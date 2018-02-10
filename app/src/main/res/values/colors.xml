@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="commonColor">#303F9F</color>
+
+    <color name="white">#ffffff</color>
+    <color name="white_t_80">#ccffffff</color>
+    <color name="white_t_50">#80ffffff</color>
+    <color name="white_t_30">#4dffffff</color>
+    <color name="white_t_10">#1Affffff</color>
+
+    <color name="main_start_color">#1A1B36</color>
+    <color name="main_end_color">#544769</color>
+    <color name="black">#000000</color>
+
+    <color name="trans">#00ffffff</color>
+    <color name="blue">#303F9F</color>
+    <color name="color_tv_main_option_btn">#000000</color>
+    <color name="gray">#b0adb0</color>
+    <color name="gray_light">#cccacc</color>
+    <color name="gray_50">#80cccacc</color>
+</resources>

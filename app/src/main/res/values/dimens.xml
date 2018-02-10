@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="item_top_height">45dp</dimen>
+    <dimen name="item_password_normal_height">35dp</dimen>
+    <dimen name="item_normal_radius">5dp</dimen>
+    <dimen name="item_main_option_btn_w_h">45dp</dimen>
+
+    <dimen name="item_main_top_height">45dp</dimen>
+
+    <dimen name="margin_item_password_normal">8dp</dimen>
+    <dimen name="margin_main_option">8dp</dimen>
+    <dimen name="radius_main_option_btn">8dp</dimen>
+    <dimen name="size_tv_main_option_btn">12sp</dimen>
+    <dimen name="margin_tv_main_option_btn">5dp</dimen>
+    <dimen name="margin_tv_main_option_btn_bottom">12dp</dimen>
+    <dimen name="item_main_option_ic_w_h">30dp</dimen>
+    <dimen name="margin_dialog_add_password">5dp</dimen>
+    <dimen name="padding_add_password_left">12dp</dimen>
+    <dimen name="margin_dialog_add_password_right">12dp</dimen>
+    <dimen name="dialog_add_password_normal_h">30dp</dimen>
+    <dimen name="size_dialog_add_password_normal">14sp</dimen>
+    <dimen name="size_item_password_normal">14sp</dimen>
+</resources>
