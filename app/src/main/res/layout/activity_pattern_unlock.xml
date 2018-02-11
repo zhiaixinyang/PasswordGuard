@@ -77,14 +77,6 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/lock_icon" />
 
-        <android.support.v7.widget.SwitchCompat
-            android:id="@+id/switch_is_open_lock"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/hint" />
 
         <com.mdove.passwordguard.ui.patternlockview.PatternLockView
             android:id="@+id/pattern_lock_view"
@@ -97,7 +89,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/switch_is_open_lock"
+            app:layout_constraintTop_toBottomOf="@+id/hint"
             app:normalStateColor="@color/lockColorPattern"
             app:wrongStateColor="@color/lockColorPatternError" />
 

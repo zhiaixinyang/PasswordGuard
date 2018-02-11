@@ -1,7 +1,5 @@
 package com.mdove.passwordguard.lock;
 
-import android.accounts.Account;
-import android.accounts.AccountManager;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,11 +11,12 @@ import android.support.annotation.Nullable;
 import android.support.v4.hardware.fingerprint.FingerprintManagerCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
 
 import com.mdove.passwordguard.R;
-import com.mdove.passwordguard.config.AppLockConfig;
+import com.mdove.passwordguard.lock.config.AppLockConfig;
 import com.mdove.passwordguard.databinding.ActivityPatternUnlockBinding;
 import com.mdove.passwordguard.lock.utils.AnimUtils;
 import com.mdove.passwordguard.main.MainActivity;
@@ -26,7 +25,6 @@ import com.mdove.passwordguard.ui.patternlockview.listener.PatternLockViewListen
 import com.mdove.passwordguard.ui.patternlockview.utils.PatternLockUtils;
 import com.mdove.passwordguard.utils.StatusBarUtil;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -60,18 +58,7 @@ public class PatternUnlockActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_pattern_unlock);
         StatusBarUtil.setTransparent(this);
-        mExtraAction = getIntent().getStringExtra(EXTRA_ACTION);
-
-        switch (mExtraAction) {
-            case ACTION_FORM_MAIN_TO_LOCK: {
-                binding.btnBack.setVisibility(View.GONE);
-                break;
-            }
-            default: {
-                binding.btnBack.setVisibility(View.VISIBLE);
-                break;
-            }
-        }
+        handleAction(getIntent());
 
         if (AppLockConfig.isAuthWithFinger()) {
             binding.btnFinger.setVisibility(View.VISIBLE);
@@ -127,6 +114,24 @@ public class PatternUnlockActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void handleAction(Intent intent) {
+        mExtraAction = intent.getStringExtra(EXTRA_ACTION);
+        if (TextUtils.isEmpty(mExtraAction)){
+            return;
+        }
+
+        switch (mExtraAction) {
+            case ACTION_FORM_MAIN_TO_LOCK: {
+                binding.btnBack.setVisibility(View.GONE);
+                break;
+            }
+            default: {
+                binding.btnBack.setVisibility(View.VISIBLE);
+                break;
+            }
+        }
     }
 
     private void showDialog() {

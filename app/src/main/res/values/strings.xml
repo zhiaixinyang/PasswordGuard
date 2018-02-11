@@ -15,7 +15,7 @@
     <string name="lock_pattern_set_error_hint">至少要连接四个点 \n 请重试</string>
     <string name="lock_pattern_confirm">再次确认手势</string>
     <string name="lock_pattern_mismatch_hint">手势不匹配</string>
-    <string name="lock_pattern_unlock_hint">绘制你的手势锁</string>
+    <string name="lock_pattern_unlock_hint">解锁</string>
     <string name="lock_reset"><u>重设</u></string>
     <string name="lock_cancel">取消</string>
     <string name="lock_ok">确定</string>
@@ -49,5 +49,7 @@
 
     <string name="lock_grant_guide_hint">Enable AppLock by granting access to %1$s</string>
     <string name="lock_name">手势锁</string>
+    <string name="lock_string_switch_on">开启手势锁</string>
+    <string name="lock_string_switch_off">关闭手势锁</string>
 
 </resources>

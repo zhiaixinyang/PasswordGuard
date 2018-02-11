@@ -13,7 +13,7 @@ import android.text.TextUtils;
 import com.hwangjr.rxbus.RxBus;
 import com.hwangjr.rxbus.annotation.Subscribe;
 import com.mdove.passwordguard.R;
-import com.mdove.passwordguard.config.AppLockConfig;
+import com.mdove.passwordguard.lock.config.AppLockConfig;
 import com.mdove.passwordguard.databinding.ActivityMainBinding;
 import com.mdove.passwordguard.lock.PatternSetActivity;
 import com.mdove.passwordguard.lock.PatternUnlockActivity;
@@ -83,7 +83,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
         String action = intent.getStringExtra(EXTRA_ACTION_KEY);
         if (TextUtils.isEmpty(action)) {
             //判断是否启动手势锁
-            if (AppLockConfig.isLock() && !TextUtils.isEmpty(AppLockConfig.getPassCode())) {
+            if (AppLockConfig.isLockSwitchOn() && AppLockConfig.isLockSet() &&
+                    !TextUtils.isEmpty(AppLockConfig.getPassCode())) {
                 PatternUnlockActivity.start(this, PatternUnlockActivity.ACTION_FORM_MAIN_TO_LOCK);
                 finish();
             }

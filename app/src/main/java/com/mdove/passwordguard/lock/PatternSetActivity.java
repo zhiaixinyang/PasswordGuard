@@ -9,9 +9,10 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.CompoundButton;
 
 import com.mdove.passwordguard.R;
-import com.mdove.passwordguard.config.AppLockConfig;
+import com.mdove.passwordguard.lock.config.AppLockConfig;
 import com.mdove.passwordguard.databinding.ActivityPatternSetBinding;
 import com.mdove.passwordguard.lock.utils.AnimUtils;
 import com.mdove.passwordguard.ui.patternlockview.PatternLockView;
@@ -61,6 +62,8 @@ public class PatternSetActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_pattern_set);
         StatusBarUtil.setTransparent(this);
+
+        initSwitch();
 
         final boolean isReset = getIntent().getBooleanExtra(EXTRA_DATA, false);
         if (isReset) {
@@ -134,7 +137,7 @@ public class PatternSetActivity extends AppCompatActivity {
                     } else {
                         binding.patternLockView.setViewMode(PatternLockView.PatternViewMode.CORRECT);
                         AppLockConfig.setPassCode(savedCode);
-                        AppLockConfig.setLock(true);
+                        AppLockConfig.setLockSet(true);
                         if (isReset) {
                             setResult(RESULT_OK);
                         } else {
@@ -148,6 +151,30 @@ public class PatternSetActivity extends AppCompatActivity {
             @Override
             public void onCleared() {
 
+            }
+        });
+    }
+
+    private void initSwitch() {
+        boolean isSwitchOn = AppLockConfig.isLockSwitchOn();
+        if (isSwitchOn) {
+            binding.switchIsOpenLock.setChecked(true);
+            binding.tvStrSwitch.setText(getString(R.string.lock_string_switch_on));
+        } else {
+            binding.switchIsOpenLock.setChecked(false);
+            binding.tvStrSwitch.setText(getString(R.string.lock_string_switch_off));
+        }
+
+        binding.switchIsOpenLock.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    binding.tvStrSwitch.setText(getString(R.string.lock_string_switch_on));
+                    AppLockConfig.setLockSwitchOn(true);
+                } else {
+                    binding.tvStrSwitch.setText(getString(R.string.lock_string_switch_off));
+                    AppLockConfig.setLockSwitchOn(false);
+                }
             }
         });
     }

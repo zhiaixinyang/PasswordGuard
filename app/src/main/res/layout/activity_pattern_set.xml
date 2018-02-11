@@ -7,12 +7,11 @@
         android:layout_height="match_parent"
         android:background="@color/lockColorBackground">
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/title_bar"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="56dp"
             android:background="@color/lockColorBackground"
-            android:orientation="horizontal"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -28,12 +27,33 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="56dp"
+                android:layout_toRightOf="@+id/btn_back"
                 android:fontFamily="sans-serif-medium"
                 android:gravity="center_vertical"
                 android:text="@string/lock_name"
                 android:textColor="@color/lockColorTextPrimary"
                 android:textSize="20sp" />
-        </LinearLayout>
+            <TextView
+                android:id="@+id/tv_str_switch"
+                android:layout_width="wrap_content"
+                android:layout_toLeftOf="@+id/switch_is_open_lock"
+                android:layout_centerVertical="true"
+                android:text="@string/lock_string_switch_on"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:alpha="0.6"
+                android:layout_marginRight="12dp"
+                android:layout_height="wrap_content" />
+            <android.support.v7.widget.SwitchCompat
+                android:id="@+id/switch_is_open_lock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="16dp"
+                />
+        </RelativeLayout>
 
         <ImageView
             android:id="@+id/lock_icon"
@@ -69,10 +89,10 @@
             app:correctStateColor="@color/lockColorAccent"
             app:dotNormalSize="16dp"
             app:dotSelectedSize="32dp"
-            app:normalStateColor="@color/lockColorPattern"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            app:normalStateColor="@color/lockColorPattern"
             app:wrongStateColor="@color/lockColorPatternError" />
 
         <TextView

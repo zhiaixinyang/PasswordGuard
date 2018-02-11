@@ -1,4 +1,4 @@
-package com.mdove.passwordguard.config;
+package com.mdove.passwordguard.lock.config;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -25,6 +25,7 @@ public class AppLockConfig {
     private static final String UNLOCK_ALL_ONCE = "UNLOCK_ALL_ONCE";
     private static final String LAST_UNLOCK_TIME = "LAST_UNLOCK_TIME";
     private static final String LAST_SCREEN_OFF_TIME = "LAST_SCREEN_OFF_TIME";
+    private static final String KEY_IS_OPEN_LOCK = "key_is_open_lock";
 
     private static SharedPreferences initPreference() {
         if (sPrefs == null) {
@@ -33,14 +34,24 @@ public class AppLockConfig {
         return sPrefs;
     }
 
-    public static void setLock(boolean isLock){
+    public static void setLockSet(boolean isLock) {
         SharedPreferences preferences = initPreference();
         preferences.edit().putBoolean(PREFS_IS_LOCK, isLock).apply();
     }
 
-    public static Boolean isLock(){
+    public static Boolean isLockSet() {
         SharedPreferences preferences = initPreference();
         return preferences.getBoolean(PREFS_IS_LOCK, false);
+    }
+
+    public static void setLockSwitchOn(boolean isLock) {
+        SharedPreferences preferences = initPreference();
+        preferences.edit().putBoolean(KEY_IS_OPEN_LOCK, isLock).apply();
+    }
+
+    public static Boolean isLockSwitchOn() {
+        SharedPreferences preferences = initPreference();
+        return preferences.getBoolean(KEY_IS_OPEN_LOCK, true);
     }
 
     public static void setPassCode(String passCode) {
