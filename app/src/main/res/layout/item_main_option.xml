@@ -72,6 +72,45 @@
                     android:textColor="@color/color_tv_main_option_btn"
                     android:textSize="@dimen/size_tv_main_option_btn" />
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/btn_lock"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:onClick="@{()->actionHandler.onClickBtnLock()}"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="@dimen/item_main_option_btn_w_h"
+                    android:layout_height="@dimen/item_main_option_btn_w_h"
+                    android:layout_marginTop="@dimen/margin_tv_main_option_btn_bottom">
+
+                    <TextView
+                        android:id="@+id/iv_add_lock"
+                        android:layout_width="@dimen/item_main_option_btn_w_h"
+                        android:layout_height="@dimen/item_main_option_btn_w_h"
+                        android:background="@drawable/bg_main_option_btn"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:layout_width="@dimen/item_main_option_ic_w_h"
+                        android:layout_height="@dimen/item_main_option_ic_w_h"
+                        android:layout_gravity="center"
+                        android:tint="@color/white"
+                        android:src="@mipmap/lock_ic_lock_large" />
+                </FrameLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_tv_main_option_btn_bottom"
+                    android:layout_marginTop="@dimen/margin_tv_main_option_btn"
+                    android:text="添加保护锁"
+                    android:textColor="@color/color_tv_main_option_btn"
+                    android:textSize="@dimen/size_tv_main_option_btn" />
+            </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
 </layout>

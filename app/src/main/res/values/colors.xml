@@ -22,4 +22,15 @@
     <color name="gray">#b0adb0</color>
     <color name="gray_light">#cccacc</color>
     <color name="gray_50">#80cccacc</color>
+
+    <!-- 九宫格锁 -->
+    <color name="pomegranate">#f4511e</color>
+    <color name="lockColorControlNormal">#FFFFFF</color>
+    <color name="lockColorControlActive">#14B0FF</color>
+    <color name="lockColorPrimary">#252844</color>
+    <color name="lockColorAccent">#14B0FF</color>
+    <color name="lockColorBackground">#252844</color>
+    <color name="lockColorTextPrimary">#FFFFFF</color>
+    <color name="lockColorPattern">#FFFFFF</color>
+    <color name="lockColorPatternError">#B3354B</color>
 </resources>

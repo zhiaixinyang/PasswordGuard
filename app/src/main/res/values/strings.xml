@@ -1,4 +1,53 @@
 <resources>
     <string name="app_name">PasswordGuard</string>
     <string name="string_add_password_suc">保存成功</string>
+
+    <!-- 九宫格锁 -->
+    <string name="lib_name">PatternLockView</string>
+    <string name="message_pattern_dot_added">Dot added to pattern</string>
+    <string name="message_pattern_started">Pattern drawing started</string>
+    <string name="message_pattern_detected">Pattern drawing completed</string>
+    <string name="message_pattern_cleared">Pattern cleared</string>
+    <string name="lock_privacy_hint_title"><![CDATA[<font color="#14B0FF">%1$d</font> Apps with Privacy Issues]]></string>
+    <string name="lock_privacy_hint_des">Lock and protect apps with a password</string>
+    <string name="lock_protect">PROTECT(%1$d)</string>
+    <string name="lock_pattern_set_hint">设置解锁手势</string>
+    <string name="lock_pattern_set_error_hint">至少要连接四个点 \n 请重试</string>
+    <string name="lock_pattern_confirm">再次确认手势</string>
+    <string name="lock_pattern_mismatch_hint">手势不匹配</string>
+    <string name="lock_pattern_unlock_hint">绘制你的手势锁</string>
+    <string name="lock_reset"><u>重设</u></string>
+    <string name="lock_cancel">取消</string>
+    <string name="lock_ok">确定</string>
+    <string name="lock_login">LOGIN</string>
+    <string name="lock_not_now">NOT NOW</string>
+    <string name="lock_yes">YES</string>
+    <string name="lock_not_now_hint">You can set fingerprint unlock later in AppLock settings</string>
+    <string name="lock_forget_password">忘记密码</string>
+    <string name="lock_forget_password_hint">1.Log in to your Google account.\n\n2.Reset your password.</string>
+    <string name="lock_forget_set_new_hint">设置新的解锁手势</string>
+    <string name="lock_fingerprint_use_hint">Use fingerprint to unlock?</string>
+    <string name="lock_fingerprint_authenticate">Authenticate with your fingerprint.</string>
+    <string name="lock_auth_success">Fingerprint unlock enabled.</string>
+    <string name="lock_auth_fail">Authenticate Failed.Please Try Again.</string>
+    <string name="lock_settings">设置</string>
+    <string name="lock_settings_unlock_all">Enter passcode once to unlock all apps</string>
+    <string name="lock_settings_reset_succeed">重置成功</string>
+    <string name="lock_settings_unlock">Unlock</string>
+    <string name="lock_settings_change_passcode">修改手势锁</string>
+    <string name="lock_settings_fingerprint_unlock">使用指纹去解锁</string>
+    <string name="lock_protected_by">Protected by</string>
+    <string name="lock_do_not_lock_app">Don\'t lock this App</string>
+    <string name="lock_invisible_pattern">Invisible Pattern</string>
+    <string name="lock_dialog_settings_title">You\'d Like to Lock apps&#8230;</string>
+    <string name="lock_dialog_settings_options_one">at screen off</string>
+    <string name="lock_dialog_settings_options_two">after screen off for 3 min</string>
+    <string name="lock_dialog_settings_options_three">immediately upon exit</string>
+
+    <string name="lock_loading">Loading …</string>
+    <string name="lock_wrong_mail_hint">Please use the Google Account that you have signed in to this device.</string>
+
+    <string name="lock_grant_guide_hint">Enable AppLock by granting access to %1$s</string>
+    <string name="lock_name">手势锁</string>
+
 </resources>

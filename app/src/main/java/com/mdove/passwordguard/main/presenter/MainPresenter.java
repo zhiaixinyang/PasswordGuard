@@ -72,4 +72,9 @@ public class MainPresenter implements MainContract.Presenter {
     public void onClickBtnPassword() {
         mView.onClickBtnPassword();
     }
+
+    @Override
+    public void onClickBtnLock() {
+        mView.onClickBtnLock();
+    }
 }

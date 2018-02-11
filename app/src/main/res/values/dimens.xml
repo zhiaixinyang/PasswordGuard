@@ -20,4 +20,10 @@
     <dimen name="dialog_add_password_normal_h">30dp</dimen>
     <dimen name="size_dialog_add_password_normal">14sp</dimen>
     <dimen name="size_item_password_normal">14sp</dimen>
+
+    <!-- 九宫格锁 -->
+    <dimen name="pattern_lock_path_width">3dp</dimen>
+    <dimen name="pattern_lock_dot_size">10dp</dimen>
+    <dimen name="pattern_lock_dot_selected_size">24dp</dimen>
+
 </resources>

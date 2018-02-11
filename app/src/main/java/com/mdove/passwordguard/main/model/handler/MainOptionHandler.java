@@ -16,4 +16,8 @@ public class MainOptionHandler {
     public void onClickBtnPassword() {
         mPresenter.onClickBtnPassword();
     }
+
+    public void onClickBtnLock() {
+        mPresenter.onClickBtnLock();
+    }
 }

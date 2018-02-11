@@ -6,11 +6,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 
 import com.hwangjr.rxbus.RxBus;
 import com.hwangjr.rxbus.annotation.Subscribe;
 import com.mdove.passwordguard.R;
+import com.mdove.passwordguard.config.AppLockConfig;
 import com.mdove.passwordguard.databinding.ActivityMainBinding;
+import com.mdove.passwordguard.lock.PatternSetActivity;
+import com.mdove.passwordguard.lock.PatternUnlockActivity;
 import com.mdove.passwordguard.main.adapter.MainAdapter;
 import com.mdove.passwordguard.main.model.BaseMainModel;
 import com.mdove.passwordguard.main.presenter.MainPresenter;
@@ -32,12 +36,18 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     private MainPresenter mPresenter;
     private RecyclerView mRlv;
     private MainAdapter mAdapter;
+    public static final String ACTION_FORM_MAIN_TO_LOCK = "action_form_main_to_lock";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         StatusBarUtil.setTranslucent(this);
+
+        if (AppLockConfig.isLock() && !TextUtils.isEmpty(AppLockConfig.getPassCode())) {
+            PatternUnlockActivity.start(this, ACTION_FORM_MAIN_TO_LOCK);
+        }
+
         mRlv = mBinding.rlvMain;
 
         RxBus.get().register(this);
@@ -71,6 +81,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     @Override
     public void onClickBtnPassword() {
         AddPasswordDialog.showDialog(this);
+    }
+
+    @Override
+    public void onClickBtnLock() {
+        PatternSetActivity.startWithAnim(this);
     }
 
     @Override

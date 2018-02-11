@@ -15,13 +15,17 @@ public interface MainContract {
     interface Presenter extends BasePresenter<MainContract.MvpView> {
         void initData();
         void addPassword(Password password);
+
         void onClickBtnPassword();
+        void onClickBtnLock();
     }
 
     interface MvpView extends BaseView<Presenter> {
         void showData(List<BaseMainModel> data);
-        void onClickBtnPassword();
         void addPasswordSuc(String suc);
         void notifyPasswordData(int position);
+
+        void onClickBtnPassword();
+        void onClickBtnLock();
     }
 }

@@ -16,4 +16,7 @@
         <item name="android:backgroundDimAmount">0.6</item>
     </style>
 
+    <style name="LockDialogCustom" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/lockColorControlActive</item>
+    </style>
 </resources>
