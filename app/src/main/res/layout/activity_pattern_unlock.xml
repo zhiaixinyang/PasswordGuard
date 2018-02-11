@@ -19,15 +19,18 @@
 
             <ImageView
                 android:id="@+id/btn_back"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="12dp"
                 android:scaleType="centerInside"
-                android:tint="@color/lockColorControlNormal"
-                android:src="@mipmap/lock_ic_back" />
+                android:src="@mipmap/lock_ic_back"
+                android:tint="@color/lockColorControlNormal" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="56dp"
+                android:layout_marginLeft="12dp"
                 android:layout_toRightOf="@+id/btn_back"
                 android:fontFamily="sans-serif-medium"
                 android:gravity="center_vertical"
@@ -37,9 +40,9 @@
 
             <TextView
                 android:id="@+id/btn_forget"
-                android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
                 android:layout_height="56dp"
+                android:layout_alignParentRight="true"
                 android:layout_marginRight="20dp"
                 android:fontFamily="sans-serif-medium"
                 android:gravity="center"
@@ -66,13 +69,22 @@
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-medium"
             android:gravity="center"
+            android:lineSpacingExtra="8dp"
             android:text="@string/lock_pattern_unlock_hint"
             android:textColor="@color/lockColorTextPrimary"
             android:textSize="16sp"
-            android:lineSpacingExtra="8dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/lock_icon" />
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/switch_is_open_lock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hint" />
 
         <com.mdove.passwordguard.ui.patternlockview.PatternLockView
             android:id="@+id/pattern_lock_view"
@@ -82,10 +94,11 @@
             app:correctStateColor="@color/lockColorAccent"
             app:dotNormalSize="16dp"
             app:dotSelectedSize="32dp"
-            app:normalStateColor="@color/lockColorPattern"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/switch_is_open_lock"
+            app:normalStateColor="@color/lockColorPattern"
             app:wrongStateColor="@color/lockColorPatternError" />
 
         <ImageView
@@ -94,9 +107,9 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:src="@mipmap/lock_ic_fingerprint"
+            android:tint="@color/lockColorControlNormal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:tint="@color/lockColorControlNormal"
             app:layout_constraintRight_toRightOf="parent" />
     </android.support.constraint.ConstraintLayout>
 </layout>

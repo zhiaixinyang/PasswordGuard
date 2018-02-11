@@ -39,6 +39,8 @@ public class PatternUnlockActivity extends AppCompatActivity {
     private ActivityPatternUnlockBinding binding;
     private static Handler handler = new Handler();
     private static String EXTRA_ACTION = "extra_action";
+    public static final String ACTION_FORM_MAIN_TO_LOCK = "action_form_main_to_lock";
+
     private String mExtraAction;
     private android.support.v4.os.CancellationSignal cancellationSignal;
 
@@ -60,16 +62,16 @@ public class PatternUnlockActivity extends AppCompatActivity {
         StatusBarUtil.setTransparent(this);
         mExtraAction = getIntent().getStringExtra(EXTRA_ACTION);
 
-//        switch (mExtraAction) {
-//            case MainActivity.ACTION_FORM_MAIN_TO_LOCK: {
-//                binding.btnBack.setVisibility(View.GONE);
-//                return;
-//            }
-//            default: {
-//                binding.btnBack.setVisibility(View.VISIBLE);
-//                return;
-//            }
-//        }
+        switch (mExtraAction) {
+            case ACTION_FORM_MAIN_TO_LOCK: {
+                binding.btnBack.setVisibility(View.GONE);
+                break;
+            }
+            default: {
+                binding.btnBack.setVisibility(View.VISIBLE);
+                break;
+            }
+        }
 
         if (AppLockConfig.isAuthWithFinger()) {
             binding.btnFinger.setVisibility(View.VISIBLE);
@@ -112,6 +114,7 @@ public class PatternUnlockActivity extends AppCompatActivity {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
+                            MainActivity.start(PatternUnlockActivity.this, MainActivity.ACTION_LOCK_IS_SUC);
                             setResult(RESULT_OK);
                             finish();
                         }

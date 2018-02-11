@@ -27,7 +27,7 @@ import java.util.List;
  */
 
 public class PatternSetActivity extends AppCompatActivity {
-    private static final String EXTRA_ACTION = "action";
+    private static final String EXTRA_DATA = "action";
     private String savedCode = "";
 
     private enum PatternSetState {
@@ -52,7 +52,7 @@ public class PatternSetActivity extends AppCompatActivity {
 
     public static void startForReset(Activity context, int requestCode) {
         Intent starter = new Intent(context, PatternSetActivity.class);
-        starter.putExtra(EXTRA_ACTION, true);
+        starter.putExtra(EXTRA_DATA, true);
         context.startActivityForResult(starter, requestCode);
     }
 
@@ -62,7 +62,7 @@ public class PatternSetActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_pattern_set);
         StatusBarUtil.setTransparent(this);
 
-        final boolean isReset = getIntent().getBooleanExtra(EXTRA_ACTION, false);
+        final boolean isReset = getIntent().getBooleanExtra(EXTRA_DATA, false);
         if (isReset) {
             binding.hint.setText(R.string.lock_forget_set_new_hint);
         }

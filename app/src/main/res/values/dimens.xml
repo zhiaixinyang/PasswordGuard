@@ -19,7 +19,7 @@
     <dimen name="margin_dialog_add_password_right">12dp</dimen>
     <dimen name="dialog_add_password_normal_h">30dp</dimen>
     <dimen name="size_dialog_add_password_normal">14sp</dimen>
-    <dimen name="size_item_password_normal">14sp</dimen>
+    <dimen name="size_item_password_normal">16sp</dimen>
 
     <!-- 九宫格锁 -->
     <dimen name="pattern_lock_path_width">3dp</dimen>

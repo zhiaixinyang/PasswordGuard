@@ -1,7 +1,9 @@
 package com.mdove.passwordguard.main;
 
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.support.annotation.StringDef;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,6 +28,8 @@ import com.mdove.passwordguard.ui.overscroll.adapters.RecyclerViewOverScrollDeco
 import com.mdove.passwordguard.utils.StatusBarUtil;
 import com.mdove.passwordguard.utils.ToastHelper;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.List;
 
 /**
@@ -36,7 +40,22 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     private MainPresenter mPresenter;
     private RecyclerView mRlv;
     private MainAdapter mAdapter;
-    public static final String ACTION_FORM_MAIN_TO_LOCK = "action_form_main_to_lock";
+
+    public static final String EXTRA_ACTION_KEY = "extra_action_key";
+    public static final String ACTION_LOCK_IS_SUC = "action_lock_is_suc";
+    private String mAction;
+    private boolean isLockFree = false;
+
+    @StringDef(value = {ACTION_LOCK_IS_SUC})
+    @Retention(RetentionPolicy.CLASS)
+    public @interface MainAction {
+    }
+
+    public static void start(Context context, @MainAction String action) {
+        Intent to = new Intent(context, MainActivity.class);
+        to.putExtra(EXTRA_ACTION_KEY, action);
+        context.startActivity(to);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +63,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         StatusBarUtil.setTranslucent(this);
 
-        if (AppLockConfig.isLock() && !TextUtils.isEmpty(AppLockConfig.getPassCode())) {
-            PatternUnlockActivity.start(this, ACTION_FORM_MAIN_TO_LOCK);
-        }
+        handleAction(getIntent());
 
         mRlv = mBinding.rlvMain;
 
@@ -60,6 +77,28 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
         new VerticalOverScrollBounceEffectDecorator(new RecyclerViewOverScrollDecorAdapter(mRlv));
 
         mPresenter.initData();
+    }
+
+    private void handleAction(Intent intent) {
+        String action = intent.getStringExtra(EXTRA_ACTION_KEY);
+        if (TextUtils.isEmpty(action)) {
+            //判断是否启动手势锁
+            if (AppLockConfig.isLock() && !TextUtils.isEmpty(AppLockConfig.getPassCode())) {
+                PatternUnlockActivity.start(this, PatternUnlockActivity.ACTION_FORM_MAIN_TO_LOCK);
+                finish();
+            }
+            return;
+        }
+
+        switch (action) {
+            case ACTION_LOCK_IS_SUC: {
+
+                break;
+            }
+            default: {
+                break;
+            }
+        }
     }
 
     @Override
