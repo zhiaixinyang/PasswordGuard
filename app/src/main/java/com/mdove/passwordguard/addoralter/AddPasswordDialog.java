@@ -1,4 +1,4 @@
-package com.mdove.passwordguard.ui;
+package com.mdove.passwordguard.addoralter;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
@@ -12,11 +12,8 @@ import android.view.WindowManager;
 import com.hwangjr.rxbus.RxBus;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.databinding.DialogAddPasswordBinding;
-import com.mdove.passwordguard.databinding.DialogAlterPasswordBinding;
 import com.mdove.passwordguard.greendao.entity.Password;
-import com.mdove.passwordguard.main.model.PasswordModel;
 import com.mdove.passwordguard.model.event.AddPasswordEvent;
-import com.mdove.passwordguard.model.event.AlterPasswordEvent;
 import com.mdove.passwordguard.utils.SystemUtils;
 import com.mdove.passwordguard.utils.ToastHelper;
 
@@ -26,32 +23,20 @@ import java.util.Date;
  * Created by MDove on 18/2/10.
  */
 
-public class AlterPasswordDialog extends AppCompatDialog {
-    private DialogAlterPasswordBinding mBinding;
+public class AddPasswordDialog extends AppCompatDialog {
+    private DialogAddPasswordBinding mBinding;
     private String mTitle, mUserName, mPassword;
-    private AlterPasswordEvent mEvent;
-    private int mItemPosition;
+    private AddPasswordEvent mEvent;
 
-    public AlterPasswordDialog(Context context, PasswordModel password, int itemPosition) {
+    public AddPasswordDialog(Context context) {
         super(context, R.style.UpgradeDialog);
-        mBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.dialog_alter_password,
+        mBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.dialog_add_password,
                 null, false);
         setContentView(mBinding.getRoot());
-        mItemPosition = itemPosition;
-
-        initPassword(password);
-
         WindowManager.LayoutParams paramsWindow = getWindow().getAttributes();
         paramsWindow.width = getWindowWidth();
         setCancelable(true);
         setCanceledOnTouchOutside(false);
-    }
-
-    private void initPassword(PasswordModel password) {
-        mBinding.tvTitle.setText(password.mTitle);
-        mTitle = password.mTitle;
-        mBinding.etAlterUsername.setText(password.mUserName);
-        mBinding.etAlterPassword.setText(password.mPassword);
     }
 
     protected int getWindowWidth() {
@@ -88,7 +73,7 @@ public class AlterPasswordDialog extends AppCompatDialog {
 
     private boolean isOkEnable() {
         getAllText();
-        if (TextUtils.isEmpty(mUserName) || TextUtils.isEmpty(mPassword)) {
+        if (TextUtils.isEmpty(mTitle) || TextUtils.isEmpty(mUserName) || TextUtils.isEmpty(mPassword)) {
             return false;
         }
         Password password = new Password();
@@ -97,19 +82,19 @@ public class AlterPasswordDialog extends AppCompatDialog {
         password.mTitle = mTitle;
         password.mTimeStamp = new Date().getTime();
 
-        mEvent = new AlterPasswordEvent();
-        mEvent.mItemPosition = mItemPosition;
+        mEvent = new AddPasswordEvent();
         mEvent.mPassword = password;
         return true;
     }
 
     private void getAllText() {
-        mUserName = mBinding.etAlterUsername.getText().toString().trim();
-        mPassword = mBinding.etAlterPassword.getText().toString().trim();
+        mTitle = mBinding.etTitle.getText().toString().trim();
+        mUserName = mBinding.etUsername.getText().toString().trim();
+        mPassword = mBinding.etPassword.getText().toString().trim();
     }
 
-    public static void showDialog(Context context, PasswordModel password, int itemPosition) {
-        AlterPasswordDialog dialog = new AlterPasswordDialog(context, password, itemPosition);
+    public static void showDialog(Context context) {
+        AddPasswordDialog dialog = new AddPasswordDialog(context);
         dialog.show();
     }
 

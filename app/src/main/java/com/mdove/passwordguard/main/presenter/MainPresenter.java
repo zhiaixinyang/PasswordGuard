@@ -2,6 +2,7 @@ package com.mdove.passwordguard.main.presenter;
 
 import com.mdove.passwordguard.App;
 import com.mdove.passwordguard.R;
+import com.mdove.passwordguard.addoralter.model.AlterPasswordModel;
 import com.mdove.passwordguard.greendao.PasswordDao;
 import com.mdove.passwordguard.greendao.entity.Password;
 import com.mdove.passwordguard.main.model.BaseMainModel;
@@ -76,5 +77,13 @@ public class MainPresenter implements MainContract.Presenter {
     @Override
     public void onClickBtnLock() {
         mView.onClickBtnLock();
+    }
+
+    @Override
+    public void alterPassword(AlterPasswordModel model, int itemPosition) {
+        mDao.update(model.mOldPassword);
+        mDao.insert(model.mNewPassword);
+        mData.add(new PasswordModel(model.mNewPassword));
+        mView.alterPasswordSuc(itemPosition, mData.size());
     }
 }

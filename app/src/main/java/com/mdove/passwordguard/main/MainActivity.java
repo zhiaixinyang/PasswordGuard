@@ -14,7 +14,6 @@ import com.hwangjr.rxbus.RxBus;
 import com.hwangjr.rxbus.annotation.Subscribe;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.listener.OnItemLongClickListener;
-import com.mdove.passwordguard.greendao.entity.Password;
 import com.mdove.passwordguard.lock.config.AppLockConfig;
 import com.mdove.passwordguard.databinding.ActivityMainBinding;
 import com.mdove.passwordguard.lock.PatternSetActivity;
@@ -25,8 +24,9 @@ import com.mdove.passwordguard.main.model.PasswordModel;
 import com.mdove.passwordguard.main.presenter.MainPresenter;
 import com.mdove.passwordguard.main.presenter.contract.MainContract;
 import com.mdove.passwordguard.model.event.AddPasswordEvent;
-import com.mdove.passwordguard.ui.AddPasswordDialog;
-import com.mdove.passwordguard.ui.AlterPasswordDialog;
+import com.mdove.passwordguard.model.event.AlterPasswordEvent;
+import com.mdove.passwordguard.addoralter.AddPasswordDialog;
+import com.mdove.passwordguard.addoralter.AlterPasswordDialog;
 import com.mdove.passwordguard.ui.overscroll.VerticalOverScrollBounceEffectDecorator;
 import com.mdove.passwordguard.ui.overscroll.adapters.RecyclerViewOverScrollDecorAdapter;
 import com.mdove.passwordguard.utils.StatusBarUtil;
@@ -139,6 +139,12 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     }
 
     @Override
+    public void alterPasswordSuc(int itemPosition, int newItemPosition) {
+        mAdapter.notifyPasswordData(itemPosition);
+        mAdapter.notifyPasswordData(newItemPosition);
+    }
+
+    @Override
     public void addPasswordSuc(String suc) {
         ToastHelper.shortToast(suc);
     }
@@ -149,7 +155,13 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     }
 
     @Subscribe
-    public void getAddPasswordInfo(AddPasswordEvent event) {
+    public void addPasswordInfo(AddPasswordEvent event) {
         mPresenter.addPassword(event.mPassword);
+    }
+
+    @Subscribe
+    public void alterPasswordInfo(AlterPasswordEvent event) {
+        mPresenter.alterPassword(event.mModel, event.mItemPosition);
+
     }
 }
