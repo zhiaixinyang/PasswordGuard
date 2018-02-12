@@ -13,16 +13,20 @@ import android.text.TextUtils;
 import com.hwangjr.rxbus.RxBus;
 import com.hwangjr.rxbus.annotation.Subscribe;
 import com.mdove.passwordguard.R;
+import com.mdove.passwordguard.base.listener.OnItemLongClickListener;
+import com.mdove.passwordguard.greendao.entity.Password;
 import com.mdove.passwordguard.lock.config.AppLockConfig;
 import com.mdove.passwordguard.databinding.ActivityMainBinding;
 import com.mdove.passwordguard.lock.PatternSetActivity;
 import com.mdove.passwordguard.lock.PatternUnlockActivity;
 import com.mdove.passwordguard.main.adapter.MainAdapter;
 import com.mdove.passwordguard.main.model.BaseMainModel;
+import com.mdove.passwordguard.main.model.PasswordModel;
 import com.mdove.passwordguard.main.presenter.MainPresenter;
 import com.mdove.passwordguard.main.presenter.contract.MainContract;
 import com.mdove.passwordguard.model.event.AddPasswordEvent;
 import com.mdove.passwordguard.ui.AddPasswordDialog;
+import com.mdove.passwordguard.ui.AlterPasswordDialog;
 import com.mdove.passwordguard.ui.overscroll.VerticalOverScrollBounceEffectDecorator;
 import com.mdove.passwordguard.ui.overscroll.adapters.RecyclerViewOverScrollDecorAdapter;
 import com.mdove.passwordguard.utils.StatusBarUtil;
@@ -72,6 +76,12 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
         mPresenter.subscribe(this);
 
         mAdapter = new MainAdapter(this, mPresenter);
+        mAdapter.setOnLongClickListener(new OnItemLongClickListener<PasswordModel>() {
+            @Override
+            public void onItemLongClick(int position, PasswordModel object) {
+                AlterPasswordDialog.showDialog(MainActivity.this, object, position);
+            }
+        });
         mRlv.setAdapter(mAdapter);
         mRlv.setLayoutManager(new LinearLayoutManager(this));
         new VerticalOverScrollBounceEffectDecorator(new RecyclerViewOverScrollDecorAdapter(mRlv));

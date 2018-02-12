@@ -13,11 +13,13 @@ public class ItemMainPasswordVM {
     public ObservableField<String> mUserName = new ObservableField<>();
     public ObservableField<String> mPassword = new ObservableField<>();
     public ObservableField<String> mTitle = new ObservableField<>();
+    public ObservableField<Boolean> mIsNew = new ObservableField<>();
 
     public ItemMainPasswordVM(PasswordModel model) {
         mTime.set(model.mTime);
         mUserName.set(model.mUserName);
         mPassword.set(model.mPassword);
         mTitle.set(model.mTitle);
+        mIsNew.set(model.mIsNew);
     }
 }

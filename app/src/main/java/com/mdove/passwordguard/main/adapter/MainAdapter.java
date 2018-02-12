@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mdove.passwordguard.R;
+import com.mdove.passwordguard.base.listener.OnItemLongClickListener;
 import com.mdove.passwordguard.databinding.ItemMainOptionBinding;
 import com.mdove.passwordguard.databinding.ItemMainTopBinding;
 import com.mdove.passwordguard.databinding.ItemPasswordNormalBinding;
@@ -90,7 +91,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if (holder instanceof MainTopViewHolder) {
             ((MainTopViewHolder) holder).bind(new ItemMainTopVM((MainTopModel) model));
         } else if (holder instanceof PasswordViewHolder) {
-            ((PasswordViewHolder) holder).bind(new ItemMainPasswordVM((PasswordModel) model));
+            ((PasswordViewHolder) holder).bind((PasswordModel) model, position);
         } else if (holder instanceof MainOptionViewHolder) {
             ((MainOptionViewHolder) holder).bind();
         }
@@ -122,8 +123,17 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             mBinding = binding;
         }
 
-        public void bind(ItemMainPasswordVM vm) {
-            mBinding.setViewModel(vm);
+        public void bind(final PasswordModel model, final int position) {
+            mBinding.setViewModel(new ItemMainPasswordVM(model));
+            mBinding.getRoot().setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    if (mListener != null) {
+                        mListener.onItemLongClick(position, model);
+                    }
+                    return false;
+                }
+            });
         }
     }
 
@@ -138,5 +148,11 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         public void bind() {
             mBinding.setActionHandler(new MainOptionHandler(mPresenter));
         }
+    }
+
+    private OnItemLongClickListener<PasswordModel> mListener;
+
+    public void setOnLongClickListener(OnItemLongClickListener<PasswordModel> listener) {
+        mListener = listener;
     }
 }

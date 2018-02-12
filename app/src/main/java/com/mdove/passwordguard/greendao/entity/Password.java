@@ -16,6 +16,13 @@ public class Password {
     public String mPassword;
     public String mTitle;
     public Long mTimeStamp;
+    public int isNew;
+    public int getIsNew() {
+        return this.isNew;
+    }
+    public void setIsNew(int isNew) {
+        this.isNew = isNew;
+    }
     public Long getMTimeStamp() {
         return this.mTimeStamp;
     }
@@ -46,14 +53,15 @@ public class Password {
     public void setId(Long id) {
         this.id = id;
     }
-    @Generated(hash = 1826548378)
+    @Generated(hash = 441318947)
     public Password(Long id, String mUserName, String mPassword, String mTitle,
-            Long mTimeStamp) {
+            Long mTimeStamp, int isNew) {
         this.id = id;
         this.mUserName = mUserName;
         this.mPassword = mPassword;
         this.mTitle = mTitle;
         this.mTimeStamp = mTimeStamp;
+        this.isNew = isNew;
     }
     @Generated(hash = 565943725)
     public Password() {

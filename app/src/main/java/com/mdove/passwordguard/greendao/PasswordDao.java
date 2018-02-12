@@ -29,6 +29,7 @@ public class PasswordDao extends AbstractDao<Password, Long> {
         public final static Property MPassword = new Property(2, String.class, "mPassword", false, "M_PASSWORD");
         public final static Property MTitle = new Property(3, String.class, "mTitle", false, "M_TITLE");
         public final static Property MTimeStamp = new Property(4, Long.class, "mTimeStamp", false, "M_TIME_STAMP");
+        public final static Property IsNew = new Property(5, int.class, "isNew", false, "IS_NEW");
     };
 
 
@@ -48,7 +49,8 @@ public class PasswordDao extends AbstractDao<Password, Long> {
                 "\"M_USER_NAME\" TEXT," + // 1: mUserName
                 "\"M_PASSWORD\" TEXT," + // 2: mPassword
                 "\"M_TITLE\" TEXT," + // 3: mTitle
-                "\"M_TIME_STAMP\" INTEGER);"); // 4: mTimeStamp
+                "\"M_TIME_STAMP\" INTEGER," + // 4: mTimeStamp
+                "\"IS_NEW\" INTEGER NOT NULL );"); // 5: isNew
     }
 
     /** Drops the underlying database table. */
@@ -85,6 +87,7 @@ public class PasswordDao extends AbstractDao<Password, Long> {
         if (mTimeStamp != null) {
             stmt.bindLong(5, mTimeStamp);
         }
+        stmt.bindLong(6, entity.getIsNew());
     }
 
     @Override
@@ -115,6 +118,7 @@ public class PasswordDao extends AbstractDao<Password, Long> {
         if (mTimeStamp != null) {
             stmt.bindLong(5, mTimeStamp);
         }
+        stmt.bindLong(6, entity.getIsNew());
     }
 
     @Override
@@ -129,7 +133,8 @@ public class PasswordDao extends AbstractDao<Password, Long> {
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // mUserName
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // mPassword
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // mTitle
-            cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4) // mTimeStamp
+            cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4), // mTimeStamp
+            cursor.getInt(offset + 5) // isNew
         );
         return entity;
     }
@@ -141,6 +146,7 @@ public class PasswordDao extends AbstractDao<Password, Long> {
         entity.setMPassword(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setMTitle(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setMTimeStamp(cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4));
+        entity.setIsNew(cursor.getInt(offset + 5));
      }
     
     @Override

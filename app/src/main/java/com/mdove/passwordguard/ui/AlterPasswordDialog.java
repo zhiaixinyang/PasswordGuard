@@ -12,7 +12,9 @@ import android.view.WindowManager;
 import com.hwangjr.rxbus.RxBus;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.databinding.DialogAddPasswordBinding;
+import com.mdove.passwordguard.databinding.DialogAlterPasswordBinding;
 import com.mdove.passwordguard.greendao.entity.Password;
+import com.mdove.passwordguard.main.model.PasswordModel;
 import com.mdove.passwordguard.model.event.AddPasswordEvent;
 import com.mdove.passwordguard.model.event.AlterPasswordEvent;
 import com.mdove.passwordguard.utils.SystemUtils;
@@ -25,12 +27,12 @@ import java.util.Date;
  */
 
 public class AlterPasswordDialog extends AppCompatDialog {
-    private DialogAddPasswordBinding mBinding;
+    private DialogAlterPasswordBinding mBinding;
     private String mTitle, mUserName, mPassword;
     private AlterPasswordEvent mEvent;
     private int mItemPosition;
 
-    public AlterPasswordDialog(Context context, Password password, int itemPosition) {
+    public AlterPasswordDialog(Context context, PasswordModel password, int itemPosition) {
         super(context, R.style.UpgradeDialog);
         mBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.dialog_alter_password,
                 null, false);
@@ -45,10 +47,11 @@ public class AlterPasswordDialog extends AppCompatDialog {
         setCanceledOnTouchOutside(false);
     }
 
-    private void initPassword(Password password) {
+    private void initPassword(PasswordModel password) {
         mBinding.tvTitle.setText(password.mTitle);
-        mBinding.etUsername.setText(password.mUserName);
-        mBinding.etPassword.setText(password.mPassword);
+        mTitle = password.mTitle;
+        mBinding.etAlterUsername.setText(password.mUserName);
+        mBinding.etAlterPassword.setText(password.mPassword);
     }
 
     protected int getWindowWidth() {
@@ -101,12 +104,11 @@ public class AlterPasswordDialog extends AppCompatDialog {
     }
 
     private void getAllText() {
-        mTitle = mBinding.etTitle.getText().toString().trim();
-        mUserName = mBinding.etUsername.getText().toString().trim();
-        mPassword = mBinding.etPassword.getText().toString().trim();
+        mUserName = mBinding.etAlterUsername.getText().toString().trim();
+        mPassword = mBinding.etAlterPassword.getText().toString().trim();
     }
 
-    public static void showDialog(Context context, Password password, int itemPosition) {
+    public static void showDialog(Context context, PasswordModel password, int itemPosition) {
         AlterPasswordDialog dialog = new AlterPasswordDialog(context, password, itemPosition);
         dialog.show();
     }
