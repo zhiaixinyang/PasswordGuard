@@ -31,6 +31,7 @@ import com.mdove.passwordguard.addoralter.AddPasswordDialog;
 import com.mdove.passwordguard.addoralter.AlterPasswordDialog;
 import com.mdove.passwordguard.ui.searchbox.SearchFragment;
 import com.mdove.passwordguard.ui.searchbox.custom.IOnSearchClickListener;
+import com.mdove.passwordguard.utils.AppUtils;
 import com.mdove.passwordguard.utils.StatusBarUtil;
 import com.mdove.passwordguard.utils.ToastHelper;
 
@@ -93,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
 //        new VerticalOverScrollBounceEffectDecorator(new RecyclerViewOverScrollDecorAdapter(mRlv));
 
         mPresenter.initData();
+        mPresenter.checkUpdate(AppUtils.getAPPVersionCodeFromAPP(this));
     }
 
     private void handleAction(Intent intent) {

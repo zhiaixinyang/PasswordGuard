@@ -53,4 +53,11 @@
     <string name="lock_string_switch_off">关闭手势锁</string>
     <string name="activity_title_delete_list">删除记录</string>
 
+    <!--更新String-->
+    <string name="update_title">发现全新版本</string>
+    <string name="update_desc">一个全新的版本被发出，尝试更新一下？ </string>
+    <string name="update_ok">没毛病，老铁</string>
+    <string name="update_cancel">我拒绝</string>
+    <string name="string_update_success">新的安装包下载成功</string>
+    <string name="string_update_err">更新包下载失败</string>
 </resources>

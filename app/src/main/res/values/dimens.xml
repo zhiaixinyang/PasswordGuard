@@ -27,4 +27,6 @@
     <dimen name="pattern_lock_dot_selected_size">24dp</dimen>
     <dimen name="item_delete_normal_w">120dp</dimen>
 
+    <dimen name="dialog_update_btn_size">16sp</dimen>
+
 </resources>

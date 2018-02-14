@@ -32,6 +32,9 @@ public interface MainContract {
         void querySearch(String queryKey);
 
         void deletePassword(int position, Password password);
+
+        void checkUpdate(String version);
+
     }
 
     interface MvpView extends BaseView<Presenter> {

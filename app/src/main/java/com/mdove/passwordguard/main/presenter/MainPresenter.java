@@ -13,10 +13,15 @@ import com.mdove.passwordguard.main.model.MainSearchModel;
 import com.mdove.passwordguard.main.model.MainTopModel;
 import com.mdove.passwordguard.main.model.PasswordModel;
 import com.mdove.passwordguard.main.presenter.contract.MainContract;
+import com.mdove.passwordguard.model.net.RealUpdate;
+import com.mdove.passwordguard.net.ApiServerImpl;
+import com.mdove.passwordguard.ui.dialog.UpdateDialog;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import rx.functions.Action1;
 
 /**
  * Created by MDove on 2018/2/10.
@@ -118,7 +123,7 @@ public class MainPresenter implements MainContract.Presenter {
             mView.searchReturn(list,null);
             return;
         }
-        mView.searchReturn(null,"关键字未搜索出对应内容");
+        mView.searchReturn(null,"@");
 
     }
 
@@ -129,6 +134,25 @@ public class MainPresenter implements MainContract.Presenter {
 //        mDao.delete(password);
 
         mView.deletePassword(position);
+    }
+
+    @Override
+    public void checkUpdate(String version) {
+        ApiServerImpl.checkUpdate(version).subscribe(new Action1<RealUpdate>() {
+            @Override
+            public void call(RealUpdate realUpdate) {
+                switch (realUpdate.getCheck()) {
+                    case "true": {
+                        showUpgradeDialog(realUpdate);
+                        break;
+                    }
+                }
+            }
+        });
+    }
+
+    private void showUpgradeDialog(final RealUpdate result) {
+        new UpdateDialog(mView.getContext(), result.getSrc()).show();
     }
 
     @Override
