@@ -19,6 +19,7 @@ import com.mdove.passwordguard.main.model.handler.MainOptionHandler;
 import com.mdove.passwordguard.main.model.vm.ItemMainPasswordVM;
 import com.mdove.passwordguard.main.model.vm.ItemMainTopVM;
 import com.mdove.passwordguard.main.presenter.MainPresenter;
+import com.mdove.passwordguard.ui.SwipeMenuLayout;
 import com.mdove.passwordguard.utils.InflateUtils;
 
 import java.util.List;
@@ -130,7 +131,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         public void bind(final PasswordModel model, final int position) {
             mBinding.setViewModel(new ItemMainPasswordVM(model));
-            mBinding.getRoot().setOnLongClickListener(new View.OnLongClickListener() {
+            mBinding.layoutItem.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
                     if (mItemListener != null) {
@@ -146,6 +147,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         mDeleteListener.onItemDeleteClick(position,model);
                     }
                     mPresenter.deletePassword(position,model.password);
+//                    mBinding.layoutMenu.quickClose();
                 }
             });
         }

@@ -89,6 +89,7 @@ public class MainPresenter implements MainContract.Presenter {
         DeletedPassword deletedPassword= DeletedPasswordHelper.getDeletedPassword(password);
         mDeleteDao.insert(deletedPassword);
         mDao.delete(password);
+
         mView.deletePassword(position);
     }
 
@@ -97,6 +98,11 @@ public class MainPresenter implements MainContract.Presenter {
         mDao.update(model.mOldPassword);
         mDao.insert(model.mNewPassword);
         mData.add(new PasswordModel(model.mNewPassword));
+
+        //直接更换旧model的isNew数据（引用指向的内存不变）
+        PasswordModel oldModel = (PasswordModel) mData.get(itemPosition);
+        oldModel.mIsNew=false;
+
         mView.alterPasswordSuc(itemPosition, mData.size());
     }
 }
