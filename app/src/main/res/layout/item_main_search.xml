@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="actionHandler"
+            type="com.mdove.passwordguard.main.model.handler.MainSearchHandler" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_top_height"
+        android:layout_margin="@dimen/margin_main_option"
+        android:onClick="@{()->actionHandler.onClickBtnSearch()}"
+        android:background="@drawable/bg_main_search"
+        >
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@mipmap/ic_search"
+            android:layout_marginLeft="12dp"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+</layout>

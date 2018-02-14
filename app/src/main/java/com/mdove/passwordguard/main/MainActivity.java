@@ -14,6 +14,8 @@ import com.hwangjr.rxbus.RxBus;
 import com.hwangjr.rxbus.annotation.Subscribe;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.listener.OnItemLongClickListener;
+import com.mdove.passwordguard.deletelist.DeleteListActivity;
+import com.mdove.passwordguard.greendao.entity.Password;
 import com.mdove.passwordguard.lock.config.AppLockConfig;
 import com.mdove.passwordguard.databinding.ActivityMainBinding;
 import com.mdove.passwordguard.lock.PatternSetActivity;
@@ -27,8 +29,8 @@ import com.mdove.passwordguard.model.event.AddPasswordEvent;
 import com.mdove.passwordguard.model.event.AlterPasswordEvent;
 import com.mdove.passwordguard.addoralter.AddPasswordDialog;
 import com.mdove.passwordguard.addoralter.AlterPasswordDialog;
-import com.mdove.passwordguard.ui.overscroll.VerticalOverScrollBounceEffectDecorator;
-import com.mdove.passwordguard.ui.overscroll.adapters.RecyclerViewOverScrollDecorAdapter;
+import com.mdove.passwordguard.ui.searchbox.SearchFragment;
+import com.mdove.passwordguard.ui.searchbox.custom.IOnSearchClickListener;
 import com.mdove.passwordguard.utils.StatusBarUtil;
 import com.mdove.passwordguard.utils.ToastHelper;
 
@@ -39,11 +41,13 @@ import java.util.List;
 /**
  * Created by MDove on 2018/2/9.
  */
-public class MainActivity extends AppCompatActivity implements MainContract.MvpView {
+public class MainActivity extends AppCompatActivity implements MainContract.MvpView, IOnSearchClickListener {
     private ActivityMainBinding mBinding;
     private MainPresenter mPresenter;
     private RecyclerView mRlv;
     private MainAdapter mAdapter;
+
+    private SearchFragment mSearchFragment;
 
     public static final String EXTRA_ACTION_KEY = "extra_action_key";
     public static final String ACTION_LOCK_IS_SUC = "action_lock_is_suc";
@@ -72,6 +76,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
         mRlv = mBinding.rlvMain;
 
         RxBus.get().register(this);
+        mSearchFragment = SearchFragment.newInstance();
+        mSearchFragment.setOnSearchClickListener(this);
         mPresenter = new MainPresenter();
         mPresenter.subscribe(this);
 
@@ -138,15 +144,43 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     }
 
     @Override
+    public void onClickBtnDelete() {
+        DeleteListActivity.start(this);
+    }
+
+    @Override
+    public void onClickBtnSearch() {
+        mSearchFragment.show(getSupportFragmentManager(), SearchFragment.TAG);
+    }
+
+    @Override
+    public void searchReturn(List<Password> data, String error) {
+        if (data == null) {
+            ToastHelper.shortToast(error);
+            return;
+        }
+        ToastHelper.shortToast(data.size() + "!");
+    }
+
+    @Override
     public void deletePassword(int position) {
-        mAdapter.deletePasswordData(position);
+        mAdapter.notifyDeletePasswordData(position);
         ToastHelper.shortToast("删除成功");
     }
 
     @Override
     public void alterPasswordSuc(int itemPosition, int newItemPosition) {
-        mAdapter.notifyPasswordData(itemPosition);
-        mAdapter.notifyPasswordData(newItemPosition);
+        mAdapter.notifyAddPasswordData(itemPosition);
+        mAdapter.notifyAddPasswordData(newItemPosition);
+    }
+
+    @Override
+    public void OnSearchClick(String keyword) {
+        if (!TextUtils.isEmpty(keyword)) {
+            mPresenter.querySearch(keyword);
+            return;
+        }
+        ToastHelper.shortToast("请输入搜索关键字");
     }
 
     @Override
@@ -156,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
 
     @Override
     public void notifyPasswordData(int position) {
-        mAdapter.notifyPasswordData(position);
+        mAdapter.notifyAddPasswordData(position);
     }
 
     @Subscribe
@@ -167,6 +201,5 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     @Subscribe
     public void alterPasswordInfo(AlterPasswordEvent event) {
         mPresenter.alterPassword(event.mModel, event.mItemPosition);
-
     }
 }

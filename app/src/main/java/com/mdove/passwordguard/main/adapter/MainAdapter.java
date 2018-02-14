@@ -10,12 +10,15 @@ import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.listener.OnItemDeleteClickListener;
 import com.mdove.passwordguard.base.listener.OnItemLongClickListener;
 import com.mdove.passwordguard.databinding.ItemMainOptionBinding;
+import com.mdove.passwordguard.databinding.ItemMainSearchBinding;
 import com.mdove.passwordguard.databinding.ItemMainTopBinding;
 import com.mdove.passwordguard.databinding.ItemPasswordNormalBinding;
 import com.mdove.passwordguard.main.model.BaseMainModel;
+import com.mdove.passwordguard.main.model.MainSearchModel;
 import com.mdove.passwordguard.main.model.MainTopModel;
 import com.mdove.passwordguard.main.model.PasswordModel;
 import com.mdove.passwordguard.main.model.handler.MainOptionHandler;
+import com.mdove.passwordguard.main.model.handler.MainSearchHandler;
 import com.mdove.passwordguard.main.model.vm.ItemMainPasswordVM;
 import com.mdove.passwordguard.main.model.vm.ItemMainTopVM;
 import com.mdove.passwordguard.main.presenter.MainPresenter;
@@ -36,6 +39,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int TYPE_MAIN_OPTION = 0;
     private static final int TYPE_MAIN_TOP = 1;
     private static final int TYPE_MAIN_PASSWORD = 2;
+    private static final int TYPE_MAIN_SEARCH = 3;
 
     public MainAdapter(Context context, MainPresenter presenter) {
         mContext = context;
@@ -48,13 +52,14 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         notifyDataSetChanged();
     }
 
-    public void notifyPasswordData(int position) {
+    public void notifyAddPasswordData(int position) {
         notifyItemChanged(position);
     }
 
-    public void deletePasswordData(int position){
+    public void notifyDeletePasswordData(int position) {
         mData.remove(position);
         notifyItemRemoved(position);
+        notifyItemRangeChanged(position,mData.size()-position);
     }
 
     @Override
@@ -69,6 +74,8 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     return TYPE_MAIN_TOP;
                 } else if (model instanceof PasswordModel) {
                     return TYPE_MAIN_PASSWORD;
+                } else if (model instanceof MainSearchModel) {
+                    return TYPE_MAIN_SEARCH;
                 }
             }
         }
@@ -87,6 +94,9 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             case TYPE_MAIN_PASSWORD: {
                 return new PasswordViewHolder((ItemPasswordNormalBinding) InflateUtils.bindingInflate(parent, R.layout.item_password_normal));
             }
+            case TYPE_MAIN_SEARCH: {
+                return new MainSearchViewHolder((ItemMainSearchBinding) InflateUtils.bindingInflate(parent, R.layout.item_main_search));
+            }
         }
         return null;
     }
@@ -100,6 +110,8 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ((PasswordViewHolder) holder).bind((PasswordModel) model, position);
         } else if (holder instanceof MainOptionViewHolder) {
             ((MainOptionViewHolder) holder).bind();
+        } else if (holder instanceof MainSearchViewHolder) {
+            ((MainSearchViewHolder) holder).bind();
         }
     }
 
@@ -143,13 +155,26 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             mBinding.btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (mDeleteListener!=null){
-                        mDeleteListener.onItemDeleteClick(position,model);
+                    if (mDeleteListener != null) {
+                        mDeleteListener.onItemDeleteClick(position, model);
                     }
-                    mPresenter.deletePassword(position,model.password);
-//                    mBinding.layoutMenu.quickClose();
+                    mPresenter.deletePassword(position, model.password);
+                    mBinding.layoutMenu.quickClose();
                 }
             });
+        }
+    }
+
+    public class MainSearchViewHolder extends RecyclerView.ViewHolder {
+        private ItemMainSearchBinding mBinding;
+
+        public MainSearchViewHolder(ItemMainSearchBinding binding) {
+            super(binding.getRoot());
+            mBinding = binding;
+        }
+
+        public void bind() {
+            mBinding.setActionHandler(new MainSearchHandler(mPresenter));
         }
     }
 
@@ -173,7 +198,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         mItemListener = listener;
     }
 
-    public void setOnDeleteClickListener(OnItemDeleteClickListener<PasswordModel> listener){
-        mDeleteListener=listener;
+    public void setOnDeleteClickListener(OnItemDeleteClickListener<PasswordModel> listener) {
+        mDeleteListener = listener;
     }
 }

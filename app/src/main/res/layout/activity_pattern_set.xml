@@ -21,7 +21,7 @@
                 android:layout_width="56dp"
                 android:layout_height="56dp"
                 android:scaleType="centerInside"
-                android:src="@mipmap/lock_ic_back"
+                android:src="@mipmap/ic_back"
                 android:tint="@color/lockColorControlNormal" />
 
             <TextView
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="88dp"
             android:scaleType="centerCrop"
-            android:src="@mipmap/lock_ic_lock_large"
+            android:src="@mipmap/ic_btn_lock"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

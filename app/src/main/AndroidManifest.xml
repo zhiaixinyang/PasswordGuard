@@ -40,6 +40,10 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".deletelist.DeleteListActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

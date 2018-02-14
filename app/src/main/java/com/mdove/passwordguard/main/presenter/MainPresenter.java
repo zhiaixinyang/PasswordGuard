@@ -9,6 +9,7 @@ import com.mdove.passwordguard.greendao.entity.DeletedPassword;
 import com.mdove.passwordguard.greendao.entity.Password;
 import com.mdove.passwordguard.greendao.utils.DeletedPasswordHelper;
 import com.mdove.passwordguard.main.model.BaseMainModel;
+import com.mdove.passwordguard.main.model.MainSearchModel;
 import com.mdove.passwordguard.main.model.MainTopModel;
 import com.mdove.passwordguard.main.model.PasswordModel;
 import com.mdove.passwordguard.main.presenter.contract.MainContract;
@@ -32,7 +33,7 @@ public class MainPresenter implements MainContract.Presenter {
         mView = view;
         mData = new ArrayList<>();
         mDao = App.getDaoSession().getPasswordDao();
-        mDeleteDao=App.getDaoSession().getDeletedPasswordDao();
+        mDeleteDao = App.getDaoSession().getDeletedPasswordDao();
     }
 
     @Override
@@ -48,6 +49,16 @@ public class MainPresenter implements MainContract.Presenter {
             mData.add(new PasswordModel(password));
         }
 
+        for (int i=0;i<15;i++) {
+            Password password = new Password();
+            password.mTitle="asd"+i;
+            password.isNew=0;
+            password.mUserName="asd"+i;
+            password.mPassword="asd"+i;
+            mData.add(new PasswordModel(password));
+        }
+
+
         mView.showData(mData);
     }
 
@@ -56,6 +67,10 @@ public class MainPresenter implements MainContract.Presenter {
         mainTopModel.mTime = new Date();
         mainTopModel.mType = 1;
         mData.add(mainTopModel);
+
+        MainSearchModel mainSearchModel = new MainSearchModel();
+        mainSearchModel.mType = 1;
+        mData.add(mainSearchModel);
 
         BaseMainModel optionModel = new BaseMainModel();
         optionModel.mType = 0;
@@ -85,10 +100,33 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
     @Override
+    public void onClickBtnDelete() {
+        mView.onClickBtnDelete();
+    }
+
+    @Override
+    public void onClickBtnSearch() {
+        mView.onClickBtnSearch();
+    }
+
+    @Override
+    public void querySearch(String queryKey) {
+        List<Password> list = mDao.queryBuilder().whereOr(PasswordDao.Properties.MTitle.like("%" + queryKey + "%"),
+                PasswordDao.Properties.MUserName.like("%" + queryKey + "%"),
+                PasswordDao.Properties.MPassword.like("%" + queryKey + "%")).list();
+        if (list.size()>0){
+            mView.searchReturn(list,null);
+            return;
+        }
+        mView.searchReturn(null,"关键字未搜索出对应内容");
+
+    }
+
+    @Override
     public void deletePassword(int position, Password password) {
-        DeletedPassword deletedPassword= DeletedPasswordHelper.getDeletedPassword(password);
+        DeletedPassword deletedPassword = DeletedPasswordHelper.getDeletedPassword(password);
         mDeleteDao.insert(deletedPassword);
-        mDao.delete(password);
+//        mDao.delete(password);
 
         mView.deletePassword(position);
     }
@@ -101,7 +139,7 @@ public class MainPresenter implements MainContract.Presenter {
 
         //直接更换旧model的isNew数据（引用指向的内存不变）
         PasswordModel oldModel = (PasswordModel) mData.get(itemPosition);
-        oldModel.mIsNew=false;
+        oldModel.mIsNew = false;
 
         mView.alterPasswordSuc(itemPosition, mData.size());
     }

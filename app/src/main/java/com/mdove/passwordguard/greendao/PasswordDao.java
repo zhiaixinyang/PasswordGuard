@@ -45,7 +45,7 @@ public class PasswordDao extends AbstractDao<Password, Long> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"PASSWORD\" (" + //
-                "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
+                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"M_USER_NAME\" TEXT," + // 1: mUserName
                 "\"M_PASSWORD\" TEXT," + // 2: mPassword
                 "\"M_TITLE\" TEXT," + // 3: mTitle

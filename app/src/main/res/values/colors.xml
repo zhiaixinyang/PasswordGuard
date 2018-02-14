@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#1A1B36</color>
+    <color name="colorPrimaryDark">#1A1B36</color>
     <color name="colorAccent">#ffffff</color>
 
     <color name="commonColor">#303F9F</color>
 
     <color name="white">#ffffff</color>
+    <color name="white_normal_bottom">#ccffffff</color>
     <color name="white_t_80">#ccffffff</color>
     <color name="white_t_50">#80ffffff</color>
     <color name="white_t_30">#4dffffff</color>
@@ -34,4 +35,5 @@
     <color name="lockColorPattern">#FFFFFF</color>
     <color name="lockColorPatternError">#B3354B</color>
     <color name="red">#fb4447</color>
+    <color name="dialog_search_divider">#EEEEEE</color>
 </resources>

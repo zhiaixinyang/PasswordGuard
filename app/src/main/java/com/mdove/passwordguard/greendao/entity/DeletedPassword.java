@@ -10,7 +10,7 @@ import org.greenrobot.greendao.annotation.Id;
 
 @Entity
 public class DeletedPassword {
-    @Id
+    @Id(autoincrement = true)
     public Long id;
     public String mUserName;
     public String mPassword;
@@ -74,4 +74,5 @@ public class DeletedPassword {
     @Generated(hash = 1518974356)
     public DeletedPassword() {
     }
+
 }

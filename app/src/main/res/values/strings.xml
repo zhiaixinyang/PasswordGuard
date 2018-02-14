@@ -51,5 +51,6 @@
     <string name="lock_name">手势锁</string>
     <string name="lock_string_switch_on">开启手势锁</string>
     <string name="lock_string_switch_off">关闭手势锁</string>
+    <string name="activity_title_delete_list">删除记录</string>
 
 </resources>

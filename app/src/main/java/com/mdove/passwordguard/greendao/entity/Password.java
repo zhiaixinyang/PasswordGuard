@@ -10,7 +10,7 @@ import org.greenrobot.greendao.annotation.Generated;
 
 @Entity
 public class Password {
-    @Id
+    @Id(autoincrement = true)
     public Long id;
     public String mUserName;
     public String mPassword;

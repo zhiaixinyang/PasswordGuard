@@ -20,4 +20,8 @@ public class MainOptionHandler {
     public void onClickBtnLock() {
         mPresenter.onClickBtnLock();
     }
+
+    public void onClickBtnDelete() {
+        mPresenter.onClickBtnDelete();
+    }
 }
