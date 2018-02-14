@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
         });
         mRlv.setAdapter(mAdapter);
         mRlv.setLayoutManager(new LinearLayoutManager(this));
-        new VerticalOverScrollBounceEffectDecorator(new RecyclerViewOverScrollDecorAdapter(mRlv));
+//        new VerticalOverScrollBounceEffectDecorator(new RecyclerViewOverScrollDecorAdapter(mRlv));
 
         mPresenter.initData();
     }
@@ -103,7 +103,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
 
         switch (action) {
             case ACTION_LOCK_IS_SUC: {
-
                 break;
             }
             default: {
@@ -136,6 +135,12 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     @Override
     public void onClickBtnLock() {
         PatternSetActivity.startWithAnim(this);
+    }
+
+    @Override
+    public void deletePassword(int position) {
+        mAdapter.deletePasswordData(position);
+        ToastHelper.shortToast("删除成功");
     }
 
     @Override

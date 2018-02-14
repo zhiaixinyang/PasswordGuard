@@ -24,6 +24,8 @@ public interface MainContract {
         void onClickBtnPassword();
 
         void onClickBtnLock();
+
+        void deletePassword(int position,Password password);
     }
 
     interface MvpView extends BaseView<Presenter> {
@@ -36,6 +38,8 @@ public interface MainContract {
         void onClickBtnPassword();
 
         void onClickBtnLock();
+
+        void deletePassword(int position);
 
         void alterPasswordSuc(int itemPosition,int newItemPosition);
     }

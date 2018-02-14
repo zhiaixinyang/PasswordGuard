@@ -28,8 +28,8 @@ import java.util.Date;
 public class AlterPasswordDialog extends AppCompatDialog {
     private DialogAlterPasswordBinding mBinding;
     private String mTitle, mUserName, mPassword;
-    private Long mPasswordId;
-    private Password password;
+    private String mOldUserName, mOldPassword;
+    private Password oldPassword;
     private AlterPasswordEvent mEvent;
     private int mItemPosition;
 
@@ -53,8 +53,10 @@ public class AlterPasswordDialog extends AppCompatDialog {
         mTitle = password.mTitle;
         mBinding.etAlterUsername.setText(password.mUserName);
         mBinding.etAlterPassword.setText(password.mPassword);
-        mPasswordId = password.mPasswordId;
-        this.password = password.password;
+        oldPassword = password.password;
+
+        mOldPassword = password.mPassword;
+        mOldUserName = password.mUserName;
     }
 
     protected int getWindowWidth() {
@@ -82,7 +84,7 @@ public class AlterPasswordDialog extends AppCompatDialog {
                 if (isOkEnable()) {
                     dismiss();
                 } else {
-                    ToastHelper.shortToast("请完整填写信息");
+                    ToastHelper.shortToast("未进行任何修改");
                 }
             }
         });
@@ -90,19 +92,20 @@ public class AlterPasswordDialog extends AppCompatDialog {
 
     private boolean isOkEnable() {
         getAllText();
-        if (TextUtils.isEmpty(mUserName) || TextUtils.isEmpty(mPassword)) {
+        if (TextUtils.equals(mOldUserName, mUserName) && TextUtils.equals(mOldPassword, mPassword)) {
             return false;
         }
-        Password password = new Password();
-        password.mPassword = mPassword;
-        password.mUserName = mUserName;
-        password.mTitle = mTitle;
-        password.mTimeStamp = new Date().getTime();
-        password.isNew = 1;
+        Password newPassword = new Password();
+        newPassword.mPassword = mPassword;
+        newPassword.mUserName = mUserName;
+        newPassword.mTitle = mTitle;
+        newPassword.mTimeStamp = new Date().getTime();
+        newPassword.isNew = 1;
+        oldPassword.isNew = 0;
 
         mEvent = new AlterPasswordEvent();
         mEvent.mItemPosition = mItemPosition;
-        mEvent.mModel = new AlterPasswordModel(this.password, password);
+        mEvent.mModel = new AlterPasswordModel(oldPassword, newPassword);
         RxBus.get().post(mEvent);
 
         return true;
@@ -117,5 +120,4 @@ public class AlterPasswordDialog extends AppCompatDialog {
         AlterPasswordDialog dialog = new AlterPasswordDialog(context, password, itemPosition);
         dialog.show();
     }
-
 }

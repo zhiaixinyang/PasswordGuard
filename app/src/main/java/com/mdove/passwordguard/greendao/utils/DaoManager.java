@@ -54,7 +54,7 @@ public class DaoManager  {
      */
     public DaoMaster getDaoMaster(){
         if (null == mDaoMaster){
-            mHelper =  new MyOpenHelper(context,DB_NAME,null);
+            mHelper =  new DBUpdateHelper(context,DB_NAME,null);
             mDaoMaster = new DaoMaster(mHelper.getWritableDatabase());
         }
         return mDaoMaster;

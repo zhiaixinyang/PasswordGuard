@@ -1,13 +1,13 @@
 package com.mdove.passwordguard.main.adapter;
 
 import android.content.Context;
-import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.mdove.passwordguard.R;
+import com.mdove.passwordguard.base.listener.OnItemDeleteClickListener;
 import com.mdove.passwordguard.base.listener.OnItemLongClickListener;
 import com.mdove.passwordguard.databinding.ItemMainOptionBinding;
 import com.mdove.passwordguard.databinding.ItemMainTopBinding;
@@ -49,6 +49,11 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public void notifyPasswordData(int position) {
         notifyItemChanged(position);
+    }
+
+    public void deletePasswordData(int position){
+        mData.remove(position);
+        notifyItemRemoved(position);
     }
 
     @Override
@@ -128,10 +133,19 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             mBinding.getRoot().setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    if (mListener != null) {
-                        mListener.onItemLongClick(position, model);
+                    if (mItemListener != null) {
+                        mItemListener.onItemLongClick(position, model);
                     }
                     return false;
+                }
+            });
+            mBinding.btnDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (mDeleteListener!=null){
+                        mDeleteListener.onItemDeleteClick(position,model);
+                    }
+                    mPresenter.deletePassword(position,model.password);
                 }
             });
         }
@@ -150,9 +164,14 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    private OnItemLongClickListener<PasswordModel> mListener;
+    private OnItemLongClickListener<PasswordModel> mItemListener;
+    private OnItemDeleteClickListener<PasswordModel> mDeleteListener;
 
     public void setOnLongClickListener(OnItemLongClickListener<PasswordModel> listener) {
-        mListener = listener;
+        mItemListener = listener;
+    }
+
+    public void setOnDeleteClickListener(OnItemDeleteClickListener<PasswordModel> listener){
+        mDeleteListener=listener;
     }
 }

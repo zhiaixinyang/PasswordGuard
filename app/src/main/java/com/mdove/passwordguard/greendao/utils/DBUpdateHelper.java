@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.mdove.passwordguard.greendao.DaoMaster;
+import com.mdove.passwordguard.greendao.DeletedPasswordDao;
 import com.mdove.passwordguard.greendao.PasswordDao;
 
 import org.greenrobot.greendao.database.Database;
@@ -12,8 +13,8 @@ import org.greenrobot.greendao.database.Database;
  * Created by MDove on 2018/2/10.
  */
 
-public class MyOpenHelper extends DaoMaster.DevOpenHelper {
-    public MyOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory) {
+public class DBUpdateHelper extends DaoMaster.DevOpenHelper {
+    public DBUpdateHelper(Context context, String name, SQLiteDatabase.CursorFactory factory) {
         super(context, name, factory);
     }
     /**
@@ -26,6 +27,7 @@ public class MyOpenHelper extends DaoMaster.DevOpenHelper {
     public void onUpgrade(Database db, int oldVersion, int newVersion) {
         //操作数据库的更新 有几个表升级都可以传入到下面
         MigrationHelper.getInstance().migrate(db,PasswordDao.class);
+        MigrationHelper.getInstance().migrate(db,DeletedPasswordDao.class);
     }
 
 }

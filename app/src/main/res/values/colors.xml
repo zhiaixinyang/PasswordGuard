@@ -33,4 +33,5 @@
     <color name="lockColorTextPrimary">#FFFFFF</color>
     <color name="lockColorPattern">#FFFFFF</color>
     <color name="lockColorPatternError">#B3354B</color>
+    <color name="red">#fb4447</color>
 </resources>

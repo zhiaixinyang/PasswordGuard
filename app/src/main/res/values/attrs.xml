@@ -17,4 +17,12 @@
         <attr name="dotAnimationDuration" format="integer"/>
         <attr name="pathEndAnimationDuration" format="integer"/>
     </declare-styleable>
+
+    <!-- Item侧滑删除效果 -->
+    <declare-styleable name="SwipeMenuLayout">
+        <attr name="swipeEnable" format="boolean" />
+        <attr name="ios" format="boolean" />
+        <attr name="leftSwipe" format="boolean" />
+    </declare-styleable>
+
 </resources>

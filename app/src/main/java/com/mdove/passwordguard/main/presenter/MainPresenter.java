@@ -3,8 +3,11 @@ package com.mdove.passwordguard.main.presenter;
 import com.mdove.passwordguard.App;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.addoralter.model.AlterPasswordModel;
+import com.mdove.passwordguard.greendao.DeletedPasswordDao;
 import com.mdove.passwordguard.greendao.PasswordDao;
+import com.mdove.passwordguard.greendao.entity.DeletedPassword;
 import com.mdove.passwordguard.greendao.entity.Password;
+import com.mdove.passwordguard.greendao.utils.DeletedPasswordHelper;
 import com.mdove.passwordguard.main.model.BaseMainModel;
 import com.mdove.passwordguard.main.model.MainTopModel;
 import com.mdove.passwordguard.main.model.PasswordModel;
@@ -22,12 +25,14 @@ public class MainPresenter implements MainContract.Presenter {
     private MainContract.MvpView mView;
     private List<BaseMainModel> mData;
     private PasswordDao mDao;
+    private DeletedPasswordDao mDeleteDao;
 
     @Override
     public void subscribe(MainContract.MvpView view) {
         mView = view;
         mData = new ArrayList<>();
         mDao = App.getDaoSession().getPasswordDao();
+        mDeleteDao=App.getDaoSession().getDeletedPasswordDao();
     }
 
     @Override
@@ -77,6 +82,14 @@ public class MainPresenter implements MainContract.Presenter {
     @Override
     public void onClickBtnLock() {
         mView.onClickBtnLock();
+    }
+
+    @Override
+    public void deletePassword(int position, Password password) {
+        DeletedPassword deletedPassword= DeletedPasswordHelper.getDeletedPassword(password);
+        mDeleteDao.insert(deletedPassword);
+        mDao.delete(password);
+        mView.deletePassword(position);
     }
 
     @Override

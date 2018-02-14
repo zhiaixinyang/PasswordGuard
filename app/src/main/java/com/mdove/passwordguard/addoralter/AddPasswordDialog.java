@@ -81,6 +81,7 @@ public class AddPasswordDialog extends AppCompatDialog {
         password.mUserName = mUserName;
         password.mTitle = mTitle;
         password.mTimeStamp = new Date().getTime();
+        password.isNew = 1;
 
         mEvent = new AddPasswordEvent();
         mEvent.mPassword = password;
