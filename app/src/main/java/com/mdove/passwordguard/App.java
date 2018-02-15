@@ -35,6 +35,10 @@ public class App extends Application {
         }
     }
 
+    public static boolean isDebug() {
+        return BuildConfig.DEBUG;
+    }
+
     public static DaoSession getDaoSession() {
         return mDaoSession;
     }

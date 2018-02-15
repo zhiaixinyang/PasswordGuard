@@ -1,4 +1,4 @@
-package com.mdove.passwordguard.ui.dialog;
+package com.mdove.passwordguard.update;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;

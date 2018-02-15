@@ -15,13 +15,14 @@ import com.mdove.passwordguard.main.model.PasswordModel;
 import com.mdove.passwordguard.main.presenter.contract.MainContract;
 import com.mdove.passwordguard.model.net.RealUpdate;
 import com.mdove.passwordguard.net.ApiServerImpl;
-import com.mdove.passwordguard.ui.dialog.UpdateDialog;
+import com.mdove.passwordguard.update.UpdateDialog;
+import com.mdove.passwordguard.utils.log.LogUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import rx.functions.Action1;
+import rx.Subscriber;
 
 /**
  * Created by MDove on 2018/2/10.
@@ -53,16 +54,6 @@ public class MainPresenter implements MainContract.Presenter {
         for (Password password : data) {
             mData.add(new PasswordModel(password));
         }
-
-        for (int i=0;i<15;i++) {
-            Password password = new Password();
-            password.mTitle="asd"+i;
-            password.isNew=0;
-            password.mUserName="asd"+i;
-            password.mPassword="asd"+i;
-            mData.add(new PasswordModel(password));
-        }
-
 
         mView.showData(mData);
     }
@@ -131,16 +122,26 @@ public class MainPresenter implements MainContract.Presenter {
     public void deletePassword(int position, Password password) {
         DeletedPassword deletedPassword = DeletedPasswordHelper.getDeletedPassword(password);
         mDeleteDao.insert(deletedPassword);
-//        mDao.delete(password);
+        mDao.delete(password);
 
         mView.deletePassword(position);
     }
 
     @Override
     public void checkUpdate(String version) {
-        ApiServerImpl.checkUpdate(version).subscribe(new Action1<RealUpdate>() {
+        ApiServerImpl.checkUpdate(version).subscribe(new Subscriber<RealUpdate>() {
             @Override
-            public void call(RealUpdate realUpdate) {
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                LogUtils.d("aaa",e.getMessage());
+            }
+
+            @Override
+            public void onNext(RealUpdate realUpdate) {
                 switch (realUpdate.getCheck()) {
                     case "true": {
                         showUpgradeDialog(realUpdate);
