@@ -13,6 +13,7 @@ import com.mdove.passwordguard.main.model.MainSearchModel;
 import com.mdove.passwordguard.main.model.MainTopModel;
 import com.mdove.passwordguard.main.model.PasswordModel;
 import com.mdove.passwordguard.main.presenter.contract.MainContract;
+import com.mdove.passwordguard.manager.UpdateStatusManager;
 import com.mdove.passwordguard.model.net.RealUpdate;
 import com.mdove.passwordguard.net.ApiServerImpl;
 import com.mdove.passwordguard.update.UpdateDialog;
@@ -110,11 +111,11 @@ public class MainPresenter implements MainContract.Presenter {
         List<Password> list = mDao.queryBuilder().whereOr(PasswordDao.Properties.MTitle.like("%" + queryKey + "%"),
                 PasswordDao.Properties.MUserName.like("%" + queryKey + "%"),
                 PasswordDao.Properties.MPassword.like("%" + queryKey + "%")).list();
-        if (list.size()>0){
-            mView.searchReturn(list,null);
+        if (list.size() > 0) {
+            mView.searchReturn(list, null);
             return;
         }
-        mView.searchReturn(null,"@");
+        mView.searchReturn(null, "@");
 
     }
 
@@ -137,14 +138,15 @@ public class MainPresenter implements MainContract.Presenter {
 
             @Override
             public void onError(Throwable e) {
-                LogUtils.d("aaa",e.getMessage());
             }
 
             @Override
             public void onNext(RealUpdate realUpdate) {
                 switch (realUpdate.getCheck()) {
                     case "true": {
-                        showUpgradeDialog(realUpdate);
+                        if (UpdateStatusManager.isShowUpdateDialog()) {
+                            showUpgradeDialog(realUpdate);
+                        }
                         break;
                     }
                 }
