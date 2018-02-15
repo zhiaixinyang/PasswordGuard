@@ -14,11 +14,12 @@
     <dimen name="margin_tv_main_option_btn">5dp</dimen>
     <dimen name="margin_tv_main_option_btn_bottom">12dp</dimen>
     <dimen name="item_main_option_ic_w_h">30dp</dimen>
-    <dimen name="margin_dialog_add_password">5dp</dimen>
+    <dimen name="margin_dialog_add_password">8dp</dimen>
+    <dimen name="margin_dialog_alter_password">8dp</dimen>
     <dimen name="padding_add_password_left">12dp</dimen>
     <dimen name="margin_dialog_add_password_right">12dp</dimen>
-    <dimen name="dialog_add_password_normal_h">40dp</dimen>
-    <dimen name="dialog_alter_password_normal_h">40dp</dimen>
+    <dimen name="dialog_add_password_normal_h">35dp</dimen>
+    <dimen name="dialog_alter_password_normal_h">35dp</dimen>
     <dimen name="size_dialog_add_password_normal">16sp</dimen>
     <dimen name="size_dialog_alter_password_normal">16sp</dimen>
     <dimen name="size_item_password_normal">16sp</dimen>

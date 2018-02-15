@@ -29,6 +29,8 @@ import com.mdove.passwordguard.model.event.AddPasswordEvent;
 import com.mdove.passwordguard.model.event.AlterPasswordEvent;
 import com.mdove.passwordguard.addoralter.AddPasswordDialog;
 import com.mdove.passwordguard.addoralter.AlterPasswordDialog;
+import com.mdove.passwordguard.search.SearchRlvDialog;
+import com.mdove.passwordguard.search.model.SearchRlvModel;
 import com.mdove.passwordguard.ui.searchbox.SearchFragment;
 import com.mdove.passwordguard.ui.searchbox.custom.IOnSearchClickListener;
 import com.mdove.passwordguard.utils.AppUtils;
@@ -37,6 +39,7 @@ import com.mdove.passwordguard.utils.ToastHelper;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -161,7 +164,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
             ToastHelper.shortToast(error);
             return;
         }
-        ToastHelper.shortToast(data.size() + "!");
+        List<BaseMainModel> dataModel=new ArrayList<>();
+        for (Password password:data){
+            dataModel.add(new SearchRlvModel(password));
+        }
+        new SearchRlvDialog(this,dataModel).show();
     }
 
     @Override

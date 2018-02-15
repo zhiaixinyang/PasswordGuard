@@ -23,17 +23,19 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rlv_search"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/layout_top"
-            android:layout_height="wrap_content" />
+            android:overScrollMode="never"
+            android:scrollbars="none" />
 
         <TextView
             android:id="@+id/btn_ok"
-            android:layout_below="@+id/rlv_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="12dp"
+            android:layout_below="@+id/rlv_search"
             android:layout_marginBottom="12dp"
+            android:layout_marginRight="12dp"
             android:layout_marginTop="12dp"
             android:text="确 定"
             android:textColor="@color/commonColor"
