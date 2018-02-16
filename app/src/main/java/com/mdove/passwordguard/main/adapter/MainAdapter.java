@@ -1,6 +1,7 @@
 package com.mdove.passwordguard.main.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,14 +10,18 @@ import android.view.ViewGroup;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.listener.OnItemDeleteClickListener;
 import com.mdove.passwordguard.base.listener.OnItemLongClickListener;
+import com.mdove.passwordguard.databinding.ItemMainGroupBinding;
 import com.mdove.passwordguard.databinding.ItemMainOptionBinding;
 import com.mdove.passwordguard.databinding.ItemMainSearchBinding;
 import com.mdove.passwordguard.databinding.ItemMainTopBinding;
 import com.mdove.passwordguard.databinding.ItemPasswordNormalBinding;
 import com.mdove.passwordguard.main.model.BaseMainModel;
+import com.mdove.passwordguard.main.model.MainGroupModel;
+import com.mdove.passwordguard.main.model.MainGroupRlvModel;
 import com.mdove.passwordguard.main.model.MainSearchModel;
 import com.mdove.passwordguard.main.model.MainTopModel;
 import com.mdove.passwordguard.main.model.PasswordModel;
+import com.mdove.passwordguard.main.model.handler.MainGroupHandler;
 import com.mdove.passwordguard.main.model.handler.MainOptionHandler;
 import com.mdove.passwordguard.main.model.handler.MainSearchHandler;
 import com.mdove.passwordguard.main.model.vm.ItemMainPasswordVM;
@@ -40,6 +45,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int TYPE_MAIN_TOP = 1;
     private static final int TYPE_MAIN_PASSWORD = 2;
     private static final int TYPE_MAIN_SEARCH = 3;
+    private static final int TYPE_MAIN_GROUP = 4;
 
     public MainAdapter(Context context, MainPresenter presenter) {
         mContext = context;
@@ -59,7 +65,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void notifyDeletePasswordData(int position) {
         mData.remove(position);
         notifyItemRemoved(position);
-        notifyItemRangeChanged(position,mData.size()-position);
+        notifyItemRangeChanged(position, mData.size() - position);
     }
 
     @Override
@@ -76,6 +82,8 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     return TYPE_MAIN_PASSWORD;
                 } else if (model instanceof MainSearchModel) {
                     return TYPE_MAIN_SEARCH;
+                } else if (model instanceof MainGroupModel) {
+                    return TYPE_MAIN_GROUP;
                 }
             }
         }
@@ -97,6 +105,9 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             case TYPE_MAIN_SEARCH: {
                 return new MainSearchViewHolder((ItemMainSearchBinding) InflateUtils.bindingInflate(parent, R.layout.item_main_search));
             }
+            case TYPE_MAIN_GROUP: {
+                return new MainGroupViewHolder((ItemMainGroupBinding) InflateUtils.bindingInflate(parent, R.layout.item_main_group));
+            }
         }
         return null;
     }
@@ -112,6 +123,8 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ((MainOptionViewHolder) holder).bind();
         } else if (holder instanceof MainSearchViewHolder) {
             ((MainSearchViewHolder) holder).bind();
+        } else if (holder instanceof MainGroupViewHolder) {
+            ((MainGroupViewHolder) holder).bind((MainGroupModel)model);
         }
     }
 
@@ -188,6 +201,24 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         public void bind() {
             mBinding.setActionHandler(new MainOptionHandler(mPresenter));
+        }
+    }
+
+    public class MainGroupViewHolder extends RecyclerView.ViewHolder {
+        private ItemMainGroupBinding mBinding;
+
+        public MainGroupViewHolder(ItemMainGroupBinding binding) {
+            super(binding.getRoot());
+            mBinding = binding;
+        }
+
+        public void bind(MainGroupModel model) {
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
+            linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+            mBinding.rlvGroup.setLayoutManager(linearLayoutManager);
+            mBinding.rlvGroup.setAdapter(new GroupRlvAdapter(mContext,model.mData));
+
+            mBinding.setActionHandler(new MainGroupHandler(mPresenter));
         }
     }
 

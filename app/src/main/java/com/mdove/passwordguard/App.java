@@ -8,6 +8,7 @@ import com.mdove.passwordguard.greendao.utils.DaoManager;
 import com.mdove.passwordguard.net.ApiServer;
 import com.mdove.passwordguard.net.RetrofitUtil;
 import com.mdove.passwordguard.net.UrlConstants;
+import com.tencent.bugly.crashreport.CrashReport;
 
 /**
  * Created by MDove on 2018/2/9.
@@ -25,6 +26,10 @@ public class App extends Application {
         mAppContext = this;
 
         mDaoManager = DaoManager.getInstance();
+
+        CrashReport.setIsDevelopmentDevice(mAppContext, true);
+        CrashReport.initCrashReport(getApplicationContext(), "544aec74cc", false);
+
         mDaoManager.init(mAppContext);
         if (mDaoSession == null) {
             synchronized (App.class) {

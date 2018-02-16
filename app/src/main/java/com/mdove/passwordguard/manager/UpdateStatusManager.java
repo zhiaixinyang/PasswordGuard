@@ -9,10 +9,6 @@ import com.mdove.passwordguard.utils.DateUtil;
 
 public class UpdateStatusManager {
     public static boolean isShowUpdateDialog() {
-        if (AppConfig.isShowUpdateDialogEnable()) {
-            AppConfig.setIsShowUpdateDialogEnable(false);
-            return true;
-        }
         long curTime = System.currentTimeMillis();
         if (AppConfig.getAppOrderTodayTime()==0){
             AppConfig.setAppOrderTodayTime(curTime);

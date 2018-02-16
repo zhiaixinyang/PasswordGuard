@@ -20,18 +20,9 @@ public class AppConfig implements IAppConfig{
         }
         return sPrefs;
     }
-    public static void setIsShowUpdateDialogEnable(boolean isShow){
-        SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(App.getAppContext()).edit();
-        editor.putBoolean(KEY_SHOW_UPDATE_DIALOG, isShow);
-        editor.apply();
-    }
-    public static boolean isShowUpdateDialogEnable(){
-        SharedPreferences preferences = initSharedPreferences();
-        return preferences.getBoolean(KEY_SHOW_UPDATE_DIALOG, true);
-    }
 
     public static void setAppOrderTodayTime(long time){
-        SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(App.getAppContext()).edit();
+        SharedPreferences.Editor editor = initSharedPreferences().edit();
         editor.putLong(KEY_ORDER_TODAY_TIME, time);
         editor.apply();
     }

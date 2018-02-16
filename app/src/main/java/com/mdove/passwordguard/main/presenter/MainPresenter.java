@@ -6,9 +6,12 @@ import com.mdove.passwordguard.addoralter.model.AlterPasswordModel;
 import com.mdove.passwordguard.greendao.DeletedPasswordDao;
 import com.mdove.passwordguard.greendao.PasswordDao;
 import com.mdove.passwordguard.greendao.entity.DeletedPassword;
+import com.mdove.passwordguard.greendao.entity.GroupInfo;
 import com.mdove.passwordguard.greendao.entity.Password;
 import com.mdove.passwordguard.greendao.utils.DeletedPasswordHelper;
 import com.mdove.passwordguard.main.model.BaseMainModel;
+import com.mdove.passwordguard.main.model.MainGroupModel;
+import com.mdove.passwordguard.main.model.MainGroupRlvModel;
 import com.mdove.passwordguard.main.model.MainSearchModel;
 import com.mdove.passwordguard.main.model.MainTopModel;
 import com.mdove.passwordguard.main.model.PasswordModel;
@@ -69,6 +72,14 @@ public class MainPresenter implements MainContract.Presenter {
         mainSearchModel.mType = 1;
         mData.add(mainSearchModel);
 
+        MainGroupModel mainGroupModel = new MainGroupModel();
+        mainGroupModel.mType = 1;
+        List<MainGroupRlvModel> data = new ArrayList<>();
+        MainGroupRlvModel mainGroupRlvModel = new MainGroupRlvModel("默认全部", "#ffffff", new Date().getTime());
+        data.add(mainGroupRlvModel);
+        mainGroupModel.mData = data;
+        mData.add(mainGroupModel);
+
         BaseMainModel optionModel = new BaseMainModel();
         optionModel.mType = 0;
         mData.add(optionModel);
@@ -115,7 +126,7 @@ public class MainPresenter implements MainContract.Presenter {
             mView.searchReturn(list, null);
             return;
         }
-        mView.searchReturn(null, "@");
+        mView.searchReturn(null, "未找到和此关键字匹配的账号信息");
 
     }
 

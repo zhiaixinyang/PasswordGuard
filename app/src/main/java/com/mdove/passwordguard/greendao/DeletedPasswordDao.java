@@ -22,7 +22,7 @@ public class DeletedPasswordDao extends AbstractDao<DeletedPassword, Long> {
     /**
      * Properties of entity DeletedPassword.<br/>
      * Can be used for QueryBuilder and for referencing column names.
-    */
+     */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property MUserName = new Property(1, String.class, "mUserName", false, "M_USER_NAME");
@@ -31,7 +31,7 @@ public class DeletedPasswordDao extends AbstractDao<DeletedPassword, Long> {
         public final static Property MTimeStamp = new Property(4, Long.class, "mTimeStamp", false, "M_TIME_STAMP");
         public final static Property IsNew = new Property(5, int.class, "isNew", false, "IS_NEW");
         public final static Property MDeletedTimeStamp = new Property(6, Long.class, "mDeletedTimeStamp", false, "M_DELETED_TIME_STAMP");
-    };
+    }
 
 
     public DeletedPasswordDao(DaoConfig config) {
@@ -176,6 +176,11 @@ public class DeletedPasswordDao extends AbstractDao<DeletedPassword, Long> {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public boolean hasKey(DeletedPassword entity) {
+        return entity.getId() != null;
     }
 
     @Override

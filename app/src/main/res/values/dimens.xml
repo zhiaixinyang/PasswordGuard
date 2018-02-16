@@ -8,6 +8,7 @@
     <dimen name="item_main_top_height">45dp</dimen>
 
     <dimen name="margin_item_password_normal">8dp</dimen>
+    <dimen name="margin_item_main_rlv_group">8dp</dimen>
     <dimen name="margin_main_option">8dp</dimen>
     <dimen name="radius_main_option_btn">8dp</dimen>
     <dimen name="size_tv_main_option_btn">12sp</dimen>
@@ -31,5 +32,6 @@
     <dimen name="item_delete_normal_w">120dp</dimen>
 
     <dimen name="dialog_update_btn_size">16sp</dimen>
+    <dimen name="item_main_group_seeting_iv_w_h">30dp</dimen>
 
 </resources>

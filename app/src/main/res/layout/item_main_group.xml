@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="actionHandler"
+            type="com.mdove.passwordguard.main.model.handler.MainGroupHandler" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/layout_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/margin_item_password_normal"
+        android:paddingLeft="@dimen/margin_item_password_normal"
+        android:paddingRight="@dimen/margin_item_password_normal">
+
+        <RelativeLayout
+            android:id="@+id/layout_top"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/item_top_height"
+            android:background="@drawable/bg_normal_top">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="12dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:text="分组信息" />
+            <ImageView
+                android:src="@mipmap/lock_ic_settings"
+                android:tint="@color/gray"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="12dp"
+                android:layout_width="@dimen/item_main_group_seeting_iv_w_h"
+                android:layout_height="@dimen/item_main_group_seeting_iv_w_h" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_below="@+id/layout_top"
+            android:background="@drawable/bg_normal_bottom"
+            android:layout_height="54dp">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rlv_group"
+                android:paddingRight="@dimen/margin_item_main_rlv_group"
+                android:layout_width="match_parent"
+                android:layout_toLeftOf="@+id/btn_add_group"
+                android:layout_height="54dp"/>
+            <ImageView
+                android:id="@+id/btn_add_group"
+                android:layout_width="@dimen/item_main_group_seeting_iv_w_h"
+                android:src="@mipmap/ic_add"
+                android:layout_margin="12dp"
+                android:tint="@color/gray"
+                android:layout_alignParentRight="true"
+                android:layout_height="@dimen/item_main_group_seeting_iv_w_h" />
+        </RelativeLayout>
+    </RelativeLayout>
+</layout>

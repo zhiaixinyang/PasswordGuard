@@ -22,7 +22,7 @@ public class PasswordDao extends AbstractDao<Password, Long> {
     /**
      * Properties of entity Password.<br/>
      * Can be used for QueryBuilder and for referencing column names.
-    */
+     */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property MUserName = new Property(1, String.class, "mUserName", false, "M_USER_NAME");
@@ -30,7 +30,7 @@ public class PasswordDao extends AbstractDao<Password, Long> {
         public final static Property MTitle = new Property(3, String.class, "mTitle", false, "M_TITLE");
         public final static Property MTimeStamp = new Property(4, Long.class, "mTimeStamp", false, "M_TIME_STAMP");
         public final static Property IsNew = new Property(5, int.class, "isNew", false, "IS_NEW");
-    };
+    }
 
 
     public PasswordDao(DaoConfig config) {
@@ -162,6 +162,11 @@ public class PasswordDao extends AbstractDao<Password, Long> {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public boolean hasKey(Password entity) {
+        return entity.getId() != null;
     }
 
     @Override

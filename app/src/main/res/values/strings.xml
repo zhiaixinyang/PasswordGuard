@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PasswordGuard</string>
+    <string name="app_name">记忆回声</string>
     <string name="string_add_password_suc">保存成功</string>
 
     <!-- 九宫格锁 -->

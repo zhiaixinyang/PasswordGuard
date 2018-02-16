@@ -67,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/margin_tv_main_option_btn_bottom"
                     android:layout_marginTop="@dimen/margin_tv_main_option_btn"
-                    android:text="添加密码"
+                    android:text="记录账号"
                     android:textColor="@color/color_tv_main_option_btn"
                     android:textSize="@dimen/size_tv_main_option_btn" />
             </LinearLayout>

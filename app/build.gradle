@@ -37,9 +37,9 @@ android {
 
     signingConfigs {
         sweetSignConfig {
-            storeFile file("$rootProject.projectDir/tool/keystore/PasswordGuard.keystore")
+            storeFile file("$rootProject.projectDir/tool/keystore/PasswordGuard.jks")
             storePassword "wjzj000"
-            keyAlias "password"
+            keyAlias "passwordguard"
             keyPassword "wjzj000"
         }
         debug {
@@ -49,8 +49,10 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.sweetSignConfig
         }
 
         applicationVariants.all { variant ->
@@ -59,22 +61,32 @@ android {
                 def fileName
                 if (outputFile != null && outputFile.name.endsWith('.apk')) {
                     if (variant.buildType.name == 'release') {
-                        fileName = "PasswordGuard-$variant.buildType.name-v${defaultConfig.versionName}-${defaultConfig.versionCode}}-${getDateTime()}.apk"
+                        fileName = "PasswordGuard-$variant.buildType.name-v${defaultConfig.versionName}-${defaultConfig.versionCode}-${getDateTime()}.apk"
                     } else {
-                        fileName = "PasswordGuard-$variant.buildType.name-v${defaultConfig.versionName}-${defaultConfig.versionCode}}.apk"
+                        fileName = "PasswordGuard-$variant.buildType.name-v${defaultConfig.versionName}-${defaultConfig.versionCode}.apk"
                     }
                     outputFileName = fileName
                 }
             }
         }
     }
+
+    lintOptions {
+        disable 'MissingTranslation'
+        disable 'ExtraTranslation'
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+
     dataBinding {
         enabled = true
     }
 }
 
 greendao {
-    schemaVersion 4
+    schemaVersion 1
     daoPackage 'com.mdove.passwordguard.greendao'
     targetGenDir 'src/main/java'
 }
@@ -97,6 +109,7 @@ dependencies {
     implementation dependencies.retrofitConverterGson
     implementation dependencies.retrofitAdapterRxJava
 
-    compile 'org.greenrobot:greendao:3.0.1'
-    compile 'org.greenrobot:greendao-generator:3.0.0'
+    implementation 'org.greenrobot:greendao:3.2.0'
+    implementation 'com.tencent.bugly:crashreport:latest.release' //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.1.9
+    implementation 'com.tencent.bugly:nativecrashreport:latest.release' //其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
 }

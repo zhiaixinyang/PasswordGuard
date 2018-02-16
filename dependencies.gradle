@@ -2,7 +2,7 @@ ext {
     compileSdkVersion = 26
     buildToolsVersion = "26.0.2"
     targetSdkVersion = 22
-    minSdkVersion = 19
+    minSdkVersion = 15
     retrofitVersion = '2.1.0'
 
     supportLibraryVersion = '26.1.0'

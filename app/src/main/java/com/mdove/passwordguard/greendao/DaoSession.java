@@ -47,8 +47,8 @@ public class DaoSession extends AbstractDaoSession {
     }
     
     public void clear() {
-        deletedPasswordDaoConfig.getIdentityScope().clear();
-        passwordDaoConfig.getIdentityScope().clear();
+        deletedPasswordDaoConfig.clearIdentityScope();
+        passwordDaoConfig.clearIdentityScope();
     }
 
     public DeletedPasswordDao getDeletedPasswordDao() {
