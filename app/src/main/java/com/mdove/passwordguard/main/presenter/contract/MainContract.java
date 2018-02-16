@@ -5,6 +5,7 @@ import com.mdove.passwordguard.base.BasePresenter;
 import com.mdove.passwordguard.base.BaseView;
 import com.mdove.passwordguard.greendao.entity.Password;
 import com.mdove.passwordguard.main.model.BaseMainModel;
+import com.mdove.passwordguard.main.model.MainGroupModel;
 import com.mdove.passwordguard.main.model.PasswordModel;
 
 import java.util.List;
@@ -50,7 +51,7 @@ public interface MainContract {
 
         void notifyPasswordData(int position);
 
-        void onClickBtnPassword();
+        void onClickBtnPassword(MainGroupModel model);
 
         void onClickBtnLock();
 

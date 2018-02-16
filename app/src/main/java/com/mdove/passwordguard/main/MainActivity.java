@@ -22,6 +22,7 @@ import com.mdove.passwordguard.lock.PatternSetActivity;
 import com.mdove.passwordguard.lock.PatternUnlockActivity;
 import com.mdove.passwordguard.main.adapter.MainAdapter;
 import com.mdove.passwordguard.main.model.BaseMainModel;
+import com.mdove.passwordguard.main.model.MainGroupModel;
 import com.mdove.passwordguard.main.model.PasswordModel;
 import com.mdove.passwordguard.main.model.event.AddGroupEvent;
 import com.mdove.passwordguard.main.presenter.MainPresenter;
@@ -140,8 +141,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     }
 
     @Override
-    public void onClickBtnPassword() {
-        AddPasswordDialog.showDialog(this);
+    public void onClickBtnPassword(MainGroupModel model) {
+        AddPasswordDialog.showDialog(this, model);
     }
 
     @Override

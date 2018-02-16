@@ -42,6 +42,7 @@ public class MainPresenter implements MainContract.Presenter {
     private DeletedPasswordDao mDeleteDao;
     private GroupInfoDao mGroupInfoDao;
     private List<MainGroupRlvModel> mGroupData;
+    private MainGroupModel mMainGroupModel;
 
     @Override
     public void subscribe(MainContract.MvpView view) {
@@ -79,8 +80,8 @@ public class MainPresenter implements MainContract.Presenter {
         mainSearchModel.mType = 1;
         mData.add(mainSearchModel);
 
-        MainGroupModel mainGroupModel = new MainGroupModel();
-        mainGroupModel.mType = 1;
+        mMainGroupModel = new MainGroupModel();
+        mMainGroupModel.mType = 1;
         MainGroupRlvModel mainGroupRlvModel = new MainGroupRlvModel("默认全部", "#ffffff", new Date().getTime());
         mGroupData.add(mainGroupRlvModel);
 
@@ -91,8 +92,8 @@ public class MainPresenter implements MainContract.Presenter {
             }
         }
 
-        mainGroupModel.mData = mGroupData;
-        mData.add(mainGroupModel);
+        mMainGroupModel.mData = mGroupData;
+        mData.add(mMainGroupModel);
 
         BaseMainModel optionModel = new BaseMainModel();
         optionModel.mType = 0;
@@ -129,7 +130,7 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void onClickBtnPassword() {
-        mView.onClickBtnPassword();
+        mView.onClickBtnPassword(mMainGroupModel);
     }
 
     @Override

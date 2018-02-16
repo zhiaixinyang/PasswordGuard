@@ -8,35 +8,66 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 
 import com.hwangjr.rxbus.RxBus;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.databinding.DialogAddPasswordBinding;
 import com.mdove.passwordguard.greendao.entity.Password;
+import com.mdove.passwordguard.main.model.MainGroupModel;
+import com.mdove.passwordguard.main.model.MainGroupRlvModel;
 import com.mdove.passwordguard.model.event.AddPasswordEvent;
 import com.mdove.passwordguard.utils.SystemUtils;
 import com.mdove.passwordguard.utils.ToastHelper;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by MDove on 18/2/10.
  */
 
 public class AddPasswordDialog extends AppCompatDialog {
+    private Context mContext;
     private DialogAddPasswordBinding mBinding;
     private String mTitle, mUserName, mPassword;
     private AddPasswordEvent mEvent;
+    private MainGroupModel mModel;
 
-    public AddPasswordDialog(Context context) {
+    public AddPasswordDialog(Context context, MainGroupModel model) {
         super(context, R.style.UpgradeDialog);
         mBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.dialog_add_password,
                 null, false);
         setContentView(mBinding.getRoot());
+
+        mModel = model;
+        mContext = context;
+
         WindowManager.LayoutParams paramsWindow = getWindow().getAttributes();
         paramsWindow.width = getWindowWidth();
         setCancelable(true);
         setCanceledOnTouchOutside(false);
+        initView();
+    }
+
+    private void initView() {
+        List<String> dataList = new ArrayList<>();
+        for (MainGroupRlvModel model : mModel.mData) {
+            dataList.add(model.mTvGroup);
+        }
+        ArrayAdapter adapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_item, dataList);
+        mBinding.spinner.setAdapter(adapter);
+        mBinding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
     }
 
     protected int getWindowWidth() {
@@ -94,8 +125,8 @@ public class AddPasswordDialog extends AppCompatDialog {
         mPassword = mBinding.etPassword.getText().toString().trim();
     }
 
-    public static void showDialog(Context context) {
-        AddPasswordDialog dialog = new AddPasswordDialog(context);
+    public static void showDialog(Context context, MainGroupModel model) {
+        AddPasswordDialog dialog = new AddPasswordDialog(context, model);
         dialog.show();
     }
 
