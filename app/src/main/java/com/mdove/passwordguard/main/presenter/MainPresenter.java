@@ -3,12 +3,15 @@ package com.mdove.passwordguard.main.presenter;
 import com.mdove.passwordguard.App;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.addoralter.model.AlterPasswordModel;
+import com.mdove.passwordguard.databinding.DialogAddGroupBinding;
 import com.mdove.passwordguard.greendao.DeletedPasswordDao;
+import com.mdove.passwordguard.greendao.GroupInfoDao;
 import com.mdove.passwordguard.greendao.PasswordDao;
 import com.mdove.passwordguard.greendao.entity.DeletedPassword;
 import com.mdove.passwordguard.greendao.entity.GroupInfo;
 import com.mdove.passwordguard.greendao.entity.Password;
 import com.mdove.passwordguard.greendao.utils.DeletedPasswordHelper;
+import com.mdove.passwordguard.main.AddGroupDialog;
 import com.mdove.passwordguard.main.model.BaseMainModel;
 import com.mdove.passwordguard.main.model.MainGroupModel;
 import com.mdove.passwordguard.main.model.MainGroupRlvModel;
@@ -37,6 +40,8 @@ public class MainPresenter implements MainContract.Presenter {
     private List<BaseMainModel> mData;
     private PasswordDao mDao;
     private DeletedPasswordDao mDeleteDao;
+    private GroupInfoDao mGroupInfoDao;
+    private List<MainGroupRlvModel> mGroupData;
 
     @Override
     public void subscribe(MainContract.MvpView view) {
@@ -44,6 +49,8 @@ public class MainPresenter implements MainContract.Presenter {
         mData = new ArrayList<>();
         mDao = App.getDaoSession().getPasswordDao();
         mDeleteDao = App.getDaoSession().getDeletedPasswordDao();
+        mGroupInfoDao = App.getDaoSession().getGroupInfoDao();
+        mGroupData = new ArrayList<>();
     }
 
     @Override
@@ -74,10 +81,17 @@ public class MainPresenter implements MainContract.Presenter {
 
         MainGroupModel mainGroupModel = new MainGroupModel();
         mainGroupModel.mType = 1;
-        List<MainGroupRlvModel> data = new ArrayList<>();
         MainGroupRlvModel mainGroupRlvModel = new MainGroupRlvModel("默认全部", "#ffffff", new Date().getTime());
-        data.add(mainGroupRlvModel);
-        mainGroupModel.mData = data;
+        mGroupData.add(mainGroupRlvModel);
+
+        List<GroupInfo> data = mGroupInfoDao.queryBuilder().list();
+        if (data != null && data.size() >= 0) {
+            for (GroupInfo groupInfo : data) {
+                mGroupData.add(new MainGroupRlvModel(groupInfo));
+            }
+        }
+
+        mainGroupModel.mData = mGroupData;
         mData.add(mainGroupModel);
 
         BaseMainModel optionModel = new BaseMainModel();
@@ -98,6 +112,22 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
     @Override
+    public void addGroup(String tvGroup) {
+        GroupInfo info = new GroupInfo();
+        info.mTvGroup = tvGroup;
+        info.mBgColor = "#ffffff";
+        info.mTimeStamp = new Date().getTime();
+        long id = mGroupInfoDao.insert(info);
+
+        MainGroupRlvModel model = new MainGroupRlvModel(info);
+        mGroupData.add(model);
+
+        if (id != -1) {
+            mView.addGroupSuc();
+        }
+    }
+
+    @Override
     public void onClickBtnPassword() {
         mView.onClickBtnPassword();
     }
@@ -110,6 +140,16 @@ public class MainPresenter implements MainContract.Presenter {
     @Override
     public void onClickBtnDelete() {
         mView.onClickBtnDelete();
+    }
+
+    @Override
+    public void onClickBtnAddGroup() {
+        new AddGroupDialog(mView.getContext()).show();
+    }
+
+    @Override
+    public void onClickBtnSetting() {
+
     }
 
     @Override

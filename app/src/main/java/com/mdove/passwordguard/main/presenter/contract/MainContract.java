@@ -19,6 +19,8 @@ public interface MainContract {
 
         void addPassword(Password password);
 
+        void addGroup(String tvGroup);
+
         void alterPassword(AlterPasswordModel model, int itemPosition);
 
         void onClickBtnPassword();
@@ -26,6 +28,10 @@ public interface MainContract {
         void onClickBtnLock();
 
         void onClickBtnDelete();
+
+        void onClickBtnAddGroup();
+
+        void onClickBtnSetting();
 
         void onClickBtnSearch();
 
@@ -54,6 +60,7 @@ public interface MainContract {
 
         void searchReturn(List<Password> data,String error);
 
+        void addGroupSuc();
 
         void deletePassword(int position);
 

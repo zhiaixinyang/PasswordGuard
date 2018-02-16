@@ -23,7 +23,7 @@
         <TextView
             android:id="@+id/tv_group"
             android:layout_width="wrap_content"
-            android:layout_height="35dp"
+            android:layout_height="38dp"
             android:background="@drawable/bg_item_main_rlv_group"
             android:gravity="center"
             android:paddingLeft="16dp"

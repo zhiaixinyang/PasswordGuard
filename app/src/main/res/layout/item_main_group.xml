@@ -38,6 +38,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="12dp"
+                android:onClick="@{()->actionHandler.onClickBtnSetting()}"
                 android:layout_width="@dimen/item_main_group_seeting_iv_w_h"
                 android:layout_height="@dimen/item_main_group_seeting_iv_w_h" />
         </RelativeLayout>
@@ -48,6 +49,8 @@
             android:layout_height="54dp">
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rlv_group"
+                android:scrollbars="none"
+                android:overScrollMode="never"
                 android:paddingRight="@dimen/margin_item_main_rlv_group"
                 android:layout_width="match_parent"
                 android:layout_toLeftOf="@+id/btn_add_group"
@@ -57,6 +60,7 @@
                 android:layout_width="@dimen/item_main_group_seeting_iv_w_h"
                 android:src="@mipmap/ic_add"
                 android:layout_margin="12dp"
+                android:onClick="@{()->actionHandler.onClickBtnAddGroup()}"
                 android:tint="@color/gray"
                 android:layout_alignParentRight="true"
                 android:layout_height="@dimen/item_main_group_seeting_iv_w_h" />

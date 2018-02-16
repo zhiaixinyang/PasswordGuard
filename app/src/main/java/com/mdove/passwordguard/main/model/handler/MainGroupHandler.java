@@ -13,15 +13,12 @@ public class MainGroupHandler {
         mPresenter = presenter;
     }
 
-    public void onClickBtnPassword() {
-        mPresenter.onClickBtnPassword();
+    public void onClickBtnAddGroup() {
+        mPresenter.onClickBtnAddGroup();
     }
 
-    public void onClickBtnLock() {
-        mPresenter.onClickBtnLock();
+    public void onClickBtnSetting() {
+        mPresenter.onClickBtnSetting();
     }
 
-    public void onClickBtnDelete() {
-        mPresenter.onClickBtnDelete();
-    }
 }

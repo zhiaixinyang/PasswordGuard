@@ -23,6 +23,7 @@ import com.mdove.passwordguard.lock.PatternUnlockActivity;
 import com.mdove.passwordguard.main.adapter.MainAdapter;
 import com.mdove.passwordguard.main.model.BaseMainModel;
 import com.mdove.passwordguard.main.model.PasswordModel;
+import com.mdove.passwordguard.main.model.event.AddGroupEvent;
 import com.mdove.passwordguard.main.presenter.MainPresenter;
 import com.mdove.passwordguard.main.presenter.contract.MainContract;
 import com.mdove.passwordguard.model.event.AddPasswordEvent;
@@ -164,11 +165,16 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
             ToastHelper.shortToast(error);
             return;
         }
-        List<BaseMainModel> dataModel=new ArrayList<>();
-        for (Password password:data){
+        List<BaseMainModel> dataModel = new ArrayList<>();
+        for (Password password : data) {
             dataModel.add(new SearchRlvModel(password));
         }
-        new SearchRlvDialog(this,dataModel).show();
+        new SearchRlvDialog(this, dataModel).show();
+    }
+
+    @Override
+    public void addGroupSuc() {
+        mAdapter.notifyAddGroup();
     }
 
     @Override
@@ -210,5 +216,10 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     @Subscribe
     public void alterPasswordInfo(AlterPasswordEvent event) {
         mPresenter.alterPassword(event.mModel, event.mItemPosition);
+    }
+
+    @Subscribe
+    public void addGroupInfo(AddGroupEvent event) {
+        mPresenter.addGroup(event.mTvGroup);
     }
 }

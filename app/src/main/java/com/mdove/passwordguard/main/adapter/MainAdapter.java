@@ -40,16 +40,15 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<BaseMainModel> mData;
     private Context mContext;
     private MainPresenter mPresenter;
-    private LayoutInflater mInflater;
     private static final int TYPE_MAIN_OPTION = 0;
     private static final int TYPE_MAIN_TOP = 1;
     private static final int TYPE_MAIN_PASSWORD = 2;
     private static final int TYPE_MAIN_SEARCH = 3;
     private static final int TYPE_MAIN_GROUP = 4;
+    private int mGroupPosition;
 
     public MainAdapter(Context context, MainPresenter presenter) {
         mContext = context;
-        mInflater = LayoutInflater.from(mContext);
         mPresenter = presenter;
     }
 
@@ -68,6 +67,10 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         notifyItemRangeChanged(position, mData.size() - position);
     }
 
+    public void notifyAddGroup() {
+        notifyItemChanged(mGroupPosition);
+    }
+
     @Override
     public int getItemViewType(int position) {
         BaseMainModel model = mData.get(position);
@@ -83,6 +86,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 } else if (model instanceof MainSearchModel) {
                     return TYPE_MAIN_SEARCH;
                 } else if (model instanceof MainGroupModel) {
+                    mGroupPosition = position;
                     return TYPE_MAIN_GROUP;
                 }
             }
@@ -124,7 +128,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         } else if (holder instanceof MainSearchViewHolder) {
             ((MainSearchViewHolder) holder).bind();
         } else if (holder instanceof MainGroupViewHolder) {
-            ((MainGroupViewHolder) holder).bind((MainGroupModel)model);
+            ((MainGroupViewHolder) holder).bind((MainGroupModel) model);
         }
     }
 
@@ -216,7 +220,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
             linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
             mBinding.rlvGroup.setLayoutManager(linearLayoutManager);
-            mBinding.rlvGroup.setAdapter(new GroupRlvAdapter(mContext,model.mData));
+            mBinding.rlvGroup.setAdapter(new GroupRlvAdapter(mContext, model.mData));
 
             mBinding.setActionHandler(new MainGroupHandler(mPresenter));
         }
