@@ -17,7 +17,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/margin_item_main_rlv_group"
-        android:paddingLeft="@dimen/margin_item_main_rlv_group"
+        android:paddingRight="4dp"
+        android:paddingLeft="4dp"
         android:paddingTop="@dimen/margin_item_main_rlv_group">
 
         <TextView

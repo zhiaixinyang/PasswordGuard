@@ -30,6 +30,7 @@ public class PasswordDao extends AbstractDao<Password, Long> {
         public final static Property MTitle = new Property(3, String.class, "mTitle", false, "M_TITLE");
         public final static Property MTimeStamp = new Property(4, Long.class, "mTimeStamp", false, "M_TIME_STAMP");
         public final static Property IsNew = new Property(5, int.class, "isNew", false, "IS_NEW");
+        public final static Property MTvGroup = new Property(6, String.class, "mTvGroup", false, "M_TV_GROUP");
     }
 
 
@@ -50,7 +51,8 @@ public class PasswordDao extends AbstractDao<Password, Long> {
                 "\"M_PASSWORD\" TEXT," + // 2: mPassword
                 "\"M_TITLE\" TEXT," + // 3: mTitle
                 "\"M_TIME_STAMP\" INTEGER," + // 4: mTimeStamp
-                "\"IS_NEW\" INTEGER NOT NULL );"); // 5: isNew
+                "\"IS_NEW\" INTEGER NOT NULL ," + // 5: isNew
+                "\"M_TV_GROUP\" TEXT);"); // 6: mTvGroup
     }
 
     /** Drops the underlying database table. */
@@ -88,6 +90,11 @@ public class PasswordDao extends AbstractDao<Password, Long> {
             stmt.bindLong(5, mTimeStamp);
         }
         stmt.bindLong(6, entity.getIsNew());
+ 
+        String mTvGroup = entity.getMTvGroup();
+        if (mTvGroup != null) {
+            stmt.bindString(7, mTvGroup);
+        }
     }
 
     @Override
@@ -119,6 +126,11 @@ public class PasswordDao extends AbstractDao<Password, Long> {
             stmt.bindLong(5, mTimeStamp);
         }
         stmt.bindLong(6, entity.getIsNew());
+ 
+        String mTvGroup = entity.getMTvGroup();
+        if (mTvGroup != null) {
+            stmt.bindString(7, mTvGroup);
+        }
     }
 
     @Override
@@ -134,7 +146,8 @@ public class PasswordDao extends AbstractDao<Password, Long> {
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // mPassword
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // mTitle
             cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4), // mTimeStamp
-            cursor.getInt(offset + 5) // isNew
+            cursor.getInt(offset + 5), // isNew
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6) // mTvGroup
         );
         return entity;
     }
@@ -147,6 +160,7 @@ public class PasswordDao extends AbstractDao<Password, Long> {
         entity.setMTitle(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setMTimeStamp(cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4));
         entity.setIsNew(cursor.getInt(offset + 5));
+        entity.setMTvGroup(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
      }
     
     @Override

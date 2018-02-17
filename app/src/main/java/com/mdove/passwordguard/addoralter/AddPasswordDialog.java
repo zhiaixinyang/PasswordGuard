@@ -18,6 +18,7 @@ import com.mdove.passwordguard.greendao.entity.Password;
 import com.mdove.passwordguard.main.model.MainGroupModel;
 import com.mdove.passwordguard.main.model.MainGroupRlvModel;
 import com.mdove.passwordguard.model.event.AddPasswordEvent;
+import com.mdove.passwordguard.ui.flowlayout.MultiLineChooseLayout;
 import com.mdove.passwordguard.utils.SystemUtils;
 import com.mdove.passwordguard.utils.ToastHelper;
 
@@ -32,9 +33,10 @@ import java.util.List;
 public class AddPasswordDialog extends AppCompatDialog {
     private Context mContext;
     private DialogAddPasswordBinding mBinding;
-    private String mTitle, mUserName, mPassword;
+    private String mTitle, mUserName, mPassword, mTvGroup;
     private AddPasswordEvent mEvent;
     private MainGroupModel mModel;
+    private int mDefualtGroup = 0;
 
     public AddPasswordDialog(Context context, MainGroupModel model) {
         super(context, R.style.UpgradeDialog);
@@ -57,15 +59,13 @@ public class AddPasswordDialog extends AppCompatDialog {
         for (MainGroupRlvModel model : mModel.mData) {
             dataList.add(model.mTvGroup);
         }
-        ArrayAdapter adapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_item, dataList);
-        mBinding.spinner.setAdapter(adapter);
-        mBinding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        mTvGroup = dataList.get(mDefualtGroup);
+        mBinding.singleChoose.setList(dataList);
+        mBinding.singleChoose.setIndexItemSelected(mDefualtGroup);
+        mBinding.singleChoose.setOnItemClickListener(new MultiLineChooseLayout.onItemClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+            public void onItemClick(int position, String text) {
+                mTvGroup = text;
             }
         });
     }
@@ -113,6 +113,7 @@ public class AddPasswordDialog extends AppCompatDialog {
         password.mTitle = mTitle;
         password.mTimeStamp = new Date().getTime();
         password.isNew = 1;
+        password.mTvGroup = mTvGroup;
 
         mEvent = new AddPasswordEvent();
         mEvent.mPassword = password;

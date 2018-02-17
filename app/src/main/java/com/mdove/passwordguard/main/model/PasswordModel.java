@@ -11,6 +11,7 @@ public class PasswordModel extends BaseMainModel {
     public String mTitle;
     public String mPassword;
     public String mUserName;
+    public String mTvGroup;
     public Long mTimeStamp;
     public boolean mIsNew = false;
     public Password password;
@@ -21,6 +22,7 @@ public class PasswordModel extends BaseMainModel {
         mPassword = password.mPassword;
         mUserName = password.mUserName;
         mTimeStamp = password.mTimeStamp;
+        mTvGroup = password.mTvGroup;
         mType = 1;
         mIsNew = password.isNew != 0;
         this.password = password;
