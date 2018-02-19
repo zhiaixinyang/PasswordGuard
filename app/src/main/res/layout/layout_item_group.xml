@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_main"
+    android:layout_width="150dp"
+    android:layout_height="40dp"
+    android:background="@drawable/bg_layout_item_group_off">
+
+    <TextView
+        android:id="@+id/iv_circle_off"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/bg_layout_item_group_circle_off" />
+
+    <ImageView
+        android:id="@+id/iv_circle_on"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="7dp"
+        android:visibility="gone"
+        android:background="@drawable/bg_layout_item_group_circle_on"
+        android:src="@mipmap/ic_right_mark" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:maxLines="1"
+        android:layout_marginLeft="15dp"
+        android:ellipsize="end"
+        android:layout_marginRight="15dp"
+        android:text="谷歌账号"
+        android:textColor="@color/gray"
+        android:textSize="16sp" />
+</RelativeLayout>

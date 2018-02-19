@@ -1,5 +1,5 @@
 
-package com.mdove.passwordguard.ui.utils;
+package com.mdove.passwordguard.ui;
 
 import android.content.Context;
 import android.content.res.ColorStateList;

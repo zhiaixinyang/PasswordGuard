@@ -1,4 +1,4 @@
-package com.mdove.passwordguard.main.adapter;
+package com.mdove.passwordguard.addoralter.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,20 +8,20 @@ import android.view.ViewGroup;
 
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.databinding.ItemMainRlvGroupBinding;
-import com.mdove.passwordguard.main.model.MainGroupRlvModel;
+import com.mdove.passwordguard.greendao.entity.GroupInfo;
 import com.mdove.passwordguard.utils.InflateUtils;
 
 import java.util.List;
 
 /**
- * Created by MDove on 2018/2/16.
+ * Created by MDove on 2018/2/19.
  */
 
-public class GroupRlvAdapter extends RecyclerView.Adapter<GroupRlvAdapter.ViewHolder> {
-    private List<MainGroupRlvModel> mData;
+public class AddPasswordGroupAdapter extends RecyclerView.Adapter<AddPasswordGroupAdapter.ViewHolder> {
+    private List<GroupInfo> mData;
     private Context mContext;
 
-    public GroupRlvAdapter(Context context, List<MainGroupRlvModel> data) {
+    public AddPasswordGroupAdapter(Context context, List<GroupInfo> data) {
         this.mData = data;
         this.mContext = context;
     }
@@ -47,8 +47,6 @@ public class GroupRlvAdapter extends RecyclerView.Adapter<GroupRlvAdapter.ViewHo
         return mData != null ? mData.size() : 0;
     }
 
-
-
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ItemMainRlvGroupBinding mBinding;
 
@@ -58,11 +56,15 @@ public class GroupRlvAdapter extends RecyclerView.Adapter<GroupRlvAdapter.ViewHo
         }
 
         public void bind(String title) {
-            if (TextUtils.isEmpty(title)){
+            if (TextUtils.isEmpty(title)) {
                 return;
             }
             mBinding.layoutItemGroup.setTitle(title);
         }
+    }
 
+    public void addData(List<GroupInfo> data) {
+        mData = data;
+        notifyDataSetChanged();
     }
 }

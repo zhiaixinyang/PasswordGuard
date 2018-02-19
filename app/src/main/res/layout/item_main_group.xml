@@ -54,6 +54,7 @@
                 android:paddingRight="@dimen/margin_item_main_rlv_group"
                 android:paddingLeft="@dimen/margin_item_main_rlv_group"
                 android:layout_width="match_parent"
+                android:layout_centerVertical="true"
                 android:layout_toLeftOf="@+id/btn_add_group"
                 android:layout_height="54dp"/>
             <ImageView

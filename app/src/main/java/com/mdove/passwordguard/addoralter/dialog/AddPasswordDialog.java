@@ -1,4 +1,4 @@
-package com.mdove.passwordguard.addoralter;
+package com.mdove.passwordguard.addoralter.dialog;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
@@ -8,8 +8,6 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 
 import com.hwangjr.rxbus.RxBus;
 import com.mdove.passwordguard.R;
@@ -36,7 +34,7 @@ public class AddPasswordDialog extends AppCompatDialog {
     private String mTitle, mUserName, mPassword, mTvGroup;
     private AddPasswordEvent mEvent;
     private MainGroupModel mModel;
-    private int mDefualtGroup = 0;
+    private int mDefaultGroup = 0;
 
     public AddPasswordDialog(Context context, MainGroupModel model) {
         super(context, R.style.UpgradeDialog);
@@ -59,9 +57,9 @@ public class AddPasswordDialog extends AppCompatDialog {
         for (MainGroupRlvModel model : mModel.mData) {
             dataList.add(model.mTvGroup);
         }
-        mTvGroup = dataList.get(mDefualtGroup);
+        mTvGroup = dataList.get(mDefaultGroup);
         mBinding.singleChoose.setList(dataList);
-        mBinding.singleChoose.setIndexItemSelected(mDefualtGroup);
+        mBinding.singleChoose.setIndexItemSelected(mDefaultGroup);
         mBinding.singleChoose.setOnItemClickListener(new MultiLineChooseLayout.onItemClickListener() {
             @Override
             public void onItemClick(int position, String text) {

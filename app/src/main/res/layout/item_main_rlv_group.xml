@@ -1,37 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <data>
-
-        <import type="android.view.View" />
-
-        <variable
-            name="viewModel"
-            type="com.mdove.passwordguard.main.model.vm.ItemMainRlvGroupVM" />
-    </data>
-
-    <RelativeLayout
-        android:id="@+id/layout_item"
+    <com.mdove.passwordguard.ui.ItemGroupLayout
+        android:id="@+id/layout_item_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/margin_item_main_rlv_group"
-        android:paddingRight="4dp"
-        android:paddingLeft="4dp"
-        android:paddingTop="@dimen/margin_item_main_rlv_group">
-
-        <TextView
-            android:id="@+id/tv_group"
-            android:layout_width="wrap_content"
-            android:layout_height="38dp"
-            android:background="@drawable/bg_item_main_rlv_group"
-            android:gravity="center"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:text="@{viewModel.mTvGroup}"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            tools:text="默认" />
-    </RelativeLayout>
+        android:layout_marginRight="6dp"
+        android:layout_marginTop="6dp" />
 </layout>

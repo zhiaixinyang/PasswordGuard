@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mdove.passwordguard">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".App"
@@ -43,6 +43,11 @@
 
         <activity
             android:name=".deletelist.DeleteListActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".addoralter.AddPasswordActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
     </application>

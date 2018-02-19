@@ -1,4 +1,4 @@
-package com.mdove.passwordguard.addoralter;
+package com.mdove.passwordguard.addoralter.dialog;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;

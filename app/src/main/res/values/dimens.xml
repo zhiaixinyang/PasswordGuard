@@ -34,5 +34,7 @@
     <dimen name="dialog_update_btn_size">16sp</dimen>
     <dimen name="item_main_group_seeting_iv_w_h">30dp</dimen>
     <dimen name="item_password_normal_radius">5dp</dimen>
+    <dimen name="activity_add_password_h">40dp</dimen>
+    <dimen name="activity_add_password_margin">6dp</dimen>
 
 </resources>

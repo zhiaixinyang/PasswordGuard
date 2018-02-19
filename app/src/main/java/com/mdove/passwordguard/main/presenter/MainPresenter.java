@@ -2,6 +2,7 @@ package com.mdove.passwordguard.main.presenter;
 
 import com.mdove.passwordguard.App;
 import com.mdove.passwordguard.R;
+import com.mdove.passwordguard.addoralter.AddPasswordActivity;
 import com.mdove.passwordguard.addoralter.model.AlterPasswordModel;
 import com.mdove.passwordguard.databinding.DialogAddGroupBinding;
 import com.mdove.passwordguard.greendao.DeletedPasswordDao;
@@ -130,7 +131,8 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void onClickBtnPassword() {
-        mView.onClickBtnPassword(mMainGroupModel);
+//        mView.onClickBtnPassword(mMainGroupModel);
+        AddPasswordActivity.start(mView.getContext());
     }
 
     @Override
