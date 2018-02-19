@@ -28,7 +28,7 @@ import java.util.Date;
 public class AlterPasswordDialog extends AppCompatDialog {
     private DialogAlterPasswordBinding mBinding;
     private String mTitle, mUserName, mPassword;
-    private String mOldUserName, mOldPassword;
+    private String mOldUserName, mOldPassword, mOldGroupTitle;
     private Password oldPassword;
     private AlterPasswordEvent mEvent;
     private int mItemPosition;
@@ -57,6 +57,7 @@ public class AlterPasswordDialog extends AppCompatDialog {
 
         mOldPassword = password.mPassword;
         mOldUserName = password.mUserName;
+        mOldGroupTitle = password.mTvGroup;
     }
 
     protected int getWindowWidth() {
@@ -99,6 +100,7 @@ public class AlterPasswordDialog extends AppCompatDialog {
         newPassword.mPassword = mPassword;
         newPassword.mUserName = mUserName;
         newPassword.mTitle = mTitle;
+        newPassword.mTvGroup = mOldGroupTitle;
         newPassword.mTimeStamp = new Date().getTime();
         newPassword.isNew = 1;
         oldPassword.isNew = 0;

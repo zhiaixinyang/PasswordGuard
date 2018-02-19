@@ -1,31 +1,28 @@
-package com.mdove.passwordguard.main.model;
+package com.mdove.passwordguard.addoralter.model;
 
 import com.mdove.passwordguard.greendao.entity.GroupInfo;
 
 /**
- * Created by MDove on 2018/2/16.
+ * Created by MDove on 2018/2/19.
  */
 
-public class MainGroupRlvModel {
+public class AddPasswordGroupRlvModel {
     public String mTvGroup;
     public String mBgColor;
     public Long mTimeStamp;
     public boolean mIsCheck = false;
-    public GroupInfo mGroupInfo = null;
 
-    public MainGroupRlvModel(GroupInfo groupInfo) {
+    public AddPasswordGroupRlvModel(GroupInfo groupInfo) {
         mBgColor = groupInfo.mBgColor;
         mTimeStamp = groupInfo.mTimeStamp;
         mTvGroup = groupInfo.mTvGroup;
         mIsCheck = false;
-        mGroupInfo = groupInfo;
     }
 
-    public MainGroupRlvModel(String tvGroup, String bgColor, Long timeStamp) {
+    public AddPasswordGroupRlvModel(String tvGroup, String bgColor, Long timeStamp) {
         mTvGroup = tvGroup;
         mBgColor = bgColor;
         mTimeStamp = timeStamp;
         mIsCheck = true;
-        mGroupInfo = null;
     }
 }

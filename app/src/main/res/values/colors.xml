@@ -36,4 +36,7 @@
     <color name="lockColorPatternError">#B3354B</color>
     <color name="red">#fb4447</color>
     <color name="dialog_search_divider">#EEEEEE</color>
+
+    <color name="default_check_group_color">#000000</color>
+
 </resources>

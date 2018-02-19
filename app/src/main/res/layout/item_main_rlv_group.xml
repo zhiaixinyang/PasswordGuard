@@ -5,6 +5,6 @@
         android:id="@+id/layout_item_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="6dp"
-        android:layout_marginTop="6dp" />
+        android:layout_marginRight="@dimen/margin_item_main_rlv_group"
+        android:layout_marginTop="@dimen/margin_item_main_rlv_group" />
 </layout>

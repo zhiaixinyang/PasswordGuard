@@ -13,12 +13,14 @@ import com.mdove.passwordguard.greendao.entity.GroupInfo;
 import com.mdove.passwordguard.greendao.entity.Password;
 import com.mdove.passwordguard.greendao.utils.DeletedPasswordHelper;
 import com.mdove.passwordguard.main.AddGroupDialog;
+import com.mdove.passwordguard.main.adapter.MainAdapter;
 import com.mdove.passwordguard.main.model.BaseMainModel;
 import com.mdove.passwordguard.main.model.MainGroupModel;
 import com.mdove.passwordguard.main.model.MainGroupRlvModel;
 import com.mdove.passwordguard.main.model.MainSearchModel;
 import com.mdove.passwordguard.main.model.MainTopModel;
 import com.mdove.passwordguard.main.model.PasswordModel;
+import com.mdove.passwordguard.main.model.event.CheckOrderEvent;
 import com.mdove.passwordguard.main.presenter.contract.MainContract;
 import com.mdove.passwordguard.manager.UpdateStatusManager;
 import com.mdove.passwordguard.model.net.RealUpdate;
@@ -44,15 +46,19 @@ public class MainPresenter implements MainContract.Presenter {
     private GroupInfoDao mGroupInfoDao;
     private List<MainGroupRlvModel> mGroupData;
     private MainGroupModel mMainGroupModel;
+    private List<GroupInfo> mCheckedList;
 
     @Override
     public void subscribe(MainContract.MvpView view) {
         mView = view;
+
         mData = new ArrayList<>();
+        mCheckedList = new ArrayList<>();
+        mGroupData = new ArrayList<>();
+
         mDao = App.getDaoSession().getPasswordDao();
         mDeleteDao = App.getDaoSession().getDeletedPasswordDao();
         mGroupInfoDao = App.getDaoSession().getGroupInfoDao();
-        mGroupData = new ArrayList<>();
     }
 
     @Override
@@ -99,6 +105,8 @@ public class MainPresenter implements MainContract.Presenter {
         BaseMainModel optionModel = new BaseMainModel();
         optionModel.mType = 0;
         mData.add(optionModel);
+
+        MainAdapter.mPasswordPosition = mData.size();
     }
 
     @Override
@@ -208,6 +216,18 @@ public class MainPresenter implements MainContract.Presenter {
         });
     }
 
+    @Override
+    public void checkOrderPassword(CheckOrderEvent event) {
+        if (event.mGroupInfo == null) {
+            if (!event.mIsCheck) {
+                return;
+            }
+            mView.showData(mData);
+            return;
+        }
+        setCheckedData(event);
+    }
+
     private void showUpgradeDialog(final RealUpdate result) {
         new UpdateDialog(mView.getContext(), result.getSrc()).show();
     }
@@ -223,5 +243,23 @@ public class MainPresenter implements MainContract.Presenter {
         oldModel.mIsNew = false;
 
         mView.alterPasswordSuc(itemPosition, mData.size());
+    }
+
+    private void setCheckedData(CheckOrderEvent event) {
+        if (event.mIsCheck) {
+            mCheckedList.add(event.mGroupInfo);
+        } else {
+            if (mCheckedList.contains(event.mGroupInfo)) mCheckedList.remove(event.mGroupInfo);
+        }
+        List<PasswordModel> checkData = new ArrayList<>();
+        for (GroupInfo info : mCheckedList) {
+            List<Password> data = mDao.queryBuilder().where(PasswordDao.Properties.MTvGroup.eq(info.getMTvGroup())).build().list();
+            List<PasswordModel> passwordData = new ArrayList<>();
+            for (Password password : data) {
+                passwordData.add(new PasswordModel(password));
+            }
+            checkData.addAll(passwordData);
+        }
+        mView.checkOrderSuc(checkData);
     }
 }

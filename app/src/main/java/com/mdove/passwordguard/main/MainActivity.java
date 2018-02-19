@@ -13,6 +13,7 @@ import android.text.TextUtils;
 import com.hwangjr.rxbus.RxBus;
 import com.hwangjr.rxbus.annotation.Subscribe;
 import com.mdove.passwordguard.R;
+import com.mdove.passwordguard.addoralter.model.event.AddPasswordActivityEvent;
 import com.mdove.passwordguard.base.listener.OnItemLongClickListener;
 import com.mdove.passwordguard.deletelist.DeleteListActivity;
 import com.mdove.passwordguard.greendao.entity.Password;
@@ -25,6 +26,7 @@ import com.mdove.passwordguard.main.model.BaseMainModel;
 import com.mdove.passwordguard.main.model.MainGroupModel;
 import com.mdove.passwordguard.main.model.PasswordModel;
 import com.mdove.passwordguard.main.model.event.AddGroupEvent;
+import com.mdove.passwordguard.main.model.event.CheckOrderEvent;
 import com.mdove.passwordguard.main.presenter.MainPresenter;
 import com.mdove.passwordguard.main.presenter.contract.MainContract;
 import com.mdove.passwordguard.model.event.AddPasswordEvent;
@@ -191,6 +193,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     }
 
     @Override
+    public void checkOrderSuc(List<PasswordModel> data) {
+        mAdapter.addPasswordData(data);
+    }
+
+    @Override
     public void OnSearchClick(String keyword) {
         if (!TextUtils.isEmpty(keyword)) {
             mPresenter.querySearch(keyword);
@@ -215,6 +222,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     }
 
     @Subscribe
+    public void addPasswordActivityInfo(AddPasswordActivityEvent event) {
+        mPresenter.addPassword(event.mPassword);
+    }
+
+    @Subscribe
     public void alterPasswordInfo(AlterPasswordEvent event) {
         mPresenter.alterPassword(event.mModel, event.mItemPosition);
     }
@@ -222,5 +234,10 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     @Subscribe
     public void addGroupInfo(AddGroupEvent event) {
         mPresenter.addGroup(event.mTvGroup);
+    }
+
+    @Subscribe
+    public void checkOrder(CheckOrderEvent event) {
+        mPresenter.checkOrderPassword(event);
     }
 }

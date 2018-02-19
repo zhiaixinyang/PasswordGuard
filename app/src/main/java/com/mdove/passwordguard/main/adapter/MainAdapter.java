@@ -1,13 +1,17 @@
 package com.mdove.passwordguard.main.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.hwangjr.rxbus.RxBus;
 import com.mdove.passwordguard.R;
+import com.mdove.passwordguard.addoralter.adapter.AddPasswordGroupAdapter;
+import com.mdove.passwordguard.addoralter.model.AddPasswordGroupRlvModel;
 import com.mdove.passwordguard.base.listener.OnItemDeleteClickListener;
 import com.mdove.passwordguard.base.listener.OnItemLongClickListener;
 import com.mdove.passwordguard.databinding.ItemMainGroupBinding;
@@ -21,6 +25,7 @@ import com.mdove.passwordguard.main.model.MainGroupRlvModel;
 import com.mdove.passwordguard.main.model.MainSearchModel;
 import com.mdove.passwordguard.main.model.MainTopModel;
 import com.mdove.passwordguard.main.model.PasswordModel;
+import com.mdove.passwordguard.main.model.event.CheckOrderEvent;
 import com.mdove.passwordguard.main.model.handler.MainGroupHandler;
 import com.mdove.passwordguard.main.model.handler.MainOptionHandler;
 import com.mdove.passwordguard.main.model.handler.MainSearchHandler;
@@ -30,6 +35,7 @@ import com.mdove.passwordguard.main.presenter.MainPresenter;
 import com.mdove.passwordguard.ui.SwipeMenuLayout;
 import com.mdove.passwordguard.utils.InflateUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,6 +52,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int TYPE_MAIN_SEARCH = 3;
     private static final int TYPE_MAIN_GROUP = 4;
     private int mGroupPosition;
+    public static int mPasswordPosition=0;
 
     public MainAdapter(Context context, MainPresenter presenter) {
         mContext = context;
@@ -54,6 +61,16 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public void setData(List<BaseMainModel> data) {
         mData = data;
+        notifyDataSetChanged();
+    }
+
+    public void addPasswordData(List<PasswordModel> data) {
+        List<BaseMainModel> newData = new ArrayList<>();
+        for (int i = 0; i < mPasswordPosition; i++) {
+            newData.add(mData.get(i));
+        }
+        newData.addAll(data);
+        mData=newData;
         notifyDataSetChanged();
     }
 
@@ -210,6 +227,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public class MainGroupViewHolder extends RecyclerView.ViewHolder {
         private ItemMainGroupBinding mBinding;
+        private GroupRlvAdapter mAdapter;
 
         public MainGroupViewHolder(ItemMainGroupBinding binding) {
             super(binding.getRoot());
@@ -217,10 +235,16 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
         public void bind(MainGroupModel model) {
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
-            linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-            mBinding.rlvGroup.setLayoutManager(linearLayoutManager);
-            mBinding.rlvGroup.setAdapter(new GroupRlvAdapter(mContext, model.mData));
+            mBinding.rlvGroup.setLayoutManager(new GridLayoutManager(mContext,3));
+
+            mAdapter = new GroupRlvAdapter(mContext, model.mData);
+            mBinding.rlvGroup.setAdapter(mAdapter);
+            mAdapter.setOnCheckListener(new GroupRlvAdapter.OnCheckListener() {
+                @Override
+                public void onCheck(boolean isCheck, MainGroupRlvModel model) {
+                    RxBus.get().post(new CheckOrderEvent(isCheck, model.mGroupInfo));
+                }
+            });
 
             mBinding.setActionHandler(new MainGroupHandler(mPresenter));
         }

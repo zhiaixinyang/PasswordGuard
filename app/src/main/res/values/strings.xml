@@ -60,4 +60,7 @@
     <string name="update_cancel">我拒绝</string>
     <string name="string_update_success">新的安装包下载成功</string>
     <string name="string_update_err">更新包下载失败</string>
+
+    <string name="default_check_group_title">默认分组</string>
+
 </resources>

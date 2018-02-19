@@ -1,8 +1,10 @@
 package com.mdove.passwordguard.addoralter.presenter.contract;
 
+import com.mdove.passwordguard.addoralter.model.AddPasswordGroupRlvModel;
 import com.mdove.passwordguard.base.BasePresenter;
 import com.mdove.passwordguard.base.BaseView;
 import com.mdove.passwordguard.greendao.entity.GroupInfo;
+import com.mdove.passwordguard.greendao.entity.Password;
 
 import java.util.List;
 
@@ -16,6 +18,6 @@ public interface AddPasswordContract {
     }
 
     interface MvpView extends BaseView<Presenter> {
-        void showGroup(List<GroupInfo> data);
+        void showGroup(List<AddPasswordGroupRlvModel> data);
     }
 }

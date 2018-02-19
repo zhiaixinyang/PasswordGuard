@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mdove.passwordguard.R;
+import com.mdove.passwordguard.addoralter.adapter.AddPasswordGroupAdapter;
 import com.mdove.passwordguard.databinding.ItemMainRlvGroupBinding;
 import com.mdove.passwordguard.main.model.MainGroupRlvModel;
 import com.mdove.passwordguard.utils.InflateUtils;
@@ -32,12 +33,18 @@ public class GroupRlvAdapter extends RecyclerView.Adapter<GroupRlvAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.bind(mData.get(position).mTvGroup);
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
+        final MainGroupRlvModel model = mData.get(position);
+        holder.bind(model);
         holder.mBinding.layoutItemGroup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                holder.mBinding.layoutItemGroup.setCheck(!holder.mBinding.layoutItemGroup.getCheck());
+                if (mListener != null) {
+                    boolean isCheck = holder.mBinding.layoutItemGroup.getCheck();
+                    model.mIsCheck = !isCheck;
+                    mListener.onCheck(!isCheck, model);
+                    holder.bind(model);
+                }
             }
         });
     }
@@ -48,7 +55,6 @@ public class GroupRlvAdapter extends RecyclerView.Adapter<GroupRlvAdapter.ViewHo
     }
 
 
-
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ItemMainRlvGroupBinding mBinding;
 
@@ -57,12 +63,19 @@ public class GroupRlvAdapter extends RecyclerView.Adapter<GroupRlvAdapter.ViewHo
             mBinding = binding;
         }
 
-        public void bind(String title) {
-            if (TextUtils.isEmpty(title)){
-                return;
-            }
-            mBinding.layoutItemGroup.setTitle(title);
+        public void bind(MainGroupRlvModel model) {
+            mBinding.layoutItemGroup.setCheck(model.mIsCheck);
+            mBinding.layoutItemGroup.setTitle(model.mTvGroup);
         }
+    }
 
+    private GroupRlvAdapter.OnCheckListener mListener;
+
+    public void setOnCheckListener(GroupRlvAdapter.OnCheckListener listener) {
+        mListener = listener;
+    }
+
+    public interface OnCheckListener {
+        void onCheck(boolean isCheck, MainGroupRlvModel model);
     }
 }

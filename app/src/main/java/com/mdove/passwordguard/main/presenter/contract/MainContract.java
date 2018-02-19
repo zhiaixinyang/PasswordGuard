@@ -3,10 +3,12 @@ package com.mdove.passwordguard.main.presenter.contract;
 import com.mdove.passwordguard.addoralter.model.AlterPasswordModel;
 import com.mdove.passwordguard.base.BasePresenter;
 import com.mdove.passwordguard.base.BaseView;
+import com.mdove.passwordguard.greendao.entity.GroupInfo;
 import com.mdove.passwordguard.greendao.entity.Password;
 import com.mdove.passwordguard.main.model.BaseMainModel;
 import com.mdove.passwordguard.main.model.MainGroupModel;
 import com.mdove.passwordguard.main.model.PasswordModel;
+import com.mdove.passwordguard.main.model.event.CheckOrderEvent;
 
 import java.util.List;
 
@@ -42,6 +44,7 @@ public interface MainContract {
 
         void checkUpdate(String version);
 
+        void checkOrderPassword(CheckOrderEvent event);
     }
 
     interface MvpView extends BaseView<Presenter> {
@@ -59,12 +62,14 @@ public interface MainContract {
 
         void onClickBtnSearch();
 
-        void searchReturn(List<Password> data,String error);
+        void searchReturn(List<Password> data, String error);
 
         void addGroupSuc();
 
         void deletePassword(int position);
 
         void alterPasswordSuc(int itemPosition, int newItemPosition);
+
+        void checkOrderSuc(List<PasswordModel> data);
     }
 }
