@@ -37,5 +37,6 @@
     <dimen name="activity_add_password_h">40dp</dimen>
     <dimen name="activity_add_password_margin">8dp</dimen>
     <dimen name="edit_activity_size">16sp</dimen>
+    <dimen name="margin_item_group_setting">12dp</dimen>
 
 </resources>

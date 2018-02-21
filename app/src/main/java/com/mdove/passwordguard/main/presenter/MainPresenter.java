@@ -13,6 +13,7 @@ import com.mdove.passwordguard.greendao.entity.DeletedPassword;
 import com.mdove.passwordguard.greendao.entity.GroupInfo;
 import com.mdove.passwordguard.greendao.entity.Password;
 import com.mdove.passwordguard.greendao.utils.DeletedPasswordHelper;
+import com.mdove.passwordguard.group.GroupSettingActivity;
 import com.mdove.passwordguard.main.AddGroupDialog;
 import com.mdove.passwordguard.main.MainActivity;
 import com.mdove.passwordguard.main.adapter.MainAdapter;
@@ -142,7 +143,6 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void onClickBtnPassword() {
-//        mView.onClickBtnPassword(mMainGroupModel);
         AddPasswordActivity.start(mView.getContext());
     }
 
@@ -153,7 +153,7 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void onClickItemPassword(ItemMainPasswordVM model) {
-        EditPasswordActivity.start(mView.getContext(),model,model.mItemPosition);
+        EditPasswordActivity.start(mView.getContext(), model, model.mItemPosition);
     }
 
     @Override
@@ -168,7 +168,7 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void onClickBtnSetting() {
-
+        GroupSettingActivity.start(mView.getContext());
     }
 
     @Override
