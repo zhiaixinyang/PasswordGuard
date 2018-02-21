@@ -52,7 +52,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int TYPE_MAIN_SEARCH = 3;
     private static final int TYPE_MAIN_GROUP = 4;
     private int mGroupPosition;
-    public static int mPasswordPosition=0;
+    public static int mPasswordPosition = 0;
 
     public MainAdapter(Context context, MainPresenter presenter) {
         mContext = context;
@@ -70,7 +70,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             newData.add(mData.get(i));
         }
         newData.addAll(data);
-        mData=newData;
+        mData = newData;
         notifyDataSetChanged();
     }
 
@@ -176,7 +176,8 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
         public void bind(final PasswordModel model, final int position) {
-            mBinding.setViewModel(new ItemMainPasswordVM(model));
+            mBinding.setViewModel(new ItemMainPasswordVM(model, position));
+            mBinding.setPresenter(mPresenter);
             mBinding.layoutItem.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
@@ -235,7 +236,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
         public void bind(MainGroupModel model) {
-            mBinding.rlvGroup.setLayoutManager(new GridLayoutManager(mContext,3));
+            mBinding.rlvGroup.setLayoutManager(new GridLayoutManager(mContext, 3));
 
             mAdapter = new GroupRlvAdapter(mContext, model.mData);
             mBinding.rlvGroup.setAdapter(mAdapter);

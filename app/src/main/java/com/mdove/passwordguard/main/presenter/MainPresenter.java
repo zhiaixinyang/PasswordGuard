@@ -3,6 +3,7 @@ package com.mdove.passwordguard.main.presenter;
 import com.mdove.passwordguard.App;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.addoralter.AddPasswordActivity;
+import com.mdove.passwordguard.addoralter.EditPasswordActivity;
 import com.mdove.passwordguard.addoralter.model.AlterPasswordModel;
 import com.mdove.passwordguard.databinding.DialogAddGroupBinding;
 import com.mdove.passwordguard.greendao.DeletedPasswordDao;
@@ -13,6 +14,7 @@ import com.mdove.passwordguard.greendao.entity.GroupInfo;
 import com.mdove.passwordguard.greendao.entity.Password;
 import com.mdove.passwordguard.greendao.utils.DeletedPasswordHelper;
 import com.mdove.passwordguard.main.AddGroupDialog;
+import com.mdove.passwordguard.main.MainActivity;
 import com.mdove.passwordguard.main.adapter.MainAdapter;
 import com.mdove.passwordguard.main.model.BaseMainModel;
 import com.mdove.passwordguard.main.model.MainGroupModel;
@@ -21,6 +23,7 @@ import com.mdove.passwordguard.main.model.MainSearchModel;
 import com.mdove.passwordguard.main.model.MainTopModel;
 import com.mdove.passwordguard.main.model.PasswordModel;
 import com.mdove.passwordguard.main.model.event.CheckOrderEvent;
+import com.mdove.passwordguard.main.model.vm.ItemMainPasswordVM;
 import com.mdove.passwordguard.main.presenter.contract.MainContract;
 import com.mdove.passwordguard.manager.UpdateStatusManager;
 import com.mdove.passwordguard.model.net.RealUpdate;
@@ -146,6 +149,11 @@ public class MainPresenter implements MainContract.Presenter {
     @Override
     public void onClickBtnLock() {
         mView.onClickBtnLock();
+    }
+
+    @Override
+    public void onClickItemPassword(ItemMainPasswordVM model) {
+        EditPasswordActivity.start(mView.getContext(),model,model.mItemPosition);
     }
 
     @Override

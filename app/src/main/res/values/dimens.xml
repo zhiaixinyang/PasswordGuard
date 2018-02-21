@@ -36,5 +36,6 @@
     <dimen name="item_password_normal_radius">5dp</dimen>
     <dimen name="activity_add_password_h">40dp</dimen>
     <dimen name="activity_add_password_margin">8dp</dimen>
+    <dimen name="edit_activity_size">16sp</dimen>
 
 </resources>

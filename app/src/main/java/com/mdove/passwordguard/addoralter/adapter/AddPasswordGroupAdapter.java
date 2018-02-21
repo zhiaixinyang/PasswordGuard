@@ -50,6 +50,20 @@ public class AddPasswordGroupAdapter extends RecyclerView.Adapter<AddPasswordGro
         });
     }
 
+    public void initCheck(String tvGroup) {
+        if (mData == null || mData.size() == 0) {
+            return;
+        }
+        for (AddPasswordGroupRlvModel model : mData) {
+            if (TextUtils.equals(model.mTvGroup, tvGroup)) {
+                model.mIsCheck = true;
+                continue;
+            }
+            model.mIsCheck=false;
+        }
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
         return mData != null ? mData.size() : 0;

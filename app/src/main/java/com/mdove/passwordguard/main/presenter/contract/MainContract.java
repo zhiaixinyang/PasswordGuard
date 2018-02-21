@@ -9,6 +9,7 @@ import com.mdove.passwordguard.main.model.BaseMainModel;
 import com.mdove.passwordguard.main.model.MainGroupModel;
 import com.mdove.passwordguard.main.model.PasswordModel;
 import com.mdove.passwordguard.main.model.event.CheckOrderEvent;
+import com.mdove.passwordguard.main.model.vm.ItemMainPasswordVM;
 
 import java.util.List;
 
@@ -29,6 +30,9 @@ public interface MainContract {
         void onClickBtnPassword();
 
         void onClickBtnLock();
+
+        //Item被点击（PasswordModel）
+        void onClickItemPassword(ItemMainPasswordVM model);
 
         void onClickBtnDelete();
 

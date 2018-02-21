@@ -14,6 +14,7 @@ import com.hwangjr.rxbus.RxBus;
 import com.hwangjr.rxbus.annotation.Subscribe;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.addoralter.model.event.AddPasswordActivityEvent;
+import com.mdove.passwordguard.addoralter.model.event.EditPasswordActivityEvent;
 import com.mdove.passwordguard.base.listener.OnItemLongClickListener;
 import com.mdove.passwordguard.deletelist.DeleteListActivity;
 import com.mdove.passwordguard.greendao.entity.Password;
@@ -224,6 +225,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     @Subscribe
     public void addPasswordActivityInfo(AddPasswordActivityEvent event) {
         mPresenter.addPassword(event.mPassword);
+    }
+
+    @Subscribe
+    public void editPasswordActivityInfo(EditPasswordActivityEvent event) {
+        mPresenter.alterPassword(event.alterPasswordModel, event.mEditItemPosition);
     }
 
     @Subscribe
