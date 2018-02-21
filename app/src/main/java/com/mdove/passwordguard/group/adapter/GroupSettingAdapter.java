@@ -27,7 +27,7 @@ public class GroupSettingAdapter extends RecyclerView.Adapter<GroupSettingAdapte
 
     @Override
     public GroupSettingAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new GroupSettingAdapter.ViewHolder((ItemGroupSettingBinding) InflateUtils.bindingInflate(parent, R.layout.item_main_rlv_group));
+        return new GroupSettingAdapter.ViewHolder((ItemGroupSettingBinding) InflateUtils.bindingInflate(parent, R.layout.item_group_setting));
     }
 
     @Override

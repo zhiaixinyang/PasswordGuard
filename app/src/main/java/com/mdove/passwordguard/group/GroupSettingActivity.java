@@ -7,10 +7,12 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.hwangjr.rxbus.RxBus;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.BaseActivity;
 import com.mdove.passwordguard.greendao.entity.GroupInfo;
 import com.mdove.passwordguard.group.adapter.GroupSettingAdapter;
+import com.mdove.passwordguard.group.model.event.GroupDeleteEvent;
 import com.mdove.passwordguard.group.presenter.GroupSettingPresenter;
 import com.mdove.passwordguard.group.presenter.contract.GroupSettingContract;
 
@@ -40,6 +42,7 @@ public class GroupSettingActivity extends BaseActivity implements GroupSettingCo
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("设置分组信息");
         setContentView(R.layout.activity_group_setting);
         mRlvGroup = findViewById(R.id.rlv_group);
 
@@ -66,5 +69,6 @@ public class GroupSettingActivity extends BaseActivity implements GroupSettingCo
     @Override
     public void deleteSuc(int position) {
         mAdapter.notifyDeleteGroup(position);
+        RxBus.get().post(new GroupDeleteEvent());
     }
 }

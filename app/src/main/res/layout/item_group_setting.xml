@@ -8,7 +8,7 @@
         <TextView
             android:id="@+id/tv_group"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:layout_marginEnd="@dimen/margin_item_group_setting"
             android:layout_marginStart="@dimen/margin_item_group_setting"
             android:layout_toLeftOf="@+id/iv_btn_delete"
@@ -19,13 +19,13 @@
             android:paddingLeft="24dp"
             android:paddingRight="24dp"
             android:text="分组信息"
-            android:textColor="@color/gray"
+            android:textColor="@color/black"
             android:textSize="16sp" />
 
         <ImageView
             android:id="@+id/iv_btn_delete"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/margin_item_group_setting"

@@ -2,16 +2,12 @@ package com.mdove.passwordguard.main.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.hwangjr.rxbus.RxBus;
 import com.mdove.passwordguard.R;
-import com.mdove.passwordguard.addoralter.adapter.AddPasswordGroupAdapter;
-import com.mdove.passwordguard.addoralter.model.AddPasswordGroupRlvModel;
 import com.mdove.passwordguard.base.listener.OnItemDeleteClickListener;
 import com.mdove.passwordguard.base.listener.OnItemLongClickListener;
 import com.mdove.passwordguard.databinding.ItemMainGroupBinding;
@@ -32,7 +28,6 @@ import com.mdove.passwordguard.main.model.handler.MainSearchHandler;
 import com.mdove.passwordguard.main.model.vm.ItemMainPasswordVM;
 import com.mdove.passwordguard.main.model.vm.ItemMainTopVM;
 import com.mdove.passwordguard.main.presenter.MainPresenter;
-import com.mdove.passwordguard.ui.SwipeMenuLayout;
 import com.mdove.passwordguard.utils.InflateUtils;
 
 import java.util.ArrayList;
@@ -226,9 +221,10 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
+    private GroupRlvAdapter mGroupRlvAdapter;
+
     public class MainGroupViewHolder extends RecyclerView.ViewHolder {
         private ItemMainGroupBinding mBinding;
-        private GroupRlvAdapter mAdapter;
 
         public MainGroupViewHolder(ItemMainGroupBinding binding) {
             super(binding.getRoot());
@@ -238,9 +234,9 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         public void bind(MainGroupModel model) {
             mBinding.rlvGroup.setLayoutManager(new GridLayoutManager(mContext, 3));
 
-            mAdapter = new GroupRlvAdapter(mContext, model.mData);
-            mBinding.rlvGroup.setAdapter(mAdapter);
-            mAdapter.setOnCheckListener(new GroupRlvAdapter.OnCheckListener() {
+            mGroupRlvAdapter = new GroupRlvAdapter(mContext, model.mData);
+            mBinding.rlvGroup.setAdapter(mGroupRlvAdapter);
+            mGroupRlvAdapter.setOnCheckListener(new GroupRlvAdapter.OnCheckListener() {
                 @Override
                 public void onCheck(boolean isCheck, MainGroupRlvModel model) {
                     RxBus.get().post(new CheckOrderEvent(isCheck, model.mGroupInfo));
@@ -260,5 +256,9 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public void setOnDeleteClickListener(OnItemDeleteClickListener<PasswordModel> listener) {
         mDeleteListener = listener;
+    }
+
+    public void notifyOnlyGroup() {
+        mGroupRlvAdapter.notifyDataSetChanged();
     }
 }

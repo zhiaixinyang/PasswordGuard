@@ -18,6 +18,7 @@ import com.mdove.passwordguard.addoralter.model.event.EditPasswordActivityEvent;
 import com.mdove.passwordguard.base.listener.OnItemLongClickListener;
 import com.mdove.passwordguard.deletelist.DeleteListActivity;
 import com.mdove.passwordguard.greendao.entity.Password;
+import com.mdove.passwordguard.group.model.event.GroupDeleteEvent;
 import com.mdove.passwordguard.lock.config.AppLockConfig;
 import com.mdove.passwordguard.databinding.ActivityMainBinding;
 import com.mdove.passwordguard.lock.PatternSetActivity;
@@ -235,6 +236,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     @Subscribe
     public void alterPasswordInfo(AlterPasswordEvent event) {
         mPresenter.alterPassword(event.mModel, event.mItemPosition);
+    }
+
+    @Subscribe
+    public void groupDelete(GroupDeleteEvent event) {
+        mPresenter.initData();
     }
 
     @Subscribe

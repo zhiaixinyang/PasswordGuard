@@ -93,6 +93,16 @@ public class MainPresenter implements MainContract.Presenter {
 
         mMainGroupModel = new MainGroupModel();
         mMainGroupModel.mType = 1;
+        initGroup();
+
+        BaseMainModel optionModel = new BaseMainModel();
+        optionModel.mType = 0;
+        mData.add(optionModel);
+
+        MainAdapter.mPasswordPosition = mData.size();
+    }
+
+    private void initGroup() {
         MainGroupRlvModel mainGroupRlvModel = new MainGroupRlvModel("默认全部", "#ffffff", new Date().getTime());
         mGroupData.add(mainGroupRlvModel);
 
@@ -105,12 +115,6 @@ public class MainPresenter implements MainContract.Presenter {
 
         mMainGroupModel.mData = mGroupData;
         mData.add(mMainGroupModel);
-
-        BaseMainModel optionModel = new BaseMainModel();
-        optionModel.mType = 0;
-        mData.add(optionModel);
-
-        MainAdapter.mPasswordPosition = mData.size();
     }
 
     @Override
