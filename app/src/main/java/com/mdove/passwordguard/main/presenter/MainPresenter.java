@@ -56,9 +56,7 @@ public class MainPresenter implements MainContract.Presenter {
     public void subscribe(MainContract.MvpView view) {
         mView = view;
 
-        mData = new ArrayList<>();
         mCheckedList = new ArrayList<>();
-        mGroupData = new ArrayList<>();
 
         mDao = App.getDaoSession().getPasswordDao();
         mDeleteDao = App.getDaoSession().getDeletedPasswordDao();
@@ -71,6 +69,9 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void initData() {
+        mData = new ArrayList<>();
+        mGroupData = new ArrayList<>();
+
         initSys();
 
         List<Password> data = mDao.queryBuilder().build().list();
