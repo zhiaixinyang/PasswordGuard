@@ -66,8 +66,10 @@ public class DeleteListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         BaseMainModel model = mData.get(position);
         if (holder instanceof DeletePasswordViewHolder) {
             ((DeletePasswordViewHolder) holder).bind((DeletePasswordModel) model);
-        }else if (holder instanceof DeleteTopViewHolder){
-            ((DeleteTopViewHolder) holder).bind(new ItemDeleteListTopVM((DeleteTopModel)model));
+        } else if (holder instanceof DeleteTopViewHolder) {
+            DeleteTopModel deleteTopModel = (DeleteTopModel) model;
+            deleteTopModel.mAllDeleteSize = mData.size() - 1;
+            ((DeleteTopViewHolder) holder).bind(new ItemDeleteListTopVM(deleteTopModel));
         }
     }
 

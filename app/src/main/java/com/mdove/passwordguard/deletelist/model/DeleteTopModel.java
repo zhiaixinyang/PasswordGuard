@@ -10,4 +10,5 @@ import java.util.Date;
 
 public class DeleteTopModel extends BaseMainModel {
     public Date mTime;
+    public Integer mAllDeleteSize;
 }
