@@ -11,6 +11,7 @@ import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.listener.OnItemDeleteClickListener;
 import com.mdove.passwordguard.base.listener.OnItemLongClickListener;
 import com.mdove.passwordguard.dailyself.ItemMainDailySelfVM;
+import com.mdove.passwordguard.dailyself.MainDailySelfHandler;
 import com.mdove.passwordguard.dailyself.MainDailySelfModel;
 import com.mdove.passwordguard.databinding.ItemMainDailyselfBinding;
 import com.mdove.passwordguard.databinding.ItemMainGroupBinding;
@@ -134,8 +135,8 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             case TYPE_MAIN_GROUP: {
                 return new MainGroupViewHolder((ItemMainGroupBinding) InflateUtils.bindingInflate(parent, R.layout.item_main_group));
             }
-            case TYPE_MAIN_DAILY_SELF:{
-                return new MainDailySelfViewHolder((ItemMainDailyselfBinding) InflateUtils.bindingInflate(parent,R.layout.item_main_dailyself));
+            case TYPE_MAIN_DAILY_SELF: {
+                return new MainDailySelfViewHolder((ItemMainDailyselfBinding) InflateUtils.bindingInflate(parent, R.layout.item_main_dailyself));
             }
         }
         return null;
@@ -154,8 +155,8 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ((MainSearchViewHolder) holder).bind();
         } else if (holder instanceof MainGroupViewHolder) {
             ((MainGroupViewHolder) holder).bind((MainGroupModel) model);
-        }else if (holder instanceof MainDailySelfViewHolder) {
-            ((MainDailySelfViewHolder) holder).bind((MainDailySelfModel) model);
+        } else if (holder instanceof MainDailySelfViewHolder) {
+            ((MainDailySelfViewHolder) holder).bind((MainDailySelfModel) model, mPresenter);
         }
     }
 
@@ -244,8 +245,9 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             mBinding = binding;
         }
 
-        public void bind(MainDailySelfModel vm) {
+        public void bind(MainDailySelfModel vm, MainPresenter presenter) {
             mBinding.setViewModel(new ItemMainDailySelfVM(vm));
+            mBinding.setActionHandler(new MainDailySelfHandler(presenter));
         }
     }
 

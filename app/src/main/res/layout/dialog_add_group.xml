@@ -46,6 +46,7 @@
                 android:layout_marginBottom="@dimen/margin_dialog_add_password"
                 android:layout_marginRight="@dimen/margin_dialog_add_password_right"
                 android:layout_marginTop="@dimen/margin_dialog_add_password"
+                android:textCursorDrawable="@drawable/bg_et_cursor"
                 android:layout_toRightOf="@+id/tv_group"
                 android:background="@drawable/bg_dialog_add_password_username"
                 android:gravity="center|left"

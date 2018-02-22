@@ -3,6 +3,7 @@ package com.mdove.passwordguard.main.presenter.contract;
 import com.mdove.passwordguard.addoralter.model.AlterPasswordModel;
 import com.mdove.passwordguard.base.BasePresenter;
 import com.mdove.passwordguard.base.BaseView;
+import com.mdove.passwordguard.dailyself.ItemMainDailySelfVM;
 import com.mdove.passwordguard.greendao.entity.GroupInfo;
 import com.mdove.passwordguard.greendao.entity.Password;
 import com.mdove.passwordguard.main.model.BaseMainModel;
@@ -51,6 +52,10 @@ public interface MainContract {
         void checkOrderPassword(CheckOrderEvent event);
 
         void insertDailySelf(String content);
+
+        void copyDailySelf(ItemMainDailySelfVM vm);
+        void copyPasswordInPassword(ItemMainPasswordVM vm);
+        void copyPasswordInUserName(ItemMainPasswordVM vm);
     }
 
     interface MvpView extends BaseView<Presenter> {

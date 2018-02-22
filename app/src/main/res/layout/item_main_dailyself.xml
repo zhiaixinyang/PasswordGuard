@@ -7,6 +7,10 @@
         <variable
             name="viewModel"
             type="com.mdove.passwordguard.dailyself.ItemMainDailySelfVM" />
+
+        <variable
+            name="actionHandler"
+            type="com.mdove.passwordguard.dailyself.MainDailySelfHandler" />
     </data>
 
     <RelativeLayout
@@ -29,13 +33,13 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="12dp"
-                android:background="@drawable/bg_password_group"
+                android:background="@drawable/bg_item_daily_self_tv_group"
                 android:paddingBottom="4dp"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
                 android:paddingTop="4dp"
                 android:text="@{viewModel.mTvGroup}"
-                android:textColor="@color/commonColor"
+                android:textColor="@color/white"
                 android:textSize="16sp"
                 tools:text="随手记" />
 
@@ -43,14 +47,24 @@
                 android:id="@+id/tv_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="12dp"
+                android:layout_alignBottom="@+id/tv_group"
+                android:layout_marginRight="@dimen/margin_activity_main_daily_self"
+                android:layout_toLeftOf="@+id/btn_copy"
                 android:text="@{viewModel.mTime}"
-                android:textColor="@color/black"
-                android:textSize="12sp"
+                android:textColor="@color/commonColor"
+                android:textSize="14sp"
                 tools:text="2018年2月22日 14:00" />
 
+            <ImageView
+                android:id="@+id/btn_copy"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignBottom="@+id/tv_time"
+                android:tint="@color/black"
+                android:layout_marginRight="@dimen/margin_activity_main_daily_self"
+                android:onClick="@{()->actionHandler.copyDailySelf(viewModel)}"
+                android:src="@mipmap/ic_btn_copy" />
         </RelativeLayout>
 
         <LinearLayout
@@ -64,10 +78,8 @@
             <TextView
                 android:id="@+id/tv_content"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/item_password_normal_height"
-                android:layout_marginBottom="12dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_activity_main_daily_self"
                 android:gravity="center_vertical"
                 android:text="@{viewModel.mContent}"
                 android:textColor="@color/black"

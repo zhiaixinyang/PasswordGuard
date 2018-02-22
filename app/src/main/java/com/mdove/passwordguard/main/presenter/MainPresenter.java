@@ -8,6 +8,7 @@ import com.mdove.passwordguard.addoralter.AddPasswordActivity;
 import com.mdove.passwordguard.addoralter.EditPasswordActivity;
 import com.mdove.passwordguard.addoralter.model.AlterPasswordModel;
 import com.mdove.passwordguard.config.AppConstant;
+import com.mdove.passwordguard.dailyself.ItemMainDailySelfVM;
 import com.mdove.passwordguard.dailyself.MainDailySelfModel;
 import com.mdove.passwordguard.greendao.DailySelfDao;
 import com.mdove.passwordguard.greendao.DeletedPasswordDao;
@@ -34,6 +35,7 @@ import com.mdove.passwordguard.manager.UpdateStatusManager;
 import com.mdove.passwordguard.model.net.RealUpdate;
 import com.mdove.passwordguard.net.ApiServerImpl;
 import com.mdove.passwordguard.update.UpdateDialog;
+import com.mdove.passwordguard.utils.ClipboardUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -276,6 +278,21 @@ public class MainPresenter implements MainContract.Presenter {
         mDailyData.add(model);
 
         mView.notifyDailySelfData(mData.size());
+    }
+
+    @Override
+    public void copyDailySelf(ItemMainDailySelfVM vm) {
+        ClipboardUtils.copyToClipboard(mView.getContext(), vm.mContent.get());
+    }
+
+    @Override
+    public void copyPasswordInPassword(ItemMainPasswordVM vm) {
+        ClipboardUtils.copyToClipboard(mView.getContext(), vm.mPassword.get());
+    }
+
+    @Override
+    public void copyPasswordInUserName(ItemMainPasswordVM vm) {
+        ClipboardUtils.copyToClipboard(mView.getContext(), vm.mUserName.get());
     }
 
     private void showUpgradeDialog(final RealUpdate result) {

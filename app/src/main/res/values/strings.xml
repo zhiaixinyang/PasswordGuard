@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">记忆回声</string>
+    <string name="app_name">密码管家</string>
     <string name="string_add_password_suc">保存成功</string>
 
     <!-- 九宫格锁 -->
@@ -64,4 +64,5 @@
     <string name="default_check_group_title">默认分组</string>
     <string name="default_daily_self_tv_group">随手记</string>
     <string name="string_delete_list_top">共%1$d条删除记录</string>
+    <string name="toast_copy_success">复制成功</string>
 </resources>

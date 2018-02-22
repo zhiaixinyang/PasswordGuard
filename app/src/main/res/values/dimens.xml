@@ -40,5 +40,7 @@
     <dimen name="margin_item_group_setting">12dp</dimen>
     <dimen name="margin_activity_main_et">3dp</dimen>
     <dimen name="margin_activity_main_et_l_r">8dp</dimen>
+    <dimen name="margin_activity_main_daily_self">12dp</dimen>
+    <dimen name="item_password_normal_copy_iv_w_h">26dp</dimen>
 
 </resources>
