@@ -127,6 +127,11 @@ public class DateUtil {
         return format.format(time);
     }
 
+    public static String getDateChinese(Long time){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日 hh:mm");
+        return format.format(time);
+    }
+
     public static String getDateChinese(){
         SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日 hh:mm");
         return format.format(new Date());

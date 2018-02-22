@@ -49,6 +49,8 @@ public interface MainContract {
         void checkUpdate(String version);
 
         void checkOrderPassword(CheckOrderEvent event);
+
+        void insertDailySelf(String content);
     }
 
     interface MvpView extends BaseView<Presenter> {
@@ -57,6 +59,7 @@ public interface MainContract {
         void addPasswordSuc(String suc);
 
         void notifyPasswordData(int position);
+        void notifyDailySelfData(int position);
 
         void onClickBtnPassword(MainGroupModel model);
 
@@ -74,6 +77,6 @@ public interface MainContract {
 
         void alterPasswordSuc(int itemPosition, int newItemPosition);
 
-        void checkOrderSuc(List<PasswordModel> data);
+        void checkOrderSuc(List<BaseMainModel> data);
     }
 }

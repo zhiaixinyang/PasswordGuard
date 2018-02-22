@@ -8,10 +8,12 @@ import com.mdove.passwordguard.greendao.entity.GroupInfo;
 
 public class CheckOrderEvent {
     public boolean mIsCheck;
+    public String mDefaultTvGroup;
     public GroupInfo mGroupInfo;
 
-    public CheckOrderEvent(boolean isCheck, GroupInfo groupInfo) {
+    public CheckOrderEvent(boolean isCheck, GroupInfo groupInfo, String defaultTvGroup) {
         mIsCheck = isCheck;
         mGroupInfo = groupInfo;
+        mDefaultTvGroup = defaultTvGroup;
     }
 }

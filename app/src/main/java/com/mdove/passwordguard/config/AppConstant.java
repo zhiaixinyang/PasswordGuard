@@ -9,5 +9,6 @@ import com.mdove.passwordguard.R;
 
 public class AppConstant {
     public static final String DEFAULT_CHECK_GROUP_TITLE = App.getAppContext().getString(R.string.default_check_group_title);
+    public static final String DEFAULT_DAILY_SELF_TV_GROUP = App.getAppContext().getString(R.string.default_daily_self_tv_group);
     public static final String DEFAULT_CHECK_GROUP_COLOR = "#ffffff";
 }

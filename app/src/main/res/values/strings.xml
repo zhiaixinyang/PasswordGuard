@@ -62,5 +62,6 @@
     <string name="string_update_err">更新包下载失败</string>
 
     <string name="default_check_group_title">默认分组</string>
+    <string name="default_daily_self_tv_group">随手记</string>
     <string name="string_delete_list_top">共%1$d条删除记录</string>
 </resources>

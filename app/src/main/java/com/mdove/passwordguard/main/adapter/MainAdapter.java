@@ -10,6 +10,9 @@ import com.hwangjr.rxbus.RxBus;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.listener.OnItemDeleteClickListener;
 import com.mdove.passwordguard.base.listener.OnItemLongClickListener;
+import com.mdove.passwordguard.dailyself.ItemMainDailySelfVM;
+import com.mdove.passwordguard.dailyself.MainDailySelfModel;
+import com.mdove.passwordguard.databinding.ItemMainDailyselfBinding;
 import com.mdove.passwordguard.databinding.ItemMainGroupBinding;
 import com.mdove.passwordguard.databinding.ItemMainOptionBinding;
 import com.mdove.passwordguard.databinding.ItemMainSearchBinding;
@@ -46,6 +49,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int TYPE_MAIN_PASSWORD = 2;
     private static final int TYPE_MAIN_SEARCH = 3;
     private static final int TYPE_MAIN_GROUP = 4;
+    private static final int TYPE_MAIN_DAILY_SELF = 5;
     private int mGroupPosition;
     public static int mPasswordPosition = 0;
 
@@ -59,7 +63,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         notifyDataSetChanged();
     }
 
-    public void addPasswordData(List<PasswordModel> data) {
+    public void addBaseMainModelData(List<BaseMainModel> data) {
         List<BaseMainModel> newData = new ArrayList<>();
         for (int i = 0; i < mPasswordPosition; i++) {
             newData.add(mData.get(i));
@@ -70,6 +74,10 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public void notifyAddPasswordData(int position) {
+        notifyItemChanged(position);
+    }
+
+    public void notifyAddDailySelfData(int position) {
         notifyItemChanged(position);
     }
 
@@ -100,6 +108,8 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 } else if (model instanceof MainGroupModel) {
                     mGroupPosition = position;
                     return TYPE_MAIN_GROUP;
+                } else if (model instanceof MainDailySelfModel) {
+                    return TYPE_MAIN_DAILY_SELF;
                 }
             }
         }
@@ -124,6 +134,9 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             case TYPE_MAIN_GROUP: {
                 return new MainGroupViewHolder((ItemMainGroupBinding) InflateUtils.bindingInflate(parent, R.layout.item_main_group));
             }
+            case TYPE_MAIN_DAILY_SELF:{
+                return new MainDailySelfViewHolder((ItemMainDailyselfBinding) InflateUtils.bindingInflate(parent,R.layout.item_main_dailyself));
+            }
         }
         return null;
     }
@@ -141,6 +154,8 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ((MainSearchViewHolder) holder).bind();
         } else if (holder instanceof MainGroupViewHolder) {
             ((MainGroupViewHolder) holder).bind((MainGroupModel) model);
+        }else if (holder instanceof MainDailySelfViewHolder) {
+            ((MainDailySelfViewHolder) holder).bind((MainDailySelfModel) model);
         }
     }
 
@@ -221,6 +236,19 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
+    public class MainDailySelfViewHolder extends RecyclerView.ViewHolder {
+        private ItemMainDailyselfBinding mBinding;
+
+        public MainDailySelfViewHolder(ItemMainDailyselfBinding binding) {
+            super(binding.getRoot());
+            mBinding = binding;
+        }
+
+        public void bind(MainDailySelfModel vm) {
+            mBinding.setViewModel(new ItemMainDailySelfVM(vm));
+        }
+    }
+
     private GroupRlvAdapter mGroupRlvAdapter;
 
     public class MainGroupViewHolder extends RecyclerView.ViewHolder {
@@ -239,7 +267,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             mGroupRlvAdapter.setOnCheckListener(new GroupRlvAdapter.OnCheckListener() {
                 @Override
                 public void onCheck(boolean isCheck, MainGroupRlvModel model) {
-                    RxBus.get().post(new CheckOrderEvent(isCheck, model.mGroupInfo));
+                    RxBus.get().post(new CheckOrderEvent(isCheck, model.mGroupInfo, model.mTvGroup));
                 }
             });
 

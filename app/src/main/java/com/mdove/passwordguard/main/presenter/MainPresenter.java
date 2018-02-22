@@ -1,21 +1,25 @@
 package com.mdove.passwordguard.main.presenter;
 
+import android.text.TextUtils;
+
 import com.mdove.passwordguard.App;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.addoralter.AddPasswordActivity;
 import com.mdove.passwordguard.addoralter.EditPasswordActivity;
 import com.mdove.passwordguard.addoralter.model.AlterPasswordModel;
-import com.mdove.passwordguard.databinding.DialogAddGroupBinding;
+import com.mdove.passwordguard.config.AppConstant;
+import com.mdove.passwordguard.dailyself.MainDailySelfModel;
+import com.mdove.passwordguard.greendao.DailySelfDao;
 import com.mdove.passwordguard.greendao.DeletedPasswordDao;
 import com.mdove.passwordguard.greendao.GroupInfoDao;
 import com.mdove.passwordguard.greendao.PasswordDao;
+import com.mdove.passwordguard.greendao.entity.DailySelf;
 import com.mdove.passwordguard.greendao.entity.DeletedPassword;
 import com.mdove.passwordguard.greendao.entity.GroupInfo;
 import com.mdove.passwordguard.greendao.entity.Password;
 import com.mdove.passwordguard.greendao.utils.DeletedPasswordHelper;
 import com.mdove.passwordguard.group.GroupSettingActivity;
 import com.mdove.passwordguard.main.AddGroupDialog;
-import com.mdove.passwordguard.main.MainActivity;
 import com.mdove.passwordguard.main.adapter.MainAdapter;
 import com.mdove.passwordguard.main.model.BaseMainModel;
 import com.mdove.passwordguard.main.model.MainGroupModel;
@@ -30,7 +34,6 @@ import com.mdove.passwordguard.manager.UpdateStatusManager;
 import com.mdove.passwordguard.model.net.RealUpdate;
 import com.mdove.passwordguard.net.ApiServerImpl;
 import com.mdove.passwordguard.update.UpdateDialog;
-import com.mdove.passwordguard.utils.log.LogUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -48,9 +51,13 @@ public class MainPresenter implements MainContract.Presenter {
     private PasswordDao mDao;
     private DeletedPasswordDao mDeleteDao;
     private GroupInfoDao mGroupInfoDao;
+    private DailySelfDao mSelfDao;
     private List<MainGroupRlvModel> mGroupData;
+    private List<BaseMainModel> mDailyData;
     private MainGroupModel mMainGroupModel;
     private List<GroupInfo> mCheckedList;
+    private static final String DEFAULT_DAILY_SELF_TV_GROUP = AppConstant.DEFAULT_DAILY_SELF_TV_GROUP;
+    private static final String DEFAULT_CHECK_GROUP_TITLE = AppConstant.DEFAULT_CHECK_GROUP_TITLE;
 
     @Override
     public void subscribe(MainContract.MvpView view) {
@@ -61,6 +68,7 @@ public class MainPresenter implements MainContract.Presenter {
         mDao = App.getDaoSession().getPasswordDao();
         mDeleteDao = App.getDaoSession().getDeletedPasswordDao();
         mGroupInfoDao = App.getDaoSession().getGroupInfoDao();
+        mSelfDao = App.getDaoSession().getDailySelfDao();
     }
 
     @Override
@@ -71,12 +79,20 @@ public class MainPresenter implements MainContract.Presenter {
     public void initData() {
         mData = new ArrayList<>();
         mGroupData = new ArrayList<>();
+        mDailyData = new ArrayList<>();
 
         initSys();
 
         List<Password> data = mDao.queryBuilder().build().list();
         for (Password password : data) {
             mData.add(new PasswordModel(password));
+        }
+
+        List<DailySelf> dailyData = mSelfDao.queryBuilder().list();
+        for (DailySelf dailySelf : dailyData) {
+            MainDailySelfModel model = new MainDailySelfModel(dailySelf);
+            mDailyData.add(model);
+            mData.add(model);
         }
 
         mView.showData(mData);
@@ -104,8 +120,10 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
     private void initGroup() {
-        MainGroupRlvModel mainGroupRlvModel = new MainGroupRlvModel("默认全部", "#ffffff", new Date().getTime());
+        MainGroupRlvModel mainGroupRlvModel = new MainGroupRlvModel(DEFAULT_CHECK_GROUP_TITLE, "#ffffff", new Date().getTime());
         mGroupData.add(mainGroupRlvModel);
+        MainGroupRlvModel mainGroupRlvModel2 = new MainGroupRlvModel(DEFAULT_DAILY_SELF_TV_GROUP, "#ffffff", new Date().getTime());
+        mGroupData.add(mainGroupRlvModel2);
 
         List<GroupInfo> data = mGroupInfoDao.queryBuilder().list();
         if (data != null && data.size() >= 0) {
@@ -235,10 +253,29 @@ public class MainPresenter implements MainContract.Presenter {
             if (!event.mIsCheck) {
                 return;
             }
-            mView.showData(mData);
-            return;
+            if (TextUtils.equals(event.mDefaultTvGroup, DEFAULT_DAILY_SELF_TV_GROUP)) {
+                mView.checkOrderSuc(mDailyData);
+                return;
+            } else if (TextUtils.equals(event.mDefaultTvGroup, DEFAULT_CHECK_GROUP_TITLE)) {
+                mView.showData(mData);
+                return;
+            }
         }
         setCheckedData(event);
+    }
+
+    @Override
+    public void insertDailySelf(String content) {
+        DailySelf dailySelf = new DailySelf();
+        dailySelf.mContent = content;
+        dailySelf.mTimeStamp = new Date().getTime();
+        dailySelf.mTvGroup = DEFAULT_DAILY_SELF_TV_GROUP;
+        mSelfDao.insert(dailySelf);
+        MainDailySelfModel model = new MainDailySelfModel(dailySelf);
+        mData.add(model);
+        mDailyData.add(model);
+
+        mView.notifyDailySelfData(mData.size());
     }
 
     private void showUpgradeDialog(final RealUpdate result) {
@@ -264,7 +301,7 @@ public class MainPresenter implements MainContract.Presenter {
         } else {
             if (mCheckedList.contains(event.mGroupInfo)) mCheckedList.remove(event.mGroupInfo);
         }
-        List<PasswordModel> checkData = new ArrayList<>();
+        List<BaseMainModel> checkData = new ArrayList<>();
         for (GroupInfo info : mCheckedList) {
             List<Password> data = mDao.queryBuilder().where(PasswordDao.Properties.MTvGroup.eq(info.getMTvGroup())).build().list();
             List<PasswordModel> passwordData = new ArrayList<>();

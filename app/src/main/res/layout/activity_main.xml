@@ -10,7 +10,43 @@
             android:id="@+id/rlv_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_above="@+id/layout_et"
             android:overScrollMode="never"
             android:scrollbars="none" />
+
+        <RelativeLayout
+            android:id="@+id/layout_et"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true">
+
+            <EditText
+                android:id="@+id/et_content"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/margin_activity_main_et_l_r"
+                android:layout_marginRight="@dimen/margin_activity_main_et_l_r"
+                android:paddingLeft="@dimen/margin_activity_main_et_l_r"
+                android:paddingRight="@dimen/margin_activity_main_et_l_r"
+                android:layout_toLeftOf="@+id/btn_send"
+                android:background="@drawable/bg_main_et_content"
+                android:hint="随手记"
+                android:textCursorDrawable="@drawable/bg_et_cursor"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/btn_send"
+                android:layout_width="70dp"
+                android:layout_marginRight="@dimen/margin_activity_main_et_l_r"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="随手记"
+                android:gravity="center"
+                android:background="@drawable/bg_main_et_btn_send"
+                android:textColor="@color/commonColor"
+                android:textSize="16sp" />
+        </RelativeLayout>
     </RelativeLayout>
 </layout>

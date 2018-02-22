@@ -4,11 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.StringDef;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.View;
 
 import com.hwangjr.rxbus.RxBus;
 import com.hwangjr.rxbus.annotation.Subscribe;
@@ -37,9 +39,11 @@ import com.mdove.passwordguard.addoralter.dialog.AddPasswordDialog;
 import com.mdove.passwordguard.addoralter.dialog.AlterPasswordDialog;
 import com.mdove.passwordguard.search.SearchRlvDialog;
 import com.mdove.passwordguard.search.model.SearchRlvModel;
+import com.mdove.passwordguard.ui.SelectorFactory;
 import com.mdove.passwordguard.ui.searchbox.SearchFragment;
 import com.mdove.passwordguard.ui.searchbox.custom.IOnSearchClickListener;
 import com.mdove.passwordguard.utils.AppUtils;
+import com.mdove.passwordguard.utils.DensityUtil;
 import com.mdove.passwordguard.utils.StatusBarUtil;
 import com.mdove.passwordguard.utils.ToastHelper;
 
@@ -51,7 +55,8 @@ import java.util.List;
 /**
  * Created by MDove on 2018/2/9.
  */
-public class MainActivity extends AppCompatActivity implements MainContract.MvpView, IOnSearchClickListener {
+public class MainActivity extends AppCompatActivity implements MainContract.MvpView,
+        IOnSearchClickListener, View.OnClickListener {
     private ActivityMainBinding mBinding;
     private MainPresenter mPresenter;
     private RecyclerView mRlv;
@@ -63,6 +68,17 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     public static final String ACTION_LOCK_IS_SUC = "action_lock_is_suc";
     private String mAction;
     private boolean isLockFree = false;
+
+    @Override
+    public void onClick(View v) {
+        String content = mBinding.etContent.getText().toString();
+        if (TextUtils.isEmpty(content)) {
+            ToastHelper.shortToast("记录内容不能为空");
+            return;
+        }
+        mPresenter.insertDailySelf(content);
+        mBinding.etContent.setText("");
+    }
 
     @StringDef(value = {ACTION_LOCK_IS_SUC})
     @Retention(RetentionPolicy.CLASS)
@@ -84,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
         handleAction(getIntent());
 
         mRlv = mBinding.rlvMain;
+        mBinding.btnSend.setOnClickListener(this);
 
         RxBus.get().register(this);
         mSearchFragment = SearchFragment.newInstance();
@@ -195,8 +212,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     }
 
     @Override
-    public void checkOrderSuc(List<PasswordModel> data) {
-        mAdapter.addPasswordData(data);
+    public void checkOrderSuc(List<BaseMainModel> data) {
+        mAdapter.addBaseMainModelData(data);
     }
 
     @Override
@@ -216,6 +233,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     @Override
     public void notifyPasswordData(int position) {
         mAdapter.notifyAddPasswordData(position);
+    }
+
+    @Override
+    public void notifyDailySelfData(int position) {
+        mAdapter.notifyAddDailySelfData(position);
     }
 
     @Subscribe
