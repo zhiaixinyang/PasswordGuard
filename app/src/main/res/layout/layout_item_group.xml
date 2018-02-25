@@ -21,7 +21,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="7dp"
-        android:visibility="gone"
+        android:visibility="visible"
         android:background="@drawable/bg_layout_item_group_circle_on"
         android:src="@mipmap/ic_right_mark" />
 

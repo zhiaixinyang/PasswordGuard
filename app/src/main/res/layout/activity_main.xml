@@ -10,8 +10,8 @@
             android:id="@+id/rlv_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/layout_et"
             android:overScrollMode="never"
+            android:layout_above="@+id/layout_et"
             android:scrollbars="none" />
 
         <RelativeLayout
@@ -29,6 +29,7 @@
                 android:layout_marginRight="@dimen/margin_activity_main_et_l_r"
                 android:paddingLeft="@dimen/margin_activity_main_et_l_r"
                 android:paddingRight="@dimen/margin_activity_main_et_l_r"
+                android:textColorHint="@color/white"
                 android:layout_toLeftOf="@+id/btn_send"
                 android:background="@drawable/bg_main_et_content"
                 android:hint="随手记"

@@ -42,7 +42,7 @@ public class ItemGroupLayout extends RelativeLayout {
         if (mIsCheck) {
             ivCircleOff.setVisibility(VISIBLE);
             ivCircleOn.setVisibility(VISIBLE);
-            mTvTitle.setTextColor(ContextCompat.getColor(mContext, R.color.commonColor));
+            mTvTitle.setTextColor(ContextCompat.getColor(mContext, R.color.black));
             mLayoutMain.setBackground(ContextCompat.getDrawable(mContext,
                     R.drawable.bg_layout_item_group_on));
         } else {

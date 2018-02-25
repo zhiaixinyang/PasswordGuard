@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#1A1B36</color>
-    <color name="colorPrimaryDark">#1A1B36</color>
+    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#ffffff</color>
 
-    <color name="commonColor">#48C5B5</color>
+    <!--<color name="commonColor">#3D7BFF</color>-->
+    <color name="commonColor">#000000</color>
 
     <color name="white">#ffffff</color>
     <color name="white_normal_bottom">#ccffffff</color>
@@ -13,8 +14,10 @@
     <color name="white_t_30">#4dffffff</color>
     <color name="white_t_10">#1Affffff</color>
 
-    <color name="main_start_color">#8E466E</color>
-    <color name="main_end_color">#F8B7E2</color>
+    <!--<color name="main_start_color">#8E466E</color>-->
+    <color name="main_start_color">#000000</color>
+    <!--<color name="main_end_color">#F8B7E2</color>-->
+    <color name="main_end_color">#ffffff</color>
     <color name="black">#000000</color>
 
     <color name="trans">#00ffffff</color>
