@@ -16,4 +16,8 @@ public class MainDailySelfHandler {
     public void copyDailySelf(ItemMainDailySelfVM vm) {
         mPresenter.copyDailySelf(vm);
     }
+
+    public void onClickBtnDeleteDailySelf(ItemMainDailySelfVM vm) {
+        mPresenter.onClickBtnDeleteDailySelf(vm);
+    }
 }

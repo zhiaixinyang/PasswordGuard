@@ -1,5 +1,9 @@
 package com.mdove.passwordguard.main.model;
 
+import android.text.TextUtils;
+
+import com.mdove.passwordguard.App;
+import com.mdove.passwordguard.config.AppConstant;
 import com.mdove.passwordguard.greendao.entity.GroupInfo;
 
 /**
@@ -25,7 +29,7 @@ public class MainGroupRlvModel {
         mTvGroup = tvGroup;
         mBgColor = bgColor;
         mTimeStamp = timeStamp;
-        mIsCheck = true;
+        mIsCheck = TextUtils.equals(tvGroup, AppConstant.DEFAULT_CHECK_GROUP_TITLE);
         mGroupInfo = null;
     }
 }

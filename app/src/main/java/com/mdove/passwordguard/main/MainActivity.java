@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.StringDef;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,7 +17,9 @@ import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.addoralter.model.event.AddPasswordActivityEvent;
 import com.mdove.passwordguard.addoralter.model.event.EditPasswordActivityEvent;
 import com.mdove.passwordguard.base.listener.OnItemLongClickListener;
-import com.mdove.passwordguard.deletelist.DeleteListActivity;
+import com.mdove.passwordguard.deletelist.DeleteListPasswordActivity;
+import com.mdove.passwordguard.deletelist.model.event.DeleteDailySelfReturnEvent;
+import com.mdove.passwordguard.deletelist.model.event.DeletePasswordReturnEvent;
 import com.mdove.passwordguard.greendao.entity.Password;
 import com.mdove.passwordguard.group.model.event.GroupDeleteEvent;
 import com.mdove.passwordguard.lock.config.AppLockConfig;
@@ -39,11 +40,9 @@ import com.mdove.passwordguard.addoralter.dialog.AddPasswordDialog;
 import com.mdove.passwordguard.addoralter.dialog.AlterPasswordDialog;
 import com.mdove.passwordguard.search.SearchRlvDialog;
 import com.mdove.passwordguard.search.model.SearchRlvModel;
-import com.mdove.passwordguard.ui.SelectorFactory;
 import com.mdove.passwordguard.ui.searchbox.SearchFragment;
 import com.mdove.passwordguard.ui.searchbox.custom.IOnSearchClickListener;
 import com.mdove.passwordguard.utils.AppUtils;
-import com.mdove.passwordguard.utils.DensityUtil;
 import com.mdove.passwordguard.utils.StatusBarUtil;
 import com.mdove.passwordguard.utils.ToastHelper;
 
@@ -172,11 +171,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     }
 
     @Override
-    public void onClickBtnDelete() {
-        DeleteListActivity.start(this);
-    }
-
-    @Override
     public void onClickBtnSearch() {
         mSearchFragment.show(getSupportFragmentManager(), SearchFragment.TAG);
     }
@@ -203,6 +197,12 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     public void deletePassword(int position) {
         mAdapter.notifyDeletePasswordData(position);
         ToastHelper.shortToast("删除成功");
+    }
+
+    @Override
+    public void deleteDailySelf(int position) {
+        mAdapter.notifyDeletePasswordData(position);
+        ToastHelper.shortToast("撤回成功");
     }
 
     @Override
@@ -258,6 +258,16 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     @Subscribe
     public void alterPasswordInfo(AlterPasswordEvent event) {
         mPresenter.alterPassword(event.mModel, event.mItemPosition);
+    }
+
+    @Subscribe
+    public void deletePasswordReturn(DeletePasswordReturnEvent event) {
+        mPresenter.deletePasswordReturn(event);
+    }
+
+    @Subscribe
+    public void deleteDailySelfReturn(DeleteDailySelfReturnEvent event) {
+        mPresenter.deleteDailySelfReturn(event);
     }
 
     @Subscribe

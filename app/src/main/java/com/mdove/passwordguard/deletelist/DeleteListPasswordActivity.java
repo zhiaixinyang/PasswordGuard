@@ -3,16 +3,15 @@ package com.mdove.passwordguard.deletelist;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.BaseActivity;
-import com.mdove.passwordguard.deletelist.adapter.DeleteListAdapter;
-import com.mdove.passwordguard.deletelist.presenter.DeleteListContract;
-import com.mdove.passwordguard.deletelist.presenter.DeleteListPresenter;
+import com.mdove.passwordguard.deletelist.adapter.DeleteListPasswordAdapter;
+import com.mdove.passwordguard.deletelist.presenter.DeleteListPasswordContract;
+import com.mdove.passwordguard.deletelist.presenter.DeleteListPasswordPresenter;
 import com.mdove.passwordguard.main.model.BaseMainModel;
 
 import java.util.List;
@@ -21,13 +20,13 @@ import java.util.List;
  * Created by MDove on 2018/2/14.
  */
 
-public class DeleteListActivity extends BaseActivity implements DeleteListContract.MvpView {
+public class DeleteListPasswordActivity extends BaseActivity implements DeleteListPasswordContract.MvpView {
     private RecyclerView mRlvDeleteList;
-    private DeleteListPresenter mPresenter;
-    private DeleteListAdapter mAdapter;
+    private DeleteListPasswordPresenter mPresenter;
+    private DeleteListPasswordAdapter mAdapter;
 
     public static void start(Context context) {
-        Intent intent = new Intent(context, DeleteListActivity.class);
+        Intent intent = new Intent(context, DeleteListPasswordActivity.class);
         context.startActivity(intent);
     }
 
@@ -39,14 +38,14 @@ public class DeleteListActivity extends BaseActivity implements DeleteListContra
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle(R.string.activity_title_delete_list);
-        setContentView(R.layout.activity_delete_list);
+        setTitle(R.string.activity_title_delete_list_password);
+        setContentView(R.layout.activity_delete_list_password);
 
         mRlvDeleteList = findViewById(R.id.rlv_delete_list);
-        mPresenter = new DeleteListPresenter();
+        mPresenter = new DeleteListPasswordPresenter();
         mPresenter.subscribe(this);
 
-        mAdapter = new DeleteListAdapter(mPresenter);
+        mAdapter = new DeleteListPasswordAdapter(mPresenter);
         mRlvDeleteList.setLayoutManager(new LinearLayoutManager(this));
         mRlvDeleteList.setAdapter(mAdapter);
 
@@ -61,5 +60,10 @@ public class DeleteListActivity extends BaseActivity implements DeleteListContra
     @Override
     public void showData(List<BaseMainModel> data) {
         mAdapter.setData(data);
+    }
+
+    @Override
+    public void deleteReturn(int position) {
+        mAdapter.notifyDeleteReturn(position);
     }
 }

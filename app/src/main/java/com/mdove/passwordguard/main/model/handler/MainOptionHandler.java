@@ -21,7 +21,11 @@ public class MainOptionHandler {
         mPresenter.onClickBtnLock();
     }
 
-    public void onClickBtnDelete() {
-        mPresenter.onClickBtnDelete();
+    public void onClickBtnDeletePassword() {
+        mPresenter.onClickBtnDeletePassword();
+    }
+
+    public void onClickBtnDeleteDailySelf() {
+        mPresenter.onClickBtnDeleteDailySelf();
     }
 }

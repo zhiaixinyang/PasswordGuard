@@ -27,7 +27,6 @@
             android:background="@color/trans"
             android:paddingRight="12dp"
             android:paddingBottom="4dp"
-            android:text="@{viewModel.mTimeAll}"
             android:textColor="@color/white"
             android:textSize="14sp"
             tools:text="2018年2月10日" />
@@ -41,7 +40,7 @@
             android:paddingBottom="4dp"
             android:paddingLeft="12dp"
             android:paddingTop="12dp"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="16sp"
             tools:text="共有5条删除记录"
             android:text="@{viewModel.mAllDelete}" />

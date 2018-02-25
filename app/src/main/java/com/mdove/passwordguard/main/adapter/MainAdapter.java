@@ -156,7 +156,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         } else if (holder instanceof MainGroupViewHolder) {
             ((MainGroupViewHolder) holder).bind((MainGroupModel) model);
         } else if (holder instanceof MainDailySelfViewHolder) {
-            ((MainDailySelfViewHolder) holder).bind((MainDailySelfModel) model, mPresenter);
+            ((MainDailySelfViewHolder) holder).bind((MainDailySelfModel) model, mPresenter, position);
         }
     }
 
@@ -245,8 +245,8 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             mBinding = binding;
         }
 
-        public void bind(MainDailySelfModel vm, MainPresenter presenter) {
-            mBinding.setViewModel(new ItemMainDailySelfVM(vm));
+        public void bind(MainDailySelfModel vm, MainPresenter presenter, int position) {
+            mBinding.setViewModel(new ItemMainDailySelfVM(vm, position));
             mBinding.setActionHandler(new MainDailySelfHandler(presenter));
         }
     }

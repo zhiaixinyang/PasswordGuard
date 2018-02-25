@@ -4,11 +4,11 @@ import com.mdove.passwordguard.addoralter.model.AlterPasswordModel;
 import com.mdove.passwordguard.base.BasePresenter;
 import com.mdove.passwordguard.base.BaseView;
 import com.mdove.passwordguard.dailyself.ItemMainDailySelfVM;
-import com.mdove.passwordguard.greendao.entity.GroupInfo;
+import com.mdove.passwordguard.deletelist.model.event.DeleteDailySelfReturnEvent;
+import com.mdove.passwordguard.deletelist.model.event.DeletePasswordReturnEvent;
 import com.mdove.passwordguard.greendao.entity.Password;
 import com.mdove.passwordguard.main.model.BaseMainModel;
 import com.mdove.passwordguard.main.model.MainGroupModel;
-import com.mdove.passwordguard.main.model.PasswordModel;
 import com.mdove.passwordguard.main.model.event.CheckOrderEvent;
 import com.mdove.passwordguard.main.model.vm.ItemMainPasswordVM;
 
@@ -35,7 +35,10 @@ public interface MainContract {
         //Item被点击（PasswordModel）
         void onClickItemPassword(ItemMainPasswordVM model);
 
-        void onClickBtnDelete();
+        void onClickBtnDeleteDailySelf(ItemMainDailySelfVM vm);
+
+        void onClickBtnDeletePassword();
+        void onClickBtnDeleteDailySelf();
 
         void onClickBtnAddGroup();
 
@@ -46,6 +49,10 @@ public interface MainContract {
         void querySearch(String queryKey);
 
         void deletePassword(int position, Password password);
+
+        void deletePasswordReturn(DeletePasswordReturnEvent event);
+
+        void deleteDailySelfReturn(DeleteDailySelfReturnEvent event);
 
         void checkUpdate(String version);
 
@@ -70,8 +77,6 @@ public interface MainContract {
 
         void onClickBtnLock();
 
-        void onClickBtnDelete();
-
         void onClickBtnSearch();
 
         void searchReturn(List<Password> data, String error);
@@ -79,6 +84,8 @@ public interface MainContract {
         void addGroupSuc();
 
         void deletePassword(int position);
+
+        void deleteDailySelf(int position);
 
         void alterPasswordSuc(int itemPosition, int newItemPosition);
 

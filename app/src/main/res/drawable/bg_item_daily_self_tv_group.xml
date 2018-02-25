@@ -2,5 +2,5 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <corners android:radius="@dimen/item_password_normal_radius" />
     <solid
-        android:color="@color/commonColor"/>
+        android:color="@color/black"/>
 </shape>

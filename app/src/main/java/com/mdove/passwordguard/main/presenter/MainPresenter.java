@@ -10,14 +10,21 @@ import com.mdove.passwordguard.addoralter.model.AlterPasswordModel;
 import com.mdove.passwordguard.config.AppConstant;
 import com.mdove.passwordguard.dailyself.ItemMainDailySelfVM;
 import com.mdove.passwordguard.dailyself.MainDailySelfModel;
+import com.mdove.passwordguard.deletelist.DeleteListDailySelfActivity;
+import com.mdove.passwordguard.deletelist.DeleteListPasswordActivity;
+import com.mdove.passwordguard.deletelist.model.event.DeleteDailySelfReturnEvent;
+import com.mdove.passwordguard.deletelist.model.event.DeletePasswordReturnEvent;
 import com.mdove.passwordguard.greendao.DailySelfDao;
+import com.mdove.passwordguard.greendao.DeletedDailySelfDao;
 import com.mdove.passwordguard.greendao.DeletedPasswordDao;
 import com.mdove.passwordguard.greendao.GroupInfoDao;
 import com.mdove.passwordguard.greendao.PasswordDao;
 import com.mdove.passwordguard.greendao.entity.DailySelf;
+import com.mdove.passwordguard.greendao.entity.DeletedDailySelf;
 import com.mdove.passwordguard.greendao.entity.DeletedPassword;
 import com.mdove.passwordguard.greendao.entity.GroupInfo;
 import com.mdove.passwordguard.greendao.entity.Password;
+import com.mdove.passwordguard.greendao.utils.DeleteDailySelfHelper;
 import com.mdove.passwordguard.greendao.utils.DeletedPasswordHelper;
 import com.mdove.passwordguard.group.GroupSettingActivity;
 import com.mdove.passwordguard.main.AddGroupDialog;
@@ -50,9 +57,11 @@ import rx.Subscriber;
 public class MainPresenter implements MainContract.Presenter {
     private MainContract.MvpView mView;
     private List<BaseMainModel> mData;
+    private List<BaseMainModel> mSysEmptyData;
     private PasswordDao mDao;
     private DeletedPasswordDao mDeleteDao;
     private GroupInfoDao mGroupInfoDao;
+    private DeletedDailySelfDao mDeleteDailyDao;
     private DailySelfDao mSelfDao;
     private List<MainGroupRlvModel> mGroupData;
     private List<BaseMainModel> mDailyData;
@@ -71,6 +80,7 @@ public class MainPresenter implements MainContract.Presenter {
         mDeleteDao = App.getDaoSession().getDeletedPasswordDao();
         mGroupInfoDao = App.getDaoSession().getGroupInfoDao();
         mSelfDao = App.getDaoSession().getDailySelfDao();
+        mDeleteDailyDao = App.getDaoSession().getDeletedDailySelfDao();
     }
 
     @Override
@@ -80,6 +90,7 @@ public class MainPresenter implements MainContract.Presenter {
     @Override
     public void initData() {
         mData = new ArrayList<>();
+        mSysEmptyData = new ArrayList<>();
         mGroupData = new ArrayList<>();
         mDailyData = new ArrayList<>();
 
@@ -105,10 +116,12 @@ public class MainPresenter implements MainContract.Presenter {
         mainTopModel.mTime = new Date();
         mainTopModel.mType = 1;
         mData.add(mainTopModel);
+        mSysEmptyData.add(mainTopModel);
 
         MainSearchModel mainSearchModel = new MainSearchModel();
         mainSearchModel.mType = 1;
         mData.add(mainSearchModel);
+        mSysEmptyData.add(mainSearchModel);
 
         mMainGroupModel = new MainGroupModel();
         mMainGroupModel.mType = 1;
@@ -117,6 +130,7 @@ public class MainPresenter implements MainContract.Presenter {
         BaseMainModel optionModel = new BaseMainModel();
         optionModel.mType = 0;
         mData.add(optionModel);
+        mSysEmptyData.add(optionModel);
 
         MainAdapter.mPasswordPosition = mData.size();
     }
@@ -136,6 +150,7 @@ public class MainPresenter implements MainContract.Presenter {
 
         mMainGroupModel.mData = mGroupData;
         mData.add(mMainGroupModel);
+        mSysEmptyData.add(mMainGroupModel);
     }
 
     @Override
@@ -148,6 +163,20 @@ public class MainPresenter implements MainContract.Presenter {
             mView.notifyPasswordData(mData.size());
             mView.addPasswordSuc(mView.getContext().getString(R.string.string_add_password_suc));
         }
+    }
+
+    @Override
+    public void insertDailySelf(String content) {
+        DailySelf dailySelf = new DailySelf();
+        dailySelf.mContent = content;
+        dailySelf.mTimeStamp = new Date().getTime();
+        dailySelf.mTvGroup = DEFAULT_DAILY_SELF_TV_GROUP;
+        mSelfDao.insert(dailySelf);
+        MainDailySelfModel model = new MainDailySelfModel(dailySelf);
+        mData.add(model);
+        mDailyData.add(model);
+
+        mView.notifyDailySelfData(mData.size());
     }
 
     @Override
@@ -182,8 +211,22 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
     @Override
-    public void onClickBtnDelete() {
-        mView.onClickBtnDelete();
+    public void onClickBtnDeleteDailySelf(ItemMainDailySelfVM vm) {
+        mSelfDao.delete(vm.mDailySelf);
+        DeletedDailySelf deletedDailySelf = DeleteDailySelfHelper.getDeletedDailySelf(vm.mDailySelf);
+        mDeleteDailyDao.insert(deletedDailySelf);
+
+        mView.deleteDailySelf(vm.mItemPosition);
+    }
+
+    @Override
+    public void onClickBtnDeletePassword() {
+        DeleteListPasswordActivity.start(mView.getContext());
+    }
+
+    @Override
+    public void onClickBtnDeleteDailySelf() {
+        DeleteListDailySelfActivity.start(mView.getContext());
     }
 
     @Override
@@ -211,7 +254,6 @@ public class MainPresenter implements MainContract.Presenter {
             return;
         }
         mView.searchReturn(null, "未找到和此关键字匹配的账号信息");
-
     }
 
     @Override
@@ -221,6 +263,30 @@ public class MainPresenter implements MainContract.Presenter {
         mDao.delete(password);
 
         mView.deletePassword(position);
+    }
+
+    @Override
+    public void deletePasswordReturn(DeletePasswordReturnEvent event) {
+        DeletedPassword deletedPassword = event.mDeletedPassword;
+        Password password = DeletedPasswordHelper.getPassword(deletedPassword);
+        mDao.insert(password);
+        PasswordModel model = new PasswordModel(password);
+        mData.add(model);
+
+        mView.notifyPasswordData(mData.size());
+    }
+
+    @Override
+    public void deleteDailySelfReturn(DeleteDailySelfReturnEvent event) {
+        DeletedDailySelf deletedDailySelf = event.mDeletedDailySelf;
+        DailySelf dailySelf = DeleteDailySelfHelper.getDailySelf(deletedDailySelf);
+        mSelfDao.insert(dailySelf);
+
+        MainDailySelfModel model = new MainDailySelfModel(dailySelf);
+        mData.add(model);
+        mDailyData.add(model);
+
+        mView.notifyDailySelfData(mData.size());
     }
 
     @Override
@@ -252,32 +318,23 @@ public class MainPresenter implements MainContract.Presenter {
     @Override
     public void checkOrderPassword(CheckOrderEvent event) {
         if (event.mGroupInfo == null) {
-            if (!event.mIsCheck) {
-                return;
-            }
             if (TextUtils.equals(event.mDefaultTvGroup, DEFAULT_DAILY_SELF_TV_GROUP)) {
+                if (!event.mIsCheck) {
+                    mView.showData(mSysEmptyData);
+                    return;
+                }
                 mView.checkOrderSuc(mDailyData);
                 return;
             } else if (TextUtils.equals(event.mDefaultTvGroup, DEFAULT_CHECK_GROUP_TITLE)) {
+                if (!event.mIsCheck) {
+                    mView.showData(mSysEmptyData);
+                    return;
+                }
                 mView.showData(mData);
                 return;
             }
         }
         setCheckedData(event);
-    }
-
-    @Override
-    public void insertDailySelf(String content) {
-        DailySelf dailySelf = new DailySelf();
-        dailySelf.mContent = content;
-        dailySelf.mTimeStamp = new Date().getTime();
-        dailySelf.mTvGroup = DEFAULT_DAILY_SELF_TV_GROUP;
-        mSelfDao.insert(dailySelf);
-        MainDailySelfModel model = new MainDailySelfModel(dailySelf);
-        mData.add(model);
-        mDailyData.add(model);
-
-        mView.notifyDailySelfData(mData.size());
     }
 
     @Override
@@ -313,20 +370,30 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
     private void setCheckedData(CheckOrderEvent event) {
-        if (event.mIsCheck) {
-            mCheckedList.add(event.mGroupInfo);
-        } else {
-            if (mCheckedList.contains(event.mGroupInfo)) mCheckedList.remove(event.mGroupInfo);
+//        if (event.mIsCheck) {
+//            mCheckedList.add(event.mGroupInfo);
+//        } else {
+//            if (mCheckedList.contains(event.mGroupInfo)) mCheckedList.remove(event.mGroupInfo);
+//        }
+        if (!event.mIsCheck) {
+            mView.showData(mSysEmptyData);
+            return;
         }
         List<BaseMainModel> checkData = new ArrayList<>();
-        for (GroupInfo info : mCheckedList) {
-            List<Password> data = mDao.queryBuilder().where(PasswordDao.Properties.MTvGroup.eq(info.getMTvGroup())).build().list();
-            List<PasswordModel> passwordData = new ArrayList<>();
-            for (Password password : data) {
-                passwordData.add(new PasswordModel(password));
-            }
-            checkData.addAll(passwordData);
+        List<Password> data = mDao.queryBuilder().where(PasswordDao.Properties.MTvGroup.eq(event.mGroupInfo.getMTvGroup())).build().list();
+        List<PasswordModel> passwordData = new ArrayList<>();
+        for (Password password : data) {
+            passwordData.add(new PasswordModel(password));
         }
+        checkData.addAll(passwordData);
+//        for (GroupInfo info : mCheckedList) {
+//            List<Password> data = mDao.queryBuilder().where(PasswordDao.Properties.MTvGroup.eq(info.getMTvGroup())).build().list();
+//            List<PasswordModel> passwordData = new ArrayList<>();
+//            for (Password password : data) {
+//                passwordData.add(new PasswordModel(password));
+//            }
+//            checkData.addAll(passwordData);
+//        }
         mView.checkOrderSuc(checkData);
     }
 }

@@ -40,10 +40,12 @@ public class GroupRlvAdapter extends RecyclerView.Adapter<GroupRlvAdapter.ViewHo
             @Override
             public void onClick(View view) {
                 if (mListener != null) {
-                    boolean isCheck = holder.mBinding.layoutItemGroup.getCheck();
-                    model.mIsCheck = !isCheck;
-                    mListener.onCheck(!isCheck, model);
-                    holder.bind(model);
+                    mListener.onCheck(!holder.mBinding.layoutItemGroup.getCheck(), model);
+                    for (MainGroupRlvModel model : mData) {
+                        model.mIsCheck = false;
+                    }
+                    mData.get(position).mIsCheck = !holder.mBinding.layoutItemGroup.getCheck();
+                    notifyDataSetChanged();
                 }
             }
         });

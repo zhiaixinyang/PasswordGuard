@@ -31,6 +31,7 @@ public class DeletedPasswordDao extends AbstractDao<DeletedPassword, Long> {
         public final static Property MTimeStamp = new Property(4, Long.class, "mTimeStamp", false, "M_TIME_STAMP");
         public final static Property IsNew = new Property(5, int.class, "isNew", false, "IS_NEW");
         public final static Property MDeletedTimeStamp = new Property(6, Long.class, "mDeletedTimeStamp", false, "M_DELETED_TIME_STAMP");
+        public final static Property MTvGroup = new Property(7, String.class, "mTvGroup", false, "M_TV_GROUP");
     }
 
 
@@ -52,7 +53,8 @@ public class DeletedPasswordDao extends AbstractDao<DeletedPassword, Long> {
                 "\"M_TITLE\" TEXT," + // 3: mTitle
                 "\"M_TIME_STAMP\" INTEGER," + // 4: mTimeStamp
                 "\"IS_NEW\" INTEGER NOT NULL ," + // 5: isNew
-                "\"M_DELETED_TIME_STAMP\" INTEGER);"); // 6: mDeletedTimeStamp
+                "\"M_DELETED_TIME_STAMP\" INTEGER," + // 6: mDeletedTimeStamp
+                "\"M_TV_GROUP\" TEXT);"); // 7: mTvGroup
     }
 
     /** Drops the underlying database table. */
@@ -95,6 +97,11 @@ public class DeletedPasswordDao extends AbstractDao<DeletedPassword, Long> {
         if (mDeletedTimeStamp != null) {
             stmt.bindLong(7, mDeletedTimeStamp);
         }
+ 
+        String mTvGroup = entity.getMTvGroup();
+        if (mTvGroup != null) {
+            stmt.bindString(8, mTvGroup);
+        }
     }
 
     @Override
@@ -131,6 +138,11 @@ public class DeletedPasswordDao extends AbstractDao<DeletedPassword, Long> {
         if (mDeletedTimeStamp != null) {
             stmt.bindLong(7, mDeletedTimeStamp);
         }
+ 
+        String mTvGroup = entity.getMTvGroup();
+        if (mTvGroup != null) {
+            stmt.bindString(8, mTvGroup);
+        }
     }
 
     @Override
@@ -147,7 +159,8 @@ public class DeletedPasswordDao extends AbstractDao<DeletedPassword, Long> {
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // mTitle
             cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4), // mTimeStamp
             cursor.getInt(offset + 5), // isNew
-            cursor.isNull(offset + 6) ? null : cursor.getLong(offset + 6) // mDeletedTimeStamp
+            cursor.isNull(offset + 6) ? null : cursor.getLong(offset + 6), // mDeletedTimeStamp
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7) // mTvGroup
         );
         return entity;
     }
@@ -161,6 +174,7 @@ public class DeletedPasswordDao extends AbstractDao<DeletedPassword, Long> {
         entity.setMTimeStamp(cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4));
         entity.setIsNew(cursor.getInt(offset + 5));
         entity.setMDeletedTimeStamp(cursor.isNull(offset + 6) ? null : cursor.getLong(offset + 6));
+        entity.setMTvGroup(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
      }
     
     @Override

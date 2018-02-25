@@ -42,7 +42,12 @@
         </activity>
 
         <activity
-            android:name=".deletelist.DeleteListActivity"
+            android:name=".deletelist.DeleteListPasswordActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".deletelist.DeleteListDailySelfActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 

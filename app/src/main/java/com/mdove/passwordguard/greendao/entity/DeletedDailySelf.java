@@ -5,35 +5,28 @@ import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 
 /**
- * Created by MDove on 2018/2/14.
+ * Created by MDove on 2018/2/25.
  */
 
 @Entity
-public class DeletedPassword {
+public class DeletedDailySelf {
     @Id(autoincrement = true)
     public Long id;
-    public String mUserName;
-    public String mPassword;
-    public String mTitle;
+    public String mContent;
     public Long mTimeStamp;
-    public int isNew;
     public Long mDeletedTimeStamp;
     public String mTvGroup;
-    @Generated(hash = 819626397)
-    public DeletedPassword(Long id, String mUserName, String mPassword,
-            String mTitle, Long mTimeStamp, int isNew, Long mDeletedTimeStamp,
-            String mTvGroup) {
+    @Generated(hash = 1033302363)
+    public DeletedDailySelf(Long id, String mContent, Long mTimeStamp,
+            Long mDeletedTimeStamp, String mTvGroup) {
         this.id = id;
-        this.mUserName = mUserName;
-        this.mPassword = mPassword;
-        this.mTitle = mTitle;
+        this.mContent = mContent;
         this.mTimeStamp = mTimeStamp;
-        this.isNew = isNew;
         this.mDeletedTimeStamp = mDeletedTimeStamp;
         this.mTvGroup = mTvGroup;
     }
-    @Generated(hash = 1518974356)
-    public DeletedPassword() {
+    @Generated(hash = 463220722)
+    public DeletedDailySelf() {
     }
     public Long getId() {
         return this.id;
@@ -41,35 +34,17 @@ public class DeletedPassword {
     public void setId(Long id) {
         this.id = id;
     }
-    public String getMUserName() {
-        return this.mUserName;
+    public String getMContent() {
+        return this.mContent;
     }
-    public void setMUserName(String mUserName) {
-        this.mUserName = mUserName;
-    }
-    public String getMPassword() {
-        return this.mPassword;
-    }
-    public void setMPassword(String mPassword) {
-        this.mPassword = mPassword;
-    }
-    public String getMTitle() {
-        return this.mTitle;
-    }
-    public void setMTitle(String mTitle) {
-        this.mTitle = mTitle;
+    public void setMContent(String mContent) {
+        this.mContent = mContent;
     }
     public Long getMTimeStamp() {
         return this.mTimeStamp;
     }
     public void setMTimeStamp(Long mTimeStamp) {
         this.mTimeStamp = mTimeStamp;
-    }
-    public int getIsNew() {
-        return this.isNew;
-    }
-    public void setIsNew(int isNew) {
-        this.isNew = isNew;
     }
     public Long getMDeletedTimeStamp() {
         return this.mDeletedTimeStamp;
@@ -83,5 +58,4 @@ public class DeletedPassword {
     public void setMTvGroup(String mTvGroup) {
         this.mTvGroup = mTvGroup;
     }
-
 }

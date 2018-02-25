@@ -11,11 +11,13 @@ public class MainDailySelfModel extends BaseMainModel {
     public String mContent;
     public Long mTime;
     public String mTvGroup;
+    public DailySelf mDailySelf;
 
     public MainDailySelfModel(DailySelf dailySelf) {
         mContent = dailySelf.mContent;
         mTime = dailySelf.mTimeStamp;
         mTvGroup = dailySelf.mTvGroup;
         mType = 1;
+        mDailySelf = dailySelf;
     }
 }
