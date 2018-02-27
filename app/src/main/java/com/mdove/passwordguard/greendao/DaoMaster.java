@@ -22,19 +22,19 @@ public class DaoMaster extends AbstractDaoMaster {
     /** Creates underlying database table using DAOs. */
     public static void createAllTables(Database db, boolean ifNotExists) {
         DailySelfDao.createTable(db, ifNotExists);
+        DeletedDailySelfDao.createTable(db, ifNotExists);
         DeletedPasswordDao.createTable(db, ifNotExists);
         GroupInfoDao.createTable(db, ifNotExists);
         PasswordDao.createTable(db, ifNotExists);
-        DeletedDailySelfDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
     public static void dropAllTables(Database db, boolean ifExists) {
         DailySelfDao.dropTable(db, ifExists);
+        DeletedDailySelfDao.dropTable(db, ifExists);
         DeletedPasswordDao.dropTable(db, ifExists);
         GroupInfoDao.dropTable(db, ifExists);
         PasswordDao.dropTable(db, ifExists);
-        DeletedDailySelfDao.dropTable(db, ifExists);
     }
 
     /**
@@ -54,10 +54,10 @@ public class DaoMaster extends AbstractDaoMaster {
     public DaoMaster(Database db) {
         super(db, SCHEMA_VERSION);
         registerDaoClass(DailySelfDao.class);
+        registerDaoClass(DeletedDailySelfDao.class);
         registerDaoClass(DeletedPasswordDao.class);
         registerDaoClass(GroupInfoDao.class);
         registerDaoClass(PasswordDao.class);
-        registerDaoClass(DeletedDailySelfDao.class);
     }
 
     public DaoSession newSession() {

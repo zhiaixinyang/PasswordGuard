@@ -73,11 +73,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="记录账号信息"
-                    android:alpha="0.5"
-                    android:textSize="10sp"
                     android:layout_marginBottom="@dimen/margin_tv_main_option_btn_bottom"
-                    android:layout_marginTop="@dimen/margin_tv_main_option_btn" />
+                    android:layout_marginTop="@dimen/margin_tv_main_option_btn"
+                    android:alpha="0.5"
+                    android:text="记录账号信息"
+                    android:textSize="10sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -116,14 +116,15 @@
                     android:text="手势锁"
                     android:textColor="@color/color_tv_main_option_btn"
                     android:textSize="@dimen/size_tv_main_option_btn" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="保护信息安全"
-                    android:alpha="0.5"
-                    android:textSize="10sp"
                     android:layout_marginBottom="@dimen/margin_tv_main_option_btn_bottom"
-                    android:layout_marginTop="@dimen/margin_tv_main_option_btn" />
+                    android:layout_marginTop="@dimen/margin_tv_main_option_btn"
+                    android:alpha="0.5"
+                    android:text="保护信息安全"
+                    android:textSize="10sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -162,14 +163,15 @@
                     android:text="删除记录"
                     android:textColor="@color/color_tv_main_option_btn"
                     android:textSize="@dimen/size_tv_main_option_btn" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="账号删除记录"
-                    android:alpha="0.5"
-                    android:textSize="10sp"
                     android:layout_marginBottom="@dimen/margin_tv_main_option_btn_bottom"
-                    android:layout_marginTop="@dimen/margin_tv_main_option_btn" />
+                    android:layout_marginTop="@dimen/margin_tv_main_option_btn"
+                    android:alpha="0.5"
+                    android:text="账号信息"
+                    android:textSize="10sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -208,14 +210,15 @@
                     android:text="删除记录"
                     android:textColor="@color/color_tv_main_option_btn"
                     android:textSize="@dimen/size_tv_main_option_btn" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="随手记删除记录"
-                    android:alpha="0.5"
-                    android:textSize="10sp"
                     android:layout_marginBottom="@dimen/margin_tv_main_option_btn_bottom"
-                    android:layout_marginTop="@dimen/margin_tv_main_option_btn" />
+                    android:layout_marginTop="@dimen/margin_tv_main_option_btn"
+                    android:alpha="0.5"
+                    android:text="随手记"
+                    android:textSize="10sp" />
             </LinearLayout>
 
         </LinearLayout>

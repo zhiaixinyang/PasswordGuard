@@ -67,8 +67,8 @@
 
                 <ImageView
                     android:id="@+id/btn_copy"
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
+                    android:layout_width="@dimen/ic_copy_w_h"
+                    android:layout_height="@dimen/ic_copy_w_h"
                     android:layout_alignBottom="@+id/tv_time"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/margin_activity_main_daily_self"

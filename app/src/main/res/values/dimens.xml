@@ -14,7 +14,7 @@
     <dimen name="size_tv_main_option_btn">12sp</dimen>
     <dimen name="margin_tv_main_option_btn">5dp</dimen>
     <dimen name="margin_tv_main_option_btn_bottom">12dp</dimen>
-    <dimen name="item_main_option_ic_w_h">30dp</dimen>
+    <dimen name="item_main_option_ic_w_h">25dp</dimen>
     <dimen name="margin_dialog_add_password">8dp</dimen>
     <dimen name="margin_dialog_alter_password">8dp</dimen>
     <dimen name="padding_add_password_left">12dp</dimen>
@@ -32,7 +32,7 @@
     <dimen name="item_delete_normal_w">120dp</dimen>
 
     <dimen name="dialog_update_btn_size">16sp</dimen>
-    <dimen name="item_main_group_setting_iv_w_h">30dp</dimen>
+    <dimen name="item_main_group_setting_iv_w_h">25dp</dimen>
     <dimen name="item_password_normal_radius">5dp</dimen>
     <dimen name="activity_add_password_h">40dp</dimen>
     <dimen name="activity_add_password_margin">8dp</dimen>
@@ -44,5 +44,6 @@
     <dimen name="item_password_normal_copy_iv_w_h">26dp</dimen>
     <dimen name="margin_item_main_option_btn_w">80dp</dimen>
     <dimen name="margin_item_delete_password_l">18dp</dimen>
+    <dimen name="ic_copy_w_h">22dp</dimen>
 
 </resources>
