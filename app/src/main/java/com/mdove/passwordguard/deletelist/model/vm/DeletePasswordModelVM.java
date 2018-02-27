@@ -11,6 +11,7 @@ import com.mdove.passwordguard.greendao.entity.DeletedPassword;
 public class DeletePasswordModelVM {
     public ObservableField<String> mTime = new ObservableField<>();
     public ObservableField<String> mUserName = new ObservableField<>();
+    public ObservableField<String> mTvGroup = new ObservableField<>();
     public ObservableField<String> mPassword = new ObservableField<>();
     public ObservableField<String> mTitle = new ObservableField<>();
     public ObservableField<Boolean> mIsNew = new ObservableField<>();
@@ -25,5 +26,6 @@ public class DeletePasswordModelVM {
         mIsNew.set(model.mIsNew);
         mDeletedPassword = model.mDeletedPassword;
         mItemPosition = model.mItemPosition;
+        mTvGroup.set(model.mTvGroup);
     }
 }

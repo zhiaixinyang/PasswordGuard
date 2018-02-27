@@ -65,12 +65,21 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/margin_tv_main_option_btn_bottom"
                     android:layout_marginTop="@dimen/margin_tv_main_option_btn"
                     android:text="记录账号"
                     android:textColor="@color/color_tv_main_option_btn"
                     android:textSize="@dimen/size_tv_main_option_btn" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="记录账号信息"
+                    android:alpha="0.5"
+                    android:textSize="10sp"
+                    android:layout_marginBottom="@dimen/margin_tv_main_option_btn_bottom"
+                    android:layout_marginTop="@dimen/margin_tv_main_option_btn" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/btn_lock"
                 android:layout_width="@dimen/margin_item_main_option_btn_w"
@@ -96,19 +105,27 @@
                         android:layout_width="@dimen/item_main_option_ic_w_h"
                         android:layout_height="@dimen/item_main_option_ic_w_h"
                         android:layout_gravity="center"
-                        android:tint="@color/white"
-                        android:src="@mipmap/ic_btn_lock" />
+                        android:src="@mipmap/ic_btn_lock"
+                        android:tint="@color/white" />
                 </FrameLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/margin_tv_main_option_btn_bottom"
                     android:layout_marginTop="@dimen/margin_tv_main_option_btn"
-                    android:text="添加手势锁"
+                    android:text="手势锁"
                     android:textColor="@color/color_tv_main_option_btn"
                     android:textSize="@dimen/size_tv_main_option_btn" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="保护信息安全"
+                    android:alpha="0.5"
+                    android:textSize="10sp"
+                    android:layout_marginBottom="@dimen/margin_tv_main_option_btn_bottom"
+                    android:layout_marginTop="@dimen/margin_tv_main_option_btn" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/btn_delete"
                 android:layout_width="@dimen/margin_item_main_option_btn_w"
@@ -129,6 +146,7 @@
                         android:background="@drawable/bg_main_option_btn"
                         android:paddingLeft="12dp"
                         android:textSize="16sp" />
+
                     <ImageView
                         android:layout_width="@dimen/item_main_option_ic_w_h"
                         android:layout_height="@dimen/item_main_option_ic_w_h"
@@ -139,13 +157,21 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/margin_tv_main_option_btn_bottom"
                     android:layout_marginTop="@dimen/margin_tv_main_option_btn"
-                    android:text="账号删除记录"
                     android:gravity="center"
+                    android:text="删除记录"
                     android:textColor="@color/color_tv_main_option_btn"
                     android:textSize="@dimen/size_tv_main_option_btn" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="账号删除记录"
+                    android:alpha="0.5"
+                    android:textSize="10sp"
+                    android:layout_marginBottom="@dimen/margin_tv_main_option_btn_bottom"
+                    android:layout_marginTop="@dimen/margin_tv_main_option_btn" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/btn_delete_daily_self"
                 android:layout_width="@dimen/margin_item_main_option_btn_w"
@@ -166,6 +192,7 @@
                         android:background="@drawable/bg_main_option_btn"
                         android:paddingLeft="12dp"
                         android:textSize="16sp" />
+
                     <ImageView
                         android:layout_width="@dimen/item_main_option_ic_w_h"
                         android:layout_height="@dimen/item_main_option_ic_w_h"
@@ -176,12 +203,19 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/margin_tv_main_option_btn_bottom"
                     android:layout_marginTop="@dimen/margin_tv_main_option_btn"
-                    android:text="随记删除记录"
                     android:gravity="center"
+                    android:text="删除记录"
                     android:textColor="@color/color_tv_main_option_btn"
                     android:textSize="@dimen/size_tv_main_option_btn" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="随手记删除记录"
+                    android:alpha="0.5"
+                    android:textSize="10sp"
+                    android:layout_marginBottom="@dimen/margin_tv_main_option_btn_bottom"
+                    android:layout_marginTop="@dimen/margin_tv_main_option_btn" />
             </LinearLayout>
 
         </LinearLayout>

@@ -43,5 +43,6 @@
     <dimen name="margin_activity_main_daily_self">12dp</dimen>
     <dimen name="item_password_normal_copy_iv_w_h">26dp</dimen>
     <dimen name="margin_item_main_option_btn_w">80dp</dimen>
+    <dimen name="margin_item_delete_password_l">18dp</dimen>
 
 </resources>
