@@ -1,5 +1,6 @@
 package com.mdove.passwordguard.dailyself;
 
+import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 
 import com.mdove.passwordguard.greendao.entity.DailySelf;
@@ -13,6 +14,7 @@ public class ItemMainDailySelfVM {
     public ObservableField<String> mTime = new ObservableField<>();
     public ObservableField<String> mContent = new ObservableField<>();
     public ObservableField<String> mTvGroup = new ObservableField<>();
+    public ObservableField<Boolean> mIsFavorite = new ObservableField<>();
     public DailySelf mDailySelf;
     public int mItemPosition;
 
@@ -23,5 +25,6 @@ public class ItemMainDailySelfVM {
 
         mDailySelf = model.mDailySelf;
         mItemPosition = position;
+        mIsFavorite.set(model.mIsFavorite);
     }
 }

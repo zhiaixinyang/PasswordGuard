@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.mdove.passwordguard.R;
 
@@ -26,6 +27,7 @@ import java.util.ListIterator;
 public abstract class BaseActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
+    private TextView mLayoutEmpty;
     private FrameLayout mContentContainer;
     private List<IBackHandler> mBackHandlers = new ArrayList<>();
 
@@ -38,6 +40,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
             mToolbar = (Toolbar) findViewById(R.id.toolbar);
             mContentContainer = (FrameLayout) findViewById(R.id.content_frame);
+            mLayoutEmpty = findViewById(R.id.layout_empty);
 
             setSupportActionBar(mToolbar);
 
@@ -46,6 +49,14 @@ public abstract class BaseActivity extends AppCompatActivity {
                 getSupportActionBar().setDisplayShowTitleEnabled(true);
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             }
+        }
+    }
+
+    protected void setDataIsEmpty(boolean isEmpty) {
+        if (isEmpty) {
+            mLayoutEmpty.setVisibility(View.VISIBLE);
+        } else {
+            mLayoutEmpty.setVisibility(View.GONE);
         }
     }
 

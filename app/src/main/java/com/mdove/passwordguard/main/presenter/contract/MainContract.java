@@ -60,6 +60,7 @@ public interface MainContract {
 
         void insertDailySelf(String content);
 
+        void favoriteDailySelf(ItemMainDailySelfVM vm);
         void copyDailySelf(ItemMainDailySelfVM vm);
         void copyPasswordInPassword(ItemMainPasswordVM vm);
         void copyPasswordInUserName(ItemMainPasswordVM vm);

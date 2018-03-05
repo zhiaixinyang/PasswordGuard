@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
 
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.BaseActivity;
@@ -43,6 +45,7 @@ public class DeleteListDailySelfActivity extends BaseActivity implements DeleteL
         setContentView(R.layout.activity_delete_list_dailyself);
 
         mRlvDeleteList = findViewById(R.id.rlv_delete_list);
+
         mPresenter = new DeleteListDailySelfPresenter();
         mPresenter.subscribe(this);
 
@@ -60,7 +63,12 @@ public class DeleteListDailySelfActivity extends BaseActivity implements DeleteL
 
     @Override
     public void showData(List<BaseMainModel> data) {
-        mAdapter.setData(data);
+        if (data == null || data.size() == 0) {
+            setDataIsEmpty(true);
+        } else {
+            mAdapter.setData(data);
+            setDataIsEmpty(false);
+        }
     }
 
     @Override

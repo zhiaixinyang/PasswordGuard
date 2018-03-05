@@ -43,13 +43,14 @@ import com.mdove.passwordguard.model.net.RealUpdate;
 import com.mdove.passwordguard.net.ApiServerImpl;
 import com.mdove.passwordguard.update.UpdateDialog;
 import com.mdove.passwordguard.utils.ClipboardUtils;
-import com.mdove.passwordguard.utils.log.LogUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import rx.Subscriber;
+
+import static android.media.CamcorderProfile.get;
 
 /**
  * Created by MDove on 2018/2/10.
@@ -63,7 +64,7 @@ public class MainPresenter implements MainContract.Presenter {
     private DeletedPasswordDao mDeleteDao;
     private GroupInfoDao mGroupInfoDao;
     private DeletedDailySelfDao mDeleteDailyDao;
-    private DailySelfDao mSelfDao;
+    private DailySelfDao mDailySelfDao;
     private List<MainGroupRlvModel> mGroupData;
     private List<BaseMainModel> mDailyData;
     private MainGroupModel mMainGroupModel;
@@ -80,7 +81,7 @@ public class MainPresenter implements MainContract.Presenter {
         mDao = App.getDaoSession().getPasswordDao();
         mDeleteDao = App.getDaoSession().getDeletedPasswordDao();
         mGroupInfoDao = App.getDaoSession().getGroupInfoDao();
-        mSelfDao = App.getDaoSession().getDailySelfDao();
+        mDailySelfDao = App.getDaoSession().getDailySelfDao();
         mDeleteDailyDao = App.getDaoSession().getDeletedDailySelfDao();
     }
 
@@ -102,7 +103,7 @@ public class MainPresenter implements MainContract.Presenter {
             mData.add(new PasswordModel(password));
         }
 
-        List<DailySelf> dailyData = mSelfDao.queryBuilder().list();
+        List<DailySelf> dailyData = mDailySelfDao.queryBuilder().list();
         for (DailySelf dailySelf : dailyData) {
             MainDailySelfModel model = new MainDailySelfModel(dailySelf);
             mDailyData.add(model);
@@ -172,12 +173,32 @@ public class MainPresenter implements MainContract.Presenter {
         dailySelf.mContent = content;
         dailySelf.mTimeStamp = new Date().getTime();
         dailySelf.mTvGroup = DEFAULT_DAILY_SELF_TV_GROUP;
-        mSelfDao.insert(dailySelf);
+        dailySelf.mIsFavorite = 0;
+        mDailySelfDao.insert(dailySelf);
         MainDailySelfModel model = new MainDailySelfModel(dailySelf);
         mData.add(model);
         mDailyData.add(model);
 
         mView.notifyDailySelfData(mData.size());
+    }
+
+    @Override
+    public void favoriteDailySelf(ItemMainDailySelfVM vm) {
+        if (vm.mDailySelf.mIsFavorite == 0) {
+            vm.mDailySelf.mIsFavorite = 1;
+            mDailySelfDao.update(vm.mDailySelf);
+
+            MainDailySelfModel model = (MainDailySelfModel) mData.get(vm.mItemPosition);
+            model.mIsFavorite = true;
+            mView.notifyDailySelfData(vm.mItemPosition);
+        } else {
+            vm.mDailySelf.mIsFavorite = 0;
+            mDailySelfDao.update(vm.mDailySelf);
+
+            MainDailySelfModel model = (MainDailySelfModel) mData.get(vm.mItemPosition);
+            model.mIsFavorite = false;
+            mView.notifyDailySelfData(vm.mItemPosition);
+        }
     }
 
     @Override
@@ -261,8 +282,7 @@ public class MainPresenter implements MainContract.Presenter {
     public void deleteDailySelf(ItemMainDailySelfVM vm) {
         DeletedDailySelf deletedDailySelf = DeleteDailySelfHelper.getDeletedDailySelf(vm.mDailySelf);
         Long id = mDeleteDailyDao.insert(deletedDailySelf);
-        LogUtils.d("aaa", id + "!" + deletedDailySelf.mContent + "!" + deletedDailySelf.mTvGroup);
-        mSelfDao.delete(vm.mDailySelf);
+        mDailySelfDao.delete(vm.mDailySelf);
 
         mView.deleteDailySelf(vm.mItemPosition);
     }
@@ -282,7 +302,7 @@ public class MainPresenter implements MainContract.Presenter {
     public void deleteDailySelfReturn(DeleteDailySelfReturnEvent event) {
         DeletedDailySelf deletedDailySelf = event.mDeletedDailySelf;
         DailySelf dailySelf = DeleteDailySelfHelper.getDailySelf(deletedDailySelf);
-        mSelfDao.insert(dailySelf);
+        mDailySelfDao.insert(dailySelf);
 
         MainDailySelfModel model = new MainDailySelfModel(dailySelf);
         mData.add(model);

@@ -15,12 +15,15 @@ public class DailySelf {
     public String mContent;
     public Long mTimeStamp;
     public String mTvGroup;
-    @Generated(hash = 111221049)
-    public DailySelf(Long id, String mContent, Long mTimeStamp, String mTvGroup) {
+    public int mIsFavorite;
+    @Generated(hash = 1128575647)
+    public DailySelf(Long id, String mContent, Long mTimeStamp, String mTvGroup,
+            int mIsFavorite) {
         this.id = id;
         this.mContent = mContent;
         this.mTimeStamp = mTimeStamp;
         this.mTvGroup = mTvGroup;
+        this.mIsFavorite = mIsFavorite;
     }
     @Generated(hash = 2097784888)
     public DailySelf() {
@@ -48,5 +51,11 @@ public class DailySelf {
     }
     public void setMTvGroup(String mTvGroup) {
         this.mTvGroup = mTvGroup;
+    }
+    public int getMIsFavorite() {
+        return this.mIsFavorite;
+    }
+    public void setMIsFavorite(int mIsFavorite) {
+        this.mIsFavorite = mIsFavorite;
     }
 }

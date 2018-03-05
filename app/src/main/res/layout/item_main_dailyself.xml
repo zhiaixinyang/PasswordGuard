@@ -43,13 +43,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="12dp"
-                    android:background="@drawable/bg_item_daily_self_tv_group"
-                    android:paddingBottom="4dp"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
-                    android:paddingTop="4dp"
                     android:text="@{viewModel.mTvGroup}"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="16sp"
                     tools:text="随手记" />
 
@@ -59,11 +54,23 @@
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/tv_group"
                     android:layout_marginRight="@dimen/margin_activity_main_daily_self"
-                    android:layout_toLeftOf="@+id/btn_copy"
+                    android:layout_toLeftOf="@+id/btn_favorite"
                     android:text="@{viewModel.mTime}"
                     android:textColor="@color/commonColor"
                     android:textSize="14sp"
                     tools:text="2018年2月22日 14:00" />
+
+                <ImageView
+                    android:id="@+id/btn_favorite"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignBottom="@+id/tv_time"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/margin_activity_main_daily_self"
+                    android:layout_toLeftOf="@+id/btn_copy"
+                    android:onClick="@{()->actionHandler.favoriteDailySelf(viewModel)}"
+                    android:tint="@color/red"
+                    app:loadFavorite="@{viewModel}" />
 
                 <ImageView
                     android:id="@+id/btn_copy"
@@ -91,10 +98,11 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_activity_main_daily_self"
                     android:gravity="center_vertical"
+                    android:lineSpacingExtra="4dp"
                     android:text="@{viewModel.mContent}"
                     android:textColor="@color/black"
                     android:textSize="@dimen/size_item_password_normal"
-                    tools:text="记录内容" />
+                    tools:text="记录内容记录内容记录内容记录内容记录内容记录内容记录内容记录内容记录内容" />
             </LinearLayout>
         </RelativeLayout>
 

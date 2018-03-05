@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
 
 import com.hwangjr.rxbus.RxBus;
 import com.mdove.passwordguard.R;
@@ -44,6 +46,7 @@ public class GroupSettingActivity extends BaseActivity implements GroupSettingCo
         super.onCreate(savedInstanceState);
         setTitle("设置分组信息");
         setContentView(R.layout.activity_group_setting);
+
         mRlvGroup = findViewById(R.id.rlv_group);
 
         mDate = new ArrayList<>();
@@ -63,7 +66,12 @@ public class GroupSettingActivity extends BaseActivity implements GroupSettingCo
 
     @Override
     public void showData(List<GroupInfo> data) {
-        mAdapter.setData(data);
+        if (data == null || data.size() == 0) {
+            setDataIsEmpty(true);
+        } else {
+            mAdapter.setData(data);
+            setDataIsEmpty(false);
+        }
     }
 
     @Override
