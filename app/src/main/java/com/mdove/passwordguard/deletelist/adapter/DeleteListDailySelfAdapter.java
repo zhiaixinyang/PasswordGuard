@@ -68,7 +68,7 @@ public class DeleteListDailySelfAdapter extends RecyclerView.Adapter<RecyclerVie
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         BaseMainModel model = mData.get(position);
         if (holder instanceof DeleteDailySelfViewHolder) {
-            ((DeleteDailySelfViewHolder) holder).bind((DeleteDailySelfModel) model, mPresenter);
+            ((DeleteDailySelfViewHolder) holder).bind((DeleteDailySelfModel) model, mPresenter, position);
         } else if (holder instanceof DeleteTopViewHolder) {
             DeleteTopModel deleteTopModel = (DeleteTopModel) model;
             deleteTopModel.mAllDeleteSize = mData.size() - 1;
@@ -92,9 +92,8 @@ public class DeleteListDailySelfAdapter extends RecyclerView.Adapter<RecyclerVie
 
     public void notifyDeleteReturn(int position) {
         mData.remove(position);
-        notifyItemChanged(0);
         notifyItemRemoved(position);
-        notifyItemRangeChanged(position, mData.size() - position);
+        notifyItemRangeChanged(position, mData.size());
     }
 
     public class DeleteDailySelfViewHolder extends RecyclerView.ViewHolder {
@@ -105,8 +104,8 @@ public class DeleteListDailySelfAdapter extends RecyclerView.Adapter<RecyclerVie
             mBinding = binding;
         }
 
-        public void bind(DeleteDailySelfModel model, DeleteListDailySelfPresenter presenter) {
-            mBinding.setViewModel(new DeleteDailySelfModelVM(model));
+        public void bind(DeleteDailySelfModel model, DeleteListDailySelfPresenter presenter, int position) {
+            mBinding.setViewModel(new DeleteDailySelfModelVM(model, position));
             mBinding.setPresenter(presenter);
         }
     }

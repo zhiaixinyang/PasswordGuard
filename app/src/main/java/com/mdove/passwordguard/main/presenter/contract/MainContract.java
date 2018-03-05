@@ -35,7 +35,7 @@ public interface MainContract {
         //Item被点击（PasswordModel）
         void onClickItemPassword(ItemMainPasswordVM model);
 
-        void onClickBtnDeleteDailySelf(ItemMainDailySelfVM vm);
+        void deleteDailySelf(ItemMainDailySelfVM vm);
 
         void onClickBtnDeletePassword();
         void onClickBtnDeleteDailySelf();

@@ -17,12 +17,12 @@ public class DeleteDailySelfModelVM {
     public DeletedDailySelf mDeletedDailySelf;
     public int mItemPosition;
 
-    public DeleteDailySelfModelVM(DeleteDailySelfModel model) {
+    public DeleteDailySelfModelVM(DeleteDailySelfModel model,int position) {
         mContent.set(model.mContent);
         mTvGroup.set(model.mTvGroup);
         mDeleteTime.set(model.mDeleteTime);
         mTimeStamp.set(DateUtil.getDateChinese(model.mTimeStamp));
         mDeletedDailySelf = model.mDeletedDailySelf;
-        mItemPosition = model.mItemPosition;
+        mItemPosition = position;
     }
 }

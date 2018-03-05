@@ -85,7 +85,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void notifyDeletePasswordData(int position) {
         mData.remove(position);
         notifyItemRemoved(position);
-        notifyItemRangeChanged(position, mData.size() - position);
+        notifyItemRangeChanged(position, mData.size());
     }
 
     public void notifyAddGroup() {

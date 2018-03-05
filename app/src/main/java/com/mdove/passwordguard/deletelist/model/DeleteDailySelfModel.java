@@ -17,15 +17,13 @@ public class DeleteDailySelfModel extends BaseMainModel {
     public Long mTimeStamp;
     public Long mDeleteTime;
     public DeletedDailySelf mDeletedDailySelf;
-    public int mItemPosition;
 
-    public DeleteDailySelfModel(DeletedDailySelf deletedDailySelf, int itemPosition) {
+    public DeleteDailySelfModel(DeletedDailySelf deletedDailySelf) {
         mContent = deletedDailySelf.mContent;
         mTimeStamp = deletedDailySelf.mTimeStamp;
         mDeleteTime = deletedDailySelf.mDeletedTimeStamp;
         mType = 1;
         mDeletedDailySelf = deletedDailySelf;
-        mItemPosition = itemPosition;
         mTvGroup = TextUtils.isEmpty(deletedDailySelf.mTvGroup) ? AppConstant.DEFAULT_DAILY_SELF_TV_GROUP : deletedDailySelf.mTvGroup;
     }
 }

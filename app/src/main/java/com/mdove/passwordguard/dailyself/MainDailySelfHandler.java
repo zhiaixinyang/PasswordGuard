@@ -18,6 +18,6 @@ public class MainDailySelfHandler {
     }
 
     public void onClickBtnDeleteDailySelf(ItemMainDailySelfVM vm) {
-        mPresenter.onClickBtnDeleteDailySelf(vm);
+        mPresenter.deleteDailySelf(vm);
     }
 }

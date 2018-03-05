@@ -43,6 +43,7 @@ import com.mdove.passwordguard.model.net.RealUpdate;
 import com.mdove.passwordguard.net.ApiServerImpl;
 import com.mdove.passwordguard.update.UpdateDialog;
 import com.mdove.passwordguard.utils.ClipboardUtils;
+import com.mdove.passwordguard.utils.log.LogUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -211,15 +212,6 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
     @Override
-    public void onClickBtnDeleteDailySelf(ItemMainDailySelfVM vm) {
-        mSelfDao.delete(vm.mDailySelf);
-        DeletedDailySelf deletedDailySelf = DeleteDailySelfHelper.getDeletedDailySelf(vm.mDailySelf);
-        mDeleteDailyDao.insert(deletedDailySelf);
-
-        mView.deleteDailySelf(vm.mItemPosition);
-    }
-
-    @Override
     public void onClickBtnDeletePassword() {
         DeleteListPasswordActivity.start(mView.getContext());
     }
@@ -263,6 +255,16 @@ public class MainPresenter implements MainContract.Presenter {
         mDao.delete(password);
 
         mView.deletePassword(position);
+    }
+
+    @Override
+    public void deleteDailySelf(ItemMainDailySelfVM vm) {
+        DeletedDailySelf deletedDailySelf = DeleteDailySelfHelper.getDeletedDailySelf(vm.mDailySelf);
+        Long id = mDeleteDailyDao.insert(deletedDailySelf);
+        LogUtils.d("aaa", id + "!" + deletedDailySelf.mContent + "!" + deletedDailySelf.mTvGroup);
+        mSelfDao.delete(vm.mDailySelf);
+
+        mView.deleteDailySelf(vm.mItemPosition);
     }
 
     @Override

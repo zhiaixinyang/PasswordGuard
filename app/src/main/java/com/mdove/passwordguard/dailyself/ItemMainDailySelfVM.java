@@ -20,6 +20,7 @@ public class ItemMainDailySelfVM {
         mTime.set(DateUtil.getDateChinese(model.mTime));
         mContent.set(model.mContent);
         mTvGroup.set(model.mTvGroup);
+
         mDailySelf = model.mDailySelf;
         mItemPosition = position;
     }

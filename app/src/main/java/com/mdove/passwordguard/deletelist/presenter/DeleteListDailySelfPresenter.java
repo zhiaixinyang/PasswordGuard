@@ -45,7 +45,7 @@ public class DeleteListDailySelfPresenter implements DeleteListDailySelfContract
 
         List<DeletedDailySelf> list = mDeleteDao.queryBuilder().build().list();
         for (int i = 0; i < list.size(); i++) {
-            mData.add(new DeleteDailySelfModel(list.get(i), ++i));
+            mData.add(new DeleteDailySelfModel(list.get(i)));
         }
         mView.showData(mData);
     }
