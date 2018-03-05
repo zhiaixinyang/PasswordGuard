@@ -43,6 +43,7 @@ import com.mdove.passwordguard.search.model.SearchRlvModel;
 import com.mdove.passwordguard.ui.searchbox.SearchFragment;
 import com.mdove.passwordguard.ui.searchbox.custom.IOnSearchClickListener;
 import com.mdove.passwordguard.utils.AppUtils;
+import com.mdove.passwordguard.utils.KeyBoardUtils;
 import com.mdove.passwordguard.utils.StatusBarUtil;
 import com.mdove.passwordguard.utils.ToastHelper;
 
@@ -77,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
         }
         mPresenter.insertDailySelf(content);
         mBinding.etContent.setText("");
+        KeyBoardUtils.closeKeyboard(this, mBinding.etContent);
     }
 
     @StringDef(value = {ACTION_LOCK_IS_SUC})
