@@ -17,7 +17,7 @@ public class DaoManager  {
     private static  final String   TAG = DaoManager.class.getSimpleName();
     private static  final String  DB_NAME="PasswordGuard.db";//数据库名称
     private volatile  static DaoManager mDaoManager;//多线程访问
-    private  static DaoMaster.DevOpenHelper mHelper;
+    private  static DaoMaster.OpenHelper mHelper;
     private static  DaoMaster mDaoMaster;
     private static DaoSession mDaoSession;
     private static SQLiteDatabase db;
