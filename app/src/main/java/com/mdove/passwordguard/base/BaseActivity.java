@@ -41,6 +41,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             mToolbar = (Toolbar) findViewById(R.id.toolbar);
             mContentContainer = (FrameLayout) findViewById(R.id.content_frame);
             mLayoutEmpty = findViewById(R.id.layout_empty);
+            mLayoutEmpty.setVisibility(View.GONE);
 
             setSupportActionBar(mToolbar);
 

@@ -46,4 +46,9 @@
     <dimen name="margin_item_delete_password_l">18dp</dimen>
     <dimen name="ic_copy_w_h">22dp</dimen>
 
+    <dimen name="color_swatch_large">64dip</dimen>
+    <dimen name="color_swatch_small">48dip</dimen>
+    <dimen name="color_swatch_margins_large">8dip</dimen>
+    <dimen name="color_swatch_margins_small">4dip</dimen>
+
 </resources>
