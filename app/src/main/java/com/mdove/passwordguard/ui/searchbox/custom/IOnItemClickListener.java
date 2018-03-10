@@ -1,7 +1,7 @@
 package com.mdove.passwordguard.ui.searchbox.custom;
 
 /**
- * Created by Won on 2016/4/22.
+ * Created by MDove on 2016/4/22.
  */
 public interface IOnItemClickListener {
 

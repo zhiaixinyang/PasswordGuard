@@ -50,5 +50,6 @@
     <dimen name="color_swatch_small">48dip</dimen>
     <dimen name="color_swatch_margins_large">8dip</dimen>
     <dimen name="color_swatch_margins_small">4dip</dimen>
+    <dimen name="margin_dialog_add_daily_self">6dp</dimen>
 
 </resources>

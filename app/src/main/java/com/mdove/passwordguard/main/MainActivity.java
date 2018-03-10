@@ -40,7 +40,9 @@ import com.mdove.passwordguard.addoralter.dialog.AddPasswordDialog;
 import com.mdove.passwordguard.addoralter.dialog.AlterPasswordDialog;
 import com.mdove.passwordguard.search.SearchRlvDialog;
 import com.mdove.passwordguard.search.model.SearchRlvModel;
+import com.mdove.passwordguard.ui.searchbox.AddDailySelfFragment;
 import com.mdove.passwordguard.ui.searchbox.SearchFragment;
+import com.mdove.passwordguard.ui.searchbox.custom.IOnAddDailySelfClickListener;
 import com.mdove.passwordguard.ui.searchbox.custom.IOnSearchClickListener;
 import com.mdove.passwordguard.utils.AppUtils;
 import com.mdove.passwordguard.utils.KeyBoardUtils;
@@ -56,13 +58,14 @@ import java.util.List;
  * Created by MDove on 2018/2/9.
  */
 public class MainActivity extends AppCompatActivity implements MainContract.MvpView,
-        IOnSearchClickListener, View.OnClickListener {
+        IOnSearchClickListener, IOnAddDailySelfClickListener, View.OnClickListener {
     private ActivityMainBinding mBinding;
     private MainPresenter mPresenter;
     private RecyclerView mRlv;
     private MainAdapter mAdapter;
 
     private SearchFragment mSearchFragment;
+    private AddDailySelfFragment mAddDailySelfFragment;
 
     public static final String EXTRA_ACTION_KEY = "extra_action_key";
     public static final String ACTION_LOCK_IS_SUC = "action_lock_is_suc";
@@ -79,6 +82,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
         mPresenter.insertDailySelf(content);
         mBinding.etContent.setText("");
         KeyBoardUtils.closeKeyboard(this, mBinding.etContent);
+    }
+
+    @Override
+    public void OnAddDailySelfClick(String keyword) {
+        ToastHelper.shortToast(keyword);
     }
 
     @StringDef(value = {ACTION_LOCK_IS_SUC})
@@ -106,8 +114,12 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
         RxBus.get().register(this);
         mSearchFragment = SearchFragment.newInstance();
         mSearchFragment.setOnSearchClickListener(this);
+        mAddDailySelfFragment = AddDailySelfFragment.newInstance();
+        mAddDailySelfFragment.setOnAddDailySelfClickListener(this);
+
         mPresenter = new MainPresenter();
         mPresenter.subscribe(this);
+        mBinding.setActionHandler(mPresenter);
 
         mAdapter = new MainAdapter(this, mPresenter);
         mAdapter.setOnLongClickListener(new OnItemLongClickListener<PasswordModel>() {
@@ -175,6 +187,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     @Override
     public void onClickBtnSearch() {
         mSearchFragment.show(getSupportFragmentManager(), SearchFragment.TAG);
+    }
+
+    @Override
+    public void onClickBtnAddDailySelf() {
+        mAddDailySelfFragment.show(getSupportFragmentManager(), SearchFragment.TAG);
     }
 
     @Override

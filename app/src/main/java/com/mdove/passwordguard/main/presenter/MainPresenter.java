@@ -258,6 +258,11 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
     @Override
+    public void onClickBtnAddDailySelf() {
+        mView.onClickBtnAddDailySelf();
+    }
+
+    @Override
     public void querySearch(String queryKey) {
         List<Password> list = mDao.queryBuilder().whereOr(PasswordDao.Properties.MTitle.like("%" + queryKey + "%"),
                 PasswordDao.Properties.MUserName.like("%" + queryKey + "%"),

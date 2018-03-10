@@ -51,7 +51,7 @@
                         android:id="@+id/iv_password"
                         android:layout_width="@dimen/item_main_option_btn_w_h"
                         android:layout_height="@dimen/item_main_option_btn_w_h"
-                        android:background="@drawable/bg_main_option_btn"
+                        android:background="@drawable/bg_main_option_btn_1"
                         android:paddingLeft="12dp"
                         android:textSize="16sp" />
 
@@ -97,7 +97,7 @@
                         android:id="@+id/iv_add_lock"
                         android:layout_width="@dimen/item_main_option_btn_w_h"
                         android:layout_height="@dimen/item_main_option_btn_w_h"
-                        android:background="@drawable/bg_main_option_btn"
+                        android:background="@drawable/bg_main_option_btn_2"
                         android:paddingLeft="12dp"
                         android:textSize="16sp" />
 
@@ -144,7 +144,7 @@
                         android:id="@+id/iv_delete"
                         android:layout_width="@dimen/item_main_option_btn_w_h"
                         android:layout_height="@dimen/item_main_option_btn_w_h"
-                        android:background="@drawable/bg_main_option_btn"
+                        android:background="@drawable/bg_main_option_btn_3"
                         android:paddingLeft="12dp"
                         android:textSize="16sp" />
 
@@ -191,7 +191,7 @@
                         android:id="@+id/iv_delete_daily_self"
                         android:layout_width="@dimen/item_main_option_btn_w_h"
                         android:layout_height="@dimen/item_main_option_btn_w_h"
-                        android:background="@drawable/bg_main_option_btn"
+                        android:background="@drawable/bg_main_option_btn_1"
                         android:paddingLeft="12dp"
                         android:textSize="16sp" />
 

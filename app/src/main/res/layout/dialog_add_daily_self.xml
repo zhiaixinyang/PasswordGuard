@@ -1,0 +1,60 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="@dimen/margin_dialog_add_daily_self"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_corner_white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_search_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_dialog_add_daily_self"
+                android:src="@mipmap/ic_back"
+                android:tint="@color/gray" />
+
+            <EditText
+                android:id="@+id/et_search_keyword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_dialog_add_daily_self"
+                android:layout_toLeftOf="@+id/iv_search_search"
+                android:layout_toRightOf="@+id/iv_search_back"
+                android:background="@drawable/bg_dialog_add_dialog_self"
+                android:gravity="top"
+                android:hint="随手记记"
+                android:paddingLeft="@dimen/margin_dialog_add_daily_self"
+                android:paddingRight="@dimen/margin_dialog_add_daily_self"
+                android:paddingBottom="@dimen/margin_dialog_add_daily_self"
+                android:paddingTop="3dp"
+                android:layout_marginBottom="12dp"
+                android:imeOptions="actionSearch"
+                android:lines="3"
+                android:textColorHint="@color/gray"
+                android:textCursorDrawable="@drawable/bg_et_cursor"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/iv_search_search"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:layout_margin="@dimen/margin_dialog_add_daily_self"
+                android:src="@mipmap/ic_add"
+                android:tint="@color/gray" />
+
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

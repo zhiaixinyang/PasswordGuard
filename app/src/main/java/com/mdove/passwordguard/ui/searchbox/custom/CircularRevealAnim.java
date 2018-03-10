@@ -7,6 +7,9 @@ import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 
+/**
+ * Created by MDove on 2017/1/13.
+ */
 public class CircularRevealAnim {
 
     public static final long DURATION = 500;

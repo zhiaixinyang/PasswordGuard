@@ -277,9 +277,6 @@
     <color name="grey_900">#212121</color>
     <color name="grey_950">#101010</color>
 
-    <color name="white">#ffffff</color>
-    <color name="black">#000000</color>
-
     <color name="black_ae">#ef000000</color>
     <color name="black_ac">#cf000000</color>
     <color name="black_aa">#af000000</color>

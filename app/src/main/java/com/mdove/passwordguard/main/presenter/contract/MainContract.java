@@ -46,6 +46,8 @@ public interface MainContract {
 
         void onClickBtnSearch();
 
+        void onClickBtnAddDailySelf();
+
         void querySearch(String queryKey);
 
         void deletePassword(int position, Password password);
@@ -79,6 +81,8 @@ public interface MainContract {
         void onClickBtnLock();
 
         void onClickBtnSearch();
+
+        void onClickBtnAddDailySelf();
 
         void searchReturn(List<Password> data, String error);
 
