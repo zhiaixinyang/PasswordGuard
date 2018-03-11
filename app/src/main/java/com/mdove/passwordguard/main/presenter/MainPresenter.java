@@ -103,12 +103,21 @@ public class MainPresenter implements MainContract.Presenter {
             mData.add(new PasswordModel(password));
         }
 
+        List<MainDailySelfModel> favoriteData=new ArrayList<>();
+        List<MainDailySelfModel> noFavoriteData=new ArrayList<>();
         List<DailySelf> dailyData = mDailySelfDao.queryBuilder().list();
         for (DailySelf dailySelf : dailyData) {
-            MainDailySelfModel model = new MainDailySelfModel(dailySelf);
-            mDailyData.add(model);
-            mData.add(model);
+            MainDailySelfModel favoriteModel = new MainDailySelfModel(dailySelf);
+            if (dailySelf.mIsFavorite==1) {
+                favoriteData.add(favoriteModel);
+            }else{
+                noFavoriteData.add(favoriteModel);
+            }
         }
+        mDailyData.addAll(favoriteData);
+        mDailyData.addAll(noFavoriteData);
+        mData.addAll(favoriteData);
+        mData.addAll(noFavoriteData);
 
         mView.showData(mData);
     }

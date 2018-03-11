@@ -91,6 +91,7 @@ public class DeleteListDailySelfAdapter extends RecyclerView.Adapter<RecyclerVie
     }
 
     public void notifyDeleteReturn(int position) {
+        notifyItemChanged(0);
         mData.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, mData.size());

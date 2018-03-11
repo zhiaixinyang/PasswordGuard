@@ -75,4 +75,9 @@ public class DeleteListDailySelfActivity extends BaseActivity implements DeleteL
     public void deleteReturn(int position) {
         mAdapter.notifyDeleteReturn(position);
     }
+
+    @Override
+    public void realDelete(int position) {
+        mAdapter.notifyDeleteReturn(position);
+    }
 }

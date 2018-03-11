@@ -97,13 +97,23 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btnDelete"
+                android:id="@+id/btn_return"
                 android:layout_width="@dimen/item_delete_normal_w"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/margin_item_password_normal"
                 android:background="@drawable/bg_normal_password_delete_return"
                 android:text="还原"
                 android:onClick="@{()->presenter.deleteReturn(viewModel)}"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+            <Button
+                android:id="@+id/btn_delete"
+                android:layout_width="@dimen/item_delete_normal_w"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin_item_password_normal"
+                android:background="@drawable/bg_normal_password_real_delete"
+                android:text="彻底删除"
+                android:onClick="@{()->presenter.realDelete(viewModel)}"
                 android:textColor="@android:color/white"
                 android:textSize="20sp" />
         </LinearLayout>

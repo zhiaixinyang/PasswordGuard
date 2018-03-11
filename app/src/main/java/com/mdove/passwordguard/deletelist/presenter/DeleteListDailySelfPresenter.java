@@ -57,6 +57,12 @@ public class DeleteListDailySelfPresenter implements DeleteListDailySelfContract
         RxBus.get().post(new DeleteDailySelfReturnEvent(vm.mDeletedDailySelf));
     }
 
+    @Override
+    public void realDelete(DeleteDailySelfModelVM vm) {
+        mDeleteDao.delete(vm.mDeletedDailySelf);
+        mView.realDelete(vm.mItemPosition);
+    }
+
     private void initSys() {
         DeleteTopModel deleteTopModel = new DeleteTopModel();
         deleteTopModel.mType = 1;
