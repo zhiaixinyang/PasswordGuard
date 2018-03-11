@@ -1,8 +1,12 @@
 package com.mdove.passwordguard.utils;
 
 import android.content.*;
+import android.content.res.Resources;
 import android.graphics.*;
+import android.support.v4.content.ContextCompat;
 import android.util.*;
+
+import com.mdove.passwordguard.R;
 
 public class PaletteUtils {
     public static int colorToPaletteIndex(Context context, int color) {
@@ -56,5 +60,11 @@ public class PaletteUtils {
         }
 
         return palette[paletteColor];
+    }
+
+    public static int[] getColors(Context context) {
+        Resources res = context.getResources();
+        int[] languages = res.getIntArray(R.array.all_select_array);
+        return languages;
     }
 }
