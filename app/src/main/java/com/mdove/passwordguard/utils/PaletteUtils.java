@@ -64,7 +64,7 @@ public class PaletteUtils {
 
     public static int[] getColors(Context context) {
         Resources res = context.getResources();
-        int[] languages = res.getIntArray(R.array.all_select_array);
+        int[] languages = res.getIntArray(R.array.lightPalette);
         return languages;
     }
 }

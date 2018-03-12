@@ -84,11 +84,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
         KeyBoardUtils.closeKeyboard(this, mBinding.etContent);
     }
 
-    @Override
-    public void OnAddDailySelfClick(String keyword) {
-        ToastHelper.shortToast(keyword);
-    }
-
     @StringDef(value = {ACTION_LOCK_IS_SUC})
     @Retention(RetentionPolicy.CLASS)
     public @interface MainAction {
@@ -243,6 +238,16 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
         }
         ToastHelper.shortToast("请输入搜索关键字");
     }
+
+    @Override
+    public void OnAddDailySelfClick(String keyword) {
+        if (TextUtils.isEmpty(keyword)) {
+            ToastHelper.shortToast("记录内容不能为空");
+            return;
+        }
+        mPresenter.insertDailySelf(keyword);
+    }
+
 
     @Override
     public void addPasswordSuc(String suc) {
