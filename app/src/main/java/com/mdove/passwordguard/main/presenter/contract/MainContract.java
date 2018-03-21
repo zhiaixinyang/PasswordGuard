@@ -6,6 +6,7 @@ import com.mdove.passwordguard.base.BaseView;
 import com.mdove.passwordguard.dailyself.ItemMainDailySelfVM;
 import com.mdove.passwordguard.deletelist.model.event.DeleteDailySelfReturnEvent;
 import com.mdove.passwordguard.deletelist.model.event.DeletePasswordReturnEvent;
+import com.mdove.passwordguard.greendao.entity.DailySelf;
 import com.mdove.passwordguard.greendao.entity.Password;
 import com.mdove.passwordguard.main.model.BaseMainModel;
 import com.mdove.passwordguard.main.model.MainGroupModel;
@@ -61,6 +62,7 @@ public interface MainContract {
         void checkOrderPassword(CheckOrderEvent event);
 
         void insertDailySelf(String content);
+        void addDailySelf(DailySelf dailySelf);
 
         void favoriteDailySelf(ItemMainDailySelfVM vm);
         void copyDailySelf(ItemMainDailySelfVM vm);

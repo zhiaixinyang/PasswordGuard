@@ -209,6 +209,16 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
     @Override
+    public void addDailySelf(DailySelf dailySelf) {
+        mDailySelfDao.insert(dailySelf);
+        MainDailySelfModel model = new MainDailySelfModel(dailySelf);
+        mData.add(model);
+        mDailyData.add(model);
+
+        mView.notifyDailySelfData(mData.size());
+    }
+
+    @Override
     public void favoriteDailySelf(ItemMainDailySelfVM vm) {
         if (vm.mDailySelf.mIsFavorite == 0) {
             vm.mDailySelf.mIsFavorite = 1;

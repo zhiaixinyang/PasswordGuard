@@ -14,6 +14,7 @@ import android.view.View;
 import com.hwangjr.rxbus.RxBus;
 import com.hwangjr.rxbus.annotation.Subscribe;
 import com.mdove.passwordguard.R;
+import com.mdove.passwordguard.addoralter.model.event.AddDailySelfActivityEvent;
 import com.mdove.passwordguard.addoralter.model.event.AddPasswordActivityEvent;
 import com.mdove.passwordguard.addoralter.model.event.EditPasswordActivityEvent;
 import com.mdove.passwordguard.base.listener.OnItemLongClickListener;
@@ -272,6 +273,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     @Subscribe
     public void addPasswordActivityInfo(AddPasswordActivityEvent event) {
         mPresenter.addPassword(event.mPassword);
+    }
+
+    @Subscribe
+    public void addDailySelfActivityInfo(AddDailySelfActivityEvent event) {
+        mPresenter.addDailySelf(event.mDailySelf);
     }
 
     @Subscribe
