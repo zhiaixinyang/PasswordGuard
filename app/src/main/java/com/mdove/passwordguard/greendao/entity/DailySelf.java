@@ -4,18 +4,22 @@ import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
 
+import java.io.Serializable;
+
 /**
  * Created by MDove on 2018/2/22.
  */
 
 @Entity
-public class DailySelf {
+public class DailySelf implements Serializable{
     @Id(autoincrement = true)
     public Long id;
     public String mContent;
     public Long mTimeStamp;
     public String mTvGroup;
     public int mIsFavorite;
+    static final long serialVersionUID = 12L;
+
     @Generated(hash = 1128575647)
     public DailySelf(Long id, String mContent, Long mTimeStamp, String mTvGroup,
             int mIsFavorite) {

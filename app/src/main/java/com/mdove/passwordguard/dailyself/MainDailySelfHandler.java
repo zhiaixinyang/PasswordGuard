@@ -24,4 +24,7 @@ public class MainDailySelfHandler {
     public void onClickBtnDeleteDailySelf(ItemMainDailySelfVM vm) {
         mPresenter.deleteDailySelf(vm);
     }
+    public void onClickItemDailySelf(ItemMainDailySelfVM vm) {
+        mPresenter.onClickItemDailySelf(vm);
+    }
 }

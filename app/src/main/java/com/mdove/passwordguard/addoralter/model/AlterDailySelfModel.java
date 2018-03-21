@@ -8,10 +8,8 @@ import com.mdove.passwordguard.greendao.entity.DailySelf;
 
 public class AlterDailySelfModel {
     public DailySelf mOldDailySelf;
-    public DailySelf mNewDailySelf;
 
-    public AlterDailySelfModel(DailySelf oldDailySelf, DailySelf newDailySelf) {
+    public AlterDailySelfModel(DailySelf oldDailySelf) {
         mOldDailySelf = oldDailySelf;
-        mNewDailySelf = newDailySelf;
     }
 }

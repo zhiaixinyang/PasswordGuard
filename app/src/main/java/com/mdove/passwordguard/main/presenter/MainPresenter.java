@@ -271,6 +271,11 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
     @Override
+    public void onClickItemDailySelf(ItemMainDailySelfVM model) {
+        AddDailySelfActivity.startEdit(mView.getContext(), model, model.mItemPosition);
+    }
+
+    @Override
     public void onClickBtnDeletePassword() {
         DeleteListPasswordActivity.start(mView.getContext());
     }
@@ -441,13 +446,13 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void alterDailySelf(AlterDailySelfModel model, int itemPosition) {
-        mDailySelfDao.update(model.mNewDailySelf);
+        mDailySelfDao.update(model.mOldDailySelf);
 //        mDao.insert(model.mNewPassword);
 //        mData.add(new PasswordModel(model.mNewPassword));
 
         //直接更换旧model的数据（引用指向的内存不变）
         MainDailySelfModel oldModel = (MainDailySelfModel) mData.get(itemPosition);
-        oldModel.setDailySelf(model.mNewDailySelf);
+        oldModel.setDailySelf(model.mOldDailySelf);
 
         mView.alterPasswordSuc(itemPosition, mData.size());
     }
@@ -468,7 +473,14 @@ public class MainPresenter implements MainContract.Presenter {
         for (Password password : data) {
             passwordData.add(new PasswordModel(password));
         }
+        List<DailySelf> dailySelfList = mDailySelfDao.queryBuilder().where(DailySelfDao.Properties.MTvGroup.eq(event.mGroupInfo.getMTvGroup())).build().list();
+        List<MainDailySelfModel> dailySelfData = new ArrayList<>();
+        for (DailySelf dailySelf : dailySelfList) {
+            dailySelfData.add(new MainDailySelfModel(dailySelf));
+        }
+
         checkData.addAll(passwordData);
+        checkData.addAll(dailySelfData);
 //        for (GroupInfo info : mCheckedList) {
 //            List<Password> data = mDao.queryBuilder().where(PasswordDao.Properties.MTvGroup.eq(info.getMTvGroup())).build().list();
 //            List<PasswordModel> passwordData = new ArrayList<>();

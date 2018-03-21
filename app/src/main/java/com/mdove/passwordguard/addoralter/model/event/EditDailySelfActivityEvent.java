@@ -13,8 +13,8 @@ public class EditDailySelfActivityEvent {
     public AlterDailySelfModel mAlterDailySelfModel;
     public int mEditItemPosition;
 
-    public EditDailySelfActivityEvent(DailySelf dailySelf, DailySelf oldEditDailySelf, int editPosition) {
-        mAlterDailySelfModel = new AlterDailySelfModel(oldEditDailySelf, dailySelf);
+    public EditDailySelfActivityEvent(DailySelf oldEditDailySelf, int editPosition) {
+        mAlterDailySelfModel = new AlterDailySelfModel(oldEditDailySelf);
         mEditItemPosition = editPosition;
     }
 }

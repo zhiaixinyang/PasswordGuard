@@ -45,7 +45,7 @@ public class AddDailySelfActivity extends BaseActivity implements AddDailySelfCo
     private static final String EXTRA_EDIT_DAILY_SELF = "extra_edit_daily_self";
     private static final String EXTRA_EDIT_ITEM_POSITION_KEY = "extra_edit_item_position_key";
     private ItemMainDailySelfVM mEditDailySelfVM;
-    private DailySelf mEditDailySelf, mOldDailySelf;
+    private DailySelf mOldDailySelf;
     private int mEditPosition;
     private boolean isEdit = false;
 
@@ -71,11 +71,18 @@ public class AddDailySelfActivity extends BaseActivity implements AddDailySelfCo
         super.onCreate(savedInstanceState);
         setTitle("随手记");
         setContentView(R.layout.activity_add_daily_self);
+        handleAction(getIntent());
         initView();
-        initData(getIntent());
+        initData();
     }
 
-    private void initData(Intent intent) {
+    private void initData(){
+        mEtContent.setText(mContent);
+        mTvGroup.setText(mDefaultTitle);
+        mAdapter.initCheck(mDefaultTitle);
+    }
+
+    private void handleAction(Intent intent) {
         if (intent == null) {
             return;
         }
@@ -88,9 +95,6 @@ public class AddDailySelfActivity extends BaseActivity implements AddDailySelfCo
         mOldDailySelf = mEditDailySelfVM.mDailySelf;
         mContent = mEditDailySelfVM.mContent.get();
         mDefaultTitle = mEditDailySelfVM.mTvGroup.get();
-        mEtContent.setText(mContent);
-        mTvGroup.setText(mDefaultTitle);
-        mAdapter.initCheck(mDefaultTitle);
     }
 
     private void initView() {
@@ -129,9 +133,11 @@ public class AddDailySelfActivity extends BaseActivity implements AddDailySelfCo
                     if (!isEdit) {
                         RxBus.get().post(new AddDailySelfActivityEvent(dailySelf));
                         finish();
+                        return;
                     } else {
-                        RxBus.get().post(new EditDailySelfActivityEvent(mEditDailySelf, mOldDailySelf, mEditPosition));
+                        RxBus.get().post(new EditDailySelfActivityEvent(mOldDailySelf, mEditPosition));
                         finish();
+                        return;
                     }
                 }
                 ToastHelper.shortToast("请完成对应信息");
@@ -166,11 +172,9 @@ public class AddDailySelfActivity extends BaseActivity implements AddDailySelfCo
             dailySelf.mTimeStamp = new Date().getTime();
             dailySelf.mTvGroup = mDefaultTitle;
         } else {
-            mEditDailySelf = new DailySelf();
-            mEditDailySelf.mIsFavorite = mOldDailySelf.mIsFavorite;
-            mEditDailySelf.mContent = mContent;
-            mEditDailySelf.mTimeStamp = new Date().getTime();
-            mEditDailySelf.mTvGroup = mDefaultTitle;
+            mOldDailySelf.mContent = mContent;
+            mOldDailySelf.mTimeStamp = new Date().getTime();
+            mOldDailySelf.mTvGroup = mDefaultTitle;
         }
 
         return true;
