@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray_light">
+
+        <RelativeLayout
+            android:id="@+id/layout_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rlv_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"
+                android:paddingLeft="@dimen/activity_add_daily_self_margin"
+                android:paddingRight="@dimen/activity_add_daily_self_margin"
+                android:scrollbars="none" />
+
+            <TextView
+                android:id="@+id/tv_group_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlv_group"
+                android:layout_marginLeft="@dimen/activity_add_daily_self_margin"
+                android:layout_marginTop="@dimen/activity_add_daily_self_margin"
+                android:text="随手记分组："
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlv_group"
+                android:layout_marginRight="@dimen/activity_add_daily_self_margin"
+                android:layout_marginTop="@dimen/activity_add_daily_self_margin"
+                android:layout_toRightOf="@+id/tv_group_tip"
+                android:text="@string/default_check_group_title"
+                android:textColor="@color/commonColor"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/et_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/layout_bottom"
+            android:layout_below="@+id/layout_top"
+            android:layout_marginTop="@dimen/activity_add_daily_self_margin"
+            android:layout_marginRight="@dimen/activity_add_daily_self_margin"
+            android:layout_marginLeft="@dimen/activity_add_daily_self_margin"
+            android:background="@drawable/bg_add_password_activity_et"
+            android:gravity="top"
+            android:hint="随手记"
+            android:padding="@dimen/activity_add_daily_self_margin"
+            android:textCursorDrawable="@drawable/bg_et_cursor" />
+
+        <LinearLayout
+            android:id="@+id/layout_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_add_daily_self_h"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="18dp"
+            android:layout_marginTop="18dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/btn_cancel"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="取消"
+                android:textColor="@color/gray"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/btn_ok"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="确定"
+                android:textColor="@color/commonColor"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</layout>

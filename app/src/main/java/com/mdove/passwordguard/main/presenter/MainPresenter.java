@@ -77,14 +77,15 @@ public class MainPresenter implements MainContract.Presenter {
     private static final String DEFAULT_DAILY_SELF_TV_GROUP = AppConstant.DEFAULT_DAILY_SELF_TV_GROUP;
     private static final String DEFAULT_CHECK_GROUP_TITLE = AppConstant.DEFAULT_CHECK_GROUP_TITLE;
 
-    public static final int MAIN_OPEN_INFO_TYPE_ACCOUNT=1;
-    public static final int MAIN_OPEN_INFO_TYPE_LOCK=2;
-    public static final int MAIN_OPEN_INFO_TYPE_DELETE_ACCOUNT =3;
-    public static final int MAIN_OPEN_INFO_TYPE_DELETE_DAILY_SELF =4;
+    public static final int MAIN_OPEN_INFO_TYPE_ACCOUNT = 1;
+    public static final int MAIN_OPEN_INFO_TYPE_LOCK = 2;
+    public static final int MAIN_OPEN_INFO_TYPE_DELETE_ACCOUNT = 3;
+    public static final int MAIN_OPEN_INFO_TYPE_DELETE_DAILY_SELF = 4;
+    public static final int MAIN_OPEN_INFO_TYPE_ADD_DAILY_SELF = 5;
 
-    @IntDef(value = {MAIN_OPEN_INFO_TYPE_ACCOUNT,MAIN_OPEN_INFO_TYPE_LOCK, MAIN_OPEN_INFO_TYPE_DELETE_ACCOUNT, MAIN_OPEN_INFO_TYPE_DELETE_DAILY_SELF})
+    @IntDef(value = {MAIN_OPEN_INFO_TYPE_ACCOUNT, MAIN_OPEN_INFO_TYPE_ADD_DAILY_SELF, MAIN_OPEN_INFO_TYPE_LOCK, MAIN_OPEN_INFO_TYPE_DELETE_ACCOUNT, MAIN_OPEN_INFO_TYPE_DELETE_DAILY_SELF})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface MainOpenInfoType{
+    public @interface MainOpenInfoType {
     }
 
     @Override
@@ -118,14 +119,14 @@ public class MainPresenter implements MainContract.Presenter {
             mData.add(new PasswordModel(password));
         }
 
-        List<MainDailySelfModel> favoriteData=new ArrayList<>();
-        List<MainDailySelfModel> noFavoriteData=new ArrayList<>();
+        List<MainDailySelfModel> favoriteData = new ArrayList<>();
+        List<MainDailySelfModel> noFavoriteData = new ArrayList<>();
         List<DailySelf> dailyData = mDailySelfDao.queryBuilder().list();
         for (DailySelf dailySelf : dailyData) {
             MainDailySelfModel favoriteModel = new MainDailySelfModel(dailySelf);
-            if (dailySelf.mIsFavorite==1) {
+            if (dailySelf.mIsFavorite == 1) {
                 favoriteData.add(favoriteModel);
-            }else{
+            } else {
                 noFavoriteData.add(favoriteModel);
             }
         }
@@ -155,7 +156,7 @@ public class MainPresenter implements MainContract.Presenter {
 
         MainOptionModel optionModel = new MainOptionModel();
         optionModel.mType = 0;
-        optionModel.mData=getInitOptionData();
+        optionModel.mData = getInitOptionData();
         mData.add(optionModel);
         mSysEmptyData.add(optionModel);
 
@@ -450,12 +451,14 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
     public List<MainOptionInfo> getInitOptionData() {
-        List<MainOptionInfo> data=new ArrayList<>();
-        MainOptionInfo account=new MainOptionInfo(MAIN_OPEN_INFO_TYPE_ACCOUNT,"记录账号","记录账号信息",R.drawable.bg_main_option_btn_1,R.mipmap.ic_btn_password);
-        MainOptionInfo lock=new MainOptionInfo(MAIN_OPEN_INFO_TYPE_LOCK,"手势锁","保护信息安全",R.drawable.bg_main_option_btn_2,R.mipmap.ic_btn_lock);
-        MainOptionInfo deleteAccount=new MainOptionInfo(MAIN_OPEN_INFO_TYPE_DELETE_ACCOUNT,"删除记录","账号信息",R.drawable.bg_main_option_btn_3,R.mipmap.ic_btn_delete);
-        MainOptionInfo deleteDailySelf=new MainOptionInfo(MAIN_OPEN_INFO_TYPE_DELETE_DAILY_SELF,"删除记录","随手记",R.drawable.bg_main_option_btn_1,R.mipmap.ic_btn_delete);
+        List<MainOptionInfo> data = new ArrayList<>();
+        MainOptionInfo account = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_ACCOUNT, "记录账号", "记录账号信息", R.drawable.bg_main_option_btn_1, R.mipmap.ic_btn_password);
+        MainOptionInfo dailySelf = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_ADD_DAILY_SELF, "随手记", "记录生活中的有趣", R.drawable.bg_main_option_btn_4, R.mipmap.ic_btn_password);
+        MainOptionInfo lock = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_LOCK, "手势锁", "保护信息安全", R.drawable.bg_main_option_btn_2, R.mipmap.ic_btn_lock);
+        MainOptionInfo deleteAccount = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_DELETE_ACCOUNT, "删除记录", "账号信息", R.drawable.bg_main_option_btn_3, R.mipmap.ic_btn_delete);
+        MainOptionInfo deleteDailySelf = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_DELETE_DAILY_SELF, "删除记录", "随手记", R.drawable.bg_main_option_btn_1, R.mipmap.ic_btn_delete);
         data.add(account);
+        data.add(dailySelf);
         data.add(lock);
         data.add(deleteAccount);
         data.add(deleteDailySelf);

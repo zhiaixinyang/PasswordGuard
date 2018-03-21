@@ -56,6 +56,13 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name=".addoralter.AddDailySelfActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+
         <activity
             android:name=".addoralter.EditPasswordActivity"
             android:launchMode="singleTask"

@@ -36,6 +36,8 @@
     <dimen name="item_password_normal_radius">5dp</dimen>
     <dimen name="activity_add_password_h">40dp</dimen>
     <dimen name="activity_add_password_margin">8dp</dimen>
+    <dimen name="activity_add_daily_self_h">40dp</dimen>
+    <dimen name="activity_add_daily_self_margin">8dp</dimen>
     <dimen name="edit_activity_size">16sp</dimen>
     <dimen name="margin_item_group_setting">12dp</dimen>
     <dimen name="margin_activity_main_et">3dp</dimen>
