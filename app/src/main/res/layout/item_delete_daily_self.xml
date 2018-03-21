@@ -113,7 +113,7 @@
                 android:layout_marginLeft="@dimen/margin_item_password_normal"
                 android:background="@drawable/bg_normal_password_real_delete"
                 android:text="彻底删除"
-                android:onClick="@{()->presenter.realDelete(viewModel)}"
+                android:onClick="@{()->presenter.warningDeleteDialog(viewModel)}"
                 android:textColor="@android:color/white"
                 android:textSize="20sp" />
         </LinearLayout>

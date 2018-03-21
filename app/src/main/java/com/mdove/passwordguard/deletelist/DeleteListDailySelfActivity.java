@@ -1,9 +1,11 @@
 package com.mdove.passwordguard.deletelist;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -13,8 +15,10 @@ import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.BaseActivity;
 import com.mdove.passwordguard.deletelist.adapter.DeleteListDailySelfAdapter;
 import com.mdove.passwordguard.deletelist.adapter.DeleteListPasswordAdapter;
+import com.mdove.passwordguard.deletelist.model.vm.DeleteDailySelfModelVM;
 import com.mdove.passwordguard.deletelist.presenter.DeleteListDailySelfContract;
 import com.mdove.passwordguard.deletelist.presenter.DeleteListDailySelfPresenter;
+import com.mdove.passwordguard.main.MainActivity;
 import com.mdove.passwordguard.main.model.BaseMainModel;
 
 import java.util.List;
@@ -79,5 +83,27 @@ public class DeleteListDailySelfActivity extends BaseActivity implements DeleteL
     @Override
     public void realDelete(int position) {
         mAdapter.notifyDeleteReturn(position);
+    }
+
+    @Override
+    public void warningDeleteDialog(final DeleteDailySelfModelVM vm) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(DeleteListDailySelfActivity.this);
+        builder.setTitle("确定要永久删除？");
+        builder.setMessage("真的要把这条记录删掉么？");
+        builder.setNegativeButton("手滑了", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.setPositiveButton("删！", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mPresenter.realDelete(vm);
+                dialog.dismiss();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

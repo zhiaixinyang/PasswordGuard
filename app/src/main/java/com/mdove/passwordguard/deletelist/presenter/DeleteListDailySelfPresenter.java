@@ -58,6 +58,11 @@ public class DeleteListDailySelfPresenter implements DeleteListDailySelfContract
     }
 
     @Override
+    public void warningDeleteDialog(DeleteDailySelfModelVM vm) {
+        mView.warningDeleteDialog(vm);
+    }
+
+    @Override
     public void realDelete(DeleteDailySelfModelVM vm) {
         mDeleteDao.delete(vm.mDeletedDailySelf);
         mView.realDelete(vm.mItemPosition);

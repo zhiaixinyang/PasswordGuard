@@ -15,13 +15,21 @@ import java.util.List;
 public interface DeleteListDailySelfContract {
     interface Presenter extends BasePresenter<DeleteListDailySelfContract.MvpView> {
         void initData();
+
         void deleteReturn(DeleteDailySelfModelVM vm);
+
+        void warningDeleteDialog(DeleteDailySelfModelVM vm);
+
         void realDelete(DeleteDailySelfModelVM vm);
     }
 
     interface MvpView extends BaseView<DeleteListDailySelfContract.Presenter> {
         void showData(List<BaseMainModel> data);
+
         void deleteReturn(int position);
+
         void realDelete(int position);
+
+        void warningDeleteDialog(DeleteDailySelfModelVM vm);
     }
 }
