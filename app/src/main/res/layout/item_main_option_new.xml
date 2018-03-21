@@ -30,6 +30,8 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rlv_options"
                 android:layout_width="match_parent"
+                android:paddingLeft="@dimen/margin_main_option"
+                android:paddingRight="@dimen/margin_main_option"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
     </RelativeLayout>

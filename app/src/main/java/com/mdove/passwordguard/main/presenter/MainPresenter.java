@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 import com.mdove.passwordguard.App;
 import com.mdove.passwordguard.R;
+import com.mdove.passwordguard.addoralter.AddDailySelfActivity;
 import com.mdove.passwordguard.addoralter.AddPasswordActivity;
 import com.mdove.passwordguard.addoralter.EditPasswordActivity;
 import com.mdove.passwordguard.addoralter.model.AlterDailySelfModel;
@@ -287,6 +288,11 @@ public class MainPresenter implements MainContract.Presenter {
     @Override
     public void onClickBtnSetting() {
         GroupSettingActivity.start(mView.getContext());
+    }
+
+    @Override
+    public void onClickBtnActivityDailySelf() {
+        AddDailySelfActivity.start(mView.getContext());
     }
 
     @Override

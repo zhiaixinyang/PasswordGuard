@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="actionHandler"
+            type="com.mdove.passwordguard.main.model.handler.ItemMainOptionHandler" />
+
+        <variable
+            name="viewModel"
+            type="com.mdove.passwordguard.main.model.vm.ItemMainOptionVM" />
+    </data>
 
     <LinearLayout
         android:id="@+id/btn_password"
         android:layout_width="@dimen/margin_item_main_option_btn_w"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:onClick="@{()->actionHandler.onClickBtnPassword()}"
+        android:onClick="@{()->actionHandler.onBtnClick(viewModel.mType)}"
         android:orientation="vertical">
 
         <FrameLayout
@@ -14,11 +26,11 @@
             android:layout_height="@dimen/item_main_option_btn_w_h"
             android:layout_marginTop="@dimen/margin_tv_main_option_btn_bottom">
 
-            <TextView
+            <ImageView
                 android:id="@+id/iv_bg"
                 android:layout_width="@dimen/item_main_option_btn_w_h"
                 android:layout_height="@dimen/item_main_option_btn_w_h"
-                android:background="@drawable/bg_main_option_btn_1"
+                app:srcDrawable="@{viewModel.bgDrawable}"
                 android:paddingLeft="12dp"
                 android:textSize="16sp" />
 
@@ -27,8 +39,8 @@
                 android:layout_width="@dimen/item_main_option_ic_w_h"
                 android:layout_height="@dimen/item_main_option_ic_w_h"
                 android:layout_gravity="center"
-                android:src="@mipmap/ic_btn_password"
-                android:tint="@color/white" />
+                android:tint="@color/white"
+                app:mipmapSrc="@{viewModel.iconId}" />
         </FrameLayout>
 
         <TextView
@@ -36,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_tv_main_option_btn"
-            android:text="记录账号"
+            android:text="@{viewModel.title}"
             android:textColor="@color/color_tv_main_option_btn"
             android:textSize="@dimen/size_tv_main_option_btn" />
 
@@ -47,7 +59,8 @@
             android:layout_marginBottom="@dimen/margin_tv_main_option_btn_bottom"
             android:layout_marginTop="@dimen/margin_tv_main_option_btn"
             android:alpha="0.5"
-            android:text="记录账号信息"
+            android:gravity="center"
+            android:text="@{viewModel.hint}"
             android:textSize="10sp" />
     </LinearLayout>
 

@@ -2,6 +2,7 @@ package com.mdove.passwordguard.main.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +17,14 @@ import com.mdove.passwordguard.dailyself.MainDailySelfModel;
 import com.mdove.passwordguard.databinding.ItemMainDailyselfBinding;
 import com.mdove.passwordguard.databinding.ItemMainGroupBinding;
 import com.mdove.passwordguard.databinding.ItemMainOptionBinding;
+import com.mdove.passwordguard.databinding.ItemMainOptionNewBinding;
 import com.mdove.passwordguard.databinding.ItemMainSearchBinding;
 import com.mdove.passwordguard.databinding.ItemMainTopBinding;
 import com.mdove.passwordguard.databinding.ItemPasswordNormalBinding;
 import com.mdove.passwordguard.main.model.BaseMainModel;
 import com.mdove.passwordguard.main.model.MainGroupModel;
 import com.mdove.passwordguard.main.model.MainGroupRlvModel;
+import com.mdove.passwordguard.main.model.MainOptionModel;
 import com.mdove.passwordguard.main.model.MainSearchModel;
 import com.mdove.passwordguard.main.model.MainTopModel;
 import com.mdove.passwordguard.main.model.PasswordModel;
@@ -51,6 +54,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int TYPE_MAIN_SEARCH = 3;
     private static final int TYPE_MAIN_GROUP = 4;
     private static final int TYPE_MAIN_DAILY_SELF = 5;
+    private static final int TYPE_MAIN_OPTION_NEW = 6;
     private int mGroupPosition;
     public static int mPasswordPosition = 0;
 
@@ -97,7 +101,9 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         BaseMainModel model = mData.get(position);
         switch (model.mType) {
             case 0: {
-                return TYPE_MAIN_OPTION;
+                if (model instanceof MainOptionModel) {
+                    return TYPE_MAIN_OPTION_NEW;
+                }
             }
             case 1: {
                 if (model instanceof MainTopModel) {
@@ -138,6 +144,9 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             case TYPE_MAIN_DAILY_SELF: {
                 return new MainDailySelfViewHolder((ItemMainDailyselfBinding) InflateUtils.bindingInflate(parent, R.layout.item_main_dailyself));
             }
+            case TYPE_MAIN_OPTION_NEW: {
+                return new NewMainOptionViewHolder((ItemMainOptionNewBinding) InflateUtils.bindingInflate(parent, R.layout.item_main_option_new));
+            }
         }
         return null;
     }
@@ -157,6 +166,8 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ((MainGroupViewHolder) holder).bind((MainGroupModel) model);
         } else if (holder instanceof MainDailySelfViewHolder) {
             ((MainDailySelfViewHolder) holder).bind((MainDailySelfModel) model, mPresenter, position);
+        } else if (holder instanceof NewMainOptionViewHolder) {
+            ((NewMainOptionViewHolder) holder).bind((MainOptionModel) model);
         }
     }
 
@@ -234,6 +245,22 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         public void bind() {
             mBinding.setActionHandler(new MainOptionHandler(mPresenter));
+        }
+    }
+
+    public class NewMainOptionViewHolder extends RecyclerView.ViewHolder {
+        private ItemMainOptionNewBinding mBinding;
+
+        public NewMainOptionViewHolder(ItemMainOptionNewBinding binding) {
+            super(binding.getRoot());
+            mBinding = binding;
+        }
+
+        public void bind(MainOptionModel mainOptionModel) {
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
+            linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+            mBinding.rlvOptions.setLayoutManager(linearLayoutManager);
+            mBinding.rlvOptions.setAdapter(new MainOptionAdapter(mainOptionModel.mData,mPresenter));
         }
     }
 
