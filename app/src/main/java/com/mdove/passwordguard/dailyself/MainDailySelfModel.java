@@ -22,4 +22,13 @@ public class MainDailySelfModel extends BaseMainModel {
         mDailySelf = dailySelf;
         mIsFavorite = dailySelf.mIsFavorite == 1;
     }
+
+    public void setDailySelf(DailySelf dailySelf){
+        mContent = dailySelf.mContent;
+        mTime = dailySelf.mTimeStamp;
+        mTvGroup = dailySelf.mTvGroup;
+        mType = 1;
+        mDailySelf = dailySelf;
+        mIsFavorite = dailySelf.mIsFavorite == 1;
+    }
 }

@@ -1,5 +1,6 @@
 package com.mdove.passwordguard.main.presenter.contract;
 
+import com.mdove.passwordguard.addoralter.model.AlterDailySelfModel;
 import com.mdove.passwordguard.addoralter.model.AlterPasswordModel;
 import com.mdove.passwordguard.base.BasePresenter;
 import com.mdove.passwordguard.base.BaseView;
@@ -29,6 +30,8 @@ public interface MainContract {
 
         void alterPassword(AlterPasswordModel model, int itemPosition);
 
+        void alterDailySelf(AlterDailySelfModel model, int itemPosition);
+
         void onClickBtnPassword();
 
         void onClickBtnLock();
@@ -39,6 +42,7 @@ public interface MainContract {
         void deleteDailySelf(ItemMainDailySelfVM vm);
 
         void onClickBtnDeletePassword();
+
         void onClickBtnDeleteDailySelf();
 
         void onClickBtnAddGroup();
@@ -62,11 +66,15 @@ public interface MainContract {
         void checkOrderPassword(CheckOrderEvent event);
 
         void insertDailySelf(String content);
+
         void addDailySelf(DailySelf dailySelf);
 
         void favoriteDailySelf(ItemMainDailySelfVM vm);
+
         void copyDailySelf(ItemMainDailySelfVM vm);
+
         void copyPasswordInPassword(ItemMainPasswordVM vm);
+
         void copyPasswordInUserName(ItemMainPasswordVM vm);
     }
 
@@ -76,6 +84,7 @@ public interface MainContract {
         void addPasswordSuc(String suc);
 
         void notifyPasswordData(int position);
+
         void notifyDailySelfData(int position);
 
         void onClickBtnPassword(MainGroupModel model);
@@ -95,6 +104,8 @@ public interface MainContract {
         void deleteDailySelf(int position);
 
         void alterPasswordSuc(int itemPosition, int newItemPosition);
+
+        void alterDailySelfSuc(int itemPosition);
 
         void checkOrderSuc(List<BaseMainModel> data);
     }

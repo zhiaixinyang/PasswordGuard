@@ -16,6 +16,7 @@ import com.hwangjr.rxbus.annotation.Subscribe;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.addoralter.model.event.AddDailySelfActivityEvent;
 import com.mdove.passwordguard.addoralter.model.event.AddPasswordActivityEvent;
+import com.mdove.passwordguard.addoralter.model.event.EditDailySelfActivityEvent;
 import com.mdove.passwordguard.addoralter.model.event.EditPasswordActivityEvent;
 import com.mdove.passwordguard.base.listener.OnItemLongClickListener;
 import com.mdove.passwordguard.deletelist.DeleteListPasswordActivity;
@@ -227,6 +228,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     }
 
     @Override
+    public void alterDailySelfSuc(int itemPosition) {
+        mAdapter.notifyAddPasswordData(itemPosition);
+    }
+
+    @Override
     public void checkOrderSuc(List<BaseMainModel> data) {
         mAdapter.addBaseMainModelData(data);
     }
@@ -283,6 +289,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     @Subscribe
     public void editPasswordActivityInfo(EditPasswordActivityEvent event) {
         mPresenter.alterPassword(event.alterPasswordModel, event.mEditItemPosition);
+    }
+
+    @Subscribe
+    public void editDailySelfActivityInfo(EditDailySelfActivityEvent event) {
+        mPresenter.alterDailySelf(event.mAlterDailySelfModel, event.mEditItemPosition);
     }
 
     @Subscribe

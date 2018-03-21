@@ -7,6 +7,7 @@ import com.mdove.passwordguard.App;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.addoralter.AddPasswordActivity;
 import com.mdove.passwordguard.addoralter.EditPasswordActivity;
+import com.mdove.passwordguard.addoralter.model.AlterDailySelfModel;
 import com.mdove.passwordguard.addoralter.model.AlterPasswordModel;
 import com.mdove.passwordguard.config.AppConstant;
 import com.mdove.passwordguard.dailyself.ItemMainDailySelfVM;
@@ -428,6 +429,19 @@ public class MainPresenter implements MainContract.Presenter {
         //直接更换旧model的isNew数据（引用指向的内存不变）
         PasswordModel oldModel = (PasswordModel) mData.get(itemPosition);
         oldModel.mIsNew = false;
+
+        mView.alterPasswordSuc(itemPosition, mData.size());
+    }
+
+    @Override
+    public void alterDailySelf(AlterDailySelfModel model, int itemPosition) {
+        mDailySelfDao.update(model.mNewDailySelf);
+//        mDao.insert(model.mNewPassword);
+//        mData.add(new PasswordModel(model.mNewPassword));
+
+        //直接更换旧model的数据（引用指向的内存不变）
+        MainDailySelfModel oldModel = (MainDailySelfModel) mData.get(itemPosition);
+        oldModel.setDailySelf(model.mNewDailySelf);
 
         mView.alterPasswordSuc(itemPosition, mData.size());
     }

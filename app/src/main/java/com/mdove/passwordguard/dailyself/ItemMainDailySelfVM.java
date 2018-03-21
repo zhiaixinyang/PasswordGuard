@@ -1,16 +1,17 @@
 package com.mdove.passwordguard.dailyself;
 
-import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 
 import com.mdove.passwordguard.greendao.entity.DailySelf;
 import com.mdove.passwordguard.utils.DateUtil;
 
+import java.io.Serializable;
+
 /**
  * Created by MDove on 2018/2/22.
  */
 
-public class ItemMainDailySelfVM {
+public class ItemMainDailySelfVM implements Serializable{
     public ObservableField<String> mTime = new ObservableField<>();
     public ObservableField<String> mContent = new ObservableField<>();
     public ObservableField<String> mTvGroup = new ObservableField<>();

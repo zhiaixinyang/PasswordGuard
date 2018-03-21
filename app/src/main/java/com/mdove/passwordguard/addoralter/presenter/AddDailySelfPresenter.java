@@ -38,6 +38,8 @@ public class AddDailySelfPresenter implements AddDailySelfContract.Presenter {
     @Override
     public void initGroup() {
         List<AddDailySelfGroupRlvModel> modelData = new ArrayList<>();
+        modelData.add(new AddDailySelfGroupRlvModel(AppConstant.DEFAULT_CHECK_GROUP_TITLE,
+                AppConstant.DEFAULT_CHECK_GROUP_COLOR, new Date().getTime()));
         modelData.add(new AddDailySelfGroupRlvModel(AppConstant.DEFAULT_DAILY_SELF_TV_GROUP,
                 AppConstant.DEFAULT_DAILY_SELF_TV_GROUP_COLOR, new Date().getTime()));
         List<GroupInfo> data = mGroupDap.queryBuilder().list();

@@ -14,19 +14,15 @@ import android.widget.TextView;
 import com.hwangjr.rxbus.RxBus;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.addoralter.adapter.AddDailySelfGroupAdapter;
-import com.mdove.passwordguard.addoralter.adapter.AddPasswordGroupAdapter;
 import com.mdove.passwordguard.addoralter.model.AddDailySelfGroupRlvModel;
-import com.mdove.passwordguard.addoralter.model.AddPasswordGroupRlvModel;
 import com.mdove.passwordguard.addoralter.model.event.AddDailySelfActivityEvent;
-import com.mdove.passwordguard.addoralter.model.event.AddPasswordActivityEvent;
+import com.mdove.passwordguard.addoralter.model.event.EditDailySelfActivityEvent;
 import com.mdove.passwordguard.addoralter.presenter.AddDailySelfPresenter;
-import com.mdove.passwordguard.addoralter.presenter.AddPasswordPresenter;
 import com.mdove.passwordguard.addoralter.presenter.contract.AddDailySelfContract;
-import com.mdove.passwordguard.addoralter.presenter.contract.AddPasswordContract;
 import com.mdove.passwordguard.base.BaseActivity;
 import com.mdove.passwordguard.config.AppConstant;
+import com.mdove.passwordguard.dailyself.ItemMainDailySelfVM;
 import com.mdove.passwordguard.greendao.entity.DailySelf;
-import com.mdove.passwordguard.greendao.entity.Password;
 import com.mdove.passwordguard.utils.ToastHelper;
 
 import java.util.ArrayList;
@@ -46,10 +42,22 @@ public class AddDailySelfActivity extends BaseActivity implements AddDailySelfCo
     private String mDefaultTitle = AppConstant.DEFAULT_DAILY_SELF_TV_GROUP;
     private String mContent;
     private DailySelf dailySelf;
-
+    private static final String EXTRA_EDIT_DAILY_SELF = "extra_edit_daily_self";
+    private static final String EXTRA_EDIT_ITEM_POSITION_KEY = "extra_edit_item_position_key";
+    private ItemMainDailySelfVM mEditDailySelfVM;
+    private DailySelf mEditDailySelf, mOldDailySelf;
+    private int mEditPosition;
+    private boolean isEdit = false;
 
     public static void start(Context context) {
         Intent start = new Intent(context, AddDailySelfActivity.class);
+        context.startActivity(start);
+    }
+
+    public static void startEdit(Context context, ItemMainDailySelfVM itemMainDailySelfVM, int position) {
+        Intent start = new Intent(context, AddDailySelfActivity.class);
+        start.putExtra(EXTRA_EDIT_DAILY_SELF, itemMainDailySelfVM);
+        start.putExtra(EXTRA_EDIT_ITEM_POSITION_KEY, position);
         context.startActivity(start);
     }
 
@@ -64,6 +72,25 @@ public class AddDailySelfActivity extends BaseActivity implements AddDailySelfCo
         setTitle("随手记");
         setContentView(R.layout.activity_add_daily_self);
         initView();
+        initData(getIntent());
+    }
+
+    private void initData(Intent intent) {
+        if (intent == null) {
+            return;
+        }
+        mEditDailySelfVM = (ItemMainDailySelfVM) intent.getSerializableExtra(EXTRA_EDIT_DAILY_SELF);
+        mEditPosition = intent.getIntExtra(EXTRA_EDIT_ITEM_POSITION_KEY, 0);
+        if (mEditDailySelfVM == null) {
+            return;
+        }
+        isEdit = true;
+        mOldDailySelf = mEditDailySelfVM.mDailySelf;
+        mContent = mEditDailySelfVM.mContent.get();
+        mDefaultTitle = mEditDailySelfVM.mTvGroup.get();
+        mEtContent.setText(mContent);
+        mTvGroup.setText(mDefaultTitle);
+        mAdapter.initCheck(mDefaultTitle);
     }
 
     private void initView() {
@@ -99,9 +126,13 @@ public class AddDailySelfActivity extends BaseActivity implements AddDailySelfCo
             @Override
             public void onClick(View v) {
                 if (isOkEnable()) {
-                    RxBus.get().post(new AddDailySelfActivityEvent(dailySelf));
-                    finish();
-                    return;
+                    if (!isEdit) {
+                        RxBus.get().post(new AddDailySelfActivityEvent(dailySelf));
+                        finish();
+                    } else {
+                        RxBus.get().post(new EditDailySelfActivityEvent(mEditDailySelf, mOldDailySelf, mEditPosition));
+                        finish();
+                    }
                 }
                 ToastHelper.shortToast("请完成对应信息");
             }
@@ -127,11 +158,20 @@ public class AddDailySelfActivity extends BaseActivity implements AddDailySelfCo
         if (TextUtils.isEmpty(mContent) || TextUtils.isEmpty(mDefaultTitle)) {
             return false;
         }
-        dailySelf = new DailySelf();
-        dailySelf.mIsFavorite = 0;
-        dailySelf.mContent = mContent;
-        dailySelf.mTimeStamp = new Date().getTime();
-        dailySelf.mTvGroup = mDefaultTitle;
+
+        if (!isEdit) {
+            dailySelf = new DailySelf();
+            dailySelf.mIsFavorite = 0;
+            dailySelf.mContent = mContent;
+            dailySelf.mTimeStamp = new Date().getTime();
+            dailySelf.mTvGroup = mDefaultTitle;
+        } else {
+            mEditDailySelf = new DailySelf();
+            mEditDailySelf.mIsFavorite = mOldDailySelf.mIsFavorite;
+            mEditDailySelf.mContent = mContent;
+            mEditDailySelf.mTimeStamp = new Date().getTime();
+            mEditDailySelf.mTvGroup = mDefaultTitle;
+        }
 
         return true;
     }
