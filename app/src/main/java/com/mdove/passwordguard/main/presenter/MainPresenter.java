@@ -458,7 +458,7 @@ public class MainPresenter implements MainContract.Presenter {
         for (Password password : data) {
             passwordData.add(new PasswordModel(password));
         }
-        List<DailySelf> dailySelfList = mDailySelfDao.queryBuilder().where(DailySelfDao.Properties.MTvGroup.eq(DEFAULT_DAILY_SELF_TV_GROUP)).build().list();
+        List<DailySelf> dailySelfList = mDailySelfDao.queryBuilder().build().list();
         for (DailySelf dailySelf : dailySelfList) {
             passwordData.add(new MainDailySelfModel(dailySelf));
         }
