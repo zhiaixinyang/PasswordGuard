@@ -52,6 +52,8 @@ public interface MainContract {
 
         void onClickBtnActivityDailySelf();
 
+        void onClickBtnGuide();
+
         void onClickBtnSearch();
 
         void onClickBtnAddDailySelf();
@@ -93,6 +95,7 @@ public interface MainContract {
         void onClickBtnPassword(MainGroupModel model);
 
         void onClickBtnLock();
+        void onShowGuide();
 
         void onClickBtnSearch();
 

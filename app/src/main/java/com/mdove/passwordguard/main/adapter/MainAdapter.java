@@ -39,6 +39,7 @@ import com.mdove.passwordguard.main.model.vm.ItemMainTopVM;
 import com.mdove.passwordguard.main.presenter.MainPresenter;
 import com.mdove.passwordguard.ui.guideview.Guide;
 import com.mdove.passwordguard.ui.guideview.GuideBuilder;
+import com.mdove.passwordguard.ui.guideview.component.CommonComponent;
 import com.mdove.passwordguard.ui.guideview.component.SimpleComponent;
 import com.mdove.passwordguard.utils.InflateUtils;
 
@@ -63,6 +64,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int TYPE_MAIN_OPTION_NEW = 6;
     private int mGroupPosition;
     public static int mPasswordPosition = 0;
+    private View mTargetSearch, mTargetGroup, mTargetOption;
 
     public MainAdapter(Context context, MainPresenter presenter) {
         mContext = context;
@@ -234,6 +236,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         public MainSearchViewHolder(ItemMainSearchBinding binding) {
             super(binding.getRoot());
+            mTargetSearch = binding.getRoot();
             mBinding = binding;
         }
 
@@ -261,6 +264,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         public NewMainOptionViewHolder(ItemMainOptionNewBinding binding) {
             super(binding.getRoot());
+            mTargetOption = binding.getRoot();
             mBinding = binding;
         }
 
@@ -303,6 +307,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         public MainGroupViewHolder(ItemMainGroupBinding binding) {
             super(binding.getRoot());
+            mTargetGroup = binding.getRoot();
             mBinding = binding;
         }
 
@@ -365,4 +370,62 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         guide.show(activity);
     }
 
+
+    public void showCommonGuide() {
+        //Option引导
+        final GuideBuilder optionBuilder = new GuideBuilder();
+        optionBuilder.addComponent(new CommonComponent("主操作区，进行记录添加/管理等操作"));
+        optionBuilder.setTargetView(mTargetOption)
+                .setAlpha(150)
+                .setHighTargetCorner(20)
+                .setOverlayTarget(false)
+                .setOutsideTouchable(false);
+        //Guide必须要在GuideBuilder之后初始化
+        final Guide optionGuide = optionBuilder.createGuide();
+        optionGuide.setShouldCheckLocInWindow(true);
+
+        //Group引导
+        final GuideBuilder groupBuilder = new GuideBuilder();
+        groupBuilder.addComponent(new CommonComponent("添加分组信息"));
+        groupBuilder.setTargetView(mTargetGroup)
+                .setAlpha(150)
+                .setHighTargetCorner(20)
+                .setOverlayTarget(false)
+                .setOutsideTouchable(false);
+        groupBuilder.setOnVisibilityChangedListener(new GuideBuilder.OnVisibilityChangedListener() {
+            @Override
+            public void onShown() {
+            }
+
+            @Override
+            public void onDismiss() {
+                optionGuide.show(mActivity);
+            }
+        });
+        final Guide groupGuide = groupBuilder.createGuide();
+        groupGuide.setShouldCheckLocInWindow(true);
+
+
+        //搜索引导
+        final GuideBuilder searchBuilder = new GuideBuilder();
+        searchBuilder.addComponent(new CommonComponent("快速搜索本地记录信息"));
+        searchBuilder.setTargetView(mTargetSearch)
+                .setAlpha(150)
+                .setHighTargetCorner(20)
+                .setOverlayTarget(false)
+                .setOutsideTouchable(false);
+        searchBuilder.setOnVisibilityChangedListener(new GuideBuilder.OnVisibilityChangedListener() {
+            @Override
+            public void onShown() {
+            }
+
+            @Override
+            public void onDismiss() {
+                groupGuide.show(mActivity);
+            }
+        });
+        final Guide searchGuide = searchBuilder.createGuide();
+        searchGuide.setShouldCheckLocInWindow(true);
+        searchGuide.show(mActivity);
+    }
 }

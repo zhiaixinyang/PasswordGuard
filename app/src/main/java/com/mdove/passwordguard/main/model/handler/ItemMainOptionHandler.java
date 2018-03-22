@@ -6,6 +6,7 @@ import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INF
 import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_ADD_DAILY_SELF;
 import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_DELETE_ACCOUNT;
 import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_DELETE_DAILY_SELF;
+import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_GUIDE;
 import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_LOCK;
 
 /**
@@ -20,25 +21,32 @@ public class ItemMainOptionHandler {
     }
 
     public void onBtnClick(@MainPresenter.MainOpenInfoType int type) {
-        switch (type){
-            case MAIN_OPEN_INFO_TYPE_ACCOUNT:{
+        switch (type) {
+            case MAIN_OPEN_INFO_TYPE_ACCOUNT: {
                 mPresenter.onClickBtnPassword();
                 break;
             }
-            case MAIN_OPEN_INFO_TYPE_LOCK:{
+            case MAIN_OPEN_INFO_TYPE_LOCK: {
                 mPresenter.onClickBtnLock();
                 break;
             }
-            case MAIN_OPEN_INFO_TYPE_DELETE_ACCOUNT:{
+            case MAIN_OPEN_INFO_TYPE_DELETE_ACCOUNT: {
                 mPresenter.onClickBtnDeletePassword();
                 break;
             }
-            case MAIN_OPEN_INFO_TYPE_DELETE_DAILY_SELF:{
+            case MAIN_OPEN_INFO_TYPE_DELETE_DAILY_SELF: {
                 mPresenter.onClickBtnDeleteDailySelf();
                 break;
             }
-            case MAIN_OPEN_INFO_TYPE_ADD_DAILY_SELF:{
+            case MAIN_OPEN_INFO_TYPE_ADD_DAILY_SELF: {
                 mPresenter.onClickBtnActivityDailySelf();
+                break;
+            }
+            case MAIN_OPEN_INFO_TYPE_GUIDE: {
+                mPresenter.onClickBtnGuide();
+                break;
+            }
+            default: {
                 break;
             }
         }

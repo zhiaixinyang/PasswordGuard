@@ -9,6 +9,7 @@
     </data>
 
     <RelativeLayout
+        android:id="@+id/layout_search"
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_top_height"
         android:layout_marginTop="@dimen/margin_main_option"

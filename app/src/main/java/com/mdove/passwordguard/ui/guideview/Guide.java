@@ -10,17 +10,17 @@ import android.view.animation.AnimationUtils;
 
 /**
  * 遮罩系统的封装 <br>
- * 外部需要调用{@link com.blog.www.guideview.GuideBuilder}来创建该实例，实例创建后调用
+ * 外部需要调用{@link com.mdove.passwordguard.ui.guideview.GuideBuilder}来创建该实例，实例创建后调用
  * {@link #show(Activity)} 控制显示； 调用 {@link #dismiss()}让遮罩系统消失。 <br>
  *
- * Created by binIoter
+ * Created by MDove on 18/3/22
  */
 public class Guide implements View.OnKeyListener, View.OnClickListener {
   /**
    * Cannot initialize out of package <font
    * color=red>包内才可见，外部使用时必须调用GuideBuilder来创建.</font>
    *
-   * @see com.blog.www.guideview.GuideBuilder
+   * @see com.mdove.passwordguard.ui.guideview.GuideBuilder
    */
   Guide() {
   }

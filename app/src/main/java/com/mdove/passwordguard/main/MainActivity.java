@@ -185,6 +185,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     }
 
     @Override
+    public void onShowGuide() {
+        mAdapter.showCommonGuide();
+    }
+
+    @Override
     public void onClickBtnSearch() {
         mSearchFragment.show(getSupportFragmentManager(), SearchFragment.TAG);
     }
