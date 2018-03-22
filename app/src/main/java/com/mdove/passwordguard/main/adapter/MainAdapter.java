@@ -1,5 +1,6 @@
 package com.mdove.passwordguard.main.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import com.hwangjr.rxbus.RxBus;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.listener.OnItemDeleteClickListener;
 import com.mdove.passwordguard.base.listener.OnItemLongClickListener;
+import com.mdove.passwordguard.config.AppConfig;
 import com.mdove.passwordguard.dailyself.ItemMainDailySelfVM;
 import com.mdove.passwordguard.dailyself.MainDailySelfHandler;
 import com.mdove.passwordguard.dailyself.MainDailySelfModel;
@@ -35,6 +37,9 @@ import com.mdove.passwordguard.main.model.handler.MainSearchHandler;
 import com.mdove.passwordguard.main.model.vm.ItemMainPasswordVM;
 import com.mdove.passwordguard.main.model.vm.ItemMainTopVM;
 import com.mdove.passwordguard.main.presenter.MainPresenter;
+import com.mdove.passwordguard.ui.guideview.Guide;
+import com.mdove.passwordguard.ui.guideview.GuideBuilder;
+import com.mdove.passwordguard.ui.guideview.component.SimpleComponent;
 import com.mdove.passwordguard.utils.InflateUtils;
 
 import java.util.ArrayList;
@@ -47,6 +52,7 @@ import java.util.List;
 public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<BaseMainModel> mData;
     private Context mContext;
+    private Activity mActivity;
     private MainPresenter mPresenter;
     private static final int TYPE_MAIN_OPTION = 0;
     private static final int TYPE_MAIN_TOP = 1;
@@ -60,6 +66,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public MainAdapter(Context context, MainPresenter presenter) {
         mContext = context;
+        mActivity = (Activity) context;
         mPresenter = presenter;
     }
 
@@ -264,6 +271,13 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 mAdapter = new MainOptionAdapter(mainOptionModel.mData, mPresenter);
                 mBinding.rlvOptions.setLayoutManager(linearLayoutManager);
                 mBinding.rlvOptions.setAdapter(mAdapter);
+                mBinding.rlvOptions.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        showGuideView(mActivity, mBinding.rlvOptions);
+                        mBinding.rlvOptions.removeCallbacks(this);
+                    }
+                }, 100);
             }
         }
     }
@@ -322,4 +336,33 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void notifyOnlyGroup() {
         mGroupRlvAdapter.notifyDataSetChanged();
     }
+
+    public void showGuideView(Activity activity, View view) {
+        if (!AppConfig.isShowGuideView()) {
+            return;
+        }
+        Guide guide;
+        GuideBuilder builder = new GuideBuilder();
+        builder.setTargetView(view)
+                .setAlpha(150)
+                .setHighTargetCorner(20)
+                .setOverlayTarget(false)
+                .setOutsideTouchable(false);
+        builder.setOnVisibilityChangedListener(new GuideBuilder.OnVisibilityChangedListener() {
+            @Override
+            public void onShown() {
+            }
+
+            @Override
+            public void onDismiss() {
+                AppConfig.setShowGuideView(false);
+            }
+        });
+
+        builder.addComponent(new SimpleComponent());
+        guide = builder.createGuide();
+        guide.setShouldCheckLocInWindow(true);
+        guide.show(activity);
+    }
+
 }

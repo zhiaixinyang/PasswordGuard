@@ -42,6 +42,9 @@ import com.mdove.passwordguard.addoralter.dialog.AddPasswordDialog;
 import com.mdove.passwordguard.addoralter.dialog.AlterPasswordDialog;
 import com.mdove.passwordguard.search.SearchRlvDialog;
 import com.mdove.passwordguard.search.model.SearchRlvModel;
+import com.mdove.passwordguard.ui.guideview.Guide;
+import com.mdove.passwordguard.ui.guideview.GuideBuilder;
+import com.mdove.passwordguard.ui.guideview.component.SimpleComponent;
 import com.mdove.passwordguard.ui.searchbox.AddDailySelfFragment;
 import com.mdove.passwordguard.ui.searchbox.SearchFragment;
 import com.mdove.passwordguard.ui.searchbox.custom.IOnAddDailySelfClickListener;
@@ -254,7 +257,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
         }
         mPresenter.insertDailySelf(keyword);
     }
-
 
     @Override
     public void addPasswordSuc(String suc) {

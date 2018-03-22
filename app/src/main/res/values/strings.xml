@@ -72,4 +72,7 @@
     <string name="color_swatch_description" translatable="false">Color <xliff:g example="14" id="color_index">%1$d</xliff:g></string>
     <string name="color_swatch_description_selected" translatable="false">Color <xliff:g example="14" id="color_index">%1$d</xliff:g> selected</string>
 
+    <string name="nearby">查看附近的人</string>
+    <string name="add_friend">add friend</string>
+
 </resources>

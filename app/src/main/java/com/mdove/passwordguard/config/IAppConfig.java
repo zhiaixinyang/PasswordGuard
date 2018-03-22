@@ -7,4 +7,5 @@ package com.mdove.passwordguard.config;
 public interface IAppConfig {
     String KEY_SHOW_UPDATE_DIALOG = "key_show_update_dialog";
     String KEY_ORDER_TODAY_TIME = "key_order_today_time";
+    String KEY_SHOW_GUIDE_VIEW = "key_show_guide_view";
 }
