@@ -234,9 +234,9 @@ public class MainPresenter implements MainContract.Presenter {
             if (mCurGroup.equals(DEFAULT_CHECK_GROUP_TITLE)) {
                 model = (MainDailySelfModel) mData.get(vm.mItemPosition);
             } else if (mCurGroup.equals(DEFAULT_DAILY_SELF_TV_GROUP)) {
-                model = (MainDailySelfModel) mDailyData.get(vm.mItemPosition);
+                model = (MainDailySelfModel) mDailyData.get(vm.mItemPosition - mSysEmptyData.size());
             } else {
-                model = (MainDailySelfModel) mCheckData.get(vm.mItemPosition);
+                model = (MainDailySelfModel) mCheckData.get(vm.mItemPosition - mSysEmptyData.size());
             }
             model.mIsFavorite = true;
             mView.notifyDailySelfData(vm.mItemPosition);
@@ -248,9 +248,9 @@ public class MainPresenter implements MainContract.Presenter {
             if (mCurGroup.equals(DEFAULT_CHECK_GROUP_TITLE)) {
                 model = (MainDailySelfModel) mData.get(vm.mItemPosition);
             } else if (mCurGroup.equals(DEFAULT_DAILY_SELF_TV_GROUP)) {
-                model = (MainDailySelfModel) mDailyData.get(vm.mItemPosition);
+                model = (MainDailySelfModel) mDailyData.get(vm.mItemPosition - mSysEmptyData.size());
             } else {
-                model = (MainDailySelfModel) mCheckData.get(vm.mItemPosition);
+                model = (MainDailySelfModel) mCheckData.get(vm.mItemPosition - mSysEmptyData.size());
             }
             model.mIsFavorite = false;
             mView.notifyDailySelfData(vm.mItemPosition);
