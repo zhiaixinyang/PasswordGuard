@@ -11,8 +11,8 @@ public class EditPasswordActivityEvent {
     public AlterPasswordModel alterPasswordModel;
     public int mEditItemPosition;
 
-    public EditPasswordActivityEvent(Password password, Password oldEditPassword, int editPostion) {
-        alterPasswordModel = new AlterPasswordModel(oldEditPassword, password);
+    public EditPasswordActivityEvent(Password tempPassword, Password needEditPassword, int editPostion) {
+        alterPasswordModel = new AlterPasswordModel(needEditPassword, tempPassword);
         mEditItemPosition = editPostion;
     }
 

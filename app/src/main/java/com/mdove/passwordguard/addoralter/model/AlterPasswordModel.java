@@ -7,11 +7,11 @@ import com.mdove.passwordguard.greendao.entity.Password;
  */
 
 public class AlterPasswordModel {
-    public Password mOldPassword;
-    public Password mNewPassword;
+    public Password mNeedEditPassword;
+    public Password mTempPassword;
 
-    public AlterPasswordModel(Password oldPassword, Password newPassword) {
-        mOldPassword = oldPassword;
-        mNewPassword = newPassword;
+    public AlterPasswordModel(Password needEditPassword, Password tempPassword) {
+        mNeedEditPassword = needEditPassword;
+        mTempPassword = tempPassword;
     }
 }

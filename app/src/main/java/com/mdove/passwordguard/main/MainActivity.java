@@ -224,7 +224,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     @Override
     public void alterPasswordSuc(int itemPosition, int newItemPosition) {
         mAdapter.notifyAddPasswordData(itemPosition);
-        mAdapter.notifyAddPasswordData(newItemPosition);
+//        mAdapter.notifyAddPasswordData(newItemPosition);
     }
 
     @Override

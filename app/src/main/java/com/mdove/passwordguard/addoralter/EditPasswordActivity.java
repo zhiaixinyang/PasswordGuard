@@ -15,7 +15,6 @@ import com.hwangjr.rxbus.RxBus;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.addoralter.adapter.AddPasswordGroupAdapter;
 import com.mdove.passwordguard.addoralter.model.AddPasswordGroupRlvModel;
-import com.mdove.passwordguard.addoralter.model.event.AddPasswordActivityEvent;
 import com.mdove.passwordguard.addoralter.model.event.EditPasswordActivityEvent;
 import com.mdove.passwordguard.addoralter.presenter.AddPasswordPresenter;
 import com.mdove.passwordguard.addoralter.presenter.contract.AddPasswordContract;
@@ -42,7 +41,7 @@ public class EditPasswordActivity extends BaseActivity implements AddPasswordCon
     private String mDefaultTitle = AppConstant.DEFAULT_CHECK_GROUP_TITLE;
     private String mTitle, mUserName, mPassword;
     private String mOldTitle, mOldUserName, mOldPassword, mOldTvGroup;
-    private Password password, mOldEditPassword;
+    private Password mTmpPassword, mNeedEditPassword;
     public static final String ACTION_FROM_IS_EDIT = "action_from_is_edit";
     private static final String ACTION_KEY = "action_key";
     private static final String EXTRA_ACTION_EDIT_VIEW_MODEL_KEY = "extra_action_key";
@@ -80,7 +79,7 @@ public class EditPasswordActivity extends BaseActivity implements AddPasswordCon
             case ACTION_FROM_IS_EDIT: {
                 ItemMainPasswordVM model = (ItemMainPasswordVM) intent.getSerializableExtra(EXTRA_ACTION_EDIT_VIEW_MODEL_KEY);
                 mEditItemPosition = intent.getIntExtra(EXTRA_ACTION_EDIT_ITEM_POSITION_KEY, 0);
-                mOldEditPassword = model.mPasswordModel.password;
+                mNeedEditPassword = model.mPasswordModel.password;
                 initEdit(model);
                 break;
             }
@@ -139,7 +138,7 @@ public class EditPasswordActivity extends BaseActivity implements AddPasswordCon
             @Override
             public void onClick(View v) {
                 if (isOkEnable()) {
-                    RxBus.get().post(new EditPasswordActivityEvent(password, mOldEditPassword, mEditItemPosition));
+                    RxBus.get().post(new EditPasswordActivityEvent(mTmpPassword, mNeedEditPassword, mEditItemPosition));
                     finish();
                     return;
                 }
@@ -169,13 +168,20 @@ public class EditPasswordActivity extends BaseActivity implements AddPasswordCon
                 && TextUtils.equals(mTitle, mOldTitle) && TextUtils.equals(mDefaultTitle, mOldTvGroup)) {
             return false;
         }
-        password = new Password();
-        password.mPassword = mPassword;
-        password.mUserName = mUserName;
-        password.mTitle = mTitle;
-        password.mTimeStamp = new Date().getTime();
-        password.isNew = 1;
-        password.mTvGroup = mDefaultTitle;
+        mTmpPassword = new Password();
+        mTmpPassword.mPassword = mNeedEditPassword.mPassword;
+        mTmpPassword.mUserName = mNeedEditPassword.mUserName;
+        mTmpPassword.mTitle = mNeedEditPassword.mTitle;
+        mTmpPassword.mTimeStamp = mNeedEditPassword.mTimeStamp;
+        mTmpPassword.isNew = 0;
+        mTmpPassword.mTvGroup = mNeedEditPassword.mTvGroup;
+
+        mNeedEditPassword.isNew = 1;
+        mNeedEditPassword.mPassword = mPassword;
+        mNeedEditPassword.mTimeStamp = new Date().getTime();
+        mNeedEditPassword.mUserName = mUserName;
+        mNeedEditPassword.mTitle = mTitle;
+        mNeedEditPassword.mTvGroup = mDefaultTitle;
 
         return true;
     }

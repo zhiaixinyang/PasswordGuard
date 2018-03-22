@@ -260,7 +260,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         public void bind(MainOptionModel mainOptionModel) {
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
             linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-11            if (mAdapter == null) {
+            if (mAdapter == null) {
                 mAdapter = new MainOptionAdapter(mainOptionModel.mData, mPresenter);
                 mBinding.rlvOptions.setLayoutManager(linearLayoutManager);
                 mBinding.rlvOptions.setAdapter(mAdapter);

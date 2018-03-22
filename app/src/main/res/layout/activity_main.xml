@@ -33,6 +33,7 @@
             android:layout_marginRight="18dp"
             android:onClick="@{()->actionHandler.onClickBtnAddDailySelf()}"
             android:src="@mipmap/ic_add"
+            app:backgroundTint="@color/white"
             android:tint="@color/black" />
 
         <RelativeLayout

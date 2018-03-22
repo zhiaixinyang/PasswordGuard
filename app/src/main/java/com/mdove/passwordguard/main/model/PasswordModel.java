@@ -27,4 +27,16 @@ public class PasswordModel extends BaseMainModel {
         mIsNew = password.isNew != 0;
         this.password = password;
     }
+
+    public void setPassword(Password password) {
+        mPasswordId = password.id;
+        mTitle = password.mTitle;
+        mPassword = password.mPassword;
+        mUserName = password.mUserName;
+        mTimeStamp = password.mTimeStamp;
+        mTvGroup = password.mTvGroup;
+        mType = 1;
+        mIsNew = password.isNew != 0;
+        this.password = password;
+    }
 }

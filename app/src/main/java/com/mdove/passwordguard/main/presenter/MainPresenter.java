@@ -85,6 +85,9 @@ public class MainPresenter implements MainContract.Presenter {
     public static final int MAIN_OPEN_INFO_TYPE_DELETE_DAILY_SELF = 4;
     public static final int MAIN_OPEN_INFO_TYPE_ADD_DAILY_SELF = 5;
 
+    private String mCurGroup = DEFAULT_CHECK_GROUP_TITLE;
+    private List<BaseMainModel> mCheckData;
+
     @IntDef(value = {MAIN_OPEN_INFO_TYPE_ACCOUNT, MAIN_OPEN_INFO_TYPE_ADD_DAILY_SELF, MAIN_OPEN_INFO_TYPE_LOCK, MAIN_OPEN_INFO_TYPE_DELETE_ACCOUNT, MAIN_OPEN_INFO_TYPE_DELETE_DAILY_SELF})
     @Retention(RetentionPolicy.SOURCE)
     public @interface MainOpenInfoType {
@@ -226,14 +229,28 @@ public class MainPresenter implements MainContract.Presenter {
             vm.mDailySelf.mIsFavorite = 1;
             mDailySelfDao.update(vm.mDailySelf);
 
-            MainDailySelfModel model = (MainDailySelfModel) mData.get(vm.mItemPosition);
+            MainDailySelfModel model = null;
+            if (mCurGroup.equals(DEFAULT_CHECK_GROUP_TITLE)) {
+                model = (MainDailySelfModel) mData.get(vm.mItemPosition);
+            } else if (mCurGroup.equals(DEFAULT_DAILY_SELF_TV_GROUP)) {
+                model = (MainDailySelfModel) mDailyData.get(vm.mItemPosition);
+            } else {
+                model = (MainDailySelfModel) mCheckData.get(vm.mItemPosition);
+            }
             model.mIsFavorite = true;
             mView.notifyDailySelfData(vm.mItemPosition);
         } else {
             vm.mDailySelf.mIsFavorite = 0;
             mDailySelfDao.update(vm.mDailySelf);
 
-            MainDailySelfModel model = (MainDailySelfModel) mData.get(vm.mItemPosition);
+            MainDailySelfModel model = null;
+            if (mCurGroup.equals(DEFAULT_CHECK_GROUP_TITLE)) {
+                model = (MainDailySelfModel) mData.get(vm.mItemPosition);
+            } else if (mCurGroup.equals(DEFAULT_DAILY_SELF_TV_GROUP)) {
+                model = (MainDailySelfModel) mDailyData.get(vm.mItemPosition);
+            } else {
+                model = (MainDailySelfModel) mCheckData.get(vm.mItemPosition);
+            }
             model.mIsFavorite = false;
             mView.notifyDailySelfData(vm.mItemPosition);
         }
@@ -396,15 +413,19 @@ public class MainPresenter implements MainContract.Presenter {
             if (TextUtils.equals(event.mDefaultTvGroup, DEFAULT_DAILY_SELF_TV_GROUP)) {
                 if (!event.mIsCheck) {
                     mView.showData(mSysEmptyData);
+                    mCurGroup = "";
                     return;
                 }
+                mCurGroup = DEFAULT_DAILY_SELF_TV_GROUP;
                 mView.checkOrderSuc(mDailyData);
                 return;
             } else if (TextUtils.equals(event.mDefaultTvGroup, DEFAULT_CHECK_GROUP_TITLE)) {
                 if (!event.mIsCheck) {
                     mView.showData(mSysEmptyData);
+                    mCurGroup = "";
                     return;
                 }
+                mCurGroup = DEFAULT_CHECK_GROUP_TITLE;
                 mView.showData(mData);
                 return;
             }
@@ -433,13 +454,11 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void alterPassword(AlterPasswordModel model, int itemPosition) {
-        mDao.update(model.mOldPassword);
-        mDao.insert(model.mNewPassword);
-        mData.add(new PasswordModel(model.mNewPassword));
+        mDao.update(model.mNeedEditPassword);
+        mDeleteDao.insert(DeletedPasswordHelper.getDeletedPassword(model.mTempPassword));
 
-        //直接更换旧model的isNew数据（引用指向的内存不变）
         PasswordModel oldModel = (PasswordModel) mData.get(itemPosition);
-        oldModel.mIsNew = false;
+        oldModel.setPassword(model.mNeedEditPassword);
 
         mView.alterPasswordSuc(itemPosition, mData.size());
     }
@@ -465,9 +484,11 @@ public class MainPresenter implements MainContract.Presenter {
 //        }
         if (!event.mIsCheck) {
             mView.showData(mSysEmptyData);
+            mCurGroup = "";
             return;
         }
-        List<BaseMainModel> checkData = new ArrayList<>();
+        mCurGroup = event.mGroupInfo.mTvGroup;
+        mCheckData = new ArrayList<>();
         List<Password> data = mDao.queryBuilder().where(PasswordDao.Properties.MTvGroup.eq(event.mGroupInfo.getMTvGroup())).build().list();
         List<PasswordModel> passwordData = new ArrayList<>();
         for (Password password : data) {
@@ -479,8 +500,8 @@ public class MainPresenter implements MainContract.Presenter {
             dailySelfData.add(new MainDailySelfModel(dailySelf));
         }
 
-        checkData.addAll(passwordData);
-        checkData.addAll(dailySelfData);
+        mCheckData.addAll(passwordData);
+        mCheckData.addAll(dailySelfData);
 //        for (GroupInfo info : mCheckedList) {
 //            List<Password> data = mDao.queryBuilder().where(PasswordDao.Properties.MTvGroup.eq(info.getMTvGroup())).build().list();
 //            List<PasswordModel> passwordData = new ArrayList<>();
@@ -489,7 +510,7 @@ public class MainPresenter implements MainContract.Presenter {
 //            }
 //            checkData.addAll(passwordData);
 //        }
-        mView.checkOrderSuc(checkData);
+        mView.checkOrderSuc(mCheckData);
     }
 
     public List<MainOptionInfo> getInitOptionData() {
