@@ -67,7 +67,7 @@ public class MainPresenter implements MainContract.Presenter {
     private MainContract.MvpView mView;
     private List<BaseMainModel> mData;
     private List<BaseMainModel> mSysEmptyData;
-    private PasswordDao mDao;
+    private PasswordDao mPasswordDao;
     private DeletedPasswordDao mDeleteDao;
     private GroupInfoDao mGroupInfoDao;
     private DeletedDailySelfDao mDeleteDailyDao;
@@ -100,7 +100,7 @@ public class MainPresenter implements MainContract.Presenter {
 
         mCheckedList = new ArrayList<>();
 
-        mDao = App.getDaoSession().getPasswordDao();
+        mPasswordDao = App.getDaoSession().getPasswordDao();
         mDeleteDao = App.getDaoSession().getDeletedPasswordDao();
         mGroupInfoDao = App.getDaoSession().getGroupInfoDao();
         mDailySelfDao = App.getDaoSession().getDailySelfDao();
@@ -120,7 +120,7 @@ public class MainPresenter implements MainContract.Presenter {
 
         initSys();
 
-        List<Password> data = mDao.queryBuilder().build().list();
+        List<Password> data = mPasswordDao.queryBuilder().build().list();
         for (Password password : data) {
             mData.add(new PasswordModel(password));
         }
@@ -189,7 +189,7 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void addPassword(Password password) {
-        long id = mDao.insert(password);
+        long id = mPasswordDao.insert(password);
         if (id != -1) {
             PasswordModel model = new PasswordModel(password);
             mData.add(model);
@@ -335,7 +335,7 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void querySearch(String queryKey) {
-        List<Password> list = mDao.queryBuilder().whereOr(PasswordDao.Properties.MTitle.like("%" + queryKey + "%"),
+        List<Password> list = mPasswordDao.queryBuilder().whereOr(PasswordDao.Properties.MTitle.like("%" + queryKey + "%"),
                 PasswordDao.Properties.MUserName.like("%" + queryKey + "%"),
                 PasswordDao.Properties.MPassword.like("%" + queryKey + "%")).list();
         if (list.size() > 0) {
@@ -349,7 +349,7 @@ public class MainPresenter implements MainContract.Presenter {
     public void deletePassword(int position, Password password) {
         DeletedPassword deletedPassword = DeletedPasswordHelper.getDeletedPassword(password);
         mDeleteDao.insert(deletedPassword);
-        mDao.delete(password);
+        mPasswordDao.delete(password);
 
         mView.deletePassword(position);
     }
@@ -367,7 +367,7 @@ public class MainPresenter implements MainContract.Presenter {
     public void deletePasswordReturn(DeletePasswordReturnEvent event) {
         DeletedPassword deletedPassword = event.mDeletedPassword;
         Password password = DeletedPasswordHelper.getPassword(deletedPassword);
-        mDao.insert(password);
+        mPasswordDao.insert(password);
         PasswordModel model = new PasswordModel(password);
         mData.add(model);
 
@@ -423,6 +423,7 @@ public class MainPresenter implements MainContract.Presenter {
                     return;
                 }
                 mCurGroup = DEFAULT_DAILY_SELF_TV_GROUP;
+                mDailyData = getDefaultDailySelf();
                 mView.checkOrderSuc(mDailyData);
                 return;
             } else if (TextUtils.equals(event.mDefaultTvGroup, DEFAULT_CHECK_GROUP_TITLE)) {
@@ -432,11 +433,36 @@ public class MainPresenter implements MainContract.Presenter {
                     return;
                 }
                 mCurGroup = DEFAULT_CHECK_GROUP_TITLE;
+                mData = getDefaultGroup();
                 mView.showData(mData);
                 return;
             }
         }
         setCheckedData(event);
+    }
+
+    public List<BaseMainModel> getDefaultDailySelf() {
+        List<DailySelf> dailySelfList = mDailySelfDao.queryBuilder().where(DailySelfDao.Properties.MTvGroup.eq(DEFAULT_DAILY_SELF_TV_GROUP)).build().list();
+        List<BaseMainModel> dailySelfData = new ArrayList<>();
+        for (DailySelf dailySelf : dailySelfList) {
+            dailySelfData.add(new MainDailySelfModel(dailySelf));
+        }
+        return dailySelfData;
+    }
+
+    public List<BaseMainModel> getDefaultGroup() {
+        List<BaseMainModel> passwordData = new ArrayList<>();
+        passwordData.addAll(mSysEmptyData);
+
+        List<Password> data = mPasswordDao.queryBuilder().where(PasswordDao.Properties.MTvGroup.eq(DEFAULT_CHECK_GROUP_TITLE)).build().list();
+        for (Password password : data) {
+            passwordData.add(new PasswordModel(password));
+        }
+        List<DailySelf> dailySelfList = mDailySelfDao.queryBuilder().where(DailySelfDao.Properties.MTvGroup.eq(DEFAULT_DAILY_SELF_TV_GROUP)).build().list();
+        for (DailySelf dailySelf : dailySelfList) {
+            passwordData.add(new MainDailySelfModel(dailySelf));
+        }
+        return passwordData;
     }
 
     @Override
@@ -460,7 +486,7 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void alterPassword(AlterPasswordModel model, int itemPosition) {
-        mDao.update(model.mNeedEditPassword);
+        mPasswordDao.update(model.mNeedEditPassword);
         mDeleteDao.insert(DeletedPasswordHelper.getDeletedPassword(model.mTempPassword));
 
         PasswordModel oldModel = (PasswordModel) mData.get(itemPosition);
@@ -472,7 +498,7 @@ public class MainPresenter implements MainContract.Presenter {
     @Override
     public void alterDailySelf(AlterDailySelfModel model, int itemPosition) {
         mDailySelfDao.update(model.mOldDailySelf);
-//        mDao.insert(model.mNewPassword);
+//        mPasswordDao.insert(model.mNewPassword);
 //        mData.add(new PasswordModel(model.mNewPassword));
 
         //直接更换旧model的数据（引用指向的内存不变）
@@ -483,11 +509,6 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
     private void setCheckedData(CheckOrderEvent event) {
-//        if (event.mIsCheck) {
-//            mCheckedList.add(event.mGroupInfo);
-//        } else {
-//            if (mCheckedList.contains(event.mGroupInfo)) mCheckedList.remove(event.mGroupInfo);
-//        }
         if (!event.mIsCheck) {
             mView.showData(mSysEmptyData);
             mCurGroup = "";
@@ -495,7 +516,7 @@ public class MainPresenter implements MainContract.Presenter {
         }
         mCurGroup = event.mGroupInfo.mTvGroup;
         mCheckData = new ArrayList<>();
-        List<Password> data = mDao.queryBuilder().where(PasswordDao.Properties.MTvGroup.eq(event.mGroupInfo.getMTvGroup())).build().list();
+        List<Password> data = mPasswordDao.queryBuilder().where(PasswordDao.Properties.MTvGroup.eq(event.mGroupInfo.getMTvGroup())).build().list();
         List<PasswordModel> passwordData = new ArrayList<>();
         for (Password password : data) {
             passwordData.add(new PasswordModel(password));
@@ -509,7 +530,7 @@ public class MainPresenter implements MainContract.Presenter {
         mCheckData.addAll(passwordData);
         mCheckData.addAll(dailySelfData);
 //        for (GroupInfo info : mCheckedList) {
-//            List<Password> data = mDao.queryBuilder().where(PasswordDao.Properties.MTvGroup.eq(info.getMTvGroup())).build().list();
+//            List<Password> data = mPasswordDao.queryBuilder().where(PasswordDao.Properties.MTvGroup.eq(info.getMTvGroup())).build().list();
 //            List<PasswordModel> passwordData = new ArrayList<>();
 //            for (Password password : data) {
 //                passwordData.add(new PasswordModel(password));
