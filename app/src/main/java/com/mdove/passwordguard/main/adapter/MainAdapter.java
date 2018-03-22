@@ -37,6 +37,7 @@ import com.mdove.passwordguard.main.model.handler.MainSearchHandler;
 import com.mdove.passwordguard.main.model.vm.ItemMainPasswordVM;
 import com.mdove.passwordguard.main.model.vm.ItemMainTopVM;
 import com.mdove.passwordguard.main.presenter.MainPresenter;
+import com.mdove.passwordguard.ui.guideview.Component;
 import com.mdove.passwordguard.ui.guideview.Guide;
 import com.mdove.passwordguard.ui.guideview.GuideBuilder;
 import com.mdove.passwordguard.ui.guideview.component.CommonComponent;
@@ -262,9 +263,14 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         private ItemMainOptionNewBinding mBinding;
         private MainOptionAdapter mAdapter;
 
-        public NewMainOptionViewHolder(ItemMainOptionNewBinding binding) {
+        public NewMainOptionViewHolder(final ItemMainOptionNewBinding binding) {
             super(binding.getRoot());
-            mTargetOption = binding.getRoot();
+            binding.getRoot().post(new Runnable() {
+                @Override
+                public void run() {
+                    mTargetOption = binding.getRoot();
+                }
+            });
             mBinding = binding;
         }
 
@@ -307,8 +313,8 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         public MainGroupViewHolder(ItemMainGroupBinding binding) {
             super(binding.getRoot());
-            mTargetGroup = binding.getRoot();
             mBinding = binding;
+            mTargetGroup = mBinding.getRoot();
         }
 
         public void bind(MainGroupModel model) {
