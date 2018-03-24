@@ -101,7 +101,7 @@ public interface MainContract {
 
         void onClickBtnAddDailySelf();
 
-        void searchReturn(List<Password> data, String error);
+        void searchReturn(List<BaseMainModel> data, String error);
 
         void addGroupSuc();
 

@@ -4,12 +4,14 @@ import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 
+import java.io.Serializable;
+
 /**
  * Created by MDove on 2018/2/14.
  */
 
 @Entity
-public class DeletedPassword {
+public class DeletedPassword implements Serializable {
     @Id(autoincrement = true)
     public Long id;
     public String mUserName;
@@ -19,6 +21,8 @@ public class DeletedPassword {
     public int isNew;
     public Long mDeletedTimeStamp;
     public String mTvGroup;
+    static final long serialVersionUID = 1L;
+
     @Generated(hash = 819626397)
     public DeletedPassword(Long id, String mUserName, String mPassword,
             String mTitle, Long mTimeStamp, int isNew, Long mDeletedTimeStamp,

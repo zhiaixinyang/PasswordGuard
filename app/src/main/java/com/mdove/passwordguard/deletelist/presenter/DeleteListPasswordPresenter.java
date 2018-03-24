@@ -56,6 +56,12 @@ public class DeleteListPasswordPresenter implements DeleteListPasswordContract.P
         RxBus.get().post(new DeletePasswordReturnEvent(vm.mDeletedPassword));
     }
 
+    @Override
+    public void realDelete(DeletePasswordModelVM vm) {
+        mDeleteDao.delete(vm.mDeletedPassword);
+        mView.realDelete(vm.mItemPosition);
+    }
+
     private void initSys() {
         DeleteTopModel deleteTopModel = new DeleteTopModel();
         deleteTopModel.mType = 1;

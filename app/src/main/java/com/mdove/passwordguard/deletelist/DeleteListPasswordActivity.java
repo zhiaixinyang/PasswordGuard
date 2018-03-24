@@ -74,4 +74,9 @@ public class DeleteListPasswordActivity extends BaseActivity implements DeleteLi
     public void deleteReturn(int position) {
         mAdapter.notifyDeleteReturn(position);
     }
+
+    @Override
+    public void realDelete(int position) {
+        mAdapter.notifyDeleteReturn(position);
+    }
 }

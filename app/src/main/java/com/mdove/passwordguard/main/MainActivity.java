@@ -40,6 +40,7 @@ import com.mdove.passwordguard.model.event.AddPasswordEvent;
 import com.mdove.passwordguard.model.event.AlterPasswordEvent;
 import com.mdove.passwordguard.addoralter.dialog.AddPasswordDialog;
 import com.mdove.passwordguard.addoralter.dialog.AlterPasswordDialog;
+import com.mdove.passwordguard.search.SearchResultActivity;
 import com.mdove.passwordguard.search.SearchRlvDialog;
 import com.mdove.passwordguard.search.model.SearchRlvModel;
 import com.mdove.passwordguard.ui.guideview.Guide;
@@ -134,6 +135,18 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
 
         mPresenter.initData();
         mPresenter.checkUpdate(AppUtils.getAPPVersionCodeFromAPP(this));
+
+        mBinding.rlvMain.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0) {
+                    mBinding.btnAdd.hide();
+                } else {
+                    mBinding.btnAdd.show();
+                }
+            }
+        });
     }
 
     private void handleAction(Intent intent) {
@@ -200,16 +213,12 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     }
 
     @Override
-    public void searchReturn(List<Password> data, String error) {
+    public void searchReturn(List<BaseMainModel> data, String error) {
         if (data == null) {
             ToastHelper.shortToast(error);
             return;
         }
-        List<BaseMainModel> dataModel = new ArrayList<>();
-        for (Password password : data) {
-            dataModel.add(new SearchRlvModel(password));
-        }
-        new SearchRlvDialog(this, dataModel).show();
+        SearchResultActivity.start(this, data);
     }
 
     @Override

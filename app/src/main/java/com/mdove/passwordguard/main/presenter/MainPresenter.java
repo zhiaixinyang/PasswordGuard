@@ -335,11 +335,20 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void querySearch(String queryKey) {
-        List<Password> list = mPasswordDao.queryBuilder().whereOr(PasswordDao.Properties.MTitle.like("%" + queryKey + "%"),
+        List<Password> passwordList = mPasswordDao.queryBuilder().whereOr(PasswordDao.Properties.MTitle.like("%" + queryKey + "%"),
                 PasswordDao.Properties.MUserName.like("%" + queryKey + "%"),
                 PasswordDao.Properties.MPassword.like("%" + queryKey + "%")).list();
-        if (list.size() > 0) {
-            mView.searchReturn(list, null);
+        List<DailySelf> dailySelfList = mDailySelfDao.queryBuilder().whereOr(DailySelfDao.Properties.MTvGroup.like("%" + queryKey + "%"),
+                DailySelfDao.Properties.MContent.like("%" + queryKey + "%")).list();
+        List<BaseMainModel> data = new ArrayList<>();
+        for (Password password : passwordList) {
+            data.add(new PasswordModel(password));
+        }
+        for (DailySelf dailySelf : dailySelfList) {
+            data.add(new MainDailySelfModel(dailySelf));
+        }
+        if (data.size() > 0) {
+            mView.searchReturn(data, "");
             return;
         }
         mView.searchReturn(null, "未找到和此关键字匹配的账号信息");
@@ -543,7 +552,7 @@ public class MainPresenter implements MainContract.Presenter {
     public List<MainOptionInfo> getInitOptionData() {
         List<MainOptionInfo> data = new ArrayList<>();
         MainOptionInfo account = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_ACCOUNT, "记录账号", "记录账号信息", R.drawable.bg_main_option_btn_1, R.mipmap.ic_btn_password);
-        MainOptionInfo dailySelf = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_ADD_DAILY_SELF, "随手记", "记录生活中的有趣", R.drawable.bg_main_option_btn_4, R.mipmap.ic_btn_password);
+        MainOptionInfo dailySelf = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_ADD_DAILY_SELF, "随手记", "记录有趣", R.drawable.bg_main_option_btn_4, R.mipmap.ic_btn_password);
         MainOptionInfo lock = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_LOCK, "手势锁", "保护信息安全", R.drawable.bg_main_option_btn_2, R.mipmap.ic_btn_lock);
         MainOptionInfo deleteAccount = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_DELETE_ACCOUNT, "删除记录", "账号信息", R.drawable.bg_main_option_btn_3, R.mipmap.ic_btn_delete);
         MainOptionInfo deleteDailySelf = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_DELETE_DAILY_SELF, "删除记录", "随手记", R.drawable.bg_main_option_btn_1, R.mipmap.ic_btn_delete);

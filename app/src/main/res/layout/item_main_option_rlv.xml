@@ -60,6 +60,8 @@
             android:layout_marginTop="@dimen/margin_tv_main_option_btn"
             android:alpha="0.5"
             android:gravity="center"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:text="@{viewModel.hint}"
             android:textSize="10sp" />
     </LinearLayout>

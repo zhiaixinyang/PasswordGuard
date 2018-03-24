@@ -275,11 +275,10 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
         public void bind(MainOptionModel mainOptionModel) {
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
-            linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+            GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext,4);
             if (mAdapter == null) {
                 mAdapter = new MainOptionAdapter(mainOptionModel.mData, mPresenter);
-                mBinding.rlvOptions.setLayoutManager(linearLayoutManager);
+                mBinding.rlvOptions.setLayoutManager(gridLayoutManager);
                 mBinding.rlvOptions.setAdapter(mAdapter);
                 mBinding.rlvOptions.postDelayed(new Runnable() {
                     @Override

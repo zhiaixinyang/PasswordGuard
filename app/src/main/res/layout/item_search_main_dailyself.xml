@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.mdove.passwordguard.dailyself.ItemMainDailySelfVM" />
+
+        <variable
+            name="actionHandler"
+            type="com.mdove.passwordguard.search.model.handle.SearchResultHandler" />
+    </data>
+
+
+    <RelativeLayout
+        android:id="@+id/layout_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/margin_item_password_normal"
+        android:paddingLeft="@dimen/margin_item_password_normal"
+        android:paddingRight="@dimen/margin_item_password_normal">
+
+        <RelativeLayout
+            android:id="@+id/layout_top"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/item_top_height"
+            android:background="@drawable/bg_normal_top">
+
+            <FrameLayout
+                android:id="@+id/layout_icon"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/margin_activity_main_daily_self"
+                android:background="@drawable/bg_icon_daily_self">
+
+                <ImageView
+                    android:id="@+id/iv_password"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/ic_btn_password"
+                    android:tint="@color/white" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tv_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@+id/layout_icon"
+                android:text="@{viewModel.mTvGroup}"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                tools:text="随手记" />
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/tv_group"
+                android:layout_marginRight="@dimen/margin_activity_main_daily_self"
+                android:layout_toLeftOf="@+id/btn_favorite"
+                android:text="@{viewModel.mTime}"
+                android:textColor="@color/commonColor"
+                android:textSize="14sp"
+                tools:text="2018年2月22日 14:00" />
+
+            <ImageView
+                android:id="@+id/btn_favorite"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignBottom="@+id/tv_time"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/margin_activity_main_daily_self"
+                android:layout_toLeftOf="@+id/btn_copy"
+                android:onClick="@{()->actionHandler.favoriteDailySelf(viewModel)}"
+                android:tint="@color/red"
+                app:loadFavorite="@{viewModel}" />
+
+            <ImageView
+                android:id="@+id/btn_copy"
+                android:layout_width="@dimen/ic_copy_w_h"
+                android:layout_height="@dimen/ic_copy_w_h"
+                android:layout_alignBottom="@+id/tv_time"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/margin_activity_main_daily_self"
+                android:onClick="@{()->actionHandler.copyDailySelf(viewModel)}"
+                android:src="@mipmap/ic_btn_copy"
+                android:tint="@color/black" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_top"
+            android:background="@drawable/bg_normal_bottom"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_activity_main_daily_self"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="4dp"
+                android:text="@{viewModel.mContent}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_item_password_normal"
+                tools:text="记录内容记录内容记录内容记录内容记录内容记录内容记录内容记录内容记录内容" />
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

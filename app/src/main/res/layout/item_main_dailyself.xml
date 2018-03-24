@@ -38,12 +38,30 @@
                 android:layout_height="@dimen/item_top_height"
                 android:background="@drawable/bg_normal_top">
 
+                <FrameLayout
+                    android:id="@+id/layout_icon"
+                    android:layout_width="32dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_activity_main_daily_self"
+                    android:background="@drawable/bg_icon_daily_self"
+                    android:layout_height="32dp">
+
+                    <ImageView
+                        android:id="@+id/iv_password"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/ic_btn_password"
+                        android:tint="@color/white" />
+                </FrameLayout>
+
                 <TextView
                     android:id="@+id/tv_group"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="12dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@+id/layout_icon"
                     android:text="@{viewModel.mTvGroup}"
                     android:textColor="@color/black"
                     android:textSize="16sp"

@@ -4,16 +4,20 @@ import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
 
+import java.io.Serializable;
+
 /**
  * Created by MDove on 2018/2/16.
  */
 @Entity
-public class GroupInfo {
+public class GroupInfo implements Serializable {
     @Id(autoincrement = true)
     public Long id;
     public String mTvGroup;
     public String mBgColor;
     public Long mTimeStamp;
+    static final long serialVersionUID = 1L;
+
     @Generated(hash = 2127567190)
     public GroupInfo(Long id, String mTvGroup, String mBgColor, Long mTimeStamp) {
         this.id = id;
