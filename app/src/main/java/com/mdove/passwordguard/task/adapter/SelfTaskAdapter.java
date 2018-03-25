@@ -27,22 +27,10 @@ public class SelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private SelfTaskPresenter mPresenter;
     private Context mContext;
     private List<SelfTaskModel> mData;
-    private Drawable mDrawable,mIvSeeOn,mIvSeeOff;
 
     public SelfTaskAdapter(Context context, SelfTaskPresenter presenter) {
         mContext = context;
         mPresenter = presenter;
-
-        mDrawable = ContextCompat.getDrawable(mContext,R.mipmap.ic_see_self_task);
-        Drawable.ConstantState state = mDrawable.getConstantState();
-
-        mIvSeeOn = DrawableCompat.wrap(state == null ? mDrawable : state.newDrawable()).mutate();
-        mIvSeeOn.setBounds(0, 0, mDrawable.getIntrinsicWidth(), mDrawable.getIntrinsicHeight());
-        DrawableCompat.setTint(mDrawable,ContextCompat.getColor(mContext,R.color.commonColor));
-
-        mIvSeeOff = DrawableCompat.wrap(state == null ? mDrawable : state.newDrawable()).mutate();
-        mIvSeeOff.setBounds(0, 0, mDrawable.getIntrinsicWidth(), mDrawable.getIntrinsicHeight());
-        DrawableCompat.setTint(mDrawable,ContextCompat.getColor(mContext,R.color.gray_light));
     }
 
     @Override
@@ -98,9 +86,9 @@ public class SelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 mBinding.tvTitle.setTextColor(ContextCompat.getColor(mContext,R.color.black));
             }
             if (selfTaskModel.mIsSee){
-                mBinding.ivSee.setColorFilter(R.color.commonColor);
+                mBinding.ivSee.setImageResource(R.mipmap.ic_self_task_see_on);
             }else{
-                mBinding.ivSee.setColorFilter(R.color.gray);
+                mBinding.ivSee.setImageResource(R.mipmap.ic_self_task_see_off);
             }
         }
     }
