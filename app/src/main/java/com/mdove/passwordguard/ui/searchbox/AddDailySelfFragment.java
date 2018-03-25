@@ -38,17 +38,15 @@ import java.util.ArrayList;
  */
 
 public class AddDailySelfFragment extends DialogFragment implements DialogInterface.OnKeyListener,
-        ViewTreeObserver.OnPreDrawListener, CircularRevealAnim.AnimListener,
+        ViewTreeObserver.OnPreDrawListener,
         IOnItemClickListener, View.OnClickListener {
 
     public static final String TAG = "SearchFragment";
-    private ImageView ivSearchBack;
+    private TextView ivSearchBack;
     private EditText etSearchKeyword;
-    private ImageView ivSearchSearch;
+    private TextView ivSearchSearch;
 
     private View view;
-    //动画
-    private CircularRevealAnim mCircularRevealAnim;
 
     public static AddDailySelfFragment newInstance() {
         Bundle bundle = new Bundle();
@@ -79,14 +77,9 @@ public class AddDailySelfFragment extends DialogFragment implements DialogInterf
     }
 
     private void init() {
-        ivSearchBack = (ImageView) view.findViewById(R.id.iv_search_back);
+        ivSearchBack = (TextView) view.findViewById(R.id.iv_search_back);
         etSearchKeyword = (EditText) view.findViewById(R.id.et_search_keyword);
-        ivSearchSearch = (ImageView) view.findViewById(R.id.iv_search_search);
-
-        //实例化动画效果
-        mCircularRevealAnim = new CircularRevealAnim();
-        //监听动画
-        mCircularRevealAnim.setAnimListener(this);
+        ivSearchSearch = (TextView) view.findViewById(R.id.iv_search_search);
 
         getDialog().setOnKeyListener(this);//键盘按键监听
         ivSearchSearch.getViewTreeObserver().addOnPreDrawListener(this);//绘制监听
@@ -95,12 +88,21 @@ public class AddDailySelfFragment extends DialogFragment implements DialogInterf
         //监听点击
         ivSearchBack.setOnClickListener(this);
         ivSearchSearch.setOnClickListener(this);
+
+        etSearchKeyword.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                KeyBoardUtils.openKeyboard(getContext(), etSearchKeyword);
+            }
+        }, 300);
     }
 
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.iv_search_back || view.getId() == R.id.view_search_outside) {
-            hideAnim();
+            KeyBoardUtils.closeKeyboard(getContext(), etSearchKeyword);
+            etSearchKeyword.setText("");
+            dismiss();
         } else if (view.getId() == R.id.iv_search_search) {
             search();
         }
@@ -124,7 +126,7 @@ public class AddDailySelfFragment extends DialogFragment implements DialogInterf
     @Override
     public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
-            hideAnim();
+            KeyBoardUtils.closeKeyboard(getContext(), etSearchKeyword);
         } else if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN) {
             search();
         }
@@ -137,27 +139,7 @@ public class AddDailySelfFragment extends DialogFragment implements DialogInterf
     @Override
     public boolean onPreDraw() {
         ivSearchSearch.getViewTreeObserver().removeOnPreDrawListener(this);
-        mCircularRevealAnim.show(ivSearchSearch, view);
         return true;
-    }
-
-    /**
-     * 搜索框动画隐藏完毕时调用
-     */
-    @Override
-    public void onHideAnimationEnd() {
-        etSearchKeyword.setText("");
-        dismiss();
-    }
-
-    /**
-     * 搜索框动画显示完毕时调用
-     */
-    @Override
-    public void onShowAnimationEnd() {
-        if (isVisible()) {
-            KeyBoardUtils.openKeyboard(getContext(), etSearchKeyword);
-        }
     }
 
     /**
@@ -186,7 +168,7 @@ public class AddDailySelfFragment extends DialogFragment implements DialogInterf
     @Override
     public void onItemClick(String keyword) {
         iOnSearchClickListener.OnAddDailySelfClick(keyword);
-        hideAnim();
+        KeyBoardUtils.closeKeyboard(getContext(), etSearchKeyword);
     }
 
     /**
@@ -196,21 +178,16 @@ public class AddDailySelfFragment extends DialogFragment implements DialogInterf
     public void onItemDeleteClick(String keyword) {
     }
 
-    private void hideAnim() {
-        KeyBoardUtils.closeKeyboard(getContext(), etSearchKeyword);
-        mCircularRevealAnim.hide(ivSearchSearch, view);
-    }
-
     private void search() {
         String searchKey = etSearchKeyword.getText().toString();
         if (TextUtils.isEmpty(searchKey.trim())) {
-            Toast.makeText(getContext(), "请输入关键字", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "记点东西可好？", Toast.LENGTH_SHORT).show();
         } else {
             iOnSearchClickListener.OnAddDailySelfClick(searchKey);//接口回调
-            hideAnim();
+            KeyBoardUtils.closeKeyboard(getContext(), etSearchKeyword);
         }
     }
-    
+
     private IOnAddDailySelfClickListener iOnSearchClickListener;
 
     public void setOnAddDailySelfClickListener(IOnAddDailySelfClickListener iOnSearchClickListener) {

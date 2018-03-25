@@ -1,64 +1,62 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/margin_dialog_add_daily_self"
-    android:orientation="vertical">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:background="@android:color/transparent"/>
-    <LinearLayout
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_corner_white"
-        android:orientation="vertical">
+        android:layout_marginLeft="@dimen/margin_dialog_add_daily_self"
+        android:layout_marginRight="@dimen/margin_dialog_add_daily_self"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
-        <RelativeLayout
+        <EditText
+            android:id="@+id/et_search_keyword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:background="@drawable/bg_dialog_add_dialog_self"
+            android:gravity="top"
+            android:hint="随手记记"
+            android:imeOptions="actionSearch"
+            android:lines="5"
+            android:padding="@dimen/margin_dialog_add_daily_self"
+            android:textColorHint="@color/gray"
+            android:textCursorDrawable="@drawable/bg_et_cursor"
+            android:textSize="16sp" />
 
-            <ImageView
-                android:id="@+id/iv_search_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_dialog_add_daily_self"
-                android:src="@mipmap/ic_back"
-                android:layout_alignTop="@+id/et_search_keyword"
-                android:tint="@color/gray" />
+        <TextView
+            android:id="@+id/iv_search_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/et_search_keyword"
+            android:layout_below="@+id/et_search_keyword"
+            android:layout_marginTop="@dimen/margin_dialog_add_daily_self"
+            android:background="@drawable/bg_dialog_add_dialog_self_back"
+            android:paddingBottom="@dimen/padding_dialog_add_daily_self_t_b"
+            android:paddingLeft="@dimen/padding_dialog_add_daily_self_r_l"
+            android:paddingRight="@dimen/padding_dialog_add_daily_self_r_l"
+            android:paddingTop="@dimen/padding_dialog_add_daily_self_t_b"
+            android:text="取消"
+            android:textColor="@color/gray"
+            android:textSize="16sp" />
 
-            <EditText
-                android:id="@+id/et_search_keyword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/iv_search_search"
-                android:layout_toRightOf="@+id/iv_search_back"
-                android:background="@drawable/bg_dialog_add_dialog_self"
-                android:gravity="top"
-                android:hint="随手记记"
-                android:paddingLeft="@dimen/margin_dialog_add_daily_self"
-                android:paddingRight="@dimen/margin_dialog_add_daily_self"
-                android:paddingBottom="@dimen/margin_dialog_add_daily_self"
-                android:paddingTop="3dp"
-                android:layout_marginBottom="15dp"
-                android:layout_marginTop="15dp"
-                android:imeOptions="actionSearch"
-                android:lines="3"
-                android:textColorHint="@color/gray"
-                android:textCursorDrawable="@drawable/bg_et_cursor"
-                android:textSize="16sp" />
-
-            <ImageView
-                android:id="@+id/iv_search_search"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_alignTop="@+id/et_search_keyword"
-                android:layout_alignParentRight="true"
-                android:layout_margin="@dimen/margin_dialog_add_daily_self"
-                android:src="@mipmap/ic_add"
-                android:tint="@color/gray" />
-
-        </RelativeLayout>
-    </LinearLayout>
+        <TextView
+            android:id="@+id/iv_search_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignRight="@+id/et_search_keyword"
+            android:layout_below="@+id/et_search_keyword"
+            android:layout_marginTop="@dimen/margin_dialog_add_daily_self"
+            android:background="@drawable/bg_dialog_add_dialog_self_ok"
+            android:paddingBottom="@dimen/padding_dialog_add_daily_self_t_b"
+            android:paddingLeft="@dimen/padding_dialog_add_daily_self_r_l"
+            android:paddingRight="@dimen/padding_dialog_add_daily_self_r_l"
+            android:paddingTop="@dimen/padding_dialog_add_daily_self_t_b"
+            android:text="确定"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+    </RelativeLayout>
 </LinearLayout>

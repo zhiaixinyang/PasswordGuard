@@ -8,6 +8,7 @@ import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INF
 import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_DELETE_DAILY_SELF;
 import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_GUIDE;
 import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_LOCK;
+import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_SELF_TASK;
 
 /**
  * Created by MDove on 2018/3/21.
@@ -44,6 +45,10 @@ public class ItemMainOptionHandler {
             }
             case MAIN_OPEN_INFO_TYPE_GUIDE: {
                 mPresenter.onClickBtnGuide();
+                break;
+            }
+            case MAIN_OPEN_INFO_TYPE_SELF_TASK: {
+                mPresenter.onClickBtnSelfTask();
                 break;
             }
             default: {

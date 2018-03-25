@@ -8,6 +8,7 @@
     <dimen name="item_main_top_height">45dp</dimen>
 
     <dimen name="margin_item_password_normal">8dp</dimen>
+    <dimen name="margin_item_self_task">8dp</dimen>
     <dimen name="margin_item_main_rlv_group">8dp</dimen>
     <dimen name="margin_main_option">8dp</dimen>
     <dimen name="radius_main_option_btn">8dp</dimen>
@@ -52,7 +53,9 @@
     <dimen name="color_swatch_small">48dip</dimen>
     <dimen name="color_swatch_margins_large">8dip</dimen>
     <dimen name="color_swatch_margins_small">4dip</dimen>
-    <dimen name="margin_dialog_add_daily_self">6dp</dimen>
+    <dimen name="margin_dialog_add_daily_self">12dp</dimen>
+    <dimen name="padding_dialog_add_daily_self_r_l">24dp</dimen>
+    <dimen name="padding_dialog_add_daily_self_t_b">8dp</dimen>
     <dimen name="margin_password_normal">8dp</dimen>
 
 </resources>

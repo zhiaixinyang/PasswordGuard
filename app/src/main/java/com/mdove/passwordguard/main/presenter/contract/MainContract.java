@@ -54,6 +54,8 @@ public interface MainContract {
 
         void onClickBtnGuide();
 
+        void onClickBtnSelfTask();
+
         void onClickBtnSearch();
 
         void onClickBtnAddDailySelf();

@@ -11,7 +11,7 @@
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_main">
+        android:background="@color/main_start_color">
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rlv_main"
             android:layout_width="match_parent"

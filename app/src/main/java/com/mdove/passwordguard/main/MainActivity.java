@@ -48,6 +48,7 @@ import com.mdove.passwordguard.ui.guideview.GuideBuilder;
 import com.mdove.passwordguard.ui.guideview.component.SimpleComponent;
 import com.mdove.passwordguard.ui.searchbox.AddDailySelfFragment;
 import com.mdove.passwordguard.ui.searchbox.SearchFragment;
+import com.mdove.passwordguard.ui.searchbox.custom.CircularRevealAnim;
 import com.mdove.passwordguard.ui.searchbox.custom.IOnAddDailySelfClickListener;
 import com.mdove.passwordguard.ui.searchbox.custom.IOnSearchClickListener;
 import com.mdove.passwordguard.utils.AppUtils;
@@ -213,12 +214,17 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     }
 
     @Override
-    public void searchReturn(List<BaseMainModel> data, String error) {
+    public void searchReturn(final List<BaseMainModel> data, String error) {
         if (data == null) {
             ToastHelper.shortToast(error);
             return;
         }
-        SearchResultActivity.start(this, data);
+        mBinding.getRoot().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                SearchResultActivity.start(MainActivity.this, data);
+            }
+        }, CircularRevealAnim.ANIM_DURATION);
     }
 
     @Override

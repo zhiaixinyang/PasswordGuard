@@ -46,6 +46,7 @@ import com.mdove.passwordguard.main.presenter.contract.MainContract;
 import com.mdove.passwordguard.manager.UpdateStatusManager;
 import com.mdove.passwordguard.model.net.RealUpdate;
 import com.mdove.passwordguard.net.ApiServerImpl;
+import com.mdove.passwordguard.task.SelfTaskActivity;
 import com.mdove.passwordguard.update.UpdateDialog;
 import com.mdove.passwordguard.utils.ClipboardUtils;
 
@@ -85,11 +86,12 @@ public class MainPresenter implements MainContract.Presenter {
     public static final int MAIN_OPEN_INFO_TYPE_DELETE_DAILY_SELF = 4;
     public static final int MAIN_OPEN_INFO_TYPE_ADD_DAILY_SELF = 5;
     public static final int MAIN_OPEN_INFO_TYPE_GUIDE = 6;
+    public static final int MAIN_OPEN_INFO_TYPE_SELF_TASK = 7;
 
     private String mCurGroup = DEFAULT_CHECK_GROUP_TITLE;
     private List<BaseMainModel> mCheckData;
 
-    @IntDef(value = {MAIN_OPEN_INFO_TYPE_ACCOUNT, MAIN_OPEN_INFO_TYPE_GUIDE, MAIN_OPEN_INFO_TYPE_ADD_DAILY_SELF, MAIN_OPEN_INFO_TYPE_LOCK, MAIN_OPEN_INFO_TYPE_DELETE_ACCOUNT, MAIN_OPEN_INFO_TYPE_DELETE_DAILY_SELF})
+    @IntDef(value = {MAIN_OPEN_INFO_TYPE_SELF_TASK, MAIN_OPEN_INFO_TYPE_ACCOUNT, MAIN_OPEN_INFO_TYPE_GUIDE, MAIN_OPEN_INFO_TYPE_ADD_DAILY_SELF, MAIN_OPEN_INFO_TYPE_LOCK, MAIN_OPEN_INFO_TYPE_DELETE_ACCOUNT, MAIN_OPEN_INFO_TYPE_DELETE_DAILY_SELF})
     @Retention(RetentionPolicy.SOURCE)
     public @interface MainOpenInfoType {
     }
@@ -324,6 +326,11 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
     @Override
+    public void onClickBtnSelfTask() {
+        SelfTaskActivity.start(mView.getContext());
+    }
+
+    @Override
     public void onClickBtnSearch() {
         mView.onClickBtnSearch();
     }
@@ -553,13 +560,15 @@ public class MainPresenter implements MainContract.Presenter {
         List<MainOptionInfo> data = new ArrayList<>();
         MainOptionInfo account = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_ACCOUNT, "记录账号", "记录账号信息", R.drawable.bg_main_option_btn_1, R.mipmap.ic_btn_password);
         MainOptionInfo dailySelf = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_ADD_DAILY_SELF, "随手记", "记录有趣", R.drawable.bg_main_option_btn_4, R.mipmap.ic_btn_password);
+        MainOptionInfo selfTask = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_SELF_TASK, "我的工作", "记录我的工作", R.drawable.bg_main_option_btn_6, R.mipmap.ic_btn_self_task);
         MainOptionInfo lock = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_LOCK, "手势锁", "保护信息安全", R.drawable.bg_main_option_btn_2, R.mipmap.ic_btn_lock);
         MainOptionInfo deleteAccount = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_DELETE_ACCOUNT, "删除记录", "账号信息", R.drawable.bg_main_option_btn_3, R.mipmap.ic_btn_delete);
-        MainOptionInfo deleteDailySelf = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_DELETE_DAILY_SELF, "删除记录", "随手记", R.drawable.bg_main_option_btn_1, R.mipmap.ic_btn_delete);
+        MainOptionInfo deleteDailySelf = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_DELETE_DAILY_SELF, "删除记录", "随手记", R.drawable.bg_main_option_btn_7, R.mipmap.ic_btn_delete);
         MainOptionInfo guide = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_GUIDE, "引导", "了解一下", R.drawable.bg_main_option_btn_5, R.mipmap.ic_btn_guide);
         data.add(guide);
         data.add(account);
         data.add(dailySelf);
+        data.add(selfTask);
         data.add(lock);
         data.add(deleteAccount);
         data.add(deleteDailySelf);

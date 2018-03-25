@@ -28,4 +28,8 @@ public class MainOptionHandler {
     public void onClickBtnDeleteDailySelf() {
         mPresenter.onClickBtnDeleteDailySelf();
     }
+
+    public void onClickBtnSelfTask() {
+        mPresenter.onClickBtnSelfTask();
+    }
 }

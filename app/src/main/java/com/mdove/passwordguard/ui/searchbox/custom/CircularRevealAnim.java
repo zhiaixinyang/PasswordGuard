@@ -12,7 +12,7 @@ import android.view.animation.DecelerateInterpolator;
  */
 public class CircularRevealAnim {
 
-    public static final long DURATION = 500;
+    public static final long ANIM_DURATION = 500;
 
     private AnimListener mListener;
 
@@ -70,7 +70,7 @@ public class CircularRevealAnim {
 
         Animator anim = ViewAnimationUtils.createCircularReveal(animView, tvX, tvY, startRadius, endRadius);
         animView.setVisibility(View.VISIBLE);
-        anim.setDuration(DURATION);
+        anim.setDuration(ANIM_DURATION);
         anim.setInterpolator(new DecelerateInterpolator());
 
         anim.addListener(new AnimatorListenerAdapter() {
