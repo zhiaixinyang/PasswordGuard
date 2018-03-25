@@ -44,8 +44,31 @@ public class DateUtil {
         }
     }
 
+    public static int getDay(long time) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(time);
+        return cal.get(Calendar.DAY_OF_MONTH);
+    }
+
+    public static String getDateChineseYMD(Date time){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
+        return format.format(time);
+    }
+
+    public static String getDateChineseYMD(long time){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
+        return format.format(time);
+    }
+
+
     public static String formatDefault(long time) {
         return DEFAULT_DATE_FORMAT.get().format(new Date(time));
+    }
+
+    public static String getYearMonth(long time) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
+        Date date = new Date(time);
+        return format.format(date);
     }
 
     public static String simpleFormat(long time, @NonNull String datePattern) {
@@ -119,6 +142,12 @@ public class DateUtil {
         Calendar calendar = Calendar.getInstance();
         int month = calendar.get(Calendar.MONTH);
         return parseMonth(month, abbrev);
+    }
+    public static String getDayOfWeek(long time) {
+        String dayNames[] = {"周日", "周一", "周二", "周三", "周四", "周五", "周六"};
+        Calendar c = Calendar.getInstance();
+        c.setTime(new Date(time));
+        return dayNames[c.get(Calendar.DAY_OF_WEEK) - 1];
     }
 
     //HH为24小时进制

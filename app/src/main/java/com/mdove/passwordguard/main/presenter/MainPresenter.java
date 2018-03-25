@@ -22,22 +22,26 @@ import com.mdove.passwordguard.greendao.DeletedDailySelfDao;
 import com.mdove.passwordguard.greendao.DeletedPasswordDao;
 import com.mdove.passwordguard.greendao.GroupInfoDao;
 import com.mdove.passwordguard.greendao.PasswordDao;
+import com.mdove.passwordguard.greendao.SelfTaskDao;
 import com.mdove.passwordguard.greendao.entity.DailySelf;
 import com.mdove.passwordguard.greendao.entity.DeletedDailySelf;
 import com.mdove.passwordguard.greendao.entity.DeletedPassword;
 import com.mdove.passwordguard.greendao.entity.GroupInfo;
 import com.mdove.passwordguard.greendao.entity.Password;
+import com.mdove.passwordguard.greendao.entity.SelfTask;
 import com.mdove.passwordguard.greendao.utils.DeleteDailySelfHelper;
 import com.mdove.passwordguard.greendao.utils.DeletedPasswordHelper;
 import com.mdove.passwordguard.group.GroupSettingActivity;
 import com.mdove.passwordguard.main.AddGroupDialog;
 import com.mdove.passwordguard.main.adapter.MainAdapter;
+import com.mdove.passwordguard.main.adapter.MainSelfTaskAdapter;
 import com.mdove.passwordguard.main.model.BaseMainModel;
 import com.mdove.passwordguard.main.model.MainGroupModel;
 import com.mdove.passwordguard.main.model.MainGroupRlvModel;
 import com.mdove.passwordguard.main.model.MainOptionInfo;
 import com.mdove.passwordguard.main.model.MainOptionModel;
 import com.mdove.passwordguard.main.model.MainSearchModel;
+import com.mdove.passwordguard.main.model.MainSelfTaskModel;
 import com.mdove.passwordguard.main.model.MainTopModel;
 import com.mdove.passwordguard.main.model.PasswordModel;
 import com.mdove.passwordguard.main.model.event.CheckOrderEvent;
@@ -47,6 +51,8 @@ import com.mdove.passwordguard.manager.UpdateStatusManager;
 import com.mdove.passwordguard.model.net.RealUpdate;
 import com.mdove.passwordguard.net.ApiServerImpl;
 import com.mdove.passwordguard.task.SelfTaskActivity;
+import com.mdove.passwordguard.task.model.SelfTaskModel;
+import com.mdove.passwordguard.task.model.SelfTaskModelVM;
 import com.mdove.passwordguard.update.UpdateDialog;
 import com.mdove.passwordguard.utils.ClipboardUtils;
 
@@ -73,6 +79,7 @@ public class MainPresenter implements MainContract.Presenter {
     private GroupInfoDao mGroupInfoDao;
     private DeletedDailySelfDao mDeleteDailyDao;
     private DailySelfDao mDailySelfDao;
+    private SelfTaskDao mSelfTaskDao;
     private List<MainGroupRlvModel> mGroupData;
     private List<BaseMainModel> mDailyData;
     private MainGroupModel mMainGroupModel;
@@ -107,6 +114,7 @@ public class MainPresenter implements MainContract.Presenter {
         mGroupInfoDao = App.getDaoSession().getGroupInfoDao();
         mDailySelfDao = App.getDaoSession().getDailySelfDao();
         mDeleteDailyDao = App.getDaoSession().getDeletedDailySelfDao();
+        mSelfTaskDao = App.getDaoSession().getSelfTaskDao();
     }
 
     @Override
@@ -121,6 +129,16 @@ public class MainPresenter implements MainContract.Presenter {
         mDailyData = new ArrayList<>();
 
         initSys();
+
+        List<SelfTaskModel> selfTaskModels = new ArrayList<>();
+        List<SelfTask> selfTasks = mSelfTaskDao.queryBuilder().list();
+        for (SelfTask selfTask : selfTasks) {
+            if (selfTask.mIsSee == 1) {
+                selfTaskModels.add(new SelfTaskModel(selfTask));
+            }
+        }
+        MainSelfTaskModel mainSearchModel = new MainSelfTaskModel(selfTaskModels);
+        mData.add(mainSearchModel);
 
         List<Password> data = mPasswordDao.queryBuilder().build().list();
         for (Password password : data) {
@@ -494,6 +512,21 @@ public class MainPresenter implements MainContract.Presenter {
     @Override
     public void copyPasswordInUserName(ItemMainPasswordVM vm) {
         ClipboardUtils.copyToClipboard(mView.getContext(), vm.mUserName.get());
+    }
+
+    @Override
+    public void onClickTaskSuc(SelfTaskModelVM vm, MainSelfTaskAdapter adapter) {
+        SelfTask selfTask = vm.mSelfTaskModel.mSelfTask;
+        if (vm.mSelfTaskModel.mIsSuc) {
+            selfTask.mIsSuc = 0;
+            vm.mSelfTaskModel.mIsSuc = false;
+            mSelfTaskDao.update(selfTask);
+        } else {
+            selfTask.mIsSuc = 1;
+            vm.mSelfTaskModel.mIsSuc = true;
+            mSelfTaskDao.update(selfTask);
+        }
+        adapter.onClickTaskSuc(vm.mPosition);
     }
 
     private void showUpgradeDialog(final RealUpdate result) {

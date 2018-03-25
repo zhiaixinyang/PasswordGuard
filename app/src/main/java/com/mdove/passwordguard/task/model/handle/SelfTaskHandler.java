@@ -18,4 +18,8 @@ public class SelfTaskHandler {
         mPresenter.onClickTaskSuc(vm);
     }
 
+    public void onClickSee(SelfTaskModelVM vm) {
+        mPresenter.onClickSee(vm);
+    }
+
 }

@@ -57,5 +57,7 @@
     <dimen name="padding_dialog_add_daily_self_r_l">24dp</dimen>
     <dimen name="padding_dialog_add_daily_self_t_b">8dp</dimen>
     <dimen name="margin_password_normal">8dp</dimen>
+    <dimen name="margin_item_main_self_task">8dp</dimen>
+    <dimen name="view_show_time_style_margin">8dp</dimen>
 
 </resources>

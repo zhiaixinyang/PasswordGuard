@@ -2,10 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
     <data>
-
-        <import type="android.view.View" />
 
         <variable
             name="viewModel"
@@ -13,25 +10,14 @@
 
         <variable
             name="actionHandler"
-            type="com.mdove.passwordguard.task.model.handle.SelfTaskHandler" />
+            type="com.mdove.passwordguard.main.model.handler.MainSelfTaskHandler" />
     </data>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_item_self_task"
         android:layout_marginLeft="@dimen/margin_item_self_task"
         android:layout_marginRight="@dimen/margin_item_self_task">
-
-        <ImageView
-            android:id="@+id/iv_see"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/margin_item_self_task"
-            android:onClick="@{()->actionHandler.onClickSee(viewModel)}"
-            android:src="@mipmap/ic_see_self_task"
-            android:tint="@color/commonColor" />
 
         <RelativeLayout
             android:id="@+id/layout_item"
@@ -87,4 +73,5 @@
         </RelativeLayout>
 
     </RelativeLayout>
+
 </layout>

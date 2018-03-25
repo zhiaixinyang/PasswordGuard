@@ -12,6 +12,7 @@ public class SelfTaskModelVM {
     public ObservableField<String> mTime = new ObservableField<>();
     public ObservableField<String> mTask = new ObservableField<>();
     public ObservableField<Boolean> mIsSuc = new ObservableField<>();
+    public ObservableField<Boolean> mIsSee = new ObservableField<>();
     public SelfTaskModel mSelfTaskModel;
     public int mPosition;
 
@@ -19,6 +20,7 @@ public class SelfTaskModelVM {
         mTask.set(selfTaskModel.mTask);
         mTime.set(DateUtil.getDateChinese(selfTaskModel.mTime));
         mIsSuc.set(selfTaskModel.mIsSuc);
+        mIsSee.set(selfTaskModel.mIsSee);
         mSelfTaskModel = selfTaskModel;
         mPosition = position;
     }

@@ -31,6 +31,7 @@ public class SelfTaskActivity extends BaseActivity implements SelfTaskContract.M
     private RecyclerView mRlv;
     private SelfTaskAdapter mAdapter;
     private SelfTaskPresenter mPresenter;
+    private List<SelfTaskModel> mData;
 
     public static void start(Context context) {
         Intent intent = new Intent(context, SelfTaskActivity.class);
@@ -47,9 +48,7 @@ public class SelfTaskActivity extends BaseActivity implements SelfTaskContract.M
         mRlv = findViewById(R.id.rlv_self_task);
 
         mPresenter = new SelfTaskPresenter();
-        mAdapter = new SelfTaskAdapter(this, mPresenter);
-        mRlv.setLayoutManager(new LinearLayoutManager(this));
-        mRlv.setAdapter(mAdapter);
+        initRlv();
         mPresenter.subscribe(this);
         mPresenter.initData();
 
@@ -67,6 +66,12 @@ public class SelfTaskActivity extends BaseActivity implements SelfTaskContract.M
         });
     }
 
+    private void initRlv() {
+        mAdapter = new SelfTaskAdapter(this, mPresenter);
+        mRlv.setLayoutManager(new LinearLayoutManager(this));
+        mRlv.setAdapter(mAdapter);
+    }
+
     @Override
     public Context getContext() {
         return this;
@@ -79,11 +84,17 @@ public class SelfTaskActivity extends BaseActivity implements SelfTaskContract.M
 
     @Override
     public void notifySelfTaskIsSuc(int position) {
-        mAdapter.notifySelfTaskIsSuc(position);
+        mAdapter.notifyPosition(position);
+    }
+
+    @Override
+    public void notifySelfSee(int position) {
+        mAdapter.notifyPosition(position);
     }
 
     @Override
     public void initData(List<SelfTaskModel> data) {
+        mData = data;
         mAdapter.setData(data);
     }
 

@@ -21,6 +21,8 @@ import com.mdove.passwordguard.databinding.ItemMainGroupBinding;
 import com.mdove.passwordguard.databinding.ItemMainOptionBinding;
 import com.mdove.passwordguard.databinding.ItemMainOptionNewBinding;
 import com.mdove.passwordguard.databinding.ItemMainSearchBinding;
+import com.mdove.passwordguard.databinding.ItemMainSelfTaskBinding;
+import com.mdove.passwordguard.databinding.ItemMainSelfTaskRlvBinding;
 import com.mdove.passwordguard.databinding.ItemMainTopBinding;
 import com.mdove.passwordguard.databinding.ItemPasswordNormalBinding;
 import com.mdove.passwordguard.main.model.BaseMainModel;
@@ -28,6 +30,7 @@ import com.mdove.passwordguard.main.model.MainGroupModel;
 import com.mdove.passwordguard.main.model.MainGroupRlvModel;
 import com.mdove.passwordguard.main.model.MainOptionModel;
 import com.mdove.passwordguard.main.model.MainSearchModel;
+import com.mdove.passwordguard.main.model.MainSelfTaskModel;
 import com.mdove.passwordguard.main.model.MainTopModel;
 import com.mdove.passwordguard.main.model.PasswordModel;
 import com.mdove.passwordguard.main.model.event.CheckOrderEvent;
@@ -63,6 +66,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int TYPE_MAIN_GROUP = 4;
     private static final int TYPE_MAIN_DAILY_SELF = 5;
     private static final int TYPE_MAIN_OPTION_NEW = 6;
+    private static final int TYPE_MAIN_SELF_TASK = 7;
     private int mGroupPosition;
     public static int mPasswordPosition = 0;
     private View mTargetSearch, mTargetGroup, mTargetOption;
@@ -127,6 +131,8 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     return TYPE_MAIN_GROUP;
                 } else if (model instanceof MainDailySelfModel) {
                     return TYPE_MAIN_DAILY_SELF;
+                } else if (model instanceof MainSelfTaskModel) {
+                    return TYPE_MAIN_SELF_TASK;
                 }
             }
         }
@@ -157,6 +163,9 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             case TYPE_MAIN_OPTION_NEW: {
                 return new NewMainOptionViewHolder((ItemMainOptionNewBinding) InflateUtils.bindingInflate(parent, R.layout.item_main_option_new));
             }
+            case TYPE_MAIN_SELF_TASK: {
+                return new MainSelfTaskHolder((ItemMainSelfTaskBinding) InflateUtils.bindingInflate(parent, R.layout.item_main_self_task));
+            }
         }
         return null;
     }
@@ -178,6 +187,8 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ((MainDailySelfViewHolder) holder).bind((MainDailySelfModel) model, mPresenter, position);
         } else if (holder instanceof NewMainOptionViewHolder) {
             ((NewMainOptionViewHolder) holder).bind((MainOptionModel) model);
+        }else if (holder instanceof MainSelfTaskHolder) {
+            ((MainSelfTaskHolder) holder).bind((MainSelfTaskModel) model);
         }
     }
 
@@ -275,7 +286,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
         public void bind(MainOptionModel mainOptionModel) {
-            GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext,4);
+            GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 4);
             if (mAdapter == null) {
                 mAdapter = new MainOptionAdapter(mainOptionModel.mData, mPresenter);
                 mBinding.rlvOptions.setLayoutManager(gridLayoutManager);
@@ -329,6 +340,27 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             });
 
             mBinding.setActionHandler(new MainGroupHandler(mPresenter));
+        }
+    }
+
+    private MainSelfTaskAdapter mMainSelfTaskAdapter;
+
+    public class MainSelfTaskHolder extends RecyclerView.ViewHolder {
+        private ItemMainSelfTaskBinding mBinding;
+
+        public MainSelfTaskHolder(ItemMainSelfTaskBinding binding) {
+            super(binding.getRoot());
+            mBinding = binding;
+        }
+
+        public void bind(MainSelfTaskModel model) {
+            mBinding.rlvMainSelfTask.setLayoutManager(new LinearLayoutManager(mContext));
+
+            if (model.mData == null || model.mData.size() == 0) {
+                mBinding.tvSee.setVisibility(View.VISIBLE);
+            }
+            mMainSelfTaskAdapter = new MainSelfTaskAdapter(mContext, mPresenter, model.mData);
+            mBinding.rlvMainSelfTask.setAdapter(mMainSelfTaskAdapter);
         }
     }
 

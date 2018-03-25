@@ -9,10 +9,12 @@ import com.mdove.passwordguard.deletelist.model.event.DeleteDailySelfReturnEvent
 import com.mdove.passwordguard.deletelist.model.event.DeletePasswordReturnEvent;
 import com.mdove.passwordguard.greendao.entity.DailySelf;
 import com.mdove.passwordguard.greendao.entity.Password;
+import com.mdove.passwordguard.main.adapter.MainSelfTaskAdapter;
 import com.mdove.passwordguard.main.model.BaseMainModel;
 import com.mdove.passwordguard.main.model.MainGroupModel;
 import com.mdove.passwordguard.main.model.event.CheckOrderEvent;
 import com.mdove.passwordguard.main.model.vm.ItemMainPasswordVM;
+import com.mdove.passwordguard.task.model.SelfTaskModelVM;
 
 import java.util.List;
 
@@ -38,6 +40,7 @@ public interface MainContract {
 
         //Item被点击（PasswordModel）
         void onClickItemPassword(ItemMainPasswordVM model);
+
         void onClickItemDailySelf(ItemMainDailySelfVM model);
 
         void deleteDailySelf(ItemMainDailySelfVM vm);
@@ -83,6 +86,8 @@ public interface MainContract {
         void copyPasswordInPassword(ItemMainPasswordVM vm);
 
         void copyPasswordInUserName(ItemMainPasswordVM vm);
+
+        void onClickTaskSuc(SelfTaskModelVM vm, MainSelfTaskAdapter adapter);
     }
 
     interface MvpView extends BaseView<Presenter> {
@@ -97,6 +102,7 @@ public interface MainContract {
         void onClickBtnPassword(MainGroupModel model);
 
         void onClickBtnLock();
+
         void onShowGuide();
 
         void onClickBtnSearch();

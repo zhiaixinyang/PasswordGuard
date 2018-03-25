@@ -43,6 +43,7 @@
 
     <color name="default_check_group_color">#000000</color>
     <color name="color_password_delete_return">#fb7544</color>
+    <color name="gray_plus">#808080</color>
 
     <array name="lightPalette">
         <item>@color/red_700</item>
