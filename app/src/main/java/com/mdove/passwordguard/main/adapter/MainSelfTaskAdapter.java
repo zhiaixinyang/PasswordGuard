@@ -60,6 +60,12 @@ public class MainSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         notifyPosition(position);
     }
 
+    public void onClickTaskSee(int position) {
+        mData.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, mData.size());
+    }
+
     public void notifyPosition(int position) {
         notifyInsertPosition(position);
     }

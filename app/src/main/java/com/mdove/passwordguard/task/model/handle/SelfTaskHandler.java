@@ -22,4 +22,8 @@ public class SelfTaskHandler {
         mPresenter.onClickSee(vm);
     }
 
+    public void onClickDelete(SelfTaskModelVM vm) {
+        mPresenter.onClickDelete(vm);
+    }
+
 }

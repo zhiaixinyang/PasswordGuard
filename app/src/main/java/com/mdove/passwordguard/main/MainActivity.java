@@ -3,16 +3,21 @@ package com.mdove.passwordguard.main;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
 import android.support.annotation.StringDef;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.hwangjr.rxbus.RxBus;
 import com.hwangjr.rxbus.annotation.Subscribe;
+import com.mdove.passwordguard.App;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.addoralter.model.event.AddDailySelfActivityEvent;
 import com.mdove.passwordguard.addoralter.model.event.AddPasswordActivityEvent;
@@ -39,16 +44,20 @@ import com.mdove.passwordguard.model.event.AlterPasswordEvent;
 import com.mdove.passwordguard.addoralter.dialog.AddPasswordDialog;
 import com.mdove.passwordguard.addoralter.dialog.AlterPasswordDialog;
 import com.mdove.passwordguard.search.SearchResultActivity;
+import com.mdove.passwordguard.task.model.event.SelfTaskClickSeeEvent;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickSucEvent;
+import com.mdove.passwordguard.ui.GradationScrollView;
 import com.mdove.passwordguard.ui.searchbox.AddDailySelfFragment;
 import com.mdove.passwordguard.ui.searchbox.SearchFragment;
 import com.mdove.passwordguard.ui.searchbox.custom.CircularRevealAnim;
 import com.mdove.passwordguard.ui.searchbox.custom.IOnAddDailySelfClickListener;
 import com.mdove.passwordguard.ui.searchbox.custom.IOnSearchClickListener;
 import com.mdove.passwordguard.utils.AppUtils;
+import com.mdove.passwordguard.utils.DensityUtil;
 import com.mdove.passwordguard.utils.KeyBoardUtils;
 import com.mdove.passwordguard.utils.StatusBarUtils;
 import com.mdove.passwordguard.utils.ToastHelper;
+import com.mdove.passwordguard.utils.log.LogUtils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -69,8 +78,12 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
 
     public static final String EXTRA_ACTION_KEY = "extra_action_key";
     public static final String ACTION_LOCK_IS_SUC = "action_lock_is_suc";
+    public static final int TOOLBAR_HEIGHT = DensityUtil.getScreenHeight(App.getAppContext()) / 5;
     private String mAction;
     private boolean isLockFree = false;
+    private TextView mTitle;
+    private LinearLayout mToolbar;
+    private int mHasDy;
 
     @Override
     public void onClick(View v) {
@@ -104,7 +117,29 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
         handleAction(getIntent());
 
         mRlv = mBinding.rlvMain;
+        mRlv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                mHasDy += dy;
+                if (mHasDy <= 0) {   //设置标题的背景颜色
+                    mTitle.setTextColor(Color.argb((int) (int) 0, 255, 255, 255));
+                    mToolbar.setBackgroundColor(Color.argb((int) 0, 39, 40, 81));
+                } else if (mHasDy > 0 && mHasDy <= TOOLBAR_HEIGHT) { //滑动距离小于banner图的高度时，设置背景和字体颜色颜色透明度渐变
+                    float scale = (float) mHasDy / TOOLBAR_HEIGHT;
+                    float alpha = (255 * scale);
+                    mTitle.setTextColor(Color.argb((int) alpha, 255, 255, 255));
+                    mToolbar.setBackgroundColor(Color.argb((int) alpha, 39, 40, 81));
+                } else {    //滑动到banner下面设置普通颜色
+                    mToolbar.setBackgroundColor(Color.argb((int) 255, 39, 40, 81));
+                }
+            }
+        });
         mBinding.btnSend.setOnClickListener(this);
+        mToolbar = mBinding.toolbar;
+        mTitle = mBinding.tvTitle;
+        mBinding.statusBar.setHeight(StatusBarUtils.getStatusBarHeight(this));
+
 
         RxBus.get().register(this);
         mSearchFragment = SearchFragment.newInstance();
@@ -350,5 +385,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     public void selfTaskClickSuc(SelfTaskClickSucEvent event) {
         //从SelfTaskActivity post 过来的notify
         mAdapter.notifyEventSelfTaskClickSuc(event.mId);
+    }
+
+    @Subscribe
+    public void selfTaskClickSee(SelfTaskClickSeeEvent event) {
+        //从SelfTaskActivity post 过来的notify
+        mAdapter.notifyEventSelfTaskClickSee(event.mId);
     }
 }

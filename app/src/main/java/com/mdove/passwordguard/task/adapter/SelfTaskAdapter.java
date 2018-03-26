@@ -57,6 +57,12 @@ public class SelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         notifyItemChanged(position);
     }
 
+    public void notifyDeleteSelfTask(int position) {
+        mData.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, mData.size());
+    }
+
     @Override
     public int getItemCount() {
         return mData != null ? mData.size() : 0;
@@ -87,8 +93,10 @@ public class SelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             }
             if (selfTaskModel.mIsSee) {
                 mBinding.ivSee.setImageResource(R.mipmap.ic_self_task_see_on);
+                mBinding.tvSeeTip.setTextColor(ContextCompat.getColor(mContext, R.color.commonColor));
             } else {
                 mBinding.ivSee.setImageResource(R.mipmap.ic_self_task_see_off);
+                mBinding.tvSeeTip.setTextColor(ContextCompat.getColor(mContext, R.color.gray_light));
             }
         }
     }

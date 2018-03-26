@@ -99,6 +99,11 @@ public class SelfTaskActivity extends BaseActivity implements SelfTaskContract.M
     }
 
     @Override
+    public void onClickDelete(int position) {
+        mAdapter.notifyDeleteSelfTask(position);
+    }
+
+    @Override
     protected boolean isNeedCustomLayout() {
         return false;
     }

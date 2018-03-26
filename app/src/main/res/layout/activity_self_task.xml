@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
@@ -45,15 +46,18 @@
                 android:textColor="@color/white"
                 android:textSize="16sp" />
         </RelativeLayout>
-        <View
+        <com.mdove.passwordguard.ui.DottedView
             android:id="@+id/line"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/white"
             android:layout_below="@+id/layout_et"
-            android:layout_marginRight="@dimen/margin_activity_main_et_l_r"
-            android:layout_marginLeft="@dimen/margin_activity_main_et_l_r"
-            />
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_item_self_task"
+            android:layout_marginLeft="@dimen/margin_item_self_task"
+            app:dv_line_height="2dp"
+            app:dv_line_interval="4dp"
+            app:dv_line_color="@color/black"
+            app:dv_line_width="12dp" />
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rlv_self_task"
             android:layout_width="match_parent"
