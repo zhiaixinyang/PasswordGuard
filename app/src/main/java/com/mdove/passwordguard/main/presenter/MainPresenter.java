@@ -515,7 +515,7 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
     @Override
-    public void onClickTaskSuc(SelfTaskModelVM vm, MainSelfTaskAdapter adapter) {
+    public void onClickTaskSuc(SelfTaskModelVM vm) {
         SelfTask selfTask = vm.mSelfTaskModel.mSelfTask;
         if (vm.mSelfTaskModel.mIsSuc) {
             selfTask.mIsSuc = 0;
@@ -526,7 +526,12 @@ public class MainPresenter implements MainContract.Presenter {
             vm.mSelfTaskModel.mIsSuc = true;
             mSelfTaskDao.update(selfTask);
         }
-        adapter.onClickTaskSuc(vm.mPosition);
+        mView.onClickTaskSuc(vm.mPosition);
+    }
+
+    @Override
+    public void onEventClickTaskSuc(SelfTaskModel selfTaskModel, int position) {
+        mSelfTaskDao.update(selfTaskModel.mSelfTask);
     }
 
     private void showUpgradeDialog(final RealUpdate result) {

@@ -19,10 +19,8 @@ import com.mdove.passwordguard.addoralter.model.event.AddPasswordActivityEvent;
 import com.mdove.passwordguard.addoralter.model.event.EditDailySelfActivityEvent;
 import com.mdove.passwordguard.addoralter.model.event.EditPasswordActivityEvent;
 import com.mdove.passwordguard.base.listener.OnItemLongClickListener;
-import com.mdove.passwordguard.deletelist.DeleteListPasswordActivity;
 import com.mdove.passwordguard.deletelist.model.event.DeleteDailySelfReturnEvent;
 import com.mdove.passwordguard.deletelist.model.event.DeletePasswordReturnEvent;
-import com.mdove.passwordguard.greendao.entity.Password;
 import com.mdove.passwordguard.group.model.event.GroupDeleteEvent;
 import com.mdove.passwordguard.lock.config.AppLockConfig;
 import com.mdove.passwordguard.databinding.ActivityMainBinding;
@@ -41,11 +39,7 @@ import com.mdove.passwordguard.model.event.AlterPasswordEvent;
 import com.mdove.passwordguard.addoralter.dialog.AddPasswordDialog;
 import com.mdove.passwordguard.addoralter.dialog.AlterPasswordDialog;
 import com.mdove.passwordguard.search.SearchResultActivity;
-import com.mdove.passwordguard.search.SearchRlvDialog;
-import com.mdove.passwordguard.search.model.SearchRlvModel;
-import com.mdove.passwordguard.ui.guideview.Guide;
-import com.mdove.passwordguard.ui.guideview.GuideBuilder;
-import com.mdove.passwordguard.ui.guideview.component.SimpleComponent;
+import com.mdove.passwordguard.task.model.event.SelfTaskClickSucEvent;
 import com.mdove.passwordguard.ui.searchbox.AddDailySelfFragment;
 import com.mdove.passwordguard.ui.searchbox.SearchFragment;
 import com.mdove.passwordguard.ui.searchbox.custom.CircularRevealAnim;
@@ -53,12 +47,11 @@ import com.mdove.passwordguard.ui.searchbox.custom.IOnAddDailySelfClickListener;
 import com.mdove.passwordguard.ui.searchbox.custom.IOnSearchClickListener;
 import com.mdove.passwordguard.utils.AppUtils;
 import com.mdove.passwordguard.utils.KeyBoardUtils;
-import com.mdove.passwordguard.utils.StatusBarUtil;
+import com.mdove.passwordguard.utils.StatusBarUtils;
 import com.mdove.passwordguard.utils.ToastHelper;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -106,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        StatusBarUtil.setTranslucent(this);
+        StatusBarUtils.setStatusBarTransparentCompat(this);
 
         handleAction(getIntent());
 
@@ -261,6 +254,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     }
 
     @Override
+    public void onClickTaskSuc(int position) {
+        mAdapter.notifySelfTaskClickSuc(position);
+    }
+
+    @Override
     public void OnSearchClick(String keyword) {
         if (!TextUtils.isEmpty(keyword)) {
             mPresenter.querySearch(keyword);
@@ -346,5 +344,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     @Subscribe
     public void checkOrder(CheckOrderEvent event) {
         mPresenter.checkOrderPassword(event);
+    }
+
+    @Subscribe
+    public void selfTaskClickSuc(SelfTaskClickSucEvent event) {
+        //从SelfTaskActivity post 过来的notify
+        mAdapter.notifyEventSelfTaskClickSuc(event.mPosition);
     }
 }

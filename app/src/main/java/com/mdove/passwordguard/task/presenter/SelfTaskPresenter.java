@@ -1,10 +1,12 @@
 package com.mdove.passwordguard.task.presenter;
 
+import com.hwangjr.rxbus.RxBus;
 import com.mdove.passwordguard.App;
 import com.mdove.passwordguard.greendao.SelfTaskDao;
 import com.mdove.passwordguard.greendao.entity.SelfTask;
 import com.mdove.passwordguard.task.model.SelfTaskModel;
 import com.mdove.passwordguard.task.model.SelfTaskModelVM;
+import com.mdove.passwordguard.task.model.event.SelfTaskClickSucEvent;
 import com.mdove.passwordguard.task.presenter.contract.SelfTaskContract;
 
 import java.util.ArrayList;
@@ -66,6 +68,7 @@ public class SelfTaskPresenter implements SelfTaskContract.Presenter {
             mSelfTaskDao.update(selfTask);
         }
         mView.notifySelfTaskIsSuc(vm.mPosition);
+        RxBus.get().post(new SelfTaskClickSucEvent(vm.mPosition));
     }
 
     @Override

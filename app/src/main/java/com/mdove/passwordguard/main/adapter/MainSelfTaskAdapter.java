@@ -52,7 +52,11 @@ public class MainSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         notifyDataSetChanged();
     }
 
-    public void onClickTaskSuc(int position){
+    public List<SelfTaskModel> getData() {
+        return mData;
+    }
+
+    public void onClickTaskSuc(int position) {
         notifyPosition(position);
     }
 
@@ -79,15 +83,15 @@ public class MainSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         public void bind(SelfTaskModel selfTaskModel, int position) {
             mBinding.setViewModel(new SelfTaskModelVM(selfTaskModel, position));
-            mBinding.setActionHandler(new MainSelfTaskHandler(mPresenter,MainSelfTaskAdapter.this));
+            mBinding.setActionHandler(new MainSelfTaskHandler(mPresenter));
             if (selfTaskModel.mIsSuc) {
-                mBinding.tvTitle.getPaint().setAntiAlias(true);
                 mBinding.tvTitle.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
                 mBinding.layoutBtn.setBackgroundResource(R.drawable.bg_item_self_task_btn_off);
                 mBinding.tvBtn.setText("取消");
                 mBinding.tvTitle.setTextColor(ContextCompat.getColor(mContext, R.color.gray_light));
             } else {
                 mBinding.tvTitle.getPaint().setFlags(0);
+                mBinding.tvTitle.getPaint().setAntiAlias(true);
                 mBinding.layoutBtn.setBackgroundResource(R.drawable.bg_item_self_task_btn_on);
                 mBinding.tvBtn.setText("完成");
                 mBinding.tvTitle.setTextColor(ContextCompat.getColor(mContext, R.color.black));

@@ -23,7 +23,7 @@ import com.mdove.passwordguard.main.MainActivity;
 import com.mdove.passwordguard.ui.patternlockview.PatternLockView;
 import com.mdove.passwordguard.ui.patternlockview.listener.PatternLockViewListener;
 import com.mdove.passwordguard.ui.patternlockview.utils.PatternLockUtils;
-import com.mdove.passwordguard.utils.StatusBarUtil;
+import com.mdove.passwordguard.utils.StatusBarUtils;
 
 import java.util.List;
 
@@ -57,7 +57,7 @@ public class PatternUnlockActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_pattern_unlock);
-        StatusBarUtil.setTransparent(this);
+        StatusBarUtils.setTransparent(this);
         handleAction(getIntent());
 
         if (AppLockConfig.isAuthWithFinger()) {

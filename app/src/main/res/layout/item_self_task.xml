@@ -30,8 +30,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/margin_item_self_task"
             android:onClick="@{()->actionHandler.onClickSee(viewModel)}"
-            android:src="@mipmap/ic_see_self_task"
-            android:tint="@color/commonColor" />
+            android:src="@mipmap/ic_self_task_see_on"/>
 
         <RelativeLayout
             android:id="@+id/layout_item"

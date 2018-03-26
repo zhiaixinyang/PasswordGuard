@@ -14,6 +14,7 @@ import com.mdove.passwordguard.main.model.BaseMainModel;
 import com.mdove.passwordguard.main.model.MainGroupModel;
 import com.mdove.passwordguard.main.model.event.CheckOrderEvent;
 import com.mdove.passwordguard.main.model.vm.ItemMainPasswordVM;
+import com.mdove.passwordguard.task.model.SelfTaskModel;
 import com.mdove.passwordguard.task.model.SelfTaskModelVM;
 
 import java.util.List;
@@ -87,7 +88,8 @@ public interface MainContract {
 
         void copyPasswordInUserName(ItemMainPasswordVM vm);
 
-        void onClickTaskSuc(SelfTaskModelVM vm, MainSelfTaskAdapter adapter);
+        void onClickTaskSuc(SelfTaskModelVM vm);
+        void onEventClickTaskSuc(SelfTaskModel selfTaskModel,int position);
     }
 
     interface MvpView extends BaseView<Presenter> {
@@ -122,5 +124,8 @@ public interface MainContract {
         void alterDailySelfSuc(int itemPosition);
 
         void checkOrderSuc(List<BaseMainModel> data);
+
+        void onClickTaskSuc(int position);
+
     }
 }

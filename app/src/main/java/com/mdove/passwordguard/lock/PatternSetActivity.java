@@ -18,7 +18,7 @@ import com.mdove.passwordguard.lock.utils.AnimUtils;
 import com.mdove.passwordguard.ui.patternlockview.PatternLockView;
 import com.mdove.passwordguard.ui.patternlockview.listener.PatternLockViewListener;
 import com.mdove.passwordguard.ui.patternlockview.utils.PatternLockUtils;
-import com.mdove.passwordguard.utils.StatusBarUtil;
+import com.mdove.passwordguard.utils.StatusBarUtils;
 
 import java.util.List;
 
@@ -61,7 +61,7 @@ public class PatternSetActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_pattern_set);
-        StatusBarUtil.setTransparent(this);
+        StatusBarUtils.setTransparent(this);
 
         initSwitch();
 

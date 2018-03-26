@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,7 @@ import android.widget.LinearLayout;
 /**
  * Created by MDove on 18/2/9.
  */
-public class StatusBarUtil {
+public class StatusBarUtils {
 
     public static final int DEFAULT_STATUS_BAR_ALPHA = 112;
 
@@ -27,6 +28,16 @@ public class StatusBarUtil {
      */
     public static void setColor(Activity activity, int color) {
         setColor(activity, color, DEFAULT_STATUS_BAR_ALPHA);
+    }
+
+
+    public static void setStatusBarColor(Activity activity, int color) {
+        if (Build.VERSION.SDK_INT >= 21) {
+            Window window = activity.getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(color);
+        }
     }
 
     /**
@@ -119,6 +130,28 @@ public class StatusBarUtil {
         }
         transparentStatusBar(activity);
         setRootView(activity);
+    }
+
+    /**
+     * 将状态栏设置成透明，注意不同于{@link #setStatusBarTranslucentCompat(Activity)},这里相当于取消状态栏半透明。
+     * <p>
+     * 如果我们在主题中设置了"<item name="android:windowTranslucentStatus">true</item>"
+     * 或者调用了{@link #setStatusBarTranslucentCompat(Activity)} 就相当于开启了状态栏半透明效果，这时
+     * 状态栏上会显示一个半透明的浅灰色，如果你想去掉这个浅灰色，可以调用该方法。
+     * 注意:如果使用了 {@link android.support.v4.widget.DrawerLayout},它自己实现了 statusbar 背景，
+     * 可以通过{@link android.support.v4.widget.DrawerLayout#setStatusBarBackground(int)}改变statusbar的背景。
+     *
+     * @param activity
+     */
+    public static void setStatusBarTransparentCompat(@NonNull Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = activity.getWindow();
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.TRANSPARENT);//maybe delete
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        }
     }
 
     /**

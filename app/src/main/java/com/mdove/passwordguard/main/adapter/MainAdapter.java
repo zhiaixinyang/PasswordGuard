@@ -40,6 +40,7 @@ import com.mdove.passwordguard.main.model.handler.MainSearchHandler;
 import com.mdove.passwordguard.main.model.vm.ItemMainPasswordVM;
 import com.mdove.passwordguard.main.model.vm.ItemMainTopVM;
 import com.mdove.passwordguard.main.presenter.MainPresenter;
+import com.mdove.passwordguard.task.model.SelfTaskModel;
 import com.mdove.passwordguard.ui.guideview.Component;
 import com.mdove.passwordguard.ui.guideview.Guide;
 import com.mdove.passwordguard.ui.guideview.GuideBuilder;
@@ -55,10 +56,6 @@ import java.util.List;
  */
 
 public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<BaseMainModel> mData;
-    private Context mContext;
-    private Activity mActivity;
-    private MainPresenter mPresenter;
     private static final int TYPE_MAIN_OPTION = 0;
     private static final int TYPE_MAIN_TOP = 1;
     private static final int TYPE_MAIN_PASSWORD = 2;
@@ -67,9 +64,18 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int TYPE_MAIN_DAILY_SELF = 5;
     private static final int TYPE_MAIN_OPTION_NEW = 6;
     private static final int TYPE_MAIN_SELF_TASK = 7;
+
+    private List<BaseMainModel> mData;
+    private Context mContext;
+    private Activity mActivity;
+    private MainPresenter mPresenter;
     private int mGroupPosition;
     public static int mPasswordPosition = 0;
     private View mTargetSearch, mTargetGroup, mTargetOption;
+
+    private GroupRlvAdapter mGroupRlvAdapter;
+    private MainSelfTaskAdapter mMainSelfTaskAdapter;
+
 
     public MainAdapter(Context context, MainPresenter presenter) {
         mContext = context;
@@ -187,7 +193,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ((MainDailySelfViewHolder) holder).bind((MainDailySelfModel) model, mPresenter, position);
         } else if (holder instanceof NewMainOptionViewHolder) {
             ((NewMainOptionViewHolder) holder).bind((MainOptionModel) model);
-        }else if (holder instanceof MainSelfTaskHolder) {
+        } else if (holder instanceof MainSelfTaskHolder) {
             ((MainSelfTaskHolder) holder).bind((MainSelfTaskModel) model);
         }
     }
@@ -316,7 +322,6 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    private GroupRlvAdapter mGroupRlvAdapter;
 
     public class MainGroupViewHolder extends RecyclerView.ViewHolder {
         private ItemMainGroupBinding mBinding;
@@ -343,7 +348,6 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    private MainSelfTaskAdapter mMainSelfTaskAdapter;
 
     public class MainSelfTaskHolder extends RecyclerView.ViewHolder {
         private ItemMainSelfTaskBinding mBinding;
@@ -464,5 +468,27 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         final Guide searchGuide = searchBuilder.createGuide();
         searchGuide.setShouldCheckLocInWindow(true);
         searchGuide.show(mActivity);
+    }
+
+    public void notifySelfTaskClickSuc(int position) {
+        if (mMainSelfTaskAdapter != null) {
+            mMainSelfTaskAdapter.onClickTaskSuc(position);
+        }
+    }
+
+    public void notifyEventSelfTaskClickSuc(int position) {
+        if (mMainSelfTaskAdapter == null) {
+            return;
+        }
+        SelfTaskModel selfTaskModel = mMainSelfTaskAdapter.getData().get(position);
+        if (selfTaskModel.mIsSuc) {
+            selfTaskModel.mIsSuc = false;
+            selfTaskModel.mSelfTask.mIsSuc = 0;
+        }else{
+            selfTaskModel.mIsSuc = true;
+            selfTaskModel.mSelfTask.mIsSuc = 1;
+        }
+        mMainSelfTaskAdapter.onClickTaskSuc(position);
+        mPresenter.onEventClickTaskSuc(selfTaskModel, position);
     }
 }

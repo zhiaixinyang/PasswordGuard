@@ -41,7 +41,7 @@ public class SelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         SelfTaskModel selfTaskModel = mData.get(position);
-        ((SelfTaskViewHolder) holder).bind(selfTaskModel,position);
+        ((SelfTaskViewHolder) holder).bind(selfTaskModel, position);
     }
 
     public void setData(List<SelfTaskModel> data) {
@@ -49,7 +49,7 @@ public class SelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         notifyDataSetChanged();
     }
 
-    public void notifyPosition(int position){
+    public void notifyPosition(int position) {
         notifyInsertPosition(position);
     }
 
@@ -70,24 +70,24 @@ public class SelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             mBinding = binding;
         }
 
-        public void bind(SelfTaskModel selfTaskModel,int position) {
-            mBinding.setViewModel(new SelfTaskModelVM(selfTaskModel,position));
+        public void bind(SelfTaskModel selfTaskModel, int position) {
+            mBinding.setViewModel(new SelfTaskModelVM(selfTaskModel, position));
             mBinding.setActionHandler(new SelfTaskHandler(mPresenter));
-            if (selfTaskModel.mIsSuc){
-                mBinding.tvTitle.getPaint().setAntiAlias(true);
-                mBinding.tvTitle.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG);
+            if (selfTaskModel.mIsSuc) {
+                mBinding.tvTitle.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
                 mBinding.layoutBtn.setBackgroundResource(R.drawable.bg_item_self_task_btn_off);
                 mBinding.tvBtn.setText("取消");
-                mBinding.tvTitle.setTextColor(ContextCompat.getColor(mContext,R.color.gray_light));
-            }else{
+                mBinding.tvTitle.setTextColor(ContextCompat.getColor(mContext, R.color.gray_light));
+            } else {
                 mBinding.tvTitle.getPaint().setFlags(0);
+                mBinding.tvTitle.getPaint().setAntiAlias(true);
                 mBinding.layoutBtn.setBackgroundResource(R.drawable.bg_item_self_task_btn_on);
                 mBinding.tvBtn.setText("完成");
-                mBinding.tvTitle.setTextColor(ContextCompat.getColor(mContext,R.color.black));
+                mBinding.tvTitle.setTextColor(ContextCompat.getColor(mContext, R.color.black));
             }
-            if (selfTaskModel.mIsSee){
+            if (selfTaskModel.mIsSee) {
                 mBinding.ivSee.setImageResource(R.mipmap.ic_self_task_see_on);
-            }else{
+            } else {
                 mBinding.ivSee.setImageResource(R.mipmap.ic_self_task_see_off);
             }
         }

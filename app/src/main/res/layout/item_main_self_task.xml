@@ -68,7 +68,7 @@
                 android:id="@+id/rlv_main_self_task"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_item_main_self_task" />
+                android:paddingTop="@dimen/margin_item_main_self_task" />
         </RelativeLayout>
     </RelativeLayout>
 </layout>
