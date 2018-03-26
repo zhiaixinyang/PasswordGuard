@@ -89,7 +89,6 @@ public interface MainContract {
         void copyPasswordInUserName(ItemMainPasswordVM vm);
 
         void onClickTaskSuc(SelfTaskModelVM vm);
-        void onEventClickTaskSuc(SelfTaskModel selfTaskModel,int position);
     }
 
     interface MvpView extends BaseView<Presenter> {
@@ -126,6 +125,5 @@ public interface MainContract {
         void checkOrderSuc(List<BaseMainModel> data);
 
         void onClickTaskSuc(int position);
-
     }
 }

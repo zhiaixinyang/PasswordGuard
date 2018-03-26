@@ -476,19 +476,25 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    public void notifyEventSelfTaskClickSuc(int position) {
+    public void notifyEventSelfTaskClickSuc(long id) {
         if (mMainSelfTaskAdapter == null) {
             return;
         }
-        SelfTaskModel selfTaskModel = mMainSelfTaskAdapter.getData().get(position);
+        SelfTaskModel selfTaskModel = null;
+        for (SelfTaskModel model : mMainSelfTaskAdapter.getData()) {
+            if (model.mId == id) {
+                selfTaskModel = model;
+            }
+        }
+        if (selfTaskModel == null) {
+            return;
+        }
         if (selfTaskModel.mIsSuc) {
             selfTaskModel.mIsSuc = false;
-            selfTaskModel.mSelfTask.mIsSuc = 0;
-        }else{
+        } else {
             selfTaskModel.mIsSuc = true;
-            selfTaskModel.mSelfTask.mIsSuc = 1;
         }
+        int position = mMainSelfTaskAdapter.getData().indexOf(selfTaskModel);
         mMainSelfTaskAdapter.onClickTaskSuc(position);
-        mPresenter.onEventClickTaskSuc(selfTaskModel, position);
     }
 }

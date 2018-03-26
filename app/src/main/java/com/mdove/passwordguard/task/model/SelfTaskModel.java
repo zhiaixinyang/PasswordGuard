@@ -12,9 +12,11 @@ public class SelfTaskModel {
     public boolean mIsSuc;
     public boolean mIsSee;
     public SelfTask mSelfTask;
+    public long mId;
 
     public SelfTaskModel(SelfTask selfTask) {
         mTask = selfTask.mTask;
+        mId = selfTask.id;
         mTime = selfTask.mTime;
         mIsSuc = selfTask.mIsSuc == 1;
         mIsSee = selfTask.mIsSee == 1;

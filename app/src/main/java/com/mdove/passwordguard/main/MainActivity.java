@@ -349,6 +349,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     @Subscribe
     public void selfTaskClickSuc(SelfTaskClickSucEvent event) {
         //从SelfTaskActivity post 过来的notify
-        mAdapter.notifyEventSelfTaskClickSuc(event.mPosition);
+        mAdapter.notifyEventSelfTaskClickSuc(event.mId);
     }
 }

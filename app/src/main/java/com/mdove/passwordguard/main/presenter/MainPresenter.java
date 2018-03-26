@@ -82,6 +82,7 @@ public class MainPresenter implements MainContract.Presenter {
     private SelfTaskDao mSelfTaskDao;
     private List<MainGroupRlvModel> mGroupData;
     private List<BaseMainModel> mDailyData;
+    private List<SelfTaskModel> mMainSelfTaskData;
     private MainGroupModel mMainGroupModel;
     private List<GroupInfo> mCheckedList;
     private static final String DEFAULT_DAILY_SELF_TV_GROUP = AppConstant.DEFAULT_DAILY_SELF_TV_GROUP;
@@ -131,10 +132,12 @@ public class MainPresenter implements MainContract.Presenter {
         initSys();
 
         List<SelfTaskModel> selfTaskModels = new ArrayList<>();
+        mMainSelfTaskData = new ArrayList<>();
         List<SelfTask> selfTasks = mSelfTaskDao.queryBuilder().list();
         for (SelfTask selfTask : selfTasks) {
             if (selfTask.mIsSee == 1) {
                 selfTaskModels.add(new SelfTaskModel(selfTask));
+                mMainSelfTaskData.add(new SelfTaskModel(selfTask));
             }
         }
         MainSelfTaskModel mainSearchModel = new MainSelfTaskModel(selfTaskModels);
@@ -527,11 +530,6 @@ public class MainPresenter implements MainContract.Presenter {
             mSelfTaskDao.update(selfTask);
         }
         mView.onClickTaskSuc(vm.mPosition);
-    }
-
-    @Override
-    public void onEventClickTaskSuc(SelfTaskModel selfTaskModel, int position) {
-        mSelfTaskDao.update(selfTaskModel.mSelfTask);
     }
 
     private void showUpgradeDialog(final RealUpdate result) {

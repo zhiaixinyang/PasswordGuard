@@ -68,7 +68,7 @@ public class SelfTaskPresenter implements SelfTaskContract.Presenter {
             mSelfTaskDao.update(selfTask);
         }
         mView.notifySelfTaskIsSuc(vm.mPosition);
-        RxBus.get().post(new SelfTaskClickSucEvent(vm.mPosition));
+        RxBus.get().post(new SelfTaskClickSucEvent(vm.mSelfTaskModel.mId));
     }
 
     @Override

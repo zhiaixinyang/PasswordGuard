@@ -5,9 +5,9 @@ package com.mdove.passwordguard.task.model.event;
  */
 
 public class SelfTaskClickSucEvent {
-    public int mPosition;
+    public long mId;
 
-    public SelfTaskClickSucEvent(int position) {
-        mPosition = position;
+    public SelfTaskClickSucEvent(long id) {
+        mId = id;
     }
 }
