@@ -6,6 +6,6 @@ package com.mdove.passwordguard.ui.searchbox.custom;
 
 public interface IOnAddDailySelfClickListener {
 
-    void OnAddDailySelfClick(String keyword);
+    void OnAddDailySelfClick(String content);
 
 }

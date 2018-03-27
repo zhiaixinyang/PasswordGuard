@@ -307,12 +307,12 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     }
 
     @Override
-    public void OnAddDailySelfClick(String keyword) {
-        if (TextUtils.isEmpty(keyword)) {
+    public void OnAddDailySelfClick(String content) {
+        if (TextUtils.isEmpty(content)) {
             ToastHelper.shortToast("记录内容不能为空");
             return;
         }
-        mPresenter.insertDailySelf(keyword);
+        mPresenter.insertDailySelf(content);
     }
 
     @Override
@@ -406,6 +406,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     @Subscribe
     public void selfTaskClickPriority(SelfTaskClickPriorityEvent event) {
         //从SelfTaskActivity post 过来的notify
-        mAdapter.notifyEventSelfTaskClickPriority(event.mId, event.mSelfTaskModel.mPriority);
+        mAdapter.notifyEventSelfTaskClickPriority(event.mId, event.mSelfTaskModel.mPriority
+        );
     }
 }

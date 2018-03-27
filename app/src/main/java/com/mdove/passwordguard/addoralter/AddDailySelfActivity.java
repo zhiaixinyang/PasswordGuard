@@ -76,7 +76,7 @@ public class AddDailySelfActivity extends BaseActivity implements AddDailySelfCo
         initData();
     }
 
-    private void initData(){
+    private void initData() {
         mEtContent.setText(mContent);
         mTvGroup.setText(mDefaultTitle);
         mAdapter.initCheck(mDefaultTitle);
@@ -129,18 +129,7 @@ public class AddDailySelfActivity extends BaseActivity implements AddDailySelfCo
         mBtnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isOkEnable()) {
-                    if (!isEdit) {
-                        RxBus.get().post(new AddDailySelfActivityEvent(dailySelf));
-                        finish();
-                        return;
-                    } else {
-                        RxBus.get().post(new EditDailySelfActivityEvent(mOldDailySelf, mEditPosition));
-                        finish();
-                        return;
-                    }
-                }
-                ToastHelper.shortToast("请完成对应信息");
+                sendText();
             }
         });
 
@@ -149,9 +138,29 @@ public class AddDailySelfActivity extends BaseActivity implements AddDailySelfCo
         mPresenter.initGroup();
     }
 
+    private void sendText() {
+        if (isOkEnable()) {
+            if (!isEdit) {
+                RxBus.get().post(new AddDailySelfActivityEvent(dailySelf));
+                finish();
+                return;
+            } else {
+                RxBus.get().post(new EditDailySelfActivityEvent(mOldDailySelf, mEditPosition));
+                finish();
+                return;
+            }
+        }
+        ToastHelper.shortToast("请完成对应信息");
+    }
+
     @Override
     public Context getContext() {
         return this;
+    }
+
+    @Override
+    protected void onClickMenuAdd() {
+        sendText();
     }
 
     @Override

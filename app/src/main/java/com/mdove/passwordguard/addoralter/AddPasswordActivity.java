@@ -53,6 +53,11 @@ public class AddPasswordActivity extends BaseActivity implements AddPasswordCont
     }
 
     @Override
+    protected boolean isNeedBaseMenu() {
+        return false;
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("添加账号信息");
@@ -121,7 +126,7 @@ public class AddPasswordActivity extends BaseActivity implements AddPasswordCont
     private boolean isOkEnable() {
         getAllText();
         if (TextUtils.isEmpty(mTitle) || TextUtils.isEmpty(mUserName)
-                || TextUtils.isEmpty(mPassword)|| TextUtils.isEmpty(mDefaultTitle)) {
+                || TextUtils.isEmpty(mPassword) || TextUtils.isEmpty(mDefaultTitle)) {
             return false;
         }
         password = new Password();

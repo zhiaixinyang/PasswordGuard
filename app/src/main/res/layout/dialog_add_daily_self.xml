@@ -27,7 +27,7 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/iv_search_back"
+            android:id="@+id/btn_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/et_search_keyword"
@@ -43,7 +43,7 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/iv_search_search"
+            android:id="@+id/btn_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

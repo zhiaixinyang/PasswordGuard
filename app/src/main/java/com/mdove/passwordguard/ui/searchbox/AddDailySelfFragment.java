@@ -3,8 +3,6 @@ package com.mdove.passwordguard.ui.searchbox;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -18,20 +16,12 @@ import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mdove.passwordguard.R;
-import com.mdove.passwordguard.ui.searchbox.adapter.SearchHistoryAdapter;
-import com.mdove.passwordguard.ui.searchbox.custom.CircularRevealAnim;
 import com.mdove.passwordguard.ui.searchbox.custom.IOnAddDailySelfClickListener;
-import com.mdove.passwordguard.ui.searchbox.custom.IOnItemClickListener;
-import com.mdove.passwordguard.ui.searchbox.custom.IOnSearchClickListener;
-import com.mdove.passwordguard.ui.searchbox.db.SearchHistoryDB;
 import com.mdove.passwordguard.utils.KeyBoardUtils;
-
-import java.util.ArrayList;
 
 /**
  * Created by MDove on 2018/3/10.
@@ -39,12 +29,12 @@ import java.util.ArrayList;
 
 public class AddDailySelfFragment extends DialogFragment implements DialogInterface.OnKeyListener,
         ViewTreeObserver.OnPreDrawListener,
-        IOnItemClickListener, View.OnClickListener {
+        View.OnClickListener {
 
     public static final String TAG = "SearchFragment";
-    private TextView ivSearchBack;
+    private TextView btnCancel;
     private EditText etSearchKeyword;
-    private TextView ivSearchSearch;
+    private TextView btnAdd;
 
     private View view;
 
@@ -77,17 +67,17 @@ public class AddDailySelfFragment extends DialogFragment implements DialogInterf
     }
 
     private void init() {
-        ivSearchBack = (TextView) view.findViewById(R.id.iv_search_back);
+        btnCancel = (TextView) view.findViewById(R.id.btn_cancel);
         etSearchKeyword = (EditText) view.findViewById(R.id.et_search_keyword);
-        ivSearchSearch = (TextView) view.findViewById(R.id.iv_search_search);
+        btnAdd = (TextView) view.findViewById(R.id.btn_add);
 
         getDialog().setOnKeyListener(this);//键盘按键监听
-        ivSearchSearch.getViewTreeObserver().addOnPreDrawListener(this);//绘制监听
+        btnAdd.getViewTreeObserver().addOnPreDrawListener(this);//绘制监听
         //监听编辑框文字改变
         etSearchKeyword.addTextChangedListener(new TextWatcherImpl());
         //监听点击
-        ivSearchBack.setOnClickListener(this);
-        ivSearchSearch.setOnClickListener(this);
+        btnCancel.setOnClickListener(this);
+        btnAdd.setOnClickListener(this);
 
         etSearchKeyword.postDelayed(new Runnable() {
             @Override
@@ -99,12 +89,12 @@ public class AddDailySelfFragment extends DialogFragment implements DialogInterf
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.iv_search_back || view.getId() == R.id.view_search_outside) {
+        if (view.getId() == R.id.btn_cancel) {
             KeyBoardUtils.closeKeyboard(getContext(), etSearchKeyword);
             etSearchKeyword.setText("");
             dismiss();
-        } else if (view.getId() == R.id.iv_search_search) {
-            search();
+        } else if (view.getId() == R.id.btn_add) {
+            addDailySelf();
         }
     }
 
@@ -128,7 +118,7 @@ public class AddDailySelfFragment extends DialogFragment implements DialogInterf
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
             KeyBoardUtils.closeKeyboard(getContext(), etSearchKeyword);
         } else if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN) {
-            search();
+            addDailySelf();
         }
         return false;
     }
@@ -138,7 +128,7 @@ public class AddDailySelfFragment extends DialogFragment implements DialogInterf
      */
     @Override
     public boolean onPreDraw() {
-        ivSearchSearch.getViewTreeObserver().removeOnPreDrawListener(this);
+        btnAdd.getViewTreeObserver().removeOnPreDrawListener(this);
         return true;
     }
 
@@ -162,29 +152,14 @@ public class AddDailySelfFragment extends DialogFragment implements DialogInterf
         }
     }
 
-    /**
-     * 点击单个搜索记录
-     */
-    @Override
-    public void onItemClick(String keyword) {
-        iOnSearchClickListener.OnAddDailySelfClick(keyword);
-        KeyBoardUtils.closeKeyboard(getContext(), etSearchKeyword);
-    }
-
-    /**
-     * 删除单个搜索记录
-     */
-    @Override
-    public void onItemDeleteClick(String keyword) {
-    }
-
-    private void search() {
-        String searchKey = etSearchKeyword.getText().toString();
-        if (TextUtils.isEmpty(searchKey.trim())) {
+    private void addDailySelf() {
+        String content = etSearchKeyword.getText().toString();
+        if (TextUtils.isEmpty(content.trim())) {
             Toast.makeText(getContext(), "记点东西可好？", Toast.LENGTH_SHORT).show();
         } else {
-            iOnSearchClickListener.OnAddDailySelfClick(searchKey);//接口回调
+            iOnSearchClickListener.OnAddDailySelfClick(content);//接口回调
             KeyBoardUtils.closeKeyboard(getContext(), etSearchKeyword);
+            dismiss();
         }
     }
 

@@ -9,6 +9,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,12 +46,33 @@ public abstract class BaseActivity extends AppCompatActivity {
 
             setSupportActionBar(mToolbar);
 
+            if (isNeedBaseMenu()) {
+                mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        int menuItemId = item.getItemId();
+                        if (menuItemId == R.id.action_add) {
+                            onClickMenuAdd();
+                        }
+                        return true;
+                    }
+                });
+            }
+
             if (getSupportActionBar() != null) {
                 getSupportActionBar().setHomeButtonEnabled(true);
                 getSupportActionBar().setDisplayShowTitleEnabled(true);
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             }
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if (isNeedBaseMenu()) {
+            getMenuInflater().inflate(R.menu.base_activity_menu, menu);//加载menu文件到布局
+        }
+        return true;
     }
 
     protected void setDataIsEmpty(boolean isEmpty) {
@@ -197,6 +219,14 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected abstract boolean isNeedCustomLayout();
+
+    protected boolean isNeedBaseMenu() {
+        return true;
+    }
+
+    protected void onClickMenuAdd() {
+
+    }
 
     public interface IBackHandler {
         boolean handleBackPressed(boolean fromKey);
