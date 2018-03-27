@@ -23,20 +23,6 @@
         android:layout_marginLeft="@dimen/margin_item_self_task"
         android:layout_marginRight="@dimen/margin_item_self_task">
 
-
-        <com.mdove.passwordguard.ui.DottedView
-            android:id="@+id/dottedView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/layout_btn_delete"
-            android:layout_marginBottom="@dimen/margin_item_self_task"
-            android:layout_marginLeft="@dimen/margin_item_self_task"
-            android:layout_marginRight="@dimen/margin_item_self_task"
-            app:dv_line_color="@color/black"
-            app:dv_line_height="2dp"
-            app:dv_line_interval="4dp"
-            app:dv_line_width="12dp" />
-
         <RelativeLayout
             android:id="@+id/layout_item"
             android:layout_width="match_parent"
