@@ -114,6 +114,6 @@ public class SelfTaskPresenter implements SelfTaskContract.Presenter {
         vm.mSelfTaskModel.mPriority = curPriority;
         mView.notifySelfTaskPriority(vm.mPosition);
 
-        RxBus.get().post(new SelfTaskClickPriorityEvent(vm.mSelfTaskModel.mId));
+        RxBus.get().post(new SelfTaskClickPriorityEvent(vm.mSelfTaskModel.mId, vm.mSelfTaskModel));
     }
 }

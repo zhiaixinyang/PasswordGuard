@@ -484,7 +484,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         mMainSelfTaskAdapter.onClickTaskDelete(position);
     }
 
-    public void notifyEventSelfTaskClickPriority(long id) {
+    public void notifyEventSelfTaskClickPriority(long id,int priority) {
         if (mMainSelfTaskAdapter == null) {
             return;
         }
@@ -492,7 +492,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         for (SelfTaskModel model : mMainSelfTaskAdapter.getData()) {
             if (model.mId == id) {
                 selfTaskModel = model;
-                selfTaskModel.mPriority = model.mPriority;
+                selfTaskModel.mPriority = priority;
             }
         }
         if (selfTaskModel == null) {

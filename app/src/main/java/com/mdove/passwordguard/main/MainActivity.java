@@ -406,6 +406,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     @Subscribe
     public void selfTaskClickPriority(SelfTaskClickPriorityEvent event) {
         //从SelfTaskActivity post 过来的notify
-        mAdapter.notifyEventSelfTaskClickPriority(event.mId);
+        mAdapter.notifyEventSelfTaskClickPriority(event.mId, event.mSelfTaskModel.mPriority);
     }
 }
