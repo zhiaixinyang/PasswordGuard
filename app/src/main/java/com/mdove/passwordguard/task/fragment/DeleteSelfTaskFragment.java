@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.hwangjr.rxbus.RxBus;
+import com.hwangjr.rxbus.annotation.Subscribe;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.databinding.FragmentAllSelfTaskBinding;
 import com.mdove.passwordguard.databinding.FragmentDeleteSelfTaskBinding;
@@ -17,6 +19,7 @@ import com.mdove.passwordguard.deletelist.presenter.DeleteListPasswordContract;
 import com.mdove.passwordguard.task.adapter.DeleteSelfTaskAdapter;
 import com.mdove.passwordguard.task.model.DeleteSelfTaskModel;
 import com.mdove.passwordguard.task.model.SelfTaskModel;
+import com.mdove.passwordguard.task.model.event.SelfTaskClickDeleteEvent;
 import com.mdove.passwordguard.task.presenter.DeleteSelfTaskPresenter;
 import com.mdove.passwordguard.task.presenter.contract.DeleteSelfTaskContract;
 
@@ -48,8 +51,9 @@ public class DeleteSelfTaskFragment extends Fragment implements DeleteSelfTaskCo
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mRlv = mBinding.rlvDeleteSelfTask;
+        RxBus.get().register(this);
 
+        mRlv = mBinding.rlvDeleteSelfTask;
         mPresenter = new DeleteSelfTaskPresenter();
         mPresenter.subscribe(this);
         mAdapter = new DeleteSelfTaskAdapter(getContext(), mPresenter);
@@ -67,9 +71,15 @@ public class DeleteSelfTaskFragment extends Fragment implements DeleteSelfTaskCo
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        RxBus.get().unregister(this);
+    }
+
+    @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser){
+        if (isVisibleToUser) {
             if (!dataExisted()) {
                 mPresenter.initData();
             }
@@ -86,5 +96,15 @@ public class DeleteSelfTaskFragment extends Fragment implements DeleteSelfTaskCo
     @Override
     public void initData(List<DeleteSelfTaskModel> data) {
         mAdapter.setData(data);
+    }
+
+    @Override
+    public void onClickDelete(int position) {
+        mAdapter.onClickTaskDelete(position);
+    }
+
+    @Subscribe
+    public void selfTaskClickDelete(SelfTaskClickDeleteEvent event) {
+        mPresenter.onClickDelete(event.mId);
     }
 }

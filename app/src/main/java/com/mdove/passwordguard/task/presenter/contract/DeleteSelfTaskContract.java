@@ -15,9 +15,14 @@ import java.util.List;
 public interface DeleteSelfTaskContract {
     interface Presenter extends BasePresenter<DeleteSelfTaskContract.MvpView> {
         void initData();
+
+        void onClickDelete(long id);
     }
 
     interface MvpView extends BaseView<Presenter> {
         void initData(List<DeleteSelfTaskModel> data);
+
+        void onClickDelete(int position);
+
     }
 }

@@ -3,8 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_add"
-        android:icon="@mipmap/ic_add"
         android:title="添加"
-        app:showAsAction="ifRoom" />
-
+        app:showAsAction="always" />
 </menu>

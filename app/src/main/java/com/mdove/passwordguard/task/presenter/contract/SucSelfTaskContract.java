@@ -15,9 +15,21 @@ import java.util.List;
 public interface SucSelfTaskContract {
     interface Presenter extends BasePresenter<SucSelfTaskContract.MvpView> {
         void initData();
+
+        void onClickSuc(SelfTaskModel model);
+
+        void onClickDelete(long id);
+
+        void onClickPriority(SelfTaskModel model);
     }
 
     interface MvpView extends BaseView<Presenter> {
         void initData(List<SucSelfTaskModel> data);
+
+        void onClickSuc(int position,boolean isSuc);
+
+        void onClickDelete(int position);
+
+        void onClickPriority(int position);
     }
 }

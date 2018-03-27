@@ -10,12 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.hwangjr.rxbus.RxBus;
+import com.hwangjr.rxbus.annotation.Subscribe;
 import com.mdove.passwordguard.R;
-import com.mdove.passwordguard.databinding.FragmentAllSelfTaskBinding;
 import com.mdove.passwordguard.databinding.FragmentSucSelfTaskBinding;
 import com.mdove.passwordguard.task.adapter.SucSelfTaskAdapter;
-import com.mdove.passwordguard.task.model.SelfTaskModel;
 import com.mdove.passwordguard.task.model.SucSelfTaskModel;
+import com.mdove.passwordguard.task.model.event.SelfTaskClickDeleteEvent;
+import com.mdove.passwordguard.task.model.event.SelfTaskClickPriorityEvent;
+import com.mdove.passwordguard.task.model.event.SelfTaskClickSucEvent;
 import com.mdove.passwordguard.task.presenter.SucSelfTaskPresenter;
 import com.mdove.passwordguard.task.presenter.contract.SucSelfTaskContract;
 
@@ -46,6 +49,8 @@ public class SucSelfTaskFragment extends Fragment implements SucSelfTaskContract
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        RxBus.get().register(this);
+
         mRlv = mBinding.rlvSucSelfTask;
         mPresenter = new SucSelfTaskPresenter();
         mPresenter.subscribe(this);
@@ -53,16 +58,6 @@ public class SucSelfTaskFragment extends Fragment implements SucSelfTaskContract
         mAdapter = new SucSelfTaskAdapter(getContext(), mPresenter);
         mRlv.setLayoutManager(new LinearLayoutManager(getContext()));
         mRlv.setAdapter(mAdapter);
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser){
-            if (!dataExisted()) {
-                mPresenter.initData();
-            }
-        }
     }
 
     @Override
@@ -78,10 +73,46 @@ public class SucSelfTaskFragment extends Fragment implements SucSelfTaskContract
         mAdapter.setData(data);
     }
 
+    @Override
+    public void onClickSuc(int position,boolean isSuc) {
+        mAdapter.onClickTaskSuc(position,isSuc);
+    }
+
+    @Override
+    public void onClickDelete(int position) {
+        mAdapter.onClickTaskDelete(position);
+    }
+
+    @Override
+    public void onClickPriority(int position) {
+        mAdapter.onClickTaskPriority(position);
+    }
+
     private boolean dataExisted() {
         if (mAdapter != null) {
             return mAdapter.getItemCount() > 0;
         }
         return false;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        RxBus.get().unregister(this);
+    }
+
+    @Subscribe
+    public void selfTaskClickSuc(SelfTaskClickSucEvent event) {
+        mPresenter.onClickSuc(event.mSelfTaskModel);
+    }
+
+    @Subscribe
+    public void selfTaskClickDelete(SelfTaskClickDeleteEvent event) {
+        mPresenter.onClickDelete(event.mId);
+    }
+
+    @Subscribe
+    public void selfTaskClickPriority(SelfTaskClickPriorityEvent event) {
+        mPresenter.onClickPriority(event.mSelfTaskModel);
     }
 }

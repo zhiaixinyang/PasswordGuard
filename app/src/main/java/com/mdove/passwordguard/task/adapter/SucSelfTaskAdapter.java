@@ -15,6 +15,7 @@ import com.mdove.passwordguard.task.model.DeleteSelfTaskModelVM;
 import com.mdove.passwordguard.task.model.SucSelfTaskModel;
 import com.mdove.passwordguard.task.model.SucSelfTaskModelVM;
 import com.mdove.passwordguard.task.presenter.SucSelfTaskPresenter;
+import com.mdove.passwordguard.task.utils.SelfTaskPriorityHelper;
 import com.mdove.passwordguard.utils.InflateUtils;
 
 import java.util.List;
@@ -56,8 +57,14 @@ public class SucSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         return mData;
     }
 
-    public void onClickTaskSuc(int position) {
-        notifyPosition(position);
+    public void onClickTaskSuc(int position,boolean isSuc) {
+        if (isSuc) {
+            notifyPosition(position);
+        }else{
+            mData.remove(position);
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, mData.size());
+        }
     }
 
     public void onClickTaskPriority(int position) {
@@ -99,11 +106,7 @@ public class SucSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         public void bind(SucSelfTaskModel selfTaskModel, int position) {
             mBinding.setViewModel(new SucSelfTaskModelVM(selfTaskModel, position));
-
-            if (selfTaskModel.mIsSuc) {
-                mBinding.tvTitle.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-                mBinding.tvTitle.setTextColor(ContextCompat.getColor(mContext, R.color.gray_light));
-            }
+            mBinding.tvTitle.setTextColor(SelfTaskPriorityHelper.getPriorityTextColor(mContext, selfTaskModel.mPriority));
         }
     }
 

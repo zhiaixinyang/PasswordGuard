@@ -52,6 +52,15 @@ public class AddPasswordActivity extends BaseActivity implements AddPasswordCont
         return false;
     }
 
+    @Override
+    protected boolean isNeedBaseMenu() {
+        return true;
+    }
+
+    @Override
+    protected void onClickMenuSend() {
+        sendPassword();
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -95,18 +104,22 @@ public class AddPasswordActivity extends BaseActivity implements AddPasswordCont
         mBtnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isOkEnable()) {
-                    RxBus.get().post(new AddPasswordActivityEvent(password));
-                    finish();
-                    return;
-                }
-                ToastHelper.shortToast("请完成对应信息");
+                sendPassword();
             }
         });
 
         mPresenter = new AddPasswordPresenter();
         mPresenter.subscribe(this);
         mPresenter.initGroup();
+    }
+
+    private void sendPassword() {
+        if (isOkEnable()) {
+            RxBus.get().post(new AddPasswordActivityEvent(password));
+            finish();
+            return;
+        }
+        ToastHelper.shortToast("请完成对应信息");
     }
 
     @Override

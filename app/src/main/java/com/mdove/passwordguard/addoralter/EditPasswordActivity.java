@@ -62,6 +62,16 @@ public class EditPasswordActivity extends BaseActivity implements AddPasswordCon
     }
 
     @Override
+    protected boolean isNeedBaseMenu() {
+        return true;
+    }
+
+    @Override
+    protected void onClickMenuSend() {
+        editPassword();
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("修改账号信息");
@@ -137,18 +147,22 @@ public class EditPasswordActivity extends BaseActivity implements AddPasswordCon
         mBtnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isOkEnable()) {
-                    RxBus.get().post(new EditPasswordActivityEvent(mTmpPassword, mNeedEditPassword, mEditItemPosition));
-                    finish();
-                    return;
-                }
-                ToastHelper.shortToast("请完成对应信息");
+                editPassword();
             }
         });
 
         mPresenter = new AddPasswordPresenter();
         mPresenter.subscribe(this);
         mPresenter.initGroup();
+    }
+
+    private void editPassword() {
+        if (isOkEnable()) {
+            RxBus.get().post(new EditPasswordActivityEvent(mTmpPassword, mNeedEditPassword, mEditItemPosition));
+            finish();
+            return;
+        }
+        ToastHelper.shortToast("请完成对应信息");
     }
 
     @Override

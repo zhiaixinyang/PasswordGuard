@@ -164,7 +164,7 @@ public class AddDailySelfActivity extends BaseActivity implements AddDailySelfCo
     }
 
     @Override
-    protected void onClickMenuAdd() {
+    protected void onClickMenuSend() {
         sendText();
     }
 

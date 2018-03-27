@@ -41,4 +41,19 @@ public class DeleteSelfTaskPresenter implements DeleteSelfTaskContract.Presenter
         }
         mView.initData(mData);
     }
+
+    @Override
+    public void onClickDelete(long id) {
+        DeleteSelfTaskModel deleteSelfTaskModel = null;
+        for (DeleteSelfTaskModel model1 : mData) {
+            if (model1.mId == id) {
+                deleteSelfTaskModel = model1;
+            }
+        }
+        if (deleteSelfTaskModel == null) {
+            return;
+        }
+        int position = mData.indexOf(deleteSelfTaskModel);
+        mView.onClickDelete(position);
+    }
 }

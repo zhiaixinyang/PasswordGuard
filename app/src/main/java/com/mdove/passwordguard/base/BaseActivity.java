@@ -1,6 +1,10 @@
 package com.mdove.passwordguard.base;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
@@ -17,6 +21,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.mdove.passwordguard.R;
+import com.mdove.passwordguard.utils.DensityUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +57,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                     public boolean onMenuItemClick(MenuItem item) {
                         int menuItemId = item.getItemId();
                         if (menuItemId == R.id.action_add) {
-                            onClickMenuAdd();
+                            onClickMenuSend();
                         }
                         return true;
                     }
@@ -70,9 +75,28 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (isNeedBaseMenu()) {
-            getMenuInflater().inflate(R.menu.base_activity_menu, menu);//加载menu文件到布局
+            getMenuInflater().inflate(R.menu.base_activity_menu, menu);//加载menu文件到布局View view = menu.add(Menu.NONE, Menu.FIRST + 1, 0, "发送").setIcon(R.mipmap.ic_btn_send)
+            menu.findItem(R.id.action_add).setIcon(resizeImage(R.mipmap.ic_btn_send,
+                    DensityUtil.dip2px(BaseActivity.this,60),DensityUtil.dip2px(BaseActivity.this,60)));
         }
         return true;
+    }
+
+    private Drawable resizeImage(int resId, int w, int h) {
+        // load the origial Bitmap
+        Bitmap BitmapOrg = BitmapFactory.decodeResource(getResources(), resId);
+        int width = BitmapOrg.getWidth();
+        int height = BitmapOrg.getHeight();
+        int newWidth = w;
+        int newHeight = h;
+        // calculate the scale
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+        // create a matrix for the manipulation
+        Matrix matrix = new Matrix();
+        matrix.postScale(scaleWidth, scaleHeight);
+        Bitmap resizedBitmap = Bitmap.createBitmap(BitmapOrg, 0, 0, width, height, matrix, true);
+        return new BitmapDrawable(resizedBitmap);
     }
 
     protected void setDataIsEmpty(boolean isEmpty) {
@@ -224,7 +248,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         return false;
     }
 
-    protected void onClickMenuAdd() {
+    protected void onClickMenuSend() {
 
     }
 
