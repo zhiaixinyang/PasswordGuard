@@ -8,14 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
 import com.mdove.passwordguard.R;
-import com.mdove.passwordguard.databinding.ItemAllSelfTaskBinding;
-import com.mdove.passwordguard.databinding.ItemSelfTaskBinding;
+import com.mdove.passwordguard.databinding.ItemSelfTaskAllBinding;
 import com.mdove.passwordguard.task.model.SelfTaskModel;
 import com.mdove.passwordguard.task.model.SelfTaskModelVM;
 import com.mdove.passwordguard.task.model.handle.AllSelfTaskHandler;
-import com.mdove.passwordguard.task.model.handle.SelfTaskHandler;
 import com.mdove.passwordguard.task.presenter.AllSelfTaskPresenter;
-import com.mdove.passwordguard.task.presenter.SelfTaskPresenter;
 import com.mdove.passwordguard.task.utils.SelfTaskPriorityHelper;
 import com.mdove.passwordguard.utils.InflateUtils;
 
@@ -37,7 +34,7 @@ public class AllSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new SelfTaskViewHolder((ItemAllSelfTaskBinding) InflateUtils.bindingInflate(parent, R.layout.item_all_self_task));
+        return new SelfTaskViewHolder((ItemSelfTaskAllBinding) InflateUtils.bindingInflate(parent, R.layout.item_self_task_all));
     }
 
     @Override
@@ -71,9 +68,9 @@ public class AllSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     public class SelfTaskViewHolder extends RecyclerView.ViewHolder {
-        private ItemAllSelfTaskBinding mBinding;
+        private ItemSelfTaskAllBinding mBinding;
 
-        public SelfTaskViewHolder(ItemAllSelfTaskBinding binding) {
+        public SelfTaskViewHolder(ItemSelfTaskAllBinding binding) {
             super(binding.getRoot());
             mBinding = binding;
         }

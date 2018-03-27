@@ -130,6 +130,37 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/layout_btn_copy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_title"
+                android:layout_marginLeft="@dimen/margin_item_self_task"
+                android:layout_marginTop="@dimen/margin_item_self_task"
+                android:layout_toRightOf="@+id/layout_btn_priority"
+                android:onClick="@{()->actionHandler.onClickCopy(viewModel)}">
+
+                <ImageView
+                    android:id="@+id/iv_copy"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginRight="@dimen/margin_item_self_task"
+                    android:src="@mipmap/ic_btn_copy"
+                    android:tint="@color/commonColor" />
+
+                <TextView
+                    android:id="@+id/tv_copy_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_copy"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/margin_item_self_task"
+                    android:text="复制"
+                    android:textColor="@color/commonColor"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:id="@+id/layout_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

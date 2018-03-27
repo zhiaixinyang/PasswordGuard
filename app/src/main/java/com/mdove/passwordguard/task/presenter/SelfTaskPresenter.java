@@ -11,6 +11,7 @@ import com.mdove.passwordguard.task.model.event.SelfTaskClickPriorityEvent;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickSeeEvent;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickSucEvent;
 import com.mdove.passwordguard.task.presenter.contract.SelfTaskContract;
+import com.mdove.passwordguard.utils.ClipboardUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -115,5 +116,10 @@ public class SelfTaskPresenter implements SelfTaskContract.Presenter {
         mView.notifySelfTaskPriority(vm.mPosition);
 
         RxBus.get().post(new SelfTaskClickPriorityEvent(vm.mSelfTaskModel.mId, vm.mSelfTaskModel));
+    }
+
+    @Override
+    public void onClickCopy(SelfTaskModelVM vm) {
+        ClipboardUtils.copyToClipboard(mView.getContext(), vm.mTask.get());
     }
 }

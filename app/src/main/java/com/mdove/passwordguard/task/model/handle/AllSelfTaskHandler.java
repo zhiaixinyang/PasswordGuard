@@ -31,4 +31,7 @@ public class AllSelfTaskHandler {
         mPresenter.onClickPriority(vm);
     }
 
+    public void onClickCopy(SelfTaskModelVM vm) {
+        mPresenter.onClickCopy(vm);
+    }
 }

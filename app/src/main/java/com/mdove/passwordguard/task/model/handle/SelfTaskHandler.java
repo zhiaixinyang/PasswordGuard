@@ -30,4 +30,8 @@ public class SelfTaskHandler {
         mPresenter.onClickPriority(vm);
     }
 
+    public void onClickCopy(SelfTaskModelVM vm) {
+        mPresenter.onClickCopy(vm);
+    }
+
 }

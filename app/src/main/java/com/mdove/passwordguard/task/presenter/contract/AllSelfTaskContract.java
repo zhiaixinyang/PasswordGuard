@@ -24,6 +24,8 @@ public interface AllSelfTaskContract {
         void onClickDelete(SelfTaskModelVM vm);
 
         void onClickPriority(SelfTaskModelVM vm);
+
+        void onClickCopy(SelfTaskModelVM vm);
     }
 
     interface MvpView extends BaseView<Presenter> {
