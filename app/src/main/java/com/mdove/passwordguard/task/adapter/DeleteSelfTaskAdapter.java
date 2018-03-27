@@ -89,6 +89,7 @@ public class DeleteSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
         public void bind(DeleteSelfTaskModel selfTaskModel, int position) {
             mBinding.setViewModel(new DeleteSelfTaskModelVM(selfTaskModel, position));
+            mBinding.setActionHandler(mPresenter);
             mBinding.tvTitle.setTextColor(SelfTaskPriorityHelper.getPriorityTextColor(mContext, selfTaskModel.mPriority));
 
             if (selfTaskModel.mIsSuc) {

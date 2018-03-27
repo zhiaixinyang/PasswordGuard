@@ -40,7 +40,7 @@
                 tools:text="我的一条任务,我的一条任务,我的一条任务,我的一条任务,我的一条任务,我的一条任务" />
 
             <RelativeLayout
-                android:id="@+id/layout_btn_delete"
+                android:id="@+id/layout_btn_see"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_title"
@@ -74,7 +74,7 @@
                 android:layout_below="@+id/tv_title"
                 android:layout_marginLeft="@dimen/margin_item_self_task"
                 android:layout_marginTop="@dimen/margin_item_self_task"
-                android:layout_toRightOf="@+id/layout_btn_delete"
+                android:layout_toRightOf="@+id/layout_btn_see"
                 android:onClick="@{()->actionHandler.onClickDelete(viewModel)}">
 
                 <ImageView
@@ -112,6 +112,7 @@
                     android:id="@+id/iv_priority"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
+                    android:padding="1dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginRight="@dimen/margin_item_self_task"
                     android:src="@mipmap/ic_item_priority"
