@@ -29,12 +29,11 @@ import com.mdove.passwordguard.greendao.entity.DeletedPassword;
 import com.mdove.passwordguard.greendao.entity.GroupInfo;
 import com.mdove.passwordguard.greendao.entity.Password;
 import com.mdove.passwordguard.greendao.entity.SelfTask;
-import com.mdove.passwordguard.greendao.utils.DeleteDailySelfHelper;
-import com.mdove.passwordguard.greendao.utils.DeletedPasswordHelper;
+import com.mdove.passwordguard.deletelist.utils.DeleteDailySelfHelper;
+import com.mdove.passwordguard.deletelist.utils.DeletedPasswordHelper;
 import com.mdove.passwordguard.group.GroupSettingActivity;
 import com.mdove.passwordguard.main.AddGroupDialog;
 import com.mdove.passwordguard.main.adapter.MainAdapter;
-import com.mdove.passwordguard.main.adapter.MainSelfTaskAdapter;
 import com.mdove.passwordguard.main.model.BaseMainModel;
 import com.mdove.passwordguard.main.model.MainGroupModel;
 import com.mdove.passwordguard.main.model.MainGroupRlvModel;
@@ -50,6 +49,7 @@ import com.mdove.passwordguard.main.presenter.contract.MainContract;
 import com.mdove.passwordguard.manager.UpdateStatusManager;
 import com.mdove.passwordguard.model.net.RealUpdate;
 import com.mdove.passwordguard.net.ApiServerImpl;
+import com.mdove.passwordguard.task.NewSelfTaskActivity;
 import com.mdove.passwordguard.task.SelfTaskActivity;
 import com.mdove.passwordguard.task.model.SelfTaskModel;
 import com.mdove.passwordguard.task.model.SelfTaskModelVM;
@@ -348,7 +348,8 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void onClickBtnSelfTask() {
-        SelfTaskActivity.start(mView.getContext());
+//        SelfTaskActivity.start(mView.getContext());
+        NewSelfTaskActivity.start(mView.getContext());
     }
 
     @Override

@@ -7,21 +7,13 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.BaseActivity;
-import com.mdove.passwordguard.task.adapter.SelfTaskAdapter;
 import com.mdove.passwordguard.task.adapter.SelfTaskPagerAdapter;
-import com.mdove.passwordguard.task.model.SelfTaskModel;
-import com.mdove.passwordguard.task.presenter.SelfTaskPresenter;
-import com.mdove.passwordguard.task.presenter.contract.SelfTaskContract;
-import com.mdove.passwordguard.utils.ToastHelper;
+import com.mdove.passwordguard.task.fragment.AllSelfTaskFragment;
+import com.mdove.passwordguard.task.fragment.DeleteSelfTaskFragment;
+import com.mdove.passwordguard.task.fragment.SucSelfTaskFragment;
 
 import java.util.ArrayList;
 import java.util.List;

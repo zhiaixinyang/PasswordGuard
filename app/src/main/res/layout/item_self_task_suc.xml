@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.mdove.passwordguard.task.model.SucSelfTaskModelVM" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_item_self_task"
+        android:layout_marginLeft="@dimen/margin_item_self_task"
+        android:layout_marginRight="@dimen/margin_item_self_task">
+
+        <RelativeLayout
+            android:id="@+id/layout_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/iv_see"
+            android:background="@drawable/bg_item_self_task">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_margin="@dimen/margin_item_self_task"
+                android:layout_toLeftOf="@+id/layout_btn"
+                android:text="@{viewModel.mTask}"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                tools:text="我的一条任务,我的一条任务,我的一条任务,我的一条任务,我的一条任务,我的一条任务" />
+
+            <RelativeLayout
+                android:id="@+id/layout_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="@dimen/margin_item_self_task"
+                android:layout_marginRight="@dimen/margin_item_self_task"
+                android:layout_marginTop="@dimen/margin_item_self_task"
+                android:background="@drawable/bg_item_self_task_delete_btn"
+                android:paddingBottom="2dp"
+                android:paddingLeft="@dimen/margin_item_self_task"
+                android:paddingRight="@dimen/margin_item_self_task"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/tv_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="还原"
+                    android:textColor="@color/white" />
+
+                <ImageView
+                    android:id="@+id/iv_btn"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_toRightOf="@+id/tv_btn"
+                    android:src="@mipmap/ic_task_suc" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</layout>

@@ -1,4 +1,4 @@
-package com.mdove.passwordguard.greendao.utils;
+package com.mdove.passwordguard.deletelist.utils;
 
 import com.mdove.passwordguard.greendao.entity.DeletedPassword;
 import com.mdove.passwordguard.greendao.entity.Password;

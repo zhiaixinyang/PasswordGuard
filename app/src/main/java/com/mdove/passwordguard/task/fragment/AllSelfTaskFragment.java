@@ -1,4 +1,4 @@
-package com.mdove.passwordguard.task;
+package com.mdove.passwordguard.task.fragment;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
