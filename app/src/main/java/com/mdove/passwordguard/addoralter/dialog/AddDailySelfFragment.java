@@ -1,4 +1,4 @@
-package com.mdove.passwordguard.ui.searchbox;
+package com.mdove.passwordguard.addoralter.dialog;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -157,6 +157,7 @@ public class AddDailySelfFragment extends DialogFragment implements DialogInterf
         if (TextUtils.isEmpty(content.trim())) {
             Toast.makeText(getContext(), "记点东西可好？", Toast.LENGTH_SHORT).show();
         } else {
+            etSearchKeyword.setText("");
             iOnSearchClickListener.OnAddDailySelfClick(content);//接口回调
             KeyBoardUtils.closeKeyboard(getContext(), etSearchKeyword);
             dismiss();

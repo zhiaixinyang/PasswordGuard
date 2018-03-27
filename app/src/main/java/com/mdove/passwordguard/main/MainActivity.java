@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.support.annotation.StringDef;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,7 +22,6 @@ import com.mdove.passwordguard.addoralter.model.event.AddDailySelfActivityEvent;
 import com.mdove.passwordguard.addoralter.model.event.AddPasswordActivityEvent;
 import com.mdove.passwordguard.addoralter.model.event.EditDailySelfActivityEvent;
 import com.mdove.passwordguard.addoralter.model.event.EditPasswordActivityEvent;
-import com.mdove.passwordguard.base.listener.OnChangeDataSizeListener;
 import com.mdove.passwordguard.base.listener.OnItemLongClickListener;
 import com.mdove.passwordguard.deletelist.model.event.DeleteDailySelfReturnEvent;
 import com.mdove.passwordguard.deletelist.model.event.DeletePasswordReturnEvent;
@@ -49,8 +47,7 @@ import com.mdove.passwordguard.task.model.event.SelfTaskClickDeleteEvent;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickPriorityEvent;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickSeeEvent;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickSucEvent;
-import com.mdove.passwordguard.ui.GradationScrollView;
-import com.mdove.passwordguard.ui.searchbox.AddDailySelfFragment;
+import com.mdove.passwordguard.addoralter.dialog.AddDailySelfFragment;
 import com.mdove.passwordguard.ui.searchbox.SearchFragment;
 import com.mdove.passwordguard.ui.searchbox.custom.CircularRevealAnim;
 import com.mdove.passwordguard.ui.searchbox.custom.IOnAddDailySelfClickListener;
@@ -60,7 +57,6 @@ import com.mdove.passwordguard.utils.DensityUtil;
 import com.mdove.passwordguard.utils.KeyBoardUtils;
 import com.mdove.passwordguard.utils.StatusBarUtils;
 import com.mdove.passwordguard.utils.ToastHelper;
-import com.mdove.passwordguard.utils.log.LogUtils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -402,7 +398,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     @Subscribe
     public void selfTaskClickPriority(SelfTaskClickPriorityEvent event) {
         //从SelfTaskActivity post 过来的notify
-        mAdapter.notifyEventSelfTaskClickPriority(event.mId, event.mSelfTaskModel.mPriority
-        );
+        mAdapter.notifyEventSelfTaskClickPriority(event.mId, event.mSelfTaskModel.mPriority);
     }
 }
