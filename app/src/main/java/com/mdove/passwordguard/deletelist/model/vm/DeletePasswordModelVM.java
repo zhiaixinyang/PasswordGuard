@@ -18,14 +18,14 @@ public class DeletePasswordModelVM {
     public DeletedPassword mDeletedPassword;
     public int mItemPosition;
 
-    public DeletePasswordModelVM(DeletePasswordModel model) {
+    public DeletePasswordModelVM(DeletePasswordModel model, int position) {
         mTime.set(model.mTime);
         mUserName.set(model.mUserName);
         mPassword.set(model.mPassword);
         mTitle.set(model.mTitle);
         mIsNew.set(model.mIsNew);
         mDeletedPassword = model.mDeletedPassword;
-        mItemPosition = model.mItemPosition;
+        mItemPosition = position;
         mTvGroup.set(model.mTvGroup);
     }
 }

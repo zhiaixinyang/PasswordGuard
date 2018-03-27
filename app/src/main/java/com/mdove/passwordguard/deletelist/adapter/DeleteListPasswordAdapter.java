@@ -64,7 +64,7 @@ public class DeleteListPasswordAdapter extends RecyclerView.Adapter<RecyclerView
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         BaseMainModel model = mData.get(position);
         if (holder instanceof DeletePasswordViewHolder) {
-            ((DeletePasswordViewHolder) holder).bind((DeletePasswordModel) model, mPresenter);
+            ((DeletePasswordViewHolder) holder).bind((DeletePasswordModel) model, mPresenter, position);
         } else if (holder instanceof DeleteTopViewHolder) {
             DeleteTopModel deleteTopModel = (DeleteTopModel) model;
             deleteTopModel.mAllDeleteSize = mData.size() - 1;
@@ -87,8 +87,9 @@ public class DeleteListPasswordAdapter extends RecyclerView.Adapter<RecyclerView
     }
 
     public void notifyDeleteReturn(int position) {
-        mData.remove(position);
+        //更新第一条Item（计数Item）
         notifyItemChanged(0);
+        mData.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, mData.size() - position);
     }
@@ -101,8 +102,8 @@ public class DeleteListPasswordAdapter extends RecyclerView.Adapter<RecyclerView
             mBinding = binding;
         }
 
-        public void bind(DeletePasswordModel model, DeleteListPasswordPresenter presenter) {
-            mBinding.setViewModel(new DeletePasswordModelVM(model));
+        public void bind(DeletePasswordModel model, DeleteListPasswordPresenter presenter, int position) {
+            mBinding.setViewModel(new DeletePasswordModelVM(model, position));
             mBinding.setPresenter(presenter);
         }
     }

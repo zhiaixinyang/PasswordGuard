@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
 
     public static final String EXTRA_ACTION_KEY = "extra_action_key";
     public static final String ACTION_LOCK_IS_SUC = "action_lock_is_suc";
-    public static final int TOOLBAR_HEIGHT = DensityUtil.getScreenHeight(App.getAppContext()) / 5;
+    public static final int TOOLBAR_HEIGHT = DensityUtil.getScreenHeight(App.getAppContext()) / 4;
     private String mAction;
     private boolean isLockFree = false;
     private TextView mTitle;
@@ -120,24 +120,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
         handleAction(getIntent());
 
         mRlv = mBinding.rlvMain;
-        mRlv.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                mHasDy += dy;
-                if (mHasDy <= 0) {   //设置标题的背景颜色
-                    mTitle.setTextColor(Color.argb((int) (int) 0, 255, 255, 255));
-                    mToolbar.setBackgroundColor(Color.argb((int) 0, 39, 40, 81));
-                } else if (mHasDy > 0 && mHasDy <= TOOLBAR_HEIGHT) { //滑动距离小于banner图的高度时，设置背景和字体颜色颜色透明度渐变
-                    float scale = (float) mHasDy / TOOLBAR_HEIGHT;
-                    float alpha = (255 * scale);
-                    mTitle.setTextColor(Color.argb((int) alpha, 255, 255, 255));
-                    mToolbar.setBackgroundColor(Color.argb((int) alpha, 39, 40, 81));
-                } else {    //滑动到banner下面设置普通颜色
-                    mToolbar.setBackgroundColor(Color.argb((int) 255, 39, 40, 81));
-                }
-            }
-        });
+
         mBinding.btnSend.setOnClickListener(this);
         mToolbar = mBinding.toolbar;
         mTitle = mBinding.tvTitle;
@@ -169,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
         mPresenter.initData();
         mPresenter.checkUpdate(AppUtils.getAPPVersionCodeFromAPP(this));
 
-        mBinding.rlvMain.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        mRlv.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -177,6 +160,19 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
                     mBinding.btnAdd.hide();
                 } else {
                     mBinding.btnAdd.show();
+                }
+                mHasDy += dy;
+                if (mHasDy <= 0 || !mRlv.canScrollVertically(-1)) {   //mRlv.canScrollVertically(-1)返回false表示到顶部了
+                    mTitle.setTextColor(Color.argb(0, 255, 255, 255));
+                    mToolbar.setBackgroundColor(Color.argb(0, 39, 40, 81));
+                } else if (mHasDy > 0 && mHasDy <= TOOLBAR_HEIGHT) { //滑动距离小于banner图的高度时，设置背景和字体颜色颜色透明度渐变
+                    float scale = (float) mHasDy / TOOLBAR_HEIGHT;
+                    float alpha = (255 * scale);
+                    mTitle.setTextColor(Color.argb((int) alpha, 255, 255, 255));
+                    mToolbar.setBackgroundColor(Color.argb((int) alpha, 39, 40, 81));
+                } else if (mHasDy > TOOLBAR_HEIGHT) {    //滑动到banner下面设置普通颜色
+                    mToolbar.setBackgroundColor(Color.argb(255, 39, 40, 81));
+                    mTitle.setTextColor(Color.argb(255, 255, 255, 255));
                 }
             }
         });

@@ -43,6 +43,11 @@ public class DeleteListDailySelfActivity extends BaseActivity implements DeleteL
     }
 
     @Override
+    protected boolean isNeedBaseMenu() {
+        return false;
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle(R.string.activity_title_delete_list_daily_self);

@@ -44,7 +44,7 @@ public class DeleteListPasswordPresenter implements DeleteListPasswordContract.P
 
         List<DeletedPassword> list = mDeleteDao.queryBuilder().build().list();
         for (int i = 0; i < list.size(); i++) {
-            mData.add(new DeletePasswordModel(list.get(i), ++i));
+            mData.add(new DeletePasswordModel(list.get(i)));
         }
         mView.showData(mData);
     }
@@ -60,6 +60,11 @@ public class DeleteListPasswordPresenter implements DeleteListPasswordContract.P
     public void realDelete(DeletePasswordModelVM vm) {
         mDeleteDao.delete(vm.mDeletedPassword);
         mView.realDelete(vm.mItemPosition);
+    }
+
+    @Override
+    public void warningDeleteDialog(DeletePasswordModelVM vm) {
+        mView.warningDeleteDialog(vm);
     }
 
     private void initSys() {

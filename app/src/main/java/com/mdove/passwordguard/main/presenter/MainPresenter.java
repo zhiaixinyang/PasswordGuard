@@ -550,8 +550,6 @@ public class MainPresenter implements MainContract.Presenter {
     @Override
     public void alterDailySelf(AlterDailySelfModel model, int itemPosition) {
         mDailySelfDao.update(model.mOldDailySelf);
-//        mPasswordDao.insert(model.mNewPassword);
-//        mData.add(new PasswordModel(model.mNewPassword));
 
         //直接更换旧model的数据（引用指向的内存不变）
         MainDailySelfModel oldModel = (MainDailySelfModel) mData.get(itemPosition);

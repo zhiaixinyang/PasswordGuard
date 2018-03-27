@@ -14,13 +14,23 @@ import java.util.List;
 public interface DeleteListPasswordContract {
     interface Presenter extends BasePresenter<DeleteListPasswordContract.MvpView> {
         void initData();
+
         void deleteReturn(DeletePasswordModelVM vm);
+
         void realDelete(DeletePasswordModelVM vm);
+
+        void warningDeleteDialog(DeletePasswordModelVM vm);
+
     }
 
     interface MvpView extends BaseView<DeleteListPasswordContract.Presenter> {
         void showData(List<BaseMainModel> data);
+
         void deleteReturn(int position);
+
         void realDelete(int position);
+
+        void warningDeleteDialog(DeletePasswordModelVM vm);
+
     }
 }

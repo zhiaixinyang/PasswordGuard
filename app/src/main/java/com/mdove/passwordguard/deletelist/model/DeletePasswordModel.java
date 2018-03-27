@@ -19,9 +19,8 @@ public class DeletePasswordModel extends BaseMainModel {
     public Long mTimeStamp;
     public boolean mIsNew = false;
     public DeletedPassword mDeletedPassword;
-    public int mItemPosition;
 
-    public DeletePasswordModel(DeletedPassword deletedPassword, int itemPosition) {
+    public DeletePasswordModel(DeletedPassword deletedPassword) {
         mPasswordId = deletedPassword.id;
         mTitle = deletedPassword.mTitle;
         mPassword = deletedPassword.mPassword;
@@ -30,7 +29,6 @@ public class DeletePasswordModel extends BaseMainModel {
         mType = 1;
         mIsNew = deletedPassword.isNew != 0;
         mDeletedPassword = deletedPassword;
-        mItemPosition = itemPosition;
         mTvGroup = TextUtils.isEmpty(deletedPassword.mTvGroup) ? AppConstant.DEFAULT_CHECK_GROUP_TITLE : deletedPassword.mTvGroup;
     }
 }

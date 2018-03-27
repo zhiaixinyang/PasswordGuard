@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.mdove.passwordguard.task.model.SelfTaskModelVM" />
+
+        <variable
+            name="actionHandler"
+            type="com.mdove.passwordguard.task.model.handle.AllSelfTaskHandler" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_item_self_task"
+        android:layout_marginLeft="@dimen/margin_item_self_task"
+        android:layout_marginRight="@dimen/margin_item_self_task">
+
+        <RelativeLayout
+            android:id="@+id/layout_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_item_self_task">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_item_self_task"
+                android:text="@{viewModel.mTask}"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                tools:text="我的一条任务,我的一条任务,我的一条任务,我的一条任务,我的一条任务,我的一条任务" />
+
+            <RelativeLayout
+                android:id="@+id/layout_btn_see"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_title"
+                android:layout_marginLeft="@dimen/margin_item_self_task"
+                android:layout_marginTop="@dimen/margin_item_self_task"
+                android:onClick="@{()->actionHandler.onClickSee(viewModel)}">
+
+                <ImageView
+                    android:id="@+id/iv_see"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginRight="@dimen/margin_item_self_task"
+                    android:src="@mipmap/ic_self_task_see_on" />
+
+                <TextView
+                    android:id="@+id/tv_see_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_see"
+                    android:layout_marginBottom="@dimen/margin_item_self_task"
+                    android:text="主页显示"
+                    android:textColor="@color/commonColor"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_btn_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_title"
+                android:layout_marginLeft="@dimen/margin_item_self_task"
+                android:layout_marginTop="@dimen/margin_item_self_task"
+                android:layout_toRightOf="@+id/layout_btn_see"
+                android:onClick="@{()->actionHandler.onClickDelete(viewModel)}">
+
+                <ImageView
+                    android:id="@+id/iv_delete"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginRight="@dimen/margin_item_self_task"
+                    android:src="@mipmap/ic_delete"
+                    android:tint="@color/commonColor" />
+
+                <TextView
+                    android:id="@+id/tv_delete_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_delete"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/margin_item_self_task"
+                    android:text="删除"
+                    android:textColor="@color/commonColor"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_btn_priority"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_title"
+                android:layout_marginLeft="@dimen/margin_item_self_task"
+                android:layout_marginTop="@dimen/margin_item_self_task"
+                android:layout_toRightOf="@+id/layout_btn_delete"
+                android:onClick="@{()->actionHandler.onClickPriority(viewModel)}">
+
+                <ImageView
+                    android:id="@+id/iv_priority"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginRight="@dimen/margin_item_self_task"
+                    android:src="@mipmap/ic_item_priority"
+                    android:tint="@color/commonColor" />
+
+                <TextView
+                    android:id="@+id/tv_priority_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_priority"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/margin_item_self_task"
+                    android:text="优先级"
+                    android:textColor="@color/commonColor"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="@dimen/margin_item_self_task"
+                android:layout_alignBottom="@+id/layout_btn_see"
+                android:layout_marginRight="@dimen/margin_item_self_task"
+                android:layout_marginTop="@dimen/margin_item_self_task"
+                android:background="@drawable/bg_item_self_task_btn_off"
+                android:onClick="@{()->actionHandler.onClickTaskSuc(viewModel)}"
+                android:paddingBottom="2dp"
+                android:paddingLeft="@dimen/margin_item_self_task"
+                android:paddingRight="@dimen/margin_item_self_task"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/tv_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="完成"
+                    android:textColor="@color/white" />
+
+                <ImageView
+                    android:id="@+id/iv_btn"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_toRightOf="@+id/tv_btn"
+                    android:src="@mipmap/ic_task_suc" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+</layout>
