@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.hwangjr.rxbus.RxBus;
 import com.mdove.passwordguard.R;
+import com.mdove.passwordguard.base.listener.OnChangeDataSizeListener;
 import com.mdove.passwordguard.base.listener.OnItemDeleteClickListener;
 import com.mdove.passwordguard.base.listener.OnItemLongClickListener;
 import com.mdove.passwordguard.config.AppConfig;
@@ -76,44 +77,10 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private GroupRlvAdapter mGroupRlvAdapter;
     private MainSelfTaskAdapter mMainSelfTaskAdapter;
 
-
     public MainAdapter(Context context, MainPresenter presenter) {
         mContext = context;
         mActivity = (Activity) context;
         mPresenter = presenter;
-    }
-
-    public void setData(List<BaseMainModel> data) {
-        mData = data;
-        notifyDataSetChanged();
-    }
-
-    public void addBaseMainModelData(List<BaseMainModel> data) {
-        List<BaseMainModel> newData = new ArrayList<>();
-        for (int i = 0; i < mPasswordPosition; i++) {
-            newData.add(mData.get(i));
-        }
-        newData.addAll(data);
-        mData = newData;
-        notifyDataSetChanged();
-    }
-
-    public void notifyAddPasswordData(int position) {
-        notifyItemChanged(position);
-    }
-
-    public void notifyAddDailySelfData(int position) {
-        notifyItemChanged(position);
-    }
-
-    public void notifyDeletePasswordData(int position) {
-        mData.remove(position);
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position, mData.size());
-    }
-
-    public void notifyAddGroup() {
-        notifyItemChanged(mGroupPosition);
     }
 
     @Override
@@ -365,6 +332,12 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             }
             mMainSelfTaskAdapter = new MainSelfTaskAdapter(mContext, mPresenter, model.mData);
             mBinding.rlvMainSelfTask.setAdapter(mMainSelfTaskAdapter);
+            mMainSelfTaskAdapter.setOnChangeDataSizeListener(new OnChangeDataSizeListener() {
+                @Override
+                public void dataIsEmpty(boolean isEmpty) {
+                    mBinding.tvSee.setVisibility(isEmpty ? View.VISIBLE : View.GONE);
+                }
+            });
         }
     }
 
@@ -476,28 +449,25 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    public void notifyEventSelfTaskClickSuc(long id) {
+    public void notifyEventSelfTaskClickSuc(long id, SelfTaskModel postModel) {
         if (mMainSelfTaskAdapter == null) {
             return;
         }
-        SelfTaskModel selfTaskModel = null;
+        SelfTaskModel exitsModel = null;
         for (SelfTaskModel model : mMainSelfTaskAdapter.getData()) {
             if (model.mId == id) {
-                selfTaskModel = model;
+                exitsModel = model;
             }
         }
-        if (selfTaskModel == null) {
+        if (exitsModel == null) {
             return;
         }
-        if (selfTaskModel.mIsSuc) {
-            selfTaskModel.mIsSuc = false;
-        } else {
-            selfTaskModel.mIsSuc = true;
-        }
-        int position = mMainSelfTaskAdapter.getData().indexOf(selfTaskModel);
+        exitsModel.mIsSuc = postModel.mIsSuc;
+        int position = mMainSelfTaskAdapter.getData().indexOf(exitsModel);
         mMainSelfTaskAdapter.onClickTaskSuc(position);
     }
-    public void notifyEventSelfTaskClickSee(long id) {
+
+    public void notifyEventSelfTaskClickDelete(long id) {
         if (mMainSelfTaskAdapter == null) {
             return;
         }
@@ -510,12 +480,67 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if (selfTaskModel == null) {
             return;
         }
-        if (selfTaskModel.mIsSee) {
-            selfTaskModel.mIsSee = false;
-        } else {
-            selfTaskModel.mIsSee = true;
-        }
         int position = mMainSelfTaskAdapter.getData().indexOf(selfTaskModel);
-        mMainSelfTaskAdapter.onClickTaskSee(position);
+        mMainSelfTaskAdapter.onClickTaskDelete(position);
+    }
+
+    public void notifyEventSelfTaskClickSee(SelfTaskModel selfTaskModel) {
+        if (mMainSelfTaskAdapter == null) {
+            return;
+        }
+        int notifyPosition = -1;
+        SelfTaskModel existModel = null;
+        for (SelfTaskModel model : mMainSelfTaskAdapter.getData()) {
+            if (model.mId == selfTaskModel.mId) {
+                existModel = model;
+                notifyPosition = mMainSelfTaskAdapter.getData().indexOf(model);
+            }
+        }
+
+        if (existModel == null) {
+            mMainSelfTaskAdapter.getData().add(selfTaskModel);
+            mMainSelfTaskAdapter.onClickTaskSee(mMainSelfTaskAdapter.getData().size(), false);
+        } else {
+            mMainSelfTaskAdapter.onClickTaskSee(notifyPosition, true);
+        }
+    }
+
+    public void setData(List<BaseMainModel> data) {
+        mData = data;
+        notifyDataSetChanged();
+    }
+
+    public void addBaseMainModelData(List<BaseMainModel> data) {
+        List<BaseMainModel> newData = new ArrayList<>();
+        for (int i = 0; i < mPasswordPosition; i++) {
+            newData.add(mData.get(i));
+        }
+        newData.addAll(data);
+        mData = newData;
+        notifyDataSetChanged();
+    }
+
+    public void notifyAddPasswordData(int position) {
+        notifyItemChanged(position);
+    }
+
+    public void notifyAddDailySelfData(int position) {
+        notifyItemChanged(position);
+    }
+
+    public void notifyDeletePasswordData(int position) {
+        mData.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, mData.size());
+    }
+
+    public void notifyAddGroup() {
+        notifyItemChanged(mGroupPosition);
+    }
+
+    public void setOnChangeDataSizeListener(OnChangeDataSizeListener listener) {
+        if (mMainSelfTaskAdapter != null) {
+            mMainSelfTaskAdapter.setOnChangeDataSizeListener(listener);
+        }
     }
 }

@@ -2,22 +2,19 @@ package com.mdove.passwordguard.main.adapter;
 
 import android.content.Context;
 import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
 import com.mdove.passwordguard.R;
+import com.mdove.passwordguard.base.listener.OnChangeDataSizeListener;
 import com.mdove.passwordguard.databinding.ItemMainSelfTaskRlvBinding;
-import com.mdove.passwordguard.databinding.ItemSelfTaskBinding;
 import com.mdove.passwordguard.main.model.handler.MainSelfTaskHandler;
 import com.mdove.passwordguard.main.presenter.MainPresenter;
 import com.mdove.passwordguard.task.model.SelfTaskModel;
 import com.mdove.passwordguard.task.model.SelfTaskModelVM;
-import com.mdove.passwordguard.task.model.handle.SelfTaskHandler;
-import com.mdove.passwordguard.task.presenter.SelfTaskPresenter;
 import com.mdove.passwordguard.utils.InflateUtils;
+import com.mdove.passwordguard.utils.log.LogUtils;
 
 import java.util.List;
 
@@ -29,11 +26,14 @@ public class MainSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private MainPresenter mPresenter;
     private Context mContext;
     private List<SelfTaskModel> mData;
+    private OnChangeDataSizeListener mListener;
 
     public MainSelfTaskAdapter(Context context, MainPresenter presenter, List<SelfTaskModel> data) {
         mContext = context;
         mPresenter = presenter;
         mData = data;
+
+        registerAdapterDataObserver(mObserver);
     }
 
     @Override
@@ -60,10 +60,20 @@ public class MainSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         notifyPosition(position);
     }
 
-    public void onClickTaskSee(int position) {
+    public void onClickTaskDelete(int position) {
         mData.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, mData.size());
+    }
+
+    public void onClickTaskSee(int position, boolean isRemove) {
+        if (isRemove) {
+            mData.remove(position);
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, mData.size());
+        } else {
+            notifyPosition(position);
+        }
     }
 
     public void notifyPosition(int position) {
@@ -101,6 +111,43 @@ public class MainSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 mBinding.layoutBtn.setBackgroundResource(R.drawable.bg_item_self_task_btn_on);
                 mBinding.tvBtn.setText("完成");
                 mBinding.tvTitle.setTextColor(ContextCompat.getColor(mContext, R.color.black));
+            }
+        }
+    }
+
+    public void setOnChangeDataSizeListener(OnChangeDataSizeListener listener) {
+        mListener = listener;
+    }
+
+    private RecyclerView.AdapterDataObserver mObserver = new RecyclerView.AdapterDataObserver() {
+        @Override
+        public void onChanged() {
+            onDataChange(mData.size());
+        }
+
+        @Override
+        public void onItemRangeChanged(int positionStart, int itemCount) {
+            onDataChange(mData.size());
+        }
+
+        @Override
+        public void onItemRangeRemoved(int positionStart, int itemCount) {
+            onDataChange(mData.size());
+        }
+    };
+
+    @Override
+    public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView);
+        unregisterAdapterDataObserver(mObserver);
+    }
+
+    private void onDataChange(int dataSize) {
+        if (mListener != null) {
+            if (dataSize <= 0) {
+                mListener.dataIsEmpty(true);
+            } else {
+                mListener.dataIsEmpty(false);
             }
         }
     }

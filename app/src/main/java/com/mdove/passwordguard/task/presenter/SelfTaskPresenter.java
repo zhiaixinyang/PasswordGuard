@@ -6,6 +6,7 @@ import com.mdove.passwordguard.greendao.SelfTaskDao;
 import com.mdove.passwordguard.greendao.entity.SelfTask;
 import com.mdove.passwordguard.task.model.SelfTaskModel;
 import com.mdove.passwordguard.task.model.SelfTaskModelVM;
+import com.mdove.passwordguard.task.model.event.SelfTaskClickDeleteEvent;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickSeeEvent;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickSucEvent;
 import com.mdove.passwordguard.task.presenter.contract.SelfTaskContract;
@@ -69,7 +70,7 @@ public class SelfTaskPresenter implements SelfTaskContract.Presenter {
             mSelfTaskDao.update(selfTask);
         }
         mView.notifySelfTaskIsSuc(vm.mPosition);
-        RxBus.get().post(new SelfTaskClickSucEvent(vm.mSelfTaskModel.mId));
+        RxBus.get().post(new SelfTaskClickSucEvent(vm.mSelfTaskModel.mId, vm.mSelfTaskModel));
     }
 
     @Override
@@ -85,12 +86,13 @@ public class SelfTaskPresenter implements SelfTaskContract.Presenter {
             mSelfTaskDao.update(selfTask);
         }
         mView.notifySelfSee(vm.mPosition);
-        RxBus.get().post(new SelfTaskClickSeeEvent(vm.mSelfTaskModel.mId));
+        RxBus.get().post(new SelfTaskClickSeeEvent(vm.mSelfTaskModel));
     }
 
     @Override
     public void onClickDelete(SelfTaskModelVM vm) {
         mSelfTaskDao.delete(vm.mSelfTaskModel.mSelfTask);
         mView.onClickDelete(vm.mPosition);
+        RxBus.get().post(new SelfTaskClickDeleteEvent(vm.mSelfTaskModel.mId));
     }
 }

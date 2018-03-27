@@ -29,6 +29,7 @@ public class SelfTaskDao extends AbstractDao<SelfTask, Long> {
         public final static Property MTime = new Property(2, long.class, "mTime", false, "M_TIME");
         public final static Property MIsSuc = new Property(3, int.class, "mIsSuc", false, "M_IS_SUC");
         public final static Property MIsSee = new Property(4, int.class, "mIsSee", false, "M_IS_SEE");
+        public final static Property MPriority = new Property(5, int.class, "mPriority", false, "M_PRIORITY");
     }
 
 
@@ -48,7 +49,8 @@ public class SelfTaskDao extends AbstractDao<SelfTask, Long> {
                 "\"M_TASK\" TEXT," + // 1: mTask
                 "\"M_TIME\" INTEGER NOT NULL ," + // 2: mTime
                 "\"M_IS_SUC\" INTEGER NOT NULL ," + // 3: mIsSuc
-                "\"M_IS_SEE\" INTEGER NOT NULL );"); // 4: mIsSee
+                "\"M_IS_SEE\" INTEGER NOT NULL ," + // 4: mIsSee
+                "\"M_PRIORITY\" INTEGER NOT NULL );"); // 5: mPriority
     }
 
     /** Drops the underlying database table. */
@@ -73,6 +75,7 @@ public class SelfTaskDao extends AbstractDao<SelfTask, Long> {
         stmt.bindLong(3, entity.getMTime());
         stmt.bindLong(4, entity.getMIsSuc());
         stmt.bindLong(5, entity.getMIsSee());
+        stmt.bindLong(6, entity.getMPriority());
     }
 
     @Override
@@ -91,6 +94,7 @@ public class SelfTaskDao extends AbstractDao<SelfTask, Long> {
         stmt.bindLong(3, entity.getMTime());
         stmt.bindLong(4, entity.getMIsSuc());
         stmt.bindLong(5, entity.getMIsSee());
+        stmt.bindLong(6, entity.getMPriority());
     }
 
     @Override
@@ -105,7 +109,8 @@ public class SelfTaskDao extends AbstractDao<SelfTask, Long> {
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // mTask
             cursor.getLong(offset + 2), // mTime
             cursor.getInt(offset + 3), // mIsSuc
-            cursor.getInt(offset + 4) // mIsSee
+            cursor.getInt(offset + 4), // mIsSee
+            cursor.getInt(offset + 5) // mPriority
         );
         return entity;
     }
@@ -117,6 +122,7 @@ public class SelfTaskDao extends AbstractDao<SelfTask, Long> {
         entity.setMTime(cursor.getLong(offset + 2));
         entity.setMIsSuc(cursor.getInt(offset + 3));
         entity.setMIsSee(cursor.getInt(offset + 4));
+        entity.setMPriority(cursor.getInt(offset + 5));
      }
     
     @Override

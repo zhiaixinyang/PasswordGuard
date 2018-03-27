@@ -23,6 +23,7 @@ import com.mdove.passwordguard.addoralter.model.event.AddDailySelfActivityEvent;
 import com.mdove.passwordguard.addoralter.model.event.AddPasswordActivityEvent;
 import com.mdove.passwordguard.addoralter.model.event.EditDailySelfActivityEvent;
 import com.mdove.passwordguard.addoralter.model.event.EditPasswordActivityEvent;
+import com.mdove.passwordguard.base.listener.OnChangeDataSizeListener;
 import com.mdove.passwordguard.base.listener.OnItemLongClickListener;
 import com.mdove.passwordguard.deletelist.model.event.DeleteDailySelfReturnEvent;
 import com.mdove.passwordguard.deletelist.model.event.DeletePasswordReturnEvent;
@@ -44,6 +45,7 @@ import com.mdove.passwordguard.model.event.AlterPasswordEvent;
 import com.mdove.passwordguard.addoralter.dialog.AddPasswordDialog;
 import com.mdove.passwordguard.addoralter.dialog.AlterPasswordDialog;
 import com.mdove.passwordguard.search.SearchResultActivity;
+import com.mdove.passwordguard.task.model.event.SelfTaskClickDeleteEvent;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickSeeEvent;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickSucEvent;
 import com.mdove.passwordguard.ui.GradationScrollView;
@@ -158,6 +160,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
                 AlterPasswordDialog.showDialog(MainActivity.this, object, position);
             }
         });
+
         mRlv.setAdapter(mAdapter);
         mRlv.setLayoutManager(new LinearLayoutManager(this));
 //        new VerticalOverScrollBounceEffectDecorator(new RecyclerViewOverScrollDecorAdapter(mRlv));
@@ -384,12 +387,18 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     @Subscribe
     public void selfTaskClickSuc(SelfTaskClickSucEvent event) {
         //从SelfTaskActivity post 过来的notify
-        mAdapter.notifyEventSelfTaskClickSuc(event.mId);
+        mAdapter.notifyEventSelfTaskClickSuc(event.mId, event.mSelfTaskModel);
     }
 
     @Subscribe
     public void selfTaskClickSee(SelfTaskClickSeeEvent event) {
         //从SelfTaskActivity post 过来的notify
-        mAdapter.notifyEventSelfTaskClickSee(event.mId);
+        mAdapter.notifyEventSelfTaskClickSee(event.mSelfTaskModel);
+    }
+
+    @Subscribe
+    public void selfTaskClickDelete(SelfTaskClickDeleteEvent event) {
+        //从SelfTaskActivity post 过来的notify
+        mAdapter.notifyEventSelfTaskClickDelete(event.mId);
     }
 }

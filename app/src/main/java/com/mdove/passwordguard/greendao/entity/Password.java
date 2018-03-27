@@ -22,9 +22,13 @@ public class Password implements Serializable {
     public String mTvGroup;
     static final long serialVersionUID = 42L;
 
+    @Generated(hash = 565943725)
+    public Password() {
+    }
+
     @Generated(hash = 856919319)
     public Password(Long id, String mUserName, String mPassword, String mTitle,
-                    Long mTimeStamp, int isNew, String mTvGroup) {
+            Long mTimeStamp, int isNew, String mTvGroup) {
         this.id = id;
         this.mUserName = mUserName;
         this.mPassword = mPassword;
@@ -32,10 +36,6 @@ public class Password implements Serializable {
         this.mTimeStamp = mTimeStamp;
         this.isNew = isNew;
         this.mTvGroup = mTvGroup;
-    }
-
-    @Generated(hash = 565943725)
-    public Password() {
     }
 
     public Long getId() {
