@@ -50,7 +50,6 @@ import com.mdove.passwordguard.manager.UpdateStatusManager;
 import com.mdove.passwordguard.model.net.RealUpdate;
 import com.mdove.passwordguard.net.ApiServerImpl;
 import com.mdove.passwordguard.task.NewSelfTaskActivity;
-import com.mdove.passwordguard.task.SelfTaskActivity;
 import com.mdove.passwordguard.task.model.SelfTaskModel;
 import com.mdove.passwordguard.task.model.SelfTaskModelVM;
 import com.mdove.passwordguard.update.UpdateDialog;
@@ -98,6 +97,7 @@ public class MainPresenter implements MainContract.Presenter {
 
     private String mCurGroup = DEFAULT_CHECK_GROUP_TITLE;
     private List<BaseMainModel> mCheckData;
+    private MainSelfTaskModel mMainSelfTaskModel;
 
     @IntDef(value = {MAIN_OPEN_INFO_TYPE_SELF_TASK, MAIN_OPEN_INFO_TYPE_ACCOUNT, MAIN_OPEN_INFO_TYPE_GUIDE, MAIN_OPEN_INFO_TYPE_ADD_DAILY_SELF, MAIN_OPEN_INFO_TYPE_LOCK, MAIN_OPEN_INFO_TYPE_DELETE_ACCOUNT, MAIN_OPEN_INFO_TYPE_DELETE_DAILY_SELF})
     @Retention(RetentionPolicy.SOURCE)
@@ -122,6 +122,7 @@ public class MainPresenter implements MainContract.Presenter {
     public void unSubscribe() {
     }
 
+
     @Override
     public void initData() {
         mData = new ArrayList<>();
@@ -140,8 +141,8 @@ public class MainPresenter implements MainContract.Presenter {
                 mMainSelfTaskData.add(new SelfTaskModel(selfTask));
             }
         }
-        MainSelfTaskModel mainSearchModel = new MainSelfTaskModel(selfTaskModels);
-        mData.add(mainSearchModel);
+        mMainSelfTaskModel = new MainSelfTaskModel(selfTaskModels);
+        mData.add(mMainSelfTaskModel);
 
         List<Password> data = mPasswordDao.queryBuilder().build().list();
         for (Password password : data) {
@@ -482,6 +483,10 @@ public class MainPresenter implements MainContract.Presenter {
     public List<BaseMainModel> getDefaultDailySelf() {
         List<DailySelf> dailySelfList = mDailySelfDao.queryBuilder().where(DailySelfDao.Properties.MTvGroup.eq(DEFAULT_DAILY_SELF_TV_GROUP)).build().list();
         List<BaseMainModel> dailySelfData = new ArrayList<>();
+        //工作线Item
+        if (mMainSelfTaskModel != null) {
+            dailySelfData.add(mMainSelfTaskModel);
+        }
         for (DailySelf dailySelf : dailySelfList) {
             dailySelfData.add(new MainDailySelfModel(dailySelf));
         }
@@ -491,7 +496,10 @@ public class MainPresenter implements MainContract.Presenter {
     public List<BaseMainModel> getDefaultGroup() {
         List<BaseMainModel> passwordData = new ArrayList<>();
         passwordData.addAll(mSysEmptyData);
-
+        //工作线Item
+        if (mMainSelfTaskModel != null) {
+            passwordData.add(mMainSelfTaskModel);
+        }
         List<Password> data = mPasswordDao.queryBuilder().where(PasswordDao.Properties.MTvGroup.eq(DEFAULT_CHECK_GROUP_TITLE)).build().list();
         for (Password password : data) {
             passwordData.add(new PasswordModel(password));
@@ -567,6 +575,11 @@ public class MainPresenter implements MainContract.Presenter {
         }
         mCurGroup = event.mGroupInfo.mTvGroup;
         mCheckData = new ArrayList<>();
+
+        //工作线Item
+        if (mMainSelfTaskModel != null) {
+            mCheckData.add(mMainSelfTaskModel);
+        }
         List<Password> data = mPasswordDao.queryBuilder().where(PasswordDao.Properties.MTvGroup.eq(event.mGroupInfo.getMTvGroup())).build().list();
         List<PasswordModel> passwordData = new ArrayList<>();
         for (Password password : data) {
