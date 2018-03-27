@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hwangjr.rxbus.RxBus;
@@ -81,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     private String mAction;
     private boolean isLockFree = false;
     private TextView mTitle;
-    private LinearLayout mToolbar;
+    private RelativeLayout mToolbar;
     private int mHasDy;
 
     @Override
@@ -161,7 +162,9 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
                 if (mHasDy <= 0 || !mRlv.canScrollVertically(-1)) {   //mRlv.canScrollVertically(-1)返回false表示到顶部了
                     mTitle.setTextColor(Color.argb(0, 255, 255, 255));
                     mToolbar.setBackgroundColor(Color.argb(0, 39, 40, 81));
+                    isShowSearchBtn(false);
                 } else if (mHasDy > 0 && mHasDy <= TOOLBAR_HEIGHT) { //滑动距离小于banner图的高度时，设置背景和字体颜色颜色透明度渐变
+                    isShowSearchBtn(false);
                     float scale = (float) mHasDy / TOOLBAR_HEIGHT;
                     float alpha = (255 * scale);
                     mTitle.setTextColor(Color.argb((int) alpha, 255, 255, 255));
@@ -169,9 +172,20 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
                 } else if (mHasDy > TOOLBAR_HEIGHT) {    //滑动到banner下面设置普通颜色
                     mToolbar.setBackgroundColor(Color.argb(255, 39, 40, 81));
                     mTitle.setTextColor(Color.argb(255, 255, 255, 255));
+                    isShowSearchBtn(true);
                 }
             }
         });
+    }
+
+    private void isShowSearchBtn(boolean isShow) {
+        if (isShow) {
+            mBinding.btnSearch.setVisibility(View.VISIBLE);
+            mBinding.btnSearch.setClickable(true);
+        } else {
+            mBinding.btnSearch.setVisibility(View.GONE);
+            mBinding.btnSearch.setClickable(false);
+        }
     }
 
     private void handleAction(Intent intent) {

@@ -72,26 +72,49 @@
                 android:textColor="@color/commonColor"
                 android:textSize="16sp" />
         </RelativeLayout>
-        <LinearLayout
+
+        <RelativeLayout
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:orientation="vertical"
+            android:layout_height="wrap_content"
             android:background="#00000000"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            android:layout_height="wrap_content">
+            android:orientation="vertical"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
             <TextView
                 android:id="@+id/status_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
             <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                android:layout_below="@+id/status_bar"
                 android:gravity="center"
                 android:text="便签管家"
                 android:textColor="@color/trans"
                 android:textSize="18sp" />
-        </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/btn_search"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/status_bar"
+                android:layout_marginRight="12dp"
+                android:onClick="@{()->actionHandler.onClickBtnSearch()}"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/ic_search"
+                    android:tint="@color/white" />
+            </FrameLayout>
+        </RelativeLayout>
 
     </android.support.design.widget.CoordinatorLayout>
 </layout>

@@ -8,6 +8,10 @@
         <variable
             name="viewModel"
             type="com.mdove.passwordguard.task.model.DeleteSelfTaskModelVM" />
+
+        <variable
+            name="actionHandler"
+            type="com.mdove.passwordguard.task.presenter.DeleteSelfTaskPresenter" />
     </data>
 
     <RelativeLayout
@@ -21,62 +25,62 @@
             android:id="@+id/layout_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/iv_see"
             android:background="@drawable/bg_item_self_task">
 
             <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_item_self_task"
                 android:layout_marginRight="@dimen/margin_item_self_task"
                 android:layout_marginTop="@dimen/margin_item_self_task"
-                android:layout_marginLeft="@dimen/margin_item_self_task"
                 android:layout_toLeftOf="@+id/layout_btn"
                 android:text="@{viewModel.mTask}"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 tools:text="我的一条任务,我的一条任务,我的一条任务,我的一条任务,我的一条任务,我的一条任务" />
+
             <TextView
                 android:id="@+id/tv_time"
-                android:layout_alignParentRight="true"
-                android:layout_margin="@dimen/margin_item_self_task"
                 android:layout_width="wrap_content"
-                android:text="@{viewModel.mDeleteTime}"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/layout_btn_delete"
                 android:layout_below="@+id/tv_title"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
+                android:layout_margin="@dimen/margin_item_self_task"
+                android:gravity="bottom"
+                android:text="@{viewModel.mDeleteTime}"
                 android:textColor="@color/gray"
-                tools:text="2018年3月27"/>
+                android:textSize="12sp"
+                tools:text="2018年3月27" />
+
             <RelativeLayout
-                android:id="@+id/layout_btn"
+                android:id="@+id/layout_btn_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginBottom="@dimen/margin_item_self_task"
+                android:layout_below="@+id/tv_title"
                 android:layout_marginRight="@dimen/margin_item_self_task"
                 android:layout_marginTop="@dimen/margin_item_self_task"
-                android:background="@drawable/bg_item_self_task_delete_btn"
-                android:paddingBottom="2dp"
-                android:paddingLeft="@dimen/margin_item_self_task"
-                android:paddingRight="@dimen/margin_item_self_task"
-                android:paddingTop="2dp"
-                android:visibility="gone">
-
-                <TextView
-                    android:id="@+id/tv_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="还原"
-                    android:textColor="@color/white" />
+                android:onClick="@{()->actionHandler.warningDeleteDialog(viewModel)}">
 
                 <ImageView
-                    android:id="@+id/iv_btn"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_toRightOf="@+id/tv_btn"
-                    android:src="@mipmap/ic_task_suc" />
+                    android:id="@+id/iv_see"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginRight="@dimen/margin_item_self_task"
+                    android:src="@mipmap/ic_delete"
+                    android:tint="@color/commonColor" />
+
+                <TextView
+                    android:id="@+id/tv_see_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_see"
+                    android:layout_marginBottom="@dimen/margin_item_self_task"
+                    android:text="永久删除"
+                    android:textColor="@color/commonColor"
+                    android:textSize="12sp" />
             </RelativeLayout>
         </RelativeLayout>
     </RelativeLayout>

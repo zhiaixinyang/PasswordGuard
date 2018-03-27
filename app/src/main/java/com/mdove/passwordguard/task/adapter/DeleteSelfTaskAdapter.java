@@ -58,24 +58,16 @@ public class DeleteSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         notifyPosition(position);
     }
 
-    public void onClickTaskPriority(int position) {
-        notifyPosition(position);
-    }
-
     public void onClickTaskDelete(int position) {
         mData.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, mData.size());
     }
 
-    public void onClickTaskSee(int position, boolean isRemove) {
-        if (isRemove) {
-            mData.remove(position);
-            notifyItemRemoved(position);
-            notifyItemRangeChanged(position, mData.size());
-        } else {
-            notifyPosition(position);
-        }
+    public void notifyDeleteReturn(int position) {
+        mData.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, mData.size() - position);
     }
 
     public void notifyPosition(int position) {

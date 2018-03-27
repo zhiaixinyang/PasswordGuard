@@ -1,9 +1,11 @@
 package com.mdove.passwordguard.task.presenter;
 
 import com.mdove.passwordguard.App;
+import com.mdove.passwordguard.deletelist.model.vm.DeleteDailySelfModelVM;
 import com.mdove.passwordguard.greendao.DeleteSelfTaskDao;
 import com.mdove.passwordguard.greendao.entity.DeleteSelfTask;
 import com.mdove.passwordguard.task.model.DeleteSelfTaskModel;
+import com.mdove.passwordguard.task.model.DeleteSelfTaskModelVM;
 import com.mdove.passwordguard.task.presenter.contract.DeleteSelfTaskContract;
 
 import java.util.ArrayList;
@@ -55,5 +57,16 @@ public class DeleteSelfTaskPresenter implements DeleteSelfTaskContract.Presenter
         }
         int position = mData.indexOf(deleteSelfTaskModel);
         mView.onClickDelete(position);
+    }
+
+    @Override
+    public void realDelete(DeleteSelfTaskModelVM vm) {
+        mDeleteSelfTaskDao.delete(vm.mDeleteSelfTaskModel.mDeleteSelfTask);
+        mView.realDelete(vm.mPosition);
+    }
+
+    @Override
+    public void warningDeleteDialog(DeleteSelfTaskModelVM vm) {
+        mView.warningDeleteDialog(vm);
     }
 }
