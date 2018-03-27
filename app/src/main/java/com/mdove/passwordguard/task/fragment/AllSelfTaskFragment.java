@@ -85,11 +85,6 @@ public class AllSelfTaskFragment extends Fragment implements AllSelfTaskContract
     }
 
     @Override
-    public Context getContext() {
-        return getContext();
-    }
-
-    @Override
     public void insertSelfTask(int position) {
         mAdapter.notifyInsertPosition(position);
     }

@@ -53,16 +53,16 @@ public class NewSelfTaskActivity extends BaseActivity {
     private void setupTabLayout() {
         List<Fragment> fragmentList = new ArrayList<>();
         fragmentList.add(AllSelfTaskFragment.newInstance());
-        fragmentList.add(DeleteSelfTaskFragment.newInstance());
         fragmentList.add(SucSelfTaskFragment.newInstance());
+        fragmentList.add(DeleteSelfTaskFragment.newInstance());
 
         SelfTaskPagerAdapter adapter = new SelfTaskPagerAdapter(getSupportFragmentManager(), fragmentList);
         mViewPager.setAdapter(adapter);
         mTabLayout.setupWithViewPager(mViewPager);
 
         mTabLayout.getTabAt(0).setText(R.string.tab_str_all_self_task);
-        mTabLayout.getTabAt(1).setText(R.string.tab_str_delete_self_task);
-        mTabLayout.getTabAt(2).setText(R.string.tab_str_suc_self_task);
+        mTabLayout.getTabAt(1).setText(R.string.tab_str_suc_self_task);
+        mTabLayout.getTabAt(2).setText(R.string.tab_str_delete_self_task);
 
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

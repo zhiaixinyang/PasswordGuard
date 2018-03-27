@@ -61,7 +61,26 @@ public class DeleteSelfTaskFragment extends Fragment implements DeleteSelfTaskCo
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mPresenter.initData();
+        if (!dataExisted()) {
+            mPresenter.initData();
+        }
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser){
+            if (!dataExisted()) {
+                mPresenter.initData();
+            }
+        }
+    }
+
+    private boolean dataExisted() {
+        if (mAdapter != null) {
+            return mAdapter.getItemCount() > 0;
+        }
+        return false;
     }
 
     @Override

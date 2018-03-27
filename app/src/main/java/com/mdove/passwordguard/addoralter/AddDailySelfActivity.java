@@ -67,6 +67,11 @@ public class AddDailySelfActivity extends BaseActivity implements AddDailySelfCo
     }
 
     @Override
+    protected boolean isNeedBaseMenu() {
+        return true;
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("随手记");

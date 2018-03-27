@@ -40,10 +40,6 @@ public class DeleteListPasswordActivity extends BaseActivity implements DeleteLi
         return false;
     }
 
-    @Override
-    protected boolean isNeedBaseMenu() {
-        return false;
-    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

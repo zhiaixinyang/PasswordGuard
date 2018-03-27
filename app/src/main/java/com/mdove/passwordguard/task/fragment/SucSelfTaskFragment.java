@@ -56,13 +56,32 @@ public class SucSelfTaskFragment extends Fragment implements SucSelfTaskContract
     }
 
     @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser){
+            if (!dataExisted()) {
+                mPresenter.initData();
+            }
+        }
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mPresenter.initData();
+        if (!dataExisted()) {
+            mPresenter.initData();
+        }
     }
 
     @Override
     public void initData(List<SucSelfTaskModel> data) {
         mAdapter.setData(data);
+    }
+
+    private boolean dataExisted() {
+        if (mAdapter != null) {
+            return mAdapter.getItemCount() > 0;
+        }
+        return false;
     }
 }

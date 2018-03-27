@@ -221,7 +221,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract boolean isNeedCustomLayout();
 
     protected boolean isNeedBaseMenu() {
-        return true;
+        return false;
     }
 
     protected void onClickMenuAdd() {

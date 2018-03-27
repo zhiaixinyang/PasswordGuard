@@ -52,10 +52,6 @@ public class AddPasswordActivity extends BaseActivity implements AddPasswordCont
         return false;
     }
 
-    @Override
-    protected boolean isNeedBaseMenu() {
-        return false;
-    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

@@ -62,11 +62,6 @@ public class EditPasswordActivity extends BaseActivity implements AddPasswordCon
     }
 
     @Override
-    protected boolean isNeedBaseMenu() {
-        return false;
-    }
-
-    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("修改账号信息");
