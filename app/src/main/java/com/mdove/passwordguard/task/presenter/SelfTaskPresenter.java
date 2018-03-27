@@ -7,6 +7,7 @@ import com.mdove.passwordguard.greendao.entity.SelfTask;
 import com.mdove.passwordguard.task.model.SelfTaskModel;
 import com.mdove.passwordguard.task.model.SelfTaskModelVM;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickDeleteEvent;
+import com.mdove.passwordguard.task.model.event.SelfTaskClickPriorityEvent;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickSeeEvent;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickSucEvent;
 import com.mdove.passwordguard.task.presenter.contract.SelfTaskContract;
@@ -52,6 +53,7 @@ public class SelfTaskPresenter implements SelfTaskContract.Presenter {
         selfTask.mTask = content;
         selfTask.mTime = new Date().getTime();
         selfTask.mIsSuc = 0;
+        selfTask.mPriority = 0;
         mSelfTaskDao.insert(selfTask);
         mData.add(new SelfTaskModel(selfTask));
         mView.insertSelfTask(mData.size());
@@ -86,6 +88,7 @@ public class SelfTaskPresenter implements SelfTaskContract.Presenter {
             mSelfTaskDao.update(selfTask);
         }
         mView.notifySelfSee(vm.mPosition);
+
         RxBus.get().post(new SelfTaskClickSeeEvent(vm.mSelfTaskModel));
     }
 
@@ -93,6 +96,24 @@ public class SelfTaskPresenter implements SelfTaskContract.Presenter {
     public void onClickDelete(SelfTaskModelVM vm) {
         mSelfTaskDao.delete(vm.mSelfTaskModel.mSelfTask);
         mView.onClickDelete(vm.mPosition);
+
         RxBus.get().post(new SelfTaskClickDeleteEvent(vm.mSelfTaskModel.mId));
+    }
+
+    @Override
+    public void onClickPriority(SelfTaskModelVM vm) {
+        SelfTask selfTask = vm.mSelfTaskModel.mSelfTask;
+        int curPriority = selfTask.mPriority;
+        curPriority++;
+        if (curPriority >= 3) {
+            curPriority = 0;
+        }
+        selfTask.mPriority = curPriority;
+        mSelfTaskDao.update(selfTask);
+
+        vm.mSelfTaskModel.mPriority = curPriority;
+        mView.notifySelfTaskPriority(vm.mPosition);
+
+        RxBus.get().post(new SelfTaskClickPriorityEvent(vm.mSelfTaskModel.mId));
     }
 }

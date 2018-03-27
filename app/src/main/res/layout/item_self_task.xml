@@ -99,6 +99,37 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/layout_btn_priority"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_title"
+                android:layout_marginLeft="@dimen/margin_item_self_task"
+                android:layout_marginTop="@dimen/margin_item_self_task"
+                android:layout_toRightOf="@+id/layout_btn_delete"
+                android:onClick="@{()->actionHandler.onClickPriority(viewModel)}">
+
+                <ImageView
+                    android:id="@+id/iv_priority"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginRight="@dimen/margin_item_self_task"
+                    android:src="@mipmap/ic_item_priority"
+                    android:tint="@color/commonColor" />
+
+                <TextView
+                    android:id="@+id/tv_priority_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_priority"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/margin_item_self_task"
+                    android:text="优先级"
+                    android:textColor="@color/commonColor"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:id="@+id/layout_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

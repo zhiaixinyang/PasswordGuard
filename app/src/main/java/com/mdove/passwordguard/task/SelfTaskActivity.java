@@ -88,6 +88,11 @@ public class SelfTaskActivity extends BaseActivity implements SelfTaskContract.M
     }
 
     @Override
+    public void notifySelfTaskPriority(int position) {
+        mAdapter.notifyPosition(position);
+    }
+
+    @Override
     public void notifySelfSee(int position) {
         mAdapter.notifyPosition(position);
     }

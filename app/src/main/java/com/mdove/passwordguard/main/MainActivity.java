@@ -46,6 +46,7 @@ import com.mdove.passwordguard.addoralter.dialog.AddPasswordDialog;
 import com.mdove.passwordguard.addoralter.dialog.AlterPasswordDialog;
 import com.mdove.passwordguard.search.SearchResultActivity;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickDeleteEvent;
+import com.mdove.passwordguard.task.model.event.SelfTaskClickPriorityEvent;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickSeeEvent;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickSucEvent;
 import com.mdove.passwordguard.ui.GradationScrollView;
@@ -400,5 +401,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     public void selfTaskClickDelete(SelfTaskClickDeleteEvent event) {
         //从SelfTaskActivity post 过来的notify
         mAdapter.notifyEventSelfTaskClickDelete(event.mId);
+    }
+
+    @Subscribe
+    public void selfTaskClickPriority(SelfTaskClickPriorityEvent event) {
+        //从SelfTaskActivity post 过来的notify
+        mAdapter.notifyEventSelfTaskClickPriority(event.mId);
     }
 }

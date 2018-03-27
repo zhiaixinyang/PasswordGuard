@@ -20,11 +20,13 @@ public interface SelfTaskContract {
         void onClickTaskSuc(SelfTaskModelVM vm);
         void onClickSee(SelfTaskModelVM vm);
         void onClickDelete(SelfTaskModelVM vm);
+        void onClickPriority(SelfTaskModelVM vm);
     }
 
     interface MvpView extends BaseView<Presenter> {
         void insertSelfTask(int position);
         void notifySelfTaskIsSuc(int position);
+        void notifySelfTaskPriority(int position);
         void notifySelfSee(int position);
 
         void initData(List<SelfTaskModel> data);

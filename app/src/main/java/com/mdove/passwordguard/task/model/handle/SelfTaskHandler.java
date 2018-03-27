@@ -26,4 +26,8 @@ public class SelfTaskHandler {
         mPresenter.onClickDelete(vm);
     }
 
+    public void onClickPriority(SelfTaskModelVM vm) {
+        mPresenter.onClickPriority(vm);
+    }
+
 }

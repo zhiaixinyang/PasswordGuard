@@ -13,6 +13,7 @@ import com.mdove.passwordguard.main.model.handler.MainSelfTaskHandler;
 import com.mdove.passwordguard.main.presenter.MainPresenter;
 import com.mdove.passwordguard.task.model.SelfTaskModel;
 import com.mdove.passwordguard.task.model.SelfTaskModelVM;
+import com.mdove.passwordguard.task.utils.SelfTaskPriorityHelper;
 import com.mdove.passwordguard.utils.InflateUtils;
 import com.mdove.passwordguard.utils.log.LogUtils;
 
@@ -60,6 +61,10 @@ public class MainSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         notifyPosition(position);
     }
 
+    public void onClickTaskPriority(int position) {
+        notifyPosition(position);
+    }
+
     public void onClickTaskDelete(int position) {
         mData.remove(position);
         notifyItemRemoved(position);
@@ -77,10 +82,6 @@ public class MainSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     public void notifyPosition(int position) {
-        notifyInsertPosition(position);
-    }
-
-    public void notifyInsertPosition(int position) {
         notifyItemChanged(position);
     }
 
@@ -100,17 +101,21 @@ public class MainSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         public void bind(SelfTaskModel selfTaskModel, int position) {
             mBinding.setViewModel(new SelfTaskModelVM(selfTaskModel, position));
             mBinding.setActionHandler(new MainSelfTaskHandler(mPresenter));
+            mBinding.tvTitle.setTextColor(SelfTaskPriorityHelper.getPriorityTextColor(mContext, selfTaskModel.mPriority));
+
             if (selfTaskModel.mIsSuc) {
                 mBinding.tvTitle.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+                mBinding.tvTitle.setTextColor(ContextCompat.getColor(mContext, R.color.gray_light));
+
                 mBinding.layoutBtn.setBackgroundResource(R.drawable.bg_item_self_task_btn_off);
                 mBinding.tvBtn.setText("取消");
-                mBinding.tvTitle.setTextColor(ContextCompat.getColor(mContext, R.color.gray_light));
             } else {
                 mBinding.tvTitle.getPaint().setFlags(0);
                 mBinding.tvTitle.getPaint().setAntiAlias(true);
+                mBinding.tvTitle.setTextColor(SelfTaskPriorityHelper.getPriorityTextColor(mContext, selfTaskModel.mPriority));
+
                 mBinding.layoutBtn.setBackgroundResource(R.drawable.bg_item_self_task_btn_on);
                 mBinding.tvBtn.setText("完成");
-                mBinding.tvTitle.setTextColor(ContextCompat.getColor(mContext, R.color.black));
             }
         }
     }

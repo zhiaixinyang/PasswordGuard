@@ -1,6 +1,7 @@
 package com.mdove.passwordguard.task.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -15,6 +16,7 @@ import com.mdove.passwordguard.task.model.SelfTaskModel;
 import com.mdove.passwordguard.task.model.SelfTaskModelVM;
 import com.mdove.passwordguard.task.model.handle.SelfTaskHandler;
 import com.mdove.passwordguard.task.presenter.SelfTaskPresenter;
+import com.mdove.passwordguard.task.utils.SelfTaskPriorityHelper;
 import com.mdove.passwordguard.utils.InflateUtils;
 
 import java.util.List;
@@ -79,17 +81,24 @@ public class SelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         public void bind(SelfTaskModel selfTaskModel, int position) {
             mBinding.setViewModel(new SelfTaskModelVM(selfTaskModel, position));
             mBinding.setActionHandler(new SelfTaskHandler(mPresenter));
+
+            mBinding.ivPriority.setColorFilter(SelfTaskPriorityHelper.getPriorityBtnColor(mContext,selfTaskModel.mPriority), PorterDuff.Mode.SRC_ATOP);
+            mBinding.tvPriorityTip.setTextColor(SelfTaskPriorityHelper.getPriorityBtnColor(mContext,selfTaskModel.mPriority));
+            mBinding.tvTitle.setTextColor(SelfTaskPriorityHelper.getPriorityTextColor(mContext,selfTaskModel.mPriority));
+
             if (selfTaskModel.mIsSuc) {
                 mBinding.tvTitle.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+                mBinding.tvTitle.setTextColor(ContextCompat.getColor(mContext, R.color.gray_light));
+
                 mBinding.layoutBtn.setBackgroundResource(R.drawable.bg_item_self_task_btn_off);
                 mBinding.tvBtn.setText("取消");
-                mBinding.tvTitle.setTextColor(ContextCompat.getColor(mContext, R.color.gray_light));
             } else {
                 mBinding.tvTitle.getPaint().setFlags(0);
                 mBinding.tvTitle.getPaint().setAntiAlias(true);
+                mBinding.tvTitle.setTextColor(SelfTaskPriorityHelper.getPriorityTextColor(mContext,selfTaskModel.mPriority));
+
                 mBinding.layoutBtn.setBackgroundResource(R.drawable.bg_item_self_task_btn_on);
                 mBinding.tvBtn.setText("完成");
-                mBinding.tvTitle.setTextColor(ContextCompat.getColor(mContext, R.color.black));
             }
             if (selfTaskModel.mIsSee) {
                 mBinding.ivSee.setImageResource(R.mipmap.ic_self_task_see_on);

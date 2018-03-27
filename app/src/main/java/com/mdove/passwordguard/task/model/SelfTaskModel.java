@@ -11,6 +11,7 @@ public class SelfTaskModel {
     public long mTime;
     public boolean mIsSuc;
     public boolean mIsSee;
+    public int mPriority;
     public SelfTask mSelfTask;
     public long mId;
 
@@ -21,5 +22,6 @@ public class SelfTaskModel {
         mIsSuc = selfTask.mIsSuc == 1;
         mIsSee = selfTask.mIsSee == 1;
         mSelfTask = selfTask;
+        mPriority = selfTask.mPriority;
     }
 }

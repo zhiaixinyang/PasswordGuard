@@ -45,6 +45,9 @@
     <color name="color_password_delete_return">#fb7544</color>
     <color name="gray_plus">#808080</color>
 
+    <color name="self_task_priority_red">@color/red_700</color>
+    <color name="self_task_priority_yellow">@color/yellow_800</color>
+
     <array name="lightPalette">
         <item>@color/red_700</item>
         <item>@color/red_200</item>
