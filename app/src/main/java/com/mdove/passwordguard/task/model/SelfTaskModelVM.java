@@ -1,7 +1,10 @@
 package com.mdove.passwordguard.task.model;
 
 import android.databinding.ObservableField;
+import android.text.Editable;
+import android.text.TextWatcher;
 
+import com.mdove.passwordguard.base.SimpleTextWatcher;
 import com.mdove.passwordguard.utils.DateUtil;
 
 /**
@@ -26,4 +29,12 @@ public class SelfTaskModelVM {
         mSelfTaskModel = selfTaskModel;
         mPosition = position;
     }
+
+    public TextWatcher textWatcher = new SimpleTextWatcher() {
+        @Override
+        public void afterTextChanged(Editable s) {
+            mTask.set(s.toString());
+            mSelfTaskModel.mTask = s.toString();
+        }
+    };
 }

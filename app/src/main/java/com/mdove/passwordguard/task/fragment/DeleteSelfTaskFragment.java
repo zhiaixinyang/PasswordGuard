@@ -70,9 +70,9 @@ public class DeleteSelfTaskFragment extends Fragment implements DeleteSelfTaskCo
             @Override
             public void dataIsEmpty(boolean isEmpty) {
                 if (isEmpty) {
-                    mLayoutEmpty.setVisibility(View.GONE);
-                } else {
                     mLayoutEmpty.setVisibility(View.VISIBLE);
+                } else {
+                    mLayoutEmpty.setVisibility(View.GONE);
                 }
             }
         });

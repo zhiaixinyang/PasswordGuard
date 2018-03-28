@@ -26,6 +26,8 @@ public interface AllSelfTaskContract {
         void onClickPriority(SelfTaskModelVM vm);
 
         void onClickCopy(SelfTaskModelVM vm);
+
+        void onClickBtnEdit(SelfTaskModelVM vm,boolean isNoChange);
     }
 
     interface MvpView extends BaseView<Presenter> {
@@ -40,5 +42,7 @@ public interface AllSelfTaskContract {
         void initData(List<SelfTaskModel> data);
 
         void onClickDelete(int position);
+
+        void onClickBtnEdit(int position);
     }
 }

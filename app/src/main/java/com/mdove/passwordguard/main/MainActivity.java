@@ -45,6 +45,7 @@ import com.mdove.passwordguard.addoralter.dialog.AddPasswordDialog;
 import com.mdove.passwordguard.addoralter.dialog.AlterPasswordDialog;
 import com.mdove.passwordguard.search.SearchResultActivity;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickDeleteEvent;
+import com.mdove.passwordguard.task.model.event.SelfTaskClickEditEvent;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickPriorityEvent;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickSeeEvent;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickSucEvent;
@@ -78,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
 
     public static final String EXTRA_ACTION_KEY = "extra_action_key";
     public static final String ACTION_LOCK_IS_SUC = "action_lock_is_suc";
-    public static final int TOOLBAR_HEIGHT = DensityUtil.getScreenHeight(App.getAppContext()) / 4;
+    public static final int TOOLBAR_HEIGHT = DensityUtil.getScreenHeight(App.getAppContext()) / 5;
     private String mAction;
     private boolean isLockFree = false;
     private TextView mTitle;
@@ -413,5 +414,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     public void selfTaskClickPriority(SelfTaskClickPriorityEvent event) {
         //从SelfTaskActivity post 过来的notify
         mAdapter.notifyEventSelfTaskClickPriority(event.mId, event.mSelfTaskModel.mPriority);
+    }
+
+    @Subscribe
+    public void selfTaskClickEdit(SelfTaskClickEditEvent event) {
+        //从SelfTaskActivity post 过来的notify
+        mAdapter.notifyEventSelfTaskClickEdit(event.mId, event.mSelfTaskModel.mTask);
     }
 }

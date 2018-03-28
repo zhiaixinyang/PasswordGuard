@@ -2,12 +2,14 @@ package com.mdove.passwordguard.task.presenter;
 
 import com.hwangjr.rxbus.RxBus;
 import com.mdove.passwordguard.App;
+import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.greendao.DeleteSelfTaskDao;
 import com.mdove.passwordguard.greendao.SelfTaskDao;
 import com.mdove.passwordguard.greendao.entity.SelfTask;
 import com.mdove.passwordguard.task.model.SelfTaskModel;
 import com.mdove.passwordguard.task.model.SelfTaskModelVM;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickDeleteEvent;
+import com.mdove.passwordguard.task.model.event.SelfTaskClickEditEvent;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickPriorityEvent;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickSeeEvent;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickSucEvent;
@@ -15,6 +17,7 @@ import com.mdove.passwordguard.task.presenter.contract.AllSelfTaskContract;
 import com.mdove.passwordguard.task.presenter.contract.SelfTaskContract;
 import com.mdove.passwordguard.task.utils.DeleteSelfTaskHelper;
 import com.mdove.passwordguard.utils.ClipboardUtils;
+import com.mdove.passwordguard.utils.ToastHelper;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -127,5 +130,23 @@ public class AllSelfTaskPresenter implements AllSelfTaskContract.Presenter {
     @Override
     public void onClickCopy(SelfTaskModelVM vm) {
         ClipboardUtils.copyToClipboard(mView.getContext(), vm.mTask.get());
+    }
+
+    @Override
+    public void onClickBtnEdit(SelfTaskModelVM vm, boolean isChange) {
+        if (!isChange) {
+            ToastHelper.shortToast(mView.getContext().getResources().getString(R.string.string_self_task_edit_error));
+            return;
+        }
+        SelfTask selfTask = vm.mSelfTaskModel.mSelfTask;
+        selfTask.mTask = vm.mTask.get();
+        mSelfTaskDao.update(selfTask);
+
+        vm.mSelfTaskModel.mTask = vm.mTask.get();
+
+        mView.onClickBtnEdit(vm.mPosition);
+
+        ToastHelper.shortToast(mView.getContext().getResources().getString(R.string.string_self_task_edit_suc));
+        RxBus.get().post(new SelfTaskClickEditEvent(vm.mSelfTaskModel.mId, vm.mSelfTaskModel));
     }
 }

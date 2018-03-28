@@ -56,10 +56,10 @@ public class SucSelfTaskPresenter implements SucSelfTaskContract.Presenter {
 
     @Override
     public void onClickSuc(SelfTaskModel model) {
-        if (model.mIsSuc){
+        if (model.mIsSuc) {
             mData.add(new SucSelfTaskModel(model.mSelfTask));
-            mView.onClickSuc(mData.size(),model.mIsSuc);
-        }else{
+            mView.onClickSuc(mData.size(), model.mIsSuc);
+        } else {
             SucSelfTaskModel sucSelfTaskModel = null;
             for (SucSelfTaskModel model1 : mData) {
                 if (model1.mId == model.mId) {
@@ -70,7 +70,7 @@ public class SucSelfTaskPresenter implements SucSelfTaskContract.Presenter {
                 return;
             }
             int position = mData.indexOf(sucSelfTaskModel);
-            mView.onClickSuc(position,model.mIsSuc);
+            mView.onClickSuc(position, model.mIsSuc);
         }
     }
 
@@ -103,5 +103,21 @@ public class SucSelfTaskPresenter implements SucSelfTaskContract.Presenter {
         sucSelfTaskModel.mPriority = model.mPriority;
         int position = mData.indexOf(sucSelfTaskModel);
         mView.onClickPriority(position);
+    }
+
+    @Override
+    public void onClickEdit(long id, String editContent) {
+        SucSelfTaskModel sucSelfTaskModel = null;
+        for (SucSelfTaskModel model1 : mData) {
+            if (model1.mId == id) {
+                sucSelfTaskModel = model1;
+            }
+        }
+        if (sucSelfTaskModel == null) {
+            return;
+        }
+        sucSelfTaskModel.mTask = editContent;
+        int position = mData.indexOf(sucSelfTaskModel);
+        mView.onClickEdit(position);
     }
 }

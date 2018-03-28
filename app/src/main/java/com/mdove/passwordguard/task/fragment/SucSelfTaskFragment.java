@@ -19,6 +19,7 @@ import com.mdove.passwordguard.databinding.FragmentSucSelfTaskBinding;
 import com.mdove.passwordguard.task.adapter.SucSelfTaskAdapter;
 import com.mdove.passwordguard.task.model.SucSelfTaskModel;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickDeleteEvent;
+import com.mdove.passwordguard.task.model.event.SelfTaskClickEditEvent;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickPriorityEvent;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickSucEvent;
 import com.mdove.passwordguard.task.presenter.SucSelfTaskPresenter;
@@ -64,9 +65,9 @@ public class SucSelfTaskFragment extends Fragment implements SucSelfTaskContract
             @Override
             public void dataIsEmpty(boolean isEmpty) {
                 if (isEmpty) {
-                    mLayoutEmpty.setVisibility(View.GONE);
-                } else {
                     mLayoutEmpty.setVisibility(View.VISIBLE);
+                } else {
+                    mLayoutEmpty.setVisibility(View.GONE);
                 }
             }
         });
@@ -103,6 +104,11 @@ public class SucSelfTaskFragment extends Fragment implements SucSelfTaskContract
         mAdapter.onClickTaskPriority(position);
     }
 
+    @Override
+    public void onClickEdit(int position) {
+        mAdapter.notifyPosition(position);
+    }
+
     private boolean dataExisted() {
         if (mAdapter != null) {
             return mAdapter.getItemCount() > 0;
@@ -130,4 +136,9 @@ public class SucSelfTaskFragment extends Fragment implements SucSelfTaskContract
     public void selfTaskClickPriority(SelfTaskClickPriorityEvent event) {
         mPresenter.onClickPriority(event.mSelfTaskModel);
     }
+
+//    @Subscribe
+//    public void selfTaskClickEdit(SelfTaskClickEditEvent event) {
+//        mPresenter.onClickEdit(event.mId, event.mSelfTaskModel.mTask);
+//    }
 }

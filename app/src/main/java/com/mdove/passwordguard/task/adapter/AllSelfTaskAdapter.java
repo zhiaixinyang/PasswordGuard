@@ -5,6 +5,7 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.mdove.passwordguard.R;
@@ -85,6 +86,24 @@ public class AllSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             mBinding.ivPriority.setColorFilter(SelfTaskPriorityHelper.getPriorityBtnColor(mContext, selfTaskModel.mPriority), PorterDuff.Mode.SRC_ATOP);
             mBinding.tvPriorityTip.setTextColor(SelfTaskPriorityHelper.getPriorityBtnColor(mContext, selfTaskModel.mPriority));
             mBinding.tvTitle.setTextColor(SelfTaskPriorityHelper.getPriorityTextColor(mContext, selfTaskModel.mPriority));
+
+            if (!selfTaskModel.mIsSuc) {
+                mBinding.tvTitle.setFocusable(true);
+                mBinding.tvTitle.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View v, boolean hasFocus) {
+                        if (hasFocus) {
+                            mBinding.btnEdit.setVisibility(View.VISIBLE);
+                        } else {
+                            mBinding.btnEdit.setVisibility(View.GONE);
+                        }
+                    }
+                });
+            } else {
+                mBinding.tvTitle.setFocusable(false);
+                mBinding.tvTitle.setClickable(false);
+                mBinding.btnEdit.setVisibility(View.GONE);
+            }
 
             if (selfTaskModel.mIsSuc) {
                 mBinding.tvTitle.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);

@@ -484,7 +484,25 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         mMainSelfTaskAdapter.onClickTaskDelete(position);
     }
 
-    public void notifyEventSelfTaskClickPriority(long id,int priority) {
+    public void notifyEventSelfTaskClickEdit(long id, String editContent) {
+        if (mMainSelfTaskAdapter == null) {
+            return;
+        }
+        SelfTaskModel selfTaskModel = null;
+        for (SelfTaskModel model : mMainSelfTaskAdapter.getData()) {
+            if (model.mId == id) {
+                selfTaskModel = model;
+            }
+        }
+        if (selfTaskModel == null) {
+            return;
+        }
+        selfTaskModel.mTask = editContent;
+        int position = mMainSelfTaskAdapter.getData().indexOf(selfTaskModel);
+        mMainSelfTaskAdapter.notifyPosition(position);
+    }
+
+    public void notifyEventSelfTaskClickPriority(long id, int priority) {
         if (mMainSelfTaskAdapter == null) {
             return;
         }

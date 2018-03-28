@@ -29,15 +29,35 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bg_item_self_task">
 
-            <TextView
+            <EditText
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_item_self_task"
+                android:layout_toLeftOf="@+id/btn_edit"
+                android:background="@null"
                 android:text="@{viewModel.mTask}"
                 android:textColor="@color/black"
                 android:textSize="16sp"
+                app:addTextChangedListener="@{viewModel.textWatcher}"
                 tools:text="我的一条任务,我的一条任务,我的一条任务,我的一条任务,我的一条任务,我的一条任务" />
+
+            <TextView
+                android:id="@+id/btn_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_margin="@dimen/margin_item_self_task"
+                android:background="@drawable/bg_item_self_task_btn_edit"
+                android:onClick="@{(view)->actionHandler.onClickBtnEdit(view,viewModel)}"
+                android:paddingBottom="4dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="4dp"
+                android:text="修改"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:visibility="gone" />
 
             <RelativeLayout
                 android:id="@+id/layout_btn_see"
@@ -112,9 +132,9 @@
                     android:id="@+id/iv_priority"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:padding="1dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginRight="@dimen/margin_item_self_task"
+                    android:padding="1dp"
                     android:src="@mipmap/ic_item_priority"
                     android:tint="@color/commonColor" />
 
@@ -165,9 +185,9 @@
                 android:id="@+id/layout_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/layout_btn_delete"
                 android:layout_alignParentRight="true"
                 android:layout_marginBottom="@dimen/margin_item_self_task"
-                android:layout_alignBottom="@+id/layout_btn_delete"
                 android:layout_marginRight="@dimen/margin_item_self_task"
                 android:layout_marginTop="@dimen/margin_item_self_task"
                 android:background="@drawable/bg_item_self_task_btn_off"

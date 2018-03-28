@@ -65,9 +65,9 @@ public class AllSelfTaskFragment extends Fragment implements AllSelfTaskContract
             @Override
             public void dataIsEmpty(boolean isEmpty) {
                 if (isEmpty) {
-                    mLayoutEmpty.setVisibility(View.GONE);
-                } else {
                     mLayoutEmpty.setVisibility(View.VISIBLE);
+                } else {
+                    mLayoutEmpty.setVisibility(View.GONE);
                 }
             }
         });
@@ -125,6 +125,11 @@ public class AllSelfTaskFragment extends Fragment implements AllSelfTaskContract
     @Override
     public void onClickDelete(int position) {
         mAdapter.notifyDeleteSelfTask(position);
+    }
+
+    @Override
+    public void onClickBtnEdit(int position) {
+        mAdapter.notifyPosition(position);
     }
 
     private boolean dataExisted() {
