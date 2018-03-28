@@ -35,6 +35,7 @@ public class DeleteListDailySelfAdapter extends RecyclerView.Adapter<RecyclerVie
 
     public DeleteListDailySelfAdapter(DeleteListDailySelfPresenter presenter) {
         mPresenter = presenter;
+        registerAdapterDataObserver(mObserver);
     }
 
     @Override

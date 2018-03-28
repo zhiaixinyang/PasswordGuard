@@ -31,6 +31,7 @@ public class DeleteListPasswordAdapter extends RecyclerView.Adapter<RecyclerView
 
     public DeleteListPasswordAdapter(DeleteListPasswordPresenter presenter) {
         mPresenter = presenter;
+        registerAdapterDataObserver(mObserver);
     }
 
     @Override
