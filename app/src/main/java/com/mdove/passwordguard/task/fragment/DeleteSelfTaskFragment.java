@@ -11,10 +11,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.hwangjr.rxbus.RxBus;
 import com.hwangjr.rxbus.annotation.Subscribe;
 import com.mdove.passwordguard.R;
+import com.mdove.passwordguard.base.listener.OnChangeDataSizeListener;
 import com.mdove.passwordguard.databinding.FragmentAllSelfTaskBinding;
 import com.mdove.passwordguard.databinding.FragmentDeleteSelfTaskBinding;
 import com.mdove.passwordguard.deletelist.DeleteListPasswordActivity;
@@ -38,6 +40,7 @@ public class DeleteSelfTaskFragment extends Fragment implements DeleteSelfTaskCo
     private RecyclerView mRlv;
     private DeleteSelfTaskPresenter mPresenter;
     private DeleteSelfTaskAdapter mAdapter;
+    private TextView mLayoutEmpty;
 
     public static DeleteSelfTaskFragment newInstance() {
         DeleteSelfTaskFragment fragment = new DeleteSelfTaskFragment();
@@ -58,9 +61,21 @@ public class DeleteSelfTaskFragment extends Fragment implements DeleteSelfTaskCo
         RxBus.get().register(this);
 
         mRlv = mBinding.rlvDeleteSelfTask;
+        mLayoutEmpty = mBinding.layoutEmpty;
+
         mPresenter = new DeleteSelfTaskPresenter();
         mPresenter.subscribe(this);
         mAdapter = new DeleteSelfTaskAdapter(getContext(), mPresenter);
+        mAdapter.setOnChangeDataSizeListener(new OnChangeDataSizeListener() {
+            @Override
+            public void dataIsEmpty(boolean isEmpty) {
+                if (isEmpty) {
+                    mLayoutEmpty.setVisibility(View.GONE);
+                } else {
+                    mLayoutEmpty.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
         mRlv.setLayoutManager(new LinearLayoutManager(getContext()));
         mRlv.setAdapter(mAdapter);

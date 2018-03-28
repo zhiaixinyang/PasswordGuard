@@ -74,6 +74,7 @@
 
     <string name="nearby">查看附近的人</string>
     <string name="add_friend">add friend</string>
+    <string name="string_rlv_empty">空空如也</string>
 
     <string name="tab_str_all_self_task">工作标签</string>
     <string name="tab_str_delete_self_task">已删除</string>

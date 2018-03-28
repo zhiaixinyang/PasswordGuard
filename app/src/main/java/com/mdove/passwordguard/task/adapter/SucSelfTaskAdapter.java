@@ -5,6 +5,7 @@ import android.graphics.Paint;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.listener.OnChangeDataSizeListener;
@@ -57,10 +58,10 @@ public class SucSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         return mData;
     }
 
-    public void onClickTaskSuc(int position,boolean isSuc) {
+    public void onClickTaskSuc(int position, boolean isSuc) {
         if (isSuc) {
             notifyPosition(position);
-        }else{
+        } else {
             mData.remove(position);
             notifyItemRemoved(position);
             notifyItemRangeChanged(position, mData.size());

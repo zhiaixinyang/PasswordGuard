@@ -9,10 +9,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.hwangjr.rxbus.RxBus;
 import com.hwangjr.rxbus.annotation.Subscribe;
 import com.mdove.passwordguard.R;
+import com.mdove.passwordguard.base.listener.OnChangeDataSizeListener;
 import com.mdove.passwordguard.databinding.FragmentSucSelfTaskBinding;
 import com.mdove.passwordguard.task.adapter.SucSelfTaskAdapter;
 import com.mdove.passwordguard.task.model.SucSelfTaskModel;
@@ -33,6 +35,7 @@ public class SucSelfTaskFragment extends Fragment implements SucSelfTaskContract
     private RecyclerView mRlv;
     private SucSelfTaskPresenter mPresenter;
     private SucSelfTaskAdapter mAdapter;
+    private TextView mLayoutEmpty;
 
     public static SucSelfTaskFragment newInstance() {
         SucSelfTaskFragment fragment = new SucSelfTaskFragment();
@@ -52,10 +55,22 @@ public class SucSelfTaskFragment extends Fragment implements SucSelfTaskContract
         RxBus.get().register(this);
 
         mRlv = mBinding.rlvSucSelfTask;
+        mLayoutEmpty = mBinding.layoutEmpty;
         mPresenter = new SucSelfTaskPresenter();
         mPresenter.subscribe(this);
 
         mAdapter = new SucSelfTaskAdapter(getContext(), mPresenter);
+        mAdapter.setOnChangeDataSizeListener(new OnChangeDataSizeListener() {
+            @Override
+            public void dataIsEmpty(boolean isEmpty) {
+                if (isEmpty) {
+                    mLayoutEmpty.setVisibility(View.GONE);
+                } else {
+                    mLayoutEmpty.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
         mRlv.setLayoutManager(new LinearLayoutManager(getContext()));
         mRlv.setAdapter(mAdapter);
     }
@@ -74,8 +89,8 @@ public class SucSelfTaskFragment extends Fragment implements SucSelfTaskContract
     }
 
     @Override
-    public void onClickSuc(int position,boolean isSuc) {
-        mAdapter.onClickTaskSuc(position,isSuc);
+    public void onClickSuc(int position, boolean isSuc) {
+        mAdapter.onClickTaskSuc(position, isSuc);
     }
 
     @Override

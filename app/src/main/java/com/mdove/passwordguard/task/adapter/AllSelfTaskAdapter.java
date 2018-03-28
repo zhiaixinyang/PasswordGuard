@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
 import com.mdove.passwordguard.R;
+import com.mdove.passwordguard.base.listener.OnChangeDataSizeListener;
 import com.mdove.passwordguard.databinding.ItemSelfTaskAllBinding;
 import com.mdove.passwordguard.task.model.SelfTaskModel;
 import com.mdove.passwordguard.task.model.SelfTaskModelVM;
@@ -26,10 +27,12 @@ public class AllSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private AllSelfTaskPresenter mPresenter;
     private Context mContext;
     private List<SelfTaskModel> mData;
+    private OnChangeDataSizeListener mListener;
 
     public AllSelfTaskAdapter(Context context, AllSelfTaskPresenter presenter) {
         mContext = context;
         mPresenter = presenter;
+        registerAdapterDataObserver(mObserver);
     }
 
     @Override
@@ -79,9 +82,9 @@ public class AllSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             mBinding.setViewModel(new SelfTaskModelVM(selfTaskModel, position));
             mBinding.setActionHandler(new AllSelfTaskHandler(mPresenter));
 
-            mBinding.ivPriority.setColorFilter(SelfTaskPriorityHelper.getPriorityBtnColor(mContext,selfTaskModel.mPriority), PorterDuff.Mode.SRC_ATOP);
-            mBinding.tvPriorityTip.setTextColor(SelfTaskPriorityHelper.getPriorityBtnColor(mContext,selfTaskModel.mPriority));
-            mBinding.tvTitle.setTextColor(SelfTaskPriorityHelper.getPriorityTextColor(mContext,selfTaskModel.mPriority));
+            mBinding.ivPriority.setColorFilter(SelfTaskPriorityHelper.getPriorityBtnColor(mContext, selfTaskModel.mPriority), PorterDuff.Mode.SRC_ATOP);
+            mBinding.tvPriorityTip.setTextColor(SelfTaskPriorityHelper.getPriorityBtnColor(mContext, selfTaskModel.mPriority));
+            mBinding.tvTitle.setTextColor(SelfTaskPriorityHelper.getPriorityTextColor(mContext, selfTaskModel.mPriority));
 
             if (selfTaskModel.mIsSuc) {
                 mBinding.tvTitle.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
@@ -92,7 +95,7 @@ public class AllSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             } else {
                 mBinding.tvTitle.getPaint().setFlags(0);
                 mBinding.tvTitle.getPaint().setAntiAlias(true);
-                mBinding.tvTitle.setTextColor(SelfTaskPriorityHelper.getPriorityTextColor(mContext,selfTaskModel.mPriority));
+                mBinding.tvTitle.setTextColor(SelfTaskPriorityHelper.getPriorityTextColor(mContext, selfTaskModel.mPriority));
 
                 mBinding.layoutBtn.setBackgroundResource(R.drawable.bg_item_self_task_btn_on);
                 mBinding.tvBtn.setText("完成");
@@ -105,5 +108,42 @@ public class AllSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 mBinding.tvSeeTip.setTextColor(ContextCompat.getColor(mContext, R.color.gray_light));
             }
         }
+    }
+
+    private RecyclerView.AdapterDataObserver mObserver = new RecyclerView.AdapterDataObserver() {
+        @Override
+        public void onChanged() {
+            onDataChange(mData.size());
+        }
+
+        @Override
+        public void onItemRangeChanged(int positionStart, int itemCount) {
+            onDataChange(mData.size());
+        }
+
+        @Override
+        public void onItemRangeRemoved(int positionStart, int itemCount) {
+            onDataChange(mData.size());
+        }
+    };
+
+    @Override
+    public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView);
+        unregisterAdapterDataObserver(mObserver);
+    }
+
+    private void onDataChange(int dataSize) {
+        if (mListener != null) {
+            if (dataSize <= 0) {
+                mListener.dataIsEmpty(true);
+            } else {
+                mListener.dataIsEmpty(false);
+            }
+        }
+    }
+
+    public void setOnChangeDataSizeListener(OnChangeDataSizeListener listener) {
+        mListener = listener;
     }
 }

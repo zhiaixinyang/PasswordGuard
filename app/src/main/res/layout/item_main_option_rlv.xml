@@ -23,8 +23,7 @@
 
         <FrameLayout
             android:layout_width="@dimen/item_main_option_btn_w_h"
-            android:layout_height="@dimen/item_main_option_btn_w_h"
-            android:layout_marginTop="@dimen/margin_tv_main_option_btn_bottom">
+            android:layout_height="@dimen/item_main_option_btn_w_h">
 
             <ImageView
                 android:id="@+id/iv_bg"

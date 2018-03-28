@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.mdove.passwordguard.R;
+import com.mdove.passwordguard.base.listener.OnChangeDataSizeListener;
 import com.mdove.passwordguard.databinding.FragmentAllSelfTaskBinding;
 import com.mdove.passwordguard.task.adapter.AllSelfTaskAdapter;
 import com.mdove.passwordguard.task.model.SelfTaskModel;
@@ -35,6 +36,7 @@ public class AllSelfTaskFragment extends Fragment implements AllSelfTaskContract
     private RecyclerView mRlv;
     private AllSelfTaskPresenter mPresenter;
     private AllSelfTaskAdapter mAdapter;
+    private TextView mLayoutEmpty;
 
     public static AllSelfTaskFragment newInstance() {
         AllSelfTaskFragment fragment = new AllSelfTaskFragment();
@@ -54,10 +56,21 @@ public class AllSelfTaskFragment extends Fragment implements AllSelfTaskContract
         mEt = mBinding.etContent;
         mBtn = mBinding.btnSend;
         mRlv = mBinding.rlvSelfTask;
+        mLayoutEmpty = mBinding.layoutEmpty;
 
         mPresenter = new AllSelfTaskPresenter();
         mPresenter.subscribe(this);
         mAdapter = new AllSelfTaskAdapter(getContext(), mPresenter);
+        mAdapter.setOnChangeDataSizeListener(new OnChangeDataSizeListener() {
+            @Override
+            public void dataIsEmpty(boolean isEmpty) {
+                if (isEmpty) {
+                    mLayoutEmpty.setVisibility(View.GONE);
+                } else {
+                    mLayoutEmpty.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
         mRlv.setLayoutManager(new LinearLayoutManager(getContext()));
         mRlv.setAdapter(mAdapter);
