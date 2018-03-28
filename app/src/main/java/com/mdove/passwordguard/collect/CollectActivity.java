@@ -39,6 +39,7 @@ public class CollectActivity extends BaseActivity implements CollectContract.Mvp
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("我的收藏");
         setContentView(R.layout.activity_collect);
         mRlvCollect = findViewById(R.id.rlv_collect);
 
