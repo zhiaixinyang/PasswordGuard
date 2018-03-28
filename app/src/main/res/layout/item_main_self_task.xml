@@ -60,7 +60,7 @@
                 android:layout_centerVertical="true"
                 android:layout_margin="@dimen/margin_item_main_self_task"
                 android:text="暂无显示工作记录"
-                android:textColor="@color/gray"
+                android:textColor="@color/black"
                 android:textSize="14sp"
                 android:visibility="gone" />
 
