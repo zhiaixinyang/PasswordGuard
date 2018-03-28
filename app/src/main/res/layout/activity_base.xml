@@ -29,6 +29,7 @@
             android:id="@+id/layout_empty"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/bg_color_all"
             android:gravity="center"
             android:text="@string/string_rlv_empty"
             android:textColor="@color/black"

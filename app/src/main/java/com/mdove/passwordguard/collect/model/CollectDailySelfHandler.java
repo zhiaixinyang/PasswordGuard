@@ -15,12 +15,12 @@ public class CollectDailySelfHandler {
         mPresenter = presenter;
     }
 
-    public void copyDailySelf(ItemMainDailySelfVM vm) {
+    public void copyDailySelf(CollectDailySelfModelVM vm) {
         mPresenter.copyDailySelf(vm);
     }
 
     public void favoriteDailySelf(CollectDailySelfModelVM vm) {
-//        mPresenter.favoriteDailySelf(vm);
+        mPresenter.favoriteDailySelf(vm);
     }
 
     public void onClickBtnDeleteDailySelf(CollectDailySelfModelVM vm) {

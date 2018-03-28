@@ -1,6 +1,10 @@
 package com.mdove.passwordguard.collect.presenter;
 
+import com.hwangjr.rxbus.RxBus;
 import com.mdove.passwordguard.App;
+import com.mdove.passwordguard.collect.model.CollectDailySelfModel;
+import com.mdove.passwordguard.collect.model.CollectDailySelfModelVM;
+import com.mdove.passwordguard.collect.model.event.CollectDailySelfEvent;
 import com.mdove.passwordguard.collect.presenter.contract.CollectContract;
 import com.mdove.passwordguard.config.AppConstant;
 import com.mdove.passwordguard.dailyself.ItemMainDailySelfVM;
@@ -44,10 +48,10 @@ public class CollectPresenter implements CollectContract.Presenter {
 //            mData.add(new PasswordModel(password));
 //        }
 
-        List<MainDailySelfModel> favoriteData = new ArrayList<>();
+        List<CollectDailySelfModel> favoriteData = new ArrayList<>();
         List<DailySelf> dailyData = mDailySelfDao.queryBuilder().list();
         for (DailySelf dailySelf : dailyData) {
-            MainDailySelfModel favoriteModel = new MainDailySelfModel(dailySelf);
+            CollectDailySelfModel favoriteModel = new CollectDailySelfModel(dailySelf);
             if (dailySelf.mIsFavorite == 1) {
                 favoriteData.add(favoriteModel);
             }
@@ -59,7 +63,7 @@ public class CollectPresenter implements CollectContract.Presenter {
 
 
     @Override
-    public void copyDailySelf(ItemMainDailySelfVM vm) {
+    public void copyDailySelf(CollectDailySelfModelVM vm) {
         ClipboardUtils.copyToClipboard(mView.getContext(), vm.mContent.get());
     }
 
@@ -71,5 +75,27 @@ public class CollectPresenter implements CollectContract.Presenter {
     @Override
     public void copyPasswordInUserName(ItemMainPasswordVM vm) {
         ClipboardUtils.copyToClipboard(mView.getContext(), vm.mUserName.get());
+    }
+
+    @Override
+    public void favoriteDailySelf(CollectDailySelfModelVM vm) {
+        DailySelf dailySelf = vm.mDailySelf;
+        CollectDailySelfModel collectDailySelfModel = vm.collectDailySelfModel;
+        boolean isFavorite;
+
+        if (vm.mIsFavorite.get()) {
+            dailySelf.mIsFavorite = 0;
+            collectDailySelfModel.mIsFavorite = false;
+            isFavorite = false;
+        } else {
+            dailySelf.mIsFavorite = 1;
+            collectDailySelfModel.mIsFavorite = true;
+            isFavorite = true;
+        }
+        mDailySelfDao.update(dailySelf);
+
+        mView.favoriteDailySelf(vm.mItemPosition);
+
+        RxBus.get().post(new CollectDailySelfEvent(isFavorite, dailySelf.id));
     }
 }

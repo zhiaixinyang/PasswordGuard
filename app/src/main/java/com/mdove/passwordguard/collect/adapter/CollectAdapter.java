@@ -1,8 +1,6 @@
 package com.mdove.passwordguard.collect.adapter;
 
 import android.content.Context;
-import android.graphics.Paint;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
@@ -13,12 +11,7 @@ import com.mdove.passwordguard.collect.model.CollectDailySelfModel;
 import com.mdove.passwordguard.collect.model.CollectDailySelfModelVM;
 import com.mdove.passwordguard.collect.presenter.CollectPresenter;
 import com.mdove.passwordguard.databinding.ItemCollectDailyselfBinding;
-import com.mdove.passwordguard.databinding.ItemSelfTaskDeleteBinding;
 import com.mdove.passwordguard.main.model.BaseMainModel;
-import com.mdove.passwordguard.task.model.DeleteSelfTaskModel;
-import com.mdove.passwordguard.task.model.DeleteSelfTaskModelVM;
-import com.mdove.passwordguard.task.presenter.DeleteSelfTaskPresenter;
-import com.mdove.passwordguard.task.utils.SelfTaskPriorityHelper;
 import com.mdove.passwordguard.utils.InflateUtils;
 
 import java.util.List;

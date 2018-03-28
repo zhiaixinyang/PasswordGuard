@@ -13,6 +13,7 @@ public class MainDailySelfModel extends BaseMainModel {
     public String mTvGroup;
     public boolean mIsFavorite;
     public DailySelf mDailySelf;
+    public long mId;
 
     public MainDailySelfModel(DailySelf dailySelf) {
         mContent = dailySelf.mContent;
@@ -21,10 +22,12 @@ public class MainDailySelfModel extends BaseMainModel {
         mType = 1;
         mDailySelf = dailySelf;
         mIsFavorite = dailySelf.mIsFavorite == 1;
+        mId = dailySelf.id;
     }
 
-    public void setDailySelf(DailySelf dailySelf){
+    public void setDailySelf(DailySelf dailySelf) {
         mContent = dailySelf.mContent;
+        mId = dailySelf.id;
         mTime = dailySelf.mTimeStamp;
         mTvGroup = dailySelf.mTvGroup;
         mType = 1;

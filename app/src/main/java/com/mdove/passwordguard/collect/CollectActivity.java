@@ -68,4 +68,9 @@ public class CollectActivity extends BaseActivity implements CollectContract.Mvp
     public void showData(List<BaseMainModel> data) {
         mAdapter.setData(data);
     }
+
+    @Override
+    public void favoriteDailySelf(int position) {
+        mAdapter.notifyItemChanged(position);
+    }
 }

@@ -541,6 +541,30 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
+    public void notifyEventCollectDailySelf(long id, boolean isFavorite) {
+        if (mData == null && mData.size() <= 0) {
+            return;
+        }
+
+        int position = -1;
+        MainDailySelfModel updateModel = null;
+        for (BaseMainModel baseMainModel : mData) {
+            if (baseMainModel instanceof MainDailySelfModel) {
+                MainDailySelfModel model = (MainDailySelfModel) baseMainModel;
+                if (model.mId == id) {
+                    model.mIsFavorite = isFavorite;
+                    updateModel = model;
+                }
+            }
+        }
+        if (updateModel == null) {
+            return;
+        }
+        position = mData.indexOf(updateModel);
+        notifyItemChanged(position);
+    }
+
+
     public void setData(List<BaseMainModel> data) {
         mData = data;
         notifyDataSetChanged();

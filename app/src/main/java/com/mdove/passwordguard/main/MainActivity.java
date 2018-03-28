@@ -24,6 +24,7 @@ import com.mdove.passwordguard.addoralter.model.event.AddPasswordActivityEvent;
 import com.mdove.passwordguard.addoralter.model.event.EditDailySelfActivityEvent;
 import com.mdove.passwordguard.addoralter.model.event.EditPasswordActivityEvent;
 import com.mdove.passwordguard.base.listener.OnItemLongClickListener;
+import com.mdove.passwordguard.collect.model.event.CollectDailySelfEvent;
 import com.mdove.passwordguard.deletelist.model.event.DeleteDailySelfReturnEvent;
 import com.mdove.passwordguard.deletelist.model.event.DeletePasswordReturnEvent;
 import com.mdove.passwordguard.group.model.event.GroupDeleteEvent;
@@ -420,5 +421,10 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     public void selfTaskClickEdit(SelfTaskClickEditEvent event) {
         //从SelfTaskActivity post 过来的notify
         mAdapter.notifyEventSelfTaskClickEdit(event.mId, event.mSelfTaskModel.mTask);
+    }
+
+    @Subscribe
+    public void collectDailySelfEdit(CollectDailySelfEvent event) {
+        mAdapter.notifyEventCollectDailySelf(event.mId, event.isFavorite);
     }
 }

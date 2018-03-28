@@ -16,15 +16,15 @@ import com.mdove.passwordguard.task.model.SelfTaskModelVM;
 
 public class DataBindingAdapter {
     @BindingAdapter("loadFavorite")
-    public static void loadFavorite(ImageView view, final ItemMainDailySelfVM vm) {
-        view.setImageResource(vm.mIsFavorite.get() ? R.mipmap.ic_favorite_on : R.mipmap.ic_favorite_off);
+    public static void loadFavorite(ImageView view, final IDailySelfFavoriteVM vm) {
+        view.setImageResource(vm.isFavorite() ? R.mipmap.ic_favorite_on : R.mipmap.ic_favorite_off);
     }
 
     @BindingAdapter("isTaskSucTv")
     public static void isTaskSucTv(TextView view, final SelfTaskModelVM vm) {
         if (vm.mIsSuc.get()) {
             view.setText("取消");
-        }else{
+        } else {
             view.setText("完成");
         }
     }
@@ -35,12 +35,12 @@ public class DataBindingAdapter {
     }
 
     @BindingAdapter("mipmapSrc")
-    public static void mipmapSrc(ImageView view,int src){
+    public static void mipmapSrc(ImageView view, int src) {
         view.setImageResource(src);
     }
 
     @BindingAdapter("srcDrawable")
-    public static void srcDrawable(ImageView view,int src){
+    public static void srcDrawable(ImageView view, int src) {
         view.setBackgroundResource(src);
     }
 }

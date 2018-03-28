@@ -2,7 +2,7 @@ package com.mdove.passwordguard.collect.presenter.contract;
 
 import com.mdove.passwordguard.base.BasePresenter;
 import com.mdove.passwordguard.base.BaseView;
-import com.mdove.passwordguard.dailyself.ItemMainDailySelfVM;
+import com.mdove.passwordguard.collect.model.CollectDailySelfModelVM;
 import com.mdove.passwordguard.main.model.BaseMainModel;
 import com.mdove.passwordguard.main.model.vm.ItemMainPasswordVM;
 
@@ -16,14 +16,20 @@ public interface CollectContract {
     interface Presenter extends BasePresenter<CollectContract.MvpView> {
         void initData();
 
-        void copyDailySelf(ItemMainDailySelfVM vm);
+        void copyDailySelf(CollectDailySelfModelVM vm);
 
         void copyPasswordInPassword(ItemMainPasswordVM vm);
 
         void copyPasswordInUserName(ItemMainPasswordVM vm);
+
+        void favoriteDailySelf(CollectDailySelfModelVM vm);
+
     }
 
     interface MvpView extends BaseView<Presenter> {
         void showData(List<BaseMainModel> data);
+
+        void favoriteDailySelf(int position);
+
     }
 }

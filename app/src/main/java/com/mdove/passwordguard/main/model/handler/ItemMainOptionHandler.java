@@ -53,7 +53,7 @@ public class ItemMainOptionHandler {
                 break;
             }
             case MAIN_OPEN_INFO_TYPE_COLLECT: {
-                mPresenter.onClickBtnSelfTask();
+                mPresenter.onClickBtnCollect();
                 break;
             }
             default: {

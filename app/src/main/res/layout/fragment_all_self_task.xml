@@ -12,7 +12,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/gray_light">
+        android:background="@color/bg_color_all">
 
         <RelativeLayout
             android:id="@+id/layout_et"
