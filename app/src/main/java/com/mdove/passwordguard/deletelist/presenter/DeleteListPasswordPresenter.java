@@ -6,6 +6,7 @@ import com.mdove.passwordguard.deletelist.model.DeletePasswordModel;
 import com.mdove.passwordguard.deletelist.model.DeleteTopModel;
 import com.mdove.passwordguard.deletelist.model.event.DeletePasswordReturnEvent;
 import com.mdove.passwordguard.deletelist.model.vm.DeletePasswordModelVM;
+import com.mdove.passwordguard.deletelist.presenter.contract.DeleteListPasswordContract;
 import com.mdove.passwordguard.greendao.DeletedPasswordDao;
 import com.mdove.passwordguard.greendao.entity.DeletedPassword;
 import com.mdove.passwordguard.main.model.BaseMainModel;

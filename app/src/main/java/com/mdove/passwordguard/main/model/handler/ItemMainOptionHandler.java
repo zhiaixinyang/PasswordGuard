@@ -4,6 +4,7 @@ import com.mdove.passwordguard.main.presenter.MainPresenter;
 
 import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_ACCOUNT;
 import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_ADD_DAILY_SELF;
+import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_COLLECT;
 import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_DELETE_ACCOUNT;
 import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_DELETE_DAILY_SELF;
 import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_GUIDE;
@@ -48,6 +49,10 @@ public class ItemMainOptionHandler {
                 break;
             }
             case MAIN_OPEN_INFO_TYPE_SELF_TASK: {
+                mPresenter.onClickBtnSelfTask();
+                break;
+            }
+            case MAIN_OPEN_INFO_TYPE_COLLECT: {
                 mPresenter.onClickBtnSelfTask();
                 break;
             }

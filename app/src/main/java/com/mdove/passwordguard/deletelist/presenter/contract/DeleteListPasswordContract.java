@@ -1,4 +1,4 @@
-package com.mdove.passwordguard.deletelist.presenter;
+package com.mdove.passwordguard.deletelist.presenter.contract;
 
 import com.mdove.passwordguard.base.BasePresenter;
 import com.mdove.passwordguard.base.BaseView;

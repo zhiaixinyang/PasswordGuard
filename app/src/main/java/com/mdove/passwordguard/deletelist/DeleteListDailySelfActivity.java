@@ -8,17 +8,14 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.TextView;
 
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.BaseActivity;
+import com.mdove.passwordguard.base.listener.OnChangeDataSizeListener;
 import com.mdove.passwordguard.deletelist.adapter.DeleteListDailySelfAdapter;
-import com.mdove.passwordguard.deletelist.adapter.DeleteListPasswordAdapter;
 import com.mdove.passwordguard.deletelist.model.vm.DeleteDailySelfModelVM;
-import com.mdove.passwordguard.deletelist.presenter.DeleteListDailySelfContract;
+import com.mdove.passwordguard.deletelist.presenter.contract.DeleteListDailySelfContract;
 import com.mdove.passwordguard.deletelist.presenter.DeleteListDailySelfPresenter;
-import com.mdove.passwordguard.main.MainActivity;
 import com.mdove.passwordguard.main.model.BaseMainModel;
 
 import java.util.List;
@@ -54,6 +51,13 @@ public class DeleteListDailySelfActivity extends BaseActivity implements DeleteL
         mPresenter.subscribe(this);
 
         mAdapter = new DeleteListDailySelfAdapter(mPresenter);
+        mAdapter.setOnChangeDataSizeListener(new OnChangeDataSizeListener() {
+            @Override
+            public void dataIsEmpty(boolean isEmpty) {
+                setDataIsEmpty(isEmpty);
+            }
+        });
+
         mRlvDeleteList.setLayoutManager(new LinearLayoutManager(this));
         mRlvDeleteList.setAdapter(mAdapter);
 
@@ -67,12 +71,7 @@ public class DeleteListDailySelfActivity extends BaseActivity implements DeleteL
 
     @Override
     public void showData(List<BaseMainModel> data) {
-        if (data == null || data.size() == 0) {
-            setDataIsEmpty(true);
-        } else {
-            mAdapter.setData(data);
-            setDataIsEmpty(false);
-        }
+        mAdapter.setData(data);
     }
 
     @Override

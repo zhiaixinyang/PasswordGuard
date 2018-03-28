@@ -10,6 +10,7 @@ import com.mdove.passwordguard.addoralter.AddPasswordActivity;
 import com.mdove.passwordguard.addoralter.EditPasswordActivity;
 import com.mdove.passwordguard.addoralter.model.AlterDailySelfModel;
 import com.mdove.passwordguard.addoralter.model.AlterPasswordModel;
+import com.mdove.passwordguard.collect.CollectActivity;
 import com.mdove.passwordguard.config.AppConstant;
 import com.mdove.passwordguard.dailyself.ItemMainDailySelfVM;
 import com.mdove.passwordguard.dailyself.MainDailySelfModel;
@@ -94,12 +95,13 @@ public class MainPresenter implements MainContract.Presenter {
     public static final int MAIN_OPEN_INFO_TYPE_ADD_DAILY_SELF = 5;
     public static final int MAIN_OPEN_INFO_TYPE_GUIDE = 6;
     public static final int MAIN_OPEN_INFO_TYPE_SELF_TASK = 7;
+    public static final int MAIN_OPEN_INFO_TYPE_COLLECT = 8;
 
     private String mCurGroup = DEFAULT_CHECK_GROUP_TITLE;
     private List<BaseMainModel> mCheckData;
     private MainSelfTaskModel mMainSelfTaskModel;
 
-    @IntDef(value = {MAIN_OPEN_INFO_TYPE_SELF_TASK, MAIN_OPEN_INFO_TYPE_ACCOUNT, MAIN_OPEN_INFO_TYPE_GUIDE, MAIN_OPEN_INFO_TYPE_ADD_DAILY_SELF, MAIN_OPEN_INFO_TYPE_LOCK, MAIN_OPEN_INFO_TYPE_DELETE_ACCOUNT, MAIN_OPEN_INFO_TYPE_DELETE_DAILY_SELF})
+    @IntDef(value = {MAIN_OPEN_INFO_TYPE_COLLECT, MAIN_OPEN_INFO_TYPE_SELF_TASK, MAIN_OPEN_INFO_TYPE_ACCOUNT, MAIN_OPEN_INFO_TYPE_GUIDE, MAIN_OPEN_INFO_TYPE_ADD_DAILY_SELF, MAIN_OPEN_INFO_TYPE_LOCK, MAIN_OPEN_INFO_TYPE_DELETE_ACCOUNT, MAIN_OPEN_INFO_TYPE_DELETE_DAILY_SELF})
     @Retention(RetentionPolicy.SOURCE)
     public @interface MainOpenInfoType {
     }
@@ -351,6 +353,11 @@ public class MainPresenter implements MainContract.Presenter {
     public void onClickBtnSelfTask() {
 //        SelfTaskActivity.start(mView.getContext());
         NewSelfTaskActivity.start(mView.getContext());
+    }
+
+    @Override
+    public void onClickBtnCollect() {
+        CollectActivity.start(mView.getContext());
     }
 
     @Override
@@ -610,9 +617,10 @@ public class MainPresenter implements MainContract.Presenter {
         MainOptionInfo dailySelf = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_ADD_DAILY_SELF, "随手记", "记录有趣", R.drawable.bg_main_option_btn_4, R.mipmap.ic_btn_password);
         MainOptionInfo selfTask = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_SELF_TASK, "我的工作", "记录我的工作", R.drawable.bg_main_option_btn_6, R.mipmap.ic_btn_self_task);
         MainOptionInfo lock = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_LOCK, "手势锁", "保护信息安全", R.drawable.bg_main_option_btn_2, R.mipmap.ic_btn_lock);
-        MainOptionInfo deleteAccount = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_DELETE_ACCOUNT, "删除记录", "账号信息", R.drawable.bg_main_option_btn_3, R.mipmap.ic_btn_delete);
+        MainOptionInfo deleteAccount = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_DELETE_ACCOUNT, "删除记录", "账号信息", R.drawable.bg_main_option_btn_3, R.mipmap.ic_delete);
         MainOptionInfo deleteDailySelf = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_DELETE_DAILY_SELF, "删除记录", "随手记", R.drawable.bg_main_option_btn_7, R.mipmap.ic_btn_delete);
         MainOptionInfo guide = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_GUIDE, "引导", "了解一下", R.drawable.bg_main_option_btn_5, R.mipmap.ic_btn_guide);
+        MainOptionInfo collect = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_COLLECT, "我的收藏", "所有收藏内容", R.drawable.bg_main_option_btn_8, R.mipmap.ic_btn_guide);
         data.add(guide);
         data.add(account);
         data.add(dailySelf);
@@ -620,6 +628,7 @@ public class MainPresenter implements MainContract.Presenter {
         data.add(lock);
         data.add(deleteAccount);
         data.add(deleteDailySelf);
+        data.add(collect);
         return data;
     }
 }

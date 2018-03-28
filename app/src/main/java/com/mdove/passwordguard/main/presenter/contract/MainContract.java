@@ -60,6 +60,8 @@ public interface MainContract {
 
         void onClickBtnSelfTask();
 
+        void onClickBtnCollect();
+
         void onClickBtnSearch();
 
         void onClickBtnAddDailySelf();

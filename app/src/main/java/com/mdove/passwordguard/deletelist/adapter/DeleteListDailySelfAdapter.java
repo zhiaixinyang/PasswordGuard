@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
 import com.mdove.passwordguard.R;
+import com.mdove.passwordguard.base.listener.OnChangeDataSizeListener;
 import com.mdove.passwordguard.databinding.ItemDeleteDailySelfBinding;
 import com.mdove.passwordguard.databinding.ItemDeleteListTopBinding;
 import com.mdove.passwordguard.databinding.ItemDeletePasswordBinding;
@@ -29,6 +30,8 @@ public class DeleteListDailySelfAdapter extends RecyclerView.Adapter<RecyclerVie
     private DeleteListDailySelfPresenter mPresenter;
     private static final int TYPE_MAIN_DELETE_DAILY_SELF = 0;
     private static final int TYPE_MAIN_TOP = 1;
+
+    private OnChangeDataSizeListener mListener;
 
     public DeleteListDailySelfAdapter(DeleteListDailySelfPresenter presenter) {
         mPresenter = presenter;
@@ -118,6 +121,43 @@ public class DeleteListDailySelfAdapter extends RecyclerView.Adapter<RecyclerVie
 
         public void bind(ItemDeleteListTopVM vm) {
             mBinding.setViewModel(vm);
+        }
+    }
+
+    public void setOnChangeDataSizeListener(OnChangeDataSizeListener listener) {
+        mListener = listener;
+    }
+
+    private RecyclerView.AdapterDataObserver mObserver = new RecyclerView.AdapterDataObserver() {
+        @Override
+        public void onChanged() {
+            onDataChange(mData.size());
+        }
+
+        @Override
+        public void onItemRangeChanged(int positionStart, int itemCount) {
+            onDataChange(mData.size());
+        }
+
+        @Override
+        public void onItemRangeRemoved(int positionStart, int itemCount) {
+            onDataChange(mData.size());
+        }
+    };
+
+    @Override
+    public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView);
+        unregisterAdapterDataObserver(mObserver);
+    }
+
+    private void onDataChange(int dataSize) {
+        if (mListener != null) {
+            if (dataSize <= 0) {
+                mListener.dataIsEmpty(true);
+            } else {
+                mListener.dataIsEmpty(false);
+            }
         }
     }
 }

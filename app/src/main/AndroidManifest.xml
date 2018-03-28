@@ -47,6 +47,11 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name=".collect.CollectActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name=".deletelist.DeleteListDailySelfActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />

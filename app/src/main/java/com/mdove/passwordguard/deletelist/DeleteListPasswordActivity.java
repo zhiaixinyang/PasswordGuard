@@ -8,14 +8,13 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.TextView;
 
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.BaseActivity;
+import com.mdove.passwordguard.base.listener.OnChangeDataSizeListener;
 import com.mdove.passwordguard.deletelist.adapter.DeleteListPasswordAdapter;
 import com.mdove.passwordguard.deletelist.model.vm.DeletePasswordModelVM;
-import com.mdove.passwordguard.deletelist.presenter.DeleteListPasswordContract;
+import com.mdove.passwordguard.deletelist.presenter.contract.DeleteListPasswordContract;
 import com.mdove.passwordguard.deletelist.presenter.DeleteListPasswordPresenter;
 import com.mdove.passwordguard.main.model.BaseMainModel;
 
@@ -53,6 +52,13 @@ public class DeleteListPasswordActivity extends BaseActivity implements DeleteLi
         mPresenter.subscribe(this);
 
         mAdapter = new DeleteListPasswordAdapter(mPresenter);
+        mAdapter.setOnChangeDataSizeListener(new OnChangeDataSizeListener() {
+            @Override
+            public void dataIsEmpty(boolean isEmpty) {
+                setDataIsEmpty(isEmpty);
+            }
+        });
+
         mRlvDeleteList.setLayoutManager(new LinearLayoutManager(this));
         mRlvDeleteList.setAdapter(mAdapter);
 
@@ -66,12 +72,7 @@ public class DeleteListPasswordActivity extends BaseActivity implements DeleteLi
 
     @Override
     public void showData(List<BaseMainModel> data) {
-        if (data == null || data.size() == 0) {
-            setDataIsEmpty(true);
-        } else {
-            mAdapter.setData(data);
-            setDataIsEmpty(false);
-        }
+        mAdapter.setData(data);
     }
 
     @Override

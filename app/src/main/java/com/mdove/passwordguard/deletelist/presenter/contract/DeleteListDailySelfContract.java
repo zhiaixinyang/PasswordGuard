@@ -1,9 +1,8 @@
-package com.mdove.passwordguard.deletelist.presenter;
+package com.mdove.passwordguard.deletelist.presenter.contract;
 
 import com.mdove.passwordguard.base.BasePresenter;
 import com.mdove.passwordguard.base.BaseView;
 import com.mdove.passwordguard.deletelist.model.vm.DeleteDailySelfModelVM;
-import com.mdove.passwordguard.deletelist.model.vm.DeletePasswordModelVM;
 import com.mdove.passwordguard.main.model.BaseMainModel;
 
 import java.util.List;

@@ -70,8 +70,8 @@
 
                 <ImageView
                     android:id="@+id/iv_see"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="@dimen/item_self_task_all_btn_icon_w_h"
+                    android:layout_height="@dimen/item_self_task_all_btn_icon_w_h"
                     android:layout_centerHorizontal="true"
                     android:layout_marginRight="@dimen/margin_item_self_task"
                     android:src="@mipmap/ic_self_task_see_on" />
@@ -84,7 +84,7 @@
                     android:layout_marginBottom="@dimen/margin_item_self_task"
                     android:text="主页显示"
                     android:textColor="@color/commonColor"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/item_self_task_all_btn_text_size" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -99,8 +99,8 @@
 
                 <ImageView
                     android:id="@+id/iv_delete"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="@dimen/item_self_task_all_btn_icon_w_h"
+                    android:layout_height="@dimen/item_self_task_all_btn_icon_w_h"
                     android:layout_centerHorizontal="true"
                     android:layout_marginRight="@dimen/margin_item_self_task"
                     android:src="@mipmap/ic_delete"
@@ -115,7 +115,7 @@
                     android:layout_marginBottom="@dimen/margin_item_self_task"
                     android:text="删除"
                     android:textColor="@color/commonColor"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/item_self_task_all_btn_text_size" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -130,8 +130,8 @@
 
                 <ImageView
                     android:id="@+id/iv_priority"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="@dimen/item_self_task_all_btn_icon_w_h"
+                    android:layout_height="@dimen/item_self_task_all_btn_icon_w_h"
                     android:layout_centerHorizontal="true"
                     android:layout_marginRight="@dimen/margin_item_self_task"
                     android:padding="1dp"
@@ -147,7 +147,7 @@
                     android:layout_marginBottom="@dimen/margin_item_self_task"
                     android:text="优先级"
                     android:textColor="@color/commonColor"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/item_self_task_all_btn_text_size" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -162,8 +162,8 @@
 
                 <ImageView
                     android:id="@+id/iv_copy"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="@dimen/item_self_task_all_btn_icon_w_h"
+                    android:layout_height="@dimen/item_self_task_all_btn_icon_w_h"
                     android:layout_centerHorizontal="true"
                     android:layout_marginRight="@dimen/margin_item_self_task"
                     android:src="@mipmap/ic_btn_copy"
@@ -178,7 +178,7 @@
                     android:layout_marginBottom="@dimen/margin_item_self_task"
                     android:text="复制"
                     android:textColor="@color/commonColor"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/item_self_task_all_btn_text_size" />
             </RelativeLayout>
 
             <RelativeLayout
