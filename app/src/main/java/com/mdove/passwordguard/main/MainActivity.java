@@ -430,6 +430,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
 
     @Subscribe
     public void collectPassword(CollectPasswordEvent event) {
-        mAdapter.notifyEventCollectDailySelf(event.mId, event.isFavorite);
+        mAdapter.notifyEventCollectPassword(event.mId, event.isFavorite);
     }
 }
