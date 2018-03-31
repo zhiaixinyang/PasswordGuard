@@ -3,7 +3,6 @@ package com.mdove.passwordguard.main.model.vm;
 import android.databinding.ObservableField;
 
 import com.mdove.passwordguard.main.model.MainGroupRlvModel;
-import com.mdove.passwordguard.main.model.PasswordModel;
 
 /**
  * Created by MDove on 2018/2/16.

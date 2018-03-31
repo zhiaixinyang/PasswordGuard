@@ -111,6 +111,7 @@ public class AddPasswordDialog extends AppCompatDialog {
         password.mTitle = mTitle;
         password.mTimeStamp = new Date().getTime();
         password.isNew = 1;
+        password.isFavorite = 0;
         password.mTvGroup = mTvGroup;
 
         mEvent = new AddPasswordEvent();

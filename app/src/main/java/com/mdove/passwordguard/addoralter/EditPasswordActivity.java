@@ -89,7 +89,7 @@ public class EditPasswordActivity extends BaseActivity implements AddPasswordCon
             case ACTION_FROM_IS_EDIT: {
                 ItemMainPasswordVM model = (ItemMainPasswordVM) intent.getSerializableExtra(EXTRA_ACTION_EDIT_VIEW_MODEL_KEY);
                 mEditItemPosition = intent.getIntExtra(EXTRA_ACTION_EDIT_ITEM_POSITION_KEY, 0);
-                mNeedEditPassword = model.mPasswordModel.password;
+                mNeedEditPassword = model.mMainPasswordModel.password;
                 initEdit(model);
                 break;
             }

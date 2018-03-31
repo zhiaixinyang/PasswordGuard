@@ -39,7 +39,7 @@ public interface MainContract {
 
         void onClickBtnLock();
 
-        //Item被点击（PasswordModel）
+        //Item被点击（MainPasswordModel）
         void onClickItemPassword(ItemMainPasswordVM model);
 
         void onClickItemDailySelf(ItemMainDailySelfVM model);
@@ -83,6 +83,8 @@ public interface MainContract {
         void addDailySelf(DailySelf dailySelf);
 
         void favoriteDailySelf(ItemMainDailySelfVM vm);
+
+        void favoritePassword(ItemMainPasswordVM vm);
 
         void copyDailySelf(ItemMainDailySelfVM vm);
 

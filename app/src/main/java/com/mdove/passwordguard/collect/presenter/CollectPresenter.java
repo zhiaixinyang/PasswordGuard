@@ -4,15 +4,16 @@ import com.hwangjr.rxbus.RxBus;
 import com.mdove.passwordguard.App;
 import com.mdove.passwordguard.collect.model.CollectDailySelfModel;
 import com.mdove.passwordguard.collect.model.CollectDailySelfModelVM;
+import com.mdove.passwordguard.collect.model.CollectPasswordModel;
+import com.mdove.passwordguard.collect.model.CollectPasswordModelVM;
 import com.mdove.passwordguard.collect.model.event.CollectDailySelfEvent;
+import com.mdove.passwordguard.collect.model.event.CollectPasswordEvent;
 import com.mdove.passwordguard.collect.presenter.contract.CollectContract;
-import com.mdove.passwordguard.config.AppConstant;
-import com.mdove.passwordguard.dailyself.ItemMainDailySelfVM;
-import com.mdove.passwordguard.dailyself.MainDailySelfModel;
 import com.mdove.passwordguard.greendao.DailySelfDao;
+import com.mdove.passwordguard.greendao.PasswordDao;
 import com.mdove.passwordguard.greendao.entity.DailySelf;
+import com.mdove.passwordguard.greendao.entity.Password;
 import com.mdove.passwordguard.main.model.BaseMainModel;
-import com.mdove.passwordguard.main.model.vm.ItemMainPasswordVM;
 import com.mdove.passwordguard.utils.ClipboardUtils;
 
 import java.util.ArrayList;
@@ -26,12 +27,14 @@ public class CollectPresenter implements CollectContract.Presenter {
     private CollectContract.MvpView mView;
     private List<BaseMainModel> mData;
     private DailySelfDao mDailySelfDao;
+    private PasswordDao mPasswordDao;
 
     @Override
     public void subscribe(CollectContract.MvpView view) {
         mView = view;
 
         mDailySelfDao = App.getDaoSession().getDailySelfDao();
+        mPasswordDao = App.getDaoSession().getPasswordDao();
     }
 
     @Override
@@ -43,19 +46,23 @@ public class CollectPresenter implements CollectContract.Presenter {
     public void initData() {
         mData = new ArrayList<>();
 
-//        List<Password> data = mPasswordDao.queryBuilder().build().list();
-//        for (Password password : data) {
-//            mData.add(new PasswordModel(password));
-//        }
+        List<CollectPasswordModel> passwordModelData = new ArrayList<>();
+        List<Password> passwordData = mPasswordDao.queryBuilder().build().list();
+        for (Password password : passwordData) {
+            if (password.isFavorite==1){
+                passwordModelData.add(new CollectPasswordModel(password));
+            }
+        }
+        mData.addAll(passwordModelData);
 
         List<CollectDailySelfModel> favoriteData = new ArrayList<>();
         List<DailySelf> dailyData = mDailySelfDao.queryBuilder().list();
         for (DailySelf dailySelf : dailyData) {
-            CollectDailySelfModel favoriteModel = new CollectDailySelfModel(dailySelf);
             if (dailySelf.mIsFavorite == 1) {
-                favoriteData.add(favoriteModel);
+                favoriteData.add(new CollectDailySelfModel(dailySelf));
             }
         }
+
         mData.addAll(favoriteData);
 
         mView.showData(mData);
@@ -68,12 +75,12 @@ public class CollectPresenter implements CollectContract.Presenter {
     }
 
     @Override
-    public void copyPasswordInPassword(ItemMainPasswordVM vm) {
+    public void copyPasswordInPassword(CollectPasswordModelVM vm) {
         ClipboardUtils.copyToClipboard(mView.getContext(), vm.mPassword.get());
     }
 
     @Override
-    public void copyPasswordInUserName(ItemMainPasswordVM vm) {
+    public void copyPasswordInUserName(CollectPasswordModelVM vm) {
         ClipboardUtils.copyToClipboard(mView.getContext(), vm.mUserName.get());
     }
 
@@ -97,5 +104,27 @@ public class CollectPresenter implements CollectContract.Presenter {
         mView.favoriteDailySelf(vm.mItemPosition);
 
         RxBus.get().post(new CollectDailySelfEvent(isFavorite, dailySelf.id));
+    }
+
+    @Override
+    public void favoritePassword(CollectPasswordModelVM vm) {
+        Password password = vm.password;
+        CollectPasswordModel passwordModel = vm.mPasswordModel;
+        boolean isFavorite;
+
+        if (vm.mFavorite.get()) {
+            password.isFavorite = 0;
+            passwordModel.mFavorite = false;
+            isFavorite = false;
+        } else {
+            password.isFavorite = 1;
+            passwordModel.mFavorite = true;
+            isFavorite = true;
+        }
+        mPasswordDao.update(password);
+
+        mView.favoritePassword(vm.mItemPosition);
+
+        RxBus.get().post(new CollectPasswordEvent(isFavorite, password.id));
     }
 }

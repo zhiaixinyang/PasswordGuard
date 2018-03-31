@@ -74,4 +74,9 @@ public class CollectActivity extends BaseActivity implements CollectContract.Mvp
     public void favoriteDailySelf(int position) {
         mAdapter.notifyItemChanged(position);
     }
+
+    @Override
+    public void favoritePassword(int position) {
+        mAdapter.notifyItemChanged(position);
+    }
 }

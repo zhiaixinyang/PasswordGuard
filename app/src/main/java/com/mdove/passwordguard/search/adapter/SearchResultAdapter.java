@@ -1,29 +1,17 @@
 package com.mdove.passwordguard.search.adapter;
 
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.dailyself.ItemMainDailySelfVM;
-import com.mdove.passwordguard.dailyself.MainDailySelfHandler;
 import com.mdove.passwordguard.dailyself.MainDailySelfModel;
-import com.mdove.passwordguard.databinding.ItemMainDailyselfBinding;
-import com.mdove.passwordguard.databinding.ItemPasswordNormalBinding;
 import com.mdove.passwordguard.databinding.ItemSearchMainDailyselfBinding;
 import com.mdove.passwordguard.databinding.ItemSearchPasswordNormalBinding;
-import com.mdove.passwordguard.databinding.ItemSearchRlvBinding;
 import com.mdove.passwordguard.main.model.BaseMainModel;
-import com.mdove.passwordguard.main.model.MainGroupModel;
-import com.mdove.passwordguard.main.model.MainOptionModel;
-import com.mdove.passwordguard.main.model.MainSearchModel;
-import com.mdove.passwordguard.main.model.MainTopModel;
-import com.mdove.passwordguard.main.model.PasswordModel;
+import com.mdove.passwordguard.main.model.MainPasswordModel;
 import com.mdove.passwordguard.main.model.vm.ItemMainPasswordVM;
-import com.mdove.passwordguard.main.presenter.MainPresenter;
-import com.mdove.passwordguard.search.model.SearchRlvModel;
 import com.mdove.passwordguard.search.model.handle.SearchResultHandler;
-import com.mdove.passwordguard.search.model.vm.SearchRlvModelVM;
 import com.mdove.passwordguard.search.presenter.SearchResultPresenter;
 import com.mdove.passwordguard.utils.InflateUtils;
 
@@ -47,7 +35,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public int getItemViewType(int position) {
         BaseMainModel model = mData.get(position);
-        if (model instanceof PasswordModel) {
+        if (model instanceof MainPasswordModel) {
             return TYPE_PASSWORD;
         } else if (model instanceof MainDailySelfModel) {
             return TYPE_DAILY_SELF;
@@ -77,7 +65,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         BaseMainModel model = mData.get(position);
         if (holder instanceof PasswordViewHolder) {
-            ((PasswordViewHolder) holder).bind((PasswordModel) model, position);
+            ((PasswordViewHolder) holder).bind((MainPasswordModel) model, position);
         } else if (holder instanceof MainDailySelfViewHolder) {
             ((MainDailySelfViewHolder) holder).bind((MainDailySelfModel) model, position);
         }
@@ -96,7 +84,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             mBinding = binding;
         }
 
-        public void bind(final PasswordModel model, final int position) {
+        public void bind(final MainPasswordModel model, final int position) {
             mBinding.setViewModel(new ItemMainPasswordVM(model, position));
             mBinding.setActionHandler(new SearchResultHandler(mPresenter));
         }

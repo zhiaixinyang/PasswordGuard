@@ -3,6 +3,7 @@ package com.mdove.passwordguard.collect.presenter.contract;
 import com.mdove.passwordguard.base.BasePresenter;
 import com.mdove.passwordguard.base.BaseView;
 import com.mdove.passwordguard.collect.model.CollectDailySelfModelVM;
+import com.mdove.passwordguard.collect.model.CollectPasswordModelVM;
 import com.mdove.passwordguard.main.model.BaseMainModel;
 import com.mdove.passwordguard.main.model.vm.ItemMainPasswordVM;
 
@@ -18,11 +19,12 @@ public interface CollectContract {
 
         void copyDailySelf(CollectDailySelfModelVM vm);
 
-        void copyPasswordInPassword(ItemMainPasswordVM vm);
+        void copyPasswordInPassword(CollectPasswordModelVM vm);
 
-        void copyPasswordInUserName(ItemMainPasswordVM vm);
+        void copyPasswordInUserName(CollectPasswordModelVM vm);
 
         void favoriteDailySelf(CollectDailySelfModelVM vm);
+        void favoritePassword(CollectPasswordModelVM vm);
 
     }
 
@@ -30,6 +32,7 @@ public interface CollectContract {
         void showData(List<BaseMainModel> data);
 
         void favoriteDailySelf(int position);
+        void favoritePassword(int position);
 
     }
 }

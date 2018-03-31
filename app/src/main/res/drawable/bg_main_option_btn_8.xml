@@ -3,5 +3,5 @@
     <corners
         android:radius="@dimen/radius_main_option_btn"/>
     <solid
-        android:color="@color/yellow_700"/>
+        android:color="@color/yellow_600"/>
 </shape>

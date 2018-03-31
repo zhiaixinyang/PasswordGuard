@@ -14,7 +14,7 @@ import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.addoralter.model.AlterPasswordModel;
 import com.mdove.passwordguard.databinding.DialogAlterPasswordBinding;
 import com.mdove.passwordguard.greendao.entity.Password;
-import com.mdove.passwordguard.main.model.PasswordModel;
+import com.mdove.passwordguard.main.model.MainPasswordModel;
 import com.mdove.passwordguard.model.event.AlterPasswordEvent;
 import com.mdove.passwordguard.utils.SystemUtils;
 import com.mdove.passwordguard.utils.ToastHelper;
@@ -33,7 +33,7 @@ public class AlterPasswordDialog extends AppCompatDialog {
     private AlterPasswordEvent mEvent;
     private int mItemPosition;
 
-    public AlterPasswordDialog(Context context, PasswordModel password, int itemPosition) {
+    public AlterPasswordDialog(Context context, MainPasswordModel password, int itemPosition) {
         super(context, R.style.UpgradeDialog);
         mBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.dialog_alter_password,
                 null, false);
@@ -48,7 +48,7 @@ public class AlterPasswordDialog extends AppCompatDialog {
         setCanceledOnTouchOutside(false);
     }
 
-    private void initPassword(PasswordModel password) {
+    private void initPassword(MainPasswordModel password) {
         mBinding.tvTitle.setText(password.mTitle);
         mTitle = password.mTitle;
         mBinding.etAlterUsername.setText(password.mUserName);
@@ -118,7 +118,7 @@ public class AlterPasswordDialog extends AppCompatDialog {
         mPassword = mBinding.etAlterPassword.getText().toString().trim();
     }
 
-    public static void showDialog(Context context, PasswordModel password, int itemPosition) {
+    public static void showDialog(Context context, MainPasswordModel password, int itemPosition) {
         AlterPasswordDialog dialog = new AlterPasswordDialog(context, password, itemPosition);
         dialog.show();
     }

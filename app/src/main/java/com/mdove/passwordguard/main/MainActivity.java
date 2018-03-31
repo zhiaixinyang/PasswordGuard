@@ -11,7 +11,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -25,6 +24,7 @@ import com.mdove.passwordguard.addoralter.model.event.EditDailySelfActivityEvent
 import com.mdove.passwordguard.addoralter.model.event.EditPasswordActivityEvent;
 import com.mdove.passwordguard.base.listener.OnItemLongClickListener;
 import com.mdove.passwordguard.collect.model.event.CollectDailySelfEvent;
+import com.mdove.passwordguard.collect.model.event.CollectPasswordEvent;
 import com.mdove.passwordguard.deletelist.model.event.DeleteDailySelfReturnEvent;
 import com.mdove.passwordguard.deletelist.model.event.DeletePasswordReturnEvent;
 import com.mdove.passwordguard.group.model.event.GroupDeleteEvent;
@@ -35,7 +35,7 @@ import com.mdove.passwordguard.lock.PatternUnlockActivity;
 import com.mdove.passwordguard.main.adapter.MainAdapter;
 import com.mdove.passwordguard.main.model.BaseMainModel;
 import com.mdove.passwordguard.main.model.MainGroupModel;
-import com.mdove.passwordguard.main.model.PasswordModel;
+import com.mdove.passwordguard.main.model.MainPasswordModel;
 import com.mdove.passwordguard.main.model.event.AddGroupEvent;
 import com.mdove.passwordguard.main.model.event.CheckOrderEvent;
 import com.mdove.passwordguard.main.presenter.MainPresenter;
@@ -137,9 +137,9 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
         mBinding.setActionHandler(mPresenter);
 
         mAdapter = new MainAdapter(this, mPresenter);
-        mAdapter.setOnLongClickListener(new OnItemLongClickListener<PasswordModel>() {
+        mAdapter.setOnLongClickListener(new OnItemLongClickListener<MainPasswordModel>() {
             @Override
-            public void onItemLongClick(int position, PasswordModel object) {
+            public void onItemLongClick(int position, MainPasswordModel object) {
                 AlterPasswordDialog.showDialog(MainActivity.this, object, position);
             }
         });
@@ -424,7 +424,12 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     }
 
     @Subscribe
-    public void collectDailySelfEdit(CollectDailySelfEvent event) {
+    public void collectDailySelf(CollectDailySelfEvent event) {
+        mAdapter.notifyEventCollectDailySelf(event.mId, event.isFavorite);
+    }
+
+    @Subscribe
+    public void collectPassword(CollectPasswordEvent event) {
         mAdapter.notifyEventCollectDailySelf(event.mId, event.isFavorite);
     }
 }

@@ -40,10 +40,10 @@ import com.mdove.passwordguard.main.model.MainGroupModel;
 import com.mdove.passwordguard.main.model.MainGroupRlvModel;
 import com.mdove.passwordguard.main.model.MainOptionInfo;
 import com.mdove.passwordguard.main.model.MainOptionModel;
+import com.mdove.passwordguard.main.model.MainPasswordModel;
 import com.mdove.passwordguard.main.model.MainSearchModel;
 import com.mdove.passwordguard.main.model.MainSelfTaskModel;
 import com.mdove.passwordguard.main.model.MainTopModel;
-import com.mdove.passwordguard.main.model.PasswordModel;
 import com.mdove.passwordguard.main.model.event.CheckOrderEvent;
 import com.mdove.passwordguard.main.model.vm.ItemMainPasswordVM;
 import com.mdove.passwordguard.main.presenter.contract.MainContract;
@@ -63,8 +63,6 @@ import java.util.Date;
 import java.util.List;
 
 import rx.Subscriber;
-
-import static android.media.CamcorderProfile.get;
 
 /**
  * Created by MDove on 2018/2/10.
@@ -148,7 +146,7 @@ public class MainPresenter implements MainContract.Presenter {
 
         List<Password> data = mPasswordDao.queryBuilder().build().list();
         for (Password password : data) {
-            mData.add(new PasswordModel(password));
+            mData.add(new MainPasswordModel(password));
         }
 
         List<MainDailySelfModel> favoriteData = new ArrayList<>();
@@ -217,7 +215,7 @@ public class MainPresenter implements MainContract.Presenter {
     public void addPassword(Password password) {
         long id = mPasswordDao.insert(password);
         if (id != -1) {
-            PasswordModel model = new PasswordModel(password);
+            MainPasswordModel model = new MainPasswordModel(password);
             mData.add(model);
 
             mView.notifyPasswordData(mData.size());
@@ -280,6 +278,24 @@ public class MainPresenter implements MainContract.Presenter {
             }
             model.mIsFavorite = false;
             mView.notifyDailySelfData(vm.mItemPosition);
+        }
+    }
+
+    @Override
+    public void favoritePassword(ItemMainPasswordVM vm) {
+        Password password = vm.mMainPasswordModel.password;
+        if (password.isFavorite == 0) {
+            password.isFavorite = 1;
+            mPasswordDao.update(password);
+
+            vm.mMainPasswordModel.mFavorite = true;
+            mView.notifyPasswordData(vm.mItemPosition);
+        } else {
+            password.isFavorite = 0;
+            mPasswordDao.update(password);
+
+            vm.mMainPasswordModel.mFavorite = false;
+            mView.notifyPasswordData(vm.mItemPosition);
         }
     }
 
@@ -379,7 +395,7 @@ public class MainPresenter implements MainContract.Presenter {
                 DailySelfDao.Properties.MContent.like("%" + queryKey + "%")).list();
         List<BaseMainModel> data = new ArrayList<>();
         for (Password password : passwordList) {
-            data.add(new PasswordModel(password));
+            data.add(new MainPasswordModel(password));
         }
         for (DailySelf dailySelf : dailySelfList) {
             data.add(new MainDailySelfModel(dailySelf));
@@ -414,7 +430,7 @@ public class MainPresenter implements MainContract.Presenter {
         DeletedPassword deletedPassword = event.mDeletedPassword;
         Password password = DeletedPasswordHelper.getPassword(deletedPassword);
         mPasswordDao.insert(password);
-        PasswordModel model = new PasswordModel(password);
+        MainPasswordModel model = new MainPasswordModel(password);
         mData.add(model);
 
         mView.notifyPasswordData(mData.size());
@@ -509,7 +525,7 @@ public class MainPresenter implements MainContract.Presenter {
         }
         List<Password> data = mPasswordDao.queryBuilder().where(PasswordDao.Properties.MTvGroup.eq(DEFAULT_CHECK_GROUP_TITLE)).build().list();
         for (Password password : data) {
-            passwordData.add(new PasswordModel(password));
+            passwordData.add(new MainPasswordModel(password));
         }
         List<DailySelf> dailySelfList = mDailySelfDao.queryBuilder().build().list();
         for (DailySelf dailySelf : dailySelfList) {
@@ -557,7 +573,7 @@ public class MainPresenter implements MainContract.Presenter {
         mPasswordDao.update(model.mNeedEditPassword);
         mDeleteDao.insert(DeletedPasswordHelper.getDeletedPassword(model.mTempPassword));
 
-        PasswordModel oldModel = (PasswordModel) mData.get(itemPosition);
+        MainPasswordModel oldModel = (MainPasswordModel) mData.get(itemPosition);
         oldModel.setPassword(model.mNeedEditPassword);
 
         mView.alterPasswordSuc(itemPosition, mData.size());
@@ -588,9 +604,9 @@ public class MainPresenter implements MainContract.Presenter {
             mCheckData.add(mMainSelfTaskModel);
         }
         List<Password> data = mPasswordDao.queryBuilder().where(PasswordDao.Properties.MTvGroup.eq(event.mGroupInfo.getMTvGroup())).build().list();
-        List<PasswordModel> passwordData = new ArrayList<>();
+        List<MainPasswordModel> passwordData = new ArrayList<>();
         for (Password password : data) {
-            passwordData.add(new PasswordModel(password));
+            passwordData.add(new MainPasswordModel(password));
         }
         List<DailySelf> dailySelfList = mDailySelfDao.queryBuilder().where(DailySelfDao.Properties.MTvGroup.eq(event.mGroupInfo.getMTvGroup())).build().list();
         List<MainDailySelfModel> dailySelfData = new ArrayList<>();
@@ -602,9 +618,9 @@ public class MainPresenter implements MainContract.Presenter {
         mCheckData.addAll(dailySelfData);
 //        for (GroupInfo info : mCheckedList) {
 //            List<Password> data = mPasswordDao.queryBuilder().where(PasswordDao.Properties.MTvGroup.eq(info.getMTvGroup())).build().list();
-//            List<PasswordModel> passwordData = new ArrayList<>();
+//            List<MainPasswordModel> passwordData = new ArrayList<>();
 //            for (Password password : data) {
-//                passwordData.add(new PasswordModel(password));
+//                passwordData.add(new MainPasswordModel(password));
 //            }
 //            checkData.addAll(passwordData);
 //        }
@@ -620,7 +636,7 @@ public class MainPresenter implements MainContract.Presenter {
         MainOptionInfo deleteAccount = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_DELETE_ACCOUNT, "删除记录", "账号信息", R.drawable.bg_main_option_btn_3, R.mipmap.ic_delete);
         MainOptionInfo deleteDailySelf = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_DELETE_DAILY_SELF, "删除记录", "随手记", R.drawable.bg_main_option_btn_7, R.mipmap.ic_btn_delete);
         MainOptionInfo guide = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_GUIDE, "引导", "了解一下", R.drawable.bg_main_option_btn_5, R.mipmap.ic_btn_guide);
-        MainOptionInfo collect = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_COLLECT, "我的收藏", "所有收藏内容", R.drawable.bg_main_option_btn_8, R.mipmap.ic_btn_guide);
+        MainOptionInfo collect = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_COLLECT, "我的收藏", "所有收藏内容", R.drawable.bg_main_option_btn_8, R.mipmap.ic_btn_collect);
         data.add(guide);
         data.add(account);
         data.add(dailySelf);

@@ -23,17 +23,16 @@ import com.mdove.passwordguard.databinding.ItemMainOptionBinding;
 import com.mdove.passwordguard.databinding.ItemMainOptionNewBinding;
 import com.mdove.passwordguard.databinding.ItemMainSearchBinding;
 import com.mdove.passwordguard.databinding.ItemMainSelfTaskBinding;
-import com.mdove.passwordguard.databinding.ItemMainSelfTaskRlvBinding;
 import com.mdove.passwordguard.databinding.ItemMainTopBinding;
 import com.mdove.passwordguard.databinding.ItemPasswordNormalBinding;
 import com.mdove.passwordguard.main.model.BaseMainModel;
 import com.mdove.passwordguard.main.model.MainGroupModel;
 import com.mdove.passwordguard.main.model.MainGroupRlvModel;
 import com.mdove.passwordguard.main.model.MainOptionModel;
+import com.mdove.passwordguard.main.model.MainPasswordModel;
 import com.mdove.passwordguard.main.model.MainSearchModel;
 import com.mdove.passwordguard.main.model.MainSelfTaskModel;
 import com.mdove.passwordguard.main.model.MainTopModel;
-import com.mdove.passwordguard.main.model.PasswordModel;
 import com.mdove.passwordguard.main.model.event.CheckOrderEvent;
 import com.mdove.passwordguard.main.model.handler.MainGroupHandler;
 import com.mdove.passwordguard.main.model.handler.MainOptionHandler;
@@ -42,7 +41,6 @@ import com.mdove.passwordguard.main.model.vm.ItemMainPasswordVM;
 import com.mdove.passwordguard.main.model.vm.ItemMainTopVM;
 import com.mdove.passwordguard.main.presenter.MainPresenter;
 import com.mdove.passwordguard.task.model.SelfTaskModel;
-import com.mdove.passwordguard.ui.guideview.Component;
 import com.mdove.passwordguard.ui.guideview.Guide;
 import com.mdove.passwordguard.ui.guideview.GuideBuilder;
 import com.mdove.passwordguard.ui.guideview.component.CommonComponent;
@@ -95,7 +93,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             case 1: {
                 if (model instanceof MainTopModel) {
                     return TYPE_MAIN_TOP;
-                } else if (model instanceof PasswordModel) {
+                } else if (model instanceof MainPasswordModel) {
                     return TYPE_MAIN_PASSWORD;
                 } else if (model instanceof MainSearchModel) {
                     return TYPE_MAIN_SEARCH;
@@ -149,7 +147,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if (holder instanceof MainTopViewHolder) {
             ((MainTopViewHolder) holder).bind(new ItemMainTopVM((MainTopModel) model));
         } else if (holder instanceof PasswordViewHolder) {
-            ((PasswordViewHolder) holder).bind((PasswordModel) model, position);
+            ((PasswordViewHolder) holder).bind((MainPasswordModel) model, position);
         } else if (holder instanceof MainOptionViewHolder) {
             ((MainOptionViewHolder) holder).bind();
         } else if (holder instanceof MainSearchViewHolder) {
@@ -191,7 +189,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             mBinding = binding;
         }
 
-        public void bind(final PasswordModel model, final int position) {
+        public void bind(final MainPasswordModel model, final int position) {
             mBinding.setViewModel(new ItemMainPasswordVM(model, position));
             mBinding.setPresenter(mPresenter);
             mBinding.layoutItem.setOnLongClickListener(new View.OnLongClickListener() {
@@ -330,6 +328,10 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             if (model.mData == null || model.mData.size() == 0) {
                 mBinding.tvSee.setVisibility(View.VISIBLE);
             }
+            if(mMainSelfTaskAdapter!=null){
+                return;
+            }
+
             mMainSelfTaskAdapter = new MainSelfTaskAdapter(mContext, mPresenter, model.mData);
             mBinding.rlvMainSelfTask.setAdapter(mMainSelfTaskAdapter);
             mMainSelfTaskAdapter.setOnChangeDataSizeListener(new OnChangeDataSizeListener() {
@@ -341,14 +343,14 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    private OnItemLongClickListener<PasswordModel> mItemListener;
-    private OnItemDeleteClickListener<PasswordModel> mDeleteListener;
+    private OnItemLongClickListener<MainPasswordModel> mItemListener;
+    private OnItemDeleteClickListener<MainPasswordModel> mDeleteListener;
 
-    public void setOnLongClickListener(OnItemLongClickListener<PasswordModel> listener) {
+    public void setOnLongClickListener(OnItemLongClickListener<MainPasswordModel> listener) {
         mItemListener = listener;
     }
 
-    public void setOnDeleteClickListener(OnItemDeleteClickListener<PasswordModel> listener) {
+    public void setOnDeleteClickListener(OnItemDeleteClickListener<MainPasswordModel> listener) {
         mDeleteListener = listener;
     }
 
@@ -553,6 +555,29 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 MainDailySelfModel model = (MainDailySelfModel) baseMainModel;
                 if (model.mId == id) {
                     model.mIsFavorite = isFavorite;
+                    updateModel = model;
+                }
+            }
+        }
+        if (updateModel == null) {
+            return;
+        }
+        position = mData.indexOf(updateModel);
+        notifyItemChanged(position);
+    }
+
+    public void notifyEventCollectPassword(long id, boolean isFavorite) {
+        if (mData == null && mData.size() <= 0) {
+            return;
+        }
+
+        int position = -1;
+        MainPasswordModel updateModel = null;
+        for (BaseMainModel baseMainModel : mData) {
+            if (baseMainModel instanceof MainPasswordModel) {
+                MainPasswordModel model = (MainPasswordModel) baseMainModel;
+                if (model.mPasswordId == id) {
+                    model.mFavorite = isFavorite;
                     updateModel = model;
                 }
             }

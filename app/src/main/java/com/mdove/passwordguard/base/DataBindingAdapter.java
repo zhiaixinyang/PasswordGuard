@@ -1,13 +1,11 @@
 package com.mdove.passwordguard.base;
 
 import android.databinding.BindingAdapter;
-import android.graphics.Paint;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mdove.passwordguard.R;
-import com.mdove.passwordguard.dailyself.ItemMainDailySelfVM;
 import com.mdove.passwordguard.task.model.SelfTaskModelVM;
 
 /**
@@ -16,7 +14,7 @@ import com.mdove.passwordguard.task.model.SelfTaskModelVM;
 
 public class DataBindingAdapter {
     @BindingAdapter("loadFavorite")
-    public static void loadFavorite(ImageView view, final IDailySelfFavoriteVM vm) {
+    public static void loadFavorite(ImageView view, final IFavoriteVM vm) {
         view.setImageResource(vm.isFavorite() ? R.mipmap.ic_favorite_on : R.mipmap.ic_favorite_off);
     }
 
