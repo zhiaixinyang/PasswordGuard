@@ -274,25 +274,25 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
 
     @Override
     public void deletePassword(int position) {
-        mAdapter.notifyDeletePasswordData(position);
+        mAdapter.notifyDeletePosition(position);
         ToastHelper.shortToast("删除成功");
     }
 
     @Override
     public void deleteDailySelf(int position) {
-        mAdapter.notifyDeletePasswordData(position);
+        mAdapter.notifyDeletePosition(position);
         ToastHelper.shortToast("撤回成功");
     }
 
     @Override
     public void alterPasswordSuc(int itemPosition, int newItemPosition) {
-        mAdapter.notifyAddPasswordData(itemPosition);
-//        mAdapter.notifyAddPasswordData(newItemPosition);
+        mAdapter.notifyPosition(itemPosition);
+//        mAdapter.notifyPosition(newItemPosition);
     }
 
     @Override
     public void alterDailySelfSuc(int itemPosition) {
-        mAdapter.notifyAddPasswordData(itemPosition);
+        mAdapter.notifyPosition(itemPosition);
     }
 
     @Override
@@ -330,12 +330,17 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
 
     @Override
     public void notifyPasswordData(int position) {
-        mAdapter.notifyAddPasswordData(position);
+        mAdapter.notifyPosition(position);
     }
 
     @Override
     public void notifyDailySelfData(int position) {
         mAdapter.notifyAddDailySelfData(position);
+    }
+
+    @Override
+    public void notifyBtnHide(int position) {
+        mAdapter.notifyDeletePosition(position);
     }
 
     @Subscribe

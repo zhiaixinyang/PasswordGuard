@@ -83,6 +83,12 @@
             android:name=".group.GroupSettingActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".mainoption.AllMainOptionActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".task.SelfTaskActivity"
             android:launchMode="singleTask"

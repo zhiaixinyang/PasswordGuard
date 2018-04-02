@@ -101,6 +101,8 @@ public class AlterPasswordDialog extends AppCompatDialog {
         newPassword.mUserName = mUserName;
         newPassword.mTitle = mTitle;
         newPassword.mTvGroup = mOldGroupTitle;
+        newPassword.isHide=oldPassword.isHide;
+        newPassword.isFavorite=oldPassword.isFavorite;
         newPassword.mTimeStamp = new Date().getTime();
         newPassword.isNew = 1;
         oldPassword.isNew = 0;

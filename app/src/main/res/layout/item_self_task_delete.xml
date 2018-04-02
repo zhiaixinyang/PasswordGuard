@@ -49,7 +49,7 @@
                 android:layout_margin="@dimen/margin_item_self_task"
                 android:gravity="bottom"
                 android:text="@{viewModel.mDeleteTime}"
-                android:textColor="@color/gray"
+                android:textColor="@color/black"
                 android:textSize="12sp"
                 tools:text="2018年3月27" />
 

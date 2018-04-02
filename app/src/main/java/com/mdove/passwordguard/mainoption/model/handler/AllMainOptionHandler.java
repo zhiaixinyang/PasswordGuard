@@ -1,6 +1,7 @@
-package com.mdove.passwordguard.main.model.handler;
+package com.mdove.passwordguard.mainoption.model.handler;
 
 import com.mdove.passwordguard.main.presenter.MainPresenter;
+import com.mdove.passwordguard.mainoption.presenter.AllMainOptionPresenter;
 
 import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_ACCOUNT;
 import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_ADD_DAILY_SELF;
@@ -9,17 +10,16 @@ import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INF
 import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_DELETE_DAILY_SELF;
 import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_GUIDE;
 import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_LOCK;
-import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_MAIN_ALL_OPTION;
 import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_SELF_TASK;
 
 /**
- * Created by MDove on 2018/3/21.
+ * Created by MDove on 2018/4/2.
  */
 
-public class ItemMainOptionHandler {
-    private MainPresenter mPresenter;
+public class AllMainOptionHandler {
+    private AllMainOptionPresenter mPresenter;
 
-    public ItemMainOptionHandler(MainPresenter presenter) {
+    public AllMainOptionHandler(AllMainOptionPresenter presenter) {
         mPresenter = presenter;
     }
 
@@ -46,7 +46,6 @@ public class ItemMainOptionHandler {
                 break;
             }
             case MAIN_OPEN_INFO_TYPE_GUIDE: {
-                mPresenter.onClickBtnGuide();
                 break;
             }
             case MAIN_OPEN_INFO_TYPE_SELF_TASK: {
@@ -55,10 +54,6 @@ public class ItemMainOptionHandler {
             }
             case MAIN_OPEN_INFO_TYPE_COLLECT: {
                 mPresenter.onClickBtnCollect();
-                break;
-            }
-            case MAIN_OPEN_INFO_TYPE_MAIN_ALL_OPTION: {
-                mPresenter.onClickBtnAllMainOption();
                 break;
             }
             default: {

@@ -15,6 +15,7 @@ public class MainPasswordModel extends BaseMainModel {
     public Long mTimeStamp;
     public boolean mIsNew = false;
     public boolean mFavorite = false;
+    public boolean mHide = false;
     public Password password;
 
     public MainPasswordModel(Password password) {
@@ -27,6 +28,7 @@ public class MainPasswordModel extends BaseMainModel {
         mType = 1;
         mIsNew = password.isNew != 0;
         mFavorite = password.isFavorite != 0;
+        mHide = password.isHide != 0;
         this.password = password;
     }
 
@@ -40,6 +42,7 @@ public class MainPasswordModel extends BaseMainModel {
         mType = 1;
         mFavorite = password.isFavorite != 0;
         mIsNew = password.isNew != 0;
+        mHide = password.isHide != 0;
         this.password = password;
     }
 }

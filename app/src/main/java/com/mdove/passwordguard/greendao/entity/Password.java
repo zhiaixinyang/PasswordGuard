@@ -20,6 +20,7 @@ public class Password implements Serializable {
     public Long mTimeStamp;
     public int isNew;
     public int isFavorite;//0表示没收藏
+    public int isHide;//0表示没隐藏
     public String mTvGroup;
     static final long serialVersionUID = 42L;
 
@@ -27,9 +28,10 @@ public class Password implements Serializable {
     public Password() {
     }
 
-    @Generated(hash = 1217362040)
+    @Generated(hash = 1851760667)
     public Password(Long id, String mUserName, String mPassword, String mTitle,
-            Long mTimeStamp, int isNew, int isFavorite, String mTvGroup) {
+            Long mTimeStamp, int isNew, int isFavorite, int isHide,
+            String mTvGroup) {
         this.id = id;
         this.mUserName = mUserName;
         this.mPassword = mPassword;
@@ -37,6 +39,7 @@ public class Password implements Serializable {
         this.mTimeStamp = mTimeStamp;
         this.isNew = isNew;
         this.isFavorite = isFavorite;
+        this.isHide = isHide;
         this.mTvGroup = mTvGroup;
     }
 
@@ -102,5 +105,13 @@ public class Password implements Serializable {
 
     public void setIsFavorite(int isFavorite) {
         this.isFavorite = isFavorite;
+    }
+
+    public int getIsHide() {
+        return this.isHide;
+    }
+
+    public void setIsHide(int isHide) {
+        this.isHide = isHide;
     }
 }

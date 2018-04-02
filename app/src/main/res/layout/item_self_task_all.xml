@@ -28,11 +28,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_item_self_task">
-
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_marginLeft="@dimen/margin_item_self_task"
+                android:layout_marginTop="@dimen/margin_item_self_task"
+                android:layout_width="wrap_content"
+                tools:text="2018/4/1"
+                android:textSize="12sp"
+                android:text="@{viewModel.mTime}"
+                android:textColor="#666666"
+                android:layout_height="wrap_content" />
             <EditText
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_time"
                 android:layout_margin="@dimen/margin_item_self_task"
                 android:layout_toLeftOf="@+id/btn_edit"
                 android:background="@null"

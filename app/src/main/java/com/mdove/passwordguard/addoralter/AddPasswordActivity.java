@@ -144,6 +144,8 @@ public class AddPasswordActivity extends BaseActivity implements AddPasswordCont
         password.mTitle = mTitle;
         password.mTimeStamp = new Date().getTime();
         password.isNew = 1;
+        password.isFavorite = 0;
+        password.isHide = 0;
         password.mTvGroup = mDefaultTitle;
 
         return true;

@@ -86,6 +86,12 @@
         <item name="item_height">wrap_content</item>
     </style>
 
+    <style name="pattern_set_switch">
+        <item name="colorControlActivated">@color/commonColorOption</item>
+        <!-- Inactive thumb color switch关闭时的拇指按钮的颜色 -->
+        <!--<item name="colorSwitchThumbNormal">@color/colorAccent</item>-->
+    </style>
+
     <style name="MultiLineChooseLayoutTags.SingleChoose" parent="MultiLineChooseLayoutTags">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

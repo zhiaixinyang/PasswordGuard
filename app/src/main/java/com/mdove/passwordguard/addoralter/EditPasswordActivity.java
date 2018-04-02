@@ -187,6 +187,8 @@ public class EditPasswordActivity extends BaseActivity implements AddPasswordCon
         mTmpPassword.mUserName = mNeedEditPassword.mUserName;
         mTmpPassword.mTitle = mNeedEditPassword.mTitle;
         mTmpPassword.mTimeStamp = mNeedEditPassword.mTimeStamp;
+        mTmpPassword.isFavorite = mNeedEditPassword.isFavorite;
+        mTmpPassword.isHide = mNeedEditPassword.isHide;
         mTmpPassword.isNew = 0;
         mTmpPassword.mTvGroup = mNeedEditPassword.mTvGroup;
 

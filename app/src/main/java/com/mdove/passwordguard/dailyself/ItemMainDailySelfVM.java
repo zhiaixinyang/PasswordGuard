@@ -4,6 +4,7 @@ import android.databinding.ObservableField;
 
 import com.mdove.passwordguard.base.IFavoriteVM;
 import com.mdove.passwordguard.greendao.entity.DailySelf;
+import com.mdove.passwordguard.main.model.impl.IHideVm;
 import com.mdove.passwordguard.utils.DateUtil;
 
 import java.io.Serializable;
@@ -12,7 +13,7 @@ import java.io.Serializable;
  * Created by MDove on 2018/2/22.
  */
 
-public class ItemMainDailySelfVM implements Serializable, IFavoriteVM {
+public class ItemMainDailySelfVM implements Serializable, IFavoriteVM,IHideVm {
     public ObservableField<String> mTime = new ObservableField<>();
     public ObservableField<String> mContent = new ObservableField<>();
     public ObservableField<String> mTvGroup = new ObservableField<>();

@@ -13,6 +13,7 @@ import com.mdove.passwordguard.main.adapter.MainSelfTaskAdapter;
 import com.mdove.passwordguard.main.model.BaseMainModel;
 import com.mdove.passwordguard.main.model.MainGroupModel;
 import com.mdove.passwordguard.main.model.event.CheckOrderEvent;
+import com.mdove.passwordguard.main.model.impl.IHideVm;
 import com.mdove.passwordguard.main.model.vm.ItemMainPasswordVM;
 import com.mdove.passwordguard.task.model.SelfTaskModel;
 import com.mdove.passwordguard.task.model.SelfTaskModelVM;
@@ -61,6 +62,7 @@ public interface MainContract {
         void onClickBtnSelfTask();
 
         void onClickBtnCollect();
+        void onClickBtnAllMainOption();
 
         void onClickBtnSearch();
 
@@ -83,6 +85,7 @@ public interface MainContract {
         void addDailySelf(DailySelf dailySelf);
 
         void favoriteDailySelf(ItemMainDailySelfVM vm);
+        void btnHide(IHideVm vm);
 
         void favoritePassword(ItemMainPasswordVM vm);
 
@@ -103,6 +106,7 @@ public interface MainContract {
         void notifyPasswordData(int position);
 
         void notifyDailySelfData(int position);
+        void notifyBtnHide(int position);
 
         void onClickBtnPassword(MainGroupModel model);
 

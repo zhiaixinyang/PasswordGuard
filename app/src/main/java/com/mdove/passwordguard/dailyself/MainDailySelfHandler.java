@@ -1,5 +1,6 @@
 package com.mdove.passwordguard.dailyself;
 
+import com.mdove.passwordguard.main.model.impl.IHideVm;
 import com.mdove.passwordguard.main.presenter.MainPresenter;
 
 /**
@@ -19,6 +20,10 @@ public class MainDailySelfHandler {
 
     public void favoriteDailySelf(ItemMainDailySelfVM vm) {
         mPresenter.favoriteDailySelf(vm);
+    }
+
+    public void btnHide(IHideVm vm) {
+        mPresenter.btnHide(vm);
     }
 
     public void onClickBtnDeleteDailySelf(ItemMainDailySelfVM vm) {

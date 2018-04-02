@@ -605,7 +605,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         notifyDataSetChanged();
     }
 
-    public void notifyAddPasswordData(int position) {
+    public void notifyPosition(int position) {
         notifyItemChanged(position);
     }
 
@@ -613,7 +613,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         notifyItemChanged(position);
     }
 
-    public void notifyDeletePasswordData(int position) {
+    public void notifyDeletePosition(int position) {
         mData.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, mData.size());
