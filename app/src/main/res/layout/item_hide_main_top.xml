@@ -36,16 +36,33 @@
             android:textSize="20sp"
             tools:text="2018年2月10日" />
 
-        <ImageView
-            android:id="@+id/btn_hide"
-            android:layout_width="@dimen/item_main_group_setting_iv_w_h"
-            android:layout_height="@dimen/item_main_group_setting_iv_w_h"
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="12dp"
-            android:layout_marginTop="12dp"
-            android:onClick="@{()->actionHandler.onClickBtnHideTimeTop()}"
-            android:src="@mipmap/ic_item_hide"
-            android:tint="@color/black" />
+            android:layout_marginTop="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="4dp"
+                android:layout_toLeftOf="@+id/btn_hide"
+                android:onClick="@{()->actionHandler.onClickBtnHideTimeTop()}"
+                android:text="取消隐藏"
+                android:layout_centerVertical="true"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/btn_hide"
+                android:layout_width="@dimen/item_main_group_setting_iv_w_h"
+                android:layout_height="@dimen/item_main_group_setting_iv_w_h"
+                android:layout_alignParentRight="true"
+                android:onClick="@{()->actionHandler.onClickBtnHideTimeTop()}"
+                android:src="@mipmap/ic_item_hide"
+                android:tint="@color/black" />
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/tv_title"

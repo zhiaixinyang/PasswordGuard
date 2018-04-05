@@ -31,15 +31,24 @@
                 android:text="快捷操作"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="取消隐藏"
+                android:layout_centerVertical="true"
+                android:onClick="@{()->actionHandler.onClickBtnHideOption()}"
+                android:textSize="12sp"
+                android:layout_marginRight="8dp"
+                android:textColor="@color/black"
+                android:layout_toLeftOf="@+id/btn_hide"/>
             <ImageView
                 android:id="@+id/btn_hide"
                 android:layout_width="@dimen/item_main_group_setting_iv_w_h"
                 android:layout_height="@dimen/item_main_group_setting_iv_w_h"
-                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="12dp"
-                android:onClick="@{()->actionHandler.onClickBtnHideGroup()}"
+                android:layout_alignParentRight="true"
+                android:onClick="@{()->actionHandler.onClickBtnHideOption()}"
                 android:src="@mipmap/ic_item_hide"
                 android:tint="@color/black" />
         </RelativeLayout>

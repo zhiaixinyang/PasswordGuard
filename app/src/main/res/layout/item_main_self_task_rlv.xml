@@ -23,28 +23,115 @@
             android:id="@+id/layout_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/iv_see"
             android:background="@drawable/bg_item_self_task">
 
             <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:layout_margin="@dimen/margin_item_self_task"
-                android:layout_toLeftOf="@+id/layout_btn"
                 android:text="@{viewModel.mTask}"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 tools:text="我的一条任务,我的一条任务,我的一条任务,我的一条任务,我的一条任务,我的一条任务" />
 
             <RelativeLayout
+                android:id="@+id/layout_btn_see"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_title"
+                android:layout_marginLeft="@dimen/margin_item_self_task"
+                android:layout_marginTop="@dimen/margin_item_self_task"
+                android:onClick="@{()->actionHandler.onClickSee(viewModel)}">
+
+                <ImageView
+                    android:id="@+id/iv_see"
+                    android:layout_width="@dimen/item_main_self_task_rlv_w_h"
+                    android:layout_height="@dimen/item_main_self_task_rlv_w_h"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginRight="@dimen/margin_item_self_task"
+                    android:src="@mipmap/ic_self_task_see_on" />
+
+                <TextView
+                    android:id="@+id/tv_see_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_see"
+                    android:layout_marginBottom="@dimen/margin_item_self_task"
+                    android:text="主页显示"
+                    android:textColor="@color/commonColor"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_btn_priority"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_title"
+                android:layout_marginLeft="@dimen/margin_item_self_task"
+                android:layout_marginTop="@dimen/margin_item_self_task"
+                android:layout_toRightOf="@+id/layout_btn_see"
+                android:onClick="@{()->actionHandler.onClickPriority(viewModel)}">
+
+                <ImageView
+                    android:id="@+id/iv_priority"
+                    android:layout_width="@dimen/item_main_self_task_rlv_w_h"
+                    android:layout_height="@dimen/item_main_self_task_rlv_w_h"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginRight="@dimen/margin_item_self_task"
+                    android:src="@mipmap/ic_item_priority"
+                    android:tint="@color/commonColor" />
+
+                <TextView
+                    android:id="@+id/tv_priority_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_priority"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/margin_item_self_task"
+                    android:text="优先级"
+                    android:textColor="@color/commonColor"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_btn_copy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_title"
+                android:layout_marginLeft="@dimen/margin_item_self_task"
+                android:layout_marginTop="@dimen/margin_item_self_task"
+                android:layout_toRightOf="@+id/layout_btn_priority"
+                android:onClick="@{()->actionHandler.onClickCopy(viewModel)}">
+
+                <ImageView
+                    android:id="@+id/iv_copy"
+                    android:layout_width="@dimen/item_main_self_task_rlv_w_h"
+                    android:layout_height="@dimen/item_main_self_task_rlv_w_h"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginRight="@dimen/margin_item_self_task"
+                    android:src="@mipmap/ic_btn_copy"
+                    android:tint="@color/commonColor" />
+
+                <TextView
+                    android:id="@+id/tv_copy_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_copy"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/margin_item_self_task"
+                    android:text="复制"
+                    android:textColor="@color/commonColor"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:id="@+id/layout_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
                 android:layout_marginBottom="@dimen/margin_item_self_task"
+                android:layout_alignBottom="@+id/layout_btn_see"
                 android:layout_marginRight="@dimen/margin_item_self_task"
                 android:layout_marginTop="@dimen/margin_item_self_task"
                 android:background="@drawable/bg_item_self_task_btn_off"
@@ -69,7 +156,6 @@
                     android:layout_toRightOf="@+id/tv_btn"
                     android:src="@mipmap/ic_task_suc" />
             </RelativeLayout>
-
         </RelativeLayout>
 
     </RelativeLayout>

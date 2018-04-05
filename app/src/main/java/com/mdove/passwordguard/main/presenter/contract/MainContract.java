@@ -106,6 +106,9 @@ public interface MainContract {
         void copyPasswordInUserName(ItemMainPasswordVM vm);
 
         void onClickTaskSuc(SelfTaskModelVM vm);
+        void onClickSee(SelfTaskModelVM vm);
+        void onClickPriority(SelfTaskModelVM vm);
+        void onClickCopyTaskSelf(SelfTaskModelVM vm);
     }
 
     interface MvpView extends BaseView<Presenter> {
@@ -152,5 +155,8 @@ public interface MainContract {
         void onClickBtnHideOption(int position);
 
         void onClickBtnHideTimeTop(int position);
+
+        void notifyTaskSelf(int position);
+
     }
 }

@@ -17,4 +17,16 @@ public class MainSelfTaskHandler {
     public void onClickTaskSuc(SelfTaskModelVM vm) {
         mPresenter.onClickTaskSuc(vm);
     }
+
+    public void onClickSee(SelfTaskModelVM vm) {
+        mPresenter.onClickSee(vm);
+    }
+
+    public void onClickPriority(SelfTaskModelVM vm) {
+        mPresenter.onClickPriority(vm);
+    }
+
+    public void onClickCopy(SelfTaskModelVM vm) {
+        mPresenter.onClickCopyTaskSelf(vm);
+    }
 }

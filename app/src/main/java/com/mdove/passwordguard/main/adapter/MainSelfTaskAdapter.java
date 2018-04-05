@@ -2,6 +2,7 @@ package com.mdove.passwordguard.main.adapter;
 
 import android.content.Context;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
@@ -101,6 +102,9 @@ public class MainSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         public void bind(SelfTaskModel selfTaskModel, int position) {
             mBinding.setViewModel(new SelfTaskModelVM(selfTaskModel, position));
             mBinding.setActionHandler(new MainSelfTaskHandler(mPresenter));
+
+            mBinding.ivPriority.setColorFilter(SelfTaskPriorityHelper.getPriorityBtnColor(mContext, selfTaskModel.mPriority), PorterDuff.Mode.SRC_ATOP);
+            mBinding.tvPriorityTip.setTextColor(SelfTaskPriorityHelper.getPriorityBtnColor(mContext, selfTaskModel.mPriority));
             mBinding.tvTitle.setTextColor(SelfTaskPriorityHelper.getPriorityTextColor(mContext, selfTaskModel.mPriority));
 
             if (selfTaskModel.mIsSuc) {

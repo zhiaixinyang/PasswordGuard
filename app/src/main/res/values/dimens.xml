@@ -63,5 +63,6 @@
     <dimen name="item_self_task_all_btn_icon_w_h">22dp</dimen>
     <dimen name="item_self_task_all_btn_text_size">10sp</dimen>
     <dimen name="margin_item_all_main_option">8dp</dimen>
+    <dimen name="item_main_self_task_rlv_w_h">23dp</dimen>
 
 </resources>

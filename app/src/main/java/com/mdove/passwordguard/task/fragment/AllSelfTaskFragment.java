@@ -1,6 +1,5 @@
 package com.mdove.passwordguard.task.fragment;
 
-import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;

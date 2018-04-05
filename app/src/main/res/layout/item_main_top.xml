@@ -45,6 +45,7 @@
             android:layout_marginTop="12dp"
             android:onClick="@{()->actionHandler.onClickBtnHideTimeTop()}"
             android:src="@mipmap/ic_item_hide"
+            android:visibility="gone"
             android:tint="@color/gray_light" />
 
         <TextView

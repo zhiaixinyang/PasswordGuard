@@ -121,6 +121,8 @@ public class MainPresenter implements MainContract.Presenter {
     public void subscribe(MainContract.MvpView view) {
         mView = view;
 
+        MainConfig.setHideSysItemOption(false);
+
         mCheckedList = new ArrayList<>();
 
         mPasswordDao = App.getDaoSession().getPasswordDao();
@@ -660,6 +662,41 @@ public class MainPresenter implements MainContract.Presenter {
             mSelfTaskDao.update(selfTask);
         }
         mView.onClickTaskSuc(vm.mPosition);
+    }
+
+    @Override
+    public void onClickSee(SelfTaskModelVM vm) {
+        SelfTask selfTask = vm.mSelfTaskModel.mSelfTask;
+        if (vm.mSelfTaskModel.mIsSee) {
+            selfTask.mIsSee = 0;
+            vm.mSelfTaskModel.mIsSee = false;
+            mSelfTaskDao.update(selfTask);
+        } else {
+            selfTask.mIsSee = 1;
+            vm.mSelfTaskModel.mIsSee = true;
+            mSelfTaskDao.update(selfTask);
+        }
+        mView.notifyTaskSelf(vm.mPosition);
+    }
+
+    @Override
+    public void onClickPriority(SelfTaskModelVM vm) {
+        SelfTask selfTask = vm.mSelfTaskModel.mSelfTask;
+        int curPriority = selfTask.mPriority;
+        curPriority++;
+        if (curPriority >= 3) {
+            curPriority = 0;
+        }
+        selfTask.mPriority = curPriority;
+        mSelfTaskDao.update(selfTask);
+
+        vm.mSelfTaskModel.mPriority = curPriority;
+        mView.notifyTaskSelf(vm.mPosition);
+    }
+
+    @Override
+    public void onClickCopyTaskSelf(SelfTaskModelVM vm) {
+        ClipboardUtils.copyToClipboard(mView.getContext(), vm.mTask.get());
     }
 
     private void showUpgradeDialog(final RealUpdate result) {

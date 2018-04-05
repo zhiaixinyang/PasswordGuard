@@ -356,8 +356,8 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         mDeleteListener = listener;
     }
 
-    public void notifyOnlyGroup() {
-        mGroupRlvAdapter.notifyDataSetChanged();
+    public void notifyTaskSelf(int position) {
+        mMainSelfTaskAdapter.notifyPosition(position);
     }
 
     public void showGuideView(Activity activity, View view) {

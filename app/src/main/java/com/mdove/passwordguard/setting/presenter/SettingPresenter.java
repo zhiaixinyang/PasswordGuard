@@ -94,48 +94,65 @@ public class SettingPresenter implements SettingContract.Presenter {
     @Override
     public void onClickBtnHideGroup() {
         MainConfig.setHideSysItemGroup(false);
+        int position = -1;
+
         for (BaseMainModel baseMainModel : mData) {
             if (baseMainModel.mSysType == BaseMainModel.MAIN_ITEM_SYS_TYPE_GROUP) {
-                mView.onClickBtnHideGroup(mData.indexOf(baseMainModel));
+                position = mData.indexOf(baseMainModel);
             }
         }
 
-        RxBus.get().post(new HideItemMainEvent(HideItemMainEvent.TYPE_HIDE_ITEM_MAIN_GROUP));
+        if (position != -1) {
+            mView.onClickBtnHideGroup(position);
+            RxBus.get().post(new HideItemMainEvent(HideItemMainEvent.TYPE_HIDE_ITEM_MAIN_GROUP));
+        }
     }
 
     @Override
     public void onClickBtnHideSearch() {
         MainConfig.setHideSysItemSearch(false);
+        int position = -1;
+
         for (BaseMainModel baseMainModel : mData) {
             if (baseMainModel.mSysType == BaseMainModel.MAIN_ITEM_SYS_TYPE_SEARCH) {
-                mView.onClickBtnHideSearch(mData.indexOf(baseMainModel));
+                position = mData.indexOf(baseMainModel);
             }
         }
-        RxBus.get().post(new HideItemMainEvent(HideItemMainEvent.TYPE_HIDE_ITEM_MAIN_SEARCH));
+        if (position!=-1) {
+            mView.onClickBtnHideSearch(position);
+            RxBus.get().post(new HideItemMainEvent(HideItemMainEvent.TYPE_HIDE_ITEM_MAIN_SEARCH));
+        }
     }
 
     @Override
     public void onClickBtnHideTimeTop() {
         MainConfig.setHideSysItemTimeTop(false);
+        int position = -1;
         for (BaseMainModel baseMainModel : mData) {
             if (baseMainModel.mSysType == BaseMainModel.MAIN_ITEM_SYS_TYPE_TOP_TIME) {
-                mView.onClickBtnHideTimeTop(mData.indexOf(baseMainModel));
+                position = mData.indexOf(baseMainModel);
             }
         }
-
-        RxBus.get().post(new HideItemMainEvent(HideItemMainEvent.TYPE_HIDE_ITEM_MAIN_TIME_TOP));
+        if (position != -1) {
+            mView.onClickBtnHideTimeTop(position);
+            RxBus.get().post(new HideItemMainEvent(HideItemMainEvent.TYPE_HIDE_ITEM_MAIN_TIME_TOP));
+        }
     }
 
     @Override
     public void onClickBtnHideOption() {
         MainConfig.setHideSysItemOption(false);
+        int position = -1;
         for (BaseMainModel baseMainModel : mData) {
             if (baseMainModel.mSysType == BaseMainModel.MAIN_ITEM_SYS_TYPE_OPTION) {
-                mView.onClickBtnHideOption(mData.indexOf(baseMainModel));
+                position = mData.indexOf(baseMainModel);
             }
         }
 
-        RxBus.get().post(new HideItemMainEvent(HideItemMainEvent.TYPE_HIDE_ITEM_MAIN_OPTION));
+        if (position!=-1) {
+            mView.onClickBtnHideOption(position);
+            RxBus.get().post(new HideItemMainEvent(HideItemMainEvent.TYPE_HIDE_ITEM_MAIN_OPTION));
+        }
     }
 
     private void initGroup() {
