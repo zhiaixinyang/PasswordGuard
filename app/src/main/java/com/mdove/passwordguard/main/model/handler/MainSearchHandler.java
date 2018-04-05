@@ -9,11 +9,24 @@ import com.mdove.passwordguard.main.presenter.MainPresenter;
 public class MainSearchHandler {
     private MainPresenter mPresenter;
 
+    public MainSearchHandler() {
+    }
+
     public MainSearchHandler(MainPresenter presenter) {
         mPresenter = presenter;
     }
 
     public void onClickBtnSearch() {
+        if (mPresenter == null) {
+            return;
+        }
         mPresenter.onClickBtnSearch();
+    }
+
+    public void onClickBtnHideSearch() {
+        if (mPresenter == null) {
+            return;
+        }
+        mPresenter.onClickBtnHideSearch();
     }
 }

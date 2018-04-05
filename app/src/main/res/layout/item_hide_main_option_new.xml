@@ -5,7 +5,7 @@
 
         <variable
             name="actionHandler"
-            type="com.mdove.passwordguard.main.presenter.MainPresenter" />
+            type="com.mdove.passwordguard.setting.model.SettingHandler" />
     </data>
 
     <RelativeLayout
@@ -18,30 +18,32 @@
         <RelativeLayout
             android:id="@+id/layout_top"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/item_top_height">
+            android:layout_height="@dimen/item_top_height"
+            android:background="@drawable/bg_normal_top">
 
             <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/item_top_height"
-                android:background="@drawable/bg_normal_top"
                 android:gravity="center_vertical"
+                android:onClick="@{()->actionHandler.onClickBtnHideOption()}"
                 android:paddingLeft="12dp"
                 android:text="快捷操作"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <ImageView
-                android:id="@+id/tv_search"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:id="@+id/btn_hide"
+                android:layout_width="@dimen/item_main_group_setting_iv_w_h"
+                android:layout_height="@dimen/item_main_group_setting_iv_w_h"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="12dp"
+                android:onClick="@{()->actionHandler.onClickBtnHideGroup()}"
                 android:src="@mipmap/ic_item_hide"
-                android:onClick="@{()->actionHandler.onClickBtnHideOption()}"
-                android:tint="@color/gray_light" />
+                android:tint="@color/black" />
         </RelativeLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"

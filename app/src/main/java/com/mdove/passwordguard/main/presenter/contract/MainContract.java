@@ -53,6 +53,14 @@ public interface MainContract {
 
         void onClickBtnAddGroup();
 
+        void onClickBtnHideGroup();
+
+        void onClickBtnHideSearch();
+
+        void onClickBtnHideOption();
+
+        void onClickBtnHideTimeTop();
+
         void onClickBtnSetting();
 
         void onClickBtnActivityDailySelf();
@@ -62,6 +70,7 @@ public interface MainContract {
         void onClickBtnSelfTask();
 
         void onClickBtnCollect();
+
         void onClickBtnAllMainOption();
 
         void onClickBtnSearch();
@@ -85,7 +94,8 @@ public interface MainContract {
         void addDailySelf(DailySelf dailySelf);
 
         void favoriteDailySelf(ItemMainDailySelfVM vm);
-        void btnHide(IHideVm vm);
+
+        void btnHidePworDs(IHideVm vm);
 
         void favoritePassword(ItemMainPasswordVM vm);
 
@@ -106,6 +116,7 @@ public interface MainContract {
         void notifyPasswordData(int position);
 
         void notifyDailySelfData(int position);
+
         void notifyBtnHide(int position);
 
         void onClickBtnPassword(MainGroupModel model);
@@ -133,5 +144,13 @@ public interface MainContract {
         void checkOrderSuc(List<BaseMainModel> data);
 
         void onClickTaskSuc(int position);
+
+        void onClickBtnHideGroup(int position);
+
+        void onClickBtnHideSearch(int position);
+
+        void onClickBtnHideOption(int position);
+
+        void onClickBtnHideTimeTop(int position);
     }
 }

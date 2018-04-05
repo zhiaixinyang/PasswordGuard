@@ -24,6 +24,10 @@ public class MainOptionAdapter extends RecyclerView.Adapter<MainOptionAdapter.Vi
     private MainPresenter mPresenter;
     private List<MainOptionInfo> mData;
 
+    public MainOptionAdapter(List<MainOptionInfo> data) {
+        mData = data;
+    }
+
     public MainOptionAdapter(List<MainOptionInfo> data, MainPresenter presenter) {
         mData = data;
         mPresenter = presenter;
@@ -54,7 +58,9 @@ public class MainOptionAdapter extends RecyclerView.Adapter<MainOptionAdapter.Vi
 
         public void bind(MainOptionInfo mainOptionInfo) {
             mBinding.setViewModel(new ItemMainOptionVM(mainOptionInfo));
-            mBinding.setActionHandler(new ItemMainOptionHandler(mPresenter));
+            if (mPresenter!=null) {
+                mBinding.setActionHandler(new ItemMainOptionHandler(mPresenter));
+            }
         }
     }
 }

@@ -9,15 +9,30 @@ import com.mdove.passwordguard.main.presenter.MainPresenter;
 public class MainGroupHandler {
     private MainPresenter mPresenter;
 
+    public MainGroupHandler(){}
+
     public MainGroupHandler(MainPresenter presenter) {
         mPresenter = presenter;
     }
 
     public void onClickBtnAddGroup() {
+        if (mPresenter==null){
+            return;
+        }
         mPresenter.onClickBtnAddGroup();
     }
 
+    public void onClickBtnHideGroup() {
+        if (mPresenter==null){
+            return;
+        }
+        mPresenter.onClickBtnHideGroup();
+    }
+
     public void onClickBtnSetting() {
+        if (mPresenter==null){
+            return;
+        }
         mPresenter.onClickBtnSetting();
     }
 

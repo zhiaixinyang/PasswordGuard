@@ -35,16 +35,18 @@ public interface AllMainOptionContract {
 
         void onClickBtnDeleteDailySelf();
 
-        void onClickBtnAddGroup();
-
         void onClickBtnSetting();
+
+        void onClickBtnAllPassword();
+
+        void onClickBtnAllDailySelf();
 
         void onClickBtnActivityDailySelf();
 
         void onClickBtnSelfTask();
 
         void onClickBtnCollect();
-        void onClickBtnAllMainOption();    }
+    }
 
     interface MvpView extends BaseView<Presenter> {
         void showData(List<MainOptionInfo> data);

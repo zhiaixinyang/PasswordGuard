@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/main_start_color">
+
+        <TextView
+            android:id="@+id/tv_hide"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="已经隐藏的按钮"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rlv_hide_setting"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_below="@+id/tv_hide"
+            android:overScrollMode="never"
+            android:paddingTop="8dp"
+            android:scrollbars="none" />
+
+    </RelativeLayout>
+</layout>

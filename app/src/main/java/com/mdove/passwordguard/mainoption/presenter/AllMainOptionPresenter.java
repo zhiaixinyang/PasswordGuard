@@ -47,11 +47,13 @@ import com.mdove.passwordguard.main.model.MainTopModel;
 import com.mdove.passwordguard.main.model.event.CheckOrderEvent;
 import com.mdove.passwordguard.main.model.impl.IHideVm;
 import com.mdove.passwordguard.main.model.vm.ItemMainPasswordVM;
+import com.mdove.passwordguard.main.presenter.MainPresenter;
 import com.mdove.passwordguard.mainoption.AllMainOptionActivity;
 import com.mdove.passwordguard.mainoption.presenter.contract.AllMainOptionContract;
 import com.mdove.passwordguard.manager.UpdateStatusManager;
 import com.mdove.passwordguard.model.net.RealUpdate;
 import com.mdove.passwordguard.net.ApiServerImpl;
+import com.mdove.passwordguard.setting.SettingActivity;
 import com.mdove.passwordguard.task.NewSelfTaskActivity;
 import com.mdove.passwordguard.task.model.SelfTaskModel;
 import com.mdove.passwordguard.task.model.SelfTaskModelVM;
@@ -123,13 +125,18 @@ public class AllMainOptionPresenter implements AllMainOptionContract.Presenter {
     }
 
     @Override
-    public void onClickBtnAddGroup() {
-        new AddGroupDialog(mView.getContext()).show();
+    public void onClickBtnSetting() {
+        SettingActivity.start(mView.getContext());
     }
 
     @Override
-    public void onClickBtnSetting() {
-        GroupSettingActivity.start(mView.getContext());
+    public void onClickBtnAllPassword() {
+
+    }
+
+    @Override
+    public void onClickBtnAllDailySelf() {
+
     }
 
     @Override
@@ -148,11 +155,6 @@ public class AllMainOptionPresenter implements AllMainOptionContract.Presenter {
         CollectActivity.start(mView.getContext());
     }
 
-    @Override
-    public void onClickBtnAllMainOption() {
-        AllMainOptionActivity.start(mView.getContext());
-    }
-
     public List<MainOptionInfo> getInitOptionData() {
         List<MainOptionInfo> data = new ArrayList<>();
         MainOptionInfo account = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_ACCOUNT, "记录账号", "记录账号信息", R.drawable.bg_main_option_btn_1, R.mipmap.ic_btn_password);
@@ -163,20 +165,20 @@ public class AllMainOptionPresenter implements AllMainOptionContract.Presenter {
         MainOptionInfo deleteDailySelf = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_DELETE_DAILY_SELF, "删除记录", "随手记", R.drawable.bg_main_option_btn_7, R.mipmap.ic_btn_delete);
         MainOptionInfo guide = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_GUIDE, "引导", "了解一下", R.drawable.bg_main_option_btn_5, R.mipmap.ic_btn_guide);
         MainOptionInfo collect = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_COLLECT, "我的收藏", "所有收藏内容", R.drawable.bg_main_option_btn_8, R.mipmap.ic_btn_collect);
-        MainOptionInfo mainOption = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_MAIN_ALL_OPTION, "更多操作", "显示隐藏操作", R.drawable.bg_main_option_btn_9, R.mipmap.ic_btn_collect);
-        MainOptionInfo allPassword = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_ALL_PASSWORD, "所有账号", "所有账号记录", R.drawable.bg_main_option_btn_10, R.mipmap.ic_btn_collect);
-        MainOptionInfo allDailySelf = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_ALL_DAILY_SELF, "所有随手记", "所有随手记", R.drawable.bg_main_option_btn_11, R.mipmap.ic_btn_collect);
+        MainOptionInfo allPassword = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_ALL_PASSWORD, "所有账号", "所有账号记录", R.drawable.bg_main_option_btn_10, R.mipmap.ic_btn_password);
+        MainOptionInfo allDailySelf = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_ALL_DAILY_SELF, "所有随手记", "所有随手记", R.drawable.bg_main_option_btn_11, R.mipmap.ic_btn_password);
+        MainOptionInfo setting = new MainOptionInfo(MainPresenter.MAIN_OPEN_INFO_TYPE_SETTING, "设置", "系统设置", R.drawable.bg_main_option_btn_12, R.mipmap.ic_settings);
         data.add(guide);
         data.add(account);
         data.add(dailySelf);
         data.add(selfTask);
         data.add(lock);
         data.add(deleteAccount);
-        data.add(mainOption);
         data.add(deleteDailySelf);
         data.add(allPassword);
         data.add(collect);
         data.add(allDailySelf);
+        data.add(setting);
         return data;
     }
 }

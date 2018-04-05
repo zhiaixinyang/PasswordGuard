@@ -13,16 +13,22 @@
             type="com.mdove.passwordguard.mainoption.model.AllMainOptionVM" />
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/btn_password"
-        android:layout_width="@dimen/margin_item_main_option_btn_w"
-        android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginRight="@dimen/margin_item_all_main_option"
+        android:layout_marginBottom="@dimen/margin_item_all_main_option"
+        android:layout_marginLeft="@dimen/margin_item_all_main_option"
+        android:background="@drawable/bg_item_all_main_option"
         android:onClick="@{()->actionHandler.onBtnClick(viewModel.mType)}"
         android:orientation="vertical">
 
         <FrameLayout
+            android:id="@+id/layout_icon"
             android:layout_width="@dimen/item_main_option_btn_w_h"
+            android:layout_marginLeft="@dimen/margin_item_all_main_option"
+            android:layout_centerVertical="true"
             android:layout_height="@dimen/item_main_option_btn_w_h">
 
             <ImageView
@@ -45,24 +51,25 @@
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
+            android:layout_alignTop="@+id/layout_icon"
+            android:layout_toRightOf="@+id/layout_icon"
+            android:layout_marginLeft="@dimen/margin_item_all_main_option"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_tv_main_option_btn"
             android:text="@{viewModel.title}"
             android:textColor="@color/color_tv_main_option_btn"
-            android:textSize="@dimen/size_tv_main_option_btn" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/tv_hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_tv_main_option_btn_bottom"
-            android:layout_marginTop="@dimen/margin_tv_main_option_btn"
-            android:alpha="0.5"
-            android:gravity="center"
+            android:layout_marginLeft="@dimen/margin_item_all_main_option"
+            android:layout_toRightOf="@+id/layout_icon"
+            android:layout_alignBottom="@+id/layout_icon"
+            android:textColor="@color/gray_light"
             android:maxLines="1"
             android:ellipsize="end"
             android:text="@{viewModel.hint}"
-            android:textSize="10sp" />
-    </LinearLayout>
-
+            android:textSize="12sp" />
+    </RelativeLayout>
 </layout>

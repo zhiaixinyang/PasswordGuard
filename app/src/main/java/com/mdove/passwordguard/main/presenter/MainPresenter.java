@@ -35,6 +35,7 @@ import com.mdove.passwordguard.deletelist.utils.DeletedPasswordHelper;
 import com.mdove.passwordguard.group.GroupSettingActivity;
 import com.mdove.passwordguard.main.AddGroupDialog;
 import com.mdove.passwordguard.main.adapter.MainAdapter;
+import com.mdove.passwordguard.main.config.MainConfig;
 import com.mdove.passwordguard.main.model.BaseMainModel;
 import com.mdove.passwordguard.main.model.MainGroupModel;
 import com.mdove.passwordguard.main.model.MainGroupRlvModel;
@@ -61,6 +62,7 @@ import com.mdove.passwordguard.utils.ClipboardUtils;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -99,12 +101,14 @@ public class MainPresenter implements MainContract.Presenter {
     public static final int MAIN_OPEN_INFO_TYPE_MAIN_ALL_OPTION = 9;
     public static final int MAIN_OPEN_INFO_TYPE_ALL_PASSWORD = 10;
     public static final int MAIN_OPEN_INFO_TYPE_ALL_DAILY_SELF = 11;
+    public static final int MAIN_OPEN_INFO_TYPE_SETTING = 12;
 
     private String mCurGroup = DEFAULT_CHECK_GROUP_TITLE;
     private List<BaseMainModel> mCheckData;
     private MainSelfTaskModel mMainSelfTaskModel;
 
-    @IntDef(value = {MAIN_OPEN_INFO_TYPE_ALL_DAILY_SELF, MAIN_OPEN_INFO_TYPE_ALL_PASSWORD,
+    //标记快捷操作的type
+    @IntDef(value = {MAIN_OPEN_INFO_TYPE_SETTING, MAIN_OPEN_INFO_TYPE_ALL_DAILY_SELF, MAIN_OPEN_INFO_TYPE_ALL_PASSWORD,
             MAIN_OPEN_INFO_TYPE_MAIN_ALL_OPTION, MAIN_OPEN_INFO_TYPE_COLLECT,
             MAIN_OPEN_INFO_TYPE_SELF_TASK, MAIN_OPEN_INFO_TYPE_ACCOUNT, MAIN_OPEN_INFO_TYPE_GUIDE,
             MAIN_OPEN_INFO_TYPE_ADD_DAILY_SELF, MAIN_OPEN_INFO_TYPE_LOCK,
@@ -180,26 +184,39 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
     private void initSys() {
-        MainTopModel mainTopModel = new MainTopModel();
-        mainTopModel.mTime = new Date();
-        mainTopModel.mType = 1;
-        mData.add(mainTopModel);
-        mSysEmptyData.add(mainTopModel);
+        if (!MainConfig.isHideSysItemTimeTop()) {
+            MainTopModel mainTopModel = new MainTopModel();
+            mainTopModel.mTime = new Date();
+            mainTopModel.mType = 1;
+            mainTopModel.mSysType = BaseMainModel.MAIN_ITEM_SYS_TYPE_TOP_TIME;
+            mData.add(mainTopModel);
+            mSysEmptyData.add(mainTopModel);
+        }
 
-        MainSearchModel mainSearchModel = new MainSearchModel();
-        mainSearchModel.mType = 1;
-        mData.add(mainSearchModel);
-        mSysEmptyData.add(mainSearchModel);
+        if (!MainConfig.isHideSysItemSearch()) {
+            MainSearchModel mainSearchModel = new MainSearchModel();
+            mainSearchModel.mType = 1;
+            mainSearchModel.mSysType = BaseMainModel.MAIN_ITEM_SYS_TYPE_SEARCH;
+            mData.add(mainSearchModel);
+            mSysEmptyData.add(mainSearchModel);
+        }
 
-        mMainGroupModel = new MainGroupModel();
-        mMainGroupModel.mType = 1;
-        initGroup();
+        if (!MainConfig.isHideSysItemGroup()) {
+            mMainGroupModel = new MainGroupModel();
+            mMainGroupModel.mType = 1;
+            mMainGroupModel.mSysType = BaseMainModel.MAIN_ITEM_SYS_TYPE_GROUP;
+            initGroup();
+        }
 
-        MainOptionModel optionModel = new MainOptionModel();
-        optionModel.mType = 0;
-        optionModel.mData = getInitOptionData();
-        mData.add(optionModel);
-        mSysEmptyData.add(optionModel);
+        if (!MainConfig.isHideSysItemOption()) {
+            MainOptionModel optionModel = new MainOptionModel();
+            optionModel.mType = 0;
+            optionModel.mData = getInitOptionData();
+            optionModel.mSysType = BaseMainModel.MAIN_ITEM_SYS_TYPE_OPTION;
+
+            mData.add(optionModel);
+            mSysEmptyData.add(optionModel);
+        }
 
         MainAdapter.mPasswordPosition = mData.size();
     }
@@ -293,7 +310,7 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
     @Override
-    public void btnHide(IHideVm vm) {
+    public void btnHidePworDs(IHideVm vm) {
         if (vm instanceof ItemMainPasswordVM) {
             ItemMainPasswordVM passwordVM = (ItemMainPasswordVM) vm;
             Password password = passwordVM.mMainPasswordModel.password;
@@ -372,6 +389,58 @@ public class MainPresenter implements MainContract.Presenter {
     @Override
     public void onClickBtnAddGroup() {
         new AddGroupDialog(mView.getContext()).show();
+    }
+
+    @Override
+    public void onClickBtnHideGroup() {
+        MainConfig.setHideSysItemGroup(true);
+        if (mSysEmptyData == null || mSysEmptyData.size() <= 0) {
+            return;
+        }
+        for (BaseMainModel baseMainModel : mSysEmptyData) {
+            if (baseMainModel.mSysType == BaseMainModel.MAIN_ITEM_SYS_TYPE_GROUP) {
+                mView.onClickBtnHideGroup(mSysEmptyData.indexOf(baseMainModel));
+            }
+        }
+    }
+
+    @Override
+    public void onClickBtnHideSearch() {
+        MainConfig.setHideSysItemSearch(true);
+        if (mSysEmptyData == null || mSysEmptyData.size() <= 0) {
+            return;
+        }
+        for (BaseMainModel baseMainModel : mSysEmptyData) {
+            if (baseMainModel.mSysType == BaseMainModel.MAIN_ITEM_SYS_TYPE_SEARCH) {
+                mView.onClickBtnHideSearch(mSysEmptyData.indexOf(baseMainModel));
+            }
+        }
+    }
+
+    @Override
+    public void onClickBtnHideOption() {
+        MainConfig.setHideSysItemOption(true);
+        if (mSysEmptyData == null || mSysEmptyData.size() <= 0) {
+            return;
+        }
+        for (BaseMainModel baseMainModel : mSysEmptyData) {
+            if (baseMainModel.mSysType == BaseMainModel.MAIN_ITEM_SYS_TYPE_OPTION) {
+                mView.onClickBtnHideOption(mSysEmptyData.indexOf(baseMainModel));
+            }
+        }
+    }
+
+    @Override
+    public void onClickBtnHideTimeTop() {
+        MainConfig.setHideSysItemTimeTop(true);
+        if (mSysEmptyData == null || mSysEmptyData.size() <= 0) {
+            return;
+        }
+        for (BaseMainModel baseMainModel : mSysEmptyData) {
+            if (baseMainModel.mSysType == BaseMainModel.MAIN_ITEM_SYS_TYPE_TOP_TIME) {
+                mView.onClickBtnHideTimeTop(mSysEmptyData.indexOf(baseMainModel));
+            }
+        }
     }
 
     @Override
@@ -645,14 +714,7 @@ public class MainPresenter implements MainContract.Presenter {
 
         mCheckData.addAll(passwordData);
         mCheckData.addAll(dailySelfData);
-//        for (GroupInfo info : mCheckedList) {
-//            List<Password> data = mPasswordDao.queryBuilder().where(PasswordDao.Properties.MTvGroup.eq(info.getMTvGroup())).build().list();
-//            List<MainPasswordModel> passwordData = new ArrayList<>();
-//            for (Password password : data) {
-//                passwordData.add(new MainPasswordModel(password));
-//            }
-//            checkData.addAll(passwordData);
-//        }
+
         mView.checkOrderSuc(mCheckData);
     }
 
@@ -661,12 +723,11 @@ public class MainPresenter implements MainContract.Presenter {
         MainOptionInfo account = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_ACCOUNT, "记录账号", "记录账号信息", R.drawable.bg_main_option_btn_1, R.mipmap.ic_btn_password);
         MainOptionInfo dailySelf = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_ADD_DAILY_SELF, "随手记", "记录有趣", R.drawable.bg_main_option_btn_4, R.mipmap.ic_btn_password);
         MainOptionInfo selfTask = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_SELF_TASK, "我的工作", "记录我的工作", R.drawable.bg_main_option_btn_6, R.mipmap.ic_btn_self_task);
-//        MainOptionInfo lock = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_LOCK, "手势锁", "保护信息安全", R.drawable.bg_main_option_btn_2, R.mipmap.ic_btn_lock);
         MainOptionInfo deleteAccount = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_DELETE_ACCOUNT, "删除记录", "账号信息", R.drawable.bg_main_option_btn_3, R.mipmap.ic_delete);
         MainOptionInfo deleteDailySelf = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_DELETE_DAILY_SELF, "删除记录", "随手记", R.drawable.bg_main_option_btn_7, R.mipmap.ic_btn_delete);
         MainOptionInfo guide = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_GUIDE, "引导", "了解一下", R.drawable.bg_main_option_btn_5, R.mipmap.ic_btn_guide);
         MainOptionInfo collect = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_COLLECT, "我的收藏", "所有收藏内容", R.drawable.bg_main_option_btn_8, R.mipmap.ic_btn_collect);
-        MainOptionInfo mainOption = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_MAIN_ALL_OPTION, "更多操作", "显示隐藏操作", R.drawable.bg_main_option_btn_9, R.mipmap.ic_btn_collect);
+        MainOptionInfo mainOption = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_MAIN_ALL_OPTION, "更多操作", "显示隐藏操作", R.drawable.bg_main_option_btn_9, R.mipmap.ic_btn_more_option);
 
         data.add(guide);
         data.add(account);

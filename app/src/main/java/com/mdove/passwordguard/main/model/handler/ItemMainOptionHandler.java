@@ -24,6 +24,9 @@ public class ItemMainOptionHandler {
     }
 
     public void onBtnClick(@MainPresenter.MainOpenInfoType int type) {
+        if (mPresenter == null) {
+            return;
+        }
         switch (type) {
             case MAIN_OPEN_INFO_TYPE_ACCOUNT: {
                 mPresenter.onClickBtnPassword();

@@ -15,6 +15,7 @@
     <dimen name="size_tv_main_option_btn">12sp</dimen>
     <dimen name="margin_tv_main_option_btn">5dp</dimen>
     <dimen name="margin_tv_main_option_btn_bottom">8dp</dimen>
+    <dimen name="margin_tv_all_main_option_btn_bottom">12dp</dimen>
     <dimen name="item_main_option_ic_w_h">25dp</dimen>
     <dimen name="margin_dialog_add_password">8dp</dimen>
     <dimen name="margin_dialog_alter_password">8dp</dimen>
@@ -61,5 +62,6 @@
     <dimen name="view_show_time_style_margin">8dp</dimen>
     <dimen name="item_self_task_all_btn_icon_w_h">22dp</dimen>
     <dimen name="item_self_task_all_btn_text_size">10sp</dimen>
+    <dimen name="margin_item_all_main_option">8dp</dimen>
 
 </resources>

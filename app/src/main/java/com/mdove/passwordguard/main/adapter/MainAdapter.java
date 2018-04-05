@@ -178,6 +178,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         public void bind(ItemMainTopVM vm) {
             mBinding.setViewModel(vm);
+            mBinding.setActionHandler(mPresenter);
         }
     }
 
@@ -270,6 +271,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     }
                 }, 100);
             }
+            mBinding.setActionHandler(mPresenter);
         }
     }
 

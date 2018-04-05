@@ -7,7 +7,7 @@
 
         <variable
             name="actionHandler"
-            type="com.mdove.passwordguard.main.model.handler.MainGroupHandler" />
+            type="com.mdove.passwordguard.setting.model.SettingHandler" />
     </data>
 
     <RelativeLayout
@@ -40,32 +40,11 @@
                 android:layout_height="@dimen/item_main_group_setting_iv_w_h"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="12dp"
-                android:layout_toLeftOf="@+id/btn_add_group"
+                android:layout_alignParentRight="true"
                 android:onClick="@{()->actionHandler.onClickBtnHideGroup()}"
                 android:src="@mipmap/ic_item_hide"
-                android:tint="@color/gray" />
+                android:tint="@color/black" />
 
-            <ImageView
-                android:id="@+id/btn_add_group"
-                android:layout_width="@dimen/item_main_group_setting_iv_w_h"
-                android:layout_height="@dimen/item_main_group_setting_iv_w_h"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="12dp"
-                android:layout_toLeftOf="@+id/btn_setting"
-                android:onClick="@{()->actionHandler.onClickBtnAddGroup()}"
-                android:src="@mipmap/ic_add"
-                android:tint="@color/gray" />
-
-            <ImageView
-                android:id="@+id/btn_setting"
-                android:layout_width="@dimen/item_main_group_setting_iv_w_h"
-                android:layout_height="@dimen/item_main_group_setting_iv_w_h"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="12dp"
-                android:onClick="@{()->actionHandler.onClickBtnSetting()}"
-                android:src="@mipmap/ic_settings"
-                android:tint="@color/gray" />
         </RelativeLayout>
 
         <RelativeLayout

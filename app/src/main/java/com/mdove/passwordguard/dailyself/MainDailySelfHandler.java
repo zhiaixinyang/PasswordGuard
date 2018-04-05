@@ -23,7 +23,7 @@ public class MainDailySelfHandler {
     }
 
     public void btnHide(IHideVm vm) {
-        mPresenter.btnHide(vm);
+        mPresenter.btnHidePworDs(vm);
     }
 
     public void onClickBtnDeleteDailySelf(ItemMainDailySelfVM vm) {

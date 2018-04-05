@@ -10,7 +10,7 @@
 
         <variable
             name="actionHandler"
-            type="com.mdove.passwordguard.main.presenter.MainPresenter" />
+            type="com.mdove.passwordguard.setting.model.SettingHandler" />
     </data>
 
     <RelativeLayout
@@ -20,7 +20,7 @@
         android:layout_marginLeft="@dimen/margin_item_password_normal"
         android:layout_marginRight="@dimen/margin_item_password_normal"
         android:layout_marginTop="30dp"
-        tools:background="@color/black">
+        tools:background="@color/gray_light">
 
         <TextView
             android:id="@+id/tv_time"
@@ -45,7 +45,7 @@
             android:layout_marginTop="12dp"
             android:onClick="@{()->actionHandler.onClickBtnHideTimeTop()}"
             android:src="@mipmap/ic_item_hide"
-            android:tint="@color/gray_light" />
+            android:tint="@color/black" />
 
         <TextView
             android:id="@+id/tv_title"

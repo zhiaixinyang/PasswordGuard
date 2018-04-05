@@ -38,6 +38,7 @@ import com.mdove.passwordguard.main.model.MainGroupModel;
 import com.mdove.passwordguard.main.model.MainPasswordModel;
 import com.mdove.passwordguard.main.model.event.AddGroupEvent;
 import com.mdove.passwordguard.main.model.event.CheckOrderEvent;
+import com.mdove.passwordguard.main.model.event.HideItemMainEvent;
 import com.mdove.passwordguard.main.presenter.MainPresenter;
 import com.mdove.passwordguard.main.presenter.contract.MainContract;
 import com.mdove.passwordguard.model.event.AddPasswordEvent;
@@ -306,6 +307,26 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     }
 
     @Override
+    public void onClickBtnHideGroup(int position) {
+        mAdapter.notifyDeletePosition(position);
+    }
+
+    @Override
+    public void onClickBtnHideSearch(int position) {
+        mAdapter.notifyDeletePosition(position);
+    }
+
+    @Override
+    public void onClickBtnHideOption(int position) {
+        mAdapter.notifyDeletePosition(position);
+    }
+
+    @Override
+    public void onClickBtnHideTimeTop(int position) {
+        mAdapter.notifyDeletePosition(position);
+    }
+
+    @Override
     public void OnSearchClick(String keyword) {
         if (!TextUtils.isEmpty(keyword)) {
             mPresenter.querySearch(keyword);
@@ -436,5 +457,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     @Subscribe
     public void collectPassword(CollectPasswordEvent event) {
         mAdapter.notifyEventCollectPassword(event.mId, event.isFavorite);
+    }
+
+    @Subscribe
+    public void hideMainItem(HideItemMainEvent event) {
+        //TODO 暂时不做特别处理，有待优化
+        mPresenter.initData();
     }
 }
