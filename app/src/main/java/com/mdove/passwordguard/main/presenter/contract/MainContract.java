@@ -157,6 +157,7 @@ public interface MainContract {
         void onClickBtnHideTimeTop(int position);
 
         void notifyTaskSelf(int position);
+        void notifyTaskSelfSee(int position);
 
     }
 }

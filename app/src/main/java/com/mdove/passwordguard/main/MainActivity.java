@@ -332,6 +332,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     }
 
     @Override
+    public void notifyTaskSelfSee(int position) {
+        mAdapter.notifyTaskSelfSee(position);
+    }
+
+    @Override
     public void OnSearchClick(String keyword) {
         if (!TextUtils.isEmpty(keyword)) {
             mPresenter.querySearch(keyword);

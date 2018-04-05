@@ -360,6 +360,11 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         mMainSelfTaskAdapter.notifyPosition(position);
     }
 
+    public void notifyTaskSelfSee(int position) {
+        mMainSelfTaskAdapter.notifyDelete(position);
+    }
+
+
     public void showGuideView(Activity activity, View view) {
         if (!AppConfig.isShowGuideView()) {
             return;

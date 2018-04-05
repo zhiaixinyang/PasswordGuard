@@ -52,6 +52,35 @@
             android:background="@drawable/bg_main_self_task_bottom"
             android:orientation="horizontal">
 
+            <RelativeLayout
+                android:id="@+id/layout_et"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="@dimen/margin_item_main_self_task"
+                android:layout_marginRight="@dimen/margin_item_main_self_task"
+                android:layout_marginTop="@dimen/margin_item_main_self_task"
+                android:background="@drawable/bg_item_main_self_task_et">
+                <ImageView
+                    android:id="@+id/iv_task"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_item_main_self_task"
+                    android:layout_marginRight="@dimen/margin_item_main_self_task"
+                    android:src="@mipmap/ic_add"/>
+                <EditText
+                    android:id="@+id/et_self_task"
+                    android:layout_toRightOf="@+id/iv_task"
+                    android:layout_width="match_parent"
+                    android:background="@null"
+                    android:textSize="18sp"
+                    android:layout_centerVertical="true"
+                    android:hint="随手工作记录"
+                    android:textColorHint="@color/white"
+                    android:layout_marginRight="@dimen/margin_item_main_self_task"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+
             <TextView
                 android:id="@+id/tv_see"
                 android:layout_width="wrap_content"
@@ -68,6 +97,7 @@
                 android:id="@+id/rlv_main_self_task"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_et"
                 android:paddingTop="@dimen/margin_item_main_self_task" />
         </RelativeLayout>
     </RelativeLayout>

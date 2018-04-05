@@ -676,7 +676,7 @@ public class MainPresenter implements MainContract.Presenter {
             vm.mSelfTaskModel.mIsSee = true;
             mSelfTaskDao.update(selfTask);
         }
-        mView.notifyTaskSelf(vm.mPosition);
+        mView.notifyTaskSelfSee(vm.mPosition);
     }
 
     @Override
