@@ -58,6 +58,7 @@ import com.mdove.passwordguard.task.model.SelfTaskModel;
 import com.mdove.passwordguard.task.model.SelfTaskModelVM;
 import com.mdove.passwordguard.update.UpdateDialog;
 import com.mdove.passwordguard.utils.ClipboardUtils;
+import com.mdove.passwordguard.utils.ToastHelper;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -120,8 +121,6 @@ public class MainPresenter implements MainContract.Presenter {
     @Override
     public void subscribe(MainContract.MvpView view) {
         mView = view;
-
-        MainConfig.setHideSysItemOption(false);
 
         mCheckedList = new ArrayList<>();
 
@@ -210,15 +209,15 @@ public class MainPresenter implements MainContract.Presenter {
             initGroup();
         }
 
-        if (!MainConfig.isHideSysItemOption()) {
-            MainOptionModel optionModel = new MainOptionModel();
-            optionModel.mType = 0;
-            optionModel.mData = getInitOptionData();
-            optionModel.mSysType = BaseMainModel.MAIN_ITEM_SYS_TYPE_OPTION;
+        //更换隐藏策略
+        MainOptionModel optionModel = new MainOptionModel();
+        optionModel.isHide = MainConfig.isHideSysItemOption();
+        optionModel.mType = 0;
+        optionModel.mData = getInitOptionData();
+        optionModel.mSysType = BaseMainModel.MAIN_ITEM_SYS_TYPE_OPTION;
 
-            mData.add(optionModel);
-            mSysEmptyData.add(optionModel);
-        }
+        mData.add(optionModel);
+        mSysEmptyData.add(optionModel);
 
         MainAdapter.mPasswordPosition = mData.size();
     }
@@ -421,10 +420,8 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void onClickBtnHideOption() {
-        MainConfig.setHideSysItemOption(true);
-        if (mSysEmptyData == null || mSysEmptyData.size() <= 0) {
-            return;
-        }
+        MainConfig.setHideSysItemOption(!MainConfig.isHideSysItemOption());
+
         for (BaseMainModel baseMainModel : mSysEmptyData) {
             if (baseMainModel.mSysType == BaseMainModel.MAIN_ITEM_SYS_TYPE_OPTION) {
                 mView.onClickBtnHideOption(mSysEmptyData.indexOf(baseMainModel));
@@ -451,6 +448,26 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
     @Override
+    public void onClickBtnMainSelfTaskIn() {
+        NewSelfTaskActivity.start(mView.getContext());
+    }
+
+    @Override
+    public void onClickBtnMainSelfTaskSend(String content) {
+        if (TextUtils.isEmpty(content)) {
+            ToastHelper.shortToast("多少写一些计划...");
+            return;
+        }
+        SelfTask selfTask = new SelfTask();
+        selfTask.mTask = content;
+        selfTask.mTime = new Date().getTime();
+        selfTask.mIsSuc = 0;
+        selfTask.mPriority = 0;
+        mSelfTaskDao.insert(selfTask);
+        mView.insertItemMainSelfTask(new SelfTaskModel(selfTask));
+    }
+
+    @Override
     public void onClickBtnActivityDailySelf() {
         AddDailySelfActivity.start(mView.getContext());
     }
@@ -462,7 +479,6 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void onClickBtnSelfTask() {
-//        SelfTaskActivity.start(mView.getContext());
         NewSelfTaskActivity.start(mView.getContext());
     }
 

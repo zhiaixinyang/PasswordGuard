@@ -34,7 +34,7 @@ public class NewSelfTaskActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("我的工作线");
+        setTitle("我的随手计划");
         setContentView(R.layout.activity_self_task_new);
         initView();
         setupTabLayout();

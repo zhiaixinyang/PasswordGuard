@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -25,6 +26,7 @@ import com.mdove.passwordguard.databinding.ItemMainSearchBinding;
 import com.mdove.passwordguard.databinding.ItemMainSelfTaskBinding;
 import com.mdove.passwordguard.databinding.ItemMainTopBinding;
 import com.mdove.passwordguard.databinding.ItemPasswordNormalBinding;
+import com.mdove.passwordguard.main.config.MainConfig;
 import com.mdove.passwordguard.main.model.BaseMainModel;
 import com.mdove.passwordguard.main.model.MainGroupModel;
 import com.mdove.passwordguard.main.model.MainGroupRlvModel;
@@ -34,6 +36,7 @@ import com.mdove.passwordguard.main.model.MainSearchModel;
 import com.mdove.passwordguard.main.model.MainSelfTaskModel;
 import com.mdove.passwordguard.main.model.MainTopModel;
 import com.mdove.passwordguard.main.model.event.CheckOrderEvent;
+import com.mdove.passwordguard.main.model.handler.ItemMainSelfTaskHandler;
 import com.mdove.passwordguard.main.model.handler.MainGroupHandler;
 import com.mdove.passwordguard.main.model.handler.MainOptionHandler;
 import com.mdove.passwordguard.main.model.handler.MainSearchHandler;
@@ -258,6 +261,19 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
         public void bind(MainOptionModel mainOptionModel) {
+            boolean isHide = MainConfig.isHideSysItemOption();
+            mBinding.setActionHandler(mPresenter);
+
+            if (isHide){
+                mBinding.rlvOptions.setVisibility(View.GONE);
+                mBinding.tvTitle.setBackgroundResource(R.drawable.bg_hide_main_option_top);
+                mBinding.tvHideBtn.setText("显示隐藏按钮");
+                return;
+            }else{
+                mBinding.rlvOptions.setVisibility(View.VISIBLE);
+                mBinding.tvTitle.setBackgroundResource(R.drawable.bg_normal_top);
+                mBinding.tvHideBtn.setText("隐藏按钮");
+            }
             GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 4);
             if (mAdapter == null) {
                 mAdapter = new MainOptionAdapter(mainOptionModel.mData, mPresenter);
@@ -271,7 +287,6 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     }
                 }, 100);
             }
-            mBinding.setActionHandler(mPresenter);
         }
     }
 
@@ -325,13 +340,11 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
         public void bind(MainSelfTaskModel model) {
+            mBinding.setActionHandler(new ItemMainSelfTaskHandler(mPresenter));
             mBinding.rlvMainSelfTask.setLayoutManager(new LinearLayoutManager(mContext));
 
             if (model.mData == null || model.mData.size() == 0) {
                 mBinding.tvSee.setVisibility(View.VISIBLE);
-            }
-            if(mMainSelfTaskAdapter!=null){
-                return;
             }
 
             mMainSelfTaskAdapter = new MainSelfTaskAdapter(mContext, mPresenter, model.mData);
@@ -340,6 +353,14 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 @Override
                 public void dataIsEmpty(boolean isEmpty) {
                     mBinding.tvSee.setVisibility(isEmpty ? View.VISIBLE : View.GONE);
+                }
+            });
+
+            mBinding.btnSend.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mPresenter.onClickBtnMainSelfTaskSend(mBinding.etSelfTask.getText().toString());
+                    mBinding.etSelfTask.setText("");
                 }
             });
         }
@@ -456,6 +477,10 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if (mMainSelfTaskAdapter != null) {
             mMainSelfTaskAdapter.onClickTaskSuc(position);
         }
+    }
+
+    public void insertItemMainSelfTask(SelfTaskModel model) {
+        mMainSelfTaskAdapter.insertItemMainSelfTask(model);
     }
 
     public void notifyEventSelfTaskClickSuc(long id, SelfTaskModel postModel) {

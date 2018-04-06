@@ -82,7 +82,7 @@ public class MainSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
 
-    public void notifyDelete(int position){
+    public void notifyDelete(int position) {
         mData.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, mData.size());
@@ -165,5 +165,10 @@ public class MainSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 mListener.dataIsEmpty(false);
             }
         }
+    }
+
+    public void insertItemMainSelfTask(SelfTaskModel model) {
+        mData.add(model);
+        notifyPosition(mData.size());
     }
 }

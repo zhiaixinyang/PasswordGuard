@@ -46,6 +46,7 @@ import com.mdove.passwordguard.model.event.AlterPasswordEvent;
 import com.mdove.passwordguard.addoralter.dialog.AddPasswordDialog;
 import com.mdove.passwordguard.addoralter.dialog.AlterPasswordDialog;
 import com.mdove.passwordguard.search.SearchResultActivity;
+import com.mdove.passwordguard.task.model.SelfTaskModel;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickDeleteEvent;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickEditEvent;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickPriorityEvent;
@@ -307,6 +308,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     }
 
     @Override
+    public void insertItemMainSelfTask(SelfTaskModel model) {
+        mAdapter.insertItemMainSelfTask(model);
+    }
+
+    @Override
     public void onClickBtnHideGroup(int position) {
         mAdapter.notifyDeletePosition(position);
     }
@@ -318,7 +324,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
 
     @Override
     public void onClickBtnHideOption(int position) {
-        mAdapter.notifyDeletePosition(position);
+        mRlv.scrollToPosition(0);
+        mAdapter.notifyPosition(position);
     }
 
     @Override

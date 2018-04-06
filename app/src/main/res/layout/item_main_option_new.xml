@@ -2,7 +2,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-
         <variable
             name="actionHandler"
             type="com.mdove.passwordguard.main.presenter.MainPresenter" />
@@ -30,9 +29,19 @@
                 android:text="快捷操作"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
-
+            <TextView
+                android:id="@+id/tv_hide_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="隐藏按钮"
+                android:layout_centerVertical="true"
+                android:onClick="@{()->actionHandler.onClickBtnHideOption()}"
+                android:textSize="12sp"
+                android:layout_marginRight="4dp"
+                android:textColor="@color/gray_light"
+                android:layout_toLeftOf="@+id/iv_hide"/>
             <ImageView
-                android:id="@+id/tv_search"
+                android:id="@+id/iv_hide"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_alignParentRight="true"

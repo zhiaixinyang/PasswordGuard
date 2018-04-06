@@ -7,5 +7,6 @@ import java.util.List;
  */
 
 public class MainOptionModel extends BaseMainModel {
+    public boolean isHide;
     public List<MainOptionInfo> mData;
 }

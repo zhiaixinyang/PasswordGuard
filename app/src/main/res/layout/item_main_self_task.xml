@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="actionHandler"
+            type="com.mdove.passwordguard.main.model.handler.ItemMainSelfTaskHandler" />
+    </data>
+
     <RelativeLayout
         android:id="@+id/layout_item"
         android:layout_width="match_parent"
@@ -39,9 +46,19 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/margin_item_main_self_task"
                 android:layout_toRightOf="@+id/layout_icon"
-                android:text="我的工作线"
+                android:text="我的随手计划"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/margin_item_main_self_task"
+                android:onClick="@{()->actionHandler.onClickBtnMainSelfTaskIn()}"
+                android:src="@mipmap/ic_btn_in"
+                android:tint="@color/gray_light" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -59,38 +76,53 @@
                 android:layout_marginLeft="@dimen/margin_item_main_self_task"
                 android:layout_marginRight="@dimen/margin_item_main_self_task"
                 android:layout_marginTop="@dimen/margin_item_main_self_task"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:background="@drawable/bg_item_main_self_task_et">
+
                 <ImageView
                     android:id="@+id/iv_task"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/margin_item_main_self_task"
                     android:layout_marginRight="@dimen/margin_item_main_self_task"
-                    android:src="@mipmap/ic_add"/>
+                    android:src="@mipmap/ic_add" />
+
                 <EditText
                     android:id="@+id/et_self_task"
-                    android:layout_toRightOf="@+id/iv_task"
                     android:layout_width="match_parent"
-                    android:background="@null"
-                    android:textSize="18sp"
+                    android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:hint="随手工作记录"
-                    android:textColorHint="@color/white"
                     android:layout_marginRight="@dimen/margin_item_main_self_task"
-                    android:layout_height="wrap_content" />
+                    android:layout_toLeftOf="@+id/btn_send"
+                    android:layout_toRightOf="@+id/iv_task"
+                    android:background="@null"
+                    android:hint="添加随手工作记录..."
+                    android:textColorHint="@color/white"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/btn_send"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/margin_item_main_self_task"
+                    android:src="@mipmap/ic_btn_send" />
             </RelativeLayout>
 
             <TextView
                 android:id="@+id/tv_see"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_et"
                 android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_margin="@dimen/margin_item_main_self_task"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
                 android:text="暂无显示工作记录"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="18sp"
                 android:visibility="gone" />
 
             <android.support.v7.widget.RecyclerView

@@ -27,7 +27,16 @@
             android:layout_marginLeft="12dp"
             android:tint="@color/black"
             android:layout_centerVertical="true"/>
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="取消隐藏"
+            android:layout_centerVertical="true"
+            android:onClick="@{()->actionHandler.onClickBtnHideSearch()}"
+            android:textSize="12sp"
+            android:layout_marginRight="8dp"
+            android:textColor="@color/black"
+            android:layout_toLeftOf="@+id/tv_search"/>
         <ImageView
             android:id="@+id/tv_search"
             android:layout_width="25dp"

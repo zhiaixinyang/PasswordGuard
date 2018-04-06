@@ -63,6 +63,10 @@ public interface MainContract {
 
         void onClickBtnSetting();
 
+        void onClickBtnMainSelfTaskIn();
+
+        void onClickBtnMainSelfTaskSend(String content);
+
         void onClickBtnActivityDailySelf();
 
         void onClickBtnGuide();
@@ -106,8 +110,11 @@ public interface MainContract {
         void copyPasswordInUserName(ItemMainPasswordVM vm);
 
         void onClickTaskSuc(SelfTaskModelVM vm);
+
         void onClickSee(SelfTaskModelVM vm);
+
         void onClickPriority(SelfTaskModelVM vm);
+
         void onClickCopyTaskSelf(SelfTaskModelVM vm);
     }
 
@@ -148,6 +155,8 @@ public interface MainContract {
 
         void onClickTaskSuc(int position);
 
+        void insertItemMainSelfTask(SelfTaskModel model);
+
         void onClickBtnHideGroup(int position);
 
         void onClickBtnHideSearch(int position);
@@ -157,6 +166,7 @@ public interface MainContract {
         void onClickBtnHideTimeTop(int position);
 
         void notifyTaskSelf(int position);
+
         void notifyTaskSelfSee(int position);
 
     }
