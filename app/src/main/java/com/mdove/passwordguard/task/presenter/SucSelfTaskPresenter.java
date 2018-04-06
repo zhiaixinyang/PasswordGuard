@@ -4,6 +4,7 @@ import com.mdove.passwordguard.App;
 import com.mdove.passwordguard.greendao.SelfTaskDao;
 import com.mdove.passwordguard.greendao.SucSelfTaskDao;
 import com.mdove.passwordguard.greendao.entity.SelfTask;
+import com.mdove.passwordguard.greendao.entity.SucSelfTask;
 import com.mdove.passwordguard.task.model.SelfTaskModel;
 import com.mdove.passwordguard.task.model.SucSelfTaskModel;
 import com.mdove.passwordguard.task.presenter.contract.SucSelfTaskContract;
@@ -22,7 +23,7 @@ public class SucSelfTaskPresenter implements SucSelfTaskContract.Presenter {
     private List<SucSelfTaskModel> mData;
 
     public SucSelfTaskPresenter() {
-//        mSucSelfTaskDao = App.getDaoSession().getSucSelfTaskDao();
+        mSucSelfTaskDao = App.getDaoSession().getSucSelfTaskDao();
         mSelfTaskDao = App.getDaoSession().getSelfTaskDao();
         mData = new ArrayList<>();
     }
@@ -34,23 +35,22 @@ public class SucSelfTaskPresenter implements SucSelfTaskContract.Presenter {
 
     @Override
     public void unSubscribe() {
-
     }
 
     @Override
     public void initData() {
-//        List<SucSelfTask> selfTaskList = mSucSelfTaskDao.queryBuilder().build().list();
-//        for (SucSelfTask selfTask : selfTaskList) {
-//            if (selfTask.mIsSuc == 1) {
-//                mData.add(new SucSelfTaskModel(selfTask));
-//            }
-//        }
-        List<SelfTask> selfTaskList = mSelfTaskDao.queryBuilder().build().list();
-        for (SelfTask selfTask : selfTaskList) {
+        List<SucSelfTask> selfTaskList = mSucSelfTaskDao.queryBuilder().build().list();
+        for (SucSelfTask selfTask : selfTaskList) {
             if (selfTask.mIsSuc == 1) {
                 mData.add(new SucSelfTaskModel(selfTask));
             }
         }
+//        List<SelfTask> selfTaskList = mSelfTaskDao.queryBuilder().build().list();
+//        for (SelfTask selfTask : selfTaskList) {
+//            if (selfTask.mIsSuc == 1) {
+//                mData.add(new SucSelfTaskModel(selfTask));
+//            }
+//        }
         mView.initData(mData);
     }
 
@@ -62,7 +62,7 @@ public class SucSelfTaskPresenter implements SucSelfTaskContract.Presenter {
         } else {
             SucSelfTaskModel sucSelfTaskModel = null;
             for (SucSelfTaskModel model1 : mData) {
-                if (model1.mId == model.mId) {
+                if (model1.mBelongId == model.mId) {
                     sucSelfTaskModel = model1;
                 }
             }
@@ -78,7 +78,7 @@ public class SucSelfTaskPresenter implements SucSelfTaskContract.Presenter {
     public void onClickDelete(long id) {
         SucSelfTaskModel sucSelfTaskModel = null;
         for (SucSelfTaskModel model1 : mData) {
-            if (model1.mId == id) {
+            if (model1.mBelongId == id) {
                 sucSelfTaskModel = model1;
             }
         }
@@ -93,7 +93,7 @@ public class SucSelfTaskPresenter implements SucSelfTaskContract.Presenter {
     public void onClickPriority(SelfTaskModel model) {
         SucSelfTaskModel sucSelfTaskModel = null;
         for (SucSelfTaskModel model1 : mData) {
-            if (model1.mId == model.mId) {
+            if (model1.mBelongId == model.mId) {
                 sucSelfTaskModel = model1;
             }
         }
@@ -103,21 +103,5 @@ public class SucSelfTaskPresenter implements SucSelfTaskContract.Presenter {
         sucSelfTaskModel.mPriority = model.mPriority;
         int position = mData.indexOf(sucSelfTaskModel);
         mView.onClickPriority(position);
-    }
-
-    @Override
-    public void onClickEdit(long id, String editContent) {
-        SucSelfTaskModel sucSelfTaskModel = null;
-        for (SucSelfTaskModel model1 : mData) {
-            if (model1.mId == id) {
-                sucSelfTaskModel = model1;
-            }
-        }
-        if (sucSelfTaskModel == null) {
-            return;
-        }
-        sucSelfTaskModel.mTask = editContent;
-        int position = mData.indexOf(sucSelfTaskModel);
-        mView.onClickEdit(position);
     }
 }

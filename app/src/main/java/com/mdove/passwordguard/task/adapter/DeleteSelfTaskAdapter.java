@@ -67,7 +67,7 @@ public class DeleteSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public void notifyDeleteReturn(int position) {
         mData.remove(position);
         notifyItemRemoved(position);
-        notifyItemRangeChanged(position, mData.size() - position);
+        notifyItemRangeChanged(position, mData.size());
     }
 
     public void notifyPosition(int position) {

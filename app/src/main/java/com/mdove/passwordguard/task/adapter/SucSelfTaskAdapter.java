@@ -62,9 +62,7 @@ public class SucSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         if (isSuc) {
             notifyPosition(position);
         } else {
-            mData.remove(position);
-            notifyItemRemoved(position);
-            notifyItemRangeChanged(position, mData.size());
+            notifyDelete(position);
         }
     }
 
@@ -73,6 +71,10 @@ public class SucSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     public void onClickTaskDelete(int position) {
+        notifyDelete(position);
+    }
+
+    public void notifyDelete(int position) {
         mData.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, mData.size());
@@ -80,9 +82,7 @@ public class SucSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     public void onClickTaskSee(int position, boolean isRemove) {
         if (isRemove) {
-            mData.remove(position);
-            notifyItemRemoved(position);
-            notifyItemRangeChanged(position, mData.size());
+            notifyDelete(position);
         } else {
             notifyPosition(position);
         }

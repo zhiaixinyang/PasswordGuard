@@ -67,16 +67,12 @@ public class MainSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     public void onClickTaskDelete(int position) {
-        mData.remove(position);
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position, mData.size());
+        notifyDelete(position);
     }
 
     public void onClickTaskSee(int position, boolean isRemove) {
         if (isRemove) {
-            mData.remove(position);
-            notifyItemRemoved(position);
-            notifyItemRangeChanged(position, mData.size());
+            notifyDelete(position);
         } else {
             notifyPosition(position);
         }

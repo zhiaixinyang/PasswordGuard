@@ -95,7 +95,7 @@ public class DeleteListPasswordAdapter extends RecyclerView.Adapter<RecyclerView
         notifyItemChanged(0);
         mData.remove(position);
         notifyItemRemoved(position);
-        notifyItemRangeChanged(position, mData.size() - position);
+        notifyItemRangeChanged(position, mData.size());
     }
 
     public class DeletePasswordViewHolder extends RecyclerView.ViewHolder {

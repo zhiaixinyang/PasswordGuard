@@ -63,7 +63,7 @@ public class GroupSettingAdapter extends RecyclerView.Adapter<GroupSettingAdapte
     public void notifyDeleteGroup(int position) {
         mData.remove(position);
         notifyItemRemoved(position);
-        notifyItemRangeChanged(position, mData.size() - position);
+        notifyItemRangeChanged(position, mData.size());
     }
 
     public void setData(List<GroupInfo> data) {

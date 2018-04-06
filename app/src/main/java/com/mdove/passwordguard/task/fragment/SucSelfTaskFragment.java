@@ -104,11 +104,6 @@ public class SucSelfTaskFragment extends Fragment implements SucSelfTaskContract
         mAdapter.onClickTaskPriority(position);
     }
 
-    @Override
-    public void onClickEdit(int position) {
-        mAdapter.notifyPosition(position);
-    }
-
     private boolean dataExisted() {
         if (mAdapter != null) {
             return mAdapter.getItemCount() > 0;
@@ -129,7 +124,8 @@ public class SucSelfTaskFragment extends Fragment implements SucSelfTaskContract
 
     @Subscribe
     public void selfTaskClickDelete(SelfTaskClickDeleteEvent event) {
-        mPresenter.onClickDelete(event.mId);
+        //归档内容不做删除
+//        mPresenter.onClickDelete(event.mId);
     }
 
     @Subscribe

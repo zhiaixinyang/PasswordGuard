@@ -98,7 +98,8 @@ public class AllSelfTaskFragment extends Fragment implements AllSelfTaskContract
 
     @Override
     public void insertSelfTask(int position) {
-        mAdapter.notifyInsertPosition(position);
+        //直接更新队尾
+        mAdapter.notifyPosition(position);
     }
 
     @Override

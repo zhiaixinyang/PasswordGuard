@@ -53,10 +53,6 @@ public class AllSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     public void notifyPosition(int position) {
-        notifyInsertPosition(position);
-    }
-
-    public void notifyInsertPosition(int position) {
         notifyItemChanged(position);
     }
 

@@ -21,8 +21,6 @@ public interface SucSelfTaskContract {
         void onClickDelete(long id);
 
         void onClickPriority(SelfTaskModel model);
-
-        void onClickEdit(long id,String editContent);
     }
 
     interface MvpView extends BaseView<Presenter> {
@@ -33,7 +31,5 @@ public interface SucSelfTaskContract {
         void onClickDelete(int position);
 
         void onClickPriority(int position);
-
-        void onClickEdit(int position);
     }
 }

@@ -15,11 +15,11 @@ public class SucSelfTaskModel {
     public int mPriority;
     public SucSelfTask mSucSelfTask;
     public SelfTask mSelfTask;
-    public long mId;
+    public long mBelongId;
 
     public SucSelfTaskModel(SucSelfTask sucSelfTask) {
         mTask = sucSelfTask.mTask;
-        mId = sucSelfTask.id;
+        mBelongId = sucSelfTask.mBelongId;
         mTime = sucSelfTask.mTime;
         mIsSuc = sucSelfTask.mIsSuc == 1;
         mIsSee = sucSelfTask.mIsSee == 1;
@@ -29,7 +29,7 @@ public class SucSelfTaskModel {
 
     public SucSelfTaskModel(SelfTask selfTask) {
         mTask = selfTask.mTask;
-        mId = selfTask.id;
+        mBelongId = selfTask.id;
         mTime = selfTask.mTime;
         mIsSuc = selfTask.mIsSuc == 1;
         mIsSee = selfTask.mIsSee == 1;

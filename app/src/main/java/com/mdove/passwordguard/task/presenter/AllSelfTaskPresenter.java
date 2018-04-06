@@ -5,7 +5,9 @@ import com.mdove.passwordguard.App;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.greendao.DeleteSelfTaskDao;
 import com.mdove.passwordguard.greendao.SelfTaskDao;
+import com.mdove.passwordguard.greendao.SucSelfTaskDao;
 import com.mdove.passwordguard.greendao.entity.SelfTask;
+import com.mdove.passwordguard.greendao.entity.SucSelfTask;
 import com.mdove.passwordguard.task.model.SelfTaskModel;
 import com.mdove.passwordguard.task.model.SelfTaskModelVM;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickDeleteEvent;
@@ -34,6 +36,7 @@ public class AllSelfTaskPresenter implements AllSelfTaskContract.Presenter {
     private List<SelfTaskModel> mData;
     private SelfTaskDao mSelfTaskDao;
     private DeleteSelfTaskDao mDeleteSelfTaskDao;
+    private SucSelfTaskDao mSucSelfTaskDao;
 
     @Override
     public void subscribe(AllSelfTaskContract.MvpView view) {
@@ -43,6 +46,7 @@ public class AllSelfTaskPresenter implements AllSelfTaskContract.Presenter {
 
         mSelfTaskDao = App.getDaoSession().getSelfTaskDao();
         mDeleteSelfTaskDao = App.getDaoSession().getDeleteSelfTaskDao();
+        mSucSelfTaskDao = App.getDaoSession().getSucSelfTaskDao();
     }
 
     @Override
@@ -86,10 +90,25 @@ public class AllSelfTaskPresenter implements AllSelfTaskContract.Presenter {
             selfTask.mIsSuc = 0;
             vm.mSelfTaskModel.mIsSuc = false;
             mSelfTaskDao.update(selfTask);
+
+            List<SucSelfTask> sucSelfTasks = mSucSelfTaskDao.queryBuilder()
+                    .where(SucSelfTaskDao.Properties.MBelongId.eq(selfTask.id)).list();
+            if (sucSelfTasks != null && sucSelfTasks.size() > 0) {
+                mSucSelfTaskDao.delete(sucSelfTasks.get(0));
+            }
         } else {
             selfTask.mIsSuc = 1;
             vm.mSelfTaskModel.mIsSuc = true;
             mSelfTaskDao.update(selfTask);
+
+            SucSelfTask sucSelfTask = new SucSelfTask();
+            sucSelfTask.mBelongId = selfTask.id;
+            sucSelfTask.mIsSee = selfTask.mIsSee;
+            sucSelfTask.mIsSuc = 1;
+            sucSelfTask.mPriority = selfTask.mPriority;
+            sucSelfTask.mTask = selfTask.mTask;
+            sucSelfTask.mTime = new Date().getTime();
+            mSucSelfTaskDao.insert(sucSelfTask);
         }
         mView.notifySelfTaskIsSuc(vm.mPosition);
         RxBus.get().post(new SelfTaskClickSucEvent(vm.mSelfTaskModel.mId, vm.mSelfTaskModel));
