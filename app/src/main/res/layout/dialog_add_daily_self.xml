@@ -23,7 +23,7 @@
             android:lines="5"
             android:padding="@dimen/margin_dialog_add_daily_self"
             android:textColorHint="@color/gray"
-            android:textCursorDrawable="@drawable/bg_et_cursor"
+            android:textCursorDrawable="@drawable/bg_et_cursor_white"
             android:textSize="16sp" />
 
         <TextView

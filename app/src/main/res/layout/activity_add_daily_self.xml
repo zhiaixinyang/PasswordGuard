@@ -58,7 +58,7 @@
             android:gravity="top"
             android:hint="随手记"
             android:padding="@dimen/activity_add_daily_self_margin"
-            android:textCursorDrawable="@drawable/bg_et_cursor" />
+            android:textCursorDrawable="@drawable/bg_et_cursor_white" />
 
         <LinearLayout
             android:id="@+id/layout_bottom"

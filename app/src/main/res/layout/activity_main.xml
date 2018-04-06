@@ -55,7 +55,7 @@
                 android:paddingLeft="@dimen/margin_activity_main_et_l_r"
                 android:paddingRight="@dimen/margin_activity_main_et_l_r"
                 android:textColorHint="@color/commonColor"
-                android:textCursorDrawable="@drawable/bg_et_cursor"
+                android:textCursorDrawable="@drawable/bg_et_cursor_white"
                 android:textSize="16sp" />
 
             <TextView
