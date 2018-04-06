@@ -20,6 +20,8 @@ import com.mdove.passwordguard.utils.ClipboardUtils;
 import com.mdove.passwordguard.utils.ToastHelper;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -50,6 +52,14 @@ public class AllSelfTaskPresenter implements AllSelfTaskContract.Presenter {
     @Override
     public void initData() {
         List<SelfTask> data = mSelfTaskDao.queryBuilder().build().list();
+        Comparator<SelfTask> comparator = new Comparator<SelfTask>() {
+            @Override
+            public int compare(SelfTask o1, SelfTask o2) {
+                return o1.compareTo(o2);
+            }
+        };
+        Collections.sort(data, comparator);
+
         for (SelfTask selfTask : data) {
             mData.add(new SelfTaskModel(selfTask));
         }
@@ -62,6 +72,7 @@ public class AllSelfTaskPresenter implements AllSelfTaskContract.Presenter {
         selfTask.mTask = content;
         selfTask.mTime = new Date().getTime();
         selfTask.mIsSuc = 0;
+        selfTask.mIsSee = 0;
         selfTask.mPriority = 0;
         mSelfTaskDao.insert(selfTask);
         mData.add(new SelfTaskModel(selfTask));

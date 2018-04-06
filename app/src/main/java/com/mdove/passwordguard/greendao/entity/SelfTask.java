@@ -1,5 +1,7 @@
 package com.mdove.passwordguard.greendao.entity;
 
+import android.support.annotation.NonNull;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 
@@ -11,7 +13,7 @@ import org.greenrobot.greendao.annotation.Generated;
  * Created by MDove on 2018/3/25.
  */
 @Entity
-public class SelfTask implements Serializable {
+public class SelfTask implements Serializable, Comparable<SelfTask> {
     @Id(autoincrement = true)
     public Long id;
     public String mTask;
@@ -27,7 +29,7 @@ public class SelfTask implements Serializable {
 
     @Generated(hash = 1232815738)
     public SelfTask(Long id, String mTask, long mTime, int mIsSuc, int mIsSee,
-            int mPriority) {
+                    int mPriority) {
         this.id = id;
         this.mTask = mTask;
         this.mTime = mTime;
@@ -84,4 +86,27 @@ public class SelfTask implements Serializable {
         this.mPriority = mPriority;
     }
 
+    @Override
+    public int compareTo(@NonNull SelfTask o) {
+        int result = 0;
+        if (this == o) {
+            result = 0;
+        }
+        if (mPriority > o.mPriority) {
+            result = -1;
+        }
+        if (mPriority == 2 && mPriority == o.mPriority ||
+                mPriority == 1 && mPriority == o.mPriority ||
+                mPriority == 0 && mPriority == o.mPriority) {
+            if (mTime >= o.mTime) {
+                result = -1;
+            } else {
+                result = 1;
+            }
+        }
+        if (mPriority < o.mPriority) {
+            result = 1;
+        }
+        return result;
+    }
 }

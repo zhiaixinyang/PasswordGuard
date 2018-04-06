@@ -157,12 +157,12 @@ public class DateUtil {
     }
 
     public static String getDateChinese(Long time){
-        SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日 hh:mm");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
         return format.format(time);
     }
 
     public static String getDateChinese(){
-        SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日 hh:mm");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
         return format.format(new Date());
     }
 
