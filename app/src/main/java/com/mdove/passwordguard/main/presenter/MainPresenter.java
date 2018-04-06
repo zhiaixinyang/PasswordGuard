@@ -462,6 +462,7 @@ public class MainPresenter implements MainContract.Presenter {
         selfTask.mTask = content;
         selfTask.mTime = new Date().getTime();
         selfTask.mIsSuc = 0;
+        selfTask.mIsSee = 1;
         selfTask.mPriority = 0;
         mSelfTaskDao.insert(selfTask);
         mView.insertItemMainSelfTask(new SelfTaskModel(selfTask));

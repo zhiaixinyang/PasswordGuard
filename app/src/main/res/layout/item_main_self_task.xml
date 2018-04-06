@@ -76,9 +76,9 @@
                 android:layout_marginLeft="@dimen/margin_item_main_self_task"
                 android:layout_marginRight="@dimen/margin_item_main_self_task"
                 android:layout_marginTop="@dimen/margin_item_main_self_task"
+                android:background="@drawable/bg_item_main_self_task_et"
                 android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:background="@drawable/bg_item_main_self_task_et">
+                android:focusableInTouchMode="true">
 
                 <ImageView
                     android:id="@+id/iv_task"
@@ -99,6 +99,8 @@
                     android:layout_toRightOf="@+id/iv_task"
                     android:background="@null"
                     android:hint="添加随手工作记录..."
+                    android:textColor="@color/white"
+                    android:textColorHighlight="@color/white"
                     android:textColorHint="@color/white"
                     android:textSize="16sp" />
 
