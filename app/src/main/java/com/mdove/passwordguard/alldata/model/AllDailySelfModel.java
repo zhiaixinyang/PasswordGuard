@@ -1,13 +1,13 @@
-package com.mdove.passwordguard.dailyself;
+package com.mdove.passwordguard.alldata.model;
 
 import com.mdove.passwordguard.greendao.entity.DailySelf;
 import com.mdove.passwordguard.main.model.BaseMainModel;
 
 /**
- * Created by MDove on 2018/2/22.
+ * Created by MDove on 2018/4/7.
  */
 
-public class MainDailySelfModel extends BaseMainModel {
+public class AllDailySelfModel extends BaseMainModel {
     public String mContent;
     public Long mTime;
     public String mTvGroup;
@@ -16,7 +16,7 @@ public class MainDailySelfModel extends BaseMainModel {
     public DailySelf mDailySelf;
     public long mId;
 
-    public MainDailySelfModel(DailySelf dailySelf) {
+    public AllDailySelfModel(DailySelf dailySelf) {
         mContent = dailySelf.mContent;
         mTime = dailySelf.mTimeStamp;
         mTvGroup = dailySelf.mTvGroup;

@@ -21,10 +21,10 @@ import com.mdove.passwordguard.databinding.ItemMainDailyselfBinding;
 import com.mdove.passwordguard.databinding.ItemMainGroupBinding;
 import com.mdove.passwordguard.databinding.ItemMainOptionBinding;
 import com.mdove.passwordguard.databinding.ItemMainOptionNewBinding;
+import com.mdove.passwordguard.databinding.ItemMainPasswordBinding;
 import com.mdove.passwordguard.databinding.ItemMainSearchBinding;
 import com.mdove.passwordguard.databinding.ItemMainSelfTaskBinding;
 import com.mdove.passwordguard.databinding.ItemMainTopBinding;
-import com.mdove.passwordguard.databinding.ItemPasswordNormalBinding;
 import com.mdove.passwordguard.main.config.MainConfig;
 import com.mdove.passwordguard.main.model.BaseMainModel;
 import com.mdove.passwordguard.main.model.MainGroupModel;
@@ -122,7 +122,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 return new MainTopViewHolder((ItemMainTopBinding) InflateUtils.bindingInflate(parent, R.layout.item_main_top));
             }
             case TYPE_MAIN_PASSWORD: {
-                return new PasswordViewHolder((ItemPasswordNormalBinding) InflateUtils.bindingInflate(parent, R.layout.item_main_password));
+                return new PasswordViewHolder((ItemMainPasswordBinding) InflateUtils.bindingInflate(parent, R.layout.item_main_password));
             }
             case TYPE_MAIN_SEARCH: {
                 return new MainSearchViewHolder((ItemMainSearchBinding) InflateUtils.bindingInflate(parent, R.layout.item_main_search));
@@ -185,9 +185,9 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public class PasswordViewHolder extends RecyclerView.ViewHolder {
-        private ItemPasswordNormalBinding mBinding;
+        private ItemMainPasswordBinding mBinding;
 
-        public PasswordViewHolder(ItemPasswordNormalBinding binding) {
+        public PasswordViewHolder(ItemMainPasswordBinding binding) {
             super(binding.getRoot());
             mBinding = binding;
         }

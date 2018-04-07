@@ -10,6 +10,7 @@ import com.mdove.passwordguard.addoralter.AddPasswordActivity;
 import com.mdove.passwordguard.addoralter.EditPasswordActivity;
 import com.mdove.passwordguard.addoralter.model.AlterDailySelfModel;
 import com.mdove.passwordguard.addoralter.model.AlterPasswordModel;
+import com.mdove.passwordguard.base.IHideVM;
 import com.mdove.passwordguard.collect.CollectActivity;
 import com.mdove.passwordguard.config.AppConstant;
 import com.mdove.passwordguard.dailyself.ItemMainDailySelfVM;
@@ -46,7 +47,6 @@ import com.mdove.passwordguard.main.model.MainSearchModel;
 import com.mdove.passwordguard.main.model.MainSelfTaskModel;
 import com.mdove.passwordguard.main.model.MainTopModel;
 import com.mdove.passwordguard.main.model.event.CheckOrderEvent;
-import com.mdove.passwordguard.main.model.impl.IHideVm;
 import com.mdove.passwordguard.main.model.vm.ItemMainPasswordVM;
 import com.mdove.passwordguard.main.presenter.contract.MainContract;
 import com.mdove.passwordguard.mainoption.AllMainOptionActivity;
@@ -259,6 +259,7 @@ public class MainPresenter implements MainContract.Presenter {
         dailySelf.mTimeStamp = new Date().getTime();
         dailySelf.mTvGroup = DEFAULT_DAILY_SELF_TV_GROUP;
         dailySelf.mIsFavorite = 0;
+        dailySelf.mIsHide = 0;
         mDailySelfDao.insert(dailySelf);
         MainDailySelfModel model = new MainDailySelfModel(dailySelf);
         mData.add(model);
@@ -311,7 +312,7 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
     @Override
-    public void btnHidePworDs(IHideVm vm) {
+    public void btnHidePworDs(IHideVM vm) {
         if (vm instanceof ItemMainPasswordVM) {
             ItemMainPasswordVM passwordVM = (ItemMainPasswordVM) vm;
             Password password = passwordVM.mMainPasswordModel.password;
@@ -323,11 +324,11 @@ public class MainPresenter implements MainContract.Presenter {
         }else if(vm instanceof ItemMainDailySelfVM){
             ItemMainDailySelfVM dailySelfVM = (ItemMainDailySelfVM) vm;
             DailySelf dailySelf = dailySelfVM.mDailySelf;
-//            dailySelf.isHide = 0;
-//            mPasswordDao.update(password);
-//
-//            passwordVM.mMainPasswordModel.mHide = false;
-//            mView.notifyBtnHide(passwordVM.mItemPosition);
+            dailySelf.mIsHide = 0;
+            mDailySelfDao.update(dailySelf);
+
+            dailySelfVM.mMainDailySelfModel.mIsHide = false;
+            mView.notifyBtnHide(dailySelfVM.mItemPosition);
         }
     }
 

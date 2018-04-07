@@ -1,6 +1,6 @@
 package com.mdove.passwordguard.dailyself;
 
-import com.mdove.passwordguard.main.model.impl.IHideVm;
+import com.mdove.passwordguard.base.IHideVM;
 import com.mdove.passwordguard.main.presenter.MainPresenter;
 
 /**
@@ -22,7 +22,7 @@ public class MainDailySelfHandler {
         mPresenter.favoriteDailySelf(vm);
     }
 
-    public void btnHide(IHideVm vm) {
+    public void btnHide(IHideVM vm) {
         mPresenter.btnHidePworDs(vm);
     }
 

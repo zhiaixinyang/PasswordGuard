@@ -62,7 +62,12 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".mainoption.AllMainOptionActivity"
+            android:name=".alldata.AllDailySelfActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".alldata.AllPasswordActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 

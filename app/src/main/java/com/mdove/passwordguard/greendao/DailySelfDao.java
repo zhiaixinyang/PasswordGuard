@@ -29,6 +29,7 @@ public class DailySelfDao extends AbstractDao<DailySelf, Long> {
         public final static Property MTimeStamp = new Property(2, Long.class, "mTimeStamp", false, "M_TIME_STAMP");
         public final static Property MTvGroup = new Property(3, String.class, "mTvGroup", false, "M_TV_GROUP");
         public final static Property MIsFavorite = new Property(4, int.class, "mIsFavorite", false, "M_IS_FAVORITE");
+        public final static Property MIsHide = new Property(5, Integer.class, "mIsHide", false, "M_IS_HIDE");
     }
 
 
@@ -48,7 +49,8 @@ public class DailySelfDao extends AbstractDao<DailySelf, Long> {
                 "\"M_CONTENT\" TEXT," + // 1: mContent
                 "\"M_TIME_STAMP\" INTEGER," + // 2: mTimeStamp
                 "\"M_TV_GROUP\" TEXT," + // 3: mTvGroup
-                "\"M_IS_FAVORITE\" INTEGER NOT NULL );"); // 4: mIsFavorite
+                "\"M_IS_FAVORITE\" INTEGER NOT NULL ," + // 4: mIsFavorite
+                "\"M_IS_HIDE\" INTEGER);"); // 5: mIsHide
     }
 
     /** Drops the underlying database table. */
@@ -81,6 +83,11 @@ public class DailySelfDao extends AbstractDao<DailySelf, Long> {
             stmt.bindString(4, mTvGroup);
         }
         stmt.bindLong(5, entity.getMIsFavorite());
+ 
+        Integer mIsHide = entity.getMIsHide();
+        if (mIsHide != null) {
+            stmt.bindLong(6, mIsHide);
+        }
     }
 
     @Override
@@ -107,6 +114,11 @@ public class DailySelfDao extends AbstractDao<DailySelf, Long> {
             stmt.bindString(4, mTvGroup);
         }
         stmt.bindLong(5, entity.getMIsFavorite());
+ 
+        Integer mIsHide = entity.getMIsHide();
+        if (mIsHide != null) {
+            stmt.bindLong(6, mIsHide);
+        }
     }
 
     @Override
@@ -121,7 +133,8 @@ public class DailySelfDao extends AbstractDao<DailySelf, Long> {
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // mContent
             cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2), // mTimeStamp
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // mTvGroup
-            cursor.getInt(offset + 4) // mIsFavorite
+            cursor.getInt(offset + 4), // mIsFavorite
+            cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5) // mIsHide
         );
         return entity;
     }
@@ -133,6 +146,7 @@ public class DailySelfDao extends AbstractDao<DailySelf, Long> {
         entity.setMTimeStamp(cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2));
         entity.setMTvGroup(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setMIsFavorite(cursor.getInt(offset + 4));
+        entity.setMIsHide(cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5));
      }
     
     @Override

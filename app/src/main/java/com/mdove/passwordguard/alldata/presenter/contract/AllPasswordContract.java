@@ -9,7 +9,7 @@ import com.mdove.passwordguard.base.BaseView;
 import java.util.List;
 
 /**
- * Created by MDove on 2018/3/21.
+ * Created by MDove on 2018/4/7.
  */
 
 public interface AllPasswordContract {

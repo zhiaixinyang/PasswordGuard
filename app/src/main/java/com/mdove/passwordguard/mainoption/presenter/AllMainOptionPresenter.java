@@ -1,73 +1,21 @@
 package com.mdove.passwordguard.mainoption.presenter;
 
-import android.support.annotation.IntDef;
-import android.text.TextUtils;
-
-import com.mdove.passwordguard.App;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.addoralter.AddDailySelfActivity;
 import com.mdove.passwordguard.addoralter.AddPasswordActivity;
-import com.mdove.passwordguard.addoralter.EditPasswordActivity;
-import com.mdove.passwordguard.addoralter.model.AlterDailySelfModel;
-import com.mdove.passwordguard.addoralter.model.AlterPasswordModel;
+import com.mdove.passwordguard.alldata.AllDailySelfActivity;
 import com.mdove.passwordguard.alldata.AllPasswordActivity;
 import com.mdove.passwordguard.collect.CollectActivity;
-import com.mdove.passwordguard.config.AppConstant;
-import com.mdove.passwordguard.dailyself.ItemMainDailySelfVM;
-import com.mdove.passwordguard.dailyself.MainDailySelfModel;
 import com.mdove.passwordguard.deletelist.DeleteListDailySelfActivity;
 import com.mdove.passwordguard.deletelist.DeleteListPasswordActivity;
-import com.mdove.passwordguard.deletelist.model.event.DeleteDailySelfReturnEvent;
-import com.mdove.passwordguard.deletelist.model.event.DeletePasswordReturnEvent;
-import com.mdove.passwordguard.deletelist.utils.DeleteDailySelfHelper;
-import com.mdove.passwordguard.deletelist.utils.DeletedPasswordHelper;
-import com.mdove.passwordguard.greendao.DailySelfDao;
-import com.mdove.passwordguard.greendao.DeletedDailySelfDao;
-import com.mdove.passwordguard.greendao.DeletedPasswordDao;
-import com.mdove.passwordguard.greendao.GroupInfoDao;
-import com.mdove.passwordguard.greendao.PasswordDao;
-import com.mdove.passwordguard.greendao.SelfTaskDao;
-import com.mdove.passwordguard.greendao.entity.DailySelf;
-import com.mdove.passwordguard.greendao.entity.DeletedDailySelf;
-import com.mdove.passwordguard.greendao.entity.DeletedPassword;
-import com.mdove.passwordguard.greendao.entity.GroupInfo;
-import com.mdove.passwordguard.greendao.entity.Password;
-import com.mdove.passwordguard.greendao.entity.SelfTask;
-import com.mdove.passwordguard.group.GroupSettingActivity;
-import com.mdove.passwordguard.main.AddGroupDialog;
-import com.mdove.passwordguard.main.adapter.MainAdapter;
-import com.mdove.passwordguard.main.model.BaseMainModel;
-import com.mdove.passwordguard.main.model.MainGroupModel;
-import com.mdove.passwordguard.main.model.MainGroupRlvModel;
 import com.mdove.passwordguard.main.model.MainOptionInfo;
-import com.mdove.passwordguard.main.model.MainOptionModel;
-import com.mdove.passwordguard.main.model.MainPasswordModel;
-import com.mdove.passwordguard.main.model.MainSearchModel;
-import com.mdove.passwordguard.main.model.MainSelfTaskModel;
-import com.mdove.passwordguard.main.model.MainTopModel;
-import com.mdove.passwordguard.main.model.event.CheckOrderEvent;
-import com.mdove.passwordguard.main.model.impl.IHideVm;
-import com.mdove.passwordguard.main.model.vm.ItemMainPasswordVM;
 import com.mdove.passwordguard.main.presenter.MainPresenter;
-import com.mdove.passwordguard.mainoption.AllMainOptionActivity;
 import com.mdove.passwordguard.mainoption.presenter.contract.AllMainOptionContract;
-import com.mdove.passwordguard.manager.UpdateStatusManager;
-import com.mdove.passwordguard.model.net.RealUpdate;
-import com.mdove.passwordguard.net.ApiServerImpl;
 import com.mdove.passwordguard.setting.SettingActivity;
 import com.mdove.passwordguard.task.NewSelfTaskActivity;
-import com.mdove.passwordguard.task.model.SelfTaskModel;
-import com.mdove.passwordguard.task.model.SelfTaskModelVM;
-import com.mdove.passwordguard.update.UpdateDialog;
-import com.mdove.passwordguard.utils.ClipboardUtils;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
-import rx.Subscriber;
 
 import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_ACCOUNT;
 import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_ADD_DAILY_SELF;
@@ -76,9 +24,7 @@ import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INF
 import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_COLLECT;
 import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_DELETE_ACCOUNT;
 import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_DELETE_DAILY_SELF;
-import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_GUIDE;
 import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_LOCK;
-import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_MAIN_ALL_OPTION;
 import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_SELF_TASK;
 
 /**
@@ -137,7 +83,7 @@ public class AllMainOptionPresenter implements AllMainOptionContract.Presenter {
 
     @Override
     public void onClickBtnAllDailySelf() {
-
+        AllDailySelfActivity.start(mView.getContext());
     }
 
     @Override

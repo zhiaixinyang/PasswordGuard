@@ -18,6 +18,12 @@ public class DataBindingAdapter {
         view.setImageResource(vm.isFavorite() ? R.mipmap.ic_favorite_on : R.mipmap.ic_favorite_off);
     }
 
+    @BindingAdapter("loadHide")
+    public static void loadHide(ImageView view, final IHideVM vm) {
+        view.setImageResource(vm.isHide() ? R.mipmap.ic_item_hide_on : R.mipmap.ic_item_hide_off);
+    }
+
+
     @BindingAdapter("isTaskSucTv")
     public static void isTaskSucTv(TextView view, final SelfTaskModelVM vm) {
         if (vm.mIsSuc.get()) {

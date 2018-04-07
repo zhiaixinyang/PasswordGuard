@@ -11,55 +11,76 @@ import java.io.Serializable;
  */
 
 @Entity
-public class DailySelf implements Serializable{
+public class DailySelf implements Serializable {
     @Id(autoincrement = true)
     public Long id;
     public String mContent;
     public Long mTimeStamp;
     public String mTvGroup;
     public int mIsFavorite;
+    public Integer mIsHide = 1;
     static final long serialVersionUID = 12L;
 
-    @Generated(hash = 1128575647)
+    @Generated(hash = 2027349683)
     public DailySelf(Long id, String mContent, Long mTimeStamp, String mTvGroup,
-            int mIsFavorite) {
+            int mIsFavorite, Integer mIsHide) {
         this.id = id;
         this.mContent = mContent;
         this.mTimeStamp = mTimeStamp;
         this.mTvGroup = mTvGroup;
         this.mIsFavorite = mIsFavorite;
+        this.mIsHide = mIsHide;
     }
+
     @Generated(hash = 2097784888)
     public DailySelf() {
     }
+
     public Long getId() {
         return this.id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
+
     public String getMContent() {
         return this.mContent;
     }
+
     public void setMContent(String mContent) {
         this.mContent = mContent;
     }
+
     public Long getMTimeStamp() {
         return this.mTimeStamp;
     }
+
     public void setMTimeStamp(Long mTimeStamp) {
         this.mTimeStamp = mTimeStamp;
     }
+
     public String getMTvGroup() {
         return this.mTvGroup;
     }
+
     public void setMTvGroup(String mTvGroup) {
         this.mTvGroup = mTvGroup;
     }
+
     public int getMIsFavorite() {
         return this.mIsFavorite;
     }
+
     public void setMIsFavorite(int mIsFavorite) {
         this.mIsFavorite = mIsFavorite;
+    }
+
+    public Integer getMIsHide() {
+        return this.mIsHide;
+    }
+
+    public void setMIsHide(Integer mIsHide) {
+        this.mIsHide = mIsHide;
     }
 }

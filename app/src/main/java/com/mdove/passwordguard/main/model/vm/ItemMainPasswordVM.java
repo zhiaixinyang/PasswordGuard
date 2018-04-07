@@ -3,8 +3,8 @@ package com.mdove.passwordguard.main.model.vm;
 import android.databinding.ObservableField;
 
 import com.mdove.passwordguard.base.IFavoriteVM;
+import com.mdove.passwordguard.base.IHideVM;
 import com.mdove.passwordguard.main.model.MainPasswordModel;
-import com.mdove.passwordguard.main.model.impl.IHideVm;
 
 import java.io.Serializable;
 
@@ -12,7 +12,7 @@ import java.io.Serializable;
  * Created by MDove on 2018/2/9.
  */
 
-public class ItemMainPasswordVM implements Serializable ,IFavoriteVM,IHideVm{
+public class ItemMainPasswordVM implements Serializable, IFavoriteVM, IHideVM {
     public ObservableField<String> mTime = new ObservableField<>();
     public ObservableField<String> mUserName = new ObservableField<>();
     public ObservableField<String> mPassword = new ObservableField<>();
@@ -40,5 +40,10 @@ public class ItemMainPasswordVM implements Serializable ,IFavoriteVM,IHideVm{
     @Override
     public boolean isFavorite() {
         return mFavorite.get();
+    }
+
+    @Override
+    public boolean isHide() {
+        return mIsHide.get();
     }
 }
