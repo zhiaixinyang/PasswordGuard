@@ -22,6 +22,8 @@ import com.mdove.passwordguard.addoralter.model.event.AddDailySelfActivityEvent;
 import com.mdove.passwordguard.addoralter.model.event.AddPasswordActivityEvent;
 import com.mdove.passwordguard.addoralter.model.event.EditDailySelfActivityEvent;
 import com.mdove.passwordguard.addoralter.model.event.EditPasswordActivityEvent;
+import com.mdove.passwordguard.alldata.model.event.AllDailySelfHideEvent;
+import com.mdove.passwordguard.alldata.model.event.AllPasswordHideEvent;
 import com.mdove.passwordguard.base.listener.OnItemLongClickListener;
 import com.mdove.passwordguard.collect.model.event.CollectDailySelfEvent;
 import com.mdove.passwordguard.collect.model.event.CollectPasswordEvent;
@@ -381,6 +383,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
         mAdapter.notifyDeletePosition(position);
     }
 
+    @Override
+    public void notifyBtnNoHide(int position) {
+        mAdapter.notifyPosition(position);
+    }
+
     @Subscribe
     public void addPasswordInfo(AddPasswordEvent event) {
         mPresenter.addPassword(event.mPassword);
@@ -480,5 +487,15 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     public void hideMainItem(HideItemMainEvent event) {
         //TODO 暂时不做特别处理，有待优化
         mPresenter.initData();
+    }
+
+    @Subscribe
+    public void hidePassword(AllPasswordHideEvent event) {
+        mPresenter.postAllPasswordHide(event.mId, event.mIsHide);
+    }
+
+    @Subscribe
+    public void hideDailySelf(AllDailySelfHideEvent event) {
+        mPresenter.postAllDailySelfHide(event.mId, event.mIsHide);
     }
 }

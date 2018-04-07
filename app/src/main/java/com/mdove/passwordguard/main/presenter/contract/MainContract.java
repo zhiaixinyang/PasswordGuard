@@ -100,6 +100,10 @@ public interface MainContract {
 
         void btnHidePworDs(IHideVM vm);
 
+        void postAllPasswordHide(long id, boolean isHide);
+
+        void postAllDailySelfHide(long id, boolean isHide);
+
         void favoritePassword(ItemMainPasswordVM vm);
 
         void copyDailySelf(ItemMainDailySelfVM vm);
@@ -127,6 +131,8 @@ public interface MainContract {
         void notifyDailySelfData(int position);
 
         void notifyBtnHide(int position);
+
+        void notifyBtnNoHide(int position);
 
         void onClickBtnPassword(MainGroupModel model);
 

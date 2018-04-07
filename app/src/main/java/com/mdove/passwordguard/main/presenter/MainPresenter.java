@@ -169,6 +169,9 @@ public class MainPresenter implements MainContract.Presenter {
         List<MainDailySelfModel> noFavoriteData = new ArrayList<>();
         List<DailySelf> dailyData = mDailySelfDao.queryBuilder().list();
         for (DailySelf dailySelf : dailyData) {
+            if (dailySelf.mIsHide != null && dailySelf.mIsHide == 1) {
+                continue;
+            }
             MainDailySelfModel favoriteModel = new MainDailySelfModel(dailySelf);
             if (dailySelf.mIsFavorite == 1) {
                 favoriteData.add(favoriteModel);
@@ -316,19 +319,72 @@ public class MainPresenter implements MainContract.Presenter {
         if (vm instanceof ItemMainPasswordVM) {
             ItemMainPasswordVM passwordVM = (ItemMainPasswordVM) vm;
             Password password = passwordVM.mMainPasswordModel.password;
-            password.isHide = 0;
+            password.isHide = 1;
             mPasswordDao.update(password);
 
-            passwordVM.mMainPasswordModel.mHide = false;
+            passwordVM.mMainPasswordModel.mHide = true;
             mView.notifyBtnHide(passwordVM.mItemPosition);
-        }else if(vm instanceof ItemMainDailySelfVM){
+        } else if (vm instanceof ItemMainDailySelfVM) {
             ItemMainDailySelfVM dailySelfVM = (ItemMainDailySelfVM) vm;
             DailySelf dailySelf = dailySelfVM.mDailySelf;
-            dailySelf.mIsHide = 0;
+            dailySelf.mIsHide = 1;
             mDailySelfDao.update(dailySelf);
 
-            dailySelfVM.mMainDailySelfModel.mIsHide = false;
+            dailySelfVM.mMainDailySelfModel.mIsHide = true;
             mView.notifyBtnHide(dailySelfVM.mItemPosition);
+        }
+    }
+
+    @Override
+    public void postAllPasswordHide(long id, boolean isHide) {
+        if (isHide) {
+            int position = -1;
+            for (BaseMainModel baseMainModel : mData) {
+                if (baseMainModel instanceof MainPasswordModel) {
+                    MainPasswordModel model = (MainPasswordModel) baseMainModel;
+                    if (model.mPasswordId == id) {
+                        position = mData.indexOf(model);
+                    }
+                }
+            }
+            if (position != -1) {
+                mView.notifyBtnHide(position);
+            }
+        } else {
+            List<Password> list = mPasswordDao.queryBuilder().where(PasswordDao.Properties.Id.eq(id)).build().list();
+            if (list == null || list.size() <= 0) {
+                return;
+            }
+            Password password = list.get(0);
+            mData.add(new MainPasswordModel(password));
+            mView.notifyBtnNoHide(mData.size());
+        }
+    }
+
+    @Override
+    public void postAllDailySelfHide(long id, boolean isHide) {
+        if (isHide) {
+            int position = -1;
+            for (BaseMainModel baseMainModel : mData) {
+                if (baseMainModel instanceof MainDailySelfModel) {
+                    MainDailySelfModel model = (MainDailySelfModel) baseMainModel;
+                    if (model.mId == id) {
+                        position = mData.indexOf(model);
+                    }
+                }
+            }
+            //避免ConcurrentModificationException异常
+            if (position != -1) {
+                mView.notifyBtnHide(position);
+            }
+        } else {
+            List<DailySelf> list = mDailySelfDao.queryBuilder().where(DailySelfDao.Properties.Id.eq(id)).build().list();
+            if (list == null || list.size() <= 0) {
+                return;
+            }
+            DailySelf dailySelf = list.get(0);
+            mData.add(new MainDailySelfModel(dailySelf));
+            mView.notifyBtnNoHide(mData.size());
         }
     }
 

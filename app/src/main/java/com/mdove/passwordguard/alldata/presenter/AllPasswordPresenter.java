@@ -1,7 +1,9 @@
 package com.mdove.passwordguard.alldata.presenter;
 
+import com.hwangjr.rxbus.RxBus;
 import com.mdove.passwordguard.App;
 import com.mdove.passwordguard.alldata.model.AllPasswordModel;
+import com.mdove.passwordguard.alldata.model.event.AllPasswordHideEvent;
 import com.mdove.passwordguard.alldata.model.vm.ItemAllPasswordVM;
 import com.mdove.passwordguard.alldata.presenter.contract.AllPasswordContract;
 import com.mdove.passwordguard.greendao.PasswordDao;
@@ -50,13 +52,19 @@ public class AllPasswordPresenter implements AllPasswordContract.Presenter {
 
     @Override
     public void btnHidePworDs(ItemAllPasswordVM vm) {
-        ItemAllPasswordVM passwordVM = (ItemAllPasswordVM) vm;
-        Password password = passwordVM.mAllPasswordModel.password;
-        password.isHide = 0;
-        mPasswordDao.update(password);
+        Password password = vm.mAllPasswordModel.password;
+        if (vm.mIsHide.get()) {
+            password.isHide = 0;
+            vm.mAllPasswordModel.mHide = false;
+        } else {
+            password.isHide = 1;
+            vm.mAllPasswordModel.mHide = true;
+        }
 
-        passwordVM.mAllPasswordModel.mHide = false;
-        mView.notifyBtnHide(passwordVM.mItemPosition);
+        mPasswordDao.update(password);
+        mView.notifyBtnHide(vm.mItemPosition);
+
+        RxBus.get().post(new AllPasswordHideEvent(password.id, !vm.mIsHide.get()));
     }
 
     @Override

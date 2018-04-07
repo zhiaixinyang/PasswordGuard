@@ -1,8 +1,10 @@
 package com.mdove.passwordguard.alldata.presenter;
 
+import com.hwangjr.rxbus.RxBus;
 import com.mdove.passwordguard.App;
 import com.mdove.passwordguard.alldata.model.AllDailySelfModel;
 import com.mdove.passwordguard.alldata.model.AllPasswordModel;
+import com.mdove.passwordguard.alldata.model.event.AllDailySelfHideEvent;
 import com.mdove.passwordguard.alldata.model.vm.ItemAllDailySelfVM;
 import com.mdove.passwordguard.alldata.model.vm.ItemAllPasswordVM;
 import com.mdove.passwordguard.alldata.presenter.contract.AllDailySelfContract;
@@ -77,6 +79,8 @@ public class AllDailySelfPresenter implements AllDailySelfContract.Presenter {
 
         mDailySelfDao.update(dailySelf);
         mView.notifyBtnHide(vm.mItemPosition);
+
+        RxBus.get().post(new AllDailySelfHideEvent(dailySelf.id,!vm.mIsHide.get()));
     }
 
     @Override
