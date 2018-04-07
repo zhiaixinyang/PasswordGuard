@@ -320,6 +320,14 @@ public class MainPresenter implements MainContract.Presenter {
 
             passwordVM.mMainPasswordModel.mHide = false;
             mView.notifyBtnHide(passwordVM.mItemPosition);
+        }else if(vm instanceof ItemMainDailySelfVM){
+            ItemMainDailySelfVM dailySelfVM = (ItemMainDailySelfVM) vm;
+            DailySelf dailySelf = dailySelfVM.mDailySelf;
+//            dailySelf.isHide = 0;
+//            mPasswordDao.update(password);
+//
+//            passwordVM.mMainPasswordModel.mHide = false;
+//            mView.notifyBtnHide(passwordVM.mItemPosition);
         }
     }
 
@@ -779,11 +787,11 @@ public class MainPresenter implements MainContract.Presenter {
         MainOptionInfo selfTask = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_SELF_TASK, "我的工作", "记录我的工作", R.drawable.bg_main_option_btn_6, R.mipmap.ic_btn_self_task);
         MainOptionInfo deleteAccount = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_DELETE_ACCOUNT, "删除记录", "账号信息", R.drawable.bg_main_option_btn_3, R.mipmap.ic_delete);
         MainOptionInfo deleteDailySelf = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_DELETE_DAILY_SELF, "删除记录", "随手记", R.drawable.bg_main_option_btn_7, R.mipmap.ic_btn_delete);
-        MainOptionInfo guide = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_GUIDE, "引导", "了解一下", R.drawable.bg_main_option_btn_5, R.mipmap.ic_btn_guide);
         MainOptionInfo collect = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_COLLECT, "我的收藏", "所有收藏内容", R.drawable.bg_main_option_btn_8, R.mipmap.ic_btn_collect);
         MainOptionInfo mainOption = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_MAIN_ALL_OPTION, "更多操作", "显示隐藏操作", R.drawable.bg_main_option_btn_9, R.mipmap.ic_btn_more_option);
+        MainOptionInfo lock = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_LOCK, "手势锁", "保护信息安全", R.drawable.bg_main_option_btn_2, R.mipmap.ic_btn_lock);
 
-        data.add(guide);
+        data.add(lock);
         data.add(account);
         data.add(dailySelf);
         data.add(selfTask);

@@ -10,6 +10,7 @@ import com.mdove.passwordguard.addoralter.AddPasswordActivity;
 import com.mdove.passwordguard.addoralter.EditPasswordActivity;
 import com.mdove.passwordguard.addoralter.model.AlterDailySelfModel;
 import com.mdove.passwordguard.addoralter.model.AlterPasswordModel;
+import com.mdove.passwordguard.alldata.AllPasswordActivity;
 import com.mdove.passwordguard.collect.CollectActivity;
 import com.mdove.passwordguard.config.AppConstant;
 import com.mdove.passwordguard.dailyself.ItemMainDailySelfVM;
@@ -131,7 +132,7 @@ public class AllMainOptionPresenter implements AllMainOptionContract.Presenter {
 
     @Override
     public void onClickBtnAllPassword() {
-
+        AllPasswordActivity.start(mView.getContext());
     }
 
     @Override
@@ -163,12 +164,12 @@ public class AllMainOptionPresenter implements AllMainOptionContract.Presenter {
         MainOptionInfo lock = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_LOCK, "手势锁", "保护信息安全", R.drawable.bg_main_option_btn_2, R.mipmap.ic_btn_lock);
         MainOptionInfo deleteAccount = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_DELETE_ACCOUNT, "删除记录", "账号信息", R.drawable.bg_main_option_btn_3, R.mipmap.ic_delete);
         MainOptionInfo deleteDailySelf = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_DELETE_DAILY_SELF, "删除记录", "随手记", R.drawable.bg_main_option_btn_7, R.mipmap.ic_btn_delete);
-        MainOptionInfo guide = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_GUIDE, "引导", "了解一下", R.drawable.bg_main_option_btn_5, R.mipmap.ic_btn_guide);
+//        MainOptionInfo guide = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_GUIDE, "引导", "了解一下", R.drawable.bg_main_option_btn_5, R.mipmap.ic_btn_guide);
         MainOptionInfo collect = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_COLLECT, "我的收藏", "所有收藏内容", R.drawable.bg_main_option_btn_8, R.mipmap.ic_btn_collect);
         MainOptionInfo allPassword = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_ALL_PASSWORD, "所有账号", "所有账号记录", R.drawable.bg_main_option_btn_10, R.mipmap.ic_btn_password);
         MainOptionInfo allDailySelf = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_ALL_DAILY_SELF, "所有随手记", "所有随手记", R.drawable.bg_main_option_btn_11, R.mipmap.ic_btn_password);
         MainOptionInfo setting = new MainOptionInfo(MainPresenter.MAIN_OPEN_INFO_TYPE_SETTING, "设置", "系统设置", R.drawable.bg_main_option_btn_12, R.mipmap.ic_settings);
-        data.add(guide);
+//        data.add(guide);
         data.add(account);
         data.add(dailySelf);
         data.add(selfTask);

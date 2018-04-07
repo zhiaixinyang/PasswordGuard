@@ -62,6 +62,11 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name=".mainoption.AllMainOptionActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name=".addoralter.AddPasswordActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"

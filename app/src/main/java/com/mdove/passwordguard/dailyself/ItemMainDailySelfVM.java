@@ -13,12 +13,13 @@ import java.io.Serializable;
  * Created by MDove on 2018/2/22.
  */
 
-public class ItemMainDailySelfVM implements Serializable, IFavoriteVM,IHideVm {
+public class ItemMainDailySelfVM implements Serializable, IFavoriteVM, IHideVm {
     public ObservableField<String> mTime = new ObservableField<>();
     public ObservableField<String> mContent = new ObservableField<>();
     public ObservableField<String> mTvGroup = new ObservableField<>();
     public ObservableField<Boolean> mIsFavorite = new ObservableField<>();
     public DailySelf mDailySelf;
+    public MainDailySelfModel mMainDailySelfModel;
     public int mItemPosition;
 
     public ItemMainDailySelfVM(MainDailySelfModel model, int position) {
@@ -29,6 +30,7 @@ public class ItemMainDailySelfVM implements Serializable, IFavoriteVM,IHideVm {
         mDailySelf = model.mDailySelf;
         mItemPosition = position;
         mIsFavorite.set(model.mIsFavorite);
+        mMainDailySelfModel = model;
     }
 
     @Override
