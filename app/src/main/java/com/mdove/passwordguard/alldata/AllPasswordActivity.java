@@ -14,6 +14,7 @@ import com.mdove.passwordguard.alldata.presenter.AllPasswordPresenter;
 import com.mdove.passwordguard.alldata.presenter.contract.AllPasswordContract;
 import com.mdove.passwordguard.base.BaseActivity;
 import com.mdove.passwordguard.base.listener.OnChangeDataSizeListener;
+import com.mdove.passwordguard.dailyself.MainDailySelfModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,6 +75,11 @@ public class AllPasswordActivity extends BaseActivity implements AllPasswordCont
 
     @Override
     public void notifyBtnHide(int position) {
+        mAdapter.notifyPosition(position);
+    }
+
+    @Override
+    public void notifyBtnFavorite(int position) {
         mAdapter.notifyPosition(position);
     }
 }

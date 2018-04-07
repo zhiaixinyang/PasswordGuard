@@ -20,7 +20,7 @@ public class DataBindingAdapter {
 
     @BindingAdapter("loadHide")
     public static void loadHide(ImageView view, final IHideVM vm) {
-        view.setImageResource(vm.isHide() ? R.mipmap.ic_item_hide_on : R.mipmap.ic_item_hide_off);
+        view.setImageResource(vm.isHide() ? R.mipmap.ic_item_hide_off : R.mipmap.ic_item_hide_on);
     }
 
 

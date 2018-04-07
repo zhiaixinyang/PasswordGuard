@@ -47,7 +47,17 @@ public class AllPasswordPresenter implements AllPasswordContract.Presenter {
 
     @Override
     public void favoritePassword(ItemAllPasswordVM vm) {
+        Password password = vm.mAllPasswordModel.password;
+        if (vm.mFavorite.get()) {
+            password.isFavorite = 0;
+            vm.mAllPasswordModel.mFavorite = false;
+        } else {
+            password.isFavorite = 1;
+            vm.mAllPasswordModel.mFavorite = true;
+        }
 
+        mPasswordDao.update(password);
+        mView.notifyBtnFavorite(vm.mItemPosition);
     }
 
     @Override

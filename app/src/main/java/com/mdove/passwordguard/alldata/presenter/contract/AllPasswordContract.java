@@ -29,5 +29,6 @@ public interface AllPasswordContract {
         void showData(List<AllPasswordModel> data);
 
         void notifyBtnHide(int position);
+        void notifyBtnFavorite(int position);
     }
 }
