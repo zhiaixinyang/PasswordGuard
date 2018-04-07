@@ -69,7 +69,17 @@
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     tools:text="随手记" />
-
+                <TextView
+                    android:id="@+id/tv_hint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_item_main_self_task"
+                    android:layout_toRightOf="@+id/tv_group"
+                    android:layout_alignBottom="@+id/tv_group"
+                    android:text="#记录有趣#"
+                    android:textColor="@color/gray"
+                    android:textSize="14sp" />
                 <ImageView
                     android:id="@+id/btn_hide"
                     android:layout_width="25dp"

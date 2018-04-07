@@ -13,6 +13,7 @@ import com.mdove.passwordguard.alldata.model.vm.ItemAllDailySelfVM;
 import com.mdove.passwordguard.alldata.model.vm.ItemAllPasswordVM;
 import com.mdove.passwordguard.alldata.presenter.AllDailySelfPresenter;
 import com.mdove.passwordguard.alldata.presenter.AllPasswordPresenter;
+import com.mdove.passwordguard.base.listener.OnChangeDataSizeListener;
 import com.mdove.passwordguard.databinding.ItemAllDailyselfBinding;
 import com.mdove.passwordguard.databinding.ItemAllPasswordBinding;
 import com.mdove.passwordguard.utils.InflateUtils;
@@ -27,11 +28,13 @@ public class AllDailySelfAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private List<AllDailySelfModel> mData;
     private Context mContext;
     private AllDailySelfPresenter mPresenter;
+    private OnChangeDataSizeListener mListener;
 
     public AllDailySelfAdapter(Context context, List<AllDailySelfModel> data, AllDailySelfPresenter presenter) {
         mContext = context;
         mData = data;
         mPresenter = presenter;
+        registerAdapterDataObserver(mObserver);
     }
 
     @Override
@@ -72,5 +75,42 @@ public class AllDailySelfAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public void notifyPosition(int position) {
         notifyItemChanged(position);
+    }
+
+    public void setOnChangeDataSizeListener(OnChangeDataSizeListener listener) {
+        mListener = listener;
+    }
+
+    private RecyclerView.AdapterDataObserver mObserver = new RecyclerView.AdapterDataObserver() {
+        @Override
+        public void onChanged() {
+            onDataChange(mData.size());
+        }
+
+        @Override
+        public void onItemRangeChanged(int positionStart, int itemCount) {
+            onDataChange(mData.size());
+        }
+
+        @Override
+        public void onItemRangeRemoved(int positionStart, int itemCount) {
+            onDataChange(mData.size());
+        }
+    };
+
+    @Override
+    public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView);
+        unregisterAdapterDataObserver(mObserver);
+    }
+
+    private void onDataChange(int dataSize) {
+        if (mListener != null) {
+            if (dataSize <= 0) {
+                mListener.dataIsEmpty(true);
+            } else {
+                mListener.dataIsEmpty(false);
+            }
+        }
     }
 }

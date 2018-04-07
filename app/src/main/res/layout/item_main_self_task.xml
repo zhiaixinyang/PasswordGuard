@@ -41,6 +41,7 @@
             </FrameLayout>
 
             <TextView
+                android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -49,6 +50,18 @@
                 android:text="我的随手计划"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/margin_item_main_self_task"
+                android:layout_toRightOf="@+id/tv_title"
+                android:layout_alignBottom="@+id/tv_title"
+                android:text="#记录突然的计划#"
+                android:textColor="@color/gray"
+                android:textSize="14sp" />
 
             <ImageView
                 android:layout_width="24dp"

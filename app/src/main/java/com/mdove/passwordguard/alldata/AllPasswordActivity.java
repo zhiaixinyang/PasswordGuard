@@ -13,6 +13,7 @@ import com.mdove.passwordguard.alldata.model.AllPasswordModel;
 import com.mdove.passwordguard.alldata.presenter.AllPasswordPresenter;
 import com.mdove.passwordguard.alldata.presenter.contract.AllPasswordContract;
 import com.mdove.passwordguard.base.BaseActivity;
+import com.mdove.passwordguard.base.listener.OnChangeDataSizeListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +50,12 @@ public class AllPasswordActivity extends BaseActivity implements AllPasswordCont
         mPresenter.subscribe(this);
         mData = new ArrayList<>();
         mAdapter = new AllPasswordAdapter(this, mData, mPresenter);
+        mAdapter.setOnChangeDataSizeListener(new OnChangeDataSizeListener() {
+            @Override
+            public void dataIsEmpty(boolean isEmpty) {
+                setDataIsEmpty(isEmpty);
+            }
+        });
         mRlv.setLayoutManager(new LinearLayoutManager(this));
         mRlv.setAdapter(mAdapter);
         mPresenter.initData();

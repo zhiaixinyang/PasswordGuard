@@ -17,6 +17,7 @@ import com.mdove.passwordguard.alldata.presenter.AllPasswordPresenter;
 import com.mdove.passwordguard.alldata.presenter.contract.AllDailySelfContract;
 import com.mdove.passwordguard.alldata.presenter.contract.AllPasswordContract;
 import com.mdove.passwordguard.base.BaseActivity;
+import com.mdove.passwordguard.base.listener.OnChangeDataSizeListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +45,7 @@ public class AllDailySelfActivity extends BaseActivity implements AllDailySelfCo
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("所有账号记录");
+        setTitle("所有随手记");
         setContentView(R.layout.activity_all_password);
 
         mRlv = findViewById(R.id.rlv_all_password);
@@ -53,6 +54,12 @@ public class AllDailySelfActivity extends BaseActivity implements AllDailySelfCo
         mPresenter.subscribe(this);
         mData = new ArrayList<>();
         mAdapter = new AllDailySelfAdapter(this, mData, mPresenter);
+        mAdapter.setOnChangeDataSizeListener(new OnChangeDataSizeListener() {
+            @Override
+            public void dataIsEmpty(boolean isEmpty) {
+                setDataIsEmpty(isEmpty);
+            }
+        });
         mRlv.setLayoutManager(new LinearLayoutManager(this));
         mRlv.setAdapter(mAdapter);
         mPresenter.initData();
