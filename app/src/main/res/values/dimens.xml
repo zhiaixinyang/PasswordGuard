@@ -63,6 +63,12 @@
     <dimen name="item_self_task_all_btn_icon_w_h">22dp</dimen>
     <dimen name="item_self_task_all_btn_text_size">10sp</dimen>
     <dimen name="margin_item_all_main_option">8dp</dimen>
-    <dimen name="item_main_self_task_rlv_w_h">22dp</dimen>
+    <dimen name="item_main_self_task_rlv_w_h">20dp</dimen>
+    <dimen name="item_main_self_task_rlv_size">10dp</dimen>
+    <dimen name="margin_item_main_self_task_rlv">6dp</dimen>
+    <dimen name="margin_item_main_daily_plan">8dp</dimen>
+    <dimen name="margin_fragment_today_plan">8dp</dimen>
+    <dimen name="margin_item_main_daily_plan_today_rlv">8dp</dimen>
+
 
 </resources>

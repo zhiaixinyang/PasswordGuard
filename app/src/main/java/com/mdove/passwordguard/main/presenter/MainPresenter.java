@@ -38,6 +38,7 @@ import com.mdove.passwordguard.main.AddGroupDialog;
 import com.mdove.passwordguard.main.adapter.MainAdapter;
 import com.mdove.passwordguard.main.config.MainConfig;
 import com.mdove.passwordguard.main.model.BaseMainModel;
+import com.mdove.passwordguard.main.model.MainDailyPlanModel;
 import com.mdove.passwordguard.main.model.MainGroupModel;
 import com.mdove.passwordguard.main.model.MainGroupRlvModel;
 import com.mdove.passwordguard.main.model.MainOptionInfo;
@@ -145,6 +146,9 @@ public class MainPresenter implements MainContract.Presenter {
         mDailyData = new ArrayList<>();
 
         initSys();
+
+        MainDailyPlanModel mainDailyPlanModel = new MainDailyPlanModel();
+        mData.add(mainDailyPlanModel);
 
         List<SelfTaskModel> selfTaskModels = new ArrayList<>();
         mMainSelfTaskData = new ArrayList<>();
@@ -463,10 +467,15 @@ public class MainPresenter implements MainContract.Presenter {
         if (mSysEmptyData == null || mSysEmptyData.size() <= 0) {
             return;
         }
+        int position = -1;
         for (BaseMainModel baseMainModel : mSysEmptyData) {
             if (baseMainModel.mSysType == BaseMainModel.MAIN_ITEM_SYS_TYPE_GROUP) {
-                mView.onClickBtnHideGroup(mSysEmptyData.indexOf(baseMainModel));
+                position = mSysEmptyData.indexOf(baseMainModel);
+                mView.onClickBtnHideGroup(position);
             }
+        }
+        if (position != -1) {
+            mSysEmptyData.remove(position);
         }
     }
 
@@ -476,10 +485,15 @@ public class MainPresenter implements MainContract.Presenter {
         if (mSysEmptyData == null || mSysEmptyData.size() <= 0) {
             return;
         }
+        int position = -1;
         for (BaseMainModel baseMainModel : mSysEmptyData) {
             if (baseMainModel.mSysType == BaseMainModel.MAIN_ITEM_SYS_TYPE_SEARCH) {
-                mView.onClickBtnHideSearch(mSysEmptyData.indexOf(baseMainModel));
+                position = mSysEmptyData.indexOf(baseMainModel);
+                mView.onClickBtnHideSearch(position);
             }
+        }
+        if (position != -1) {
+            mSysEmptyData.remove(position);
         }
     }
 
@@ -487,10 +501,15 @@ public class MainPresenter implements MainContract.Presenter {
     public void onClickBtnHideOption() {
         MainConfig.setHideSysItemOption(!MainConfig.isHideSysItemOption());
 
+        int position = -1;
         for (BaseMainModel baseMainModel : mSysEmptyData) {
             if (baseMainModel.mSysType == BaseMainModel.MAIN_ITEM_SYS_TYPE_OPTION) {
-                mView.onClickBtnHideOption(mSysEmptyData.indexOf(baseMainModel));
+                position = mSysEmptyData.indexOf(baseMainModel);
+                mView.onClickBtnHideOption(position);
             }
+        }
+        if (position != -1) {
+            mSysEmptyData.remove(position);
         }
     }
 
@@ -500,10 +519,15 @@ public class MainPresenter implements MainContract.Presenter {
         if (mSysEmptyData == null || mSysEmptyData.size() <= 0) {
             return;
         }
+        int position = -1;
         for (BaseMainModel baseMainModel : mSysEmptyData) {
             if (baseMainModel.mSysType == BaseMainModel.MAIN_ITEM_SYS_TYPE_TOP_TIME) {
-                mView.onClickBtnHideTimeTop(mSysEmptyData.indexOf(baseMainModel));
+                position = mSysEmptyData.indexOf(baseMainModel);
+                mView.onClickBtnHideTimeTop(position);
             }
+        }
+        if (position != -1) {
+            mSysEmptyData.remove(position);
         }
     }
 

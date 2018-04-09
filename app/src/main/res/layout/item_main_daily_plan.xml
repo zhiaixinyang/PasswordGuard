@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.mdove.passwordguard.main.model.vm.DailyPlanModelVM" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/margin_item_main_daily_plan"
+        android:paddingLeft="@dimen/margin_item_main_daily_plan"
+        android:paddingRight="@dimen/margin_item_main_daily_plan">
+
+        <RelativeLayout
+            android:id="@+id/layout_top"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/item_top_height"
+            android:background="@drawable/bg_normal_top">
+
+            <FrameLayout
+                android:id="@+id/layout_icon"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/margin_item_main_daily_plan"
+                android:background="@drawable/bg_icon_self_task">
+
+                <ImageView
+                    android:id="@+id/iv_main_daily_plan"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/ic_btn_self_task" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/margin_item_main_daily_plan"
+                android:layout_toRightOf="@+id/layout_icon"
+                android:text="每日计划"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/tv_title"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/margin_item_main_daily_plan"
+                android:layout_toRightOf="@+id/tv_title"
+                android:text="#记录突然的计划#"
+                android:textColor="@color/gray"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_top"
+            android:background="@drawable/bg_main_self_task_bottom"
+            android:orientation="horizontal">
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_below="@+id/tab_layout" />
+        </RelativeLayout>
+    </RelativeLayout>
+</layout>

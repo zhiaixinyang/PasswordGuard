@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.mdove.passwordguard.main.model.vm.DailyPlanModelVM" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_normal_white"
+        android:layout_marginBottom="@dimen/margin_item_password_normal"
+        android:layout_marginLeft="@dimen/margin_item_password_normal"
+        android:layout_marginRight="@dimen/margin_item_password_normal">
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/trans"
+            android:gravity="center_vertical"
+            android:layout_margin="@dimen/margin_item_main_daily_plan_today_rlv"
+            android:text="@{viewModel.mTime}"
+            android:textColor="@color/gray"
+            android:textSize="12sp"
+            tools:text="2018年2月10日" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_time"
+            android:alpha="0.8"
+            android:background="@color/trans"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="@dimen/margin_item_main_daily_plan_today_rlv"
+            android:layout_marginLeft="@dimen/margin_item_main_daily_plan_today_rlv"
+            android:layout_marginRight="@dimen/margin_item_main_daily_plan_today_rlv"
+            android:text="@{viewModel.mContent}"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            tools:text="周日" />
+    </RelativeLayout>
+</layout>

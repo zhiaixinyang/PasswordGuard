@@ -82,4 +82,6 @@
     <string name="tab_str_delete_self_task">已删除</string>
     <string name="tab_str_suc_self_task">已完成.归档</string>
 
+    <string name="tab_str_today">今日计划</string>
+    <string name="tab_str_yesterday">昨日计划</string>
 </resources>

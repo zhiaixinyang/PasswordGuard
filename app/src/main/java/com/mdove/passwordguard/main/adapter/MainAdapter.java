@@ -2,6 +2,8 @@ package com.mdove.passwordguard.main.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +19,7 @@ import com.mdove.passwordguard.config.AppConfig;
 import com.mdove.passwordguard.dailyself.ItemMainDailySelfVM;
 import com.mdove.passwordguard.dailyself.MainDailySelfHandler;
 import com.mdove.passwordguard.dailyself.MainDailySelfModel;
+import com.mdove.passwordguard.databinding.ItemMainDailyPlanBinding;
 import com.mdove.passwordguard.databinding.ItemMainDailyselfBinding;
 import com.mdove.passwordguard.databinding.ItemMainGroupBinding;
 import com.mdove.passwordguard.databinding.ItemMainOptionBinding;
@@ -26,7 +29,10 @@ import com.mdove.passwordguard.databinding.ItemMainSearchBinding;
 import com.mdove.passwordguard.databinding.ItemMainSelfTaskBinding;
 import com.mdove.passwordguard.databinding.ItemMainTopBinding;
 import com.mdove.passwordguard.main.config.MainConfig;
+import com.mdove.passwordguard.main.fragment.TodayPlanFragment;
+import com.mdove.passwordguard.main.fragment.YesterdayPlanFragment;
 import com.mdove.passwordguard.main.model.BaseMainModel;
+import com.mdove.passwordguard.main.model.MainDailyPlanModel;
 import com.mdove.passwordguard.main.model.MainGroupModel;
 import com.mdove.passwordguard.main.model.MainGroupRlvModel;
 import com.mdove.passwordguard.main.model.MainOptionModel;
@@ -42,6 +48,9 @@ import com.mdove.passwordguard.main.model.handler.MainSearchHandler;
 import com.mdove.passwordguard.main.model.vm.ItemMainPasswordVM;
 import com.mdove.passwordguard.main.model.vm.ItemMainTopVM;
 import com.mdove.passwordguard.main.presenter.MainPresenter;
+import com.mdove.passwordguard.task.adapter.SelfTaskPagerAdapter;
+import com.mdove.passwordguard.task.fragment.AllSelfTaskFragment;
+import com.mdove.passwordguard.task.fragment.SucSelfTaskFragment;
 import com.mdove.passwordguard.task.model.SelfTaskModel;
 import com.mdove.passwordguard.ui.guideview.Guide;
 import com.mdove.passwordguard.ui.guideview.GuideBuilder;
@@ -65,10 +74,11 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int TYPE_MAIN_DAILY_SELF = 5;
     private static final int TYPE_MAIN_OPTION_NEW = 6;
     private static final int TYPE_MAIN_SELF_TASK = 7;
+    private static final int TYPE_MAIN_DAILY_PLAN = 8;
 
     private List<BaseMainModel> mData;
     private Context mContext;
-    private Activity mActivity;
+    private AppCompatActivity mActivity;
     private MainPresenter mPresenter;
     private int mGroupPosition;
     public static int mPasswordPosition = 0;
@@ -79,7 +89,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public MainAdapter(Context context, MainPresenter presenter) {
         mContext = context;
-        mActivity = (Activity) context;
+        mActivity = (AppCompatActivity) context;
         mPresenter = presenter;
     }
 
@@ -106,6 +116,8 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     return TYPE_MAIN_DAILY_SELF;
                 } else if (model instanceof MainSelfTaskModel) {
                     return TYPE_MAIN_SELF_TASK;
+                } else if (model instanceof MainDailyPlanModel) {
+                    return TYPE_MAIN_DAILY_PLAN;
                 }
             }
         }
@@ -139,6 +151,9 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             case TYPE_MAIN_SELF_TASK: {
                 return new MainSelfTaskHolder((ItemMainSelfTaskBinding) InflateUtils.bindingInflate(parent, R.layout.item_main_self_task));
             }
+            case TYPE_MAIN_DAILY_PLAN: {
+                return new MainDailyPlanViewHolder((ItemMainDailyPlanBinding) InflateUtils.bindingInflate(parent, R.layout.item_main_daily_plan));
+            }
         }
         return null;
     }
@@ -162,12 +177,35 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ((NewMainOptionViewHolder) holder).bind((MainOptionModel) model);
         } else if (holder instanceof MainSelfTaskHolder) {
             ((MainSelfTaskHolder) holder).bind((MainSelfTaskModel) model);
+        } else if (holder instanceof MainDailyPlanViewHolder) {
+            ((MainDailyPlanViewHolder) holder).bind();
         }
     }
 
     @Override
     public int getItemCount() {
         return mData == null ? 0 : mData.size();
+    }
+
+    public class MainDailyPlanViewHolder extends RecyclerView.ViewHolder {
+        private ItemMainDailyPlanBinding mBinding;
+
+        public MainDailyPlanViewHolder(ItemMainDailyPlanBinding binding) {
+            super(binding.getRoot());
+            mBinding = binding;
+        }
+
+        public void bind() {
+            List<Fragment> fragmentList = new ArrayList<>();
+            fragmentList.add(TodayPlanFragment.newInstance());
+            fragmentList.add(YesterdayPlanFragment.newInstance());
+
+            DailyPlanPagerAdapter adapter = new DailyPlanPagerAdapter(mActivity.getSupportFragmentManager(), fragmentList);
+            mBinding.viewPager.setAdapter(adapter);
+            mBinding.tabLayout.setupWithViewPager(mBinding.viewPager);
+            mBinding.tabLayout.getTabAt(0).setText(R.string.tab_str_today);
+            mBinding.tabLayout.getTabAt(1).setText(R.string.tab_str_yesterday);
+        }
     }
 
     public class MainTopViewHolder extends RecyclerView.ViewHolder {
@@ -263,12 +301,12 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             boolean isHide = MainConfig.isHideSysItemOption();
             mBinding.setActionHandler(mPresenter);
 
-            if (isHide){
+            if (isHide) {
                 mBinding.rlvOptions.setVisibility(View.GONE);
                 mBinding.tvTitle.setBackgroundResource(R.drawable.bg_hide_main_option_top);
                 mBinding.tvHideBtn.setText("显示隐藏按钮");
                 return;
-            }else{
+            } else {
                 mBinding.rlvOptions.setVisibility(View.VISIBLE);
                 mBinding.tvTitle.setBackgroundResource(R.drawable.bg_normal_top);
                 mBinding.tvHideBtn.setText("隐藏按钮");
