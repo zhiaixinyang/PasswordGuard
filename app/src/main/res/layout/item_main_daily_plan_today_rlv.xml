@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.mdove.passwordguard.main.model.vm.DailyPlanModelVM" />
     </data>
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_normal_white"
-        android:layout_marginBottom="@dimen/margin_item_password_normal"
-        android:layout_marginLeft="@dimen/margin_item_password_normal"
-        android:layout_marginRight="@dimen/margin_item_password_normal">
+        android:layout_width="180dp"
+        android:layout_height="240dp"
+        android:layout_marginRight="@dimen/margin_item_password_normal"
+        app:loadLostAndGetBg="@{viewModel}">
 
         <TextView
             android:id="@+id/tv_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_item_main_daily_plan_today_rlv"
             android:background="@color/trans"
             android:gravity="center_vertical"
-            android:layout_margin="@dimen/margin_item_main_daily_plan_today_rlv"
             android:text="@{viewModel.mTime}"
             android:textColor="@color/gray"
             android:textSize="12sp"
@@ -33,15 +33,37 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_time"
-            android:alpha="0.8"
-            android:background="@color/trans"
-            android:gravity="center_vertical"
             android:layout_marginBottom="@dimen/margin_item_main_daily_plan_today_rlv"
             android:layout_marginLeft="@dimen/margin_item_main_daily_plan_today_rlv"
             android:layout_marginRight="@dimen/margin_item_main_daily_plan_today_rlv"
+            android:alpha="0.8"
+            android:background="@color/trans"
+            android:gravity="center_vertical"
             android:text="@{viewModel.mContent}"
             android:textColor="@color/black"
             android:textSize="16sp"
             tools:text="周日" />
+
+        <RadioGroup
+            android:id="@+id/radio_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="@dimen/margin_item_main_daily_plan_today_rlv"
+            android:layout_marginRight="@dimen/margin_item_main_daily_plan_today_rlv">
+
+            <android.support.v7.widget.AppCompatRadioButton
+                android:id="@+id/rb_get"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="得" />
+
+            <android.support.v7.widget.AppCompatRadioButton
+                android:id="@+id/rb_lost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="失" />
+        </RadioGroup>
     </RelativeLayout>
 </layout>

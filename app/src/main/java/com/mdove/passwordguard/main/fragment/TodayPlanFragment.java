@@ -12,22 +12,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.mdove.passwordguard.R;
-import com.mdove.passwordguard.base.listener.OnChangeDataSizeListener;
 import com.mdove.passwordguard.databinding.FragmentTodayPlanBinding;
-import com.mdove.passwordguard.greendao.entity.DailyPlan;
 import com.mdove.passwordguard.main.adapter.TodayPlanAdapter;
 import com.mdove.passwordguard.main.model.DailyPlanModel;
 import com.mdove.passwordguard.main.presenter.TodayPlanPresenter;
 import com.mdove.passwordguard.main.presenter.contract.TodayPlanContract;
-import com.mdove.passwordguard.task.adapter.AllSelfTaskAdapter;
-import com.mdove.passwordguard.task.model.SelfTaskModel;
-import com.mdove.passwordguard.task.presenter.AllSelfTaskPresenter;
 import com.mdove.passwordguard.utils.ToastHelper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -65,7 +58,9 @@ public class TodayPlanFragment extends Fragment implements TodayPlanContract.Mvp
         mPresenter.subscribe(this);
         mAdapter = new TodayPlanAdapter(getContext(), mPresenter);
 
-        mRlv.setLayoutManager(new LinearLayoutManager(getContext()));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        mRlv.setLayoutManager(linearLayoutManager);
         mRlv.setAdapter(mAdapter);
         mPresenter.initData();
 
@@ -92,6 +87,11 @@ public class TodayPlanFragment extends Fragment implements TodayPlanContract.Mvp
 
     @Override
     public void addDailyPlan(int position) {
+        mAdapter.notifyPosition(position);
+    }
+
+    @Override
+    public void updateLostOrGet(int position) {
         mAdapter.notifyPosition(position);
     }
 }

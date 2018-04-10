@@ -5,7 +5,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:background="@drawable/bg_main_self_task_bottom">
 
         <RelativeLayout
             android:id="@+id/layout_et"
@@ -38,8 +38,8 @@
                 android:background="@null"
                 android:hint="添加今日记录..."
                 android:textColor="@color/white"
-                android:textCursorDrawable="@drawable/bg_et_cursor_white"
                 android:textColorHint="@color/white"
+                android:textCursorDrawable="@drawable/bg_et_cursor_white"
                 android:textSize="16sp" />
 
             <ImageView
@@ -70,6 +70,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/layout_et"
-            android:paddingTop="@dimen/margin_fragment_today_plan" />
+            android:overScrollMode="never"
+            android:paddingLeft="@dimen/margin_fragment_today_plan"
+            android:paddingTop="@dimen/margin_fragment_today_plan"
+            android:scrollbars="none" />
     </RelativeLayout>
 </layout>

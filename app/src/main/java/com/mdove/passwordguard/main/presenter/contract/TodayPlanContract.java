@@ -17,11 +17,16 @@ public interface TodayPlanContract {
         void initData();
 
         void addDailyPlan(String string);
+
+        void updateLostOrGet(long id, boolean isGet);
     }
 
     interface MvpView extends BaseView<Presenter> {
         void initData(List<DailyPlanModel> data);
+
         void addDailyPlan(int position);
+
+        void updateLostOrGet(int position);
 
     }
 }

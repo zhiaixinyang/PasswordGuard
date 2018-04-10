@@ -48,9 +48,27 @@ public class TodayPlanPresenter implements TodayPlanContract.Presenter {
         DailyPlan dailyPlan = new DailyPlan();
         dailyPlan.mContent = string;
         dailyPlan.mTimeStamp = new Date().getTime();
+        dailyPlan.mStatus = 0;
         mDailyPlanDao.insert(dailyPlan);
 
         mData.add(new DailyPlanModel(dailyPlan));
         mView.addDailyPlan(mData.size());
+    }
+
+    @Override
+    public void updateLostOrGet(long id, boolean isGet) {
+        DailyPlan dailyPlan = null;
+        int position = -1;
+        for (DailyPlanModel dailyPlanModel : mData) {
+            if (id == dailyPlanModel.mId) {
+                dailyPlan = dailyPlanModel.mDailyPlan;
+                position = mData.indexOf(dailyPlanModel);
+            }
+        }
+        if (dailyPlan == null || position == -1) {
+            return;
+        }
+        dailyPlan.mStatus = isGet ? 1 : 2;
+        mView.updateLostOrGet(position);
     }
 }

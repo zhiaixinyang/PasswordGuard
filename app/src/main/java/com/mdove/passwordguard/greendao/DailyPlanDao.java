@@ -27,6 +27,7 @@ public class DailyPlanDao extends AbstractDao<DailyPlan, Long> {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property MContent = new Property(1, String.class, "mContent", false, "M_CONTENT");
         public final static Property MTimeStamp = new Property(2, Long.class, "mTimeStamp", false, "M_TIME_STAMP");
+        public final static Property MStatus = new Property(3, Integer.class, "mStatus", false, "M_STATUS");
     }
 
 
@@ -44,7 +45,8 @@ public class DailyPlanDao extends AbstractDao<DailyPlan, Long> {
         db.execSQL("CREATE TABLE " + constraint + "\"DAILY_PLAN\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"M_CONTENT\" TEXT," + // 1: mContent
-                "\"M_TIME_STAMP\" INTEGER);"); // 2: mTimeStamp
+                "\"M_TIME_STAMP\" INTEGER," + // 2: mTimeStamp
+                "\"M_STATUS\" INTEGER);"); // 3: mStatus
     }
 
     /** Drops the underlying database table. */
@@ -71,6 +73,11 @@ public class DailyPlanDao extends AbstractDao<DailyPlan, Long> {
         if (mTimeStamp != null) {
             stmt.bindLong(3, mTimeStamp);
         }
+ 
+        Integer mStatus = entity.getMStatus();
+        if (mStatus != null) {
+            stmt.bindLong(4, mStatus);
+        }
     }
 
     @Override
@@ -91,6 +98,11 @@ public class DailyPlanDao extends AbstractDao<DailyPlan, Long> {
         if (mTimeStamp != null) {
             stmt.bindLong(3, mTimeStamp);
         }
+ 
+        Integer mStatus = entity.getMStatus();
+        if (mStatus != null) {
+            stmt.bindLong(4, mStatus);
+        }
     }
 
     @Override
@@ -103,7 +115,8 @@ public class DailyPlanDao extends AbstractDao<DailyPlan, Long> {
         DailyPlan entity = new DailyPlan( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // mContent
-            cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2) // mTimeStamp
+            cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2), // mTimeStamp
+            cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3) // mStatus
         );
         return entity;
     }
@@ -113,6 +126,7 @@ public class DailyPlanDao extends AbstractDao<DailyPlan, Long> {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setMContent(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setMTimeStamp(cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2));
+        entity.setMStatus(cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3));
      }
     
     @Override

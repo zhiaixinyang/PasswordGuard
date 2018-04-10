@@ -6,6 +6,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mdove.passwordguard.R;
+import com.mdove.passwordguard.main.model.DailyPlanModel;
+import com.mdove.passwordguard.main.model.vm.DailyPlanModelVM;
 import com.mdove.passwordguard.task.model.SelfTaskModelVM;
 
 /**
@@ -16,6 +18,24 @@ public class DataBindingAdapter {
     @BindingAdapter("loadFavorite")
     public static void loadFavorite(ImageView view, final IFavoriteVM vm) {
         view.setImageResource(vm.isFavorite() ? R.mipmap.ic_favorite_on : R.mipmap.ic_favorite_off);
+    }
+
+    @BindingAdapter("loadLostAndGetBg")
+    public static void loadLostAndGetBg(RelativeLayout view, final DailyPlanModelVM modelVM) {
+        switch (modelVM.mStatus.get()) {
+            case DailyPlanModel.STATUS_NORMAL: {
+                view.setBackgroundResource(R.drawable.bg_normal_white);
+                break;
+            }
+            case DailyPlanModel.STATUS_GET: {
+                view.setBackgroundResource(R.drawable.bg_daily_plan_get);
+                break;
+            }
+            case DailyPlanModel.STATUS_LOST: {
+                view.setBackgroundResource(R.drawable.bg_daily_plan_lose);
+                break;
+            }
+        }
     }
 
     @BindingAdapter("loadHide")

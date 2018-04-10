@@ -14,11 +14,13 @@ import com.mdove.passwordguard.utils.DateUtil;
 public class DailyPlanModelVM {
     public ObservableField<String> mTime = new ObservableField<>();
     public ObservableField<String> mContent = new ObservableField<>();
+    public ObservableField<Integer> mStatus = new ObservableField<>();
     public int mPosition;
 
     public DailyPlanModelVM(DailyPlanModel dailyPlanModel, int position) {
         mTime.set(DateUtil.getDateChinese(dailyPlanModel.mTime));
         mContent.set(dailyPlanModel.mContent);
         mPosition = position;
+        mStatus.set(dailyPlanModel.mStatus);
     }
 }

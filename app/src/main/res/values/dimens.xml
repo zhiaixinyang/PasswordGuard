@@ -69,6 +69,7 @@
     <dimen name="margin_item_main_daily_plan">8dp</dimen>
     <dimen name="margin_fragment_today_plan">8dp</dimen>
     <dimen name="margin_item_main_daily_plan_today_rlv">8dp</dimen>
+    <dimen name="item_main_daily_plan_today_rlv_cb_w_h">30dp</dimen>
 
 
 </resources>

@@ -16,12 +16,14 @@ public class DailyPlan implements Serializable {
     public Long id;
     public String mContent;
     public Long mTimeStamp;
+    public Integer mStatus=0;//代表得失->0为默认，1为得，2为失
     static final long serialVersionUID = 12L;
-    @Generated(hash = 835955713)
-    public DailyPlan(Long id, String mContent, Long mTimeStamp) {
+    @Generated(hash = 963805892)
+    public DailyPlan(Long id, String mContent, Long mTimeStamp, Integer mStatus) {
         this.id = id;
         this.mContent = mContent;
         this.mTimeStamp = mTimeStamp;
+        this.mStatus = mStatus;
     }
     @Generated(hash = 617231992)
     public DailyPlan() {
@@ -43,6 +45,12 @@ public class DailyPlan implements Serializable {
     }
     public void setMTimeStamp(Long mTimeStamp) {
         this.mTimeStamp = mTimeStamp;
+    }
+    public Integer getMStatus() {
+        return this.mStatus;
+    }
+    public void setMStatus(Integer mStatus) {
+        this.mStatus = mStatus;
     }
 
 

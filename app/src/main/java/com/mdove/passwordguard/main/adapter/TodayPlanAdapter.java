@@ -3,6 +3,7 @@ package com.mdove.passwordguard.main.adapter;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
+import android.widget.RadioGroup;
 
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.listener.OnChangeDataSizeListener;
@@ -38,7 +39,7 @@ public class TodayPlanAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         DailyPlanModel model = mData.get(position);
-        ((TodayViewHolder) holder).bind(model, position);
+        ((TodayViewHolder) holder).bind(model, position, mPresenter);
     }
 
     public void setData(List<DailyPlanModel> data) {
@@ -63,8 +64,26 @@ public class TodayPlanAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             mBinding = binding;
         }
 
-        public void bind(DailyPlanModel dailyPlanModel, int position) {
+        public void bind(final DailyPlanModel dailyPlanModel, int position, final TodayPlanPresenter presenter) {
             mBinding.setViewModel(new DailyPlanModelVM(dailyPlanModel, position));
+            mBinding.radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId) {
+                    switch (checkedId) {
+                        case R.id.rb_get: {
+                            presenter.updateLostOrGet(dailyPlanModel.mId, true);
+                            break;
+                        }
+                        case R.id.rb_lost: {
+                            presenter.updateLostOrGet(dailyPlanModel.mId, false);
+                            break;
+                        }
+                        default: {
+                            break;
+                        }
+                    }
+                }
+            });
         }
     }
 
