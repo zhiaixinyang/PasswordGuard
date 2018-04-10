@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.mdove.passwordguard.main.model.vm.DailyPlanModelVM" />
+
+        <variable
+            name="actionHandler"
+            type="com.mdove.passwordguard.main.model.handler.MainDailyPlanHandler" />
     </data>
 
     <RelativeLayout
@@ -27,7 +33,7 @@
                 android:layout_height="32dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/margin_item_main_daily_plan"
-                android:background="@drawable/bg_icon_self_task">
+                android:background="@drawable/bg_icon_daily_plan">
 
                 <ImageView
                     android:id="@+id/iv_main_daily_plan"
@@ -44,7 +50,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/margin_item_main_daily_plan"
                 android:layout_toRightOf="@+id/layout_icon"
-                android:text="每日计划"
+                android:text="每日复盘"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
@@ -56,13 +62,36 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/margin_item_main_daily_plan"
                 android:layout_toRightOf="@+id/tv_title"
-                android:text="#记录突然的计划#"
+                android:text="#复盘自己的得/失#"
                 android:textColor="@color/gray"
                 android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_hide_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="4dp"
+                android:layout_toLeftOf="@+id/iv_hide"
+                android:onClick="@{()->actionHandler.onClickBtnHideDailyPlan()}"
+                android:text="隐藏按钮"
+                android:textColor="@color/gray_light"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/iv_hide"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="12dp"
+                android:onClick="@{()->actionHandler.onClickBtnHideDailyPlan()}"
+                android:src="@mipmap/ic_item_hide"
+                android:tint="@color/gray_light" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/layout_title"
+            android:id="@+id/layout_viewpager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/layout_top"
@@ -72,7 +101,12 @@
             <android.support.design.widget.TabLayout
                 android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:tabIndicatorColor="@color/trans"
+                app:tabMode="fixed"
+                app:tabSelectedTextColor="@color/commonColor"
+                app:tabTextAppearance="@style/SelfTaskTabStyle"
+                app:tabTextColor="@color/white" />
 
             <android.support.v4.view.ViewPager
                 android:id="@+id/view_pager"

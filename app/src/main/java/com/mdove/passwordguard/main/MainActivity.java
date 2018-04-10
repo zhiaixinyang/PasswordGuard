@@ -331,6 +331,17 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     }
 
     @Override
+    public void onClickBtnHideDailyPlan(int position) {
+        mRlv.scrollToPosition(0);
+        mAdapter.notifyPosition(position);
+    }
+
+    @Override
+    public void onClickBtnHideDailySelf(int position) {
+        mAdapter.notifyPosition(position);
+    }
+
+    @Override
     public void onClickBtnHideTimeTop(int position) {
         mAdapter.notifyDeletePosition(position);
     }

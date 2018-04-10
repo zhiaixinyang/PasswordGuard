@@ -54,6 +54,28 @@ public class MainConfig implements IMainConfig{
         editor.apply();
     }
 
+    public static boolean isHideSysItemDailyPlan() {
+        SharedPreferences preferences = initSharedPreferences();
+        return preferences.getBoolean(HIDE_MAIN_SYS_ITEM_DAILY_PLAN, false);
+    }
+
+    public static void setHideSysItemDailyPlan(boolean isHide) {
+        SharedPreferences.Editor editor = initSharedPreferences().edit();
+        editor.putBoolean(HIDE_MAIN_SYS_ITEM_DAILY_PLAN, isHide);
+        editor.apply();
+    }
+
+    public static boolean isHideSysItemDailySelf() {
+        SharedPreferences preferences = initSharedPreferences();
+        return preferences.getBoolean(HIDE_MAIN_SYS_ITEM_DAILY_SELF, false);
+    }
+
+    public static void setHideSysItemDailySelf(boolean isHide) {
+        SharedPreferences.Editor editor = initSharedPreferences().edit();
+        editor.putBoolean(HIDE_MAIN_SYS_ITEM_DAILY_SELF, isHide);
+        editor.apply();
+    }
+
     public static boolean isHideSysItemTimeTop() {
         SharedPreferences preferences = initSharedPreferences();
         return preferences.getBoolean(HIDE_MAIN_SYS_ITEM_TIME_TOP, false);

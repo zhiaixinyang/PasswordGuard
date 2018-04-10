@@ -69,26 +69,25 @@ public class TodayPlanAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         public void bind(final DailyPlanModel dailyPlanModel, int position, final TodayPlanPresenter presenter) {
             mBinding.setViewModel(new DailyPlanModelVM(dailyPlanModel, position));
+            mBinding.ivGet.setColorFilter(ContextCompat.getColor(mContext, R.color.gray), PorterDuff.Mode.SRC_ATOP);
+            mBinding.tvGet.setTextColor(ContextCompat.getColor(mContext, R.color.gray));
+            mBinding.ivLost.setColorFilter(ContextCompat.getColor(mContext, R.color.gray), PorterDuff.Mode.SRC_ATOP);
+            mBinding.tvLost.setTextColor(ContextCompat.getColor(mContext, R.color.gray));
+            mBinding.tvTime.setTextColor(ContextCompat.getColor(mContext, R.color.gray));
             switch (dailyPlanModel.mStatus) {
                 case DailyPlanModel.STATUS_GET: {
                     mBinding.ivGet.setColorFilter(ContextCompat.getColor(mContext, R.color.black), PorterDuff.Mode.SRC_ATOP);
                     mBinding.tvGet.setTextColor(ContextCompat.getColor(mContext, R.color.black));
-                    mBinding.ivLost.setColorFilter(ContextCompat.getColor(mContext, R.color.gray), PorterDuff.Mode.SRC_ATOP);
-                    mBinding.tvLost.setTextColor(ContextCompat.getColor(mContext, R.color.gray));
+                    mBinding.tvTime.setTextColor(ContextCompat.getColor(mContext, R.color.white));
                     break;
                 }
                 case DailyPlanModel.STATUS_LOST: {
-                    mBinding.ivGet.setColorFilter(ContextCompat.getColor(mContext, R.color.gray), PorterDuff.Mode.SRC_ATOP);
-                    mBinding.tvGet.setTextColor(ContextCompat.getColor(mContext, R.color.gray));
                     mBinding.ivLost.setColorFilter(ContextCompat.getColor(mContext, R.color.black), PorterDuff.Mode.SRC_ATOP);
                     mBinding.tvLost.setTextColor(ContextCompat.getColor(mContext, R.color.black));
+                    mBinding.tvTime.setTextColor(ContextCompat.getColor(mContext, R.color.white));
                     break;
                 }
                 default: {
-                    mBinding.ivGet.setColorFilter(ContextCompat.getColor(mContext, R.color.gray), PorterDuff.Mode.SRC_ATOP);
-                    mBinding.tvGet.setTextColor(ContextCompat.getColor(mContext, R.color.gray));
-                    mBinding.ivLost.setColorFilter(ContextCompat.getColor(mContext, R.color.gray), PorterDuff.Mode.SRC_ATOP);
-                    mBinding.tvLost.setTextColor(ContextCompat.getColor(mContext, R.color.gray));
                     break;
                 }
             }

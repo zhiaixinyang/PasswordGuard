@@ -9,4 +9,6 @@ public interface IMainConfig {
     String HIDE_MAIN_SYS_ITEM_GROUP="hide_main_sys_item_group";
     String HIDE_MAIN_SYS_ITEM_TIME_TOP="hide_main_sys_item_time_top";
     String HIDE_MAIN_SYS_ITEM_OPTION="hide_main_sys_item_option";
+    String HIDE_MAIN_SYS_ITEM_DAILY_PLAN="hide_main_sys_item_daily_plan";
+    String HIDE_MAIN_SYS_ITEM_DAILY_SELF="hide_main_sys_item_daily_self";
 }

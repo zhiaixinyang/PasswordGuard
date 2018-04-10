@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.mdove.passwordguard.main.model.vm.DailyPlanModelVM" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_marginRight="@dimen/margin_item_password_normal"
+        app:loadLostAndGetBg="@{viewModel}">
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_item_main_daily_plan_today_rlv"
+            android:background="@color/trans"
+            android:gravity="center_vertical"
+            android:text="@{viewModel.mTime}"
+            android:textColor="@color/gray"
+            android:textSize="12sp"
+            tools:text="2018年2月10日" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_time"
+            android:layout_marginBottom="@dimen/margin_item_main_daily_plan_today_rlv"
+            android:layout_marginLeft="@dimen/margin_item_main_daily_plan_today_rlv"
+            android:layout_marginRight="@dimen/margin_item_main_daily_plan_today_rlv"
+            android:alpha="0.8"
+            android:background="@color/trans"
+            android:gravity="center_vertical"
+            android:text="@{viewModel.mContent}"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            tools:text="周日" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="@dimen/margin_item_main_daily_plan_today_rlv"
+            android:layout_marginRight="@dimen/margin_item_main_daily_plan_today_rlv">
+
+            <LinearLayout
+                android:id="@+id/btn_get"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_get"
+                    android:layout_width="@dimen/item_main_daily_plan_today_rlv_cb_w_h"
+                    android:layout_height="@dimen/item_main_daily_plan_today_rlv_cb_w_h"
+                    android:src="@mipmap/ic_task_suc"
+                    android:tint="@color/gray" />
+
+                <TextView
+                    android:id="@+id/tv_get"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="得"
+                    android:textColor="@color/gray"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_lost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btn_get"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_lost"
+                    android:layout_width="@dimen/item_main_daily_plan_today_rlv_cb_w_h"
+                    android:layout_height="@dimen/item_main_daily_plan_today_rlv_cb_w_h"
+                    android:src="@mipmap/ic_task_suc"
+                    android:tint="@color/gray" />
+
+                <TextView
+                    android:id="@+id/tv_lost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="失"
+                    android:textColor="@color/gray"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </RelativeLayout>
+
+    </RelativeLayout>
+</layout>

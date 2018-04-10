@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/layout_indicator"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp">
+
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/calendar_titlebar"
+            android:orientation="horizontal">
+
+            <com.mdove.passwordguard.ui.calendar.DropIndicator
+                android:id="@+id/circleIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                app:circle_color="@color/colorPrimary"
+                app:click_color="@color/white"
+                app:color1="@color/white"
+                app:color2="@color/white"
+                app:duration="500"
+                app:radius="14dp"
+                app:scale="1">
+
+                <TextView
+                    android:id="@+id/titlebar_month"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="月"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/titlebar_week"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="周"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+            </com.mdove.passwordguard.ui.calendar.DropIndicator>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+    <com.mdove.passwordguard.ui.calendar.materialcalendar.MonthWeekMaterialCalendarView
+        android:id="@+id/slidelayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/layout_indicator">
+
+
+        <com.mdove.passwordguard.ui.calendar.materialcalendarview.MaterialCalendarView
+            android:id="@+id/calendarView_month_mode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:mcv_calendarMode="month"
+            app:mcv_dateTextAppearance="@style/TextAppearance.MaterialCalendarWidget.Date"
+            app:mcv_selectionColor="@color/colorPrimary"
+            app:mcv_showOtherDates="defaults|other_months"
+            app:mcv_showWeekView="false" />
+
+        <com.mdove.passwordguard.ui.calendar.materialcalendarview.MaterialCalendarView
+            android:id="@+id/calendarView_week_mode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:visibility="invisible"
+            app:mcv_calendarMode="week"
+            app:mcv_dateTextAppearance="@style/TextAppearance.MaterialCalendarWidget.Date"
+            app:mcv_selectionColor="@color/colorPrimary"
+            app:mcv_showTopBar="false"
+            app:mcv_showWeekView="false" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:orientation="vertical" />
+
+
+        <LinearLayout
+            android:id="@+id/weekview_top"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="周日"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="周一"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="周二"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="周三"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="周四"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="周五"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="周六"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+    </com.mdove.passwordguard.ui.calendar.materialcalendar.MonthWeekMaterialCalendarView>
+</RelativeLayout>

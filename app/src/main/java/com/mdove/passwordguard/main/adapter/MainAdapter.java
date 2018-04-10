@@ -42,6 +42,7 @@ import com.mdove.passwordguard.main.model.MainSelfTaskModel;
 import com.mdove.passwordguard.main.model.MainTopModel;
 import com.mdove.passwordguard.main.model.event.CheckOrderEvent;
 import com.mdove.passwordguard.main.model.handler.ItemMainSelfTaskHandler;
+import com.mdove.passwordguard.main.model.handler.MainDailyPlanHandler;
 import com.mdove.passwordguard.main.model.handler.MainGroupHandler;
 import com.mdove.passwordguard.main.model.handler.MainOptionHandler;
 import com.mdove.passwordguard.main.model.handler.MainSearchHandler;
@@ -178,7 +179,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         } else if (holder instanceof MainSelfTaskHolder) {
             ((MainSelfTaskHolder) holder).bind((MainSelfTaskModel) model);
         } else if (holder instanceof MainDailyPlanViewHolder) {
-            ((MainDailyPlanViewHolder) holder).bind();
+            ((MainDailyPlanViewHolder) holder).bind(mPresenter);
         }
     }
 
@@ -195,7 +196,21 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             mBinding = binding;
         }
 
-        public void bind() {
+        public void bind(MainPresenter presenter) {
+            boolean isHide = MainConfig.isHideSysItemDailyPlan();
+            mBinding.setActionHandler(new MainDailyPlanHandler(presenter));
+
+            if (isHide) {
+                mBinding.layoutViewpager.setVisibility(View.GONE);
+                mBinding.layoutTop.setBackgroundResource(R.drawable.bg_hide_main_option_top);
+                mBinding.tvHideBtn.setText("显示");
+                return;
+            } else {
+                mBinding.layoutViewpager.setVisibility(View.VISIBLE);
+                mBinding.layoutTop.setBackgroundResource(R.drawable.bg_normal_top);
+                mBinding.tvHideBtn.setText("隐藏");
+            }
+
             List<Fragment> fragmentList = new ArrayList<>();
             fragmentList.add(TodayPlanFragment.newInstance());
             fragmentList.add(YesterdayPlanFragment.newInstance());

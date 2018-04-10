@@ -60,6 +60,10 @@ public interface MainContract {
 
         void onClickBtnHideTimeTop();
 
+        void onClickBtnHideDailyPlan();
+
+        void onClickBtnHideDailySelf();
+
         void onClickBtnSetting();
 
         void onClickBtnMainSelfTaskIn();
@@ -167,6 +171,10 @@ public interface MainContract {
         void onClickBtnHideSearch(int position);
 
         void onClickBtnHideOption(int position);
+
+        void onClickBtnHideDailyPlan(int position);
+
+        void onClickBtnHideDailySelf(int position);
 
         void onClickBtnHideTimeTop(int position);
 

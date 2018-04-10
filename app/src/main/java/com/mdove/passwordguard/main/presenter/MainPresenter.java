@@ -147,9 +147,6 @@ public class MainPresenter implements MainContract.Presenter {
 
         initSys();
 
-        MainDailyPlanModel mainDailyPlanModel = new MainDailyPlanModel();
-        mData.add(mainDailyPlanModel);
-
         List<SelfTaskModel> selfTaskModels = new ArrayList<>();
         mMainSelfTaskData = new ArrayList<>();
         List<SelfTask> selfTasks = mSelfTaskDao.queryBuilder().list();
@@ -225,6 +222,12 @@ public class MainPresenter implements MainContract.Presenter {
 
         mData.add(optionModel);
         mSysEmptyData.add(optionModel);
+
+        //每日计划（每日复盘）
+        MainDailyPlanModel mainDailyPlanModel = new MainDailyPlanModel();
+        mainDailyPlanModel.mSysType = BaseMainModel.MAIN_ITEM_SYS_TYPE_DAILY_PLAN;
+        mData.add(mainDailyPlanModel);
+        mSysEmptyData.add(mainDailyPlanModel);
 
         MainAdapter.mPasswordPosition = mData.size();
     }
@@ -508,9 +511,9 @@ public class MainPresenter implements MainContract.Presenter {
                 mView.onClickBtnHideOption(position);
             }
         }
-        if (position != -1) {
-            mSysEmptyData.remove(position);
-        }
+//        if (position != -1) {
+//            mSysEmptyData.remove(position);
+//        }
     }
 
     @Override
@@ -528,6 +531,32 @@ public class MainPresenter implements MainContract.Presenter {
         }
         if (position != -1) {
             mSysEmptyData.remove(position);
+        }
+    }
+
+    @Override
+    public void onClickBtnHideDailyPlan() {
+        MainConfig.setHideSysItemDailyPlan(!MainConfig.isHideSysItemDailyPlan());
+
+        int position = -1;
+        for (BaseMainModel baseMainModel : mSysEmptyData) {
+            if (baseMainModel.mSysType == BaseMainModel.MAIN_ITEM_SYS_TYPE_DAILY_PLAN) {
+                position = mSysEmptyData.indexOf(baseMainModel);
+                mView.onClickBtnHideDailyPlan(position);
+            }
+        }
+    }
+
+    @Override
+    public void onClickBtnHideDailySelf() {
+        MainConfig.setHideSysItemDailySelf(!MainConfig.isHideSysItemDailySelf());
+
+        int position = -1;
+        for (BaseMainModel baseMainModel : mSysEmptyData) {
+            if (baseMainModel.mSysType == BaseMainModel.MAIN_ITEM_SYS_TYPE_DAILY_SELF) {
+                position = mSysEmptyData.indexOf(baseMainModel);
+                mView.onClickBtnHideDailySelf(position);
+            }
         }
     }
 
