@@ -44,8 +44,7 @@
             android:textSize="16sp"
             tools:text="周日" />
 
-        <RadioGroup
-            android:id="@+id/radio_group"
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -53,17 +52,53 @@
             android:layout_marginBottom="@dimen/margin_item_main_daily_plan_today_rlv"
             android:layout_marginRight="@dimen/margin_item_main_daily_plan_today_rlv">
 
-            <android.support.v7.widget.AppCompatRadioButton
-                android:id="@+id/rb_get"
+            <LinearLayout
+                android:id="@+id/btn_get"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="得" />
+                android:gravity="center"
+                android:orientation="horizontal">
 
-            <android.support.v7.widget.AppCompatRadioButton
-                android:id="@+id/rb_lost"
+                <ImageView
+                    android:id="@+id/iv_get"
+                    android:layout_width="@dimen/item_main_daily_plan_today_rlv_cb_w_h"
+                    android:layout_height="@dimen/item_main_daily_plan_today_rlv_cb_w_h"
+                    android:src="@mipmap/ic_task_suc"
+                    android:tint="@color/gray" />
+
+                <TextView
+                    android:id="@+id/tv_get"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="得"
+                    android:textColor="@color/gray"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_lost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="失" />
-        </RadioGroup>
+                android:layout_below="@+id/btn_get"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_lost"
+                    android:layout_width="@dimen/item_main_daily_plan_today_rlv_cb_w_h"
+                    android:layout_height="@dimen/item_main_daily_plan_today_rlv_cb_w_h"
+                    android:src="@mipmap/ic_task_suc"
+                    android:tint="@color/gray" />
+
+                <TextView
+                    android:id="@+id/tv_lost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="失"
+                    android:textColor="@color/gray"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </RelativeLayout>
+
     </RelativeLayout>
 </layout>

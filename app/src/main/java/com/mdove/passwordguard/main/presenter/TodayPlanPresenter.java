@@ -57,18 +57,22 @@ public class TodayPlanPresenter implements TodayPlanContract.Presenter {
 
     @Override
     public void updateLostOrGet(long id, boolean isGet) {
-        DailyPlan dailyPlan = null;
+        DailyPlan curDailyPlan = null;
+        DailyPlanModel curDailyPlanModel = null;
         int position = -1;
         for (DailyPlanModel dailyPlanModel : mData) {
             if (id == dailyPlanModel.mId) {
-                dailyPlan = dailyPlanModel.mDailyPlan;
+                curDailyPlan = dailyPlanModel.mDailyPlan;
+                curDailyPlanModel = dailyPlanModel;
                 position = mData.indexOf(dailyPlanModel);
             }
         }
-        if (dailyPlan == null || position == -1) {
+        if (curDailyPlan == null || position == -1) {
             return;
         }
-        dailyPlan.mStatus = isGet ? 1 : 2;
+        curDailyPlan.mStatus = isGet ? 1 : 2;
+        curDailyPlanModel.mStatus = isGet ? 1 : 2;
+        mDailyPlanDao.update(curDailyPlan);
         mView.updateLostOrGet(position);
     }
 }

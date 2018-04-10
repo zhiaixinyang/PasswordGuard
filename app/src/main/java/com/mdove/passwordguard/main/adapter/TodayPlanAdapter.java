@@ -1,7 +1,10 @@
 package com.mdove.passwordguard.main.adapter;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
 
@@ -66,21 +69,42 @@ public class TodayPlanAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         public void bind(final DailyPlanModel dailyPlanModel, int position, final TodayPlanPresenter presenter) {
             mBinding.setViewModel(new DailyPlanModelVM(dailyPlanModel, position));
-            mBinding.radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            switch (dailyPlanModel.mStatus) {
+                case DailyPlanModel.STATUS_GET: {
+                    mBinding.ivGet.setColorFilter(ContextCompat.getColor(mContext, R.color.black), PorterDuff.Mode.SRC_ATOP);
+                    mBinding.tvGet.setTextColor(ContextCompat.getColor(mContext, R.color.black));
+                    mBinding.ivLost.setColorFilter(ContextCompat.getColor(mContext, R.color.gray), PorterDuff.Mode.SRC_ATOP);
+                    mBinding.tvLost.setTextColor(ContextCompat.getColor(mContext, R.color.gray));
+                    break;
+                }
+                case DailyPlanModel.STATUS_LOST: {
+                    mBinding.ivGet.setColorFilter(ContextCompat.getColor(mContext, R.color.gray), PorterDuff.Mode.SRC_ATOP);
+                    mBinding.tvGet.setTextColor(ContextCompat.getColor(mContext, R.color.gray));
+                    mBinding.ivLost.setColorFilter(ContextCompat.getColor(mContext, R.color.black), PorterDuff.Mode.SRC_ATOP);
+                    mBinding.tvLost.setTextColor(ContextCompat.getColor(mContext, R.color.black));
+                    break;
+                }
+                default: {
+                    mBinding.ivGet.setColorFilter(ContextCompat.getColor(mContext, R.color.gray), PorterDuff.Mode.SRC_ATOP);
+                    mBinding.tvGet.setTextColor(ContextCompat.getColor(mContext, R.color.gray));
+                    mBinding.ivLost.setColorFilter(ContextCompat.getColor(mContext, R.color.gray), PorterDuff.Mode.SRC_ATOP);
+                    mBinding.tvLost.setTextColor(ContextCompat.getColor(mContext, R.color.gray));
+                    break;
+                }
+            }
+            mBinding.btnGet.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onCheckedChanged(RadioGroup group, int checkedId) {
-                    switch (checkedId) {
-                        case R.id.rb_get: {
-                            presenter.updateLostOrGet(dailyPlanModel.mId, true);
-                            break;
-                        }
-                        case R.id.rb_lost: {
-                            presenter.updateLostOrGet(dailyPlanModel.mId, false);
-                            break;
-                        }
-                        default: {
-                            break;
-                        }
+                public void onClick(View v) {
+                    if (dailyPlanModel.mStatus != DailyPlanModel.STATUS_GET) {
+                        presenter.updateLostOrGet(dailyPlanModel.mId, true);
+                    }
+                }
+            });
+            mBinding.btnLost.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (dailyPlanModel.mStatus != DailyPlanModel.STATUS_LOST) {
+                        presenter.updateLostOrGet(dailyPlanModel.mId, false);
                     }
                 }
             });
