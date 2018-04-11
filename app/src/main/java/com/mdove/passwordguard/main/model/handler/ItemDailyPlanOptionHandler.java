@@ -30,8 +30,8 @@ public class ItemDailyPlanOptionHandler {
             return;
         }
         switch (type) {
-            case DailyPlanOptionPresenter.DAILY_PLAN_OPTION_TYPE_CALENDER:{
-
+            case DailyPlanOptionPresenter.DAILY_PLAN_OPTION_TYPE_CALENDER: {
+                mPresenter.onClickCalender();
                 break;
             }
             default: {
