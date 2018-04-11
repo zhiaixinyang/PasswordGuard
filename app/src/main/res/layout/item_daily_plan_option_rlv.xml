@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="actionHandler"
+            type="com.mdove.passwordguard.main.model.handler.ItemDailyPlanOptionHandler" />
+
+        <variable
+            name="viewModel"
+            type="com.mdove.passwordguard.main.model.vm.ItemDailyPlanOptionVM" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/btn_password"
+        android:layout_width="@dimen/margin_item_main_option_btn_w"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:onClick="@{()->actionHandler.onBtnClick(viewModel.mType)}"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="@dimen/item_main_option_btn_w_h"
+            android:layout_height="@dimen/item_main_option_btn_w_h">
+
+            <ImageView
+                android:id="@+id/iv_bg"
+                android:layout_width="@dimen/item_main_option_btn_w_h"
+                android:layout_height="@dimen/item_main_option_btn_w_h"
+                android:paddingLeft="12dp"
+                android:textSize="16sp"
+                app:srcDrawable="@{viewModel.bgDrawable}" />
+
+            <ImageView
+                android:id="@+id/iv_icon"
+                android:layout_width="@dimen/item_main_option_ic_w_h"
+                android:layout_height="@dimen/item_main_option_ic_w_h"
+                android:layout_gravity="center"
+                android:tint="@color/white"
+                app:mipmapSrc="@{viewModel.iconId}" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_tv_main_option_btn"
+            android:text="@{viewModel.title}"
+            android:textColor="@color/color_tv_main_option_btn"
+            android:textSize="@dimen/size_tv_main_option_btn" />
+
+        <TextView
+            android:id="@+id/tv_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_tv_main_option_btn_bottom"
+            android:layout_marginTop="@dimen/margin_tv_main_option_btn"
+            android:alpha="0.5"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@{viewModel.hint}"
+            android:textColor="@color/gray"
+            android:textSize="10sp" />
+    </LinearLayout>
+
+</layout>
