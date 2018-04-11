@@ -30,7 +30,7 @@ import com.mdove.passwordguard.databinding.ItemMainSelfTaskBinding;
 import com.mdove.passwordguard.databinding.ItemMainTopBinding;
 import com.mdove.passwordguard.main.config.MainConfig;
 import com.mdove.passwordguard.main.fragment.TodayPlanFragment;
-import com.mdove.passwordguard.main.fragment.YesterdayPlanFragment;
+import com.mdove.passwordguard.main.fragment.PlanOptionPlanFragment;
 import com.mdove.passwordguard.main.model.BaseMainModel;
 import com.mdove.passwordguard.main.model.MainDailyPlanModel;
 import com.mdove.passwordguard.main.model.MainGroupModel;
@@ -49,9 +49,6 @@ import com.mdove.passwordguard.main.model.handler.MainSearchHandler;
 import com.mdove.passwordguard.main.model.vm.ItemMainPasswordVM;
 import com.mdove.passwordguard.main.model.vm.ItemMainTopVM;
 import com.mdove.passwordguard.main.presenter.MainPresenter;
-import com.mdove.passwordguard.task.adapter.SelfTaskPagerAdapter;
-import com.mdove.passwordguard.task.fragment.AllSelfTaskFragment;
-import com.mdove.passwordguard.task.fragment.SucSelfTaskFragment;
 import com.mdove.passwordguard.task.model.SelfTaskModel;
 import com.mdove.passwordguard.ui.guideview.Guide;
 import com.mdove.passwordguard.ui.guideview.GuideBuilder;
@@ -213,7 +210,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             List<Fragment> fragmentList = new ArrayList<>();
             fragmentList.add(TodayPlanFragment.newInstance());
-            fragmentList.add(YesterdayPlanFragment.newInstance());
+            fragmentList.add(PlanOptionPlanFragment.newInstance());
 
             DailyPlanPagerAdapter adapter = new DailyPlanPagerAdapter(mActivity.getSupportFragmentManager(), fragmentList);
             mBinding.viewPager.setAdapter(adapter);

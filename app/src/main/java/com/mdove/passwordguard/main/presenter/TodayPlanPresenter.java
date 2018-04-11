@@ -56,7 +56,7 @@ public class TodayPlanPresenter implements TodayPlanContract.Presenter {
     }
 
     @Override
-    public void updateLostOrGet(long id, boolean isGet) {
+    public void updateLostOrGet(long id, int type) {
         DailyPlan curDailyPlan = null;
         DailyPlanModel curDailyPlanModel = null;
         int position = -1;
@@ -70,8 +70,8 @@ public class TodayPlanPresenter implements TodayPlanContract.Presenter {
         if (curDailyPlan == null || position == -1) {
             return;
         }
-        curDailyPlan.mStatus = isGet ? 1 : 2;
-        curDailyPlanModel.mStatus = isGet ? 1 : 2;
+        curDailyPlan.mStatus = type;
+        curDailyPlanModel.mStatus = type;
         mDailyPlanDao.update(curDailyPlan);
         mView.updateLostOrGet(position);
     }

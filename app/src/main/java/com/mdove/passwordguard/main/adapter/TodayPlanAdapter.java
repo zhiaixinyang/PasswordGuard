@@ -69,22 +69,40 @@ public class TodayPlanAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         public void bind(final DailyPlanModel dailyPlanModel, int position, final TodayPlanPresenter presenter) {
             mBinding.setViewModel(new DailyPlanModelVM(dailyPlanModel, position));
+
             mBinding.ivGet.setColorFilter(ContextCompat.getColor(mContext, R.color.gray), PorterDuff.Mode.SRC_ATOP);
             mBinding.tvGet.setTextColor(ContextCompat.getColor(mContext, R.color.gray));
+            mBinding.ivNormal.setColorFilter(ContextCompat.getColor(mContext, R.color.gray), PorterDuff.Mode.SRC_ATOP);
+            mBinding.tvNormal.setTextColor(ContextCompat.getColor(mContext, R.color.gray));
             mBinding.ivLost.setColorFilter(ContextCompat.getColor(mContext, R.color.gray), PorterDuff.Mode.SRC_ATOP);
             mBinding.tvLost.setTextColor(ContextCompat.getColor(mContext, R.color.gray));
-            mBinding.tvTime.setTextColor(ContextCompat.getColor(mContext, R.color.gray));
+            mBinding.tvDay.setTextColor(ContextCompat.getColor(mContext, R.color.gray));
+            mBinding.tvWeek.setTextColor(ContextCompat.getColor(mContext, R.color.gray));
+            mBinding.tvYearMonth.setTextColor(ContextCompat.getColor(mContext, R.color.gray));
+
             switch (dailyPlanModel.mStatus) {
                 case DailyPlanModel.STATUS_GET: {
                     mBinding.ivGet.setColorFilter(ContextCompat.getColor(mContext, R.color.black), PorterDuff.Mode.SRC_ATOP);
                     mBinding.tvGet.setTextColor(ContextCompat.getColor(mContext, R.color.black));
-                    mBinding.tvTime.setTextColor(ContextCompat.getColor(mContext, R.color.white));
+                    mBinding.tvDay.setTextColor(ContextCompat.getColor(mContext, R.color.white));
+                    mBinding.tvWeek.setTextColor(ContextCompat.getColor(mContext, R.color.white));
+                    mBinding.tvYearMonth.setTextColor(ContextCompat.getColor(mContext, R.color.white));
                     break;
                 }
                 case DailyPlanModel.STATUS_LOST: {
                     mBinding.ivLost.setColorFilter(ContextCompat.getColor(mContext, R.color.black), PorterDuff.Mode.SRC_ATOP);
                     mBinding.tvLost.setTextColor(ContextCompat.getColor(mContext, R.color.black));
-                    mBinding.tvTime.setTextColor(ContextCompat.getColor(mContext, R.color.white));
+                    mBinding.tvDay.setTextColor(ContextCompat.getColor(mContext, R.color.white));
+                    mBinding.tvWeek.setTextColor(ContextCompat.getColor(mContext, R.color.white));
+                    mBinding.tvYearMonth.setTextColor(ContextCompat.getColor(mContext, R.color.white));
+                    break;
+                }
+                case DailyPlanModel.STATUS_NORMAL: {
+                    mBinding.ivNormal.setColorFilter(ContextCompat.getColor(mContext, R.color.black), PorterDuff.Mode.SRC_ATOP);
+                    mBinding.tvNormal.setTextColor(ContextCompat.getColor(mContext, R.color.black));
+                    mBinding.tvDay.setTextColor(ContextCompat.getColor(mContext, R.color.gray));
+                    mBinding.tvWeek.setTextColor(ContextCompat.getColor(mContext, R.color.gray));
+                    mBinding.tvYearMonth.setTextColor(ContextCompat.getColor(mContext, R.color.gray));
                     break;
                 }
                 default: {
@@ -95,7 +113,7 @@ public class TodayPlanAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 @Override
                 public void onClick(View v) {
                     if (dailyPlanModel.mStatus != DailyPlanModel.STATUS_GET) {
-                        presenter.updateLostOrGet(dailyPlanModel.mId, true);
+                        presenter.updateLostOrGet(dailyPlanModel.mId, DailyPlanModel.STATUS_GET);
                     }
                 }
             });
@@ -103,7 +121,15 @@ public class TodayPlanAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 @Override
                 public void onClick(View v) {
                     if (dailyPlanModel.mStatus != DailyPlanModel.STATUS_LOST) {
-                        presenter.updateLostOrGet(dailyPlanModel.mId, false);
+                        presenter.updateLostOrGet(dailyPlanModel.mId, DailyPlanModel.STATUS_LOST);
+                    }
+                }
+            });
+            mBinding.btnNormal.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (dailyPlanModel.mStatus != DailyPlanModel.STATUS_NORMAL) {
+                        presenter.updateLostOrGet(dailyPlanModel.mId, DailyPlanModel.STATUS_NORMAL);
                     }
                 }
             });

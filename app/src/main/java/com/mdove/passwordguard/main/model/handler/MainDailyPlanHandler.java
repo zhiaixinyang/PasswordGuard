@@ -1,6 +1,5 @@
 package com.mdove.passwordguard.main.model.handler;
 
-import com.mdove.passwordguard.App;
 import com.mdove.passwordguard.main.presenter.MainPresenter;
 import com.mdove.passwordguard.calendar.CalendarSmoothActivity;
 
@@ -16,7 +15,6 @@ public class MainDailyPlanHandler {
     }
 
     public void onClickBtnHideDailyPlan() {
-        CalendarSmoothActivity.start(App.getAppContext());
-//        mPresenter.onClickBtnHideDailyPlan();
+        mPresenter.onClickBtnHideDailyPlan();
     }
 }

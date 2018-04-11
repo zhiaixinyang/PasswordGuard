@@ -18,7 +18,7 @@ public interface TodayPlanContract {
 
         void addDailyPlan(String string);
 
-        void updateLostOrGet(long id, boolean isGet);
+        void updateLostOrGet(long id, int type);
     }
 
     interface MvpView extends BaseView<Presenter> {

@@ -1,6 +1,7 @@
 package com.mdove.passwordguard.base;
 
 import android.databinding.BindingAdapter;
+import android.support.constraint.ConstraintLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -21,7 +22,7 @@ public class DataBindingAdapter {
     }
 
     @BindingAdapter("loadLostAndGetBg")
-    public static void loadLostAndGetBg(RelativeLayout view, final DailyPlanModelVM modelVM) {
+    public static void loadLostAndGetBg(ConstraintLayout view, final DailyPlanModelVM modelVM) {
         switch (modelVM.mStatus.get()) {
             case DailyPlanModel.STATUS_NORMAL: {
                 view.setBackgroundResource(R.drawable.bg_normal_white);
