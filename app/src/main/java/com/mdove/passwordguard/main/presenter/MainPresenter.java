@@ -25,6 +25,7 @@ import com.mdove.passwordguard.greendao.DeletedPasswordDao;
 import com.mdove.passwordguard.greendao.GroupInfoDao;
 import com.mdove.passwordguard.greendao.PasswordDao;
 import com.mdove.passwordguard.greendao.SelfTaskDao;
+import com.mdove.passwordguard.greendao.SucSelfTaskDao;
 import com.mdove.passwordguard.greendao.entity.DailySelf;
 import com.mdove.passwordguard.greendao.entity.DeletedDailySelf;
 import com.mdove.passwordguard.greendao.entity.DeletedPassword;
@@ -33,6 +34,7 @@ import com.mdove.passwordguard.greendao.entity.Password;
 import com.mdove.passwordguard.greendao.entity.SelfTask;
 import com.mdove.passwordguard.deletelist.utils.DeleteDailySelfHelper;
 import com.mdove.passwordguard.deletelist.utils.DeletedPasswordHelper;
+import com.mdove.passwordguard.greendao.entity.SucSelfTask;
 import com.mdove.passwordguard.group.GroupSettingActivity;
 import com.mdove.passwordguard.main.AddGroupDialog;
 import com.mdove.passwordguard.main.adapter.MainAdapter;
@@ -57,6 +59,7 @@ import com.mdove.passwordguard.net.ApiServerImpl;
 import com.mdove.passwordguard.task.NewSelfTaskActivity;
 import com.mdove.passwordguard.task.model.SelfTaskModel;
 import com.mdove.passwordguard.task.model.SelfTaskModelVM;
+import com.mdove.passwordguard.task.utils.SucSelfTaskHelper;
 import com.mdove.passwordguard.update.UpdateDialog;
 import com.mdove.passwordguard.utils.ClipboardUtils;
 import com.mdove.passwordguard.utils.ToastHelper;
@@ -83,6 +86,7 @@ public class MainPresenter implements MainContract.Presenter {
     private GroupInfoDao mGroupInfoDao;
     private DeletedDailySelfDao mDeleteDailyDao;
     private DailySelfDao mDailySelfDao;
+    private SucSelfTaskDao mSucSelfTaskDao;
     private SelfTaskDao mSelfTaskDao;
     private List<MainGroupRlvModel> mGroupData;
     private List<BaseMainModel> mDailyData;
@@ -131,6 +135,7 @@ public class MainPresenter implements MainContract.Presenter {
         mDailySelfDao = App.getDaoSession().getDailySelfDao();
         mDeleteDailyDao = App.getDaoSession().getDeletedDailySelfDao();
         mSelfTaskDao = App.getDaoSession().getSelfTaskDao();
+        mSucSelfTaskDao = App.getDaoSession().getSucSelfTaskDao();
     }
 
     @Override
@@ -787,14 +792,29 @@ public class MainPresenter implements MainContract.Presenter {
     @Override
     public void onClickTaskSuc(SelfTaskModelVM vm) {
         SelfTask selfTask = vm.mSelfTaskModel.mSelfTask;
+        List<SucSelfTask> sucSelfTasks = mSucSelfTaskDao.queryBuilder().where(SucSelfTaskDao.Properties.MBelongId.eq(selfTask.id)).list();
+        SucSelfTask sucSelfTask = null;
+        if (sucSelfTasks != null && sucSelfTasks.size() > 0) {
+            sucSelfTask = sucSelfTasks.get(0);
+        }
+
         if (vm.mSelfTaskModel.mIsSuc) {
             selfTask.mIsSuc = 0;
             vm.mSelfTaskModel.mIsSuc = false;
             mSelfTaskDao.update(selfTask);
+
+            if (sucSelfTask != null) {
+                mSucSelfTaskDao.delete(sucSelfTask);
+            }
         } else {
             selfTask.mIsSuc = 1;
             vm.mSelfTaskModel.mIsSuc = true;
             mSelfTaskDao.update(selfTask);
+
+            if (sucSelfTask == null) {
+                sucSelfTask = SucSelfTaskHelper.getSucSelfTask(vm.mSelfTaskModel.mSelfTask);
+                mSucSelfTaskDao.insert(sucSelfTask);
+            }
         }
         mView.onClickTaskSuc(vm.mPosition);
     }
