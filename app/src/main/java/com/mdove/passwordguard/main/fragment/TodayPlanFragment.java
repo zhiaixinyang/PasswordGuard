@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.mdove.passwordguard.R;
@@ -29,7 +30,7 @@ import java.util.List;
 public class TodayPlanFragment extends Fragment implements TodayPlanContract.MvpView {
     private FragmentTodayPlanBinding mBinding;
     private EditText mEt;
-    private ImageView mBtn;
+    private FrameLayout mBtn;
     private RecyclerView mRlv;
     private TodayPlanPresenter mPresenter;
     private TodayPlanAdapter mAdapter;

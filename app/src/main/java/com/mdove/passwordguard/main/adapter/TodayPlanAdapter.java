@@ -6,11 +6,10 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RadioGroup;
 
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.listener.OnChangeDataSizeListener;
-import com.mdove.passwordguard.databinding.ItemMainDailyPlanTodayRlvBinding;
+import com.mdove.passwordguard.databinding.ItemDailyPlanTodayRlvBinding;
 import com.mdove.passwordguard.main.model.DailyPlanModel;
 import com.mdove.passwordguard.main.model.vm.DailyPlanModelVM;
 import com.mdove.passwordguard.main.presenter.TodayPlanPresenter;
@@ -36,7 +35,7 @@ public class TodayPlanAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new TodayViewHolder((ItemMainDailyPlanTodayRlvBinding) InflateUtils.bindingInflate(parent, R.layout.item_main_daily_plan_today_rlv));
+        return new TodayViewHolder((ItemDailyPlanTodayRlvBinding) InflateUtils.bindingInflate(parent, R.layout.item_daily_plan_today_rlv));
     }
 
     @Override
@@ -60,9 +59,9 @@ public class TodayPlanAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     public class TodayViewHolder extends RecyclerView.ViewHolder {
-        private ItemMainDailyPlanTodayRlvBinding mBinding;
+        private ItemDailyPlanTodayRlvBinding mBinding;
 
-        public TodayViewHolder(ItemMainDailyPlanTodayRlvBinding binding) {
+        public TodayViewHolder(ItemDailyPlanTodayRlvBinding binding) {
             super(binding.getRoot());
             mBinding = binding;
         }
@@ -78,6 +77,7 @@ public class TodayPlanAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             mBinding.tvLost.setTextColor(ContextCompat.getColor(mContext, R.color.gray));
             mBinding.tvDay.setTextColor(ContextCompat.getColor(mContext, R.color.gray));
             mBinding.tvWeek.setTextColor(ContextCompat.getColor(mContext, R.color.gray));
+            mBinding.tvTime.setTextColor(ContextCompat.getColor(mContext, R.color.gray));
             mBinding.tvYearMonth.setTextColor(ContextCompat.getColor(mContext, R.color.gray));
 
             switch (dailyPlanModel.mStatus) {
@@ -87,6 +87,7 @@ public class TodayPlanAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     mBinding.tvDay.setTextColor(ContextCompat.getColor(mContext, R.color.white));
                     mBinding.tvWeek.setTextColor(ContextCompat.getColor(mContext, R.color.white));
                     mBinding.tvYearMonth.setTextColor(ContextCompat.getColor(mContext, R.color.white));
+                    mBinding.tvTime.setTextColor(ContextCompat.getColor(mContext, R.color.white));
                     break;
                 }
                 case DailyPlanModel.STATUS_LOST: {
@@ -95,6 +96,7 @@ public class TodayPlanAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     mBinding.tvDay.setTextColor(ContextCompat.getColor(mContext, R.color.white));
                     mBinding.tvWeek.setTextColor(ContextCompat.getColor(mContext, R.color.white));
                     mBinding.tvYearMonth.setTextColor(ContextCompat.getColor(mContext, R.color.white));
+                    mBinding.tvTime.setTextColor(ContextCompat.getColor(mContext, R.color.white));
                     break;
                 }
                 case DailyPlanModel.STATUS_NORMAL: {
@@ -103,6 +105,7 @@ public class TodayPlanAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     mBinding.tvDay.setTextColor(ContextCompat.getColor(mContext, R.color.gray));
                     mBinding.tvWeek.setTextColor(ContextCompat.getColor(mContext, R.color.gray));
                     mBinding.tvYearMonth.setTextColor(ContextCompat.getColor(mContext, R.color.gray));
+                    mBinding.tvTime.setTextColor(ContextCompat.getColor(mContext, R.color.gray));
                     break;
                 }
                 default: {

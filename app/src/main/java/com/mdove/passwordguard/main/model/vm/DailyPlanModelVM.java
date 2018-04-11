@@ -21,7 +21,7 @@ public class DailyPlanModelVM {
     public int mPosition;
 
     public DailyPlanModelVM(DailyPlanModel dailyPlanModel, int position) {
-        mTime.set(DateUtil.getDateChinese(dailyPlanModel.mTime));
+        mTime.set(DateUtil.getHourM(dailyPlanModel.mTime));
         mDay.set(DateUtil.getDay(dailyPlanModel.mTime) + "");
         mWeek.set(DateUtil.getDayOfWeek(dailyPlanModel.mTime));
         mYearMonth.set(DateUtil.getYearMonth(dailyPlanModel.mTime));

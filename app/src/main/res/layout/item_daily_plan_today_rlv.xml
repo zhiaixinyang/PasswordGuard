@@ -48,6 +48,20 @@
                 tools:text="星期一" />
 
             <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/tv_week"
+                android:layout_alignTop="@+id/tv_day"
+                android:layout_marginLeft="@dimen/view_show_time_style_margin"
+                android:layout_toRightOf="@+id/tv_week"
+                android:gravity="center"
+                android:text="@{viewModel.mTime}"
+                android:textColor="@color/gray_plus"
+                android:textSize="12sp"
+                tools:text="16:00" />
+
+            <TextView
                 android:id="@+id/tv_year_month"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -139,6 +153,7 @@
                     android:textColor="@color/gray"
                     android:textSize="16sp" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/btn_normal"
                 android:layout_width="wrap_content"

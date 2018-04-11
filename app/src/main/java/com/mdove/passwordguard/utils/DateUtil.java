@@ -161,6 +161,11 @@ public class DateUtil {
         return format.format(time);
     }
 
+    public static String getHourM(Long time){
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+        return format.format(time);
+    }
+
     public static String getDateChinese(){
         SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
         return format.format(new Date());

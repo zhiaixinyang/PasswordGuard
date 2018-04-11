@@ -66,28 +66,33 @@
                 android:textColor="@color/gray"
                 android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/tv_hide_btn"
+            <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="4dp"
-                android:layout_toLeftOf="@+id/iv_hide"
                 android:onClick="@{()->actionHandler.onClickBtnHideDailyPlan()}"
-                android:text="隐藏按钮"
-                android:textColor="@color/gray_light"
-                android:textSize="12sp" />
+                android:layout_marginRight="8dp"
+                android:layout_height="35dp">
+                <TextView
+                    android:id="@+id/tv_hide_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="4dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/iv_hide"
+                    android:text="隐藏按钮"
+                    android:textColor="@color/gray_light"
+                    android:textSize="12sp" />
 
-            <ImageView
-                android:id="@+id/iv_hide"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="12dp"
-                android:onClick="@{()->actionHandler.onClickBtnHideDailyPlan()}"
-                android:src="@mipmap/ic_item_hide"
-                android:tint="@color/gray_light" />
+                <ImageView
+                    android:id="@+id/iv_hide"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/ic_item_hide"
+                    android:tint="@color/gray_light" />
+            </RelativeLayout>
+
         </RelativeLayout>
 
         <RelativeLayout

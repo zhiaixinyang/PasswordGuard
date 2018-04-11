@@ -15,6 +15,7 @@ public class SucSelfTaskHelper {
         sucSelfTask.mIsSuc = selfTask.mIsSuc;
         sucSelfTask.mPriority = selfTask.mPriority;
         sucSelfTask.mTask = selfTask.mTask;
+        sucSelfTask.mTime = selfTask.id;
         return sucSelfTask;
     }
 
@@ -25,6 +26,7 @@ public class SucSelfTaskHelper {
         selfTask.mIsSee = sucSelfTask.mIsSee;
         selfTask.mTask = sucSelfTask.mTask;
         selfTask.mTime = sucSelfTask.mTime;
+        sucSelfTask.mTime = selfTask.id;
         return selfTask;
     }
 }
