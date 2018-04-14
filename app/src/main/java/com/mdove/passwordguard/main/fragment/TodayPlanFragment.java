@@ -14,7 +14,10 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.hwangjr.rxbus.RxBus;
+import com.hwangjr.rxbus.annotation.Subscribe;
 import com.mdove.passwordguard.R;
+import com.mdove.passwordguard.calendar.model.CalendarEvent;
 import com.mdove.passwordguard.databinding.FragmentTodayPlanBinding;
 import com.mdove.passwordguard.main.adapter.TodayPlanAdapter;
 import com.mdove.passwordguard.main.model.DailyPlanModel;
@@ -51,6 +54,8 @@ public class TodayPlanFragment extends Fragment implements TodayPlanContract.Mvp
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        RxBus.get().register(this);
+
         mEt = mBinding.etToday;
         mBtn = mBinding.btnSend;
         mRlv = mBinding.rlvMainToday;
@@ -81,6 +86,12 @@ public class TodayPlanFragment extends Fragment implements TodayPlanContract.Mvp
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        RxBus.get().unregister(this);
+    }
+
+    @Override
     public void initData(List<DailyPlanModel> data) {
         mData = data;
         mAdapter.setData(mData);
@@ -94,5 +105,15 @@ public class TodayPlanFragment extends Fragment implements TodayPlanContract.Mvp
     @Override
     public void updateLostOrGet(int position) {
         mAdapter.notifyPosition(position);
+    }
+
+    @Override
+    public void onClickDailyPlanDelete(int position) {
+        mAdapter.notifyDelete(position);
+    }
+
+    @Subscribe
+    public void updateLostOrGet(CalendarEvent event) {
+        mPresenter.updateLostOrGet(event.mId,event.type);
     }
 }

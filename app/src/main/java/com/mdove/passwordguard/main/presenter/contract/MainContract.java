@@ -13,6 +13,7 @@ import com.mdove.passwordguard.greendao.entity.Password;
 import com.mdove.passwordguard.main.model.BaseMainModel;
 import com.mdove.passwordguard.main.model.MainGroupModel;
 import com.mdove.passwordguard.main.model.event.CheckOrderEvent;
+import com.mdove.passwordguard.main.model.vm.DailyPlanModelVM;
 import com.mdove.passwordguard.main.model.vm.ItemMainPasswordVM;
 import com.mdove.passwordguard.task.model.SelfTaskModel;
 import com.mdove.passwordguard.task.model.SelfTaskModelVM;
@@ -123,6 +124,7 @@ public interface MainContract {
         void onClickPriority(SelfTaskModelVM vm);
 
         void onClickCopyTaskSelf(SelfTaskModelVM vm);
+
     }
 
     interface MvpView extends BaseView<Presenter> {

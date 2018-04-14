@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.BaseActivity;
 import com.mdove.passwordguard.base.listener.BaseAnimatorlistener;
+import com.mdove.passwordguard.calendar.model.BaseCalendarModel;
 import com.mdove.passwordguard.calendar.presenter.CalendarPresenter;
 import com.mdove.passwordguard.calendar.presenter.contract.CalendarContract;
 import com.mdove.passwordguard.main.model.DailyPlanModel;
@@ -36,10 +37,7 @@ import java.util.List;
 public class CalendarSmoothActivity extends BaseActivity implements CalendarContract.MvpView {
     private MonthWeekMaterialCalendarView monthWeekMaterialCalendarView;
     private CalendarDay selectedDate;
-    private TextView _titlebar_month;
-    private TextView _titlebar_week;
     private RecyclerView recyclerView;
-    private DropIndicator dropIndicator;
     private boolean canPaging = true;
     private CalendarPresenter mPresenter;
     private CalendarSmoothAdapter mAdapter;
@@ -55,42 +53,27 @@ public class CalendarSmoothActivity extends BaseActivity implements CalendarCont
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("每日复盘");
         setContentView(R.layout.activity_calendar_smooth);
         selectedDate = CalendarDay.today();
 
         monthWeekMaterialCalendarView = findViewById(R.id.slidelayout);
-        dropIndicator = findViewById(R.id.circleIndicator);
-        _titlebar_month = findViewById(R.id.titlebar_month);
-        _titlebar_week = findViewById(R.id.titlebar_week);
         recyclerView = findViewById(R.id.recyclerView);
 
         initRecyclerView();
 
         monthWeekMaterialCalendarView.setCurrentDate(selectedDate);
         monthWeekMaterialCalendarView.setSelectedDate(selectedDate);
-        //默认是月模式
-        setMonthSelector();
+
         monthWeekMaterialCalendarView.state().edit().setSlideModeChangeListener(new MonthWeekMaterialCalendarView.SlideModeChangeListener() {
             @Override
             public void modeChange(MonthWeekMaterialCalendarView.Mode mode) {
-                if (mode.equals(MonthWeekMaterialCalendarView.Mode.MONTH)) {
-                    if (!_titlebar_month.isSelected() && !dropAnimat) {
-                        setMonthSelector();
-                        clickMonthAnimator();
-                    }
-                }
-                if (mode.equals(MonthWeekMaterialCalendarView.Mode.WEEK)) {
-                    if (!_titlebar_week.isSelected() && !dropAnimat) {
-                        setWeekSelector();
-                        clickWeekAnimator();
-                    }
-                }
+
             }
         }).setSlideDateSelectedlistener(new MonthWeekMaterialCalendarView.SlideDateSelectedlistener() {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
                 selectedDate = date;
-//                _tv_selectdate.setText(new DateFormatTitleFormatter().format(selectedDate));
             }
         }).setSlideOnMonthChangedListener(new MonthWeekMaterialCalendarView.SlideOnMonthChangedListener() {
             @Override
@@ -105,48 +88,6 @@ public class CalendarSmoothActivity extends BaseActivity implements CalendarCont
     @Override
     protected boolean isNeedCustomLayout() {
         return false;
-    }
-
-    private void clickWeekAnimator() {
-        dropIndicator.startAniTo(0, 1, new BaseAnimatorlistener() {
-            @Override
-            public void onAnimationStart(Animator animator) {
-                dropAnimat = true;
-                _titlebar_month.setTextColor(getResources().getColor(R.color.white));
-                _titlebar_week.setTextColor(getResources().getColor(R.color.white));
-                monthWeekMaterialCalendarView.setAnimatStart(true);
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animator) {
-                dropAnimat = false;
-                _titlebar_month.setTextColor(getResources().getColor(R.color.white));
-                _titlebar_week.setTextColor(getResources().getColor(R.color.colorPrimary));
-                monthWeekMaterialCalendarView.setAnimatStart(false);
-            }
-        });
-    }
-
-    private boolean dropAnimat;
-
-    private void clickMonthAnimator() {
-        dropIndicator.startAniTo(1, 0, new BaseAnimatorlistener() {
-            @Override
-            public void onAnimationStart(Animator animator) {
-                dropAnimat = true;
-                _titlebar_week.setTextColor(getResources().getColor(R.color.white));
-                _titlebar_month.setTextColor(getResources().getColor(R.color.white));
-                monthWeekMaterialCalendarView.setAnimatStart(true);
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animator) {
-                dropAnimat = false;
-                _titlebar_week.setTextColor(getResources().getColor(R.color.white));
-                _titlebar_month.setTextColor(getResources().getColor(R.color.colorPrimary));
-                monthWeekMaterialCalendarView.setAnimatStart(false);
-            }
-        });
     }
 
     private void AddDecorator() {
@@ -168,7 +109,7 @@ public class CalendarSmoothActivity extends BaseActivity implements CalendarCont
         mPresenter = new CalendarPresenter();
         mPresenter.subscribe(this);
 
-        mAdapter = new CalendarSmoothAdapter(this);
+        mAdapter = new CalendarSmoothAdapter(this,mPresenter);
 
         recyclerView.setLayoutManager(new CustomLinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL, false));
@@ -177,29 +118,6 @@ public class CalendarSmoothActivity extends BaseActivity implements CalendarCont
         mPresenter.initData();
     }
 
-
-    private void setWeekSelector() {
-        clearTextSelect();
-        //周模式时候设置回默认的DateFormatTitleFormatter 标题显示样式
-//        _tv_selectdate.setText(new DateFormatTitleFormatter().format(selectedDate));
-        _titlebar_month.setSelected(false);
-        _titlebar_week.setSelected(true);
-        _titlebar_week.setTextColor(getResources().getColor(R.color.colorPrimary));
-    }
-
-    private void setMonthSelector() {
-        clearTextSelect();
-        //月模式时候设置回默认的DateFormatTitleFormatter 标题显示样式
-//        _tv_selectdate.setText(new DateFormatTitleFormatter().format(selectedDate));
-        _titlebar_month.setSelected(true);
-        _titlebar_month.setTextColor(getResources().getColor(R.color.colorPrimary));
-        _titlebar_week.setSelected(false);
-    }
-
-    private void clearTextSelect() {
-        _titlebar_week.setTextColor(getResources().getColor(R.color.white));
-        _titlebar_month.setTextColor(getResources().getColor(R.color.white));
-    }
 
     public void clickPrevious() {
         monthWeekMaterialCalendarView.goToPrevious();
@@ -267,30 +185,23 @@ public class CalendarSmoothActivity extends BaseActivity implements CalendarCont
                 .show();
     }
 
-    public void clickMonth() {
-        if (!_titlebar_month.isSelected() && !monthWeekMaterialCalendarView.isAnimatStart() && !dropAnimat) {
-            setMonthSelector();
-            monthWeekMaterialCalendarView.setMode(MonthWeekMaterialCalendarView.Mode.MONTH);
-            clickMonthAnimator();
-
-        }
-    }
-
-    public void clickWeek() {
-        if (!_titlebar_week.isSelected() && !monthWeekMaterialCalendarView.isAnimatStart() && !dropAnimat) {
-            setWeekSelector();
-            monthWeekMaterialCalendarView.setMode(MonthWeekMaterialCalendarView.Mode.WEEK);
-            clickWeekAnimator();
-        }
-    }
-
     @Override
     public Context getContext() {
         return this;
     }
 
     @Override
-    public void showData(List<DailyPlanModel> data) {
+    public void showData(List<BaseCalendarModel> data) {
         mAdapter.setData(data);
+    }
+
+    @Override
+    public void updateLostOrGet(int position) {
+        mAdapter.notifyPosition(position);
+    }
+
+    @Override
+    public void onClickDailyPlanDelete(int position) {
+        mAdapter.notifyDelete(position);
     }
 }

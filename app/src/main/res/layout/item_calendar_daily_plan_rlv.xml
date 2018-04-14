@@ -8,34 +8,52 @@
         <variable
             name="viewModel"
             type="com.mdove.passwordguard.main.model.vm.DailyPlanModelVM" />
+        <variable
+            name="actionHandler"
+            type="com.mdove.passwordguard.calendar.model.ItemCalendarHandler"/>
     </data>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="160dp"
-        android:layout_marginRight="@dimen/margin_item_password_normal"
+        android:layout_marginRight="@dimen/margin_item_calendar"
+        android:layout_marginLeft="@dimen/margin_item_calendar"
+        android:layout_marginBottom="@dimen/margin_item_calendar"
         app:loadLostAndGetBg="@{viewModel}">
 
         <TextView
             android:id="@+id/tv_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_item_main_daily_plan_today_rlv"
+            android:layout_margin="@dimen/margin_item_calendar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             android:background="@color/trans"
             android:gravity="center_vertical"
-            android:text="@{viewModel.mTime}"
+            android:text="@{viewModel.mAllTime}"
             android:textColor="@color/gray"
             android:textSize="12sp"
             tools:text="2018年2月10日" />
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginRight="@dimen/margin_item_daily_plan_today_rlv"
+            android:layout_marginTop="@dimen/margin_item_daily_plan_today_rlv"
+            android:onClick="@{()->actionHandler.onClickDailyPlanDelete(viewModel)}"
+            android:src="@mipmap/ic_delete"
+            android:tint="@color/gray_light"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="38dp"
             android:layout_below="@+id/tv_time"
-            android:layout_marginBottom="@dimen/margin_item_main_daily_plan_today_rlv"
-            android:layout_marginLeft="@dimen/margin_item_main_daily_plan_today_rlv"
-            android:layout_marginRight="@dimen/margin_item_main_daily_plan_today_rlv"
+            android:layout_marginBottom="@dimen/margin_item_calendar"
+            android:paddingLeft="@dimen/margin_item_calendar"
+            android:paddingRight="@dimen/margin_item_calendar"
             android:alpha="0.8"
             android:background="@color/trans"
             android:gravity="center_vertical"
@@ -46,14 +64,14 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_time"
-            tools:text="内容" />
+            tools:text="内容内容内容内容内容内容内容内容内容内容内容内容" />
 
         <RelativeLayout
             android:id="@+id/layout_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_item_main_daily_plan_today_rlv"
-            android:layout_marginRight="@dimen/margin_item_main_daily_plan_today_rlv"
+            android:layout_marginBottom="@dimen/margin_item_calendar"
+            android:layout_marginRight="@dimen/margin_item_calendar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent">
 
@@ -61,7 +79,9 @@
                 android:id="@+id/btn_get"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/margin_item_calendar"
                 android:gravity="center"
+                android:layout_toLeftOf="@+id/btn_lost"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -84,8 +104,9 @@
                 android:id="@+id/btn_lost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/btn_get"
+                android:layout_marginRight="@dimen/margin_item_calendar"
                 android:gravity="center"
+                android:layout_toLeftOf="@+id/btn_normal"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -100,6 +121,29 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="失"
+                    android:textColor="@color/gray"
+                    android:textSize="16sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/btn_normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_normal"
+                    android:layout_width="@dimen/item_main_daily_plan_today_rlv_cb_w_h"
+                    android:layout_height="@dimen/item_main_daily_plan_today_rlv_cb_w_h"
+                    android:src="@mipmap/ic_task_suc"
+                    android:tint="@color/gray" />
+
+                <TextView
+                    android:id="@+id/tv_normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="平淡"
                     android:textColor="@color/gray"
                     android:textSize="16sp" />
             </LinearLayout>

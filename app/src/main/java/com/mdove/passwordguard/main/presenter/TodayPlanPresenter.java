@@ -4,6 +4,7 @@ import com.mdove.passwordguard.App;
 import com.mdove.passwordguard.greendao.DailyPlanDao;
 import com.mdove.passwordguard.greendao.entity.DailyPlan;
 import com.mdove.passwordguard.main.model.DailyPlanModel;
+import com.mdove.passwordguard.main.model.vm.DailyPlanModelVM;
 import com.mdove.passwordguard.main.presenter.contract.TodayPlanContract;
 
 import java.util.ArrayList;
@@ -74,5 +75,19 @@ public class TodayPlanPresenter implements TodayPlanContract.Presenter {
         curDailyPlanModel.mStatus = type;
         mDailyPlanDao.update(curDailyPlan);
         mView.updateLostOrGet(position);
+    }
+
+    @Override
+    public void onClickDailyPlanDelete(DailyPlanModelVM vm) {
+        int position = -1;
+        for (DailyPlanModel model : mData) {
+            if (model == vm.mDailyPlanModel) {
+                position = mData.indexOf(model);
+            }
+        }
+        if (position != -1) {
+            mDailyPlanDao.delete(vm.mDailyPlanModel.mDailyPlan);
+            mView.onClickDailyPlanDelete(position);
+        }
     }
 }

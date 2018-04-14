@@ -50,6 +50,7 @@ import com.mdove.passwordguard.main.model.MainSearchModel;
 import com.mdove.passwordguard.main.model.MainSelfTaskModel;
 import com.mdove.passwordguard.main.model.MainTopModel;
 import com.mdove.passwordguard.main.model.event.CheckOrderEvent;
+import com.mdove.passwordguard.main.model.vm.DailyPlanModelVM;
 import com.mdove.passwordguard.main.model.vm.ItemMainPasswordVM;
 import com.mdove.passwordguard.main.presenter.contract.MainContract;
 import com.mdove.passwordguard.mainoption.AllMainOptionActivity;

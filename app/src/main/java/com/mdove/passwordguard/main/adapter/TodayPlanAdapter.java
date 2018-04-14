@@ -11,6 +11,7 @@ import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.listener.OnChangeDataSizeListener;
 import com.mdove.passwordguard.databinding.ItemDailyPlanTodayRlvBinding;
 import com.mdove.passwordguard.main.model.DailyPlanModel;
+import com.mdove.passwordguard.main.model.handler.ItemDailyPlanHandler;
 import com.mdove.passwordguard.main.model.vm.DailyPlanModelVM;
 import com.mdove.passwordguard.main.presenter.TodayPlanPresenter;
 import com.mdove.passwordguard.utils.InflateUtils;
@@ -53,6 +54,12 @@ public class TodayPlanAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         notifyItemChanged(position);
     }
 
+    public void notifyDelete(int position) {
+        mData.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, mData.size());
+    }
+
     @Override
     public int getItemCount() {
         return mData != null ? mData.size() : 0;
@@ -68,6 +75,7 @@ public class TodayPlanAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         public void bind(final DailyPlanModel dailyPlanModel, int position, final TodayPlanPresenter presenter) {
             mBinding.setViewModel(new DailyPlanModelVM(dailyPlanModel, position));
+            mBinding.setActionHandler(new ItemDailyPlanHandler(mPresenter));
 
             mBinding.ivGet.setColorFilter(ContextCompat.getColor(mContext, R.color.gray), PorterDuff.Mode.SRC_ATOP);
             mBinding.tvGet.setTextColor(ContextCompat.getColor(mContext, R.color.gray));

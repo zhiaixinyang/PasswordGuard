@@ -5,59 +5,10 @@
     android:layout_height="fill_parent"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:id="@+id/layout_indicator"
-        android:layout_width="fill_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="10dp">
-
-        <LinearLayout
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:background="@drawable/calendar_titlebar"
-            android:orientation="horizontal">
-
-            <com.mdove.passwordguard.ui.calendar.DropIndicator
-                android:id="@+id/circleIndicator"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                app:circle_color="@color/colorPrimary"
-                app:click_color="@color/white"
-                app:color1="@color/white"
-                app:color2="@color/white"
-                app:duration="500"
-                app:radius="14dp"
-                app:scale="1">
-
-                <TextView
-                    android:id="@+id/titlebar_month"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="月"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/titlebar_week"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="周"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
-            </com.mdove.passwordguard.ui.calendar.DropIndicator>
-        </LinearLayout>
-
-    </RelativeLayout>
-
-
     <com.mdove.passwordguard.ui.calendar.materialcalendar.MonthWeekMaterialCalendarView
         android:id="@+id/slidelayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/layout_indicator">
-
+        android:layout_height="match_parent">
 
         <com.mdove.passwordguard.ui.calendar.materialcalendarview.MaterialCalendarView
             android:id="@+id/calendarView_month_mode"
@@ -81,11 +32,13 @@
             app:mcv_showTopBar="false"
             app:mcv_showWeekView="false" />
 
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
+            android:paddingTop="@dimen/margin_item_calendar"
+            android:background="@color/gray_light"
             android:orientation="vertical" />
 
 
@@ -151,8 +104,6 @@
                 android:gravity="center"
                 android:text="周六"
                 android:textColor="@color/white" />
-
         </LinearLayout>
-
     </com.mdove.passwordguard.ui.calendar.materialcalendar.MonthWeekMaterialCalendarView>
 </RelativeLayout>
