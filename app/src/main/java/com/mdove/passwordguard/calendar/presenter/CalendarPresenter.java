@@ -10,8 +10,10 @@ import com.mdove.passwordguard.greendao.DailyPlanDao;
 import com.mdove.passwordguard.greendao.entity.DailyPlan;
 import com.mdove.passwordguard.main.model.DailyPlanModel;
 import com.mdove.passwordguard.main.model.vm.DailyPlanModelVM;
+import com.mdove.passwordguard.ui.calendar.materialcalendarview.CalendarDay;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -54,7 +56,7 @@ public class CalendarPresenter implements CalendarContract.Presenter {
         int position = -1;
         for (BaseCalendarModel model : mData) {
             if (model instanceof DailyPlanModel) {
-                DailyPlanModel dailyPlanModel= (DailyPlanModel) model;
+                DailyPlanModel dailyPlanModel = (DailyPlanModel) model;
                 if (id == dailyPlanModel.mId) {
                     curDailyPlan = dailyPlanModel.mDailyPlan;
                     curDailyPlanModel = dailyPlanModel;
@@ -66,21 +68,21 @@ public class CalendarPresenter implements CalendarContract.Presenter {
             return;
         }
         CalendarEvent event;
-        switch (type){
-            case DailyPlanModel.STATUS_LOST:{
-                event=new CalendarEvent(CalendarEvent.UPDATE_TYPE_LOST,id);
+        switch (type) {
+            case DailyPlanModel.STATUS_LOST: {
+                event = new CalendarEvent(CalendarEvent.UPDATE_TYPE_LOST, id);
                 break;
             }
-            case DailyPlanModel.STATUS_GET:{
-                event=new CalendarEvent(CalendarEvent.UPDATE_TYPE_GET,id);
+            case DailyPlanModel.STATUS_GET: {
+                event = new CalendarEvent(CalendarEvent.UPDATE_TYPE_GET, id);
                 break;
             }
-            case DailyPlanModel.STATUS_NORMAL:{
-                event=new CalendarEvent(CalendarEvent.UPDATE_TYPE_NORMAL,id);
+            case DailyPlanModel.STATUS_NORMAL: {
+                event = new CalendarEvent(CalendarEvent.UPDATE_TYPE_NORMAL, id);
                 break;
             }
             default:
-                event=new CalendarEvent(CalendarEvent.UPDATE_TYPE_NORMAL,id);
+                event = new CalendarEvent(CalendarEvent.UPDATE_TYPE_NORMAL, id);
                 break;
         }
         RxBus.get().post(event);
@@ -101,6 +103,30 @@ public class CalendarPresenter implements CalendarContract.Presenter {
         if (position != -1) {
             mDailyPlanDao.delete(vm.mDailyPlanModel.mDailyPlan);
             mView.onClickDailyPlanDelete(position);
+        }
+    }
+
+    @Override
+    public void onSelectDay(CalendarDay selectDay) {
+        int days = selectDay.getDay();
+        int year = selectDay.getYear();
+        int month = selectDay.getMonth();
+        Calendar calendar = Calendar.getInstance();
+        calendar.clear();
+        calendar.set(year, month, days);
+        long curTime = calendar.getTimeInMillis();
+        calendar.set(year, month, days + 1);
+        long nextTime = calendar.getTimeInMillis();
+
+        List<DailyPlan> data = mDailyPlanDao.queryBuilder().where(DailyPlanDao.Properties.MTimeStamp.ge(curTime),
+                DailyPlanDao.Properties.MTimeStamp.lt(nextTime))
+                .build().list();
+        if (data != null && data.size() > 0) {
+            mData.removeAll(mData);
+            for (DailyPlan dailyPlan : data) {
+                mData.add(new DailyPlanModel(dailyPlan));
+                mView.showData(mData);
+            }
         }
     }
 }

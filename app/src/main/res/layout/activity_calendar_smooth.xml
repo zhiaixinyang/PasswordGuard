@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <com.mdove.passwordguard.ui.calendar.materialcalendar.MonthWeekMaterialCalendarView
@@ -42,68 +43,83 @@
             android:orientation="vertical" />
 
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/weekview_top"
             android:layout_width="match_parent"
-            android:layout_height="44dp"
-            android:background="@color/colorPrimary"
-            android:orientation="horizontal">
-
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary">
             <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="周日"
-                android:textColor="@color/white" />
+                android:id="@+id/tv_time"
+                android:textSize="18sp"
+                android:padding="@dimen/margin_item_calendar"
+                android:textColor="@color/white"
+                tools:text="2018-4-14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_below="@+id/tv_time"
+                android:background="@color/colorPrimary"
+                android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="周一"
-                android:textColor="@color/white" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="周日"
+                    android:textColor="@color/white" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="周二"
-                android:textColor="@color/white" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="周一"
+                    android:textColor="@color/white" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="周三"
-                android:textColor="@color/white" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="周二"
+                    android:textColor="@color/white" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="周四"
-                android:textColor="@color/white" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="周三"
+                    android:textColor="@color/white" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="周五"
-                android:textColor="@color/white" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="周四"
+                    android:textColor="@color/white" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="周六"
-                android:textColor="@color/white" />
-        </LinearLayout>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="周五"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="周六"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+        </RelativeLayout>
     </com.mdove.passwordguard.ui.calendar.materialcalendar.MonthWeekMaterialCalendarView>
 </RelativeLayout>

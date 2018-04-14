@@ -265,14 +265,15 @@ class DayView extends CheckedTextView {
         final int offset = Math.abs(height - width) / 2;
 
         // Lollipop platform bug. Circle drawable offset needs to be half of normal offset
-        final int circleOffset = Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP ? offset / 2 : offset;
+        final int circleOffset = Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP ?
+                offset / 2 : offset;
 
         if (width >= height) {
             tempRect.set(offset, 0, radius + offset, height);
-            circleDrawableRect.set(circleOffset, 0, radius + circleOffset, height);
+            circleDrawableRect.set(circleOffset+20, 20, radius + circleOffset-20, height-20);
         } else {
             tempRect.set(0, offset, width, radius + offset);
-            circleDrawableRect.set(0, circleOffset, width, radius + circleOffset);
+            circleDrawableRect.set(0, circleOffset , width, radius + circleOffset);
         }
     }
 }

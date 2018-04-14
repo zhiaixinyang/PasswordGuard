@@ -1,6 +1,5 @@
 package com.mdove.passwordguard.calendar;
 
-import android.animation.Animator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -16,19 +15,16 @@ import android.widget.TextView;
 
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.BaseActivity;
-import com.mdove.passwordguard.base.listener.BaseAnimatorlistener;
 import com.mdove.passwordguard.calendar.model.BaseCalendarModel;
 import com.mdove.passwordguard.calendar.presenter.CalendarPresenter;
 import com.mdove.passwordguard.calendar.presenter.contract.CalendarContract;
-import com.mdove.passwordguard.main.model.DailyPlanModel;
-import com.mdove.passwordguard.ui.calendar.DropIndicator;
 import com.mdove.passwordguard.ui.calendar.decorators.EventDecorator;
+import com.mdove.passwordguard.ui.calendar.decorators.RemindDecorator;
 import com.mdove.passwordguard.ui.calendar.materialcalendar.MonthWeekMaterialCalendarView;
 import com.mdove.passwordguard.ui.calendar.materialcalendarview.CalendarDay;
 import com.mdove.passwordguard.ui.calendar.materialcalendarview.MaterialCalendarView;
+import com.mdove.passwordguard.utils.DateUtil;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -41,6 +37,7 @@ public class CalendarSmoothActivity extends BaseActivity implements CalendarCont
     private boolean canPaging = true;
     private CalendarPresenter mPresenter;
     private CalendarSmoothAdapter mAdapter;
+    private TextView mTvTime;
 
     public static void start(Context context) {
         Intent start = new Intent(context, CalendarSmoothActivity.class);
@@ -59,11 +56,13 @@ public class CalendarSmoothActivity extends BaseActivity implements CalendarCont
 
         monthWeekMaterialCalendarView = findViewById(R.id.slidelayout);
         recyclerView = findViewById(R.id.recyclerView);
+        mTvTime = findViewById(R.id.tv_time);
 
         initRecyclerView();
 
         monthWeekMaterialCalendarView.setCurrentDate(selectedDate);
         monthWeekMaterialCalendarView.setSelectedDate(selectedDate);
+        mTvTime.setText(DateUtil.getDateChinese(selectedDate.getDate()));
 
         monthWeekMaterialCalendarView.state().edit().setSlideModeChangeListener(new MonthWeekMaterialCalendarView.SlideModeChangeListener() {
             @Override
@@ -74,15 +73,17 @@ public class CalendarSmoothActivity extends BaseActivity implements CalendarCont
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
                 selectedDate = date;
+                mTvTime.setText(DateUtil.getDateChinese(selectedDate.getDate()));
+                mPresenter.onSelectDay(selectedDate);
             }
         }).setSlideOnMonthChangedListener(new MonthWeekMaterialCalendarView.SlideOnMonthChangedListener() {
             @Override
             public void onMonthChanged(MaterialCalendarView widget, CalendarDay date) {
-
+                mTvTime.setText(DateUtil.getDateChinese(date.getDate()));
             }
         }).commit();
 
-        AddDecorator();
+        addDecorator();
     }
 
     @Override
@@ -90,26 +91,28 @@ public class CalendarSmoothActivity extends BaseActivity implements CalendarCont
         return false;
     }
 
-    private void AddDecorator() {
+    private void addDecorator() {
         //150天
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.MONTH, -2);
-        ArrayList<CalendarDay> dates = new ArrayList<>();
-        for (int i = 0; i < 30; i++) {
-            CalendarDay day = CalendarDay.from(calendar);
-            dates.add(day);
-            calendar.add(Calendar.DATE, 5);
-        }
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.add(Calendar.MONTH, -2);
+//        ArrayList<CalendarDay> dates = new ArrayList<>();
+//        for (int i = 0; i < 30; i++) {
+//            CalendarDay day = CalendarDay.from(calendar);
+//            dates.add(day);
+//            calendar.add(Calendar.DATE, 5);
+//        }
         //增加有红点标志
-        monthWeekMaterialCalendarView.addDecorator(new EventDecorator(Color.RED, dates));
+        monthWeekMaterialCalendarView.addDecorator(new EventDecorator(Color.RED));
+        monthWeekMaterialCalendarView.addDecorator(new RemindDecorator(this));
     }
 
 
     private void initRecyclerView() {
         mPresenter = new CalendarPresenter();
         mPresenter.subscribe(this);
+        mPresenter.onSelectDay(selectedDate);
 
-        mAdapter = new CalendarSmoothAdapter(this,mPresenter);
+        mAdapter = new CalendarSmoothAdapter(this, mPresenter);
 
         recyclerView.setLayoutManager(new CustomLinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL, false));
@@ -131,58 +134,6 @@ public class CalendarSmoothActivity extends BaseActivity implements CalendarCont
         selectedDate = CalendarDay.today();
         monthWeekMaterialCalendarView.setCurrentDate(selectedDate);
         monthWeekMaterialCalendarView.setSelectedDate(selectedDate);
-    }
-
-    public void clickSetting() {
-        CharSequence[] items = {
-                "显示其他月份",
-                "显示超出最大和最小日期范围",
-                "能否选中其他月，选中会跳转",
-                "能否竖直滑动",
-                "能否左右滑动"
-        };
-
-        final int[] itemValues = {
-                MaterialCalendarView.SHOW_OTHER_MONTHS,
-                MaterialCalendarView.SHOW_OUT_OF_RANGE,
-        };
-        int showOtherDates = monthWeekMaterialCalendarView.getShowOtherDates();
-        @SuppressWarnings("ResourceType")
-        boolean[] initSelections = {
-                MaterialCalendarView.showOtherMonths(showOtherDates),
-                MaterialCalendarView.showOutOfRange(showOtherDates),
-                monthWeekMaterialCalendarView.allowClickDaysOutsideCurrentMonth(),
-                monthWeekMaterialCalendarView.isCanDrag(),
-                canPaging
-        };
-        new AlertDialog.Builder(this)
-                .setTitle("Show Other Dates")
-                .setMultiChoiceItems(items, initSelections, new DialogInterface.OnMultiChoiceClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                        if (which < 2) {
-                            int showOtherDates = monthWeekMaterialCalendarView.getShowOtherDates();
-                            if (isChecked) {
-                                //Set flag
-                                showOtherDates |= itemValues[which];
-                            } else {
-                                //Unset flag
-                                showOtherDates &= ~itemValues[which];
-                            }
-                            monthWeekMaterialCalendarView.setShowOtherDates(showOtherDates);
-                        } else if (which == 2) {
-                            monthWeekMaterialCalendarView.setAllowClickDaysOutsideCurrentMonth(isChecked);
-                        } else if (which == 3) {
-                            monthWeekMaterialCalendarView.setCanDrag(isChecked);
-                        } else if (which == 4) {
-                            canPaging = isChecked;
-                            monthWeekMaterialCalendarView.setPagingEnabled(isChecked);
-                        }
-
-                    }
-                })
-                .setPositiveButton(android.R.string.ok, null)
-                .show();
     }
 
     @Override

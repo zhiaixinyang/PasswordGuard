@@ -169,12 +169,10 @@ public class MonthWeekMaterialCalendarView extends FrameLayout implements SlideM
      */
 
     private void setStopItemPosition(int position) {
-
         defaultStopHeight = (position) * singleItemHight;
     }
 
     class DragHelperCallback extends ViewDragHelper.Callback {
-
         /**
          * 设置recyclerView可拖拽
          */
@@ -185,9 +183,6 @@ public class MonthWeekMaterialCalendarView extends FrameLayout implements SlideM
                     && isAtTop(mRecyclerView) && !ViewCompat.canScrollVertically(mRecyclerView, -1);
         }
 
-        /**
-         *
-         */
         @Override
         public int clampViewPositionVertical(View child, int top, int dy) {
             //决定竖直方向上能移动的距离为 finalWeekModeHeight-finalMonthModeHeight
@@ -843,19 +838,16 @@ public class MonthWeekMaterialCalendarView extends FrameLayout implements SlideM
     }
     //属性动画回调
     public interface SlideOffsetAnimatorlistener {
-
         void onAnimationUpdate(ValueAnimator valueAnimator);
     }
 
     //日期选中回调
     public interface SlideDateSelectedlistener {
-
         void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected);
     }
 
     //滚动距离回调
     public interface SlideScrolledlistener {
-
         void onScrolled(int position, float percent);
     }
 
@@ -977,7 +969,6 @@ public class MonthWeekMaterialCalendarView extends FrameLayout implements SlideM
             MonthWeekMaterialCalendarView.this.commit(new SlideState(this));
         }
     }
-
 }
 
 
