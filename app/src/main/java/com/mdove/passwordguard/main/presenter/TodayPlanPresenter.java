@@ -6,6 +6,8 @@ import com.mdove.passwordguard.greendao.entity.DailyPlan;
 import com.mdove.passwordguard.main.model.DailyPlanModel;
 import com.mdove.passwordguard.main.model.vm.DailyPlanModelVM;
 import com.mdove.passwordguard.main.presenter.contract.TodayPlanContract;
+import com.mdove.passwordguard.utils.DateUtil;
+import com.mdove.passwordguard.utils.log.LogUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -37,7 +39,13 @@ public class TodayPlanPresenter implements TodayPlanContract.Presenter {
 
     @Override
     public void initData() {
-        List<DailyPlan> data = mDailyPlanDao.queryBuilder().list();
+        long curTime = System.currentTimeMillis();
+        int year = DateUtil.getYear(curTime);
+        int month = DateUtil.getMonth(curTime);
+        int day = DateUtil.getDay(curTime);
+        long time = new Date(year, month, day).getTime();
+
+        List<DailyPlan> data = mDailyPlanDao.queryBuilder().where(DailyPlanDao.Properties.MTimeStamp.ge(time)).list();
         for (DailyPlan plan : data) {
             mData.add(new DailyPlanModel(plan));
         }

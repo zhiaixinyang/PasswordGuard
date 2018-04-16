@@ -50,12 +50,24 @@ public class DateUtil {
         return cal.get(Calendar.DAY_OF_MONTH);
     }
 
-    public static String getDateChineseYMD(Date time){
+    public static int getYear(long time) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(time);
+        return cal.get(Calendar.YEAR);
+    }
+
+    public static int getMonth(long time) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(time);
+        return cal.get(Calendar.MONTH) + 1;
+    }
+
+    public static String getDateChineseYMD(Date time) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
         return format.format(time);
     }
 
-    public static String getDateChineseYMD(long time){
+    public static String getDateChineseYMD(long time) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
         return format.format(time);
     }
@@ -143,6 +155,7 @@ public class DateUtil {
         int month = calendar.get(Calendar.MONTH);
         return parseMonth(month, abbrev);
     }
+
     public static String getDayOfWeek(long time) {
         String dayNames[] = {"周日", "周一", "周二", "周三", "周四", "周五", "周六"};
         Calendar c = Calendar.getInstance();
@@ -151,22 +164,22 @@ public class DateUtil {
     }
 
     //HH为24小时进制
-    public static String getDateChinese(Date time){
+    public static String getDateChinese(Date time) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
         return format.format(time);
     }
 
-    public static String getDateChinese(Long time){
+    public static String getDateChinese(Long time) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
         return format.format(time);
     }
 
-    public static String getHourM(Long time){
+    public static String getHourM(Long time) {
         SimpleDateFormat format = new SimpleDateFormat("HH:mm");
         return format.format(time);
     }
 
-    public static String getDateChinese(){
+    public static String getDateChinese() {
         SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
         return format.format(new Date());
     }

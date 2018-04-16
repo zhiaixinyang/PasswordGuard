@@ -92,13 +92,11 @@
 
         <TextView
             android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:layout_marginBottom="@dimen/margin_item_daily_plan_today_rlv"
-            android:layout_marginLeft="@dimen/margin_item_daily_plan_today_rlv"
-            android:layout_marginRight="@dimen/margin_item_daily_plan_today_rlv"
+            android:layout_margin="@dimen/margin_item_daily_plan_today_rlv"
             android:alpha="0.8"
             android:background="@color/trans"
             android:gravity="center_vertical"
@@ -109,7 +107,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layout_time"
-            tools:text="内容" />
+            tools:text="内容内容内容内容内容内容内容内容内容" />
 
         <RelativeLayout
             android:id="@+id/layout_btn"
