@@ -47,7 +47,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/margin_item_main_self_task"
                 android:layout_toRightOf="@+id/layout_icon"
-                android:text="我的随手计划"
+                android:text="随手计划"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 

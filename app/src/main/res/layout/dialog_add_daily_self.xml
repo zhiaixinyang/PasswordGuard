@@ -12,10 +12,21 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_dialog_add_daily_self"
+            android:layout_marginLeft="@dimen/margin_dialog_add_daily_self"
+            android:text="随手记"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
         <EditText
             android:id="@+id/et_search_keyword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_title"
             android:background="@drawable/bg_dialog_add_dialog_self"
             android:gravity="top"
             android:hint="随手记记"
@@ -23,16 +34,16 @@
             android:lines="5"
             android:padding="@dimen/margin_dialog_add_daily_self"
             android:textColorHint="@color/gray"
-            android:textCursorDrawable="@drawable/bg_et_cursor_white"
             android:textSize="16sp" />
 
         <TextView
             android:id="@+id/btn_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/et_search_keyword"
             android:layout_below="@+id/et_search_keyword"
+            android:layout_marginRight="@dimen/margin_dialog_add_daily_self"
             android:layout_marginTop="@dimen/margin_dialog_add_daily_self"
+            android:layout_toLeftOf="@+id/btn_add"
             android:background="@drawable/bg_dialog_add_dialog_self_back"
             android:paddingBottom="@dimen/padding_dialog_add_daily_self_t_b"
             android:paddingLeft="@dimen/padding_dialog_add_daily_self_r_l"
