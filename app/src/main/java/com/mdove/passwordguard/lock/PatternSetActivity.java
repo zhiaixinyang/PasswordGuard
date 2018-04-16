@@ -86,6 +86,16 @@ public class PatternSetActivity extends AppCompatActivity {
                 AppLockConfig.setPassCode("");
             }
         });
+
+        binding.btnResetHas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.patternLockView.setVisibility(View.VISIBLE);
+                binding.btnResetHas.setVisibility(View.GONE);
+                AppLockConfig.setLockSet(false);
+            }
+        });
+
         binding.patternLockView.addPatternLockListener(new PatternLockViewListener() {
             @Override
             public void onStarted() {
@@ -153,6 +163,11 @@ public class PatternSetActivity extends AppCompatActivity {
 
             }
         });
+
+        if (AppLockConfig.isLockSet()) {
+            binding.patternLockView.setVisibility(View.GONE);
+            binding.btnResetHas.setVisibility(View.VISIBLE);
+        }
     }
 
     private void initSwitch() {

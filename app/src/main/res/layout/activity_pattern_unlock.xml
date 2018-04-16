@@ -48,7 +48,8 @@
                 android:gravity="center"
                 android:text="@string/lock_forget_password"
                 android:textColor="@color/lockColorTextPrimary"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:visibility="gone" />
         </RelativeLayout>
 
         <ImageView

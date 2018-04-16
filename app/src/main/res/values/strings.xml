@@ -14,6 +14,7 @@
     <string name="lock_privacy_hint_des">Lock and protect apps with a password</string>
     <string name="lock_protect">PROTECT(%1$d)</string>
     <string name="lock_pattern_set_hint">设置解锁手势</string>
+    <string name="lock_pattern_reset_has_locker">重置手势锁</string>
     <string name="lock_pattern_set_error_hint">至少要连接四个点 \n 请重试</string>
     <string name="lock_pattern_confirm">再次确认手势</string>
     <string name="lock_pattern_mismatch_hint">手势不匹配</string>
@@ -51,8 +52,8 @@
 
     <string name="lock_grant_guide_hint">Enable AppLock by granting access to %1$s</string>
     <string name="lock_name">手势锁</string>
-    <string name="lock_string_switch_on">开启手势锁</string>
-    <string name="lock_string_switch_off">关闭手势锁</string>
+    <string name="lock_string_switch_on">已开启</string>
+    <string name="lock_string_switch_off">已关闭</string>
     <string name="activity_title_delete_list_password">账号删除记录</string>
     <string name="activity_title_delete_list_daily_self">随手记删除记录</string>
 
