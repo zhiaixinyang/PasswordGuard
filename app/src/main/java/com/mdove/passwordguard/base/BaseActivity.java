@@ -77,7 +77,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (isNeedBaseMenu()) {
             getMenuInflater().inflate(R.menu.base_activity_menu, menu);//加载menu文件到布局View view = menu.add(Menu.NONE, Menu.FIRST + 1, 0, "发送").setIcon(R.mipmap.ic_btn_send)
             menu.findItem(R.id.action_add).setIcon(resizeImage(R.mipmap.ic_btn_send,
-                    DensityUtil.dip2px(BaseActivity.this,60),DensityUtil.dip2px(BaseActivity.this,60)));
+                    DensityUtil.dip2px(BaseActivity.this, 60), DensityUtil.dip2px(BaseActivity.this, 60)));
         }
         return true;
     }
@@ -105,6 +105,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         } else {
             mLayoutEmpty.setVisibility(View.GONE);
         }
+    }
+
+    protected void customEmptyText(String customText) {
+        mLayoutEmpty.setText(customText);
     }
 
     @Override

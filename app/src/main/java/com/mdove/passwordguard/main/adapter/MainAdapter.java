@@ -42,6 +42,7 @@ import com.mdove.passwordguard.main.model.MainSelfTaskModel;
 import com.mdove.passwordguard.main.model.MainTopModel;
 import com.mdove.passwordguard.main.model.event.CheckOrderEvent;
 import com.mdove.passwordguard.main.model.handler.ItemMainSelfTaskHandler;
+import com.mdove.passwordguard.main.model.handler.ItemMainTopHandler;
 import com.mdove.passwordguard.main.model.handler.MainDailyPlanHandler;
 import com.mdove.passwordguard.main.model.handler.MainGroupHandler;
 import com.mdove.passwordguard.main.model.handler.MainOptionHandler;
@@ -230,7 +231,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         public void bind(ItemMainTopVM vm) {
             mBinding.setViewModel(vm);
-            mBinding.setActionHandler(mPresenter);
+            mBinding.setActionHandler(new ItemMainTopHandler(mPresenter));
         }
     }
 

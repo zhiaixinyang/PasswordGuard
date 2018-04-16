@@ -40,6 +40,8 @@ public interface MainContract {
 
         void onClickBtnLock();
 
+        void onClickBtnStatistics();
+
         //Item被点击（MainPasswordModel）
         void onClickItemPassword(ItemMainPasswordVM model);
 
@@ -106,9 +108,11 @@ public interface MainContract {
         void btnHidePworDs(IHideVM vm);
 
         void postAllPasswordHide(long id, boolean isHide);
+
         void postAllPasswordFavorite(long id, boolean isFavorite);
 
         void postAllDailySelfHide(long id, boolean isHide);
+
         void postAllDailySelfFavorite(long id, boolean isFavorite);
 
         void favoritePassword(ItemMainPasswordVM vm);

@@ -1,5 +1,6 @@
 package com.mdove.passwordguard.addoralter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -50,6 +51,9 @@ public class EditPasswordActivity extends BaseActivity implements AddPasswordCon
 
     public static void start(Context context, ItemMainPasswordVM model, int position) {
         Intent start = new Intent(context, EditPasswordActivity.class);
+        if (!(context instanceof Activity)) {
+            start.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
         start.putExtra(ACTION_KEY, ACTION_FROM_IS_EDIT);
         start.putExtra(EXTRA_ACTION_EDIT_VIEW_MODEL_KEY, model);
         start.putExtra(EXTRA_ACTION_EDIT_ITEM_POSITION_KEY, position);

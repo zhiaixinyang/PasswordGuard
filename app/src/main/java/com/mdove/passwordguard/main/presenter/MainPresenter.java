@@ -56,6 +56,7 @@ import com.mdove.passwordguard.main.presenter.contract.MainContract;
 import com.mdove.passwordguard.mainoption.AllMainOptionActivity;
 import com.mdove.passwordguard.manager.UpdateStatusManager;
 import com.mdove.passwordguard.model.net.RealUpdate;
+import com.mdove.passwordguard.mystatistics.MyStatisticsActivity;
 import com.mdove.passwordguard.net.ApiServerImpl;
 import com.mdove.passwordguard.task.NewSelfTaskActivity;
 import com.mdove.passwordguard.task.model.SelfTaskModel;
@@ -511,6 +512,11 @@ public class MainPresenter implements MainContract.Presenter {
     @Override
     public void onClickBtnLock() {
         mView.onClickBtnLock();
+    }
+
+    @Override
+    public void onClickBtnStatistics() {
+        MyStatisticsActivity.start(mView.getContext());
     }
 
     @Override

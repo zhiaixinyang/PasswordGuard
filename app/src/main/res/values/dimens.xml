@@ -72,5 +72,6 @@
     <dimen name="item_main_daily_plan_today_rlv_cb_w_h">25dp</dimen>
     <dimen name="margin_item_main_daily_plan_today_rlv">8dp</dimen>
     <dimen name="margin_item_calendar">8dp</dimen>
+    <dimen name="margin_item_main_top">12dp</dimen>
 
 </resources>

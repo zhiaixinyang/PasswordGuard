@@ -10,7 +10,7 @@
 
         <variable
             name="actionHandler"
-            type="com.mdove.passwordguard.main.presenter.MainPresenter" />
+            type="com.mdove.passwordguard.main.model.handler.ItemMainTopHandler" />
     </data>
 
     <RelativeLayout
@@ -29,8 +29,8 @@
             android:background="@color/trans"
             android:gravity="center_vertical"
             android:paddingBottom="4dp"
-            android:paddingLeft="12dp"
-            android:paddingTop="12dp"
+            android:paddingLeft="@dimen/margin_item_main_top"
+            android:paddingTop="@dimen/margin_item_main_top"
             android:text="@{viewModel.mTimeAll}"
             android:textColor="@color/white"
             android:textSize="20sp"
@@ -41,12 +41,12 @@
             android:layout_width="@dimen/item_main_group_setting_iv_w_h"
             android:layout_height="@dimen/item_main_group_setting_iv_w_h"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="12dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginRight="@dimen/margin_item_main_top"
+            android:layout_marginTop="@dimen/margin_item_main_top"
             android:onClick="@{()->actionHandler.onClickBtnHideTimeTop()}"
             android:src="@mipmap/ic_item_hide"
-            android:visibility="gone"
-            android:tint="@color/gray_light" />
+            android:tint="@color/gray_light"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/tv_title"
@@ -56,11 +56,35 @@
             android:alpha="0.8"
             android:background="@color/trans"
             android:gravity="center_vertical"
-            android:paddingBottom="12dp"
-            android:paddingLeft="12dp"
+            android:paddingBottom="@dimen/margin_item_main_top"
+            android:paddingLeft="@dimen/margin_item_main_top"
             android:text="@{viewModel.mTimeWeek}"
             android:textColor="@color/white"
             android:textSize="14sp"
             tools:text="周日" />
+
+        <LinearLayout
+            android:id="@+id/btn_statistics"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/margin_item_main_top"
+            android:gravity="center"
+            android:onClick="@{()->actionHandler.onClickBtnStatistics()}"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@mipmap/ic_btn_collect" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我的统计"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </LinearLayout>
     </RelativeLayout>
 </layout>

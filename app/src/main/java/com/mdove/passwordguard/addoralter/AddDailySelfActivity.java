@@ -1,5 +1,6 @@
 package com.mdove.passwordguard.addoralter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -51,6 +52,9 @@ public class AddDailySelfActivity extends BaseActivity implements AddDailySelfCo
 
     public static void start(Context context) {
         Intent start = new Intent(context, AddDailySelfActivity.class);
+        if (!(context instanceof Activity)) {
+            start.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
         context.startActivity(start);
     }
 

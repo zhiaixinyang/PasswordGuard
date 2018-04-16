@@ -52,6 +52,12 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name=".mystatistics.MyStatisticsActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+
+        <activity
             android:name=".collect.CollectActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />

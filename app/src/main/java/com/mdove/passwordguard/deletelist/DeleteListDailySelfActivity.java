@@ -1,5 +1,6 @@
 package com.mdove.passwordguard.deletelist;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -30,8 +31,11 @@ public class DeleteListDailySelfActivity extends BaseActivity implements DeleteL
     private DeleteListDailySelfAdapter mAdapter;
 
     public static void start(Context context) {
-        Intent intent = new Intent(context, DeleteListDailySelfActivity.class);
-        context.startActivity(intent);
+        Intent start = new Intent(context, DeleteListDailySelfActivity.class);
+        if (!(context instanceof Activity)) {
+            start.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+        context.startActivity(start);
     }
 
     @Override
