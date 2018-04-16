@@ -1,10 +1,14 @@
 package com.mdove.passwordguard.mainoption.presenter;
 
+import android.Manifest;
+import android.app.Activity;
+
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.addoralter.AddDailySelfActivity;
 import com.mdove.passwordguard.addoralter.AddPasswordActivity;
 import com.mdove.passwordguard.alldata.AllDailySelfActivity;
 import com.mdove.passwordguard.alldata.AllPasswordActivity;
+import com.mdove.passwordguard.backup.BackUpService;
 import com.mdove.passwordguard.collect.CollectActivity;
 import com.mdove.passwordguard.deletelist.DeleteListDailySelfActivity;
 import com.mdove.passwordguard.deletelist.DeleteListPasswordActivity;
@@ -13,6 +17,9 @@ import com.mdove.passwordguard.main.presenter.MainPresenter;
 import com.mdove.passwordguard.mainoption.presenter.contract.AllMainOptionContract;
 import com.mdove.passwordguard.setting.SettingActivity;
 import com.mdove.passwordguard.task.NewSelfTaskActivity;
+import com.mdove.passwordguard.utils.permission.PermissionGrantCallback;
+import com.mdove.passwordguard.utils.permission.PermissionManager;
+import com.mdove.passwordguard.utils.permission.PermissionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,6 +109,26 @@ public class AllMainOptionPresenter implements AllMainOptionContract.Presenter {
         CollectActivity.start(mView.getContext());
     }
 
+    @Override
+    public void onClickBtnBackUp() {
+        String[] permissions = new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        if (!PermissionUtils.hasPermissions(mView.getContext(), permissions)) {
+            PermissionManager.askForPermission((Activity) mView.getContext(), 0, permissions, new PermissionGrantCallback() {
+                @Override
+                public void permissionGranted(int requestCode) {
+                    BackUpService.start(mView.getContext());
+                }
+
+                @Override
+                public void permissionRefused(int requestCode) {
+
+                }
+            });
+        } else {
+            BackUpService.start(mView.getContext());
+        }
+    }
+
     public List<MainOptionInfo> getInitOptionData() {
         List<MainOptionInfo> data = new ArrayList<>();
         MainOptionInfo account = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_ACCOUNT, "记录账号", "记录自己想要保存账号信息", R.drawable.bg_main_option_btn_1, R.mipmap.ic_btn_password);
@@ -115,6 +142,7 @@ public class AllMainOptionPresenter implements AllMainOptionContract.Presenter {
         MainOptionInfo allPassword = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_ALL_PASSWORD, "所有账号", "所有账号记录（包括隐藏显示）", R.drawable.bg_main_option_btn_10, R.mipmap.ic_btn_password);
         MainOptionInfo allDailySelf = new MainOptionInfo(MAIN_OPEN_INFO_TYPE_ALL_DAILY_SELF, "所有随手记", "所有随手记（包括隐藏显示）", R.drawable.bg_main_option_btn_11, R.mipmap.ic_btn_password);
         MainOptionInfo setting = new MainOptionInfo(MainPresenter.MAIN_OPEN_INFO_TYPE_SETTING, "设置", "系统设置（恢复隐藏按钮）", R.drawable.bg_main_option_btn_12, R.mipmap.ic_settings);
+        MainOptionInfo backup = new MainOptionInfo(MainPresenter.MAIN_OPEN_INFO_TYPE_BACKUP, "备份", "备份数据至文件", R.drawable.bg_main_option_btn_13, R.mipmap.ic_settings);
 //        data.add(guide);
         data.add(account);
         data.add(dailySelf);
@@ -126,6 +154,7 @@ public class AllMainOptionPresenter implements AllMainOptionContract.Presenter {
         data.add(allDailySelf);
         data.add(collect);
         data.add(setting);
+        data.add(backup);
         return data;
     }
 }

@@ -7,6 +7,7 @@ import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INF
 import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_ADD_DAILY_SELF;
 import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_ALL_DAILY_SELF;
 import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_ALL_PASSWORD;
+import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_BACKUP;
 import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_COLLECT;
 import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_DELETE_ACCOUNT;
 import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_DELETE_DAILY_SELF;
@@ -69,6 +70,10 @@ public class AllMainOptionHandler {
             }
             case MAIN_OPEN_INFO_TYPE_SETTING: {
                 mPresenter.onClickBtnSetting();
+                break;
+            }
+            case MAIN_OPEN_INFO_TYPE_BACKUP: {
+                mPresenter.onClickBtnBackUp();
                 break;
             }
             default: {

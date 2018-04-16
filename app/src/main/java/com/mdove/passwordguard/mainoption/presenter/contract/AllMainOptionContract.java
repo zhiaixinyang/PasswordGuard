@@ -33,6 +33,8 @@ public interface AllMainOptionContract {
         void onClickBtnSelfTask();
 
         void onClickBtnCollect();
+
+        void onClickBtnBackUp();
     }
 
     interface MvpView extends BaseView<Presenter> {

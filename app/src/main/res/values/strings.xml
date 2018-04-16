@@ -89,4 +89,7 @@
     <string name="previous">Go to previous</string>
     <string name="next">Go to next</string>
     <string name="calendar">Calendar</string>
+
+    <string name="permission_title">权限需要</string>
+    <string name="permissions_message">为了正常使用这个功能，我们需要一些权限。</string>
 </resources>

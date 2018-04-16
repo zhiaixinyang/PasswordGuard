@@ -1,5 +1,7 @@
 package com.mdove.passwordguard.main.presenter;
 
+import android.Manifest;
+import android.app.Activity;
 import android.support.annotation.IntDef;
 import android.text.TextUtils;
 
@@ -10,6 +12,7 @@ import com.mdove.passwordguard.addoralter.AddPasswordActivity;
 import com.mdove.passwordguard.addoralter.EditPasswordActivity;
 import com.mdove.passwordguard.addoralter.model.AlterDailySelfModel;
 import com.mdove.passwordguard.addoralter.model.AlterPasswordModel;
+import com.mdove.passwordguard.backup.BackUpService;
 import com.mdove.passwordguard.base.IHideVM;
 import com.mdove.passwordguard.collect.CollectActivity;
 import com.mdove.passwordguard.config.AppConstant;
@@ -50,7 +53,6 @@ import com.mdove.passwordguard.main.model.MainSearchModel;
 import com.mdove.passwordguard.main.model.MainSelfTaskModel;
 import com.mdove.passwordguard.main.model.MainTopModel;
 import com.mdove.passwordguard.main.model.event.CheckOrderEvent;
-import com.mdove.passwordguard.main.model.vm.DailyPlanModelVM;
 import com.mdove.passwordguard.main.model.vm.ItemMainPasswordVM;
 import com.mdove.passwordguard.main.presenter.contract.MainContract;
 import com.mdove.passwordguard.mainoption.AllMainOptionActivity;
@@ -65,11 +67,13 @@ import com.mdove.passwordguard.task.utils.SucSelfTaskHelper;
 import com.mdove.passwordguard.update.UpdateDialog;
 import com.mdove.passwordguard.utils.ClipboardUtils;
 import com.mdove.passwordguard.utils.ToastHelper;
+import com.mdove.passwordguard.utils.permission.PermissionGrantCallback;
+import com.mdove.passwordguard.utils.permission.PermissionManager;
+import com.mdove.passwordguard.utils.permission.PermissionUtils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -110,6 +114,7 @@ public class MainPresenter implements MainContract.Presenter {
     public static final int MAIN_OPEN_INFO_TYPE_ALL_PASSWORD = 10;
     public static final int MAIN_OPEN_INFO_TYPE_ALL_DAILY_SELF = 11;
     public static final int MAIN_OPEN_INFO_TYPE_SETTING = 12;
+    public static final int MAIN_OPEN_INFO_TYPE_BACKUP = 13;
 
     private String mCurGroup = DEFAULT_CHECK_GROUP_TITLE;
     private List<BaseMainModel> mCheckData;
@@ -120,7 +125,7 @@ public class MainPresenter implements MainContract.Presenter {
             MAIN_OPEN_INFO_TYPE_MAIN_ALL_OPTION, MAIN_OPEN_INFO_TYPE_COLLECT,
             MAIN_OPEN_INFO_TYPE_SELF_TASK, MAIN_OPEN_INFO_TYPE_ACCOUNT, MAIN_OPEN_INFO_TYPE_GUIDE,
             MAIN_OPEN_INFO_TYPE_ADD_DAILY_SELF, MAIN_OPEN_INFO_TYPE_LOCK,
-            MAIN_OPEN_INFO_TYPE_DELETE_ACCOUNT, MAIN_OPEN_INFO_TYPE_DELETE_DAILY_SELF})
+            MAIN_OPEN_INFO_TYPE_DELETE_ACCOUNT, MAIN_OPEN_INFO_TYPE_DELETE_DAILY_SELF, MAIN_OPEN_INFO_TYPE_BACKUP})
     @Retention(RetentionPolicy.SOURCE)
     public @interface MainOpenInfoType {
     }
