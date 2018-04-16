@@ -106,8 +106,10 @@ public interface MainContract {
         void btnHidePworDs(IHideVM vm);
 
         void postAllPasswordHide(long id, boolean isHide);
+        void postAllPasswordFavorite(long id, boolean isFavorite);
 
         void postAllDailySelfHide(long id, boolean isHide);
+        void postAllDailySelfFavorite(long id, boolean isFavorite);
 
         void favoritePassword(ItemMainPasswordVM vm);
 

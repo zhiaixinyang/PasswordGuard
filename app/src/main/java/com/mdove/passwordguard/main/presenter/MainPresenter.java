@@ -375,6 +375,39 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
     @Override
+    public void postAllPasswordFavorite(long id, boolean isFavorite) {
+        if (isFavorite) {
+            int position = -1;
+            for (BaseMainModel baseMainModel : mData) {
+                if (baseMainModel instanceof MainPasswordModel) {
+                    MainPasswordModel model = (MainPasswordModel) baseMainModel;
+                    if (model.mPasswordId == id) {
+                        model.mFavorite = true;
+                        position = mData.indexOf(model);
+                    }
+                }
+            }
+            if (position != -1) {
+                mView.notifyPasswordData(position);
+            }
+        } else {
+            int position = -1;
+            for (BaseMainModel baseMainModel : mData) {
+                if (baseMainModel instanceof MainPasswordModel) {
+                    MainPasswordModel model = (MainPasswordModel) baseMainModel;
+                    if (model.mPasswordId == id) {
+                        model.mFavorite = false;
+                        position = mData.indexOf(model);
+                    }
+                }
+            }
+            if (position != -1) {
+                mView.notifyPasswordData(position);
+            }
+        }
+    }
+
+    @Override
     public void postAllDailySelfHide(long id, boolean isHide) {
         if (isHide) {
             int position = -1;
@@ -398,6 +431,41 @@ public class MainPresenter implements MainContract.Presenter {
             DailySelf dailySelf = list.get(0);
             mData.add(new MainDailySelfModel(dailySelf));
             mView.notifyBtnNoHide(mData.size());
+        }
+    }
+
+    @Override
+    public void postAllDailySelfFavorite(long id, boolean isFavorite) {
+        if (isFavorite) {
+            int position = -1;
+            for (BaseMainModel baseMainModel : mData) {
+                if (baseMainModel instanceof MainDailySelfModel) {
+                    MainDailySelfModel model = (MainDailySelfModel) baseMainModel;
+                    if (model.mId == id) {
+                        model.mIsFavorite = true;
+                        position = mData.indexOf(model);
+                    }
+                }
+            }
+            //避免ConcurrentModificationException异常
+            if (position != -1) {
+                mView.notifyDailySelfData(position);
+            }
+        } else {
+            int position = -1;
+            for (BaseMainModel baseMainModel : mData) {
+                if (baseMainModel instanceof MainDailySelfModel) {
+                    MainDailySelfModel model = (MainDailySelfModel) baseMainModel;
+                    if (model.mId == id) {
+                        model.mIsFavorite = false;
+                        position = mData.indexOf(model);
+                    }
+                }
+            }
+            //避免ConcurrentModificationException异常
+            if (position != -1) {
+                mView.notifyDailySelfData(position);
+            }
         }
     }
 

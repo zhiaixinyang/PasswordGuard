@@ -3,6 +3,7 @@ package com.mdove.passwordguard.alldata.presenter;
 import com.hwangjr.rxbus.RxBus;
 import com.mdove.passwordguard.App;
 import com.mdove.passwordguard.alldata.model.AllPasswordModel;
+import com.mdove.passwordguard.alldata.model.event.AllPasswordFavoriteEvent;
 import com.mdove.passwordguard.alldata.model.event.AllPasswordHideEvent;
 import com.mdove.passwordguard.alldata.model.vm.ItemAllPasswordVM;
 import com.mdove.passwordguard.alldata.presenter.contract.AllPasswordContract;
@@ -58,6 +59,8 @@ public class AllPasswordPresenter implements AllPasswordContract.Presenter {
 
         mPasswordDao.update(password);
         mView.notifyBtnFavorite(vm.mItemPosition);
+
+        RxBus.get().post(new AllPasswordFavoriteEvent(password.id, vm.mAllPasswordModel.mFavorite));
     }
 
     @Override

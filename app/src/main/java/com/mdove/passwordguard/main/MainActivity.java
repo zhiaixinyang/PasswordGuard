@@ -22,7 +22,9 @@ import com.mdove.passwordguard.addoralter.model.event.AddDailySelfActivityEvent;
 import com.mdove.passwordguard.addoralter.model.event.AddPasswordActivityEvent;
 import com.mdove.passwordguard.addoralter.model.event.EditDailySelfActivityEvent;
 import com.mdove.passwordguard.addoralter.model.event.EditPasswordActivityEvent;
+import com.mdove.passwordguard.alldata.model.event.AllDailySelfFavoriteEvent;
 import com.mdove.passwordguard.alldata.model.event.AllDailySelfHideEvent;
+import com.mdove.passwordguard.alldata.model.event.AllPasswordFavoriteEvent;
 import com.mdove.passwordguard.alldata.model.event.AllPasswordHideEvent;
 import com.mdove.passwordguard.base.listener.OnItemLongClickListener;
 import com.mdove.passwordguard.collect.model.event.CollectDailySelfEvent;
@@ -508,5 +510,15 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     @Subscribe
     public void hideDailySelf(AllDailySelfHideEvent event) {
         mPresenter.postAllDailySelfHide(event.mId, event.mIsHide);
+    }
+
+    @Subscribe
+    public void favoriteAllDailySelf(AllDailySelfFavoriteEvent event) {
+        mPresenter.postAllDailySelfFavorite(event.mId, event.mIsFavorite);
+    }
+
+    @Subscribe
+    public void favoriteAllPassword(AllPasswordFavoriteEvent event) {
+        mPresenter.postAllPasswordFavorite(event.mId, event.mIsFavorite);
     }
 }
