@@ -13,10 +13,12 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.hwangjr.rxbus.RxBus;
 import com.hwangjr.rxbus.annotation.Subscribe;
 import com.mdove.passwordguard.R;
+import com.mdove.passwordguard.base.listener.OnChangeDataSizeListener;
 import com.mdove.passwordguard.calendar.model.CalendarEvent;
 import com.mdove.passwordguard.databinding.FragmentTodayPlanBinding;
 import com.mdove.passwordguard.main.adapter.TodayPlanAdapter;
@@ -35,6 +37,7 @@ public class TodayPlanFragment extends Fragment implements TodayPlanContract.Mvp
     private EditText mEt;
     private FrameLayout mBtn;
     private RecyclerView mRlv;
+    private TextView mTvSee;
     private TodayPlanPresenter mPresenter;
     private TodayPlanAdapter mAdapter;
     private List<DailyPlanModel> mData;
@@ -59,6 +62,7 @@ public class TodayPlanFragment extends Fragment implements TodayPlanContract.Mvp
         mEt = mBinding.etToday;
         mBtn = mBinding.btnSend;
         mRlv = mBinding.rlvMainToday;
+        mTvSee = mBinding.tvSee;
 
         mPresenter = new TodayPlanPresenter();
         mPresenter.subscribe(this);
@@ -69,6 +73,13 @@ public class TodayPlanFragment extends Fragment implements TodayPlanContract.Mvp
         mRlv.setLayoutManager(linearLayoutManager);
         mRlv.setAdapter(mAdapter);
         mPresenter.initData();
+
+        mAdapter.setOnChangeDataSizeListener(new OnChangeDataSizeListener() {
+            @Override
+            public void dataIsEmpty(boolean isEmpty) {
+                mTvSee.setVisibility(isEmpty ? View.VISIBLE : View.GONE);
+            }
+        });
 
         mBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,6 +104,8 @@ public class TodayPlanFragment extends Fragment implements TodayPlanContract.Mvp
 
     @Override
     public void initData(List<DailyPlanModel> data) {
+        mTvSee.setVisibility(data.isEmpty() ? View.VISIBLE : View.GONE);
+
         mData = data;
         mAdapter.setData(mData);
     }
@@ -114,6 +127,6 @@ public class TodayPlanFragment extends Fragment implements TodayPlanContract.Mvp
 
     @Subscribe
     public void updateLostOrGet(CalendarEvent event) {
-        mPresenter.updateLostOrGet(event.mId,event.type);
+        mPresenter.updateLostOrGet(event.mId, event.type);
     }
 }

@@ -22,6 +22,7 @@ import android.widget.CheckedTextView;
 
 
 import com.mdove.passwordguard.ui.calendar.materialcalendarview.format.DayFormatter;
+import com.mdove.passwordguard.utils.DensityUtil;
 
 import java.util.List;
 
@@ -270,10 +271,12 @@ class DayView extends CheckedTextView {
 
         if (width >= height) {
             tempRect.set(offset, 0, radius + offset, height);
-            circleDrawableRect.set(circleOffset+20, 20, radius + circleOffset-20, height-20);
+            circleDrawableRect.set(circleOffset+ DensityUtil.dip2px(getContext(),5), DensityUtil.dip2px(getContext(),5),
+                    radius + circleOffset-DensityUtil.dip2px(getContext(),5), height-DensityUtil.dip2px(getContext(),5));
         } else {
             tempRect.set(0, offset, width, radius + offset);
-            circleDrawableRect.set(0, circleOffset , width, radius + circleOffset);
+            circleDrawableRect.set(DensityUtil.dip2px(getContext(),5), circleOffset ,
+                    width-DensityUtil.dip2px(getContext(),5), radius + circleOffset-DensityUtil.dip2px(getContext(),5));
         }
     }
 }

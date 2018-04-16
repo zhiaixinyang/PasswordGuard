@@ -123,8 +123,8 @@ public class AllMainOptionPresenter implements AllMainOptionContract.Presenter {
         data.add(deleteAccount);
         data.add(deleteDailySelf);
         data.add(allPassword);
-        data.add(collect);
         data.add(allDailySelf);
+        data.add(collect);
         data.add(setting);
         return data;
     }

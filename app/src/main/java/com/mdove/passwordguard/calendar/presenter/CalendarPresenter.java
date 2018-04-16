@@ -121,7 +121,7 @@ public class CalendarPresenter implements CalendarContract.Presenter {
         List<DailyPlan> data = mDailyPlanDao.queryBuilder().where(DailyPlanDao.Properties.MTimeStamp.ge(curTime),
                 DailyPlanDao.Properties.MTimeStamp.lt(nextTime))
                 .build().list();
-        if (data != null && data.size() > 0) {
+        if (data != null && data.size() > 0 && mData != null) {
             mData.removeAll(mData);
             for (DailyPlan dailyPlan : data) {
                 mData.add(new DailyPlanModel(dailyPlan));

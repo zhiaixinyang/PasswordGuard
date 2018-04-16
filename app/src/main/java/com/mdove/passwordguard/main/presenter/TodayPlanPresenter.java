@@ -10,6 +10,7 @@ import com.mdove.passwordguard.utils.DateUtil;
 import com.mdove.passwordguard.utils.log.LogUtils;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -41,11 +42,18 @@ public class TodayPlanPresenter implements TodayPlanContract.Presenter {
     public void initData() {
         long curTime = System.currentTimeMillis();
         int year = DateUtil.getYear(curTime);
-        int month = DateUtil.getMonth(curTime);
-        int day = DateUtil.getDay(curTime);
-        long time = new Date(year, month, day).getTime();
+        //以一月是0为准计算
+        int month = DateUtil.getMonth(curTime)-1;
+        int days = DateUtil.getDay(curTime);
+        Calendar calendar = Calendar.getInstance();
+        calendar.clear();
+        calendar.set(year, month, days);
+        curTime = calendar.getTimeInMillis();
+        calendar.set(year, month, days + 1);
+        long nextTime = calendar.getTimeInMillis();
 
-        List<DailyPlan> data = mDailyPlanDao.queryBuilder().where(DailyPlanDao.Properties.MTimeStamp.ge(time)).list();
+        List<DailyPlan> data = mDailyPlanDao.queryBuilder().where(DailyPlanDao.Properties.MTimeStamp.ge(curTime),
+                DailyPlanDao.Properties.MTimeStamp.lt(nextTime)).build().list();
         for (DailyPlan plan : data) {
             mData.add(new DailyPlanModel(plan));
         }

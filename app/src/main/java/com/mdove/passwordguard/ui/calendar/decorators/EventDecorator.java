@@ -7,6 +7,7 @@ import com.mdove.passwordguard.ui.calendar.materialcalendarview.CalendarDay;
 import com.mdove.passwordguard.ui.calendar.materialcalendarview.DayViewDecorator;
 import com.mdove.passwordguard.ui.calendar.materialcalendarview.DayViewFacade;
 import com.mdove.passwordguard.ui.calendar.materialcalendarview.spans.DotSpan;
+import com.mdove.passwordguard.utils.DateUtil;
 
 import org.greenrobot.greendao.query.QueryBuilder;
 
@@ -24,29 +25,30 @@ public class EventDecorator implements DayViewDecorator {
 
     private int color;
     private DailyPlanDao mDao;
-    private QueryBuilder<DailyPlan> mQuery;
 
     public EventDecorator(int color) {
         this.color = color;
         mDao = App.getDaoSession().getDailyPlanDao();
-        mQuery = mDao.queryBuilder();
     }
 
     @Override
     public boolean shouldDecorate(CalendarDay day) {
-//        int days = day.getDay();
-//        int year = day.getYear();
-//        int month = day.getMonth();
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.clear();
-//        calendar.set(year,month,days);
-//        long curTime = calendar.getTimeInMillis();
-//        DailyPlan list = mQuery.where(DailyPlanDao.Properties.MTimeStamp.ge(curTime))
-//                .unique();
-//        if (list != null) {
-//            return true;
-//        }
-        return false;
+        int days = day.getDay();
+        int year = day.getYear();
+        int month = day.getMonth();
+        Calendar calendar = Calendar.getInstance();
+        calendar.clear();
+        calendar.set(year, month, days);
+        long curTime = calendar.getTimeInMillis();
+        calendar.set(year, month, days + 1);
+        long nextTime = calendar.getTimeInMillis();
+
+        if (mDao.queryBuilder().where(DailyPlanDao.Properties.MTimeStamp.ge(curTime),
+                DailyPlanDao.Properties.MTimeStamp.lt(nextTime)).buildCount().count() > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override

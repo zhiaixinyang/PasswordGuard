@@ -45,9 +45,10 @@
             <FrameLayout
                 android:id="@+id/btn_send"
                 android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_height="40dp">
+                android:layout_centerVertical="true">
+
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
@@ -64,8 +65,8 @@
             android:layout_below="@+id/layout_et"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp"
-            android:text="暂无显示工作记录"
+            android:layout_marginTop="40dp"
+            android:text="今天还没有复盘得失"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:visibility="gone" />

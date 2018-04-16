@@ -92,15 +92,6 @@ public class CalendarSmoothActivity extends BaseActivity implements CalendarCont
     }
 
     private void addDecorator() {
-        //150天
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.add(Calendar.MONTH, -2);
-//        ArrayList<CalendarDay> dates = new ArrayList<>();
-//        for (int i = 0; i < 30; i++) {
-//            CalendarDay day = CalendarDay.from(calendar);
-//            dates.add(day);
-//            calendar.add(Calendar.DATE, 5);
-//        }
         //增加有红点标志
         monthWeekMaterialCalendarView.addDecorator(new EventDecorator(Color.RED));
         monthWeekMaterialCalendarView.addDecorator(new RemindDecorator(this));
@@ -119,6 +110,8 @@ public class CalendarSmoothActivity extends BaseActivity implements CalendarCont
         recyclerView.setAdapter(mAdapter);
 
         mPresenter.initData();
+
+        mPresenter.onSelectDay(selectedDate);
     }
 
 

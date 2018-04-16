@@ -43,14 +43,14 @@ public class DailyPlanOptionPresenter implements DailyPlanOptionContract.Present
 
     @Override
     public void initDailyPlan() {
-        DailyPlanOptionInfo account = new DailyPlanOptionInfo(DAILY_PLAN_OPTION_TYPE_CALENDER, "记录账号", "记录账号信息", R.drawable.bg_main_option_btn_1, R.mipmap.ic_btn_password);
-        DailyPlanOptionInfo dailySelf = new DailyPlanOptionInfo(DAILY_PLAN_OPTION_TYPE_CALENDER, "随手记", "记录有趣", R.drawable.bg_main_option_btn_4, R.mipmap.ic_btn_password);
-        DailyPlanOptionInfo selfTask = new DailyPlanOptionInfo(DAILY_PLAN_OPTION_TYPE_CALENDER, "我的工作", "记录我的工作", R.drawable.bg_main_option_btn_6, R.mipmap.ic_btn_self_task);
-        DailyPlanOptionInfo deleteAccount = new DailyPlanOptionInfo(DAILY_PLAN_OPTION_TYPE_CALENDER, "删除记录", "账号信息", R.drawable.bg_main_option_btn_3, R.mipmap.ic_delete);
+        DailyPlanOptionInfo account = new DailyPlanOptionInfo(DAILY_PLAN_OPTION_TYPE_CALENDER, "日历模式", "历史复盘信息", R.drawable.bg_main_option_btn_1, R.mipmap.ic_btn_password);
+//        DailyPlanOptionInfo dailySelf = new DailyPlanOptionInfo(DAILY_PLAN_OPTION_TYPE_CALENDER, "随手记", "记录有趣", R.drawable.bg_main_option_btn_4, R.mipmap.ic_btn_password);
+//        DailyPlanOptionInfo selfTask = new DailyPlanOptionInfo(DAILY_PLAN_OPTION_TYPE_CALENDER, "我的工作", "记录我的工作", R.drawable.bg_main_option_btn_6, R.mipmap.ic_btn_self_task);
+//        DailyPlanOptionInfo deleteAccount = new DailyPlanOptionInfo(DAILY_PLAN_OPTION_TYPE_CALENDER, "删除记录", "账号信息", R.drawable.bg_main_option_btn_3, R.mipmap.ic_delete);
         mData.add(account);
-        mData.add(dailySelf);
-        mData.add(selfTask);
-        mData.add(deleteAccount);
+//        mData.add(dailySelf);
+//        mData.add(selfTask);
+//        mData.add(deleteAccount);
 
         mView.initDailyPlan(mData);
     }
