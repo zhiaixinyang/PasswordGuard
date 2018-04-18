@@ -51,14 +51,14 @@
             android:layout_height="wrap_content"
             android:layout_above="@+id/layout_bottom"
             android:layout_below="@+id/layout_top"
-            android:layout_marginTop="@dimen/activity_add_daily_self_margin"
-            android:layout_marginRight="@dimen/activity_add_daily_self_margin"
             android:layout_marginLeft="@dimen/activity_add_daily_self_margin"
+            android:layout_marginRight="@dimen/activity_add_daily_self_margin"
+            android:layout_marginTop="@dimen/activity_add_daily_self_margin"
             android:background="@drawable/bg_add_password_activity_et"
             android:gravity="top"
             android:hint="随手记"
             android:padding="@dimen/activity_add_daily_self_margin"
-            android:textCursorDrawable="@drawable/bg_et_cursor_white" />
+            android:textCursorDrawable="@drawable/bg_et_cursor_common" />
 
         <LinearLayout
             android:id="@+id/layout_bottom"

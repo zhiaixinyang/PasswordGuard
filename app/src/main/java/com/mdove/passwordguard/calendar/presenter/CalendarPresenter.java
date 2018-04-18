@@ -40,7 +40,7 @@ public class CalendarPresenter implements CalendarContract.Presenter {
     @Override
     public void initData() {
         mData = new ArrayList<>();
-        mData.add(new CalendarTopModel());
+//        mData.add(new CalendarTopModel());
         List<DailyPlan> data = mDailyPlanDao.queryBuilder().list();
         for (DailyPlan plan : data) {
             mData.add(new DailyPlanModel(plan));

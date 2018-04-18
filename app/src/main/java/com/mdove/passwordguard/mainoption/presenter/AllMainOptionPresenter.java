@@ -51,7 +51,6 @@ public class AllMainOptionPresenter implements AllMainOptionContract.Presenter {
     public void unSubscribe() {
     }
 
-
     @Override
     public void initData() {
         mData = getInitOptionData();
