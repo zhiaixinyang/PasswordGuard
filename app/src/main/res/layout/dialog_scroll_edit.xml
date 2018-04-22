@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+    </ScrollView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip"
+        android:background="#666666"></View>
+    <RelativeLayout
+        android:id="@+id/layout_et"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="@dimen/margin_dialog_scroll_edit"
+        android:background="@drawable/bg_item_main_self_task_et"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <ImageView
+            android:id="@+id/iv_task"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_dialog_scroll_edit"
+            android:layout_marginRight="@dimen/margin_dialog_scroll_edit"
+            android:src="@mipmap/ic_add" />
+
+        <EditText
+            android:id="@+id/et_self_task"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/margin_dialog_scroll_edit"
+            android:layout_toLeftOf="@+id/btn_send"
+            android:layout_toRightOf="@+id/iv_task"
+            android:background="@null"
+            android:hint="添加随手工作记录..."
+            android:textColor="@color/white"
+            android:textCursorDrawable="@drawable/bg_et_cursor_white"
+            android:textColorHint="@color/white"
+            android:textSize="16sp" />
+
+        <FrameLayout
+            android:id="@+id/btn_send"
+            android:layout_width="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_height="40dp">
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/margin_dialog_scroll_edit"
+                android:src="@mipmap/ic_btn_send" />
+        </FrameLayout>
+    </RelativeLayout>
+</LinearLayout>

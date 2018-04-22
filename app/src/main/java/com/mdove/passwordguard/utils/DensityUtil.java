@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Display;
+import android.view.View;
 
 
 public class DensityUtil {
@@ -80,5 +81,17 @@ public class DensityUtil {
             mHeightPixels = displayMetrics.heightPixels;
         }
         return mHeightPixels;
+    }
+
+    public static int getYByView(View view) {
+        int[] arrY = new int[2];
+        view.getLocationOnScreen(arrY);
+        return arrY[1];
+    }
+
+    public static int getXByView(View view) {
+        int[] arrY = new int[2];
+        view.getLocationOnScreen(arrY);
+        return arrY[0];
     }
 }

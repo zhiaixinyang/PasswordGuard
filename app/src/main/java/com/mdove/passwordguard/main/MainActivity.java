@@ -1,16 +1,20 @@
 package com.mdove.passwordguard.main;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.support.annotation.StringDef;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -42,6 +46,7 @@ import com.mdove.passwordguard.main.model.MainGroupModel;
 import com.mdove.passwordguard.main.model.MainPasswordModel;
 import com.mdove.passwordguard.main.model.event.AddGroupEvent;
 import com.mdove.passwordguard.main.model.event.CheckOrderEvent;
+import com.mdove.passwordguard.main.model.event.DailyTaskScrollEvent;
 import com.mdove.passwordguard.main.model.event.HideItemMainEvent;
 import com.mdove.passwordguard.main.presenter.MainPresenter;
 import com.mdove.passwordguard.main.presenter.contract.MainContract;
@@ -130,7 +135,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
         mToolbar = mBinding.toolbar;
         mTitle = mBinding.tvTitle;
         mBinding.statusBar.setHeight(StatusBarUtils.getStatusBarHeight(this));
-
 
         RxBus.get().register(this);
         mSearchFragment = SearchFragment.newInstance();
@@ -520,5 +524,9 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     @Subscribe
     public void favoriteAllPassword(AllPasswordFavoriteEvent event) {
         mPresenter.postAllPasswordFavorite(event.mId, event.mIsFavorite);
+    }
+
+    @Subscribe
+    public void dailyTaskScroll(DailyTaskScrollEvent event) {
     }
 }

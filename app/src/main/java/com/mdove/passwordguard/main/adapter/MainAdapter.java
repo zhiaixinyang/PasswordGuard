@@ -41,6 +41,7 @@ import com.mdove.passwordguard.main.model.MainSearchModel;
 import com.mdove.passwordguard.main.model.MainSelfTaskModel;
 import com.mdove.passwordguard.main.model.MainTopModel;
 import com.mdove.passwordguard.main.model.event.CheckOrderEvent;
+import com.mdove.passwordguard.main.model.event.DailyTaskScrollEvent;
 import com.mdove.passwordguard.main.model.handler.ItemMainSelfTaskHandler;
 import com.mdove.passwordguard.main.model.handler.ItemMainTopHandler;
 import com.mdove.passwordguard.main.model.handler.MainDailyPlanHandler;
@@ -55,6 +56,7 @@ import com.mdove.passwordguard.ui.guideview.Guide;
 import com.mdove.passwordguard.ui.guideview.GuideBuilder;
 import com.mdove.passwordguard.ui.guideview.component.CommonComponent;
 import com.mdove.passwordguard.ui.guideview.component.SimpleComponent;
+import com.mdove.passwordguard.utils.DensityUtil;
 import com.mdove.passwordguard.utils.InflateUtils;
 
 import java.util.ArrayList;
@@ -380,6 +382,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
+    private int scrollPosition = -1;
 
     public class MainSelfTaskHolder extends RecyclerView.ViewHolder {
         private ItemMainSelfTaskBinding mBinding;
@@ -396,6 +399,15 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             if (model.mData == null || model.mData.size() == 0) {
                 mBinding.tvSee.setVisibility(View.VISIBLE);
             }
+
+            mBinding.layoutEt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    RxBus.get().post(new DailyTaskScrollEvent(
+                            DensityUtil.getYByView(mBinding.layoutEt),
+                            mBinding.layoutEt.getHeight()));
+                }
+            });
 
             mMainSelfTaskAdapter = new MainSelfTaskAdapter(mContext, mPresenter, model.mData);
             mBinding.rlvMainSelfTask.setAdapter(mMainSelfTaskAdapter);

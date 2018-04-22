@@ -2,6 +2,8 @@ package com.mdove.passwordguard.main.model.handler;
 
 import android.widget.EditText;
 
+import com.hwangjr.rxbus.RxBus;
+import com.mdove.passwordguard.main.model.event.DailyTaskScrollEvent;
 import com.mdove.passwordguard.main.presenter.MainPresenter;
 
 /**
@@ -17,6 +19,9 @@ public class ItemMainSelfTaskHandler {
 
     public void onClickBtnMainSelfTaskIn() {
         mPresenter.onClickBtnMainSelfTaskIn();
+    }
+
+    public void onClickBtnLayoutEt(){
     }
 
     //没用
