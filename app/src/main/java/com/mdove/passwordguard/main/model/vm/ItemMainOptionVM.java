@@ -1,12 +1,8 @@
 package com.mdove.passwordguard.main.model.vm;
 
 import android.databinding.BaseObservable;
-import android.databinding.ObservableField;
 
 import com.mdove.passwordguard.main.model.MainOptionInfo;
-import com.mdove.passwordguard.main.model.MainOptionModel;
-import com.mdove.passwordguard.main.model.MainTopModel;
-import com.mdove.passwordguard.utils.DateUtil;
 
 /**
  * Created by MDove on 2018/2/9.

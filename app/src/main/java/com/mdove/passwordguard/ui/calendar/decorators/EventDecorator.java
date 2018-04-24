@@ -2,20 +2,12 @@ package com.mdove.passwordguard.ui.calendar.decorators;
 
 import com.mdove.passwordguard.App;
 import com.mdove.passwordguard.greendao.DailyPlanDao;
-import com.mdove.passwordguard.greendao.entity.DailyPlan;
 import com.mdove.passwordguard.ui.calendar.materialcalendarview.CalendarDay;
 import com.mdove.passwordguard.ui.calendar.materialcalendarview.DayViewDecorator;
 import com.mdove.passwordguard.ui.calendar.materialcalendarview.DayViewFacade;
 import com.mdove.passwordguard.ui.calendar.materialcalendarview.spans.DotSpan;
-import com.mdove.passwordguard.utils.DateUtil;
-
-import org.greenrobot.greendao.query.QueryBuilder;
 
 import java.util.Calendar;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
 
 /**
  * Created by dickliu on 2017/4/26.

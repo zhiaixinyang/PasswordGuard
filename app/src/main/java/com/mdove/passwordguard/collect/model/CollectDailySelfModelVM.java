@@ -4,7 +4,7 @@ import android.databinding.ObservableField;
 
 import com.mdove.passwordguard.base.IFavoriteVM;
 import com.mdove.passwordguard.greendao.entity.DailySelf;
-import com.mdove.passwordguard.utils.DateUtil;
+import com.mdove.passwordguard.utils.DateUtils;
 
 import java.io.Serializable;
 
@@ -22,7 +22,7 @@ public class CollectDailySelfModelVM implements Serializable, IFavoriteVM {
     public int mItemPosition;
 
     public CollectDailySelfModelVM(CollectDailySelfModel model, int position) {
-        mTime.set(DateUtil.getDateChinese(model.mTime));
+        mTime.set(DateUtils.getDateChinese(model.mTime));
         mContent.set(model.mContent);
         mTvGroup.set(model.mTvGroup);
         mIsFavorite.set(model.mIsFavorite);

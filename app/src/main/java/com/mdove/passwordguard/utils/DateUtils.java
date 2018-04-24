@@ -10,11 +10,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author MDove on 2018/2/10.
  */
-public class DateUtil {
+public class DateUtils {
 
     public static final long SECOND_IN_MILLIS = 1000;
     public static final long MINUTE_IN_MILLIS = SECOND_IN_MILLIS * 60;
@@ -56,6 +57,23 @@ public class DateUtil {
         return cal.get(Calendar.YEAR);
     }
 
+    public static String formatMinsS(long timestamp) {
+        if (getHour(timestamp) <= 0) {
+            return String.format("%dmins%ds",
+                    TimeUnit.MILLISECONDS.toMinutes(timestamp),
+                    TimeUnit.MILLISECONDS.toSeconds(timestamp) -
+                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(timestamp))
+            );
+        }
+        return simpleFormat(TimeZone.getDefault().getDisplayName(), timestamp, "HH:mm:ss");
+    }
+
+    public static int getHour(long timestamp) {
+        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone(TimeZone.getDefault().getDisplayName()));
+        calendar.setTimeInMillis(timestamp);
+        return calendar.get(Calendar.HOUR);
+    }
+
     public static int getMonth(long time) {
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(time);
@@ -75,6 +93,15 @@ public class DateUtil {
 
     public static String formatDefault(long time) {
         return DEFAULT_DATE_FORMAT.get().format(new Date(time));
+    }
+
+    public static String simpleFormat(@Nullable String timeZone, long time, @NonNull String datePattern) {
+        Date date = new Date(time);
+        DateFormat format = new SimpleDateFormat(datePattern);
+        if (timeZone != null) {
+            format.setTimeZone(TimeZone.getTimeZone(timeZone));
+        }
+        return format.format(date);
     }
 
     public static String getYearMonth(long time) {

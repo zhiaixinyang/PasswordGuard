@@ -5,7 +5,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 
 import com.mdove.passwordguard.base.SimpleTextWatcher;
-import com.mdove.passwordguard.utils.DateUtil;
+import com.mdove.passwordguard.utils.DateUtils;
 
 /**
  * Created by MDove on 2018/3/25.
@@ -22,7 +22,7 @@ public class SelfTaskModelVM {
 
     public SelfTaskModelVM(SelfTaskModel selfTaskModel, int position) {
         mTask.set(selfTaskModel.mTask);
-        mTime.set(DateUtil.getDateChinese(selfTaskModel.mTime));
+        mTime.set(DateUtils.getDateChinese(selfTaskModel.mTime));
         mIsSuc.set(selfTaskModel.mIsSuc);
         mIsSee.set(selfTaskModel.mIsSee);
         mPriority.set(selfTaskModel.mPriority);

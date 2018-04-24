@@ -2,7 +2,7 @@ package com.mdove.passwordguard.task.model;
 
 import android.databinding.ObservableField;
 
-import com.mdove.passwordguard.utils.DateUtil;
+import com.mdove.passwordguard.utils.DateUtils;
 
 /**
  * Created by MDove on 2018/3/27.
@@ -19,7 +19,7 @@ public class SucSelfTaskModelVM {
 
     public SucSelfTaskModelVM(SucSelfTaskModel sucSelfTaskModel, int position) {
         mTask.set(sucSelfTaskModel.mTask);
-        mTime.set(DateUtil.getDateChinese(sucSelfTaskModel.mTime));
+        mTime.set(DateUtils.getDateChinese(sucSelfTaskModel.mTime));
         mIsSuc.set(sucSelfTaskModel.mIsSuc);
         mIsSee.set(sucSelfTaskModel.mIsSee);
         mPriority.set(sucSelfTaskModel.mPriority);

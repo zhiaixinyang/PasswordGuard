@@ -4,7 +4,7 @@ import android.databinding.ObservableField;
 
 import com.mdove.passwordguard.deletelist.model.DeleteDailySelfModel;
 import com.mdove.passwordguard.greendao.entity.DeletedDailySelf;
-import com.mdove.passwordguard.utils.DateUtil;
+import com.mdove.passwordguard.utils.DateUtils;
 
 /**
  * Created by MDove on 2018/2/25.
@@ -21,7 +21,7 @@ public class DeleteDailySelfModelVM {
         mContent.set(model.mContent);
         mTvGroup.set(model.mTvGroup);
         mDeleteTime.set(model.mDeleteTime);
-        mTimeStamp.set(DateUtil.getDateChinese(model.mTimeStamp));
+        mTimeStamp.set(DateUtils.getDateChinese(model.mTimeStamp));
         mDeletedDailySelf = model.mDeletedDailySelf;
         mItemPosition = position;
     }

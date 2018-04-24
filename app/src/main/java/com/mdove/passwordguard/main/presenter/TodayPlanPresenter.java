@@ -6,8 +6,7 @@ import com.mdove.passwordguard.greendao.entity.DailyPlan;
 import com.mdove.passwordguard.main.model.DailyPlanModel;
 import com.mdove.passwordguard.main.model.vm.DailyPlanModelVM;
 import com.mdove.passwordguard.main.presenter.contract.TodayPlanContract;
-import com.mdove.passwordguard.utils.DateUtil;
-import com.mdove.passwordguard.utils.log.LogUtils;
+import com.mdove.passwordguard.utils.DateUtils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -41,10 +40,10 @@ public class TodayPlanPresenter implements TodayPlanContract.Presenter {
     @Override
     public void initData() {
         long curTime = System.currentTimeMillis();
-        int year = DateUtil.getYear(curTime);
+        int year = DateUtils.getYear(curTime);
         //以一月是0为准计算
-        int month = DateUtil.getMonth(curTime)-1;
-        int days = DateUtil.getDay(curTime);
+        int month = DateUtils.getMonth(curTime)-1;
+        int days = DateUtils.getDay(curTime);
         Calendar calendar = Calendar.getInstance();
         calendar.clear();
         calendar.set(year, month, days);

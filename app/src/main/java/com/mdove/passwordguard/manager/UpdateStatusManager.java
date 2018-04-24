@@ -1,7 +1,7 @@
 package com.mdove.passwordguard.manager;
 
 import com.mdove.passwordguard.config.AppConfig;
-import com.mdove.passwordguard.utils.DateUtil;
+import com.mdove.passwordguard.utils.DateUtils;
 
 /**
  * Created by MDove on 2018/2/15.
@@ -14,7 +14,7 @@ public class UpdateStatusManager {
             AppConfig.setAppOrderTodayTime(curTime);
             return true;
         }
-        boolean isSame= DateUtil.isSameDay(curTime,AppConfig.getAppOrderTodayTime());
+        boolean isSame= DateUtils.isSameDay(curTime,AppConfig.getAppOrderTodayTime());
         if (!isSame){
             AppConfig.setAppOrderTodayTime(curTime);
             return true;

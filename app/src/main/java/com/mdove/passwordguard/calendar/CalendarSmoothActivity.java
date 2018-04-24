@@ -2,13 +2,11 @@ package com.mdove.passwordguard.calendar;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
@@ -23,7 +21,7 @@ import com.mdove.passwordguard.ui.calendar.decorators.RemindDecorator;
 import com.mdove.passwordguard.ui.calendar.materialcalendar.MonthWeekMaterialCalendarView;
 import com.mdove.passwordguard.ui.calendar.materialcalendarview.CalendarDay;
 import com.mdove.passwordguard.ui.calendar.materialcalendarview.MaterialCalendarView;
-import com.mdove.passwordguard.utils.DateUtil;
+import com.mdove.passwordguard.utils.DateUtils;
 
 import java.util.List;
 
@@ -62,7 +60,7 @@ public class CalendarSmoothActivity extends BaseActivity implements CalendarCont
 
         monthWeekMaterialCalendarView.setCurrentDate(selectedDate);
         monthWeekMaterialCalendarView.setSelectedDate(selectedDate);
-        mTvTime.setText(DateUtil.getDateChinese(selectedDate.getDate()));
+        mTvTime.setText(DateUtils.getDateChinese(selectedDate.getDate()));
 
         monthWeekMaterialCalendarView.state().edit().setSlideModeChangeListener(new MonthWeekMaterialCalendarView.SlideModeChangeListener() {
             @Override
@@ -73,13 +71,13 @@ public class CalendarSmoothActivity extends BaseActivity implements CalendarCont
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
                 selectedDate = date;
-                mTvTime.setText(DateUtil.getDateChinese(selectedDate.getDate()));
+                mTvTime.setText(DateUtils.getDateChinese(selectedDate.getDate()));
                 mPresenter.onSelectDay(selectedDate);
             }
         }).setSlideOnMonthChangedListener(new MonthWeekMaterialCalendarView.SlideOnMonthChangedListener() {
             @Override
             public void onMonthChanged(MaterialCalendarView widget, CalendarDay date) {
-                mTvTime.setText(DateUtil.getDateChinese(date.getDate()));
+                mTvTime.setText(DateUtils.getDateChinese(date.getDate()));
             }
         }).commit();
 

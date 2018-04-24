@@ -6,7 +6,7 @@ import com.mdove.passwordguard.alldata.model.AllDailySelfModel;
 import com.mdove.passwordguard.base.IFavoriteVM;
 import com.mdove.passwordguard.base.IHideVM;
 import com.mdove.passwordguard.greendao.entity.DailySelf;
-import com.mdove.passwordguard.utils.DateUtil;
+import com.mdove.passwordguard.utils.DateUtils;
 
 import java.io.Serializable;
 
@@ -25,7 +25,7 @@ public class ItemAllDailySelfVM implements Serializable, IFavoriteVM, IHideVM {
     public int mItemPosition;
 
     public ItemAllDailySelfVM(AllDailySelfModel model, int position) {
-        mTime.set(DateUtil.getDateChinese(model.mTime));
+        mTime.set(DateUtils.getDateChinese(model.mTime));
         mContent.set(model.mContent);
         mTvGroup.set(model.mTvGroup);
 
