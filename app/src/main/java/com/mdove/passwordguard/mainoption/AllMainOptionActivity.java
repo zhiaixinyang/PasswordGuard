@@ -1,5 +1,6 @@
 package com.mdove.passwordguard.mainoption;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,6 +31,9 @@ public class AllMainOptionActivity extends BaseActivity implements AllMainOption
 
     public static void start(Context context) {
         Intent start = new Intent(context, AllMainOptionActivity.class);
+        if (!(context instanceof Activity)) {
+            start.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
         context.startActivity(start);
     }
 

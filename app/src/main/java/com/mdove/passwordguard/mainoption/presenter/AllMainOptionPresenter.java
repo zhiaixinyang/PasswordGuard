@@ -2,12 +2,14 @@ package com.mdove.passwordguard.mainoption.presenter;
 
 import android.Manifest;
 import android.app.Activity;
+import android.util.SparseArray;
 
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.addoralter.AddDailySelfActivity;
 import com.mdove.passwordguard.addoralter.AddPasswordActivity;
 import com.mdove.passwordguard.alldata.AllDailySelfActivity;
 import com.mdove.passwordguard.alldata.AllPasswordActivity;
+import com.mdove.passwordguard.backup.BackUpActivity;
 import com.mdove.passwordguard.backup.BackUpService;
 import com.mdove.passwordguard.collect.CollectActivity;
 import com.mdove.passwordguard.deletelist.DeleteListDailySelfActivity;
@@ -22,6 +24,7 @@ import com.mdove.passwordguard.utils.permission.PermissionManager;
 import com.mdove.passwordguard.utils.permission.PermissionUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static com.mdove.passwordguard.main.presenter.MainPresenter.MAIN_OPEN_INFO_TYPE_ACCOUNT;
@@ -110,22 +113,23 @@ public class AllMainOptionPresenter implements AllMainOptionContract.Presenter {
 
     @Override
     public void onClickBtnBackUp() {
-        String[] permissions = new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-        if (!PermissionUtils.hasPermissions(mView.getContext(), permissions)) {
-            PermissionManager.askForPermission((Activity) mView.getContext(), 0, permissions, new PermissionGrantCallback() {
-                @Override
-                public void permissionGranted(int requestCode) {
-                    BackUpService.start(mView.getContext());
-                }
-
-                @Override
-                public void permissionRefused(int requestCode) {
-
-                }
-            });
-        } else {
-            BackUpService.start(mView.getContext());
-        }
+        BackUpActivity.start(mView.getContext());
+//        String[] permissions = new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+//        if (!PermissionUtils.hasPermissions(mView.getContext(), permissions)) {
+//            PermissionManager.askForPermission((Activity) mView.getContext(), 0, permissions, new PermissionGrantCallback() {
+//                @Override
+//                public void permissionGranted(int requestCode) {
+//                    BackUpService.start(mView.getContext());
+//                }
+//
+//                @Override
+//                public void permissionRefused(int requestCode) {
+//
+//                }
+//            });
+//        } else {
+//            BackUpService.start(mView.getContext());
+//        }
     }
 
     public List<MainOptionInfo> getInitOptionData() {

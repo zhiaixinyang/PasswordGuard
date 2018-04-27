@@ -2,7 +2,10 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
+        <import type="android.view.View" />
 
         <variable
             name="viewModel"
@@ -12,6 +15,7 @@
             name="actionHandler"
             type="com.mdove.passwordguard.main.model.handler.MainSelfTaskHandler" />
     </data>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,21 +29,39 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bg_item_self_task">
 
-            <TextView
-                android:id="@+id/tv_title"
+            <RelativeLayout
+                android:id="@+id/layout_title"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_item_self_task"
-                android:text="@{viewModel.mTask}"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                tools:text="我的一条任务,我的一条任务,我的一条任务,我的一条任务,我的一条任务,我的一条任务" />
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_item_self_task"
+                    android:text="@{viewModel.mTask}"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    tools:text="我的一条任务,我的一条任务,我的一条任务,我的一条任务,我的一条任务,我的一条任务,我的一条任务,我的一条任务,我的一条任务,我的一条任务,我的一条任务,我的一条任务" />
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:rotation="-30"
+                    android:src="@mipmap/ic_self_task_suc"
+                    android:visibility="@{viewModel.mIsSuc?View.VISIBLE:View.GONE}" />
+
+
+            </RelativeLayout>
+
 
             <RelativeLayout
                 android:id="@+id/layout_btn_see"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_title"
+                android:layout_below="@+id/layout_title"
                 android:layout_marginLeft="@dimen/margin_item_self_task"
                 android:layout_marginTop="@dimen/margin_item_self_task"
                 android:onClick="@{()->actionHandler.onClickSee(viewModel)}">
@@ -67,7 +89,7 @@
                 android:id="@+id/layout_btn_priority"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_title"
+                android:layout_below="@+id/layout_title"
                 android:layout_marginLeft="@dimen/margin_item_self_task"
                 android:layout_marginTop="@dimen/margin_item_self_task"
                 android:layout_toRightOf="@+id/layout_btn_see"
@@ -87,8 +109,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/iv_priority"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="@dimen/margin_item_self_task"
                     android:text="优先级"
                     android:textColor="@color/commonColor"
                     android:textSize="@dimen/item_main_self_task_rlv_size" />
@@ -98,7 +118,7 @@
                 android:id="@+id/layout_btn_copy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_title"
+                android:layout_below="@+id/layout_title"
                 android:layout_marginLeft="@dimen/margin_item_self_task"
                 android:layout_marginTop="@dimen/margin_item_self_task"
                 android:layout_toRightOf="@+id/layout_btn_priority"
@@ -129,9 +149,9 @@
                 android:id="@+id/layout_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/layout_btn_see"
                 android:layout_alignParentRight="true"
                 android:layout_marginBottom="@dimen/margin_item_self_task"
-                android:layout_alignBottom="@+id/layout_btn_see"
                 android:layout_marginRight="@dimen/margin_item_self_task"
                 android:layout_marginTop="@dimen/margin_item_self_task"
                 android:background="@drawable/bg_item_self_task_btn_off"
@@ -147,8 +167,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="完成"
-                    android:textSize="14sp"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
 
                 <ImageView
                     android:id="@+id/iv_btn"

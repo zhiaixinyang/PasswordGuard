@@ -117,6 +117,10 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
+        <activity android:name=".backup.BackUpActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".task.NewSelfTaskActivity"
             android:launchMode="singleTask"
@@ -131,6 +135,7 @@
                 <action android:name="mdove.action.backup.suc" />
                 <action android:name="mdove.action.backup.error" />
                 <action android:name="mdove.action.backup.start" />
+                <action android:name="mdove.action.backup.has.exist" />
             </intent-filter>
         </receiver>
 

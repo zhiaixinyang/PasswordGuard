@@ -16,8 +16,6 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="160dp"
-        android:layout_marginRight="@dimen/margin_item_calendar"
-        android:layout_marginLeft="@dimen/margin_item_calendar"
         android:layout_marginBottom="@dimen/margin_item_calendar"
         app:loadLostAndGetBg="@{viewModel}">
 

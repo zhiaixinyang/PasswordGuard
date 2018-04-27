@@ -103,7 +103,7 @@ public class BackUpService extends IntentService {
         if (!file.exists()) {
             Intent startBackUp = new Intent(BackUpStatusReceiver.ACTION_BACK_UP_START);
             sendBroadcast(startBackUp);
-            copyRawDBToApkDb(this,getDatabasePath("PasswordGuard.db").getPath(),
+            copyRawDBToApkDb(this, getDatabasePath("PasswordGuard.db").getPath(),
                     Environment.getExternalStorageDirectory().getPath(), DEFAULT_FILENAME);
         } else {
             Intent hasBackUp = new Intent(BackUpStatusReceiver.ACTION_BACK_UP_HAS_EXIST);
@@ -111,7 +111,7 @@ public class BackUpService extends IntentService {
         }
     }
 
-    public static boolean copyRawDBToApkDb(Context context,String innerPath, String apkDbPath, String dbName) {
+    public static boolean copyRawDBToApkDb(Context context, String innerPath, String apkDbPath, String dbName) {
         boolean b;
 
         File f = new File(apkDbPath);
@@ -147,6 +147,51 @@ public class BackUpService extends IntentService {
 
                 Intent errorBackUp = new Intent(BackUpStatusReceiver.ACTION_BACK_UP_ERROR);
                 context.sendBroadcast(errorBackUp);
+            } finally {
+                IOUtils.close(fos);
+                IOUtils.close(fis);
+            }
+        }
+        return !b;
+    }
+
+    public static void deleteBackUpFile() {
+        File backUpFile = new File(Environment.getExternalStorageDirectory().getPath() + "/" + DEFAULT_FILENAME);
+        if (backUpFile.exists()) {
+            backUpFile.delete();
+        }
+
+    }
+
+    public static boolean restartBackUp(Context context) {
+        boolean b;
+
+        File backUpFile = new File(Environment.getExternalStorageDirectory().getPath() + "/" + DEFAULT_FILENAME);
+        if (!backUpFile.exists()) {
+            return false;
+        }
+
+        File dbFile = new File(context.getDatabasePath("PasswordGuard.db").getPath());
+        b = dbFile.exists();
+        if (b) {
+            dbFile.delete();
+        }
+        if (!b) {
+            File file = new File(context.getDatabasePath("PasswordGuard.db").getPath());
+            if (!file.exists()) {
+                return false;
+            }
+
+            FileInputStream fis = null;
+            FileOutputStream fos = null;
+            try {
+                fis = new FileInputStream(dbFile);
+                fos = new FileOutputStream(file);
+                fos.getChannel().transferFrom(fis.getChannel(), 0, fis.getChannel().size());
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             } finally {
                 IOUtils.close(fos);
                 IOUtils.close(fis);

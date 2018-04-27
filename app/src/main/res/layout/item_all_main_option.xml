@@ -17,9 +17,7 @@
         android:id="@+id/btn_password"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginRight="@dimen/margin_item_all_main_option"
         android:layout_marginBottom="@dimen/margin_item_all_main_option"
-        android:layout_marginLeft="@dimen/margin_item_all_main_option"
         android:background="@drawable/bg_item_all_main_option"
         android:onClick="@{()->actionHandler.onBtnClick(viewModel.mType)}"
         android:orientation="vertical">

@@ -21,9 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="@{()->actionHandler.onClickItemDailySelf(viewModel)}"
-        android:paddingBottom="@dimen/margin_item_password_normal"
-        android:paddingLeft="@dimen/margin_item_password_normal"
-        android:paddingRight="@dimen/margin_item_password_normal">
+        android:paddingBottom="@dimen/margin_item_password_normal">
 
         <RelativeLayout
             android:id="@+id/layout_top"

@@ -20,7 +20,7 @@
         android:layout_marginLeft="@dimen/margin_item_password_normal"
         android:layout_marginRight="@dimen/margin_item_password_normal"
         android:layout_marginTop="30dp"
-        tools:background="@color/black">
+        tools:background="@color/white">
 
         <TextView
             android:id="@+id/tv_time"
@@ -32,7 +32,7 @@
             android:paddingLeft="@dimen/margin_item_main_top"
             android:paddingTop="@dimen/margin_item_main_top"
             android:text="@{viewModel.mTimeAll}"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="20sp"
             tools:text="2018年2月10日" />
 
@@ -59,7 +59,7 @@
             android:paddingBottom="@dimen/margin_item_main_top"
             android:paddingLeft="@dimen/margin_item_main_top"
             android:text="@{viewModel.mTimeWeek}"
-            android:textColor="@color/white"
+            android:textColor="@color/black_light"
             android:textSize="14sp"
             tools:text="周日" />
 
@@ -70,6 +70,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/margin_item_main_top"
+            android:visibility="gone"
             android:gravity="center"
             android:onClick="@{()->actionHandler.onClickBtnStatistics()}"
             android:orientation="vertical">

@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 
+import com.mdove.passwordguard.utils.ToastHelper;
+
 /**
  * Created by MDove on 2018/4/16.
  */
@@ -23,15 +25,19 @@ public class BackUpStatusReceiver extends BroadcastReceiver {
 
         switch (intent.getAction()) {
             case ACTION_BACK_UP_ERROR: {
+                ToastHelper.shortToast("备份失败");
                 break;
             }
             case ACTION_BACK_UP_START: {
+                ToastHelper.shortToast("开始备份");
                 break;
             }
             case ACTION_BACK_UP_SUC: {
+                ToastHelper.shortToast("备份成功");
                 break;
             }
             case ACTION_BACK_UP_HAS_EXIST: {
+                ToastHelper.shortToast("已存在备份文件");
                 break;
             }
             default: {
