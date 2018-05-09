@@ -92,4 +92,11 @@
 
     <string name="permission_title">权限需要</string>
     <string name="permissions_message">为了正常使用这个功能，我们需要一些权限。</string>
+    <string name="home_tab_options">功能</string>
+    <string name="fragment_title_options">所有功能</string>
+    <string name="home_tab_everyday_replay">复盘</string>
+    <string name="fragment_title_everyday_replay">每日复盘</string>
+    <string name="home_tab_daily_task">计划</string>
+    <string name="fragment_title_daily_task">我的计划</string>
+    <string name="string_everyday_replay_empty">复盘内容总不能为空吧</string>
 </resources>
