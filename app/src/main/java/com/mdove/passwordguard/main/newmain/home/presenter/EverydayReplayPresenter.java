@@ -1,4 +1,4 @@
-package com.mdove.passwordguard.main.newmain.presenter;
+package com.mdove.passwordguard.main.newmain.home.presenter;
 
 import com.hwangjr.rxbus.RxBus;
 import com.mdove.passwordguard.App;
@@ -7,10 +7,9 @@ import com.mdove.passwordguard.calendar.model.CalendarEvent;
 import com.mdove.passwordguard.greendao.DailyPlanDao;
 import com.mdove.passwordguard.greendao.entity.DailyPlan;
 import com.mdove.passwordguard.main.model.DailyPlanModel;
-import com.mdove.passwordguard.main.model.vm.DailyPlanModelVM;
-import com.mdove.passwordguard.main.newmain.model.EverydayReplayModel;
-import com.mdove.passwordguard.main.newmain.model.EverydayReplayModelVM;
-import com.mdove.passwordguard.main.newmain.presenter.contract.EverydayReplayContract;
+import com.mdove.passwordguard.main.newmain.home.model.EverydayReplayModel;
+import com.mdove.passwordguard.main.newmain.home.model.EverydayReplayModelVM;
+import com.mdove.passwordguard.main.newmain.home.presenter.contract.EverydayReplayContract;
 import com.mdove.passwordguard.ui.calendar.materialcalendarview.CalendarDay;
 
 import java.util.ArrayList;
@@ -56,22 +55,13 @@ public class EverydayReplayPresenter implements EverydayReplayContract.Presenter
     }
 
     @Override
-    public void sendEverydayReplayContent(String content) {
-        DailyPlan plan = new DailyPlan();
-        plan.mTimeStamp = new Date().getTime();
-        plan.mContent = content;
-        plan.mStatus = EverydayReplayModel.STATUS_EMPTY;
-        mDailyPlanDao.insert(plan);
-    }
-
-    @Override
     public void updateLostOrGet(long id, int type) {
         DailyPlan curDailyPlan = null;
-        DailyPlanModel curDailyPlanModel = null;
+        EverydayReplayModel curDailyPlanModel = null;
         int position = -1;
         for (BaseCalendarModel model : mData) {
-            if (model instanceof DailyPlanModel) {
-                DailyPlanModel dailyPlanModel = (DailyPlanModel) model;
+            if (model instanceof EverydayReplayModel) {
+                EverydayReplayModel dailyPlanModel = (EverydayReplayModel) model;
                 if (id == dailyPlanModel.mId) {
                     curDailyPlan = dailyPlanModel.mDailyPlan;
                     curDailyPlanModel = dailyPlanModel;
@@ -139,7 +129,7 @@ public class EverydayReplayPresenter implements EverydayReplayContract.Presenter
         if (data != null && data.size() > 0 && mData != null) {
             mData.removeAll(mData);
             for (DailyPlan dailyPlan : data) {
-                mData.add(new DailyPlanModel(dailyPlan));
+                mData.add(new EverydayReplayModel(dailyPlan));
                 mView.showData(mData);
             }
         }

@@ -9,6 +9,8 @@ import android.widget.TextView;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.main.model.DailyPlanModel;
 import com.mdove.passwordguard.main.model.vm.DailyPlanModelVM;
+import com.mdove.passwordguard.main.newmain.everydayreplay.model.EverydayReplayRlvModelVM;
+import com.mdove.passwordguard.main.newmain.home.model.EverydayReplayModelVM;
 import com.mdove.passwordguard.task.model.SelfTaskModelVM;
 
 /**
@@ -25,7 +27,7 @@ public class DataBindingAdapter {
     public static void loadLostAndGetBg(ConstraintLayout view, final DailyPlanModelVM modelVM) {
         switch (modelVM.mStatus.get()) {
             case DailyPlanModel.STATUS_NORMAL: {
-                view.setBackgroundResource(R.drawable.bg_normal_white);
+                view.setBackgroundResource(R.drawable.bg_normal_white_round);
                 break;
             }
             case DailyPlanModel.STATUS_GET: {
@@ -34,6 +36,54 @@ public class DataBindingAdapter {
             }
             case DailyPlanModel.STATUS_LOST: {
                 view.setBackgroundResource(R.drawable.bg_daily_plan_lose);
+                break;
+            }
+            default:{
+                view.setBackgroundResource(R.drawable.bg_normal_white_round);
+                break;
+            }
+        }
+    }
+
+    @BindingAdapter("loadLostAndGetBg")
+    public static void loadLostAndGetBg(ConstraintLayout view, final EverydayReplayRlvModelVM modelVM) {
+        switch (modelVM.mStatus.get()) {
+            case DailyPlanModel.STATUS_NORMAL: {
+                view.setBackgroundResource(R.drawable.bg_normal_white_round);
+                break;
+            }
+            case DailyPlanModel.STATUS_GET: {
+                view.setBackgroundResource(R.drawable.bg_daily_plan_get);
+                break;
+            }
+            case DailyPlanModel.STATUS_LOST: {
+                view.setBackgroundResource(R.drawable.bg_daily_plan_lose);
+                break;
+            }
+            default:{
+                view.setBackgroundResource(R.drawable.bg_normal_white_round);
+                break;
+            }
+        }
+    }
+
+    @BindingAdapter("loadLostAndGetBg")
+    public static void loadLostAndGetBg(ConstraintLayout view, final EverydayReplayModelVM modelVM) {
+        switch (modelVM.mStatus.get()) {
+            case DailyPlanModel.STATUS_NORMAL: {
+                view.setBackgroundResource(R.drawable.bg_normal_white_round);
+                break;
+            }
+            case DailyPlanModel.STATUS_GET: {
+                view.setBackgroundResource(R.drawable.bg_daily_plan_get);
+                break;
+            }
+            case DailyPlanModel.STATUS_LOST: {
+                view.setBackgroundResource(R.drawable.bg_daily_plan_lose);
+                break;
+            }
+            default:{
+                view.setBackgroundResource(R.drawable.bg_normal_white_round);
                 break;
             }
         }

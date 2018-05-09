@@ -1,5 +1,6 @@
 package com.mdove.passwordguard.main;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -113,6 +114,14 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpV
     @StringDef(value = {ACTION_LOCK_IS_SUC})
     @Retention(RetentionPolicy.CLASS)
     public @interface MainAction {
+    }
+
+    public static void start(Context context) {
+        Intent start = new Intent(context, MainActivity.class);
+        if (!(context instanceof Activity)) {
+            start.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+        context.startActivity(start);
     }
 
     public static void start(Context context, @MainAction String action) {

@@ -1,4 +1,4 @@
-package com.mdove.passwordguard.main.newmain.model;
+package com.mdove.passwordguard.main.newmain.home.model;
 
 import com.mdove.passwordguard.calendar.model.BaseCalendarModel;
 import com.mdove.passwordguard.greendao.entity.DailyPlan;

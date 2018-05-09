@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            android:theme="@style/AppBarLayout">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        </android.support.design.widget.AppBarLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_et"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/app_bar"
+            android:layout_marginLeft="@dimen/margin_et_everyday_replay"
+            android:layout_marginRight="@dimen/margin_et_everyday_replay"
+            android:layout_marginTop="@dimen/margin_et_everyday_replay"
+            android:background="@drawable/bg_item_main_self_task_et">
+
+            <ImageView
+                android:id="@+id/iv_task"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/margin_et_everyday_replay"
+                android:layout_marginRight="@dimen/margin_et_everyday_replay"
+                android:src="@mipmap/ic_add" />
+
+            <EditText
+                android:id="@+id/et_everyday_replay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/margin_et_everyday_replay"
+                android:layout_toLeftOf="@+id/btn_send"
+                android:layout_toRightOf="@+id/iv_task"
+                android:background="@null"
+                android:hint="复盘今日工作..."
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textCursorDrawable="@drawable/bg_et_cursor_white"
+                android:textSize="16sp" />
+
+            <FrameLayout
+                android:id="@+id/btn_send"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="@dimen/margin_et_everyday_replay"
+                    android:src="@mipmap/ic_btn_send" />
+            </FrameLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/layout_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_et"
+            android:layout_marginBottom="@dimen/margin_et_everyday_replay"
+            android:layout_marginTop="@dimen/margin_et_everyday_replay"
+            android:layout_marginLeft="@dimen/margin_item_calendar">
+
+            <LinearLayout
+                android:id="@+id/btn_get"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/margin_et_everyday_replay"
+                android:gravity="center"
+                android:layout_toLeftOf="@+id/btn_lost"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_get"
+                    android:layout_width="@dimen/item_main_daily_plan_today_rlv_cb_w_h"
+                    android:layout_height="@dimen/item_main_daily_plan_today_rlv_cb_w_h"
+                    android:src="@mipmap/ic_task_suc"
+                    android:tint="@color/gray" />
+
+                <TextView
+                    android:id="@+id/tv_get"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="得"
+                    android:textColor="@color/gray"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_lost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/margin_et_everyday_replay"
+                android:gravity="center"
+                android:layout_toLeftOf="@+id/btn_normal"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_lost"
+                    android:layout_width="@dimen/item_main_daily_plan_today_rlv_cb_w_h"
+                    android:layout_height="@dimen/item_main_daily_plan_today_rlv_cb_w_h"
+                    android:src="@mipmap/ic_task_suc"
+                    android:tint="@color/gray" />
+
+                <TextView
+                    android:id="@+id/tv_lost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="失"
+                    android:textColor="@color/gray"
+                    android:textSize="16sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/btn_normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/margin_et_everyday_replay"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_normal"
+                    android:layout_width="@dimen/item_main_daily_plan_today_rlv_cb_w_h"
+                    android:layout_height="@dimen/item_main_daily_plan_today_rlv_cb_w_h"
+                    android:src="@mipmap/ic_task_suc"
+                    android:tint="@color/gray" />
+
+                <TextView
+                    android:id="@+id/tv_normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="平淡"
+                    android:textColor="@color/gray"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </RelativeLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rlv"
+            android:layout_below="@+id/layout_btn"
+            android:layout_width="match_parent"
+            android:scrollbars="none"
+            android:overScrollMode="never"
+            android:background="@color/gray_light"
+            android:paddingLeft="@dimen/margin_et_everyday_replay"
+            android:paddingRight="@dimen/margin_et_everyday_replay"
+            android:paddingTop="@dimen/margin_et_everyday_replay"
+            android:layout_height="match_parent"/>
+    </RelativeLayout>
+</layout>

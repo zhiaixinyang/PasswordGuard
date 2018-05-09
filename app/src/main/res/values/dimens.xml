@@ -5,6 +5,7 @@
     <dimen name="item_normal_radius">5dp</dimen>
     <dimen name="item_main_option_btn_w_h">45dp</dimen>
 
+    <dimen name="main_radius">8dp</dimen>
     <dimen name="item_main_top_height">45dp</dimen>
 
     <dimen name="margin_item_password_normal">8dp</dimen>
@@ -80,4 +81,7 @@
     <dimen name="tab_text_size">14sp</dimen>
     <dimen name="tab_text_size_2line">12sp</dimen>
     <dimen name="tab_scrollable_min_width">72dp</dimen>
+
+    <dimen name="margin_et_everyday_replay">8dp</dimen>
+
 </resources>

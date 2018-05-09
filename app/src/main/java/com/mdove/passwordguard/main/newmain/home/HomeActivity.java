@@ -1,4 +1,4 @@
-package com.mdove.passwordguard.main.newmain;
+package com.mdove.passwordguard.main.newmain.home;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;

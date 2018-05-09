@@ -1,4 +1,4 @@
-package com.mdove.passwordguard.main.newmain;
+package com.mdove.passwordguard.main.newmain.home;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.databinding.FragmentDailyTaskBinding;
+import com.mdove.passwordguard.main.MainActivity;
 
 /**
  * Created by MDove on 2018/5/3.
@@ -30,6 +31,12 @@ public class DailyTaskFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_daily_task, container, false);
+        mBinding.btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.start(getContext());
+            }
+        });
         return mBinding.getRoot();
     }
 }

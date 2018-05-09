@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="actionHandler"
+            type="com.mdove.passwordguard.main.newmain.home.model.handler.EverydayReplayHandler" />
+    </data>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -60,7 +67,12 @@
                 android:layout_height="wrap_content"
                 android:background="@color/gray_light"
                 android:orientation="vertical"
-                android:paddingTop="@dimen/margin_item_calendar" />
+                android:scrollbars="none"
+                android:overScrollMode="never"
+                android:paddingTop="@dimen/margin_item_calendar"
+                android:paddingRight="@dimen/margin_item_calendar"
+                android:paddingLeft="@dimen/margin_item_calendar"
+                />
 
 
             <RelativeLayout
@@ -154,8 +166,7 @@
             android:layout_marginRight="@dimen/margin_item_main_self_task"
             android:layout_marginTop="@dimen/margin_item_main_self_task"
             android:background="@drawable/bg_item_main_self_task_et"
-            android:focusable="true"
-            android:focusableInTouchMode="true">
+            android:onClick="@{()->actionHandler.onClickEt()}">
 
             <ImageView
                 android:id="@+id/iv_task"
@@ -167,7 +178,6 @@
                 android:src="@mipmap/ic_add" />
 
             <TextView
-                android:id="@+id/et_everyday_replay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"

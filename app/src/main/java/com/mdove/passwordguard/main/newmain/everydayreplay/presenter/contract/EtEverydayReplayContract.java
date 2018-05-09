@@ -1,31 +1,30 @@
-package com.mdove.passwordguard.main.newmain.presenter.contract;
+package com.mdove.passwordguard.main.newmain.everydayreplay.presenter.contract;
 
 import com.mdove.passwordguard.base.BasePresenter;
 import com.mdove.passwordguard.base.BaseView;
 import com.mdove.passwordguard.calendar.model.BaseCalendarModel;
 import com.mdove.passwordguard.main.model.vm.DailyPlanModelVM;
-import com.mdove.passwordguard.main.newmain.model.EverydayReplayModelVM;
+import com.mdove.passwordguard.main.newmain.everydayreplay.model.EverydayReplayRlvModelVM;
+import com.mdove.passwordguard.main.newmain.home.model.EverydayReplayModelVM;
 import com.mdove.passwordguard.ui.calendar.materialcalendarview.CalendarDay;
 
 import java.util.List;
 
 /**
- * Created by MDove on 2018/5/3.
+ * Created by MDove on 2018/5/9.
  */
 
-public interface EverydayReplayContract {
-    interface Presenter extends BasePresenter<EverydayReplayContract.MvpView> {
+public interface EtEverydayReplayContract {
+    interface Presenter extends BasePresenter<EtEverydayReplayContract.MvpView> {
         void initData();
-
-        void onClickEt();
-
-        void sendEverydayReplayContent(String content);
 
         void updateLostOrGet(long id, int type);
 
-        void onClickDailyPlanDelete(EverydayReplayModelVM vm);
+        void onClickDailyPlanDelete(EverydayReplayRlvModelVM vm);
 
         void onSelectDay(CalendarDay selectDay);
+
+        void addDailyPlan(String string,int status);
     }
 
     interface MvpView extends BaseView<Presenter> {
@@ -35,6 +34,7 @@ public interface EverydayReplayContract {
 
         void onClickDailyPlanDelete(int position);
 
-        void onClickEt();
+        void addDailyPlan(int position);
+
     }
 }

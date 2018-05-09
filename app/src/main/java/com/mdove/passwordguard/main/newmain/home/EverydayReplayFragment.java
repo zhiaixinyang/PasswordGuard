@@ -1,4 +1,4 @@
-package com.mdove.passwordguard.main.newmain;
+package com.mdove.passwordguard.main.newmain.home;
 
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
@@ -18,11 +18,12 @@ import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.calendar.CalendarSmoothAdapter;
 import com.mdove.passwordguard.calendar.CustomLinearLayoutManager;
 import com.mdove.passwordguard.calendar.model.BaseCalendarModel;
-import com.mdove.passwordguard.calendar.presenter.CalendarPresenter;
-import com.mdove.passwordguard.calendar.presenter.contract.CalendarContract;
 import com.mdove.passwordguard.databinding.FragmentEveryReplayBinding;
-import com.mdove.passwordguard.main.newmain.presenter.EverydayReplayPresenter;
-import com.mdove.passwordguard.main.newmain.presenter.contract.EverydayReplayContract;
+import com.mdove.passwordguard.main.newmain.everydayreplay.EtEverydayReplayActivity;
+import com.mdove.passwordguard.main.newmain.home.adapter.HomeEverydayReplayAdapter;
+import com.mdove.passwordguard.main.newmain.home.model.handler.EverydayReplayHandler;
+import com.mdove.passwordguard.main.newmain.home.presenter.EverydayReplayPresenter;
+import com.mdove.passwordguard.main.newmain.home.presenter.contract.EverydayReplayContract;
 import com.mdove.passwordguard.ui.calendar.decorators.EventDecorator;
 import com.mdove.passwordguard.ui.calendar.decorators.RemindDecorator;
 import com.mdove.passwordguard.ui.calendar.materialcalendar.MonthWeekMaterialCalendarView;
@@ -43,7 +44,7 @@ public class EverydayReplayFragment extends Fragment implements EverydayReplayCo
     private CalendarDay selectedDate;
     private RecyclerView recyclerView;
     private EverydayReplayPresenter mPresenter;
-    private CalendarSmoothAdapter mAdapter;
+    private HomeEverydayReplayAdapter mAdapter;
     private TextView mTvTime;
 
     public static EverydayReplayFragment newInstance() {
@@ -101,17 +102,7 @@ public class EverydayReplayFragment extends Fragment implements EverydayReplayCo
     }
 
     private void initListener() {
-        mBinding.btnSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String content = mBinding.etEverydayReplay.getText().toString();
-                if (!TextUtils.isEmpty(content)) {
-                    mPresenter.sendEverydayReplayContent(content);
-                }else{
-                    ToastHelper.shortToast(getString(R.string.string_everyday_replay_empty));
-                }
-            }
-        });
+        mBinding.setActionHandler(new EverydayReplayHandler(mPresenter));
     }
 
     private void addDecorator() {
@@ -125,7 +116,7 @@ public class EverydayReplayFragment extends Fragment implements EverydayReplayCo
         mPresenter.subscribe(this);
         mPresenter.onSelectDay(selectedDate);
 
-//        mAdapter = new CalendarSmoothAdapter(getActivity(), mPresenter);
+        mAdapter = new HomeEverydayReplayAdapter(getActivity(), mPresenter);
 
         recyclerView.setLayoutManager(new CustomLinearLayoutManager(getActivity(),
                 LinearLayoutManager.VERTICAL, false));
@@ -149,5 +140,10 @@ public class EverydayReplayFragment extends Fragment implements EverydayReplayCo
     @Override
     public void onClickDailyPlanDelete(int position) {
         mAdapter.notifyDelete(position);
+    }
+
+    @Override
+    public void onClickEt() {
+        EtEverydayReplayActivity.start(getContext());
     }
 }

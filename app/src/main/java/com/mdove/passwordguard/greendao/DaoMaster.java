@@ -30,7 +30,6 @@ public class DaoMaster extends AbstractDaoMaster {
         PasswordDao.createTable(db, ifNotExists);
         SelfTaskDao.createTable(db, ifNotExists);
         SucSelfTaskDao.createTable(db, ifNotExists);
-        EverydayReplayDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
@@ -44,7 +43,6 @@ public class DaoMaster extends AbstractDaoMaster {
         PasswordDao.dropTable(db, ifExists);
         SelfTaskDao.dropTable(db, ifExists);
         SucSelfTaskDao.dropTable(db, ifExists);
-        EverydayReplayDao.dropTable(db, ifExists);
     }
 
     /**
@@ -72,7 +70,6 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(PasswordDao.class);
         registerDaoClass(SelfTaskDao.class);
         registerDaoClass(SucSelfTaskDao.class);
-        registerDaoClass(EverydayReplayDao.class);
     }
 
     public DaoSession newSession() {

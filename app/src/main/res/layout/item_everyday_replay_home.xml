@@ -7,11 +7,11 @@
 
         <variable
             name="viewModel"
-            type="com.mdove.passwordguard.main.model.vm.DailyPlanModelVM" />
+            type="com.mdove.passwordguard.main.newmain.home.model.EverydayReplayModelVM" />
 
         <variable
             name="actionHandler"
-            type="com.mdove.passwordguard.calendar.model.ItemCalendarHandler" />
+            type="com.mdove.passwordguard.main.newmain.home.model.handler.ItemEverydayReplayHandler" />
     </data>
 
     <android.support.constraint.ConstraintLayout

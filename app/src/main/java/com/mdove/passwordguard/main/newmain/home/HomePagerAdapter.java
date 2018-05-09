@@ -1,4 +1,4 @@
-package com.mdove.passwordguard.main.newmain;
+package com.mdove.passwordguard.main.newmain.home;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

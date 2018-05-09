@@ -1,5 +1,6 @@
 package com.mdove.passwordguard.alldata;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,6 +32,9 @@ public class AllPasswordActivity extends BaseActivity implements AllPasswordCont
 
     public static void start(Context context) {
         Intent intent = new Intent(context, AllPasswordActivity.class);
+        if (!(context instanceof Activity)) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
         context.startActivity(intent);
     }
 
