@@ -14,11 +14,16 @@
             <com.mdove.passwordguard.ui.tablayout.TabLayoutExt
                 android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
                 android:layout_gravity="bottom"
                 app:indicatorMode="wrap"
+                app:tabIconTint="@color/gray"
+                app:tabIndicatorColor="@color/colorPrimary"
                 app:tabIndicatorMarginBottom="20dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true" />
+                app:tabSelectedIconTint="@color/colorPrimary"
+                app:tabSelectedTextColor="@color/colorPrimary"
+                app:tabTextColor="@color/gray" />
         </android.support.v4.view.ViewPager>
     </RelativeLayout>
 </layout>

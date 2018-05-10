@@ -49,8 +49,8 @@ public class HomeActivity extends BaseActivity {
         mViewPager.setAdapter(adapter);
         mTabLayoutExt.setupWithViewPager(mViewPager);
 
-        mTabLayoutExt.getTabAt(0).setText(R.string.home_tab_options).setIcon(R.mipmap.ic_btn_lock);
-        mTabLayoutExt.getTabAt(1).setText(R.string.home_tab_everyday_replay).setIcon(R.mipmap.ic_btn_lock);
-        mTabLayoutExt.getTabAt(2).setText(R.string.home_tab_daily_task).setIcon(R.mipmap.ic_btn_lock);
+        mTabLayoutExt.getTabAt(0).setText(R.string.home_tab_options).setIcon(R.mipmap.ic_tab_options);
+        mTabLayoutExt.getTabAt(1).setText(R.string.home_tab_everyday_replay).setIcon(R.mipmap.ic_tab_everyday_replay);
+        mTabLayoutExt.getTabAt(2).setText(R.string.home_tab_daily_task).setIcon(R.mipmap.ic_tab_daily_task);
     }
 }
