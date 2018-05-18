@@ -2,15 +2,185 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="topOneVM"
+            type="com.mdove.passwordguard.main.newmain.options.model.vm.MainOptionsTopOneVM"/>
+        <variable
+            name="topTwoVM"
+            type="com.mdove.passwordguard.main.newmain.options.model.vm.MainOptionsTopTwoVM"/>
+        <variable
+            name="topThreeVM"
+            type="com.mdove.passwordguard.main.newmain.options.model.vm.MainOptionsTopThreeVM"/>
+    </data>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <TextView
+        <LinearLayout
+            android:id="@+id/layout_top"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="所有功能"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="@dimen/main_option_top_btn_w_h"
+                    android:layout_height="@dimen/main_option_top_btn_w_h">
+
+                    <ImageView
+                        android:id="@+id/iv_bg_one"
+                        android:layout_width="@dimen/main_option_top_btn_w_h"
+                        android:layout_height="@dimen/main_option_top_btn_w_h"
+                        android:paddingLeft="12dp"
+                        android:textSize="16sp"
+                        app:srcDrawable="@{topOneVM.bgDrawable}" />
+
+                    <ImageView
+                        android:id="@+id/iv_icon_one"
+                        android:layout_width="@dimen/main_option_top_iv_w_h"
+                        android:layout_height="@dimen/main_option_top_iv_w_h"
+                        android:layout_gravity="center"
+                        android:tint="@color/white"
+                        app:mipmapSrc="@{topOneVM.iconId}" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/tv_title_one"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_tv_main_option_btn"
+                    android:text="@{topOneVM.title}"
+                    android:textColor="@color/color_tv_main_option_btn"
+                    android:textSize="@dimen/size_tv_main_option_btn" />
+
+                <TextView
+                    android:id="@+id/tv_hint_one"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_tv_main_option_btn_bottom"
+                    android:layout_marginTop="@dimen/margin_tv_main_option_btn"
+                    android:alpha="0.5"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="@{topOneVM.hint}"
+                    android:textColor="@color/gray"
+                    android:textSize="10sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="@dimen/main_option_top_btn_w_h"
+                    android:layout_height="@dimen/main_option_top_btn_w_h">
+
+                    <ImageView
+                        android:id="@+id/iv_bg_two"
+                        android:layout_width="@dimen/main_option_top_btn_w_h"
+                        android:layout_height="@dimen/main_option_top_btn_w_h"
+                        android:paddingLeft="12dp"
+                        android:textSize="16sp"
+                        app:srcDrawable="@{topTwoVM.bgDrawable}" />
+
+                    <ImageView
+                        android:id="@+id/iv_icon_two"
+                        android:layout_width="@dimen/main_option_top_iv_w_h"
+                        android:layout_height="@dimen/main_option_top_iv_w_h"
+                        android:layout_gravity="center"
+                        android:tint="@color/white"
+                        app:mipmapSrc="@{topTwoVM.iconId}" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/tv_title_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_tv_main_option_btn"
+                    android:text="@{topTwoVM.title}"
+                    android:textColor="@color/color_tv_main_option_btn"
+                    android:textSize="@dimen/size_tv_main_option_btn" />
+
+                <TextView
+                    android:id="@+id/tv_hint_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_tv_main_option_btn_bottom"
+                    android:layout_marginTop="@dimen/margin_tv_main_option_btn"
+                    android:alpha="0.5"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="@{topTwoVM.hint}"
+                    android:textColor="@color/gray"
+                    android:textSize="10sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="@dimen/main_option_top_btn_w_h"
+                    android:layout_height="@dimen/main_option_top_btn_w_h">
+
+                    <ImageView
+                        android:id="@+id/iv_bg_three"
+                        android:layout_width="@dimen/main_option_top_btn_w_h"
+                        android:layout_height="@dimen/main_option_top_btn_w_h"
+                        android:paddingLeft="12dp"
+                        android:textSize="16sp"
+                        app:srcDrawable="@{topThreeVM.bgDrawable}" />
+
+                    <ImageView
+                        android:id="@+id/iv_icon_three"
+                        android:layout_width="@dimen/main_option_top_iv_w_h"
+                        android:layout_height="@dimen/main_option_top_iv_w_h"
+                        android:layout_gravity="center"
+                        android:tint="@color/white"
+                        app:mipmapSrc="@{topThreeVM.iconId}" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/tv_title_three"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_tv_main_option_btn"
+                    android:text="@{topThreeVM.title}"
+                    android:textColor="@color/color_tv_main_option_btn"
+                    android:textSize="@dimen/size_tv_main_option_btn" />
+
+                <TextView
+                    android:id="@+id/tv_hint_three"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_tv_main_option_btn_bottom"
+                    android:layout_marginTop="@dimen/margin_tv_main_option_btn"
+                    android:alpha="0.5"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="@{topThreeVM.hint}"
+                    android:textColor="@color/gray"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rlv_options"
+            android:layout_below="@+id/layout_top"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
     </RelativeLayout>
 </layout>

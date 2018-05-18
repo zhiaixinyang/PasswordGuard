@@ -10,6 +10,7 @@ import android.view.View;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.BaseActivity;
 import com.mdove.passwordguard.databinding.ActivityHomeBinding;
+import com.mdove.passwordguard.main.newmain.options.OptionsFragment;
 import com.mdove.passwordguard.ui.tablayout.TabLayoutExt;
 
 import java.util.ArrayList;

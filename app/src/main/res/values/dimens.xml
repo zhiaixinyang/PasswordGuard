@@ -5,6 +5,9 @@
     <dimen name="item_normal_radius">5dp</dimen>
     <dimen name="item_main_option_btn_w_h">45dp</dimen>
 
+    <dimen name="main_option_top_btn_w_h">45dp</dimen>
+    <dimen name="main_option_top_iv_w_h">25dp</dimen>
+
     <dimen name="main_radius">8dp</dimen>
     <dimen name="item_main_top_height">45dp</dimen>
 
