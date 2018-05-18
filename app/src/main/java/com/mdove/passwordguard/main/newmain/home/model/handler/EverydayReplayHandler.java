@@ -14,6 +14,5 @@ public class EverydayReplayHandler {
     }
 
     public void onClickEt() {
-        mPresenter.onClickEt();
     }
 }

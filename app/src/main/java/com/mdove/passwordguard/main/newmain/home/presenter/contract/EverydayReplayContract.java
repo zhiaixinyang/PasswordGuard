@@ -16,8 +16,6 @@ public interface EverydayReplayContract {
     interface Presenter extends BasePresenter<EverydayReplayContract.MvpView> {
         void initData();
 
-        void onClickEt();
-
         void updateLostOrGet(long id, int type);
 
         void onClickDailyPlanDelete(EverydayReplayModelVM vm);
@@ -32,7 +30,5 @@ public interface EverydayReplayContract {
         void updateLostOrGet(int position);
 
         void onClickDailyPlanDelete(int position);
-
-        void onClickEt();
     }
 }

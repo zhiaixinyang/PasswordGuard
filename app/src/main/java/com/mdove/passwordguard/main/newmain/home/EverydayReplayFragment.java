@@ -32,6 +32,7 @@ import com.mdove.passwordguard.ui.calendar.materialcalendarview.MaterialCalendar
 import com.mdove.passwordguard.utils.DateUtils;
 import com.mdove.passwordguard.utils.ToastHelper;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -45,7 +46,6 @@ public class EverydayReplayFragment extends Fragment implements EverydayReplayCo
     private RecyclerView recyclerView;
     private EverydayReplayPresenter mPresenter;
     private HomeEverydayReplayAdapter mAdapter;
-    private TextView mTvTime;
 
     public static EverydayReplayFragment newInstance() {
 
@@ -70,13 +70,12 @@ public class EverydayReplayFragment extends Fragment implements EverydayReplayCo
 
         monthWeekMaterialCalendarView = mBinding.slidelayout;
         recyclerView = mBinding.recyclerView;
-        mTvTime = mBinding.tvTime;
 
         initRecyclerView();
+        initToolBar(DateUtils.getDateChinese(selectedDate.getDate()));
 
         monthWeekMaterialCalendarView.setCurrentDate(selectedDate);
         monthWeekMaterialCalendarView.setSelectedDate(selectedDate);
-        mTvTime.setText(DateUtils.getDateChinese(selectedDate.getDate()));
 
         monthWeekMaterialCalendarView.state().edit().setSlideModeChangeListener(new MonthWeekMaterialCalendarView.SlideModeChangeListener() {
             @Override
@@ -87,18 +86,35 @@ public class EverydayReplayFragment extends Fragment implements EverydayReplayCo
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
                 selectedDate = date;
-                mTvTime.setText(DateUtils.getDateChinese(selectedDate.getDate()));
+                initToolBar(DateUtils.getDateChinese(selectedDate.getDate()));
                 mPresenter.onSelectDay(selectedDate);
             }
         }).setSlideOnMonthChangedListener(new MonthWeekMaterialCalendarView.SlideOnMonthChangedListener() {
             @Override
             public void onMonthChanged(MaterialCalendarView widget, CalendarDay date) {
-                mTvTime.setText(DateUtils.getDateChinese(date.getDate()));
+                initToolBar(DateUtils.getDateChinese(date.getDate()));
             }
         }).commit();
 
         addDecorator();
         initListener();
+    }
+
+    public void initToolBar() {
+        if (selectedDate != null) {
+            initToolBar(DateUtils.getDateChinese(selectedDate.getDate()));
+        }
+    }
+
+    private void initToolBar(String time) {
+        setToolbarTitle(getString(R.string.fragment_title_daily_task));
+        ((HomeActivity) getActivity()).setTitleAndTime(false,
+                getString(R.string.fragment_title_daily_task),
+                time);
+    }
+
+    private void setToolbarTitle(String time) {
+        ((HomeActivity) getActivity()).setToolbarTitle(time);
     }
 
     private void initListener() {
@@ -142,8 +158,4 @@ public class EverydayReplayFragment extends Fragment implements EverydayReplayCo
         mAdapter.notifyDelete(position);
     }
 
-    @Override
-    public void onClickEt() {
-        EtEverydayReplayActivity.start(getContext());
-    }
 }

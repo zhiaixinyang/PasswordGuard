@@ -17,6 +17,7 @@ public class AddDailySelfGroupRlvModel {
         mTimeStamp = groupInfo.mTimeStamp;
         mTvGroup = groupInfo.mTvGroup;
         mIsCheck = false;
+
     }
 
     public AddDailySelfGroupRlvModel(String tvGroup, String bgColor, Long timeStamp) {

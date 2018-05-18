@@ -6,23 +6,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <android.support.design.widget.AppBarLayout
-            android:id="@+id/app_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
-            android:theme="@style/AppBarLayout">
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                app:titleTextColor="@color/white"
-                app:title="@string/fragment_title_daily_task"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_scrollFlags="scroll|enterAlways"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
-            </android.support.v7.widget.Toolbar>
-        </android.support.design.widget.AppBarLayout>
         <RelativeLayout
             android:id="@+id/layout_et"
             android:layout_width="match_parent"

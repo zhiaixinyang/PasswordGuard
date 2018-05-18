@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.BaseActivity;
@@ -22,6 +23,7 @@ public class HomeActivity extends BaseActivity {
     private ActivityHomeBinding mBinding;
     private ViewPager mViewPager;
     private TabLayoutExt mTabLayoutExt;
+    private EverydayReplayFragment mEverydayReplayFragment;
 
     @Override
     protected boolean isNeedCustomLayout() {
@@ -42,7 +44,8 @@ public class HomeActivity extends BaseActivity {
     private void initTabLayout() {
         List<Fragment> fragmentList = new ArrayList<>();
         fragmentList.add(OptionsFragment.newInstance());
-        fragmentList.add(EverydayReplayFragment.newInstance());
+        mEverydayReplayFragment = EverydayReplayFragment.newInstance();
+        fragmentList.add(mEverydayReplayFragment);
         fragmentList.add(DailyTaskFragment.newInstance());
 
         HomePagerAdapter adapter = new HomePagerAdapter(getSupportFragmentManager(), fragmentList);
@@ -52,5 +55,60 @@ public class HomeActivity extends BaseActivity {
         mTabLayoutExt.getTabAt(0).setText(R.string.home_tab_options).setIcon(R.mipmap.ic_tab_options);
         mTabLayoutExt.getTabAt(1).setText(R.string.home_tab_everyday_replay).setIcon(R.mipmap.ic_tab_everyday_replay);
         mTabLayoutExt.getTabAt(2).setText(R.string.home_tab_daily_task).setIcon(R.mipmap.ic_tab_daily_task);
+
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                switch (position) {
+                    case 0: {
+                        setTitleAndTime(true,
+                                getString(R.string.fragment_title_daily_task), null);
+                        break;
+                    }
+                    case 1: {
+                        if (mEverydayReplayFragment != null) {
+                            mEverydayReplayFragment.initToolBar();
+                        }
+                        break;
+                    }
+                    case 2: {
+                        setTitleAndTime(true,
+                                getString(R.string.fragment_title_options), null);
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        mViewPager.setCurrentItem(1);
+    }
+
+    public void setToolbarTitle(String title) {
+        mBinding.toolbar.setTitle(title);
+    }
+
+    public void setToolbarTime(String time) {
+        mBinding.tvTime.setVisibility(View.VISIBLE);
+        mBinding.tvTime.setText(time);
+    }
+
+    public void setTitleAndTime(boolean isHide, String title, String time) {
+        setToolbarTitle(title);
+        if (isHide) {
+            mBinding.tvTime.setVisibility(View.GONE);
+        } else {
+            mBinding.tvTime.setVisibility(View.VISIBLE);
+            mBinding.tvTime.setText(time);
+        }
     }
 }

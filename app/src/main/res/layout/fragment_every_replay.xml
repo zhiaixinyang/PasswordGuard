@@ -14,45 +14,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.design.widget.AppBarLayout
-            android:id="@+id/app_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
-            android:theme="@style/AppBarLayout">
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_scrollFlags="scroll|enterAlways"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                app:title="@string/fragment_title_everyday_replay"
-                app:titleTextColor="@color/white">
-
-                <TextView
-                    android:id="@+id/tv_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_marginRight="12dp"
-                    android:background="@drawable/bg_normal_white_round_small"
-                    android:paddingBottom="4dp"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
-                    android:paddingTop="4dp"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    tools:text="2018-4-14" />
-            </android.support.v7.widget.Toolbar>
-        </android.support.design.widget.AppBarLayout>
-
         <com.mdove.passwordguard.ui.calendar.materialcalendar.MonthWeekMaterialCalendarView
             android:id="@+id/slidelayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/layout_et"
-            android:layout_below="@+id/app_bar">
+            >
 
             <com.mdove.passwordguard.ui.calendar.materialcalendarview.MaterialCalendarView
                 android:id="@+id/calendarView_month_mode"
@@ -161,55 +128,5 @@
 
             </RelativeLayout>
         </com.mdove.passwordguard.ui.calendar.materialcalendar.MonthWeekMaterialCalendarView>
-
-        <RelativeLayout
-            android:id="@+id/layout_et"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="@dimen/margin_item_main_self_task"
-            android:layout_marginRight="@dimen/margin_item_main_self_task"
-            android:layout_marginTop="@dimen/margin_item_main_self_task"
-            android:background="@drawable/bg_item_main_self_task_et"
-            android:onClick="@{()->actionHandler.onClickEt()}">
-
-            <ImageView
-                android:id="@+id/iv_task"
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/margin_item_main_self_task"
-                android:layout_marginRight="@dimen/margin_item_main_self_task"
-                android:src="@mipmap/ic_add" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/margin_item_main_self_task"
-                android:layout_toLeftOf="@+id/btn_send"
-                android:layout_toRightOf="@+id/iv_task"
-                android:background="@null"
-                android:hint="复盘今日工作..."
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textCursorDrawable="@drawable/bg_et_cursor_white"
-                android:textSize="16sp" />
-
-            <FrameLayout
-                android:id="@+id/btn_send"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true">
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:layout_marginRight="@dimen/margin_fragment_today_plan"
-                    android:src="@mipmap/ic_btn_send" />
-            </FrameLayout>
-        </RelativeLayout>
     </RelativeLayout>
 </layout>

@@ -9,15 +9,13 @@ import android.view.ViewGroup;
 
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.calendar.model.BaseCalendarModel;
-import com.mdove.passwordguard.calendar.model.CalendarTopModel;
-import com.mdove.passwordguard.calendar.model.ItemCalendarHandler;
-import com.mdove.passwordguard.calendar.presenter.CalendarPresenter;
-import com.mdove.passwordguard.databinding.ItemCalendarDailyPlanRlvBinding;
+import com.mdove.passwordguard.databinding.ItemEverydayReplayEtBinding;
 import com.mdove.passwordguard.databinding.ItemEverydayReplayHomeBinding;
 import com.mdove.passwordguard.main.model.DailyPlanModel;
-import com.mdove.passwordguard.main.model.vm.DailyPlanModelVM;
+import com.mdove.passwordguard.main.newmain.everydayreplay.EtEverydayReplayActivity;
 import com.mdove.passwordguard.main.newmain.home.model.EverydayReplayModel;
 import com.mdove.passwordguard.main.newmain.home.model.EverydayReplayModelVM;
+import com.mdove.passwordguard.main.newmain.home.model.EverydayReplayInitEtModel;
 import com.mdove.passwordguard.main.newmain.home.model.handler.ItemEverydayReplayHandler;
 import com.mdove.passwordguard.main.newmain.home.presenter.EverydayReplayPresenter;
 import com.mdove.passwordguard.utils.InflateUtils;
@@ -31,9 +29,20 @@ import java.util.List;
 public class HomeEverydayReplayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
     private List<BaseCalendarModel> mData;
-    private static final int TYPE_TOP = 0;
+    private static final int TYPE_TOP_ET = 0;
     private static final int TYPE_NORMAL = 1;
     private EverydayReplayPresenter mPresenter;
+
+    @Override
+    public int getItemViewType(int position) {
+        BaseCalendarModel model = mData.get(position);
+        if (model instanceof EverydayReplayModel) {
+            return TYPE_NORMAL;
+        } else if (model instanceof EverydayReplayInitEtModel) {
+            return TYPE_TOP_ET;
+        }
+        return super.getItemViewType(position);
+    }
 
     public HomeEverydayReplayAdapter(Context context, EverydayReplayPresenter presenter) {
         mContext = context;
@@ -47,8 +56,20 @@ public class HomeEverydayReplayAdapter extends RecyclerView.Adapter<RecyclerView
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder((ItemEverydayReplayHomeBinding) InflateUtils.bindingInflate(parent,
-                R.layout.item_everyday_replay_home));
+        switch (viewType){
+            case TYPE_TOP_ET:{
+                return new ViewHolderTopEt((ItemEverydayReplayEtBinding) InflateUtils.bindingInflate(parent,
+                        R.layout.item_everyday_replay_et));
+            }
+            case TYPE_NORMAL:{
+                return new ViewHolder((ItemEverydayReplayHomeBinding) InflateUtils.bindingInflate(parent,
+                        R.layout.item_everyday_replay_home));
+            }
+            default:{
+                return new ViewHolder((ItemEverydayReplayHomeBinding) InflateUtils.bindingInflate(parent,
+                        R.layout.item_everyday_replay_home));
+            }
+        }
     }
 
     @Override
@@ -56,12 +77,32 @@ public class HomeEverydayReplayAdapter extends RecyclerView.Adapter<RecyclerView
         BaseCalendarModel model = mData.get(position);
         if (model instanceof EverydayReplayModel) {
             ((ViewHolder) holder).bind((EverydayReplayModel) model, position, mPresenter);
+        }else if (model instanceof EverydayReplayInitEtModel){
+            ((ViewHolderTopEt) holder).bind();
         }
     }
 
     @Override
     public int getItemCount() {
         return mData == null ? 0 : mData.size();
+    }
+
+    public class ViewHolderTopEt extends RecyclerView.ViewHolder {
+        private ItemEverydayReplayEtBinding mBinding;
+
+        public ViewHolderTopEt(ItemEverydayReplayEtBinding binding) {
+            super(binding.getRoot());
+            mBinding = binding;
+        }
+
+        public void bind() {
+            mBinding.layoutEt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    EtEverydayReplayActivity.start(mContext);
+                }
+            });
+        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

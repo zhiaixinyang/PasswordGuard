@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:id="@+id/layout_et"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginBottom="@dimen/margin_item_main_self_task"
+        android:background="@drawable/bg_item_main_self_task_et">
+
+        <ImageView
+            android:id="@+id/iv_task"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_item_main_self_task"
+            android:layout_marginRight="@dimen/margin_item_main_self_task"
+            android:src="@mipmap/ic_add" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/margin_item_main_self_task"
+            android:layout_toLeftOf="@+id/btn_send"
+            android:layout_toRightOf="@+id/iv_task"
+            android:background="@null"
+            android:hint="复盘今日工作..."
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textCursorDrawable="@drawable/bg_et_cursor_white"
+            android:textSize="16sp" />
+
+        <FrameLayout
+            android:id="@+id/btn_send"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/margin_fragment_today_plan"
+                android:src="@mipmap/ic_btn_send" />
+        </FrameLayout>
+    </RelativeLayout>
+</layout>

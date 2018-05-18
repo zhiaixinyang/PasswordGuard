@@ -9,12 +9,12 @@ import com.mdove.passwordguard.greendao.entity.DailyPlan;
 import com.mdove.passwordguard.main.model.DailyPlanModel;
 import com.mdove.passwordguard.main.newmain.home.model.EverydayReplayModel;
 import com.mdove.passwordguard.main.newmain.home.model.EverydayReplayModelVM;
+import com.mdove.passwordguard.main.newmain.home.model.EverydayReplayInitEtModel;
 import com.mdove.passwordguard.main.newmain.home.presenter.contract.EverydayReplayContract;
 import com.mdove.passwordguard.ui.calendar.materialcalendarview.CalendarDay;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -41,17 +41,15 @@ public class EverydayReplayPresenter implements EverydayReplayContract.Presenter
     @Override
     public void initData() {
         mData = new ArrayList<>();
+
+        mData.add(new EverydayReplayInitEtModel());
+
         List<DailyPlan> data = mDailyPlanDao.queryBuilder().list();
         for (DailyPlan plan : data) {
             mData.add(new EverydayReplayModel(plan));
         }
 
         mView.showData(mData);
-    }
-
-    @Override
-    public void onClickEt() {
-        mView.onClickEt();
     }
 
     @Override
