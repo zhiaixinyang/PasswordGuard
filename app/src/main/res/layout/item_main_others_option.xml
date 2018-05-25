@@ -70,6 +70,7 @@
             android:textSize="12sp" />
 
         <View
+            android:id="@+id/line"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginLeft="@dimen/margin_item_all_main_option"

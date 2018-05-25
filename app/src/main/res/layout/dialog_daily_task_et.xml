@@ -1,25 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <RelativeLayout
+<layout
+    >
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <android.support.v7.widget.RecyclerView
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/gray_light"
-            android:scrollbars="none"
-            android:overScrollMode="never"
-            android:layout_above="@+id/layout_bottom" />
-
+            android:layout_weight="1"/>
         <RelativeLayout
-            android:id="@+id/layout_bottom"
             android:layout_width="match_parent"
             android:background="@color/white"
-            android:layout_alignParentBottom="true"
             android:layout_height="wrap_content">
             <RelativeLayout
                 android:id="@+id/layout_et"
@@ -37,7 +30,7 @@
                     android:layout_marginRight="@dimen/margin_item_main_self_task"
                     android:src="@mipmap/ic_add" />
 
-                <TextView
+                <EditText
                     android:id="@+id/et_daily_task"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -45,8 +38,11 @@
                     android:layout_marginRight="@dimen/margin_fragment_daily_task"
                     android:layout_toLeftOf="@+id/btn_send"
                     android:layout_toRightOf="@+id/iv_task"
+                    android:background="@null"
+                    android:hint="今日待办工作"
                     android:textColor="@color/white"
-                    android:text="今日待办工作"
+                    android:textColorHint="@color/white"
+                    android:textCursorDrawable="@drawable/bg_et_cursor_white"
                     android:textSize="16sp" />
 
                 <FrameLayout
@@ -66,5 +62,5 @@
             </RelativeLayout>
 
         </RelativeLayout>
-    </RelativeLayout>
+    </LinearLayout>
 </layout>

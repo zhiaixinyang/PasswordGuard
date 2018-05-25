@@ -88,5 +88,6 @@
     <dimen name="margin_et_everyday_replay">8dp</dimen>
     <dimen name="margin_fragment_options">20dp</dimen>
     <dimen name="margin_fragment_options_inner">12dp</dimen>
+    <dimen name="margin_fragment_daily_task">8dp</dimen>
 
 </resources>

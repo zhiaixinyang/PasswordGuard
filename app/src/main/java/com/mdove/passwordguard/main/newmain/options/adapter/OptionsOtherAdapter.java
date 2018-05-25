@@ -2,6 +2,7 @@ package com.mdove.passwordguard.main.newmain.options.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.mdove.passwordguard.R;
@@ -43,7 +44,7 @@ public class OptionsOtherAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         MainOptionNewInfo mainOptionInfo = mData.get(position);
-        ((ViewHolder)holder).bind(mainOptionInfo);
+        ((ViewHolder) holder).bind(mainOptionInfo, position);
     }
 
     @Override
@@ -65,9 +66,12 @@ public class OptionsOtherAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             mBinding = binding;
         }
 
-        public void bind(MainOptionNewInfo mainOptionInfo) {
+        public void bind(MainOptionNewInfo mainOptionInfo, int position) {
             mBinding.setViewModel(new MainOptionsOthersVM(mainOptionInfo));
             mBinding.setActionHandler(new MainOptionsOthersHandler(mPresenter));
+            if (position - 1 == mData.size()) {
+                mBinding.line.setVisibility(View.GONE);
+            }
         }
     }
 }
