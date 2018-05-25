@@ -116,8 +116,8 @@ import static android.support.v4.view.ViewPager.SCROLL_STATE_SETTLING;
 @ViewPager.DecorView
 public class TabLayoutExt extends HorizontalScrollView {
 
-    private static final int DEFAULT_HEIGHT_WITH_TEXT_ICON = 72; // dps
-    static final int DEFAULT_GAP_TEXT_ICON = 8; // dps
+    private static final int DEFAULT_HEIGHT_WITH_TEXT_ICON = 60; // dps
+    static final int DEFAULT_GAP_TEXT_ICON = 4; // dps
     private static final int INVALID_WIDTH = -1;
     private static final int DEFAULT_HEIGHT = 48; // dps
     private static final int TAB_MIN_WIDTH_MARGIN = 56; //dps

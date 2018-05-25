@@ -17,24 +17,24 @@
         android:id="@+id/btn_password"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginBottom="@dimen/margin_item_all_main_option"
+        android:background="@color/white"
         android:onClick="@{()->actionHandler.onBtnClick(viewModel.mType)}"
         android:orientation="vertical">
 
         <FrameLayout
             android:id="@+id/layout_icon"
             android:layout_width="@dimen/item_main_option_btn_w_h"
-            android:layout_marginLeft="@dimen/margin_item_all_main_option"
+            android:layout_height="@dimen/item_main_option_btn_w_h"
             android:layout_centerVertical="true"
-            android:layout_height="@dimen/item_main_option_btn_w_h">
+            android:layout_marginLeft="@dimen/margin_item_all_main_option">
 
             <ImageView
                 android:id="@+id/iv_bg"
                 android:layout_width="@dimen/item_main_option_btn_w_h"
                 android:layout_height="@dimen/item_main_option_btn_w_h"
-                app:srcDrawable="@{viewModel.bgDrawable}"
                 android:paddingLeft="12dp"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                app:srcDrawable="@{viewModel.bgDrawable}" />
 
             <ImageView
                 android:id="@+id/iv_icon"
@@ -48,10 +48,10 @@
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
-            android:layout_alignTop="@+id/layout_icon"
-            android:layout_toRightOf="@+id/layout_icon"
-            android:layout_marginLeft="@dimen/margin_item_all_main_option"
             android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/layout_icon"
+            android:layout_marginLeft="@dimen/margin_item_all_main_option"
+            android:layout_toRightOf="@+id/layout_icon"
             android:text="@{viewModel.title}"
             android:textColor="@color/color_tv_main_option_btn"
             android:textSize="14sp" />
@@ -60,13 +60,21 @@
             android:id="@+id/tv_hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/layout_icon"
             android:layout_marginLeft="@dimen/margin_item_all_main_option"
             android:layout_toRightOf="@+id/layout_icon"
-            android:layout_alignBottom="@+id/layout_icon"
-            android:textColor="@color/gray_light"
-            android:maxLines="1"
             android:ellipsize="end"
+            android:maxLines="1"
             android:text="@{viewModel.hint}"
+            android:textColor="@color/gray_light"
             android:textSize="12sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/margin_item_all_main_option"
+            android:layout_toRightOf="@+id/layout_icon"
+            android:layout_alignParentBottom="true"
+            android:background="@color/gray_light" />
     </RelativeLayout>
 </layout>

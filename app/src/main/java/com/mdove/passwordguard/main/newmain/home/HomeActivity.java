@@ -10,6 +10,7 @@ import android.view.View;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.BaseActivity;
 import com.mdove.passwordguard.databinding.ActivityHomeBinding;
+import com.mdove.passwordguard.main.newmain.dailytask.DailyTaskFragment;
 import com.mdove.passwordguard.main.newmain.options.OptionsFragment;
 import com.mdove.passwordguard.ui.tablayout.TabLayoutExt;
 
@@ -68,7 +69,7 @@ public class HomeActivity extends BaseActivity {
                 switch (position) {
                     case 0: {
                         setTitleAndTime(true,
-                                getString(R.string.fragment_title_daily_task), null);
+                                getString(R.string.fragment_title_options), null);
                         break;
                     }
                     case 1: {
@@ -79,7 +80,7 @@ public class HomeActivity extends BaseActivity {
                     }
                     case 2: {
                         setTitleAndTime(true,
-                                getString(R.string.fragment_title_options), null);
+                                getString(R.string.fragment_title_daily_task), null);
                         break;
                     }
                 }

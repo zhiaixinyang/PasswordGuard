@@ -107,9 +107,9 @@ public class EverydayReplayFragment extends Fragment implements EverydayReplayCo
     }
 
     private void initToolBar(String time) {
-        setToolbarTitle(getString(R.string.fragment_title_daily_task));
+        setToolbarTitle(getString(R.string.fragment_title_everyday_replay));
         ((HomeActivity) getActivity()).setTitleAndTime(false,
-                getString(R.string.fragment_title_daily_task),
+                getString(R.string.fragment_title_everyday_replay),
                 time);
     }
 
