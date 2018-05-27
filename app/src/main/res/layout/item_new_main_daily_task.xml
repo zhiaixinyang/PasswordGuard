@@ -9,21 +9,26 @@
 
         <variable
             name="viewModel"
-            type="com.mdove.passwordguard.task.model.SelfTaskModelVM" />
+            type="com.mdove.passwordguard.main.newmain.dailytask.model.DailyTaskModelVM" />
 
         <variable
             name="actionHandler"
-            type="com.mdove.passwordguard.task.model.handle.AllSelfTaskHandler" />
+            type="com.mdove.passwordguard.main.newmain.dailytask.model.DailyTaskHandler" />
     </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_item_self_task">
+        android:layout_marginBottom="@dimen/margin_item_self_task"
+        android:layout_marginRight="@dimen/margin_item_self_task"
+        android:layout_marginLeft="@dimen/margin_item_self_task"
+        >
 
         <RelativeLayout
             android:id="@+id/layout_item"
             android:layout_width="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_item_self_task">
             <TextView
@@ -66,6 +71,15 @@
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 android:visibility="gone" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:rotation="-30"
+                android:src="@mipmap/ic_self_task_suc"
+                android:visibility="@{viewModel.mIsSuc?View.VISIBLE:View.GONE}" />
 
             <RelativeLayout
                 android:id="@+id/layout_btn_see"

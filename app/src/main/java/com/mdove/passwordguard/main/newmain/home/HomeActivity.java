@@ -7,11 +7,17 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
+import com.hwangjr.rxbus.annotation.Subscribe;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.BaseActivity;
 import com.mdove.passwordguard.databinding.ActivityHomeBinding;
 import com.mdove.passwordguard.main.newmain.dailytask.DailyTaskFragment;
 import com.mdove.passwordguard.main.newmain.options.OptionsFragment;
+import com.mdove.passwordguard.task.NewSelfTaskActivity;
+import com.mdove.passwordguard.task.model.event.SelfTaskClickDeleteEvent;
+import com.mdove.passwordguard.task.model.event.SelfTaskClickPriorityEvent;
+import com.mdove.passwordguard.task.model.event.SelfTaskClickSeeEvent;
+import com.mdove.passwordguard.task.model.event.SelfTaskClickSucEvent;
 import com.mdove.passwordguard.ui.tablayout.TabLayoutExt;
 
 import java.util.ArrayList;
@@ -40,6 +46,13 @@ public class HomeActivity extends BaseActivity {
         mTabLayoutExt = mBinding.tabLayout;
         mViewPager = mBinding.viewPager;
 
+        mBinding.btnIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NewSelfTaskActivity.start(HomeActivity.this);
+            }
+        });
+
         initTabLayout();
     }
 
@@ -58,6 +71,7 @@ public class HomeActivity extends BaseActivity {
         mTabLayoutExt.getTabAt(1).setText(R.string.home_tab_everyday_replay).setIcon(R.mipmap.ic_tab_everyday_replay);
         mTabLayoutExt.getTabAt(2).setText(R.string.home_tab_daily_task).setIcon(R.mipmap.ic_tab_daily_task);
 
+
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -70,17 +84,20 @@ public class HomeActivity extends BaseActivity {
                     case 0: {
                         setTitleAndTime(true,
                                 getString(R.string.fragment_title_options), null);
+                        mBinding.btnIn.setVisibility(View.GONE);
                         break;
                     }
                     case 1: {
                         if (mEverydayReplayFragment != null) {
                             mEverydayReplayFragment.initToolBar();
                         }
+                        mBinding.btnIn.setVisibility(View.GONE);
                         break;
                     }
                     case 2: {
                         setTitleAndTime(true,
                                 getString(R.string.fragment_title_daily_task), null);
+                        mBinding.btnIn.setVisibility(View.VISIBLE);
                         break;
                     }
                 }

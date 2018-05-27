@@ -20,6 +20,7 @@ import com.mdove.passwordguard.main.model.DailyPlanModel;
 import com.mdove.passwordguard.main.newmain.everydayreplay.adapter.EverydayReplayRlvAdapter;
 import com.mdove.passwordguard.main.newmain.everydayreplay.presenter.EtEverydayReplayPresenter;
 import com.mdove.passwordguard.main.newmain.everydayreplay.presenter.contract.EtEverydayReplayContract;
+import com.mdove.passwordguard.utils.DateUtils;
 import com.mdove.passwordguard.utils.ToastHelper;
 
 import java.util.List;
@@ -29,16 +30,20 @@ import java.util.List;
  */
 
 public class EtEverydayReplayActivity extends BaseActivity implements EtEverydayReplayContract.MvpView {
+    private static final String SELECT_TIME = "select_time";
+
     private ActivityEtEverydayReplayBinding mBinding;
     private EverydayReplayRlvAdapter mAdapter;
     private EtEverydayReplayPresenter mPresenter;
     private int mDefaultNormal = DailyPlanModel.STATUS_NORMAL;
+    private long mSelectTime = 0;
 
-    public static void start(Context context) {
+    public static void start(Context context, long time) {
         Intent intent = new Intent(context, EtEverydayReplayActivity.class);
         if (!(context instanceof Activity)) {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         }
+        intent.putExtra(SELECT_TIME, time);
         context.startActivity(intent);
     }
 
@@ -51,6 +56,8 @@ public class EtEverydayReplayActivity extends BaseActivity implements EtEveryday
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_et_everyday_replay);
+        mSelectTime = getIntent().getLongExtra(SELECT_TIME, 0);
+
         initToolbar();
 
         mPresenter = new EtEverydayReplayPresenter();
@@ -67,7 +74,7 @@ public class EtEverydayReplayActivity extends BaseActivity implements EtEveryday
             public void onClick(View v) {
                 String content = mBinding.etEverydayReplay.getText().toString();
                 if (!TextUtils.isEmpty(content)) {
-                    mPresenter.addDailyPlan(content,mDefaultNormal);
+                    mPresenter.addDailyPlan(content, mDefaultNormal);
                     mBinding.etEverydayReplay.setText("");
                     ToastHelper.shortToast("添加成功");
                     return;
@@ -102,7 +109,7 @@ public class EtEverydayReplayActivity extends BaseActivity implements EtEveryday
         mBinding.btnNormal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mDefaultNormal!= DailyPlanModel.STATUS_NORMAL) {
+                if (mDefaultNormal != DailyPlanModel.STATUS_NORMAL) {
                     mDefaultNormal = DailyPlanModel.STATUS_NORMAL;
                     changeStatus(mDefaultNormal);
                 }
@@ -151,6 +158,7 @@ public class EtEverydayReplayActivity extends BaseActivity implements EtEveryday
     private void initToolbar() {
         mBinding.toolbar.setTitle("今日复盘");
         setSupportActionBar(mBinding.toolbar);
+        mBinding.tvTime.setText(DateUtils.getDateChineseNoH(mSelectTime));
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setHomeButtonEnabled(true);

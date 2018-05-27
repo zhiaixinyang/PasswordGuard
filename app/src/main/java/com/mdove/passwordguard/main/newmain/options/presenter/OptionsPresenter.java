@@ -13,6 +13,7 @@ import com.mdove.passwordguard.deletelist.DeleteListDailySelfActivity;
 import com.mdove.passwordguard.deletelist.DeleteListPasswordActivity;
 import com.mdove.passwordguard.main.newmain.options.model.MainOptionNewInfo;
 import com.mdove.passwordguard.main.newmain.options.model.MainOptionsTopModel;
+import com.mdove.passwordguard.main.newmain.options.model.vm.BaseMainOptionsTopVM;
 import com.mdove.passwordguard.main.newmain.options.model.vm.MainOptionsTopOneVM;
 import com.mdove.passwordguard.main.newmain.options.model.vm.MainOptionsTopThreeVM;
 import com.mdove.passwordguard.main.newmain.options.model.vm.MainOptionsTopTwoVM;
@@ -73,6 +74,24 @@ public class OptionsPresenter implements OptionsContract.Presenter {
         initOthersOptionsData();
     }
 
+    @Override
+    public void onClickBtnTop(BaseMainOptionsTopVM observable) {
+        switch (observable.mType) {
+            case MAIN_OPEN_INFO_TYPE_ACCOUNT: {
+                AddPasswordActivity.start(mView.getContext());
+                break;
+            }
+            case MAIN_OPEN_INFO_TYPE_ADD_DAILY_SELF: {
+                AddDailySelfActivity.start(mView.getContext());
+                break;
+            }
+            case MAIN_OPEN_INFO_TYPE_SELF_TASK: {
+                NewSelfTaskActivity.start(mView.getContext());
+                break;
+            }
+        }
+    }
+
     private void initOptionsTop() {
         MainOptionNewInfo account = new MainOptionNewInfo(MAIN_OPEN_INFO_TYPE_ACCOUNT, "记录账号", "记录账号信息", R.drawable.bg_main_option_btn_1, R.mipmap.ic_btn_password);
         MainOptionNewInfo dailySelf = new MainOptionNewInfo(MAIN_OPEN_INFO_TYPE_ADD_DAILY_SELF, "随手记", "记录有趣", R.drawable.bg_main_option_btn_4, R.mipmap.ic_btn_password);
@@ -99,8 +118,11 @@ public class OptionsPresenter implements OptionsContract.Presenter {
         MainOptionNewInfo collect = new MainOptionNewInfo(MAIN_OPEN_INFO_TYPE_COLLECT, "我的收藏", "所有收藏内容", R.drawable.bg_main_option_btn_8, R.mipmap.ic_btn_collect);
         MainOptionNewInfo mainOption = new MainOptionNewInfo(MAIN_OPEN_INFO_TYPE_MAIN_ALL_OPTION, "更多操作", "显示隐藏操作", R.drawable.bg_main_option_btn_9, R.mipmap.ic_btn_more_option);
         MainOptionNewInfo lock = new MainOptionNewInfo(MAIN_OPEN_INFO_TYPE_LOCK, "手势锁", "保护信息安全", R.drawable.bg_main_option_btn_2, R.mipmap.ic_btn_lock);
+        MainOptionNewInfo account = new MainOptionNewInfo(MAIN_OPEN_INFO_TYPE_ALL_PASSWORD, "所有账号", "查看所有的账号密码记录", R.drawable.bg_main_option_btn_5, R.mipmap.ic_btn_password);
+        MainOptionNewInfo dailySelf = new MainOptionNewInfo(MAIN_OPEN_INFO_TYPE_ALL_DAILY_SELF, "所有随手记", "查看所有的随手记", R.drawable.bg_main_option_btn_4, R.mipmap.ic_btn_password);
 
-        data.add(lock);
+        data.add(account);
+        data.add(dailySelf);
         data.add(deleteAccount);
         data.add(deleteDailySelf);
         data.add(collect);

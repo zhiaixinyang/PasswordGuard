@@ -4,6 +4,7 @@ import com.mdove.passwordguard.base.BasePresenter;
 import com.mdove.passwordguard.base.BaseView;
 import com.mdove.passwordguard.main.newmain.options.model.MainOptionNewInfo;
 import com.mdove.passwordguard.main.newmain.options.model.MainOptionsTopModel;
+import com.mdove.passwordguard.main.newmain.options.model.vm.BaseMainOptionsTopVM;
 
 import java.util.List;
 
@@ -14,6 +15,8 @@ import java.util.List;
 public interface OptionsContract {
     interface Presenter extends BasePresenter<OptionsContract.MvpView> {
         void initData();
+
+        void onClickBtnTop(BaseMainOptionsTopVM observable);
 
         void onClickBtnPassword();
 

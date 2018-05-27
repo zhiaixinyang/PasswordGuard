@@ -15,6 +15,7 @@ import com.mdove.passwordguard.main.model.MainOptionInfo;
 import com.mdove.passwordguard.main.newmain.options.adapter.OptionsOtherAdapter;
 import com.mdove.passwordguard.main.newmain.options.model.MainOptionNewInfo;
 import com.mdove.passwordguard.main.newmain.options.model.MainOptionsTopModel;
+import com.mdove.passwordguard.main.newmain.options.model.handler.MainOptionsTopHandler;
 import com.mdove.passwordguard.main.newmain.options.presenter.OptionsPresenter;
 import com.mdove.passwordguard.main.newmain.options.presenter.contract.OptionsContract;
 
@@ -67,6 +68,9 @@ public class OptionsFragment extends Fragment implements OptionsContract.MvpView
         mBinding.setTopOneVM(model.mOneVM);
         mBinding.setTopTwoVM(model.mTwoVM);
         mBinding.setTopThreeVM(model.mThreeVM);
+        mBinding.setActionTopOne(new MainOptionsTopHandler(mPresenter));
+        mBinding.setActionTopTwo(new MainOptionsTopHandler(mPresenter));
+        mBinding.setActionTopThree(new MainOptionsTopHandler(mPresenter));
     }
 
     @Override

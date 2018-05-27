@@ -195,6 +195,10 @@ public class DateUtils {
         SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
         return format.format(time);
     }
+    public static String getDateChineseNoH(Long time) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
+        return format.format(time);
+    }
 
     public static String getDateChinese(Long time) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");

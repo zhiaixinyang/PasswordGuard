@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.mdove.passwordguard.main.newmain.dailytask.dialog.model.DailyTaskLabelModelVM" />
+    </data>
+
+    <TextView
+        android:id="@+id/tv_label"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="8dp"
+        android:background="@drawable/bg_label_daily_self_unselect"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:text="@{vm.mLabelName}"
+        android:textColor="@color/white"
+        tools:text="Bug"/>
+</layout>

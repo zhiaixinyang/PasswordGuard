@@ -1,17 +1,18 @@
-package com.mdove.passwordguard.task.model;
+package com.mdove.passwordguard.main.newmain.dailytask.model;
 
 import android.databinding.ObservableField;
 import android.text.Editable;
 import android.text.TextWatcher;
 
 import com.mdove.passwordguard.base.SimpleTextWatcher;
+import com.mdove.passwordguard.task.model.SelfTaskModel;
 import com.mdove.passwordguard.utils.DateUtils;
 
 /**
  * Created by MDove on 2018/3/25.
  */
 
-public class SelfTaskModelVM {
+public class DailyTaskModelVM {
     public ObservableField<String> mTime = new ObservableField<>();
     public ObservableField<String> mTask = new ObservableField<>();
     public ObservableField<Boolean> mIsSuc = new ObservableField<>();
@@ -20,7 +21,7 @@ public class SelfTaskModelVM {
     public SelfTaskModel mSelfTaskModel;
     public int mPosition;
 
-    public SelfTaskModelVM(SelfTaskModel selfTaskModel, int position) {
+    public DailyTaskModelVM(SelfTaskModel selfTaskModel, int position) {
         mTask.set(selfTaskModel.mTask);
         mTime.set(DateUtils.getDateChinese(selfTaskModel.mTime));
         mIsSuc.set(selfTaskModel.mIsSuc);

@@ -3,9 +3,9 @@
     <dimen name="item_top_height">48dp</dimen>
     <dimen name="item_password_normal_height">35dp</dimen>
     <dimen name="item_normal_radius">5dp</dimen>
-    <dimen name="item_main_option_btn_w_h">40dp</dimen>
+    <dimen name="item_main_option_btn_w_h">35dp</dimen>
 
-    <dimen name="main_option_top_btn_w_h">60dp</dimen>
+    <dimen name="main_option_top_btn_w_h">50dp</dimen>
     <dimen name="main_option_top_iv_w_h">35dp</dimen>
 
     <dimen name="main_radius">8dp</dimen>
@@ -21,7 +21,7 @@
     <dimen name="margin_tv_main_option_btn">5dp</dimen>
     <dimen name="margin_tv_main_option_btn_bottom">8dp</dimen>
     <dimen name="margin_tv_all_main_option_btn_bottom">12dp</dimen>
-    <dimen name="item_main_option_ic_w_h">25dp</dimen>
+    <dimen name="item_main_option_ic_w_h">23dp</dimen>
     <dimen name="margin_dialog_add_password">8dp</dimen>
     <dimen name="margin_dialog_alter_password">8dp</dimen>
     <dimen name="padding_add_password_left">12dp</dimen>
@@ -85,9 +85,10 @@
     <dimen name="tab_text_size_2line">12sp</dimen>
     <dimen name="tab_scrollable_min_width">72dp</dimen>
 
-    <dimen name="margin_et_everyday_replay">8dp</dimen>
+    <dimen name="margin_et_everyday_replay">6dp</dimen>
     <dimen name="margin_fragment_options">20dp</dimen>
     <dimen name="margin_fragment_options_inner">12dp</dimen>
-    <dimen name="margin_fragment_daily_task">8dp</dimen>
+    <dimen name="margin_fragment_daily_task">6dp</dimen>
+    <dimen name="margin_fragment_daily_task_et">6dp</dimen>
 
 </resources>

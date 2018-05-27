@@ -69,7 +69,7 @@ public class OptionsOtherAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         public void bind(MainOptionNewInfo mainOptionInfo, int position) {
             mBinding.setViewModel(new MainOptionsOthersVM(mainOptionInfo));
             mBinding.setActionHandler(new MainOptionsOthersHandler(mPresenter));
-            if (position - 1 == mData.size()) {
+            if (position == mData.size() - 1) {
                 mBinding.line.setVisibility(View.GONE);
             }
         }

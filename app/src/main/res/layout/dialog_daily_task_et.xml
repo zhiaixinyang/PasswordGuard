@@ -1,24 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     >
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <ScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
-        <RelativeLayout
+            android:layout_above="@+id/layout_main"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:id="@+id/layout_main"
             android:layout_width="match_parent"
+            android:orientation="vertical"
             android:background="@color/white"
+            android:layout_alignParentBottom="true"
             android:layout_height="wrap_content">
             <RelativeLayout
                 android:id="@+id/layout_et"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_margin="@dimen/margin_fragment_daily_task"
+                android:layout_above="@+id/rlv"
+                android:layout_marginLeft="@dimen/margin_fragment_daily_task"
+                android:layout_marginRight="@dimen/margin_fragment_daily_task"
+                android:layout_marginTop="@dimen/margin_fragment_daily_task_et"
+                android:layout_marginBottom="@dimen/margin_fragment_daily_task_et"
                 android:background="@drawable/bg_item_main_self_task_et">
 
                 <ImageView
@@ -60,7 +67,12 @@
                         android:src="@mipmap/ic_btn_send" />
                 </FrameLayout>
             </RelativeLayout>
-
-        </RelativeLayout>
-    </LinearLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rlv"
+                android:layout_width="match_parent"
+                android:layout_alignParentBottom="true"
+                android:paddingBottom="@dimen/margin_fragment_daily_task"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </RelativeLayout>
 </layout>

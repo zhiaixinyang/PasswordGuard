@@ -8,9 +8,11 @@
         android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/rlv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/gray_light"
+            android:paddingTop="8dp"
             android:scrollbars="none"
             android:overScrollMode="never"
             android:layout_above="@+id/layout_bottom" />
@@ -25,7 +27,10 @@
                 android:id="@+id/layout_et"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_margin="@dimen/margin_fragment_daily_task"
+                android:layout_marginLeft="@dimen/margin_fragment_daily_task"
+                android:layout_marginRight="@dimen/margin_fragment_daily_task"
+                android:layout_marginTop="@dimen/margin_fragment_daily_task_et"
+                android:layout_marginBottom="@dimen/margin_fragment_daily_task_et"
                 android:background="@drawable/bg_item_main_self_task_et">
 
                 <ImageView

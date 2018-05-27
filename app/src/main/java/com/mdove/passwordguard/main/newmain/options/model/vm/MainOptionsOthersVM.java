@@ -1,20 +1,16 @@
 package com.mdove.passwordguard.main.newmain.options.model.vm;
 
-import android.databinding.BaseObservable;
-
-import com.mdove.passwordguard.main.model.MainOptionInfo;
 import com.mdove.passwordguard.main.newmain.options.model.MainOptionNewInfo;
 
 /**
  * Created by MDove on 2018/5/18.
  */
 
-public class MainOptionsOthersVM extends BaseObservable {
+public class MainOptionsOthersVM extends BaseMainOptionsTopVM {
     public String mTitle;
     public String mHint;
     public int mBgDrawable;
     public int mIconId;
-    public int mType;
 
     public MainOptionsOthersVM(MainOptionNewInfo model) {
         mTitle = model.mTitle;

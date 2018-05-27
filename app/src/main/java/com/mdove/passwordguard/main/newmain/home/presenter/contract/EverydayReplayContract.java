@@ -22,6 +22,7 @@ public interface EverydayReplayContract {
 
         void onSelectDay(CalendarDay selectDay);
 
+        long getSelectDay();
     }
 
     interface MvpView extends BaseView<Presenter> {

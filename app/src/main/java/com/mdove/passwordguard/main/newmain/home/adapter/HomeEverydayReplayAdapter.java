@@ -56,16 +56,16 @@ public class HomeEverydayReplayAdapter extends RecyclerView.Adapter<RecyclerView
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        switch (viewType){
-            case TYPE_TOP_ET:{
+        switch (viewType) {
+            case TYPE_TOP_ET: {
                 return new ViewHolderTopEt((ItemEverydayReplayEtBinding) InflateUtils.bindingInflate(parent,
                         R.layout.item_everyday_replay_et));
             }
-            case TYPE_NORMAL:{
+            case TYPE_NORMAL: {
                 return new ViewHolder((ItemEverydayReplayHomeBinding) InflateUtils.bindingInflate(parent,
                         R.layout.item_everyday_replay_home));
             }
-            default:{
+            default: {
                 return new ViewHolder((ItemEverydayReplayHomeBinding) InflateUtils.bindingInflate(parent,
                         R.layout.item_everyday_replay_home));
             }
@@ -77,7 +77,7 @@ public class HomeEverydayReplayAdapter extends RecyclerView.Adapter<RecyclerView
         BaseCalendarModel model = mData.get(position);
         if (model instanceof EverydayReplayModel) {
             ((ViewHolder) holder).bind((EverydayReplayModel) model, position, mPresenter);
-        }else if (model instanceof EverydayReplayInitEtModel){
+        } else if (model instanceof EverydayReplayInitEtModel) {
             ((ViewHolderTopEt) holder).bind();
         }
     }
@@ -99,7 +99,7 @@ public class HomeEverydayReplayAdapter extends RecyclerView.Adapter<RecyclerView
             mBinding.layoutEt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    EtEverydayReplayActivity.start(mContext);
+                    EtEverydayReplayActivity.start(mContext, mPresenter.getSelectDay());
                 }
             });
         }

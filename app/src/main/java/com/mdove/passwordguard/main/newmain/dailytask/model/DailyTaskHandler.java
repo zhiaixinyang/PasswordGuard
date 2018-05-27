@@ -1,34 +1,31 @@
-package com.mdove.passwordguard.task.model.handle;
+package com.mdove.passwordguard.main.newmain.dailytask.model;
 
 import android.view.View;
-import android.widget.EditText;
 
-import com.mdove.passwordguard.R;
+import com.mdove.passwordguard.main.newmain.dailytask.presenter.DailyTaskPresenter;
 import com.mdove.passwordguard.task.model.SelfTaskModelVM;
 import com.mdove.passwordguard.task.presenter.AllSelfTaskPresenter;
-import com.mdove.passwordguard.task.presenter.SelfTaskPresenter;
-import com.mdove.passwordguard.utils.ToastHelper;
 
 /**
- * Created by MDove on 2018/3/27.
+ * Created by MDove on 2018/5/26.
  */
 
-public class AllSelfTaskHandler {
-    private AllSelfTaskPresenter mPresenter;
+public class DailyTaskHandler {
+    private DailyTaskPresenter mPresenter;
 
-    public AllSelfTaskHandler(AllSelfTaskPresenter presenter) {
+    public DailyTaskHandler(DailyTaskPresenter presenter) {
         mPresenter = presenter;
     }
 
-    public void onClickTaskSuc(SelfTaskModelVM vm) {
+    public void onClickTaskSuc(DailyTaskModelVM vm) {
         mPresenter.onClickTaskSuc(vm);
     }
 
-    public void onClickSee(SelfTaskModelVM vm) {
+    public void onClickSee(DailyTaskModelVM vm) {
         mPresenter.onClickSee(vm);
     }
 
-    public void onClickBtnEdit(View editText, SelfTaskModelVM vm) {
+    public void onClickBtnEdit(View editText, DailyTaskModelVM vm) {
         boolean isChange = true;
         if (vm.mTask.get().equals(vm.mSelfTaskModel.mSelfTask.mTask)) {
             isChange = false;
@@ -37,15 +34,15 @@ public class AllSelfTaskHandler {
         mPresenter.onClickBtnEdit(vm, isChange);
     }
 
-    public void onClickDelete(SelfTaskModelVM vm) {
+    public void onClickDelete(DailyTaskModelVM vm) {
         mPresenter.onClickDelete(vm);
     }
 
-    public void onClickPriority(SelfTaskModelVM vm) {
+    public void onClickPriority(DailyTaskModelVM vm) {
         mPresenter.onClickPriority(vm);
     }
 
-    public void onClickCopy(SelfTaskModelVM vm) {
+    public void onClickCopy(DailyTaskModelVM vm) {
         mPresenter.onClickCopy(vm);
     }
 }

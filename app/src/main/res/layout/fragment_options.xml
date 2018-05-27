@@ -12,6 +12,15 @@
         <variable
             name="topThreeVM"
             type="com.mdove.passwordguard.main.newmain.options.model.vm.MainOptionsTopThreeVM"/>
+        <variable
+            name="actionTopOne"
+            type="com.mdove.passwordguard.main.newmain.options.model.handler.MainOptionsTopHandler"/>
+        <variable
+            name="actionTopTwo"
+            type="com.mdove.passwordguard.main.newmain.options.model.handler.MainOptionsTopHandler"/>
+        <variable
+            name="actionTopThree"
+            type="com.mdove.passwordguard.main.newmain.options.model.handler.MainOptionsTopHandler"/>
     </data>
 
     <RelativeLayout
@@ -30,6 +39,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:onClick="@{()->actionTopOne.onClick(topOneVM)}"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical">
@@ -69,7 +79,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_tv_main_option_btn"
-                    android:alpha="0.5"
                     android:ellipsize="end"
                     android:gravity="center"
                     android:maxLines="1"
@@ -80,6 +89,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:onClick="@{()->actionTopTwo.onClick(topTwoVM)}"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical">
@@ -119,7 +129,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_tv_main_option_btn"
-                    android:alpha="0.5"
                     android:ellipsize="end"
                     android:gravity="center"
                     android:maxLines="1"
@@ -130,6 +139,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:onClick="@{()->actionTopThree.onClick(topThreeVM)}"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical">
@@ -169,7 +179,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_tv_main_option_btn"
-                    android:alpha="0.5"
                     android:ellipsize="end"
                     android:gravity="center"
                     android:maxLines="1"

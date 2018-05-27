@@ -13,7 +13,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_item_self_task">
+        android:layout_marginBottom="@dimen/margin_item_self_task"
+        android:layout_marginLeft="@dimen/margin_item_self_task"
+        android:layout_marginRight="@dimen/margin_item_self_task">
 
         <RelativeLayout
             android:id="@+id/layout_item"
@@ -38,10 +40,10 @@
             <LinearLayout
                 android:id="@+id/layout_btn"
                 android:layout_width="wrap_content"
-                android:gravity="center"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/margin_item_self_task"
-                android:layout_marginTop="@dimen/margin_item_self_task">
+                android:layout_marginTop="@dimen/margin_item_self_task"
+                android:gravity="center">
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -69,6 +71,7 @@
                         android:layout_toRightOf="@+id/tv_btn"
                         android:src="@mipmap/ic_task_suc" />
                 </RelativeLayout>
+
                 <TextView
                     android:id="@+id/tv_time_tip"
                     android:layout_width="wrap_content"
@@ -77,14 +80,15 @@
                     android:text="完成时间："
                     android:textColor="@color/gray"
                     android:textSize="14sp" />
+
                 <TextView
                     android:id="@+id/tv_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{viewModel.mTime}"
-                    tools:text="2018/4/6"
                     android:textColor="@color/gray"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    tools:text="2018/4/6" />
             </LinearLayout>
 
         </RelativeLayout>

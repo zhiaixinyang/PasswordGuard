@@ -22,6 +22,27 @@
                 app:title="@string/fragment_title_everyday_replay"
                 app:titleTextColor="@color/white">
 
+                <LinearLayout
+                    android:id="@+id/btn_in"
+                    android:layout_width="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="right"
+                    android:gravity="center"
+                    android:layout_marginRight="12dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="详情"
+                        android:layout_marginRight="4dp"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@mipmap/ic_btn_in"/>
+                </LinearLayout>
+
                 <TextView
                     android:id="@+id/tv_time"
                     android:layout_width="wrap_content"
@@ -36,6 +57,7 @@
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     tools:text="2018-4-14" />
+
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>
 

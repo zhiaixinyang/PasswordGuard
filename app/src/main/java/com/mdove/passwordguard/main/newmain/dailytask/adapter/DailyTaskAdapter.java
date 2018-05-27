@@ -10,7 +10,13 @@ import android.view.ViewGroup;
 
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.listener.OnChangeDataSizeListener;
+import com.mdove.passwordguard.databinding.ItemNewMainDailyTaskBinding;
 import com.mdove.passwordguard.databinding.ItemSelfTaskAllBinding;
+import com.mdove.passwordguard.main.model.vm.DailyPlanModelVM;
+import com.mdove.passwordguard.main.newmain.dailytask.model.DailyTaskHandler;
+import com.mdove.passwordguard.main.newmain.dailytask.model.DailyTaskModel;
+import com.mdove.passwordguard.main.newmain.dailytask.model.DailyTaskModelVM;
+import com.mdove.passwordguard.main.newmain.dailytask.presenter.DailyTaskPresenter;
 import com.mdove.passwordguard.task.model.SelfTaskModel;
 import com.mdove.passwordguard.task.model.SelfTaskModelVM;
 import com.mdove.passwordguard.task.model.handle.AllSelfTaskHandler;
@@ -25,12 +31,12 @@ import java.util.List;
  */
 
 public class DailyTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private AllSelfTaskPresenter mPresenter;
+    private DailyTaskPresenter mPresenter;
     private Context mContext;
     private List<SelfTaskModel> mData;
     private OnChangeDataSizeListener mListener;
 
-    public DailyTaskAdapter(Context context, AllSelfTaskPresenter presenter) {
+    public DailyTaskAdapter(Context context, DailyTaskPresenter presenter) {
         mContext = context;
         mPresenter = presenter;
         registerAdapterDataObserver(mObserver);
@@ -38,7 +44,7 @@ public class DailyTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new SelfTaskViewHolder((ItemSelfTaskAllBinding) InflateUtils.bindingInflate(parent, R.layout.item_self_task_all));
+        return new SelfTaskViewHolder((ItemNewMainDailyTaskBinding) InflateUtils.bindingInflate(parent, R.layout.item_new_main_daily_task));
     }
 
     @Override
@@ -68,16 +74,16 @@ public class DailyTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     public class SelfTaskViewHolder extends RecyclerView.ViewHolder {
-        private ItemSelfTaskAllBinding mBinding;
+        private ItemNewMainDailyTaskBinding mBinding;
 
-        public SelfTaskViewHolder(ItemSelfTaskAllBinding binding) {
+        public SelfTaskViewHolder(ItemNewMainDailyTaskBinding binding) {
             super(binding.getRoot());
             mBinding = binding;
         }
 
         public void bind(SelfTaskModel selfTaskModel, int position) {
-            mBinding.setViewModel(new SelfTaskModelVM(selfTaskModel, position));
-            mBinding.setActionHandler(new AllSelfTaskHandler(mPresenter));
+            mBinding.setViewModel(new DailyTaskModelVM(selfTaskModel, position));
+            mBinding.setActionHandler(new DailyTaskHandler(mPresenter));
 
             mBinding.ivPriority.setColorFilter(SelfTaskPriorityHelper.getPriorityBtnColor(mContext, selfTaskModel.mPriority), PorterDuff.Mode.SRC_ATOP);
             mBinding.tvPriorityTip.setTextColor(SelfTaskPriorityHelper.getPriorityBtnColor(mContext, selfTaskModel.mPriority));
@@ -160,5 +166,74 @@ public class DailyTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     public void setOnChangeDataSizeListener(OnChangeDataSizeListener listener) {
         mListener = listener;
+    }
+
+    public void notifyEventSelfTaskClickSuc(long id, SelfTaskModel postModel) {
+        SelfTaskModel exitsModel = null;
+        for (SelfTaskModel model : mData) {
+            if (model.mId == id) {
+                exitsModel = model;
+            }
+        }
+        if (exitsModel == null) {
+            return;
+        }
+        exitsModel.mIsSuc = postModel.mIsSuc;
+        int position = mData.indexOf(exitsModel);
+        notifyPosition(position);
+    }
+
+    public void notifyEventSelfTaskClickDelete(long id) {
+        SelfTaskModel selfTaskModel = null;
+        for (SelfTaskModel model : mData) {
+            if (model.mId == id) {
+                selfTaskModel = model;
+            }
+        }
+        if (selfTaskModel == null) {
+            return;
+        }
+        int position = mData.indexOf(selfTaskModel);
+        notifyPosition(position);
+    }
+
+
+    public void notifyEventSelfTaskClickPriority(long id, int priority) {
+        SelfTaskModel selfTaskModel = null;
+        for (SelfTaskModel model : mData) {
+            if (model.mId == id) {
+                selfTaskModel = model;
+                selfTaskModel.mPriority = priority;
+            }
+        }
+        if (selfTaskModel == null) {
+            return;
+        }
+        int position = mData.indexOf(selfTaskModel);
+        notifyPosition(position);
+    }
+
+    public void notifyEventSelfTaskClickSee(SelfTaskModel selfTaskModel) {
+        int position = -1;
+        SelfTaskModel existModel = null;
+        for (SelfTaskModel model : mData) {
+            if (model.mId == selfTaskModel.mId) {
+                existModel = model;
+                position = mData.indexOf(model);
+            }
+        }
+
+        if (existModel == null) {
+            mData.add(selfTaskModel);
+            notifyPosition(mData.size());
+        } else {
+            notifyDelete(position);
+        }
+    }
+
+    public void notifyDelete(int position) {
+        mData.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, mData.size());
     }
 }

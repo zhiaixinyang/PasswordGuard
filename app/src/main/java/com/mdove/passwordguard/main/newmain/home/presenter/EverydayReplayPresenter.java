@@ -15,6 +15,7 @@ import com.mdove.passwordguard.ui.calendar.materialcalendarview.CalendarDay;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,6 +26,7 @@ public class EverydayReplayPresenter implements EverydayReplayContract.Presenter
     private EverydayReplayContract.MvpView mView;
     private List<BaseCalendarModel> mData;
     private DailyPlanDao mDailyPlanDao;
+    private long mSelectDay = 0;
 
     @Override
     public void subscribe(EverydayReplayContract.MvpView view) {
@@ -111,6 +113,8 @@ public class EverydayReplayPresenter implements EverydayReplayContract.Presenter
 
     @Override
     public void onSelectDay(CalendarDay selectDay) {
+        mSelectDay = selectDay.getDate().getTime();
+
         int days = selectDay.getDay();
         int year = selectDay.getYear();
         int month = selectDay.getMonth();
@@ -131,5 +135,13 @@ public class EverydayReplayPresenter implements EverydayReplayContract.Presenter
                 mView.showData(mData);
             }
         }
+    }
+
+    @Override
+    public long getSelectDay() {
+        if (mSelectDay == 0) {
+            mSelectDay = new Date().getTime();
+        }
+        return mSelectDay;
     }
 }

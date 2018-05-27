@@ -54,6 +54,7 @@
                 android:paddingLeft="@dimen/margin_item_calendar"
                 android:paddingRight="@dimen/margin_item_calendar"
                 android:paddingTop="@dimen/margin_item_calendar"
+                android:layout_marginBottom="@dimen/margin_item_calendar"
                 android:scrollbars="none" />
 
 
