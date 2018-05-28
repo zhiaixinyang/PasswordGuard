@@ -53,13 +53,13 @@
         <RelativeLayout
             android:id="@+id/layout_rlv_label"
             android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/margin_item_self_task"
             android:layout_below="@+id/layout_et"
             android:layout_height="wrap_content">
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rlv_label"
                 android:layout_toLeftOf="@+id/btn_label_setting"
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/margin_item_self_task"
                 android:layout_height="wrap_content"/>
             <ImageView
                 android:id="@+id/btn_label_setting"
