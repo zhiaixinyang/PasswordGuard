@@ -1,5 +1,6 @@
 package com.mdove.passwordguard.task;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,8 +28,11 @@ public class NewSelfTaskActivity extends BaseActivity {
     private ViewPager mViewPager;
 
     public static void start(Context context) {
-        Intent intent = new Intent(context, NewSelfTaskActivity.class);
-        context.startActivity(intent);
+        Intent start = new Intent(context, NewSelfTaskActivity.class);
+        if (!(context instanceof Activity)) {
+            start.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+        context.startActivity(start);
     }
 
     @Override

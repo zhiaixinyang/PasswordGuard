@@ -38,7 +38,7 @@ import com.mdove.passwordguard.main.model.MainGroupRlvModel;
 import com.mdove.passwordguard.main.model.MainOptionModel;
 import com.mdove.passwordguard.main.model.MainPasswordModel;
 import com.mdove.passwordguard.main.model.MainSearchModel;
-import com.mdove.passwordguard.main.model.MainSelfTaskModel;
+import com.mdove.passwordguard.main.model.SelfTaskListModel;
 import com.mdove.passwordguard.main.model.MainTopModel;
 import com.mdove.passwordguard.main.model.event.CheckOrderEvent;
 import com.mdove.passwordguard.main.model.event.DailyTaskScrollEvent;
@@ -51,7 +51,6 @@ import com.mdove.passwordguard.main.model.handler.MainSearchHandler;
 import com.mdove.passwordguard.main.model.vm.ItemMainPasswordVM;
 import com.mdove.passwordguard.main.model.vm.ItemMainTopVM;
 import com.mdove.passwordguard.main.presenter.MainPresenter;
-import com.mdove.passwordguard.task.model.SelfTaskModel;
 import com.mdove.passwordguard.ui.guideview.Guide;
 import com.mdove.passwordguard.ui.guideview.GuideBuilder;
 import com.mdove.passwordguard.ui.guideview.component.CommonComponent;
@@ -115,7 +114,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     return TYPE_MAIN_GROUP;
                 } else if (model instanceof MainDailySelfModel) {
                     return TYPE_MAIN_DAILY_SELF;
-                } else if (model instanceof MainSelfTaskModel) {
+                } else if (model instanceof SelfTaskListModel) {
                     return TYPE_MAIN_SELF_TASK;
                 } else if (model instanceof MainDailyPlanModel) {
                     return TYPE_MAIN_DAILY_PLAN;
@@ -177,7 +176,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         } else if (holder instanceof NewMainOptionViewHolder) {
             ((NewMainOptionViewHolder) holder).bind((MainOptionModel) model);
         } else if (holder instanceof MainSelfTaskHolder) {
-            ((MainSelfTaskHolder) holder).bind((MainSelfTaskModel) model);
+            ((MainSelfTaskHolder) holder).bind((SelfTaskListModel) model);
         } else if (holder instanceof MainDailyPlanViewHolder) {
             ((MainDailyPlanViewHolder) holder).bind(mPresenter);
         }
@@ -392,7 +391,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             mBinding = binding;
         }
 
-        public void bind(MainSelfTaskModel model) {
+        public void bind(SelfTaskListModel model) {
             mBinding.setActionHandler(new ItemMainSelfTaskHandler(mPresenter));
             mBinding.rlvMainSelfTask.setLayoutManager(new LinearLayoutManager(mContext));
 
@@ -541,16 +540,16 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    public void insertItemMainSelfTask(SelfTaskModel model) {
+    public void insertItemMainSelfTask(com.mdove.passwordguard.task.model.SelfTaskModel model) {
         mMainSelfTaskAdapter.insertItemMainSelfTask(model);
     }
 
-    public void notifyEventSelfTaskClickSuc(long id, SelfTaskModel postModel) {
+    public void notifyEventSelfTaskClickSuc(long id, com.mdove.passwordguard.task.model.SelfTaskModel postModel) {
         if (mMainSelfTaskAdapter == null) {
             return;
         }
-        SelfTaskModel exitsModel = null;
-        for (SelfTaskModel model : mMainSelfTaskAdapter.getData()) {
+        com.mdove.passwordguard.task.model.SelfTaskModel exitsModel = null;
+        for (com.mdove.passwordguard.task.model.SelfTaskModel model : mMainSelfTaskAdapter.getData()) {
             if (model.mId == id) {
                 exitsModel = model;
             }
@@ -567,8 +566,8 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if (mMainSelfTaskAdapter == null) {
             return;
         }
-        SelfTaskModel selfTaskModel = null;
-        for (SelfTaskModel model : mMainSelfTaskAdapter.getData()) {
+        com.mdove.passwordguard.task.model.SelfTaskModel selfTaskModel = null;
+        for (com.mdove.passwordguard.task.model.SelfTaskModel model : mMainSelfTaskAdapter.getData()) {
             if (model.mId == id) {
                 selfTaskModel = model;
             }
@@ -584,8 +583,8 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if (mMainSelfTaskAdapter == null) {
             return;
         }
-        SelfTaskModel selfTaskModel = null;
-        for (SelfTaskModel model : mMainSelfTaskAdapter.getData()) {
+        com.mdove.passwordguard.task.model.SelfTaskModel selfTaskModel = null;
+        for (com.mdove.passwordguard.task.model.SelfTaskModel model : mMainSelfTaskAdapter.getData()) {
             if (model.mId == id) {
                 selfTaskModel = model;
             }
@@ -602,8 +601,8 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if (mMainSelfTaskAdapter == null) {
             return;
         }
-        SelfTaskModel selfTaskModel = null;
-        for (SelfTaskModel model : mMainSelfTaskAdapter.getData()) {
+        com.mdove.passwordguard.task.model.SelfTaskModel selfTaskModel = null;
+        for (com.mdove.passwordguard.task.model.SelfTaskModel model : mMainSelfTaskAdapter.getData()) {
             if (model.mId == id) {
                 selfTaskModel = model;
                 selfTaskModel.mPriority = priority;
@@ -616,13 +615,13 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         mMainSelfTaskAdapter.onClickTaskPriority(position);
     }
 
-    public void notifyEventSelfTaskClickSee(SelfTaskModel selfTaskModel) {
+    public void notifyEventSelfTaskClickSee(com.mdove.passwordguard.task.model.SelfTaskModel selfTaskModel) {
         if (mMainSelfTaskAdapter == null) {
             return;
         }
         int notifyPosition = -1;
-        SelfTaskModel existModel = null;
-        for (SelfTaskModel model : mMainSelfTaskAdapter.getData()) {
+        com.mdove.passwordguard.task.model.SelfTaskModel existModel = null;
+        for (com.mdove.passwordguard.task.model.SelfTaskModel model : mMainSelfTaskAdapter.getData()) {
             if (model.mId == selfTaskModel.mId) {
                 existModel = model;
                 notifyPosition = mMainSelfTaskAdapter.getData().indexOf(model);

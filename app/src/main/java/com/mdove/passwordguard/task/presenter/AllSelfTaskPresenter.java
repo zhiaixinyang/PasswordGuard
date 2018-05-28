@@ -3,11 +3,15 @@ package com.mdove.passwordguard.task.presenter;
 import com.hwangjr.rxbus.RxBus;
 import com.mdove.passwordguard.App;
 import com.mdove.passwordguard.R;
+import com.mdove.passwordguard.greendao.SelfTaskLabelDao;
 import com.mdove.passwordguard.greendao.DeleteSelfTaskDao;
 import com.mdove.passwordguard.greendao.SelfTaskDao;
 import com.mdove.passwordguard.greendao.SucSelfTaskDao;
+import com.mdove.passwordguard.greendao.entity.SelfTaskLabel;
 import com.mdove.passwordguard.greendao.entity.SelfTask;
 import com.mdove.passwordguard.greendao.entity.SucSelfTask;
+import com.mdove.passwordguard.main.newmain.dailytask.dialog.model.DailyTaskLabelModel;
+import com.mdove.passwordguard.task.LabelSettingActivity;
 import com.mdove.passwordguard.task.model.SelfTaskModel;
 import com.mdove.passwordguard.task.model.SelfTaskModelVM;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickDeleteEvent;
@@ -16,7 +20,6 @@ import com.mdove.passwordguard.task.model.event.SelfTaskClickPriorityEvent;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickSeeEvent;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickSucEvent;
 import com.mdove.passwordguard.task.presenter.contract.AllSelfTaskContract;
-import com.mdove.passwordguard.task.presenter.contract.SelfTaskContract;
 import com.mdove.passwordguard.task.utils.DeleteSelfTaskHelper;
 import com.mdove.passwordguard.utils.ClipboardUtils;
 import com.mdove.passwordguard.utils.ToastHelper;
@@ -30,13 +33,14 @@ import java.util.List;
 /**
  * Created by MDove on 2018/3/27.
  */
-
 public class AllSelfTaskPresenter implements AllSelfTaskContract.Presenter {
     private AllSelfTaskContract.MvpView mView;
     private List<SelfTaskModel> mData;
+    private List<DailyTaskLabelModel> mLabelData;
     private SelfTaskDao mSelfTaskDao;
     private DeleteSelfTaskDao mDeleteSelfTaskDao;
     private SucSelfTaskDao mSucSelfTaskDao;
+    private SelfTaskLabelDao mLabelDao;
 
     @Override
     public void subscribe(AllSelfTaskContract.MvpView view) {
@@ -47,6 +51,7 @@ public class AllSelfTaskPresenter implements AllSelfTaskContract.Presenter {
         mSelfTaskDao = App.getDaoSession().getSelfTaskDao();
         mDeleteSelfTaskDao = App.getDaoSession().getDeleteSelfTaskDao();
         mSucSelfTaskDao = App.getDaoSession().getSucSelfTaskDao();
+        mLabelDao = App.getDaoSession().getSelfTaskLabelDao();
     }
 
     @Override
@@ -68,6 +73,20 @@ public class AllSelfTaskPresenter implements AllSelfTaskContract.Presenter {
             mData.add(new SelfTaskModel(selfTask));
         }
         mView.initData(mData);
+    }
+
+    @Override
+    public void initLabel() {
+        List<SelfTaskLabel> data = mLabelDao.queryBuilder().list();
+        mLabelData = new ArrayList<>();
+        for (SelfTaskLabel label : data) {
+            mLabelData.add(new DailyTaskLabelModel(label));
+        }
+        if (mLabelData.size() <= 0) {
+            return;
+        }
+        mLabelData.get(0).setSelect(true);
+        mView.initLabel(mLabelData);
     }
 
     @Override
@@ -160,6 +179,11 @@ public class AllSelfTaskPresenter implements AllSelfTaskContract.Presenter {
     @Override
     public void onClickCopy(SelfTaskModelVM vm) {
         ClipboardUtils.copyToClipboard(mView.getContext(), vm.mTask.get());
+    }
+
+    @Override
+    public void onClickLabelSetting() {
+        LabelSettingActivity.start(mView.getContext());
     }
 
     @Override

@@ -10,23 +10,23 @@ import java.io.Serializable;
  * Created by MDove on 2018/5/27.
  */
 @Entity
-public class DailyTaskLabel implements Serializable {
+public class SelfTaskLabel implements Serializable {
     @Id(autoincrement = true)
     public Long id;
     public String mTvLabel;
     public String mBgColor;
     public Long mTimeStamp;
     static final long serialVersionUID = 1L;
-    @Generated(hash = 214038179)
-    public DailyTaskLabel(Long id, String mTvLabel, String mBgColor,
+    @Generated(hash = 2027180992)
+    public SelfTaskLabel(Long id, String mTvLabel, String mBgColor,
             Long mTimeStamp) {
         this.id = id;
         this.mTvLabel = mTvLabel;
         this.mBgColor = mBgColor;
         this.mTimeStamp = mTimeStamp;
     }
-    @Generated(hash = 220494481)
-    public DailyTaskLabel() {
+    @Generated(hash = 1201483618)
+    public SelfTaskLabel() {
     }
     public Long getId() {
         return this.id;
@@ -52,4 +52,5 @@ public class DailyTaskLabel implements Serializable {
     public void setMTimeStamp(Long mTimeStamp) {
         this.mTimeStamp = mTimeStamp;
     }
+
 }

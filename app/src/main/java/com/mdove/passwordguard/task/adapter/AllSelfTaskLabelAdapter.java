@@ -1,4 +1,4 @@
-package com.mdove.passwordguard.main.newmain.dailytask.dialog;
+package com.mdove.passwordguard.task.adapter;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.databinding.ItemLabelDailySelfBinding;
+import com.mdove.passwordguard.main.newmain.dailytask.dialog.MainSelfTaskEtDialog;
 import com.mdove.passwordguard.main.newmain.dailytask.dialog.model.DailyTaskLabelModel;
 import com.mdove.passwordguard.main.newmain.dailytask.dialog.model.DailyTaskLabelModelVM;
 import com.mdove.passwordguard.utils.InflateUtils;
@@ -15,26 +16,25 @@ import com.mdove.passwordguard.utils.InflateUtils;
 import java.util.List;
 
 /**
- * Created by MDove on 2018/5/27.
+ * Created by MDove on 2018/5/28.
  */
 
-public class DailyTaskEtDialogAdapter extends RecyclerView.Adapter<DailyTaskEtDialogAdapter.ViewHolder> {
+public class AllSelfTaskLabelAdapter extends RecyclerView.Adapter<AllSelfTaskLabelAdapter.ViewHolder> {
     private Context mContext;
     private List<DailyTaskLabelModel> mData;
-    private DailyTaskEtDialog.OnClickLabelSelectListener mListener;
+    private MainSelfTaskEtDialog.OnClickLabelSelectListener mListener;
 
-    public DailyTaskEtDialogAdapter(Context context, List<DailyTaskLabelModel> data) {
-        mData = data;
+    public AllSelfTaskLabelAdapter(Context context) {
         mContext = context;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder((ItemLabelDailySelfBinding) InflateUtils.bindingInflate(parent, R.layout.item_label_daily_self));
+    public AllSelfTaskLabelAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new AllSelfTaskLabelAdapter.ViewHolder((ItemLabelDailySelfBinding) InflateUtils.bindingInflate(parent, R.layout.item_label_daily_self));
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(AllSelfTaskLabelAdapter.ViewHolder holder, int position) {
         DailyTaskLabelModel mode = mData.get(position);
         holder.bind(mode);
     }
@@ -81,13 +81,18 @@ public class DailyTaskEtDialogAdapter extends RecyclerView.Adapter<DailyTaskEtDi
         }
     }
 
-    public void setListener(DailyTaskEtDialog.OnClickLabelSelectListener listener) {
+    public void setListener(MainSelfTaskEtDialog.OnClickLabelSelectListener listener) {
         mListener = listener;
     }
 
     public void setData(List<DailyTaskLabelModel> data) {
         mData = data;
         notifyDataSetChanged();
+    }
+
+    public void insertData(DailyTaskLabelModel model) {
+        mData.add(model);
+        notify(mData.size());
     }
 
     public void notify(int position) {

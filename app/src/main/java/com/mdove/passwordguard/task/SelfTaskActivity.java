@@ -1,5 +1,6 @@
 package com.mdove.passwordguard.task;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,8 +35,11 @@ public class SelfTaskActivity extends BaseActivity implements SelfTaskContract.M
     private List<SelfTaskModel> mData;
 
     public static void start(Context context) {
-        Intent intent = new Intent(context, SelfTaskActivity.class);
-        context.startActivity(intent);
+        Intent start = new Intent(context, SelfTaskActivity.class);
+        if (!(context instanceof Activity)) {
+            start.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+        context.startActivity(start);
     }
 
     @Override

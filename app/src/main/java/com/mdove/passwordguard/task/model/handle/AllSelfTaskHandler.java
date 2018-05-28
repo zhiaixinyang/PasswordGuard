@@ -48,4 +48,8 @@ public class AllSelfTaskHandler {
     public void onClickCopy(SelfTaskModelVM vm) {
         mPresenter.onClickCopy(vm);
     }
+
+    public void onClickLabelSetting(){
+        mPresenter.onClickLabelSetting();
+    }
 }

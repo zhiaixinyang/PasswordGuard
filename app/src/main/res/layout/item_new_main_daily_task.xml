@@ -9,44 +9,76 @@
 
         <variable
             name="viewModel"
-            type="com.mdove.passwordguard.main.newmain.dailytask.model.DailyTaskModelVM" />
+            type="com.mdove.passwordguard.main.newmain.dailytask.model.MainSelfTaskModelVM" />
 
         <variable
             name="actionHandler"
-            type="com.mdove.passwordguard.main.newmain.dailytask.model.DailyTaskHandler" />
+            type="com.mdove.passwordguard.main.newmain.dailytask.model.MainSelfTaskHandler" />
     </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_item_self_task"
-        android:layout_marginRight="@dimen/margin_item_self_task"
         android:layout_marginLeft="@dimen/margin_item_self_task"
-        >
+        android:layout_marginRight="@dimen/margin_item_self_task">
 
         <RelativeLayout
             android:id="@+id/layout_item"
             android:layout_width="match_parent"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_item_self_task">
+            android:background="@drawable/bg_item_self_task"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <RelativeLayout
+                android:id="@+id/layout_label"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_item_self_task"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/bg_label">
+
+                <ImageView
+                    android:id="@+id/iv_label"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/ic_label"
+                    android:tint="@color/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/tv_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/iv_label"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    tools:text="Bug" />
+            </RelativeLayout>
+
             <TextView
                 android:id="@+id/tv_time"
-                android:layout_marginLeft="@dimen/margin_item_self_task"
-                android:layout_marginTop="@dimen/margin_item_self_task"
                 android:layout_width="wrap_content"
-                tools:text="2018/4/1"
-                android:textSize="12sp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_item_self_task"
+                android:layout_toRightOf="@+id/layout_label"
                 android:text="@{viewModel.mTime}"
                 android:textColor="#666666"
-                android:layout_height="wrap_content" />
+                android:textSize="12sp"
+                tools:text="2018/4/1" />
+
             <EditText
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_time"
-                android:layout_margin="@dimen/margin_item_self_task"
+                android:layout_below="@+id/layout_label"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="@dimen/margin_item_self_task"
+                android:layout_marginRight="@dimen/margin_item_self_task"
+                android:layout_marginTop="4dp"
                 android:layout_toLeftOf="@+id/btn_edit"
                 android:background="@null"
                 android:text="@{viewModel.mTask}"

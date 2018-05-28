@@ -6,7 +6,7 @@
 
         <variable
             name="actionHandler"
-            type="com.mdove.passwordguard.main.presenter.MainPresenter" />
+            type="com.mdove.passwordguard.task.model.handle.AllSelfTaskHandler"/>
     </data>
 
     <RelativeLayout
@@ -50,12 +50,35 @@
                 android:textColor="@color/white"
                 android:textSize="16sp" />
         </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/layout_rlv_label"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/layout_et"
+            android:layout_height="wrap_content">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rlv_label"
+                android:layout_toLeftOf="@+id/btn_label_setting"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/margin_item_self_task"
+                android:layout_height="wrap_content"/>
+            <ImageView
+                android:id="@+id/btn_label_setting"
+                android:layout_width="25dp"
+                android:src="@mipmap/ic_settings"
+                android:layout_marginRight="@dimen/margin_item_self_task"
+                android:layout_marginLeft="@dimen/margin_item_self_task"
+                android:tint="@color/colorPrimary"
+                android:onClick="@{()->actionHandler.onClickLabelSetting()}"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_height="25dp" />
+        </RelativeLayout>
 
         <com.mdove.passwordguard.ui.DottedView
             android:id="@+id/line"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/layout_et"
+            android:layout_below="@+id/layout_rlv_label"
             android:layout_marginLeft="@dimen/margin_item_self_task"
             android:layout_marginRight="@dimen/margin_item_self_task"
             android:layout_marginTop="@dimen/margin_item_self_task"

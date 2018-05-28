@@ -77,6 +77,10 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
+        <activity android:name=".task.LabelSettingActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".alldata.AllDailySelfActivity"
             android:launchMode="singleTask"

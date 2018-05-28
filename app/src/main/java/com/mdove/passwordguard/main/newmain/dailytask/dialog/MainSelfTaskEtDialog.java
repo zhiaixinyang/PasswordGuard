@@ -12,9 +12,10 @@ import android.view.View;
 import com.mdove.passwordguard.App;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.databinding.DialogDailyTaskEtBinding;
-import com.mdove.passwordguard.greendao.DailyTaskLabelDao;
-import com.mdove.passwordguard.greendao.entity.DailyTaskLabel;
+import com.mdove.passwordguard.greendao.SelfTaskLabelDao;
+import com.mdove.passwordguard.greendao.entity.SelfTaskLabel;
 import com.mdove.passwordguard.main.newmain.dailytask.dialog.model.DailyTaskLabelModel;
+import com.mdove.passwordguard.task.LabelSettingActivity;
 import com.mdove.passwordguard.utils.ToastHelper;
 
 import java.util.ArrayList;
@@ -23,29 +24,37 @@ import java.util.List;
 /**
  * Created by MDove on 18/5/27.
  */
-public class DailyTaskEtDialog extends AppCompatDialog {
+public class MainSelfTaskEtDialog extends AppCompatDialog {
     private DialogDailyTaskEtBinding mBinding;
     private Context mContext;
-    private DailyTaskEtDialogAdapter mAdapter;
+    private MainSelfTaskEtDialogAdapter mAdapter;
     private List<DailyTaskLabelModel> mData;
-    private DailyTaskLabelDao mDao;
+    private SelfTaskLabelDao mDao;
     private OnClickSendListener mOnClickSendListener;
     private OnClickLabelSelectListener mOnClickLabelSelectListener;
 
-    public DailyTaskEtDialog(Context context) {
+    public MainSelfTaskEtDialog(Context context) {
         super(context, android.R.style.Theme_Translucent_NoTitleBar);
         mContext = context;
         mBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.dialog_daily_task_et,
                 null, false);
         setContentView(mBinding.getRoot());
         mData = new ArrayList<>();
-        mAdapter = new DailyTaskEtDialogAdapter(mContext, mData);
+        mAdapter = new MainSelfTaskEtDialogAdapter(mContext, mData);
+
+        mBinding.btnLabelSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LabelSettingActivity.start(mContext);
+                dismiss();
+            }
+        });
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mDao = App.getDaoSession().getDailyTaskLabelDao();
+        mDao = App.getDaoSession().getSelfTaskLabelDao();
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -74,9 +83,12 @@ public class DailyTaskEtDialog extends AppCompatDialog {
     }
 
     private void initData() {
-        List<DailyTaskLabel> data = mDao.queryBuilder().list();
-        for (DailyTaskLabel dailyTaskLabel : data) {
-            mData.add(new DailyTaskLabelModel(dailyTaskLabel));
+        List<SelfTaskLabel> data = mDao.queryBuilder().list();
+        for (SelfTaskLabel selfTaskLabel : data) {
+            mData.add(new DailyTaskLabelModel(selfTaskLabel));
+        }
+        if (mData.size() <= 0) {
+            return;
         }
         mData.get(0).setSelect(true);
         mAdapter.setData(mData);

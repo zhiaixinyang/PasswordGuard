@@ -11,16 +11,12 @@ import android.view.ViewGroup;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.listener.OnChangeDataSizeListener;
 import com.mdove.passwordguard.databinding.ItemNewMainDailyTaskBinding;
-import com.mdove.passwordguard.databinding.ItemSelfTaskAllBinding;
-import com.mdove.passwordguard.main.model.vm.DailyPlanModelVM;
-import com.mdove.passwordguard.main.newmain.dailytask.model.DailyTaskHandler;
-import com.mdove.passwordguard.main.newmain.dailytask.model.DailyTaskModel;
-import com.mdove.passwordguard.main.newmain.dailytask.model.DailyTaskModelVM;
-import com.mdove.passwordguard.main.newmain.dailytask.presenter.DailyTaskPresenter;
+import com.mdove.passwordguard.main.newmain.dailytask.model.MainSelfTaskHandler;
+import com.mdove.passwordguard.main.newmain.dailytask.model.MainSelfTaskModel;
+import com.mdove.passwordguard.main.newmain.dailytask.model.MainSelfTaskModelVM;
+import com.mdove.passwordguard.main.newmain.dailytask.presenter.MainSelfTaskPresenter;
+import com.mdove.passwordguard.main.newmain.dailytask.util.LabelConstant;
 import com.mdove.passwordguard.task.model.SelfTaskModel;
-import com.mdove.passwordguard.task.model.SelfTaskModelVM;
-import com.mdove.passwordguard.task.model.handle.AllSelfTaskHandler;
-import com.mdove.passwordguard.task.presenter.AllSelfTaskPresenter;
 import com.mdove.passwordguard.task.utils.SelfTaskPriorityHelper;
 import com.mdove.passwordguard.utils.InflateUtils;
 
@@ -30,13 +26,13 @@ import java.util.List;
  * Created by MDove on 2018/5/27.
  */
 
-public class DailyTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private DailyTaskPresenter mPresenter;
+public class MainSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private MainSelfTaskPresenter mPresenter;
     private Context mContext;
     private List<SelfTaskModel> mData;
     private OnChangeDataSizeListener mListener;
 
-    public DailyTaskAdapter(Context context, DailyTaskPresenter presenter) {
+    public MainSelfTaskAdapter(Context context, MainSelfTaskPresenter presenter) {
         mContext = context;
         mPresenter = presenter;
         registerAdapterDataObserver(mObserver);
@@ -82,12 +78,13 @@ public class DailyTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
 
         public void bind(SelfTaskModel selfTaskModel, int position) {
-            mBinding.setViewModel(new DailyTaskModelVM(selfTaskModel, position));
-            mBinding.setActionHandler(new DailyTaskHandler(mPresenter));
+            mBinding.setViewModel(new MainSelfTaskModelVM(selfTaskModel, position));
+            mBinding.setActionHandler(new MainSelfTaskHandler(mPresenter));
 
             mBinding.ivPriority.setColorFilter(SelfTaskPriorityHelper.getPriorityBtnColor(mContext, selfTaskModel.mPriority), PorterDuff.Mode.SRC_ATOP);
             mBinding.tvPriorityTip.setTextColor(SelfTaskPriorityHelper.getPriorityBtnColor(mContext, selfTaskModel.mPriority));
             mBinding.tvTitle.setTextColor(SelfTaskPriorityHelper.getPriorityTextColor(mContext, selfTaskModel.mPriority));
+            mBinding.tvLabel.setText(LabelConstant.DEFAULT_LABEL);
 
             if (!selfTaskModel.mIsSuc) {
                 mBinding.tvTitle.setFocusable(true);

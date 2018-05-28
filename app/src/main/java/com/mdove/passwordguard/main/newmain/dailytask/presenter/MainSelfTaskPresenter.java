@@ -8,8 +8,8 @@ import com.mdove.passwordguard.greendao.SelfTaskDao;
 import com.mdove.passwordguard.greendao.SucSelfTaskDao;
 import com.mdove.passwordguard.greendao.entity.SelfTask;
 import com.mdove.passwordguard.greendao.entity.SucSelfTask;
-import com.mdove.passwordguard.main.newmain.dailytask.model.DailyTaskModelVM;
-import com.mdove.passwordguard.main.newmain.dailytask.presenter.contract.DailyTaskContract;
+import com.mdove.passwordguard.main.newmain.dailytask.model.MainSelfTaskModelVM;
+import com.mdove.passwordguard.main.newmain.dailytask.presenter.contract.MainSelfTaskContract;
 import com.mdove.passwordguard.task.model.SelfTaskModel;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickDeleteEvent;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickEditEvent;
@@ -30,15 +30,15 @@ import java.util.List;
  * Created by MDove on 2018/5/9.
  */
 
-public class DailyTaskPresenter implements DailyTaskContract.Presenter {
-    private DailyTaskContract.MvpView mView;
+public class MainSelfTaskPresenter implements MainSelfTaskContract.Presenter {
+    private MainSelfTaskContract.MvpView mView;
     private List<SelfTaskModel> mData;
     private SelfTaskDao mSelfTaskDao;
     private SucSelfTaskDao mSucSelfTaskDao;
     private DeleteSelfTaskDao mDeleteSelfTaskDao;
 
     @Override
-    public void subscribe(DailyTaskContract.MvpView view) {
+    public void subscribe(MainSelfTaskContract.MvpView view) {
         mView = view;
 
         mSelfTaskDao = App.getDaoSession().getSelfTaskDao();
@@ -86,7 +86,7 @@ public class DailyTaskPresenter implements DailyTaskContract.Presenter {
     }
 
     @Override
-    public void onClickTaskSuc(DailyTaskModelVM vm) {
+    public void onClickTaskSuc(MainSelfTaskModelVM vm) {
         SelfTask selfTask = vm.mSelfTaskModel.mSelfTask;
         if (vm.mSelfTaskModel.mIsSuc) {
             selfTask.mIsSuc = 0;
@@ -117,7 +117,7 @@ public class DailyTaskPresenter implements DailyTaskContract.Presenter {
     }
 
     @Override
-    public void onClickSee(DailyTaskModelVM vm) {
+    public void onClickSee(MainSelfTaskModelVM vm) {
         SelfTask selfTask = vm.mSelfTaskModel.mSelfTask;
         if (vm.mSelfTaskModel.mIsSee) {
             selfTask.mIsSee = 0;
@@ -134,7 +134,7 @@ public class DailyTaskPresenter implements DailyTaskContract.Presenter {
     }
 
     @Override
-    public void onClickDelete(DailyTaskModelVM vm) {
+    public void onClickDelete(MainSelfTaskModelVM vm) {
         mSelfTaskDao.delete(vm.mSelfTaskModel.mSelfTask);
         mView.onClickDelete(vm.mPosition);
         mDeleteSelfTaskDao.insert(DeleteSelfTaskHelper.getDeletedSelfTask(vm.mSelfTaskModel.mSelfTask));
@@ -143,7 +143,7 @@ public class DailyTaskPresenter implements DailyTaskContract.Presenter {
     }
 
     @Override
-    public void onClickPriority(DailyTaskModelVM vm) {
+    public void onClickPriority(MainSelfTaskModelVM vm) {
         SelfTask selfTask = vm.mSelfTaskModel.mSelfTask;
         int curPriority = selfTask.mPriority;
         curPriority++;
@@ -160,12 +160,12 @@ public class DailyTaskPresenter implements DailyTaskContract.Presenter {
     }
 
     @Override
-    public void onClickCopy(DailyTaskModelVM vm) {
+    public void onClickCopy(MainSelfTaskModelVM vm) {
         ClipboardUtils.copyToClipboard(mView.getContext(), vm.mTask.get());
     }
 
     @Override
-    public void onClickBtnEdit(DailyTaskModelVM vm, boolean isChange) {
+    public void onClickBtnEdit(MainSelfTaskModelVM vm, boolean isChange) {
         if (!isChange) {
             ToastHelper.shortToast(mView.getContext().getResources().getString(R.string.string_self_task_edit_error));
             return;

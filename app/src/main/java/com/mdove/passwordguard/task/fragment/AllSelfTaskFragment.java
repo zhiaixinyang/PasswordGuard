@@ -13,11 +13,19 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.hwangjr.rxbus.RxBus;
+import com.hwangjr.rxbus.annotation.Subscribe;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.listener.OnChangeDataSizeListener;
 import com.mdove.passwordguard.databinding.FragmentAllSelfTaskBinding;
+import com.mdove.passwordguard.main.newmain.dailytask.dialog.MainSelfTaskEtDialog;
+import com.mdove.passwordguard.main.newmain.dailytask.dialog.model.DailyTaskLabelModel;
 import com.mdove.passwordguard.task.adapter.AllSelfTaskAdapter;
+import com.mdove.passwordguard.task.adapter.AllSelfTaskLabelAdapter;
 import com.mdove.passwordguard.task.model.SelfTaskModel;
+import com.mdove.passwordguard.task.model.event.SelfTaskClickSucEvent;
+import com.mdove.passwordguard.task.model.event.SelfTaskLabelInsertEvent;
+import com.mdove.passwordguard.task.model.handle.AllSelfTaskHandler;
 import com.mdove.passwordguard.task.presenter.AllSelfTaskPresenter;
 import com.mdove.passwordguard.task.presenter.contract.AllSelfTaskContract;
 import com.mdove.passwordguard.utils.ToastHelper;
@@ -35,6 +43,7 @@ public class AllSelfTaskFragment extends Fragment implements AllSelfTaskContract
     private RecyclerView mRlv;
     private AllSelfTaskPresenter mPresenter;
     private AllSelfTaskAdapter mAdapter;
+    private AllSelfTaskLabelAdapter mLabelAdapter;
     private TextView mLayoutEmpty;
 
     public static AllSelfTaskFragment newInstance() {
@@ -58,8 +67,17 @@ public class AllSelfTaskFragment extends Fragment implements AllSelfTaskContract
         mLayoutEmpty = mBinding.layoutEmpty;
 
         mPresenter = new AllSelfTaskPresenter();
+        mBinding.setActionHandler(new AllSelfTaskHandler(mPresenter));
         mPresenter.subscribe(this);
         mAdapter = new AllSelfTaskAdapter(getContext(), mPresenter);
+        mLabelAdapter = new AllSelfTaskLabelAdapter(getContext());
+        mLabelAdapter.setListener(new MainSelfTaskEtDialog.OnClickLabelSelectListener() {
+            @Override
+            public void onClickLabel(String content) {
+
+            }
+        });
+
         mAdapter.setOnChangeDataSizeListener(new OnChangeDataSizeListener() {
             @Override
             public void dataIsEmpty(boolean isEmpty) {
@@ -74,6 +92,10 @@ public class AllSelfTaskFragment extends Fragment implements AllSelfTaskContract
         mRlv.setLayoutManager(new LinearLayoutManager(getContext()));
         mRlv.setAdapter(mAdapter);
 
+        mBinding.rlvLabel.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        mBinding.rlvLabel.setAdapter(mLabelAdapter);
+
+
         mBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,6 +108,8 @@ public class AllSelfTaskFragment extends Fragment implements AllSelfTaskContract
                 ToastHelper.shortToast("怎么能添加一个空的工作内容");
             }
         });
+
+        RxBus.get().register(this);
     }
 
     @Override
@@ -94,12 +118,26 @@ public class AllSelfTaskFragment extends Fragment implements AllSelfTaskContract
         if (!dataExisted()) {
             mPresenter.initData();
         }
+        if (!labelDataExisted()) {
+            mPresenter.initLabel();
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        RxBus.get().unregister(this);
     }
 
     @Override
     public void insertSelfTask(int position) {
         //直接更新队尾
         mAdapter.notifyPosition(position);
+    }
+
+    @Override
+    public void initLabel(List<DailyTaskLabelModel> data) {
+        mLabelAdapter.setData(data);
     }
 
     @Override
@@ -137,5 +175,17 @@ public class AllSelfTaskFragment extends Fragment implements AllSelfTaskContract
             return mAdapter.getItemCount() > 0;
         }
         return false;
+    }
+
+    private boolean labelDataExisted() {
+        if (mLabelAdapter != null) {
+            return mLabelAdapter.getItemCount() > 0;
+        }
+        return false;
+    }
+
+    @Subscribe
+    public void selfTaskLabelInsert(SelfTaskLabelInsertEvent event) {
+        mLabelAdapter.insertData(event.mDailyTaskLabelModel);
     }
 }

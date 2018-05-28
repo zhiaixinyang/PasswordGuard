@@ -99,4 +99,5 @@
     <string name="home_tab_daily_task">计划</string>
     <string name="fragment_title_daily_task">我的计划</string>
     <string name="string_everyday_replay_empty">复盘内容总不能为空吧</string>
+    <string name="activity_title_label_setting">标签设置</string>
 </resources>

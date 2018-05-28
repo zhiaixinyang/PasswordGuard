@@ -1,5 +1,6 @@
 package com.mdove.passwordguard.group;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,6 +34,9 @@ public class GroupSettingActivity extends BaseActivity implements GroupSettingCo
 
     public static void start(Context context) {
         Intent start = new Intent(context, GroupSettingActivity.class);
+        if (!(context instanceof Activity)) {
+            start.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
         context.startActivity(start);
     }
 

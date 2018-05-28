@@ -7,17 +7,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
-import com.hwangjr.rxbus.annotation.Subscribe;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.BaseActivity;
 import com.mdove.passwordguard.databinding.ActivityHomeBinding;
-import com.mdove.passwordguard.main.newmain.dailytask.DailyTaskFragment;
+import com.mdove.passwordguard.main.newmain.dailytask.MainSelfTaskFragment;
 import com.mdove.passwordguard.main.newmain.options.OptionsFragment;
 import com.mdove.passwordguard.task.NewSelfTaskActivity;
-import com.mdove.passwordguard.task.model.event.SelfTaskClickDeleteEvent;
-import com.mdove.passwordguard.task.model.event.SelfTaskClickPriorityEvent;
-import com.mdove.passwordguard.task.model.event.SelfTaskClickSeeEvent;
-import com.mdove.passwordguard.task.model.event.SelfTaskClickSucEvent;
 import com.mdove.passwordguard.ui.tablayout.TabLayoutExt;
 
 import java.util.ArrayList;
@@ -61,7 +56,7 @@ public class HomeActivity extends BaseActivity {
         fragmentList.add(OptionsFragment.newInstance());
         mEverydayReplayFragment = EverydayReplayFragment.newInstance();
         fragmentList.add(mEverydayReplayFragment);
-        fragmentList.add(DailyTaskFragment.newInstance());
+        fragmentList.add(MainSelfTaskFragment.newInstance());
 
         HomePagerAdapter adapter = new HomePagerAdapter(getSupportFragmentManager(), fragmentList);
         mViewPager.setAdapter(adapter);

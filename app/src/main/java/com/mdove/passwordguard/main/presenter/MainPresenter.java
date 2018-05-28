@@ -1,7 +1,5 @@
 package com.mdove.passwordguard.main.presenter;
 
-import android.Manifest;
-import android.app.Activity;
 import android.support.annotation.IntDef;
 import android.text.TextUtils;
 
@@ -12,7 +10,6 @@ import com.mdove.passwordguard.addoralter.AddPasswordActivity;
 import com.mdove.passwordguard.addoralter.EditPasswordActivity;
 import com.mdove.passwordguard.addoralter.model.AlterDailySelfModel;
 import com.mdove.passwordguard.addoralter.model.AlterPasswordModel;
-import com.mdove.passwordguard.backup.BackUpService;
 import com.mdove.passwordguard.base.IHideVM;
 import com.mdove.passwordguard.collect.CollectActivity;
 import com.mdove.passwordguard.config.AppConstant;
@@ -50,7 +47,7 @@ import com.mdove.passwordguard.main.model.MainOptionInfo;
 import com.mdove.passwordguard.main.model.MainOptionModel;
 import com.mdove.passwordguard.main.model.MainPasswordModel;
 import com.mdove.passwordguard.main.model.MainSearchModel;
-import com.mdove.passwordguard.main.model.MainSelfTaskModel;
+import com.mdove.passwordguard.main.model.SelfTaskListModel;
 import com.mdove.passwordguard.main.model.MainTopModel;
 import com.mdove.passwordguard.main.model.event.CheckOrderEvent;
 import com.mdove.passwordguard.main.model.vm.ItemMainPasswordVM;
@@ -67,9 +64,6 @@ import com.mdove.passwordguard.task.utils.SucSelfTaskHelper;
 import com.mdove.passwordguard.update.UpdateDialog;
 import com.mdove.passwordguard.utils.ClipboardUtils;
 import com.mdove.passwordguard.utils.ToastHelper;
-import com.mdove.passwordguard.utils.permission.PermissionGrantCallback;
-import com.mdove.passwordguard.utils.permission.PermissionManager;
-import com.mdove.passwordguard.utils.permission.PermissionUtils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -118,7 +112,7 @@ public class MainPresenter implements MainContract.Presenter {
 
     private String mCurGroup = DEFAULT_CHECK_GROUP_TITLE;
     private List<BaseMainModel> mCheckData;
-    private MainSelfTaskModel mMainSelfTaskModel;
+    private SelfTaskListModel mSelfTaskModel;
 
     //标记快捷操作的type
     @IntDef(value = {MAIN_OPEN_INFO_TYPE_SETTING, MAIN_OPEN_INFO_TYPE_ALL_DAILY_SELF, MAIN_OPEN_INFO_TYPE_ALL_PASSWORD,
@@ -168,8 +162,8 @@ public class MainPresenter implements MainContract.Presenter {
                 mMainSelfTaskData.add(new SelfTaskModel(selfTask));
             }
         }
-        mMainSelfTaskModel = new MainSelfTaskModel(selfTaskModels);
-        mData.add(mMainSelfTaskModel);
+        mSelfTaskModel = new SelfTaskListModel(selfTaskModels);
+        mData.add(mSelfTaskModel);
 
         List<Password> data = mPasswordDao.queryBuilder().build().list();
         for (Password password : data) {
@@ -668,7 +662,7 @@ public class MainPresenter implements MainContract.Presenter {
         selfTask.mIsSee = 1;
         selfTask.mPriority = 0;
         mSelfTaskDao.insert(selfTask);
-        mView.insertItemMainSelfTask(new SelfTaskModel(selfTask));
+        mView.insertItemMainSelfTask(new com.mdove.passwordguard.task.model.SelfTaskModel(selfTask));
     }
 
     @Override
@@ -827,8 +821,8 @@ public class MainPresenter implements MainContract.Presenter {
         List<DailySelf> dailySelfList = mDailySelfDao.queryBuilder().where(DailySelfDao.Properties.MTvGroup.eq(DEFAULT_DAILY_SELF_TV_GROUP)).build().list();
         List<BaseMainModel> dailySelfData = new ArrayList<>();
         //工作线Item
-        if (mMainSelfTaskModel != null) {
-            dailySelfData.add(mMainSelfTaskModel);
+        if (mSelfTaskModel != null) {
+            dailySelfData.add(mSelfTaskModel);
         }
         for (DailySelf dailySelf : dailySelfList) {
             dailySelfData.add(new MainDailySelfModel(dailySelf));
@@ -840,8 +834,8 @@ public class MainPresenter implements MainContract.Presenter {
         List<BaseMainModel> passwordData = new ArrayList<>();
         passwordData.addAll(mSysEmptyData);
         //工作线Item
-        if (mMainSelfTaskModel != null) {
-            passwordData.add(mMainSelfTaskModel);
+        if (mSelfTaskModel != null) {
+            passwordData.add(mSelfTaskModel);
         }
         List<Password> data = mPasswordDao.queryBuilder().where(PasswordDao.Properties.MTvGroup.eq(DEFAULT_CHECK_GROUP_TITLE)).build().list();
         for (Password password : data) {
@@ -970,8 +964,8 @@ public class MainPresenter implements MainContract.Presenter {
         mCheckData = new ArrayList<>();
 
         //工作线Item
-        if (mMainSelfTaskModel != null) {
-            mCheckData.add(mMainSelfTaskModel);
+        if (mSelfTaskModel != null) {
+            mCheckData.add(mSelfTaskModel);
         }
         List<Password> data = mPasswordDao.queryBuilder().where(PasswordDao.Properties.MTvGroup.eq(event.mGroupInfo.getMTvGroup())).build().list();
         List<MainPasswordModel> passwordData = new ArrayList<>();

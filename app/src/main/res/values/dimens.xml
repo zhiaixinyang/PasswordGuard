@@ -90,5 +90,7 @@
     <dimen name="margin_fragment_options_inner">12dp</dimen>
     <dimen name="margin_fragment_daily_task">6dp</dimen>
     <dimen name="margin_fragment_daily_task_et">6dp</dimen>
+    <dimen name="margin_label_setting">8dp</dimen>
+    <dimen name="padding_label_setting">8dp</dimen>
 
 </resources>

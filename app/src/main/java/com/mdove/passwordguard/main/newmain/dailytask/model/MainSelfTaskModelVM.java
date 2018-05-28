@@ -12,7 +12,7 @@ import com.mdove.passwordguard.utils.DateUtils;
  * Created by MDove on 2018/3/25.
  */
 
-public class DailyTaskModelVM {
+public class MainSelfTaskModelVM {
     public ObservableField<String> mTime = new ObservableField<>();
     public ObservableField<String> mTask = new ObservableField<>();
     public ObservableField<Boolean> mIsSuc = new ObservableField<>();
@@ -21,7 +21,7 @@ public class DailyTaskModelVM {
     public SelfTaskModel mSelfTaskModel;
     public int mPosition;
 
-    public DailyTaskModelVM(SelfTaskModel selfTaskModel, int position) {
+    public MainSelfTaskModelVM(SelfTaskModel selfTaskModel, int position) {
         mTask.set(selfTaskModel.mTask);
         mTime.set(DateUtils.getDateChinese(selfTaskModel.mTime));
         mIsSuc.set(selfTaskModel.mIsSuc);
