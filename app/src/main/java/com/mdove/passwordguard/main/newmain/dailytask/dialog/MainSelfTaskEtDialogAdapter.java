@@ -59,7 +59,7 @@ public class MainSelfTaskEtDialogAdapter extends RecyclerView.Adapter<MainSelfTa
                 public void onClick(View v) {
                     if (model.isSelect) {
                         if (mListener != null) {
-                            mListener.onClickLabel(model.mLabelName);
+                            mListener.onClickLabel(model.mLabelName, model.mLabel.id);
                         }
                     } else {
                         for (DailyTaskLabelModel model1 : mData) {
@@ -67,11 +67,14 @@ public class MainSelfTaskEtDialogAdapter extends RecyclerView.Adapter<MainSelfTa
                         }
                         model.isSelect = true;
                         notifyDataSetChanged();
-                        mListener.onClickLabel(model.mLabelName);
+                        mListener.onClickLabel(model.mLabelName, model.mLabel.id);
                     }
                 }
             });
             if (model.isSelect) {
+                if (mListener != null) {
+                    mListener.onClickLabel(model.mLabelName, model.mLabel.id);
+                }
                 mBinding.tvLabel.setBackgroundResource(R.drawable.bg_label_daily_self_select);
                 mBinding.tvLabel.setTextColor(ContextCompat.getColor(mContext, R.color.white));
             } else {

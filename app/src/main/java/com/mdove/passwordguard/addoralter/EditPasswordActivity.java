@@ -16,6 +16,7 @@ import com.hwangjr.rxbus.RxBus;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.addoralter.adapter.AddPasswordGroupAdapter;
 import com.mdove.passwordguard.addoralter.model.AddPasswordGroupRlvModel;
+import com.mdove.passwordguard.addoralter.model.AlterPasswordModel;
 import com.mdove.passwordguard.addoralter.model.event.EditPasswordActivityEvent;
 import com.mdove.passwordguard.addoralter.presenter.AddPasswordPresenter;
 import com.mdove.passwordguard.addoralter.presenter.contract.AddPasswordContract;
@@ -162,7 +163,8 @@ public class EditPasswordActivity extends BaseActivity implements AddPasswordCon
 
     private void editPassword() {
         if (isOkEnable()) {
-            RxBus.get().post(new EditPasswordActivityEvent(mTmpPassword, mNeedEditPassword, mEditItemPosition));
+//            RxBus.get().post(new EditPasswordActivityEvent(mTmpPassword, mNeedEditPassword, mEditItemPosition));
+            mPresenter.alterPassword(new AlterPasswordModel(mNeedEditPassword, mTmpPassword), mEditItemPosition);
             finish();
             return;
         }

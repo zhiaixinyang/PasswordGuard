@@ -13,6 +13,7 @@ import com.mdove.passwordguard.main.newmain.dailytask.dialog.model.DailyTaskLabe
 import com.mdove.passwordguard.main.newmain.dailytask.dialog.model.DailyTaskLabelModelVM;
 import com.mdove.passwordguard.utils.InflateUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -59,7 +60,7 @@ public class AllSelfTaskLabelAdapter extends RecyclerView.Adapter<AllSelfTaskLab
                 public void onClick(View v) {
                     if (model.isSelect) {
                         if (mListener != null) {
-                            mListener.onClickLabel(model.mLabelName);
+                            mListener.onClickLabel(model.mLabelName, model.mLabel.id);
                         }
                     } else {
                         for (DailyTaskLabelModel model1 : mData) {
@@ -67,11 +68,14 @@ public class AllSelfTaskLabelAdapter extends RecyclerView.Adapter<AllSelfTaskLab
                         }
                         model.isSelect = true;
                         notifyDataSetChanged();
-                        mListener.onClickLabel(model.mLabelName);
+                        mListener.onClickLabel(model.mLabelName, model.mLabel.id);
                     }
                 }
             });
             if (model.isSelect) {
+                if (mListener != null) {
+                    mListener.onClickLabel(model.mLabelName, model.mLabel.id);
+                }
                 mBinding.tvLabel.setBackgroundResource(R.drawable.bg_label_daily_self_select);
                 mBinding.tvLabel.setTextColor(ContextCompat.getColor(mContext, R.color.white));
             } else {
@@ -91,6 +95,9 @@ public class AllSelfTaskLabelAdapter extends RecyclerView.Adapter<AllSelfTaskLab
     }
 
     public void insertData(DailyTaskLabelModel model) {
+        if (mData == null) {
+            mData = new ArrayList<>();
+        }
         mData.add(model);
         notify(mData.size());
     }

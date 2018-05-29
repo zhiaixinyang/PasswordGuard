@@ -11,6 +11,7 @@ import com.mdove.passwordguard.greendao.entity.SelfTaskLabel;
 import com.mdove.passwordguard.greendao.entity.SelfTask;
 import com.mdove.passwordguard.greendao.entity.SucSelfTask;
 import com.mdove.passwordguard.main.newmain.dailytask.dialog.model.DailyTaskLabelModel;
+import com.mdove.passwordguard.main.newmain.dailytask.util.LabelTempModel;
 import com.mdove.passwordguard.task.LabelSettingActivity;
 import com.mdove.passwordguard.task.model.SelfTaskModel;
 import com.mdove.passwordguard.task.model.SelfTaskModelVM;
@@ -90,13 +91,15 @@ public class AllSelfTaskPresenter implements AllSelfTaskContract.Presenter {
     }
 
     @Override
-    public void insertSelfTask(String content) {
+    public void insertSelfTask(String content, LabelTempModel tempModel) {
         SelfTask selfTask = new SelfTask();
         selfTask.mTask = content;
         selfTask.mTime = new Date().getTime();
         selfTask.mIsSuc = 0;
         selfTask.mIsSee = 0;
         selfTask.mPriority = 0;
+        selfTask.mLabel = tempModel.mLabel;
+        selfTask.mLabelId = tempModel.mSelectId;
         mSelfTaskDao.insert(selfTask);
         mData.add(new SelfTaskModel(selfTask));
         mView.insertSelfTask(mData.size());

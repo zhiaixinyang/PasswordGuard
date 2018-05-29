@@ -49,5 +49,4 @@ public class DBUpdateHelper extends DaoMaster.OpenHelper {
                 SelfTaskDao.class, DeleteSelfTaskDao.class, DeletedDailySelfDao.class, DailyPlanDao.class,
                 SucSelfTaskDao.class, SelfTaskLabelDao.class);
     }
-
 }

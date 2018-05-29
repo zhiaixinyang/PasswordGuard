@@ -16,6 +16,7 @@ import com.hwangjr.rxbus.RxBus;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.addoralter.adapter.AddDailySelfGroupAdapter;
 import com.mdove.passwordguard.addoralter.model.AddDailySelfGroupRlvModel;
+import com.mdove.passwordguard.addoralter.model.AlterDailySelfModel;
 import com.mdove.passwordguard.addoralter.model.event.AddDailySelfActivityEvent;
 import com.mdove.passwordguard.addoralter.model.event.EditDailySelfActivityEvent;
 import com.mdove.passwordguard.addoralter.presenter.AddDailySelfPresenter;
@@ -150,11 +151,14 @@ public class AddDailySelfActivity extends BaseActivity implements AddDailySelfCo
     private void sendText() {
         if (isOkEnable()) {
             if (!isEdit) {
-                RxBus.get().post(new AddDailySelfActivityEvent(dailySelf));
+//                RxBus.get().post(new AddDailySelfActivityEvent(dailySelf));
+                mPresenter.insertDailySelf(dailySelf);
                 finish();
                 return;
             } else {
-                RxBus.get().post(new EditDailySelfActivityEvent(mOldDailySelf, mEditPosition));
+                //RxBus是原版本的需求，直接在主界面进行更新UI
+//                RxBus.get().post(new EditDailySelfActivityEvent(mOldDailySelf, mEditPosition));
+                mPresenter.alterDailySelf(new AlterDailySelfModel(mOldDailySelf), mEditPosition);
                 finish();
                 return;
             }

@@ -26,9 +26,12 @@
 
         <RelativeLayout
             android:id="@+id/layout_item"
-            android:onClick="@{()->actionHandler.onClickItemDailySelf(viewModel)}"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_activity_main_daily_self"
+            android:layout_marginLeft="@dimen/margin_activity_main_daily_self"
+            android:layout_marginRight="@dimen/margin_activity_main_daily_self"
+            android:onClick="@{()->actionHandler.onClickItemDailySelf(viewModel)}">
 
             <RelativeLayout
                 android:id="@+id/layout_top"
@@ -67,17 +70,19 @@
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     tools:text="随手记" />
+
                 <TextView
                     android:id="@+id/tv_hint"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/tv_group"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/margin_item_main_self_task"
                     android:layout_toRightOf="@+id/tv_group"
-                    android:layout_alignBottom="@+id/tv_group"
                     android:text="#记录有趣#"
                     android:textColor="@color/gray"
                     android:textSize="14sp" />
+
                 <ImageView
                     android:id="@+id/btn_hide"
                     android:layout_width="25dp"
@@ -117,7 +122,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/layout_top"
-                android:background="@color/main_normal_bg">
+                android:background="@drawable/bg_normal_bottom">
 
                 <TextView
                     android:id="@+id/tv_content"
@@ -130,14 +135,15 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/size_item_password_normal"
                     tools:text="记录内容记录内容记录内容记录内容记录内容记录内容记录内容记录内容记录内容" />
+
                 <TextView
                     android:id="@+id/tv_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_below="@+id/tv_content"
-                    android:layout_marginRight="@dimen/margin_activity_main_daily_self"
                     android:layout_marginBottom="@dimen/margin_activity_main_daily_self"
+                    android:layout_marginRight="@dimen/margin_activity_main_daily_self"
                     android:text="@{viewModel.mTime}"
                     android:textColor="@color/commonColor"
                     android:textSize="12sp"

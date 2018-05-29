@@ -104,5 +104,4 @@ public class DaoManager  {
             mHelper = null;
         }
     }
-
 }

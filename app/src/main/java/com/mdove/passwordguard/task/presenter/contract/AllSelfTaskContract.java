@@ -3,6 +3,7 @@ package com.mdove.passwordguard.task.presenter.contract;
 import com.mdove.passwordguard.base.BasePresenter;
 import com.mdove.passwordguard.base.BaseView;
 import com.mdove.passwordguard.main.newmain.dailytask.dialog.model.DailyTaskLabelModel;
+import com.mdove.passwordguard.main.newmain.dailytask.util.LabelTempModel;
 import com.mdove.passwordguard.task.model.SelfTaskModel;
 import com.mdove.passwordguard.task.model.SelfTaskModelVM;
 
@@ -18,7 +19,7 @@ public interface AllSelfTaskContract {
 
         void initLabel();
 
-        void insertSelfTask(String content);
+        void insertSelfTask(String content,LabelTempModel tempModel);
 
         void onClickTaskSuc(SelfTaskModelVM vm);
 

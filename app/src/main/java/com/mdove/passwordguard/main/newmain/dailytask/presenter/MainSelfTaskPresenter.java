@@ -10,6 +10,7 @@ import com.mdove.passwordguard.greendao.entity.SelfTask;
 import com.mdove.passwordguard.greendao.entity.SucSelfTask;
 import com.mdove.passwordguard.main.newmain.dailytask.model.MainSelfTaskModelVM;
 import com.mdove.passwordguard.main.newmain.dailytask.presenter.contract.MainSelfTaskContract;
+import com.mdove.passwordguard.main.newmain.dailytask.util.LabelTempModel;
 import com.mdove.passwordguard.task.model.SelfTaskModel;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickDeleteEvent;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickEditEvent;
@@ -73,13 +74,15 @@ public class MainSelfTaskPresenter implements MainSelfTaskContract.Presenter {
     }
 
     @Override
-    public void insertSelfTask(String content) {
+    public void insertSelfTask(String content,LabelTempModel tempModel) {
         SelfTask selfTask = new SelfTask();
         selfTask.mTask = content;
         selfTask.mTime = new Date().getTime();
         selfTask.mIsSuc = 0;
-        selfTask.mIsSee = 0;
+        selfTask.mIsSee = 1;
         selfTask.mPriority = 0;
+        selfTask.mLabel = tempModel.mLabel;
+        selfTask.mLabelId = tempModel.mSelectId;
         mSelfTaskDao.insert(selfTask);
         mData.add(new SelfTaskModel(selfTask));
         mView.insertSelfTask(mData.size());

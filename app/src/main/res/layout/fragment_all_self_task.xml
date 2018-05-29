@@ -6,7 +6,7 @@
 
         <variable
             name="actionHandler"
-            type="com.mdove.passwordguard.task.model.handle.AllSelfTaskHandler"/>
+            type="com.mdove.passwordguard.task.model.handle.AllSelfTaskHandler" />
     </data>
 
     <RelativeLayout
@@ -16,15 +16,15 @@
 
         <RelativeLayout
             android:id="@+id/layout_et"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
 
             <EditText
                 android:id="@+id/et_content"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="@dimen/main_et_h"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/margin_item_self_task"
                 android:layout_marginRight="@dimen/margin_item_self_task"
@@ -40,7 +40,7 @@
             <TextView
                 android:id="@+id/btn_send"
                 android:layout_width="60dp"
-                android:layout_height="40dp"
+                android:layout_height="@dimen/main_et_h"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/margin_activity_main_et_l_r"
@@ -50,28 +50,31 @@
                 android:textColor="@color/white"
                 android:textSize="16sp" />
         </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/layout_rlv_label"
             android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/margin_item_self_task"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/layout_et"
-            android:layout_height="wrap_content">
+            android:layout_marginTop="@dimen/margin_item_self_task">
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rlv_label"
-                android:layout_toLeftOf="@+id/btn_label_setting"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/btn_label_setting" />
+
             <ImageView
                 android:id="@+id/btn_label_setting"
                 android:layout_width="25dp"
-                android:src="@mipmap/ic_settings"
-                android:layout_marginRight="@dimen/margin_item_self_task"
-                android:layout_marginLeft="@dimen/margin_item_self_task"
-                android:tint="@color/colorPrimary"
-                android:onClick="@{()->actionHandler.onClickLabelSetting()}"
-                android:layout_centerVertical="true"
+                android:layout_height="25dp"
                 android:layout_alignParentRight="true"
-                android:layout_height="25dp" />
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/margin_item_self_task"
+                android:layout_marginRight="@dimen/margin_item_self_task"
+                android:onClick="@{()->actionHandler.onClickLabelSetting()}"
+                android:src="@mipmap/ic_settings"
+                android:tint="@color/colorPrimary" />
         </RelativeLayout>
 
         <com.mdove.passwordguard.ui.DottedView

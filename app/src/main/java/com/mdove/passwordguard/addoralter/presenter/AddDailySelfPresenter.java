@@ -3,10 +3,14 @@ package com.mdove.passwordguard.addoralter.presenter;
 import com.mdove.passwordguard.App;
 import com.mdove.passwordguard.addoralter.model.AddDailySelfGroupRlvModel;
 import com.mdove.passwordguard.addoralter.model.AddPasswordGroupRlvModel;
+import com.mdove.passwordguard.addoralter.model.AlterDailySelfModel;
 import com.mdove.passwordguard.addoralter.presenter.contract.AddDailySelfContract;
 import com.mdove.passwordguard.addoralter.presenter.contract.AddPasswordContract;
 import com.mdove.passwordguard.config.AppConstant;
+import com.mdove.passwordguard.dailyself.MainDailySelfModel;
+import com.mdove.passwordguard.greendao.DailySelfDao;
 import com.mdove.passwordguard.greendao.GroupInfoDao;
+import com.mdove.passwordguard.greendao.entity.DailySelf;
 import com.mdove.passwordguard.greendao.entity.GroupInfo;
 
 import java.util.ArrayList;
@@ -20,9 +24,11 @@ import java.util.List;
 public class AddDailySelfPresenter implements AddDailySelfContract.Presenter {
     private AddDailySelfContract.MvpView mView;
     private GroupInfoDao mGroupDap;
+    private DailySelfDao mDailySelfDao;
 
     public AddDailySelfPresenter() {
         mGroupDap = App.getDaoSession().getGroupInfoDao();
+        mDailySelfDao = App.getDaoSession().getDailySelfDao();
     }
 
     @Override
@@ -47,5 +53,15 @@ public class AddDailySelfPresenter implements AddDailySelfContract.Presenter {
             modelData.add(new AddDailySelfGroupRlvModel(info));
         }
         mView.showGroup(modelData);
+    }
+
+    @Override
+    public void insertDailySelf(DailySelf dailySelf) {
+        mDailySelfDao.insert(dailySelf);
+    }
+
+    @Override
+    public void alterDailySelf(AlterDailySelfModel model, int itemPosition) {
+        mDailySelfDao.update(model.mOldDailySelf);
     }
 }

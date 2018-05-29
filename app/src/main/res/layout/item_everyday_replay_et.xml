@@ -4,7 +4,7 @@
     <RelativeLayout
         android:id="@+id/layout_et"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/main_et_h"
         android:layout_marginBottom="@dimen/margin_item_main_self_task"
         android:background="@drawable/bg_item_main_self_task_et">
 

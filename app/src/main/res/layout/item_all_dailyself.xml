@@ -18,6 +18,9 @@
         android:id="@+id/layout_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_item_password_normal"
+        android:layout_marginRight="@dimen/margin_item_password_normal"
+        android:layout_marginBottom="@dimen/margin_item_password_normal"
         android:paddingBottom="@dimen/margin_item_password_normal">
 
         <RelativeLayout
@@ -96,7 +99,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/layout_top"
-            android:background="@color/main_normal_bg">
+            android:background="@drawable/bg_normal_bottom">
 
             <TextView
                 android:id="@+id/tv_content"

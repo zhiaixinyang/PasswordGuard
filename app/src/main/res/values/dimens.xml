@@ -92,5 +92,6 @@
     <dimen name="margin_fragment_daily_task_et">6dp</dimen>
     <dimen name="margin_label_setting">5dp</dimen>
     <dimen name="padding_label_setting">5dp</dimen>
+    <dimen name="main_et_h">36dp</dimen>
 
 </resources>

@@ -20,6 +20,7 @@ import com.mdove.passwordguard.base.listener.OnChangeDataSizeListener;
 import com.mdove.passwordguard.databinding.FragmentAllSelfTaskBinding;
 import com.mdove.passwordguard.main.newmain.dailytask.dialog.MainSelfTaskEtDialog;
 import com.mdove.passwordguard.main.newmain.dailytask.dialog.model.DailyTaskLabelModel;
+import com.mdove.passwordguard.main.newmain.dailytask.util.LabelTempModel;
 import com.mdove.passwordguard.task.adapter.AllSelfTaskAdapter;
 import com.mdove.passwordguard.task.adapter.AllSelfTaskLabelAdapter;
 import com.mdove.passwordguard.task.model.SelfTaskModel;
@@ -45,6 +46,7 @@ public class AllSelfTaskFragment extends Fragment implements AllSelfTaskContract
     private AllSelfTaskAdapter mAdapter;
     private AllSelfTaskLabelAdapter mLabelAdapter;
     private TextView mLayoutEmpty;
+    private LabelTempModel mTempModel;
 
     public static AllSelfTaskFragment newInstance() {
         AllSelfTaskFragment fragment = new AllSelfTaskFragment();
@@ -73,8 +75,8 @@ public class AllSelfTaskFragment extends Fragment implements AllSelfTaskContract
         mLabelAdapter = new AllSelfTaskLabelAdapter(getContext());
         mLabelAdapter.setListener(new MainSelfTaskEtDialog.OnClickLabelSelectListener() {
             @Override
-            public void onClickLabel(String content) {
-
+            public void onClickLabel(String content, long id) {
+                mTempModel = new LabelTempModel(content, id);
             }
         });
 
@@ -101,7 +103,7 @@ public class AllSelfTaskFragment extends Fragment implements AllSelfTaskContract
             public void onClick(View v) {
                 String content = mEt.getText().toString();
                 if (!TextUtils.isEmpty(content)) {
-                    mPresenter.insertSelfTask(content);
+                    mPresenter.insertSelfTask(content, mTempModel);
                     mEt.setText("");
                     return;
                 }

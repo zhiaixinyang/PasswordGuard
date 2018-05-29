@@ -119,7 +119,8 @@ public class AddPasswordActivity extends BaseActivity implements AddPasswordCont
 
     private void sendPassword() {
         if (isOkEnable()) {
-            RxBus.get().post(new AddPasswordActivityEvent(password));
+//            RxBus.get().post(new AddPasswordActivityEvent(password));
+            mPresenter.addPassword(password);
             finish();
             return;
         }

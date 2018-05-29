@@ -15,6 +15,7 @@ import com.mdove.passwordguard.databinding.DialogDailyTaskEtBinding;
 import com.mdove.passwordguard.greendao.SelfTaskLabelDao;
 import com.mdove.passwordguard.greendao.entity.SelfTaskLabel;
 import com.mdove.passwordguard.main.newmain.dailytask.dialog.model.DailyTaskLabelModel;
+import com.mdove.passwordguard.main.newmain.dailytask.util.LabelTempModel;
 import com.mdove.passwordguard.task.LabelSettingActivity;
 import com.mdove.passwordguard.utils.ToastHelper;
 
@@ -32,6 +33,7 @@ public class MainSelfTaskEtDialog extends AppCompatDialog {
     private SelfTaskLabelDao mDao;
     private OnClickSendListener mOnClickSendListener;
     private OnClickLabelSelectListener mOnClickLabelSelectListener;
+    private LabelTempModel mTempModel;
 
     public MainSelfTaskEtDialog(Context context) {
         super(context, android.R.style.Theme_Translucent_NoTitleBar);
@@ -73,11 +75,17 @@ public class MainSelfTaskEtDialog extends AppCompatDialog {
                     String content = mBinding.etDailyTask.getText().toString();
                     if (!TextUtils.isEmpty(content)) {
                         mBinding.etDailyTask.setText("");
-                        mOnClickSendListener.onClickSend(content);
+                        mOnClickSendListener.onClickSend(content, mTempModel);
                     } else {
                         ToastHelper.shortToast("今日的计划怎么能为空呢？");
                     }
                 }
+            }
+        });
+        mAdapter.setListener(new OnClickLabelSelectListener() {
+            @Override
+            public void onClickLabel(String content, long id) {
+                mTempModel = new LabelTempModel(content, id);
             }
         });
     }
@@ -104,10 +112,10 @@ public class MainSelfTaskEtDialog extends AppCompatDialog {
     }
 
     public interface OnClickSendListener {
-        void onClickSend(String content);
+        void onClickSend(String content, LabelTempModel tempModel);
     }
 
     public interface OnClickLabelSelectListener {
-        void onClickLabel(String content);
+        void onClickLabel(String content, long id);
     }
 }

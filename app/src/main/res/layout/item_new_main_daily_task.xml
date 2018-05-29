@@ -55,7 +55,8 @@
                     android:layout_centerHorizontal="true"
                     android:text="@{viewModel.mLabel}"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/iv_label"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:textColor="@color/white"
                     android:textSize="12sp"
                     tools:text="Bug" />

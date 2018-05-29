@@ -23,6 +23,7 @@ import com.mdove.passwordguard.main.newmain.dailytask.dialog.MainSelfTaskEtDialo
 import com.mdove.passwordguard.main.newmain.dailytask.model.MainSelfTaskModel;
 import com.mdove.passwordguard.main.newmain.dailytask.presenter.MainSelfTaskPresenter;
 import com.mdove.passwordguard.main.newmain.dailytask.presenter.contract.MainSelfTaskContract;
+import com.mdove.passwordguard.main.newmain.dailytask.util.LabelTempModel;
 import com.mdove.passwordguard.task.model.SelfTaskModel;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickDeleteEvent;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickPriorityEvent;
@@ -115,13 +116,13 @@ public class MainSelfTaskFragment extends Fragment implements MainSelfTaskContra
         mDialogN = new MainSelfTaskEtDialog(getActivity());
         mDialogN.setOnClickSendListener(new MainSelfTaskEtDialog.OnClickSendListener() {
             @Override
-            public void onClickSend(String content) {
-                mPresenter.insertSelfTask(content);
+            public void onClickSend(String content, LabelTempModel tempModel) {
+                mPresenter.insertSelfTask(content, tempModel);
             }
         });
         mDialogN.setOnClickLabelSelectListener(new MainSelfTaskEtDialog.OnClickLabelSelectListener() {
             @Override
-            public void onClickLabel(String content) {
+            public void onClickLabel(String content, long id) {
                 ToastHelper.shortToast(content);
             }
         });
