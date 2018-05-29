@@ -30,6 +30,8 @@ public class SelfTaskDao extends AbstractDao<SelfTask, Long> {
         public final static Property MIsSuc = new Property(3, int.class, "mIsSuc", false, "M_IS_SUC");
         public final static Property MIsSee = new Property(4, int.class, "mIsSee", false, "M_IS_SEE");
         public final static Property MPriority = new Property(5, int.class, "mPriority", false, "M_PRIORITY");
+        public final static Property MLabelId = new Property(6, long.class, "mLabelId", false, "M_LABEL_ID");
+        public final static Property MLabel = new Property(7, String.class, "mLabel", false, "M_LABEL");
     }
 
 
@@ -50,7 +52,9 @@ public class SelfTaskDao extends AbstractDao<SelfTask, Long> {
                 "\"M_TIME\" INTEGER NOT NULL ," + // 2: mTime
                 "\"M_IS_SUC\" INTEGER NOT NULL ," + // 3: mIsSuc
                 "\"M_IS_SEE\" INTEGER NOT NULL ," + // 4: mIsSee
-                "\"M_PRIORITY\" INTEGER NOT NULL );"); // 5: mPriority
+                "\"M_PRIORITY\" INTEGER NOT NULL ," + // 5: mPriority
+                "\"M_LABEL_ID\" INTEGER NOT NULL ," + // 6: mLabelId
+                "\"M_LABEL\" TEXT);"); // 7: mLabel
     }
 
     /** Drops the underlying database table. */
@@ -76,6 +80,12 @@ public class SelfTaskDao extends AbstractDao<SelfTask, Long> {
         stmt.bindLong(4, entity.getMIsSuc());
         stmt.bindLong(5, entity.getMIsSee());
         stmt.bindLong(6, entity.getMPriority());
+        stmt.bindLong(7, entity.getMLabelId());
+ 
+        String mLabel = entity.getMLabel();
+        if (mLabel != null) {
+            stmt.bindString(8, mLabel);
+        }
     }
 
     @Override
@@ -95,6 +105,12 @@ public class SelfTaskDao extends AbstractDao<SelfTask, Long> {
         stmt.bindLong(4, entity.getMIsSuc());
         stmt.bindLong(5, entity.getMIsSee());
         stmt.bindLong(6, entity.getMPriority());
+        stmt.bindLong(7, entity.getMLabelId());
+ 
+        String mLabel = entity.getMLabel();
+        if (mLabel != null) {
+            stmt.bindString(8, mLabel);
+        }
     }
 
     @Override
@@ -110,7 +126,9 @@ public class SelfTaskDao extends AbstractDao<SelfTask, Long> {
             cursor.getLong(offset + 2), // mTime
             cursor.getInt(offset + 3), // mIsSuc
             cursor.getInt(offset + 4), // mIsSee
-            cursor.getInt(offset + 5) // mPriority
+            cursor.getInt(offset + 5), // mPriority
+            cursor.getLong(offset + 6), // mLabelId
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7) // mLabel
         );
         return entity;
     }
@@ -123,6 +141,8 @@ public class SelfTaskDao extends AbstractDao<SelfTask, Long> {
         entity.setMIsSuc(cursor.getInt(offset + 3));
         entity.setMIsSee(cursor.getInt(offset + 4));
         entity.setMPriority(cursor.getInt(offset + 5));
+        entity.setMLabelId(cursor.getLong(offset + 6));
+        entity.setMLabel(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
      }
     
     @Override

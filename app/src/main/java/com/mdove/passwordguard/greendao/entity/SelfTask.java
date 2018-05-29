@@ -23,19 +23,24 @@ public class SelfTask implements Serializable, Comparable<SelfTask> {
     public int mPriority;//优先级，0-1（黄色）-2（红色）
     static final long serialVersionUID = 1L;
 
-    @Generated(hash = 1540708757)
-    public SelfTask() {
-    }
+    public long mLabelId;
+    public String mLabel;
 
-    @Generated(hash = 1232815738)
+    @Generated(hash = 1455626636)
     public SelfTask(Long id, String mTask, long mTime, int mIsSuc, int mIsSee,
-                    int mPriority) {
+            int mPriority, long mLabelId, String mLabel) {
         this.id = id;
         this.mTask = mTask;
         this.mTime = mTime;
         this.mIsSuc = mIsSuc;
         this.mIsSee = mIsSee;
         this.mPriority = mPriority;
+        this.mLabelId = mLabelId;
+        this.mLabel = mLabel;
+    }
+
+    @Generated(hash = 1540708757)
+    public SelfTask() {
     }
 
     public Long getId() {
@@ -108,5 +113,21 @@ public class SelfTask implements Serializable, Comparable<SelfTask> {
             result = 1;
         }
         return result;
+    }
+
+    public long getMLabelId() {
+        return this.mLabelId;
+    }
+
+    public void setMLabelId(long mLabelId) {
+        this.mLabelId = mLabelId;
+    }
+
+    public String getMLabel() {
+        return this.mLabel;
+    }
+
+    public void setMLabel(String mLabel) {
+        this.mLabel = mLabel;
     }
 }

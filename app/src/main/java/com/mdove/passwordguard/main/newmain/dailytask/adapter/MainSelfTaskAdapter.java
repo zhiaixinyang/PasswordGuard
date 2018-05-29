@@ -84,7 +84,6 @@ public class MainSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             mBinding.ivPriority.setColorFilter(SelfTaskPriorityHelper.getPriorityBtnColor(mContext, selfTaskModel.mPriority), PorterDuff.Mode.SRC_ATOP);
             mBinding.tvPriorityTip.setTextColor(SelfTaskPriorityHelper.getPriorityBtnColor(mContext, selfTaskModel.mPriority));
             mBinding.tvTitle.setTextColor(SelfTaskPriorityHelper.getPriorityTextColor(mContext, selfTaskModel.mPriority));
-            mBinding.tvLabel.setText(LabelConstant.DEFAULT_LABEL);
 
             if (!selfTaskModel.mIsSuc) {
                 mBinding.tvTitle.setFocusable(true);
