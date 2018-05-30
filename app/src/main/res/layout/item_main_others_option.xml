@@ -50,27 +50,27 @@
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/layout_icon"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/margin_item_all_main_option"
             android:layout_toRightOf="@+id/layout_icon"
             android:text="@{viewModel.title}"
             tools:text="随手记"
             android:textColor="@color/color_tv_main_option_btn"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tv_hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/layout_icon"
-            android:layout_marginLeft="@dimen/margin_item_all_main_option"
-            android:layout_toRightOf="@+id/layout_icon"
+            android:layout_alignBottom="@+id/tv_title"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@+id/tv_title"
             android:ellipsize="end"
             android:maxLines="1"
             tools:text="随手记信息"
             android:text="@{viewModel.hint}"
             android:textColor="@color/gray"
-            android:textSize="10sp" />
+            android:textSize="12sp" />
 
         <View
             android:id="@+id/line"

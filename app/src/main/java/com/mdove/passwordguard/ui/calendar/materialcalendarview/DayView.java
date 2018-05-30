@@ -270,15 +270,23 @@ class DayView extends CheckedTextView {
                 offset / 2 : offset;
 
         if (width >= height) {
-            tempRect.set(offset + DensityUtil.dip2px(getContext(), 5), DensityUtil.dip2px(getContext(), 5),
-                    radius + offset - DensityUtil.dip2px(getContext(), 5), height - DensityUtil.dip2px(getContext(), 5));
-            circleDrawableRect.set(circleOffset + DensityUtil.dip2px(getContext(), 5), DensityUtil.dip2px(getContext(), 5),
-                    radius + circleOffset - DensityUtil.dip2px(getContext(), 5), height - DensityUtil.dip2px(getContext(), 5));
+//            tempRect.set(offset + DensityUtil.dip2px(getContext(), 5), DensityUtil.dip2px(getContext(), 5),
+//                    radius + offset - DensityUtil.dip2px(getContext(), 5), height - DensityUtil.dip2px(getContext(), 5));
+//            circleDrawableRect.set(circleOffset + DensityUtil.dip2px(getContext(), 5), DensityUtil.dip2px(getContext(), 5),
+//                    radius + circleOffset - DensityUtil.dip2px(getContext(), 5), height - DensityUtil.dip2px(getContext(), 5));
+            tempRect.set(offset , 0,
+                    radius + offset , height);
+            circleDrawableRect.set(circleOffset , 0,
+                    radius + circleOffset , height );
         } else {
-            tempRect.set(DensityUtil.dip2px(getContext(), 5), offset,
-                    width - DensityUtil.dip2px(getContext(), 5), radius + offset - DensityUtil.dip2px(getContext(), 5));
-            circleDrawableRect.set(DensityUtil.dip2px(getContext(), 5), circleOffset,
-                    width - DensityUtil.dip2px(getContext(), 5), radius + circleOffset - DensityUtil.dip2px(getContext(), 5));
+//            tempRect.set(DensityUtil.dip2px(getContext(), 5), offset,
+//                    width - DensityUtil.dip2px(getContext(), 5), radius + offset - DensityUtil.dip2px(getContext(), 5));
+//            circleDrawableRect.set(DensityUtil.dip2px(getContext(), 5), circleOffset,
+//                    width - DensityUtil.dip2px(getContext(), 5), radius + circleOffset - DensityUtil.dip2px(getContext(), 5));
+            tempRect.set(0, offset,
+                    width , radius + offset);
+            circleDrawableRect.set(0, circleOffset,
+                    width , radius + circleOffset);
         }
     }
 }
