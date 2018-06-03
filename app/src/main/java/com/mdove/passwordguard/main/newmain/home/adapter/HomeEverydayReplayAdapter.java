@@ -11,6 +11,7 @@ import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.calendar.model.BaseCalendarModel;
 import com.mdove.passwordguard.databinding.ItemEverydayReplayEtBinding;
 import com.mdove.passwordguard.databinding.ItemEverydayReplayHomeBinding;
+import com.mdove.passwordguard.databinding.ItemEverydayReplayHomeNewBinding;
 import com.mdove.passwordguard.main.model.DailyPlanModel;
 import com.mdove.passwordguard.main.newmain.everydayreplay.EtEverydayReplayActivity;
 import com.mdove.passwordguard.main.newmain.home.model.EverydayReplayModel;
@@ -62,12 +63,12 @@ public class HomeEverydayReplayAdapter extends RecyclerView.Adapter<RecyclerView
                         R.layout.item_everyday_replay_et));
             }
             case TYPE_NORMAL: {
-                return new ViewHolder((ItemEverydayReplayHomeBinding) InflateUtils.bindingInflate(parent,
-                        R.layout.item_everyday_replay_home));
+                return new ViewHolder((ItemEverydayReplayHomeNewBinding) InflateUtils.bindingInflate(parent,
+                        R.layout.item_everyday_replay_home_new));
             }
             default: {
-                return new ViewHolder((ItemEverydayReplayHomeBinding) InflateUtils.bindingInflate(parent,
-                        R.layout.item_everyday_replay_home));
+                return new ViewHolder((ItemEverydayReplayHomeNewBinding) InflateUtils.bindingInflate(parent,
+                        R.layout.item_everyday_replay_home_new));
             }
         }
     }
@@ -106,9 +107,9 @@ public class HomeEverydayReplayAdapter extends RecyclerView.Adapter<RecyclerView
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private ItemEverydayReplayHomeBinding mBinding;
+        private ItemEverydayReplayHomeNewBinding mBinding;
 
-        public ViewHolder(ItemEverydayReplayHomeBinding binding) {
+        public ViewHolder(ItemEverydayReplayHomeNewBinding binding) {
             super(binding.getRoot());
             mBinding = binding;
         }
@@ -129,19 +130,16 @@ public class HomeEverydayReplayAdapter extends RecyclerView.Adapter<RecyclerView
                 case DailyPlanModel.STATUS_GET: {
                     mBinding.ivGet.setColorFilter(ContextCompat.getColor(mContext, R.color.black), PorterDuff.Mode.SRC_ATOP);
                     mBinding.tvGet.setTextColor(ContextCompat.getColor(mContext, R.color.black));
-                    mBinding.tvTime.setTextColor(ContextCompat.getColor(mContext, R.color.white));
                     break;
                 }
                 case DailyPlanModel.STATUS_LOST: {
                     mBinding.ivLost.setColorFilter(ContextCompat.getColor(mContext, R.color.black), PorterDuff.Mode.SRC_ATOP);
                     mBinding.tvLost.setTextColor(ContextCompat.getColor(mContext, R.color.black));
-                    mBinding.tvTime.setTextColor(ContextCompat.getColor(mContext, R.color.white));
                     break;
                 }
                 case DailyPlanModel.STATUS_NORMAL: {
                     mBinding.ivNormal.setColorFilter(ContextCompat.getColor(mContext, R.color.black), PorterDuff.Mode.SRC_ATOP);
                     mBinding.tvNormal.setTextColor(ContextCompat.getColor(mContext, R.color.black));
-                    mBinding.tvTime.setTextColor(ContextCompat.getColor(mContext, R.color.gray));
                     break;
                 }
                 default: {

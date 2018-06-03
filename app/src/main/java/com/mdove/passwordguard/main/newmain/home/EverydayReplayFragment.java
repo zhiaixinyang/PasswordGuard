@@ -14,12 +14,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.hwangjr.rxbus.RxBus;
+import com.hwangjr.rxbus.annotation.Subscribe;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.calendar.CalendarSmoothAdapter;
 import com.mdove.passwordguard.calendar.CustomLinearLayoutManager;
 import com.mdove.passwordguard.calendar.model.BaseCalendarModel;
 import com.mdove.passwordguard.databinding.FragmentEveryReplayBinding;
 import com.mdove.passwordguard.main.newmain.everydayreplay.EtEverydayReplayActivity;
+import com.mdove.passwordguard.main.newmain.everydayreplay.model.handler.EtEverydayReplayEvent;
 import com.mdove.passwordguard.main.newmain.home.adapter.HomeEverydayReplayAdapter;
 import com.mdove.passwordguard.main.newmain.home.model.handler.EverydayReplayHandler;
 import com.mdove.passwordguard.main.newmain.home.presenter.EverydayReplayPresenter;
@@ -98,6 +101,13 @@ public class EverydayReplayFragment extends Fragment implements EverydayReplayCo
 
         addDecorator();
         initListener();
+        RxBus.get().register(this);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        RxBus.get().unregister(this);
     }
 
     public void initToolBar() {
@@ -158,4 +168,12 @@ public class EverydayReplayFragment extends Fragment implements EverydayReplayCo
         mAdapter.notifyDelete(position);
     }
 
+
+    @Subscribe
+    public void updateUI(EtEverydayReplayEvent event){
+        if (mPresenter!=null){
+            mPresenter.initData();
+            monthWeekMaterialCalendarView.addDecorator(new EventDecorator(Color.RED));
+        }
+    }
 }

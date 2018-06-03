@@ -15,9 +15,7 @@ import android.widget.TextView;
 
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.BaseActivity;
-import com.mdove.passwordguard.databinding.ActivityLabelSettingBinding;
 import com.mdove.passwordguard.main.newmain.dailytask.dialog.model.DailyTaskLabelModel;
-import com.mdove.passwordguard.task.adapter.AllSelfTaskLabelAdapter;
 import com.mdove.passwordguard.task.adapter.LabelSettingAdapter;
 import com.mdove.passwordguard.task.presenter.LabelSettingPresenter;
 import com.mdove.passwordguard.task.presenter.contract.LabelSettingContract;

@@ -130,6 +130,8 @@ public class EverydayReplayPresenter implements EverydayReplayContract.Presenter
                 .build().list();
         if (data != null && data.size() > 0 && mData != null) {
             mData.removeAll(mData);
+            mData.add(new EverydayReplayInitEtModel());
+
             for (DailyPlan dailyPlan : data) {
                 mData.add(new EverydayReplayModel(dailyPlan));
                 mView.showData(mData);

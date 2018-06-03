@@ -10,14 +10,17 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
+import android.util.EventLogTags;
 import android.view.View;
 
+import com.hwangjr.rxbus.RxBus;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.BaseActivity;
 import com.mdove.passwordguard.calendar.model.BaseCalendarModel;
 import com.mdove.passwordguard.databinding.ActivityEtEverydayReplayBinding;
 import com.mdove.passwordguard.main.model.DailyPlanModel;
 import com.mdove.passwordguard.main.newmain.everydayreplay.adapter.EverydayReplayRlvAdapter;
+import com.mdove.passwordguard.main.newmain.everydayreplay.model.handler.EtEverydayReplayEvent;
 import com.mdove.passwordguard.main.newmain.everydayreplay.presenter.EtEverydayReplayPresenter;
 import com.mdove.passwordguard.main.newmain.everydayreplay.presenter.contract.EtEverydayReplayContract;
 import com.mdove.passwordguard.utils.DateUtils;
@@ -74,9 +77,12 @@ public class EtEverydayReplayActivity extends BaseActivity implements EtEveryday
             public void onClick(View v) {
                 String content = mBinding.etEverydayReplay.getText().toString();
                 if (!TextUtils.isEmpty(content)) {
-                    mPresenter.addDailyPlan(content, mDefaultNormal);
-                    mBinding.etEverydayReplay.setText("");
-                    ToastHelper.shortToast("添加成功");
+                    boolean isSuc=mPresenter.addDailyPlan(mSelectTime,content, mDefaultNormal);
+                    if (isSuc) {
+                        mBinding.etEverydayReplay.setText("");
+                        ToastHelper.shortToast("添加成功");
+                        RxBus.get().post(new EtEverydayReplayEvent());
+                    }
                     return;
                 }
                 ToastHelper.shortToast("复盘内容怎么能为空呢？");

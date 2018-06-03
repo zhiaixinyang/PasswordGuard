@@ -24,7 +24,7 @@ public interface EtEverydayReplayContract {
 
         void onSelectDay(CalendarDay selectDay);
 
-        void addDailyPlan(String string,int status);
+        boolean addDailyPlan(long selectTime,String string,int status);
     }
 
     interface MvpView extends BaseView<Presenter> {

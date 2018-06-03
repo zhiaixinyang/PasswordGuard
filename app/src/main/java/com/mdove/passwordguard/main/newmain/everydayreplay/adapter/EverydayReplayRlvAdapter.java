@@ -105,29 +105,6 @@ public class EverydayReplayRlvAdapter extends RecyclerView.Adapter<RecyclerView.
             mBinding.tvLost.setTextColor(ContextCompat.getColor(mContext, R.color.gray));
             mBinding.tvTime.setTextColor(ContextCompat.getColor(mContext, R.color.gray));
 
-            switch (dailyPlanModel.mStatus) {
-                case DailyPlanModel.STATUS_GET: {
-                    mBinding.ivGet.setColorFilter(ContextCompat.getColor(mContext, R.color.black), PorterDuff.Mode.SRC_ATOP);
-                    mBinding.tvGet.setTextColor(ContextCompat.getColor(mContext, R.color.black));
-                    mBinding.tvTime.setTextColor(ContextCompat.getColor(mContext, R.color.white));
-                    break;
-                }
-                case DailyPlanModel.STATUS_LOST: {
-                    mBinding.ivLost.setColorFilter(ContextCompat.getColor(mContext, R.color.black), PorterDuff.Mode.SRC_ATOP);
-                    mBinding.tvLost.setTextColor(ContextCompat.getColor(mContext, R.color.black));
-                    mBinding.tvTime.setTextColor(ContextCompat.getColor(mContext, R.color.white));
-                    break;
-                }
-                case DailyPlanModel.STATUS_NORMAL: {
-                    mBinding.ivNormal.setColorFilter(ContextCompat.getColor(mContext, R.color.black), PorterDuff.Mode.SRC_ATOP);
-                    mBinding.tvNormal.setTextColor(ContextCompat.getColor(mContext, R.color.black));
-                    mBinding.tvTime.setTextColor(ContextCompat.getColor(mContext, R.color.gray));
-                    break;
-                }
-                default: {
-                    break;
-                }
-            }
             mBinding.btnGet.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

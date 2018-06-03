@@ -1,7 +1,9 @@
 package com.mdove.passwordguard.base;
 
 import android.databinding.BindingAdapter;
+import android.databinding.adapters.TextViewBindingAdapter;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.content.ContextCompat;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -31,15 +33,74 @@ public class DataBindingAdapter {
                 break;
             }
             case DailyPlanModel.STATUS_GET: {
-                view.setBackgroundResource(R.drawable.bg_daily_plan_get);
+//                view.setBackgroundResource(R.drawable.bg_daily_plan_get);
+                view.setBackgroundResource(R.drawable.bg_normal_white_round);
                 break;
             }
             case DailyPlanModel.STATUS_LOST: {
-                view.setBackgroundResource(R.drawable.bg_daily_plan_lose);
+//                view.setBackgroundResource(R.drawable.bg_daily_plan_lose);
+                view.setBackgroundResource(R.drawable.bg_normal_white_round);
                 break;
             }
-            default:{
+            default: {
+//                view.setBackgroundResource(R.drawable.bg_normal_white_round);
                 view.setBackgroundResource(R.drawable.bg_normal_white_round);
+                break;
+            }
+        }
+    }
+
+    @BindingAdapter({"loadLostAndGetIconBg"})
+    public static void loadLostAndGetIconBg(TextView view, final EverydayReplayModelVM modelVM) {
+        switch (modelVM.mStatus.get()) {
+            case DailyPlanModel.STATUS_NORMAL: {
+                view.setBackgroundResource(R.drawable.bg_everyday_replay_normal);
+                TextViewBindingAdapter.setText(view,"淡");
+                view.setTextColor(ContextCompat.getColor(view.getContext(), R.color.black));
+                break;
+            }
+            case DailyPlanModel.STATUS_GET: {
+                view.setBackgroundResource(R.drawable.bg_everyday_replay_get);
+                TextViewBindingAdapter.setText(view,"得");
+                view.setTextColor(ContextCompat.getColor(view.getContext(), R.color.green_300));
+                break;
+            }
+            case DailyPlanModel.STATUS_LOST: {
+                view.setBackgroundResource(R.drawable.bg_everyday_replay_lose);
+                TextViewBindingAdapter.setText(view,"失");
+                view.setTextColor(ContextCompat.getColor(view.getContext(), R.color.red_300));
+                break;
+            }
+            default: {
+                view.setBackgroundResource(R.drawable.bg_everyday_replay_normal);
+                break;
+            }
+        }
+    }
+
+    @BindingAdapter({"loadLostAndGetIconBg"})
+    public static void loadLostAndGetIconBg(TextView view, final EverydayReplayRlvModelVM modelVM) {
+        switch (modelVM.mStatus.get()) {
+            case DailyPlanModel.STATUS_NORMAL: {
+                view.setBackgroundResource(R.drawable.bg_everyday_replay_normal);
+                TextViewBindingAdapter.setText(view,"淡");
+                view.setTextColor(ContextCompat.getColor(view.getContext(), R.color.black));
+                break;
+            }
+            case DailyPlanModel.STATUS_GET: {
+                view.setBackgroundResource(R.drawable.bg_everyday_replay_get);
+                TextViewBindingAdapter.setText(view,"得");
+                view.setTextColor(ContextCompat.getColor(view.getContext(), R.color.green_300));
+                break;
+            }
+            case DailyPlanModel.STATUS_LOST: {
+                view.setBackgroundResource(R.drawable.bg_everyday_replay_lose);
+                TextViewBindingAdapter.setText(view,"失");
+                view.setTextColor(ContextCompat.getColor(view.getContext(), R.color.red_300));
+                break;
+            }
+            default: {
+                view.setBackgroundResource(R.drawable.bg_everyday_replay_normal);
                 break;
             }
         }
@@ -53,14 +114,17 @@ public class DataBindingAdapter {
                 break;
             }
             case DailyPlanModel.STATUS_GET: {
-                view.setBackgroundResource(R.drawable.bg_daily_plan_get);
+//                view.setBackgroundResource(R.drawable.bg_daily_plan_get);
+                view.setBackgroundResource(R.drawable.bg_normal_white_round);
                 break;
             }
             case DailyPlanModel.STATUS_LOST: {
-                view.setBackgroundResource(R.drawable.bg_daily_plan_lose);
+//                view.setBackgroundResource(R.drawable.bg_daily_plan_lose);
+                view.setBackgroundResource(R.drawable.bg_normal_white_round);
                 break;
             }
-            default:{
+            default: {
+//                view.setBackgroundResource(R.drawable.bg_normal_white_round);
                 view.setBackgroundResource(R.drawable.bg_normal_white_round);
                 break;
             }
@@ -75,14 +139,17 @@ public class DataBindingAdapter {
                 break;
             }
             case DailyPlanModel.STATUS_GET: {
-                view.setBackgroundResource(R.drawable.bg_daily_plan_get);
+//                view.setBackgroundResource(R.drawable.bg_daily_plan_get);
+                view.setBackgroundResource(R.drawable.bg_normal_white_round);
                 break;
             }
             case DailyPlanModel.STATUS_LOST: {
-                view.setBackgroundResource(R.drawable.bg_daily_plan_lose);
+//                view.setBackgroundResource(R.drawable.bg_daily_plan_lose);
+                view.setBackgroundResource(R.drawable.bg_normal_white_round);
                 break;
             }
-            default:{
+            default: {
+//                view.setBackgroundResource(R.drawable.bg_normal_white_round);
                 view.setBackgroundResource(R.drawable.bg_normal_white_round);
                 break;
             }

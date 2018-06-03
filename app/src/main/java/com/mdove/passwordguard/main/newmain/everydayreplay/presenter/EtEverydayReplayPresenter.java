@@ -10,6 +10,9 @@ import com.mdove.passwordguard.main.model.DailyPlanModel;
 import com.mdove.passwordguard.main.newmain.everydayreplay.model.EverydayReplayRlvModelVM;
 import com.mdove.passwordguard.main.newmain.everydayreplay.presenter.contract.EtEverydayReplayContract;
 import com.mdove.passwordguard.ui.calendar.materialcalendarview.CalendarDay;
+import com.mdove.passwordguard.utils.DateUtils;
+import com.mdove.passwordguard.utils.ToastHelper;
+import com.mdove.passwordguard.utils.log.LogUtils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -129,14 +132,33 @@ public class EtEverydayReplayPresenter implements EtEverydayReplayContract.Prese
     }
 
     @Override
-    public void addDailyPlan(String string, int status) {
+    public boolean addDailyPlan(long selectTime,String string, int status) {
+        long realTime=0L;
+        if (isSameDay(selectTime)) {
+            realTime=new Date().getTime();
+        }else{
+            if (selectTime>new Date().getTime()){
+                ToastHelper.shortToast("大兄弟，复盘的太超前点了吧...");
+                return false;
+            }
+            Calendar calendar = Calendar.getInstance();
+            calendar.clear();
+            long curTime=new Date().getTime();
+            calendar.set(DateUtils.getYear(curTime), DateUtils.getMonth(curTime)-1, DateUtils.getDay(curTime));
+            realTime=selectTime+(curTime-calendar.getTimeInMillis());
+        }
         DailyPlan dailyPlan = new DailyPlan();
         dailyPlan.mContent = string;
-        dailyPlan.mTimeStamp = new Date().getTime();
+        dailyPlan.mTimeStamp = realTime;
         dailyPlan.mStatus = status;
         mDailyPlanDao.insert(dailyPlan);
 
         mData.add(new DailyPlanModel(dailyPlan));
         mView.addDailyPlan(mData.size());
+        return true;
+    }
+
+    private boolean isSameDay(long selectTime){
+        return DateUtils.isSameDay(selectTime,new Date().getTime());
     }
 }

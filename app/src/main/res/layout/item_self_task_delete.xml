@@ -14,18 +14,14 @@
             type="com.mdove.passwordguard.task.presenter.DeleteSelfTaskPresenter" />
     </data>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_item_self_task"
-        android:layout_marginRight="@dimen/margin_item_self_task"
-        android:layout_marginLeft="@dimen/margin_item_self_task"
-        >
 
         <RelativeLayout
             android:id="@+id/layout_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_item_self_task"
+            android:layout_marginRight="@dimen/margin_item_self_task"
+            android:layout_marginLeft="@dimen/margin_item_self_task"
             android:background="@drawable/bg_item_self_task">
 
             <TextView
@@ -42,15 +38,25 @@
                 tools:text="我的一条任务,我的一条任务,我的一条任务,我的一条任务,我的一条任务,我的一条任务" />
 
             <TextView
+                android:id="@+id/tv_cre_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_title"
+                android:layout_margin="@dimen/margin_item_self_task"
+                android:text="@{viewModel.mCreateTime}"
+                android:textColor="@color/gray"
+                android:textSize="12sp"
+                tools:text="2018年3月27" />
+
+            <TextView
                 android:id="@+id/tv_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/layout_btn_delete"
-                android:layout_below="@+id/tv_title"
-                android:layout_margin="@dimen/margin_item_self_task"
-                android:gravity="bottom"
+                android:layout_below="@+id/tv_cre_time"
+                android:layout_marginLeft="@dimen/margin_item_self_task"
+                android:layout_marginBottom="@dimen/margin_item_self_task"
                 android:text="@{viewModel.mDeleteTime}"
-                android:textColor="@color/black"
+                android:textColor="@color/gray"
                 android:textSize="12sp"
                 tools:text="2018年3月27" />
 
@@ -84,6 +90,5 @@
                     android:textSize="12sp" />
             </RelativeLayout>
         </RelativeLayout>
-    </RelativeLayout>
 
 </layout>

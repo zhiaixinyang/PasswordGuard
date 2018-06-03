@@ -42,7 +42,9 @@ public class SucSelfTaskPresenter implements SucSelfTaskContract.Presenter {
         List<SucSelfTask> selfTaskList = mSucSelfTaskDao.queryBuilder().build().list();
         for (SucSelfTask selfTask : selfTaskList) {
             if (selfTask.mIsSuc == 1) {
-                mData.add(new SucSelfTaskModel(selfTask));
+                SucSelfTaskModel model=new SucSelfTaskModel(selfTask);
+                model.mSelfTask=mSelfTaskDao.queryBuilder().where(SelfTaskDao.Properties.Id.eq(selfTask.getMBelongId())).unique();
+                mData.add(model);
             }
         }
 //        List<SelfTask> selfTaskList = mSelfTaskDao.queryBuilder().build().list();
@@ -64,6 +66,7 @@ public class SucSelfTaskPresenter implements SucSelfTaskContract.Presenter {
             for (SucSelfTaskModel model1 : mData) {
                 if (model1.mBelongId == model.mId) {
                     sucSelfTaskModel = model1;
+                    sucSelfTaskModel.mSelfTask=model1.mSelfTask;
                 }
             }
             if (sucSelfTaskModel == null) {

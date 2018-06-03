@@ -156,6 +156,30 @@ public class DateUtils {
         return c.get(Calendar.HOUR_OF_DAY);
     }
 
+    /**
+     * 获取晚上9点半的时间戳
+     *
+     * @return
+     */
+    public static long getTimes(int day, int hour, int minute) {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, day);
+        cal.set(Calendar.HOUR_OF_DAY, hour);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MINUTE, minute);
+        cal.set(Calendar.MILLISECOND, 0);
+        return cal.getTimeInMillis();
+    }
+
+    public static long getTimes(int hour, int minute) {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY, hour);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MINUTE, minute);
+        cal.set(Calendar.MILLISECOND, 0);
+        return cal.getTimeInMillis();
+    }
+
     public static int getMinute() {
         Calendar c = Calendar.getInstance();
         return c.get(Calendar.MINUTE);
@@ -207,6 +231,10 @@ public class DateUtils {
 
     public static String getHourM(Long time) {
         SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+        return format.format(time);
+    }
+    public static String getHourMChinese(Long time) {
+        SimpleDateFormat format = new SimpleDateFormat("HH小时mm分");
         return format.format(time);
     }
 

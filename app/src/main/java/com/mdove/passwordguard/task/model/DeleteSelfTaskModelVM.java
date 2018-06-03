@@ -20,8 +20,8 @@ public class DeleteSelfTaskModelVM {
 
     public DeleteSelfTaskModelVM(DeleteSelfTaskModel deleteSelfTaskModel, int position) {
         mTask.set(deleteSelfTaskModel.mTask);
-        mCreateTime.set(DateUtils.getDateChinese(deleteSelfTaskModel.mCreateTime));
-        mDeleteTime.set(DateUtils.getDateChinese(deleteSelfTaskModel.mDeleteTime));
+        mCreateTime.set("创建时间："+DateUtils.getDateChinese(deleteSelfTaskModel.mCreateTime));
+        mDeleteTime.set("删除时间："+DateUtils.getDateChinese(deleteSelfTaskModel.mDeleteTime));
         mIsSuc.set(deleteSelfTaskModel.mIsSuc);
         mIsSee.set(deleteSelfTaskModel.mIsSee);
         mPriority.set(deleteSelfTaskModel.mPriority);
