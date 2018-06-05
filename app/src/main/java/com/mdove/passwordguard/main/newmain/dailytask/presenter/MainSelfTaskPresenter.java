@@ -15,7 +15,6 @@ import com.mdove.passwordguard.task.model.SelfTaskModel;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickDeleteEvent;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickEditEvent;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickPriorityEvent;
-import com.mdove.passwordguard.task.model.event.SelfTaskClickSeeEvent;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickSucEvent;
 import com.mdove.passwordguard.task.utils.DeleteSelfTaskHelper;
 import com.mdove.passwordguard.utils.ClipboardUtils;
@@ -53,7 +52,7 @@ public class MainSelfTaskPresenter implements MainSelfTaskContract.Presenter {
 
     @Override
     public void initData() {
-        mData=new ArrayList<>();
+        mData = new ArrayList<>();
 
         List<SelfTask> data = mSelfTaskDao.queryBuilder().build().list();
         Comparator<SelfTask> comparator = new Comparator<SelfTask>() {
@@ -65,7 +64,7 @@ public class MainSelfTaskPresenter implements MainSelfTaskContract.Presenter {
         Collections.sort(data, comparator);
 
         for (SelfTask selfTask : data) {
-            if (selfTask.mIsSee==1) {
+            if (selfTask.mIsSee == 1) {
                 mData.add(new SelfTaskModel(selfTask));
             }
         }
@@ -74,7 +73,7 @@ public class MainSelfTaskPresenter implements MainSelfTaskContract.Presenter {
     }
 
     @Override
-    public void insertSelfTask(String content,LabelTempModel tempModel) {
+    public void insertSelfTask(String content, LabelTempModel tempModel) {
         SelfTask selfTask = new SelfTask();
         selfTask.mTask = content;
         selfTask.mTime = new Date().getTime();
@@ -91,9 +90,20 @@ public class MainSelfTaskPresenter implements MainSelfTaskContract.Presenter {
     @Override
     public void onClickTaskSuc(MainSelfTaskModelVM vm) {
         SelfTask selfTask = vm.mSelfTaskModel.mSelfTask;
-        if (vm.mSelfTaskModel.mIsSuc) {
+
+        int position = -1;
+        SelfTaskModel selfTaskModel = null;
+        for (SelfTaskModel model : mData) {
+            if (model.mId == vm.mSelfTaskModel.mSelfTask.id) {
+                selfTaskModel = model;
+            }
+        }
+        if (selfTaskModel == null) {
+            return;
+        }
+        if (selfTaskModel.mIsSuc) {
             selfTask.mIsSuc = 0;
-            vm.mSelfTaskModel.mIsSuc = false;
+            selfTaskModel.mIsSuc = false;
             mSelfTaskDao.update(selfTask);
 
             List<SucSelfTask> sucSelfTasks = mSucSelfTaskDao.queryBuilder()
@@ -103,7 +113,7 @@ public class MainSelfTaskPresenter implements MainSelfTaskContract.Presenter {
             }
         } else {
             selfTask.mIsSuc = 1;
-            vm.mSelfTaskModel.mIsSuc = true;
+            selfTaskModel.mIsSuc = true;
             mSelfTaskDao.update(selfTask);
 
             SucSelfTask sucSelfTask = new SucSelfTask();
@@ -115,34 +125,46 @@ public class MainSelfTaskPresenter implements MainSelfTaskContract.Presenter {
             sucSelfTask.mTime = new Date().getTime();
             mSucSelfTaskDao.insert(sucSelfTask);
         }
-        mView.notifySelfTaskIsSuc(vm.mPosition);
+
+        position = mData.indexOf(selfTaskModel);
+        mView.notifySelfTaskIsSuc(position);
         RxBus.get().post(new SelfTaskClickSucEvent(vm.mSelfTaskModel.mId, vm.mSelfTaskModel));
     }
 
     @Override
     public void onClickSee(MainSelfTaskModelVM vm) {
         SelfTask selfTask = vm.mSelfTaskModel.mSelfTask;
-        if (vm.mSelfTaskModel.mIsSee) {
-            selfTask.mIsSee = 0;
-            vm.mSelfTaskModel.mIsSee = false;
-            mSelfTaskDao.update(selfTask);
-        } else {
-            selfTask.mIsSee = 1;
-            vm.mSelfTaskModel.mIsSee = true;
-            mSelfTaskDao.update(selfTask);
+        SelfTaskModel selfTaskModel = null;
+        int position = -1;
+        for (SelfTaskModel model : mData) {
+            if (model.mId == selfTask.id) {
+                selfTaskModel = model;
+            }
         }
-        mView.notifySelfSee(vm.mPosition);
+        selfTaskModel.mSelfTask.mIsSee = 0;
+        mSelfTaskDao.update(selfTask);
 
-        RxBus.get().post(new SelfTaskClickSeeEvent(vm.mSelfTaskModel));
+        position = mData.indexOf(selfTaskModel);
+
+        mView.notifySelfSee(position);
     }
 
     @Override
     public void onClickDelete(MainSelfTaskModelVM vm) {
         mSelfTaskDao.delete(vm.mSelfTaskModel.mSelfTask);
-        mView.onClickDelete(vm.mPosition);
-        mDeleteSelfTaskDao.insert(DeleteSelfTaskHelper.getDeletedSelfTask(vm.mSelfTaskModel.mSelfTask));
-
-        RxBus.get().post(new SelfTaskClickDeleteEvent(vm.mSelfTaskModel.mId));
+        int position = -1;
+        SelfTaskModel selfTaskModel = null;
+        for (SelfTaskModel model : mData) {
+            if (model.mId == vm.mSelfTaskModel.mSelfTask.id) {
+                selfTaskModel = model;
+            }
+        }
+        position = mData.indexOf(selfTaskModel);
+        if (position != -1) {
+            mView.onClickDelete(position);
+            mDeleteSelfTaskDao.insert(DeleteSelfTaskHelper.getDeletedSelfTask(vm.mSelfTaskModel.mSelfTask));
+            RxBus.get().post(new SelfTaskClickDeleteEvent(vm.mSelfTaskModel.mId));
+        }
     }
 
     @Override
@@ -156,10 +178,20 @@ public class MainSelfTaskPresenter implements MainSelfTaskContract.Presenter {
         selfTask.mPriority = curPriority;
         mSelfTaskDao.update(selfTask);
 
-        vm.mSelfTaskModel.mPriority = curPriority;
-        mView.notifySelfTaskPriority(vm.mPosition);
+        int position = -1;
+        SelfTaskModel selfTaskModel = null;
+        for (SelfTaskModel model : mData) {
+            if (model.mId == selfTask.id) {
+                selfTaskModel = model;
+            }
+        }
+        position = mData.indexOf(selfTaskModel);
 
-        RxBus.get().post(new SelfTaskClickPriorityEvent(vm.mSelfTaskModel.mId, vm.mSelfTaskModel));
+        vm.mSelfTaskModel.mPriority = curPriority;
+        if (position != -1) {
+            mView.notifySelfTaskPriority(position);
+            RxBus.get().post(new SelfTaskClickPriorityEvent(vm.mSelfTaskModel.mId, vm.mSelfTaskModel));
+        }
     }
 
     @Override
@@ -174,12 +206,21 @@ public class MainSelfTaskPresenter implements MainSelfTaskContract.Presenter {
             return;
         }
         SelfTask selfTask = vm.mSelfTaskModel.mSelfTask;
+
+        int position = -1;
+        SelfTaskModel selfTaskModel = null;
+        for (SelfTaskModel model : mData) {
+            if (model.mId == selfTask.id) {
+                selfTaskModel = model;
+            }
+        }
+        position = mData.indexOf(selfTaskModel);
         selfTask.mTask = vm.mTask.get();
         mSelfTaskDao.update(selfTask);
 
         vm.mSelfTaskModel.mTask = vm.mTask.get();
 
-        mView.onClickBtnEdit(vm.mPosition);
+        mView.onClickBtnEdit(position);
 
         ToastHelper.shortToast(mView.getContext().getResources().getString(R.string.string_self_task_edit_suc));
         RxBus.get().post(new SelfTaskClickEditEvent(vm.mSelfTaskModel.mId, vm.mSelfTaskModel));

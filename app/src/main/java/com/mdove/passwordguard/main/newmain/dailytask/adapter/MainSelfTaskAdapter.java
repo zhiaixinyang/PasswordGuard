@@ -46,7 +46,7 @@ public class MainSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         SelfTaskModel selfTaskModel = mData.get(position);
-        ((SelfTaskViewHolder) holder).bind(selfTaskModel, position);
+        ((SelfTaskViewHolder) holder).bind(selfTaskModel);
     }
 
     public void setData(List<SelfTaskModel> data) {
@@ -59,9 +59,7 @@ public class MainSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     public void notifyDeleteSelfTask(int position) {
-        mData.remove(position);
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position, mData.size());
+        notifyDelete(position);
     }
 
     @Override
@@ -77,13 +75,28 @@ public class MainSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             mBinding = binding;
         }
 
-        public void bind(SelfTaskModel selfTaskModel, int position) {
-            mBinding.setViewModel(new MainSelfTaskModelVM(selfTaskModel, position));
+        public void bind(SelfTaskModel selfTaskModel) {
+            mBinding.setViewModel(new MainSelfTaskModelVM(selfTaskModel));
             mBinding.setActionHandler(new MainSelfTaskHandler(mPresenter));
 
             mBinding.ivPriority.setColorFilter(SelfTaskPriorityHelper.getPriorityBtnColor(mContext, selfTaskModel.mPriority), PorterDuff.Mode.SRC_ATOP);
             mBinding.tvPriorityTip.setTextColor(SelfTaskPriorityHelper.getPriorityBtnColor(mContext, selfTaskModel.mPriority));
             mBinding.tvTitle.setTextColor(SelfTaskPriorityHelper.getPriorityTextColor(mContext, selfTaskModel.mPriority));
+
+            switch (selfTaskModel.mPriority) {
+                case SelfTaskPriorityHelper.PRIORITY_IS_NORMAL: {
+                    mBinding.layoutTop.setBackgroundResource(R.drawable.bg_daily_task_bg_p1);
+                    break;
+                }
+                case SelfTaskPriorityHelper.PRIORITY_IS_YELLOW: {
+                    mBinding.layoutTop.setBackgroundResource(R.drawable.bg_daily_task_bg_p2);
+                    break;
+                }
+                case SelfTaskPriorityHelper.PRIORITY_IS_RED: {
+                    mBinding.layoutTop.setBackgroundResource(R.drawable.bg_daily_task_bg_p3);
+                    break;
+                }
+            }
 
             if (!selfTaskModel.mIsSuc) {
                 mBinding.tvTitle.setFocusable(true);
@@ -190,7 +203,7 @@ public class MainSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             return;
         }
         int position = mData.indexOf(selfTaskModel);
-        notifyPosition(position);
+        notifyDeleteSelfTask(position);
     }
 
 
@@ -221,7 +234,7 @@ public class MainSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         if (existModel == null) {
             mData.add(selfTaskModel);
-            notifyPosition(mData.size());
+            notifyItemInserted(mData.size());
         } else {
             notifyDelete(position);
         }
@@ -230,6 +243,5 @@ public class MainSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void notifyDelete(int position) {
         mData.remove(position);
         notifyItemRemoved(position);
-        notifyItemRangeChanged(position, mData.size());
     }
 }

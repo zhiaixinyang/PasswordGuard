@@ -1,6 +1,7 @@
 package com.mdove.passwordguard.main.newmain.dailytask;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -82,6 +83,11 @@ public class MainSelfTaskFragment extends Fragment implements MainSelfTaskContra
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         getActivity().getWindow().getDecorView().getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -128,6 +134,12 @@ public class MainSelfTaskFragment extends Fragment implements MainSelfTaskContra
         });
     }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
     @Override
     public void insertSelfTask(int position) {
         mAdapter.notifyPosition(position);
@@ -150,7 +162,7 @@ public class MainSelfTaskFragment extends Fragment implements MainSelfTaskContra
 
     @Override
     public void notifySelfSee(int position) {
-        mAdapter.notifyPosition(position);
+        mAdapter.notifyDelete(position);
     }
 
     @Override
@@ -165,25 +177,21 @@ public class MainSelfTaskFragment extends Fragment implements MainSelfTaskContra
 
     @Subscribe
     public void selfTaskClickSuc(SelfTaskClickSucEvent event) {
-        //从SelfTaskActivity post 过来的notify
         mAdapter.notifyEventSelfTaskClickSuc(event.mId, event.mSelfTaskModel);
     }
 
     @Subscribe
     public void selfTaskClickSee(SelfTaskClickSeeEvent event) {
-        //从SelfTaskActivity post 过来的notify
         mAdapter.notifyEventSelfTaskClickSee(event.mSelfTaskModel);
     }
 
     @Subscribe
     public void selfTaskClickDelete(SelfTaskClickDeleteEvent event) {
-        //从SelfTaskActivity post 过来的notify
         mAdapter.notifyEventSelfTaskClickDelete(event.mId);
     }
 
     @Subscribe
     public void selfTaskClickPriority(SelfTaskClickPriorityEvent event) {
-        //从SelfTaskActivity post 过来的notify
         mAdapter.notifyEventSelfTaskClickPriority(event.mId, event.mSelfTaskModel.mPriority);
     }
 }

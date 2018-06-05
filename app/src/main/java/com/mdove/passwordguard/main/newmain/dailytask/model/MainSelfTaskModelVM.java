@@ -22,9 +22,8 @@ public class MainSelfTaskModelVM {
     public ObservableField<Boolean> mIsSee = new ObservableField<>();
     public ObservableField<Integer> mPriority = new ObservableField<>();
     public SelfTaskModel mSelfTaskModel;
-    public int mPosition;
 
-    public MainSelfTaskModelVM(SelfTaskModel selfTaskModel, int position) {
+    public MainSelfTaskModelVM(SelfTaskModel selfTaskModel) {
         mTask.set(selfTaskModel.mTask);
         mTime.set(DateUtils.getDateChinese(selfTaskModel.mTime));
         mIsSuc.set(selfTaskModel.mIsSuc);
@@ -33,7 +32,6 @@ public class MainSelfTaskModelVM {
         mSelfTaskModel = selfTaskModel;
         String label = mSelfTaskModel.mSelfTask.getMLabel();
         mLabel.set(TextUtils.isEmpty(label) ? LabelConstant.DEFAULT_LABEL : label);
-        mPosition = position;
     }
 
     public TextWatcher textWatcher = new SimpleTextWatcher() {

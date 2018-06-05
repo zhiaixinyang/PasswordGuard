@@ -1,6 +1,5 @@
 package com.mdove.passwordguard.task.model.event;
 
-import com.mdove.passwordguard.main.newmain.dailytask.model.MainSelfTaskModel;
 import com.mdove.passwordguard.task.model.SelfTaskModel;
 
 /**
