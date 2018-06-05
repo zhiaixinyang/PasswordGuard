@@ -30,6 +30,7 @@ import com.mdove.passwordguard.task.model.event.SelfTaskClickDeleteEvent;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickPriorityEvent;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickSeeEvent;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickSucEvent;
+import com.mdove.passwordguard.task.model.event.SelfTaskFinishEvent;
 import com.mdove.passwordguard.utils.ToastHelper;
 
 import java.util.ArrayList;
@@ -74,6 +75,12 @@ public class MainSelfTaskFragment extends Fragment implements MainSelfTaskContra
 
         RxBus.get().register(this);
         return mBinding.getRoot();
+    }
+
+    private void updateUI() {
+        if (mPresenter!=null){
+            mPresenter.initData();
+        }
     }
 
     @Override
@@ -188,6 +195,11 @@ public class MainSelfTaskFragment extends Fragment implements MainSelfTaskContra
     @Subscribe
     public void selfTaskClickDelete(SelfTaskClickDeleteEvent event) {
         mAdapter.notifyEventSelfTaskClickDelete(event.mId);
+    }
+
+    @Subscribe
+    public void selfTaskFinishEvnet(SelfTaskFinishEvent event) {
+        updateUI();
     }
 
     @Subscribe

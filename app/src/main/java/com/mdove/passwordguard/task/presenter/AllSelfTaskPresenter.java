@@ -107,6 +107,7 @@ public class AllSelfTaskPresenter implements AllSelfTaskContract.Presenter {
 
     @Override
     public void onClickTaskSuc(SelfTaskModelVM vm) {
+        int position = -1;
         SelfTask selfTask = vm.mSelfTaskModel.mSelfTask;
         if (vm.mSelfTaskModel.mIsSuc) {
             selfTask.mIsSuc = 0;
@@ -132,13 +133,25 @@ public class AllSelfTaskPresenter implements AllSelfTaskContract.Presenter {
             sucSelfTask.mTime = new Date().getTime();
             mSucSelfTaskDao.insert(sucSelfTask);
         }
-        mView.notifySelfTaskIsSuc(vm.mPosition);
+
+        for (int i = 0; i < mData.size(); i++) {
+            if (mData.get(i).mId == vm.mSelfTaskModel.mId) {
+                position = i;
+                break;
+            }
+        }
+
+        if (position==-1){
+            return;
+        }
+        mView.notifySelfTaskIsSuc(position);
         RxBus.get().post(new SelfTaskClickSucEvent(vm.mSelfTaskModel.mId, vm.mSelfTaskModel));
     }
 
     @Override
     public void onClickSee(SelfTaskModelVM vm) {
         SelfTask selfTask = vm.mSelfTaskModel.mSelfTask;
+        int position = -1;
         if (vm.mSelfTaskModel.mIsSee) {
             selfTask.mIsSee = 0;
             vm.mSelfTaskModel.mIsSee = false;
@@ -148,7 +161,18 @@ public class AllSelfTaskPresenter implements AllSelfTaskContract.Presenter {
             vm.mSelfTaskModel.mIsSee = true;
             mSelfTaskDao.update(selfTask);
         }
-        mView.notifySelfSee(vm.mPosition);
+
+        for (int i = 0; i < mData.size(); i++) {
+            if (mData.get(i).mId == vm.mSelfTaskModel.mId) {
+                position = i;
+                break;
+            }
+        }
+
+        if (position==-1){
+            return;
+        }
+        mView.notifySelfSee(position);
 
         RxBus.get().post(new SelfTaskClickSeeEvent(vm.mSelfTaskModel));
     }
@@ -156,7 +180,21 @@ public class AllSelfTaskPresenter implements AllSelfTaskContract.Presenter {
     @Override
     public void onClickDelete(SelfTaskModelVM vm) {
         mSelfTaskDao.delete(vm.mSelfTaskModel.mSelfTask);
-        mView.onClickDelete(vm.mPosition);
+
+        int position=-1;
+        for (int i = 0; i < mData.size(); i++) {
+            if (mData.get(i).mId == vm.mSelfTaskModel.mId) {
+                position = i;
+                break;
+            }
+        }
+
+        if (position==-1){
+            return;
+        }
+
+        mView.onClickDelete(position);
+
         mDeleteSelfTaskDao.insert(DeleteSelfTaskHelper.getDeletedSelfTask(vm.mSelfTaskModel.mSelfTask));
 
         RxBus.get().post(new SelfTaskClickDeleteEvent(vm.mSelfTaskModel.mId));
@@ -174,7 +212,20 @@ public class AllSelfTaskPresenter implements AllSelfTaskContract.Presenter {
         mSelfTaskDao.update(selfTask);
 
         vm.mSelfTaskModel.mPriority = curPriority;
-        mView.notifySelfTaskPriority(vm.mPosition);
+
+        int position=-1;
+        for (int i = 0; i < mData.size(); i++) {
+            if (mData.get(i).mId == vm.mSelfTaskModel.mId) {
+                position = i;
+                break;
+            }
+        }
+
+        if (position==-1){
+            return;
+        }
+
+        mView.notifySelfTaskPriority(position);
 
         RxBus.get().post(new SelfTaskClickPriorityEvent(vm.mSelfTaskModel.mId, vm.mSelfTaskModel));
     }
@@ -201,7 +252,19 @@ public class AllSelfTaskPresenter implements AllSelfTaskContract.Presenter {
 
         vm.mSelfTaskModel.mTask = vm.mTask.get();
 
-        mView.onClickBtnEdit(vm.mPosition);
+        int position=-1;
+        for (int i = 0; i < mData.size(); i++) {
+            if (mData.get(i).mId == vm.mSelfTaskModel.mId) {
+                position = i;
+                break;
+            }
+        }
+
+        if (position==-1){
+            return;
+        }
+
+        mView.onClickBtnEdit(position);
 
         ToastHelper.shortToast(mView.getContext().getResources().getString(R.string.string_self_task_edit_suc));
         RxBus.get().post(new SelfTaskClickEditEvent(vm.mSelfTaskModel.mId, vm.mSelfTaskModel));

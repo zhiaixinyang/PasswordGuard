@@ -178,6 +178,7 @@ public class MainSelfTaskPresenter implements MainSelfTaskContract.Presenter {
         selfTask.mPriority = curPriority;
         mSelfTaskDao.update(selfTask);
 
+
         int position = -1;
         SelfTaskModel selfTaskModel = null;
         for (SelfTaskModel model : mData) {

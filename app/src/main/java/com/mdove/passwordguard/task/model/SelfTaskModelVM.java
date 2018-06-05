@@ -21,9 +21,10 @@ public class SelfTaskModelVM {
     public ObservableField<Boolean> mIsSee = new ObservableField<>();
     public ObservableField<Integer> mPriority = new ObservableField<>();
     public SelfTaskModel mSelfTaskModel;
-    public int mPosition;
+    @Deprecated
+    public int mPosition;//注意这个变量已经被废弃（没有删除，是因为一些不用的界面还在使用，不想改了）
 
-    public SelfTaskModelVM(SelfTaskModel selfTaskModel, int position) {
+    public SelfTaskModelVM(SelfTaskModel selfTaskModel) {
         mTask.set(selfTaskModel.mTask);
         mTime.set(DateUtils.getDateChinese(selfTaskModel.mTime));
         mIsSuc.set(selfTaskModel.mIsSuc);
@@ -32,7 +33,10 @@ public class SelfTaskModelVM {
         mSelfTaskModel = selfTaskModel;
         String label = mSelfTaskModel.mSelfTask.getMLabel();
         mLabel.set(TextUtils.isEmpty(label) ? LabelConstant.DEFAULT_LABEL : label);
-        mPosition = position;
+    }
+
+    @Deprecated//注意这个变量已经被废弃（没有删除，是因为一些不用的界面还在使用，不想改了）
+    public SelfTaskModelVM(SelfTaskModel selfTaskMode,int position) {
     }
 
     public TextWatcher textWatcher = new SimpleTextWatcher() {

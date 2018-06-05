@@ -9,12 +9,15 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 
+import com.hwangjr.rxbus.RxBus;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.BaseActivity;
 import com.mdove.passwordguard.task.adapter.SelfTaskPagerAdapter;
 import com.mdove.passwordguard.task.fragment.AllSelfTaskFragment;
 import com.mdove.passwordguard.task.fragment.DeleteSelfTaskFragment;
 import com.mdove.passwordguard.task.fragment.SucSelfTaskFragment;
+import com.mdove.passwordguard.task.model.event.SelfTaskFinishEvent;
+import com.mdove.passwordguard.task.model.event.SelfTaskLabelInsertEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,5 +88,11 @@ public class NewSelfTaskActivity extends BaseActivity {
 
             }
         });
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        RxBus.get().post(new SelfTaskFinishEvent());
     }
 }

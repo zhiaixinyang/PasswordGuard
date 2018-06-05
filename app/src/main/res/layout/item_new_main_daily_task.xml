@@ -26,12 +26,12 @@
         <RelativeLayout
             android:id="@+id/layout_item"
             android:layout_width="match_parent"
-            android:layout_marginTop="18dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
             android:background="@drawable/bg_item_self_task"
-            android:paddingTop="18dp"
             android:focusable="true"
-            android:focusableInTouchMode="true">
+            android:focusableInTouchMode="true"
+            android:paddingTop="18dp">
 
             <EditText
                 android:id="@+id/tv_title"
@@ -219,8 +219,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="完成"
-                    android:textSize="14sp"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
 
                 <ImageView
                     android:id="@+id/iv_btn"
@@ -231,43 +231,30 @@
             </RelativeLayout>
         </RelativeLayout>
 
-        <RelativeLayout
+        <android.support.constraint.ConstraintLayout
             android:id="@+id/layout_top"
             android:layout_width="200dp"
-            android:background="@drawable/bg_daily_task_bg_p1"
+            android:layout_height="36dp"
             android:layout_centerHorizontal="true"
-            android:layout_height="36dp">
-            <RelativeLayout
-                android:id="@+id/layout_label"
-                android:layout_width="50dp"
+            android:background="@drawable/bg_daily_task_bg_p1">
+
+            <TextView
+                android:id="@+id/tv_label"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
                 android:layout_centerVertical="true"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_item_self_task"
-                android:layout_marginTop="4dp"
-                >
-
-                <ImageView
-                    android:id="@+id/iv_label"
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/margin_item_self_task"
-                    android:src="@mipmap/ic_label"
-                    android:tint="@color/colorPrimary" />
-
-                <TextView
-                    android:id="@+id/tv_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:text="@{viewModel.mLabel}"
-                    android:layout_centerVertical="true"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:textColor="@color/white"
-                    android:textSize="12sp"
-                    tools:text="Bug" />
-            </RelativeLayout>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/tv_time"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:gravity="center"
+                android:background="@drawable/bg_circle_white"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{viewModel.mLabel}"
+                android:textColor="@color/green_300"
+                android:textSize="12sp"
+                tools:text="Bug" />
 
             <TextView
                 android:id="@+id/tv_time"
@@ -276,9 +263,13 @@
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/layout_label"
                 android:text="@{viewModel.mTime}"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/tv_label"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 android:textColor="@color/white"
                 android:textSize="12sp"
                 tools:text="2018/4/1" />
-        </RelativeLayout>
+        </android.support.constraint.ConstraintLayout>
     </RelativeLayout>
 </layout>

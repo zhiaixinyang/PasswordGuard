@@ -86,14 +86,17 @@ public class MainSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             switch (selfTaskModel.mPriority) {
                 case SelfTaskPriorityHelper.PRIORITY_IS_NORMAL: {
                     mBinding.layoutTop.setBackgroundResource(R.drawable.bg_daily_task_bg_p1);
+                    mBinding.tvLabel.setTextColor(ContextCompat.getColor(mContext,R.color.green_300));
                     break;
                 }
                 case SelfTaskPriorityHelper.PRIORITY_IS_YELLOW: {
                     mBinding.layoutTop.setBackgroundResource(R.drawable.bg_daily_task_bg_p2);
+                    mBinding.tvLabel.setTextColor(ContextCompat.getColor(mContext,R.color.self_task_priority_yellow));
                     break;
                 }
                 case SelfTaskPriorityHelper.PRIORITY_IS_RED: {
                     mBinding.layoutTop.setBackgroundResource(R.drawable.bg_daily_task_bg_p3);
+                    mBinding.tvLabel.setTextColor(ContextCompat.getColor(mContext,R.color.self_task_priority_red));
                     break;
                 }
             }

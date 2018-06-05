@@ -44,7 +44,7 @@ public class AllSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         SelfTaskModel selfTaskModel = mData.get(position);
-        ((SelfTaskViewHolder) holder).bind(selfTaskModel, position);
+        ((SelfTaskViewHolder) holder).bind(selfTaskModel);
     }
 
     public void setData(List<SelfTaskModel> data) {
@@ -59,7 +59,6 @@ public class AllSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public void notifyDeleteSelfTask(int position) {
         mData.remove(position);
         notifyItemRemoved(position);
-        notifyItemRangeChanged(position, mData.size());
     }
 
     @Override
@@ -75,8 +74,8 @@ public class AllSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             mBinding = binding;
         }
 
-        public void bind(SelfTaskModel selfTaskModel, int position) {
-            mBinding.setViewModel(new SelfTaskModelVM(selfTaskModel, position));
+        public void bind(SelfTaskModel selfTaskModel) {
+            mBinding.setViewModel(new SelfTaskModelVM(selfTaskModel));
             mBinding.setActionHandler(new AllSelfTaskHandler(mPresenter));
 
             mBinding.ivPriority.setColorFilter(SelfTaskPriorityHelper.getPriorityBtnColor(mContext, selfTaskModel.mPriority), PorterDuff.Mode.SRC_ATOP);
