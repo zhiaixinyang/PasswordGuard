@@ -80,7 +80,18 @@
                     android:id="@+id/rlv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@+id/btn_label_setting" />
+                    android:layout_toLeftOf="@+id/btn_timer" />
+
+                <ImageView
+                    android:id="@+id/btn_timer"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/btn_label_setting"
+                    android:layout_marginLeft="@dimen/margin_item_self_task"
+                    android:layout_marginRight="@dimen/margin_item_self_task"
+                    android:src="@mipmap/ic_time"
+                    android:tint="@color/colorPrimary" />
 
                 <ImageView
                     android:id="@+id/btn_label_setting"
@@ -88,7 +99,6 @@
                     android:layout_height="22dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/margin_item_self_task"
                     android:layout_marginRight="@dimen/margin_item_self_task"
                     android:src="@mipmap/ic_settings"
                     android:tint="@color/colorPrimary" />

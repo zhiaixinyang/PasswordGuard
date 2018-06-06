@@ -31,6 +31,7 @@ public class DaoMaster extends AbstractDaoMaster {
         SelfTaskDao.createTable(db, ifNotExists);
         SelfTaskLabelDao.createTable(db, ifNotExists);
         SucSelfTaskDao.createTable(db, ifNotExists);
+        SelfTaskTimerDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
@@ -45,6 +46,7 @@ public class DaoMaster extends AbstractDaoMaster {
         SelfTaskDao.dropTable(db, ifExists);
         SelfTaskLabelDao.dropTable(db, ifExists);
         SucSelfTaskDao.dropTable(db, ifExists);
+        SelfTaskTimerDao.dropTable(db, ifExists);
     }
 
     /**
@@ -73,6 +75,7 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(SelfTaskDao.class);
         registerDaoClass(SelfTaskLabelDao.class);
         registerDaoClass(SucSelfTaskDao.class);
+        registerDaoClass(SelfTaskTimerDao.class);
     }
 
     public DaoSession newSession() {

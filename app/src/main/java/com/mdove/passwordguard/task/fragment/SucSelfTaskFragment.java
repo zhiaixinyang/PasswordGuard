@@ -135,6 +135,6 @@ public class SucSelfTaskFragment extends Fragment implements SucSelfTaskContract
 
 //    @Subscribe
 //    public void selfTaskClickEdit(SelfTaskClickEditEvent event) {
-//        mPresenter.onClickEdit(event.mId, event.mSelfTaskModel.mTask);
+//        mPresenter.onClickEdit(event.mId, event.mSelfTaskTimerModel.mTask);
 //    }
 }

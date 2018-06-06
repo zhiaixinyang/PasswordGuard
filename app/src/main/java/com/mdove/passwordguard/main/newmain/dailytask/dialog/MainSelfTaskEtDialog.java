@@ -14,8 +14,10 @@ import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.databinding.DialogDailyTaskEtBinding;
 import com.mdove.passwordguard.greendao.SelfTaskLabelDao;
 import com.mdove.passwordguard.greendao.entity.SelfTaskLabel;
+import com.mdove.passwordguard.main.config.MainConfig;
 import com.mdove.passwordguard.main.newmain.dailytask.dialog.model.DailyTaskLabelModel;
 import com.mdove.passwordguard.main.newmain.dailytask.util.LabelTempModel;
+import com.mdove.passwordguard.main.newmain.timer.TimerActivity;
 import com.mdove.passwordguard.task.LabelSettingActivity;
 import com.mdove.passwordguard.utils.ToastHelper;
 
@@ -48,6 +50,14 @@ public class MainSelfTaskEtDialog extends AppCompatDialog {
             @Override
             public void onClick(View v) {
                 LabelSettingActivity.start(mContext);
+                dismiss();
+            }
+        });
+
+        mBinding.btnTimer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TimerActivity.start(mContext);
                 dismiss();
             }
         });

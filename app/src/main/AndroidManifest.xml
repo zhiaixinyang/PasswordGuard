@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:name=".App"
@@ -13,10 +14,11 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".main.newmain.home.HomeActivity"
+        <activity
+            android:name=".main.newmain.home.HomeActivity"
             android:launchMode="singleTop"
-            android:windowSoftInputMode="stateHidden|adjustPan"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -77,7 +79,8 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".task.LabelSettingActivity"
+        <activity
+            android:name=".task.LabelSettingActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
@@ -100,7 +103,7 @@
         <activity
             android:name=".main.newmain.everydayreplay.EtEverydayReplayActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".search.SearchResultActivity"
@@ -143,6 +146,12 @@
             android:name=".task.NewSelfTaskActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".main.newmain.timer.TimerActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".calendar.CalendarSmoothActivity"
             android:launchMode="singleTask"
@@ -154,6 +163,12 @@
                 <action android:name="mdove.action.backup.error" />
                 <action android:name="mdove.action.backup.start" />
                 <action android:name="mdove.action.backup.has.exist" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".main.newmain.timer.TimerReceiver">
+            <intent-filter>
+                <action android:name="mdove.action.timer.action" />
             </intent-filter>
         </receiver>
 

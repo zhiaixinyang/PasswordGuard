@@ -13,6 +13,7 @@ import com.mdove.passwordguard.greendao.DeletedPasswordDao;
 import com.mdove.passwordguard.greendao.GroupInfoDao;
 import com.mdove.passwordguard.greendao.PasswordDao;
 import com.mdove.passwordguard.greendao.SelfTaskDao;
+import com.mdove.passwordguard.greendao.SelfTaskTimerDao;
 import com.mdove.passwordguard.greendao.SucSelfTaskDao;
 
 import org.greenrobot.greendao.database.Database;
@@ -47,6 +48,6 @@ public class DBUpdateHelper extends DaoMaster.OpenHelper {
                     }
                 }, PasswordDao.class, DailySelfDao.class, GroupInfoDao.class, DeletedPasswordDao.class,
                 SelfTaskDao.class, DeleteSelfTaskDao.class, DeletedDailySelfDao.class, DailyPlanDao.class,
-                SucSelfTaskDao.class, SelfTaskLabelDao.class);
+                SucSelfTaskDao.class, SelfTaskLabelDao.class, SelfTaskTimerDao.class);
     }
 }

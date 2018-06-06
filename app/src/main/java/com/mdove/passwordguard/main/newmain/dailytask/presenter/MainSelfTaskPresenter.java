@@ -9,6 +9,7 @@ import com.mdove.passwordguard.greendao.SucSelfTaskDao;
 import com.mdove.passwordguard.greendao.entity.SelfTask;
 import com.mdove.passwordguard.greendao.entity.SucSelfTask;
 import com.mdove.passwordguard.main.newmain.dailytask.model.MainSelfTaskModelVM;
+import com.mdove.passwordguard.main.newmain.dailytask.model.MainSelfTaskTimerModelVM;
 import com.mdove.passwordguard.main.newmain.dailytask.presenter.contract.MainSelfTaskContract;
 import com.mdove.passwordguard.main.newmain.dailytask.util.LabelTempModel;
 import com.mdove.passwordguard.task.model.SelfTaskModel;
@@ -132,6 +133,11 @@ public class MainSelfTaskPresenter implements MainSelfTaskContract.Presenter {
     }
 
     @Override
+    public void onClickTaskSuc(MainSelfTaskTimerModelVM vm) {
+        ToastHelper.shortToast("点击完成");
+    }
+
+    @Override
     public void onClickSee(MainSelfTaskModelVM vm) {
         SelfTask selfTask = vm.mSelfTaskModel.mSelfTask;
         SelfTaskModel selfTaskModel = null;
@@ -165,6 +171,11 @@ public class MainSelfTaskPresenter implements MainSelfTaskContract.Presenter {
             mDeleteSelfTaskDao.insert(DeleteSelfTaskHelper.getDeletedSelfTask(vm.mSelfTaskModel.mSelfTask));
             RxBus.get().post(new SelfTaskClickDeleteEvent(vm.mSelfTaskModel.mId));
         }
+    }
+
+    @Override
+    public void onClickDelete(MainSelfTaskTimerModelVM vm) {
+        ToastHelper.shortToast("点击删除");
     }
 
     @Override
