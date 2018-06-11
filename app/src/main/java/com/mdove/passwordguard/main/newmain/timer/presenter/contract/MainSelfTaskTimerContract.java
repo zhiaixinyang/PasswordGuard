@@ -15,10 +15,10 @@ import java.util.List;
 
 public interface MainSelfTaskTimerContract {
     interface Presenter extends BasePresenter<MainSelfTaskTimerContract.MvpView> {
-        void insertSelfTaskTimer(String content);
+        void insertSelfTaskTimer(String content,long selectData);
     }
 
     interface MvpView extends BaseView<Presenter> {
-        void insertSelfTaskTimer(String content);
+        void insertSelfTaskTimer(String content,int notificationId);
     }
 }

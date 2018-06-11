@@ -5,10 +5,14 @@ import com.mdove.passwordguard.App;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.greendao.DeleteSelfTaskDao;
 import com.mdove.passwordguard.greendao.SelfTaskDao;
+import com.mdove.passwordguard.greendao.SelfTaskTimerDao;
 import com.mdove.passwordguard.greendao.SucSelfTaskDao;
 import com.mdove.passwordguard.greendao.entity.SelfTask;
+import com.mdove.passwordguard.greendao.entity.SelfTaskTimer;
 import com.mdove.passwordguard.greendao.entity.SucSelfTask;
+import com.mdove.passwordguard.main.newmain.dailytask.model.BaseMainSelfTaskModel;
 import com.mdove.passwordguard.main.newmain.dailytask.model.MainSelfTaskModelVM;
+import com.mdove.passwordguard.main.newmain.dailytask.model.MainSelfTaskTimerModel;
 import com.mdove.passwordguard.main.newmain.dailytask.model.MainSelfTaskTimerModelVM;
 import com.mdove.passwordguard.main.newmain.dailytask.presenter.contract.MainSelfTaskContract;
 import com.mdove.passwordguard.main.newmain.dailytask.util.LabelTempModel;
@@ -33,8 +37,9 @@ import java.util.List;
 
 public class MainSelfTaskPresenter implements MainSelfTaskContract.Presenter {
     private MainSelfTaskContract.MvpView mView;
-    private List<SelfTaskModel> mData;
+    private List<BaseMainSelfTaskModel> mData;
     private SelfTaskDao mSelfTaskDao;
+    private SelfTaskTimerDao mSelfTaskTimerDao;
     private SucSelfTaskDao mSucSelfTaskDao;
     private DeleteSelfTaskDao mDeleteSelfTaskDao;
 
@@ -45,6 +50,7 @@ public class MainSelfTaskPresenter implements MainSelfTaskContract.Presenter {
         mSelfTaskDao = App.getDaoSession().getSelfTaskDao();
         mDeleteSelfTaskDao = App.getDaoSession().getDeleteSelfTaskDao();
         mSucSelfTaskDao = App.getDaoSession().getSucSelfTaskDao();
+        mSelfTaskTimerDao = App.getDaoSession().getSelfTaskTimerDao();
     }
 
     @Override
@@ -68,6 +74,11 @@ public class MainSelfTaskPresenter implements MainSelfTaskContract.Presenter {
             if (selfTask.mIsSee == 1) {
                 mData.add(new SelfTaskModel(selfTask));
             }
+        }
+
+        List<SelfTaskTimer> timerData = mSelfTaskTimerDao.queryBuilder().build().list();
+        for (SelfTaskTimer timer : timerData) {
+            mData.add(new MainSelfTaskTimerModel(timer));
         }
 
         mView.initData(mData);
@@ -94,9 +105,12 @@ public class MainSelfTaskPresenter implements MainSelfTaskContract.Presenter {
 
         int position = -1;
         SelfTaskModel selfTaskModel = null;
-        for (SelfTaskModel model : mData) {
-            if (model.mId == vm.mSelfTaskModel.mSelfTask.id) {
-                selfTaskModel = model;
+
+        for (BaseMainSelfTaskModel model : mData) {
+            if (model instanceof SelfTaskModel) {
+                if (((SelfTaskModel) model).mId == vm.mSelfTaskModel.mSelfTask.id) {
+                    selfTaskModel = (SelfTaskModel) model;
+                }
             }
         }
         if (selfTaskModel == null) {
@@ -134,7 +148,28 @@ public class MainSelfTaskPresenter implements MainSelfTaskContract.Presenter {
 
     @Override
     public void onClickTaskSuc(MainSelfTaskTimerModelVM vm) {
-        ToastHelper.shortToast("点击完成");
+        onClickDelete(vm);
+    }
+
+    @Override
+    public void onClickTimerDelete(MainSelfTaskTimerModelVM vm) {
+        MainSelfTaskTimerModel timerModel = vm.mSelfTaskTimerModel;
+        SelfTaskTimer timer = mSelfTaskTimerDao.queryBuilder().where(SelfTaskTimerDao.Properties.Id.eq(timerModel.mId)).unique();
+        mSelfTaskTimerDao.delete(timer);
+
+        int position = -1;
+        for (BaseMainSelfTaskModel model : mData) {
+            if (model instanceof MainSelfTaskTimerModel) {
+                if (((MainSelfTaskTimerModel) model).mId == timerModel.mId) {
+                    timerModel = (MainSelfTaskTimerModel) model;
+                }
+            }
+        }
+
+        position = mData.indexOf(timerModel);
+        if (position != -1) {
+            mView.onClickDelete(position);
+        }
     }
 
     @Override
@@ -142,9 +177,11 @@ public class MainSelfTaskPresenter implements MainSelfTaskContract.Presenter {
         SelfTask selfTask = vm.mSelfTaskModel.mSelfTask;
         SelfTaskModel selfTaskModel = null;
         int position = -1;
-        for (SelfTaskModel model : mData) {
-            if (model.mId == selfTask.id) {
-                selfTaskModel = model;
+        for (BaseMainSelfTaskModel model : mData) {
+            if (model instanceof SelfTaskModel) {
+                if (((SelfTaskModel) model).mId == selfTask.id) {
+                    selfTaskModel = (SelfTaskModel) model;
+                }
             }
         }
         selfTaskModel.mSelfTask.mIsSee = 0;
@@ -160,9 +197,11 @@ public class MainSelfTaskPresenter implements MainSelfTaskContract.Presenter {
         mSelfTaskDao.delete(vm.mSelfTaskModel.mSelfTask);
         int position = -1;
         SelfTaskModel selfTaskModel = null;
-        for (SelfTaskModel model : mData) {
-            if (model.mId == vm.mSelfTaskModel.mSelfTask.id) {
-                selfTaskModel = model;
+        for (BaseMainSelfTaskModel model : mData) {
+            if (model instanceof SelfTaskModel) {
+                if (((SelfTaskModel) model).mId == vm.mSelfTaskModel.mSelfTask.id) {
+                    selfTaskModel = (SelfTaskModel) model;
+                }
             }
         }
         position = mData.indexOf(selfTaskModel);
@@ -175,7 +214,23 @@ public class MainSelfTaskPresenter implements MainSelfTaskContract.Presenter {
 
     @Override
     public void onClickDelete(MainSelfTaskTimerModelVM vm) {
-        ToastHelper.shortToast("点击删除");
+        long outId=vm.mSelfTaskTimerModel.mId;
+        int position=-1;
+        for (BaseMainSelfTaskModel timer:mData){
+            if (timer instanceof MainSelfTaskTimerModel){
+                if (((MainSelfTaskTimerModel) timer).mId==outId) {
+                    position = mData.indexOf(timer);
+                    SelfTaskTimer realTimer=mSelfTaskTimerDao.queryBuilder().where(
+                            SelfTaskTimerDao.Properties.Id.eq(outId)).unique();
+                    mSelfTaskTimerDao.delete(realTimer);
+                    mView.cancelNotification(realTimer.mNotificationId);
+                }
+            }
+        }
+
+        if(position!=-1){
+            mView.onClickDelete(position);
+        }
     }
 
     @Override
@@ -192,9 +247,11 @@ public class MainSelfTaskPresenter implements MainSelfTaskContract.Presenter {
 
         int position = -1;
         SelfTaskModel selfTaskModel = null;
-        for (SelfTaskModel model : mData) {
-            if (model.mId == selfTask.id) {
-                selfTaskModel = model;
+        for (BaseMainSelfTaskModel model : mData) {
+            if (model instanceof SelfTaskModel) {
+                if (((SelfTaskModel) model).mId == selfTask.id) {
+                    selfTaskModel = (SelfTaskModel) model;
+                }
             }
         }
         position = mData.indexOf(selfTaskModel);
@@ -221,9 +278,11 @@ public class MainSelfTaskPresenter implements MainSelfTaskContract.Presenter {
 
         int position = -1;
         SelfTaskModel selfTaskModel = null;
-        for (SelfTaskModel model : mData) {
-            if (model.mId == selfTask.id) {
-                selfTaskModel = model;
+        for (BaseMainSelfTaskModel model : mData) {
+            if (model instanceof SelfTaskModel) {
+                if (((SelfTaskModel) model).mId == selfTask.id) {
+                    selfTaskModel = (SelfTaskModel) model;
+                }
             }
         }
         position = mData.indexOf(selfTaskModel);

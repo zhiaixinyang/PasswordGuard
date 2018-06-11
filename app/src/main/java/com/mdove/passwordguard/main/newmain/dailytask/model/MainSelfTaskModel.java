@@ -6,7 +6,7 @@ import com.mdove.passwordguard.greendao.entity.SelfTask;
  * Created by MDove on 2018/3/25.
  */
 
-public class MainSelfTaskModel {
+public class MainSelfTaskModel extends BaseMainSelfTaskModel{
     public String mTask;
     public long mTime;
     public boolean mIsSuc;

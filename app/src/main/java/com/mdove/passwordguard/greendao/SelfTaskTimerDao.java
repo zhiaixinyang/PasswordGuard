@@ -27,7 +27,10 @@ public class SelfTaskTimerDao extends AbstractDao<SelfTaskTimer, Long> {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property MTask = new Property(1, String.class, "mTask", false, "M_TASK");
         public final static Property MTime = new Property(2, long.class, "mTime", false, "M_TIME");
-        public final static Property MIsSuc = new Property(3, int.class, "mIsSuc", false, "M_IS_SUC");
+        public final static Property MStopTime = new Property(3, long.class, "mStopTime", false, "M_STOP_TIME");
+        public final static Property MNotificationId = new Property(4, long.class, "mNotificationId", false, "M_NOTIFICATION_ID");
+        public final static Property MIsCancel = new Property(5, long.class, "mIsCancel", false, "M_IS_CANCEL");
+        public final static Property MIsSuc = new Property(6, int.class, "mIsSuc", false, "M_IS_SUC");
     }
 
 
@@ -46,7 +49,10 @@ public class SelfTaskTimerDao extends AbstractDao<SelfTaskTimer, Long> {
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"M_TASK\" TEXT," + // 1: mTask
                 "\"M_TIME\" INTEGER NOT NULL ," + // 2: mTime
-                "\"M_IS_SUC\" INTEGER NOT NULL );"); // 3: mIsSuc
+                "\"M_STOP_TIME\" INTEGER NOT NULL ," + // 3: mStopTime
+                "\"M_NOTIFICATION_ID\" INTEGER NOT NULL ," + // 4: mNotificationId
+                "\"M_IS_CANCEL\" INTEGER NOT NULL ," + // 5: mIsCancel
+                "\"M_IS_SUC\" INTEGER NOT NULL );"); // 6: mIsSuc
     }
 
     /** Drops the underlying database table. */
@@ -69,7 +75,10 @@ public class SelfTaskTimerDao extends AbstractDao<SelfTaskTimer, Long> {
             stmt.bindString(2, mTask);
         }
         stmt.bindLong(3, entity.getMTime());
-        stmt.bindLong(4, entity.getMIsSuc());
+        stmt.bindLong(4, entity.getMStopTime());
+        stmt.bindLong(5, entity.getMNotificationId());
+        stmt.bindLong(6, entity.getMIsCancel());
+        stmt.bindLong(7, entity.getMIsSuc());
     }
 
     @Override
@@ -86,7 +95,10 @@ public class SelfTaskTimerDao extends AbstractDao<SelfTaskTimer, Long> {
             stmt.bindString(2, mTask);
         }
         stmt.bindLong(3, entity.getMTime());
-        stmt.bindLong(4, entity.getMIsSuc());
+        stmt.bindLong(4, entity.getMStopTime());
+        stmt.bindLong(5, entity.getMNotificationId());
+        stmt.bindLong(6, entity.getMIsCancel());
+        stmt.bindLong(7, entity.getMIsSuc());
     }
 
     @Override
@@ -100,7 +112,10 @@ public class SelfTaskTimerDao extends AbstractDao<SelfTaskTimer, Long> {
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // mTask
             cursor.getLong(offset + 2), // mTime
-            cursor.getInt(offset + 3) // mIsSuc
+            cursor.getLong(offset + 3), // mStopTime
+            cursor.getLong(offset + 4), // mNotificationId
+            cursor.getLong(offset + 5), // mIsCancel
+            cursor.getInt(offset + 6) // mIsSuc
         );
         return entity;
     }
@@ -110,7 +125,10 @@ public class SelfTaskTimerDao extends AbstractDao<SelfTaskTimer, Long> {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setMTask(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setMTime(cursor.getLong(offset + 2));
-        entity.setMIsSuc(cursor.getInt(offset + 3));
+        entity.setMStopTime(cursor.getLong(offset + 3));
+        entity.setMNotificationId(cursor.getLong(offset + 4));
+        entity.setMIsCancel(cursor.getLong(offset + 5));
+        entity.setMIsSuc(cursor.getInt(offset + 6));
      }
     
     @Override

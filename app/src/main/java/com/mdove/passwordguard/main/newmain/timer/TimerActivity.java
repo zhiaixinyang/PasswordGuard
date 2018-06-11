@@ -14,9 +14,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.hwangjr.rxbus.RxBus;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.BaseActivity;
 import com.mdove.passwordguard.databinding.ActivityTimerBinding;
+import com.mdove.passwordguard.main.newmain.dailytask.model.event.MainSelfTaskTimerAdd;
 import com.mdove.passwordguard.main.newmain.timer.presenter.MainSelfTaskTimerPresenter;
 import com.mdove.passwordguard.main.newmain.timer.presenter.contract.MainSelfTaskTimerContract;
 import com.mdove.passwordguard.ui.pickerview.listener.CustomListener;
@@ -69,9 +71,12 @@ public class TimerActivity extends BaseActivity implements MainSelfTaskTimerCont
             @Override
             public void onClick(View v) {
                 String content = mBinding.etTimer.getText().toString();
-                if (!TextUtils.isEmpty(content)) {
-                    mPresenter.insertSelfTaskTimer(content);
-                }else{
+                if (!TextUtils.isEmpty(content) && mSelectDate != null) {
+                    mBinding.etTimer.setText("");
+                    ToastHelper.shortToast("定时任务记录成功...");
+                    RxBus.get().post(new MainSelfTaskTimerAdd());
+                    mPresenter.insertSelfTaskTimer(content, mSelectDate.getTime());
+                } else {
                     ToastHelper.shortToast("计划总不能为空吧...");
                 }
             }
@@ -134,12 +139,13 @@ public class TimerActivity extends BaseActivity implements MainSelfTaskTimerCont
     }
 
     @Override
-    public void insertSelfTaskTimer(String content) {
+    public void insertSelfTaskTimer(String content, int notificationId) {
         AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent myIntent = new Intent();
         myIntent.setAction(TimerReceiver.TIMER_ACTION);
-        myIntent.putExtra(TimerConstant.TIMER_EXTRA, content);
-        PendingIntent sender = PendingIntent.getBroadcast(TimerActivity.this, 0, myIntent, 0);
+        myIntent.putExtra(TimerConstant.TIMER_EXTRA_CONTENT, content);
+        myIntent.putExtra(TimerConstant.TIMER_EXTRA_NOTIFICATION_ID, notificationId);
+        PendingIntent sender = PendingIntent.getBroadcast(TimerActivity.this, notificationId, myIntent, 0);
         alarm.set(AlarmManager.RTC_WAKEUP, mSelectDate.getTime(), sender);
     }
 }

@@ -48,7 +48,7 @@
                 android:layout_toLeftOf="@+id/btn_send"
                 android:layout_toRightOf="@+id/iv_task"
                 android:background="@null"
-                android:hint="今日待办工作"
+                android:hint="今设置闹钟任务"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"
                 android:textCursorDrawable="@drawable/bg_et_cursor_white"
@@ -73,22 +73,30 @@
         <TextView
             android:id="@+id/tv_time"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:layout_below="@+id/layout_et"
             android:layout_marginBottom="@dimen/margin_fragment_daily_task_et"
             android:layout_marginLeft="@dimen/margin_fragment_daily_task_et"
             android:layout_marginRight="@dimen/margin_fragment_daily_task_et"
+            android:text="设置提醒时间"
+            android:textColor="@color/gray"
             android:layout_toLeftOf="@+id/btn_timer" />
 
         <ImageView
             android:id="@+id/btn_timer"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/layout_et"
             android:layout_marginRight="@dimen/margin_fragment_daily_task_et"
+            android:layout_marginBottom="@dimen/margin_fragment_daily_task_et"
             android:layout_toLeftOf="@+id/btn_label_setting"
             android:src="@mipmap/ic_time"
             android:tint="@color/colorPrimary" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rlv"
+            android:layout_below="@+id/btn_timer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
     </RelativeLayout>
 </layout>

@@ -57,13 +57,17 @@ public class MainSelfTaskTimerPresenter implements MainSelfTaskTimerContract.Pre
     }
 
     @Override
-    public void insertSelfTaskTimer(String content) {
+    public void insertSelfTaskTimer(String content, long selectData) {
+        long time = new Date().getTime();
         SelfTaskTimer timer = new SelfTaskTimer();
         timer.mIsSuc = 0;
-        timer.mTime = new Date().getTime();
+        timer.mTime = time;
+        int id = (int) (time % 100000);
+        timer.mNotificationId = id;
         timer.mTask = content;
+        timer.mStopTime = selectData;
         mSelfTaskTimerDao.insert(timer);
 
-        mView.insertSelfTaskTimer(content);
+        mView.insertSelfTaskTimer(content, id);
     }
 }

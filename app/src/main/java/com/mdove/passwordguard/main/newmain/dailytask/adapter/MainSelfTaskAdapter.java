@@ -10,10 +10,15 @@ import android.view.ViewGroup;
 
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.listener.OnChangeDataSizeListener;
+import com.mdove.passwordguard.databinding.ItemMainTimerDailyTaskBinding;
 import com.mdove.passwordguard.databinding.ItemNewMainDailyTaskBinding;
+import com.mdove.passwordguard.main.newmain.dailytask.model.BaseMainSelfTaskModel;
 import com.mdove.passwordguard.main.newmain.dailytask.model.MainSelfTaskHandler;
 import com.mdove.passwordguard.main.newmain.dailytask.model.MainSelfTaskModel;
 import com.mdove.passwordguard.main.newmain.dailytask.model.MainSelfTaskModelVM;
+import com.mdove.passwordguard.main.newmain.dailytask.model.MainSelfTaskTimerHandler;
+import com.mdove.passwordguard.main.newmain.dailytask.model.MainSelfTaskTimerModel;
+import com.mdove.passwordguard.main.newmain.dailytask.model.MainSelfTaskTimerModelVM;
 import com.mdove.passwordguard.main.newmain.dailytask.presenter.MainSelfTaskPresenter;
 import com.mdove.passwordguard.main.newmain.dailytask.util.LabelConstant;
 import com.mdove.passwordguard.task.model.SelfTaskModel;
@@ -29,8 +34,11 @@ import java.util.List;
 public class MainSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private MainSelfTaskPresenter mPresenter;
     private Context mContext;
-    private List<SelfTaskModel> mData;
+    private List<BaseMainSelfTaskModel> mData;
     private OnChangeDataSizeListener mListener;
+
+    private static final int TYPE_SELF_TASK_NORMAL = 1;
+    private static final int TYPE_SELF_TASK_TIMER = 2;
 
     public MainSelfTaskAdapter(Context context, MainSelfTaskPresenter presenter) {
         mContext = context;
@@ -39,17 +47,36 @@ public class MainSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     @Override
+    public int getItemViewType(int position) {
+        BaseMainSelfTaskModel model = mData.get(position);
+        if (model instanceof MainSelfTaskTimerModel) {
+            return TYPE_SELF_TASK_TIMER;
+        } else if (model instanceof SelfTaskModel) {
+            return TYPE_SELF_TASK_NORMAL;
+        }
+        return super.getItemViewType(position);
+    }
+
+    @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new SelfTaskViewHolder((ItemNewMainDailyTaskBinding) InflateUtils.bindingInflate(parent, R.layout.item_new_main_daily_task));
+        if (viewType == TYPE_SELF_TASK_NORMAL) {
+            return new SelfTaskViewHolder((ItemNewMainDailyTaskBinding) InflateUtils.bindingInflate(parent, R.layout.item_new_main_daily_task));
+        } else {
+            return new TimerViewHolder((ItemMainTimerDailyTaskBinding) InflateUtils.bindingInflate(parent, R.layout.item_main_timer_daily_task));
+        }
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        SelfTaskModel selfTaskModel = mData.get(position);
-        ((SelfTaskViewHolder) holder).bind(selfTaskModel);
+        BaseMainSelfTaskModel selfTaskModel = mData.get(position);
+        if (selfTaskModel instanceof SelfTaskModel) {
+            ((SelfTaskViewHolder) holder).bind((SelfTaskModel) selfTaskModel);
+        } else if (selfTaskModel instanceof MainSelfTaskTimerModel) {
+            ((TimerViewHolder) holder).bind((MainSelfTaskTimerModel) selfTaskModel);
+        }
     }
 
-    public void setData(List<SelfTaskModel> data) {
+    public void setData(List<BaseMainSelfTaskModel> data) {
         mData = data;
         notifyDataSetChanged();
     }
@@ -86,17 +113,17 @@ public class MainSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             switch (selfTaskModel.mPriority) {
                 case SelfTaskPriorityHelper.PRIORITY_IS_NORMAL: {
                     mBinding.layoutTop.setBackgroundResource(R.drawable.bg_daily_task_bg_p1);
-                    mBinding.tvLabel.setTextColor(ContextCompat.getColor(mContext,R.color.green_300));
+                    mBinding.tvLabel.setTextColor(ContextCompat.getColor(mContext, R.color.green_300));
                     break;
                 }
                 case SelfTaskPriorityHelper.PRIORITY_IS_YELLOW: {
                     mBinding.layoutTop.setBackgroundResource(R.drawable.bg_daily_task_bg_p2);
-                    mBinding.tvLabel.setTextColor(ContextCompat.getColor(mContext,R.color.self_task_priority_yellow));
+                    mBinding.tvLabel.setTextColor(ContextCompat.getColor(mContext, R.color.self_task_priority_yellow));
                     break;
                 }
                 case SelfTaskPriorityHelper.PRIORITY_IS_RED: {
                     mBinding.layoutTop.setBackgroundResource(R.drawable.bg_daily_task_bg_p3);
-                    mBinding.tvLabel.setTextColor(ContextCompat.getColor(mContext,R.color.self_task_priority_red));
+                    mBinding.tvLabel.setTextColor(ContextCompat.getColor(mContext, R.color.self_task_priority_red));
                     break;
                 }
             }
@@ -143,6 +170,21 @@ public class MainSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
 
+    public class TimerViewHolder extends RecyclerView.ViewHolder {
+        private ItemMainTimerDailyTaskBinding mBinding;
+
+        public TimerViewHolder(ItemMainTimerDailyTaskBinding binging) {
+            super(binging.getRoot());
+            mBinding = binging;
+        }
+
+        public void bind(MainSelfTaskTimerModel model) {
+            mBinding.setViewModel(new MainSelfTaskTimerModelVM(model));
+            mBinding.setActionHandler(new MainSelfTaskTimerHandler(mPresenter));
+
+        }
+    }
+
     private RecyclerView.AdapterDataObserver mObserver = new RecyclerView.AdapterDataObserver() {
         @Override
         public void onChanged() {
@@ -182,9 +224,11 @@ public class MainSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public void notifyEventSelfTaskClickSuc(long id, SelfTaskModel postModel) {
         SelfTaskModel exitsModel = null;
-        for (SelfTaskModel model : mData) {
-            if (model.mId == id) {
-                exitsModel = model;
+        for (BaseMainSelfTaskModel model : mData) {
+            if (model instanceof SelfTaskModel) {
+                if (((SelfTaskModel) model).mId == id) {
+                    exitsModel = ((SelfTaskModel) model);
+                }
             }
         }
         if (exitsModel == null) {
@@ -197,9 +241,11 @@ public class MainSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public void notifyEventSelfTaskClickDelete(long id) {
         SelfTaskModel selfTaskModel = null;
-        for (SelfTaskModel model : mData) {
-            if (model.mId == id) {
-                selfTaskModel = model;
+        for (BaseMainSelfTaskModel model : mData) {
+            if (model instanceof SelfTaskModel) {
+                if (((SelfTaskModel) model).mId == id) {
+                    selfTaskModel = ((SelfTaskModel) model);
+                }
             }
         }
         if (selfTaskModel == null) {
@@ -212,10 +258,12 @@ public class MainSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public void notifyEventSelfTaskClickPriority(long id, int priority) {
         SelfTaskModel selfTaskModel = null;
-        for (SelfTaskModel model : mData) {
-            if (model.mId == id) {
-                selfTaskModel = model;
-                selfTaskModel.mPriority = priority;
+        for (BaseMainSelfTaskModel model : mData) {
+            if (model instanceof SelfTaskModel) {
+                if (((SelfTaskModel) model).mId == id) {
+                    selfTaskModel = ((SelfTaskModel) model);
+                    selfTaskModel.mPriority = priority;
+                }
             }
         }
         if (selfTaskModel == null) {
@@ -228,10 +276,12 @@ public class MainSelfTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void notifyEventSelfTaskClickSee(SelfTaskModel selfTaskModel) {
         int position = -1;
         SelfTaskModel existModel = null;
-        for (SelfTaskModel model : mData) {
-            if (model.mId == selfTaskModel.mId) {
-                existModel = model;
-                position = mData.indexOf(model);
+        for (BaseMainSelfTaskModel model : mData) {
+            if (model instanceof SelfTaskModel) {
+                if (((SelfTaskModel) model).mId == selfTaskModel.mId) {
+                    existModel = ((SelfTaskModel) model);
+                    position = mData.indexOf(model);
+                }
             }
         }
 

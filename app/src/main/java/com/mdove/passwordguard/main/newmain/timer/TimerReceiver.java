@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Vibrator;
 
+import com.mdove.passwordguard.utils.log.LogUtils;
+
 import static android.content.Context.VIBRATOR_SERVICE;
 
 /**
@@ -20,9 +22,9 @@ public class TimerReceiver extends BroadcastReceiver {
         switch (intent.getAction()) {
             case TIMER_ACTION: {
                 Vibrator vibrator = (Vibrator) context.getSystemService(VIBRATOR_SERVICE);
-                long[] patter = {1000, 1000, 1000, 1000, 1000, 1000};
+                long[] patter = {1000, 1000, 750, 1250, 500, 1500};
                 vibrator.vibrate(patter, -1);
-                String content = intent.getStringExtra(TimerConstant.TIMER_EXTRA);
+                String content = intent.getStringExtra(TimerConstant.TIMER_EXTRA_CONTENT);
                 TimerNotificationHepler.sendTimerDailySelfNotification(context, content);
             }
         }

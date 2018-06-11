@@ -1,12 +1,13 @@
 package com.mdove.passwordguard.task.model;
 
 import com.mdove.passwordguard.greendao.entity.SelfTask;
+import com.mdove.passwordguard.main.newmain.dailytask.model.BaseMainSelfTaskModel;
 
 /**
  * Created by MDove on 2018/3/25.
  */
 
-public class SelfTaskModel {
+public class SelfTaskModel extends BaseMainSelfTaskModel{
     public String mTask;
     public long mTime;
     public boolean mIsSuc;

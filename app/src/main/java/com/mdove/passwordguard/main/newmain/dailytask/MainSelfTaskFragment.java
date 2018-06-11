@@ -1,7 +1,10 @@
 package com.mdove.passwordguard.main.newmain.dailytask;
 
+import android.app.AlarmManager;
 import android.app.Dialog;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -21,10 +24,12 @@ import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.databinding.FragmentDailyTaskBinding;
 import com.mdove.passwordguard.main.newmain.dailytask.adapter.MainSelfTaskAdapter;
 import com.mdove.passwordguard.main.newmain.dailytask.dialog.MainSelfTaskEtDialog;
-import com.mdove.passwordguard.main.newmain.dailytask.model.MainSelfTaskModel;
+import com.mdove.passwordguard.main.newmain.dailytask.model.BaseMainSelfTaskModel;
+import com.mdove.passwordguard.main.newmain.dailytask.model.event.MainSelfTaskTimerAdd;
 import com.mdove.passwordguard.main.newmain.dailytask.presenter.MainSelfTaskPresenter;
 import com.mdove.passwordguard.main.newmain.dailytask.presenter.contract.MainSelfTaskContract;
 import com.mdove.passwordguard.main.newmain.dailytask.util.LabelTempModel;
+import com.mdove.passwordguard.main.newmain.timer.TimerReceiver;
 import com.mdove.passwordguard.task.model.SelfTaskModel;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickDeleteEvent;
 import com.mdove.passwordguard.task.model.event.SelfTaskClickPriorityEvent;
@@ -153,7 +158,7 @@ public class MainSelfTaskFragment extends Fragment implements MainSelfTaskContra
     }
 
     @Override
-    public void initData(List<SelfTaskModel> data) {
+    public void initData(List<BaseMainSelfTaskModel> data) {
         mAdapter.setData(data);
     }
 
@@ -178,6 +183,16 @@ public class MainSelfTaskFragment extends Fragment implements MainSelfTaskContra
     }
 
     @Override
+    public void cancelNotification(long notificationId) {
+        Intent myIntent = new Intent();
+        myIntent.setAction(TimerReceiver.TIMER_ACTION);
+        PendingIntent sender = PendingIntent.getBroadcast(getActivity(), (int) notificationId, myIntent,0);
+        AlarmManager alarm = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+        alarm.cancel(sender);
+        ToastHelper.shortToast("闹钟通知已删除");
+    }
+
+    @Override
     public void onClickBtnEdit(int position) {
         mAdapter.notifyPosition(position);
     }
@@ -199,6 +214,11 @@ public class MainSelfTaskFragment extends Fragment implements MainSelfTaskContra
 
     @Subscribe
     public void selfTaskFinishEvnet(SelfTaskFinishEvent event) {
+        updateUI();
+    }
+
+    @Subscribe
+    public void selfTaskTimerFinishEvnet(MainSelfTaskTimerAdd event) {
         updateUI();
     }
 
