@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="handler"
+            type="com.mdove.passwordguard.singleplan.model.EtSinglePlanHandler" />
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:background="@color/gray_light"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/layout_label"
+            android:layout_width="match_parent"
+            android:layout_marginTop="12dp"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rlv_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/btn_label_setting" />
+
+            <ImageView
+                android:id="@+id/btn_label_setting"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/main_margin"
+                android:onClick="@{()->handler.onClickLabelSetting()}"
+                android:src="@mipmap/ic_settings"
+                android:tint="@color/colorPrimary" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_urgent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_label"
+            android:layout_marginTop="@dimen/main_margin">
+
+            <TextView
+                android:id="@+id/tv_urgent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/main_margin"
+                android:text="紧急度："
+                android:textColor="@color/black" />
+
+            <com.mdove.passwordguard.ui.renkstar.BubbleSeekBar
+                android:id="@+id/bb_urgent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/main_margin"
+                android:layout_marginRight="@dimen/main_margin"
+                android:layout_toRightOf="@+id/tv_urgent"
+                app:bsb_max="100"
+                app:bsb_min="0"
+                app:bsb_progress="25"
+                app:bsb_second_track_color="@color/blue_700"
+                app:bsb_track_size="4dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_important"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_urgent"
+            android:layout_marginTop="@dimen/main_margin">
+
+            <TextView
+                android:id="@+id/tv_important"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/main_margin"
+                android:layout_marginTop="@dimen/main_margin"
+                android:text="重要度："
+                android:textColor="@color/black" />
+
+            <com.mdove.passwordguard.ui.renkstar.BubbleSeekBar
+                android:id="@+id/bb_important"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/main_margin"
+                android:layout_marginRight="@dimen/main_margin"
+                android:layout_marginTop="@dimen/main_margin"
+                android:layout_toRightOf="@+id/tv_important"
+                app:bsb_max="100"
+                app:bsb_min="0"
+                app:bsb_progress="25"
+                app:bsb_second_track_color="@color/blue_700"
+                app:bsb_track_size="4dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_important"
+            android:layout_marginTop="@dimen/main_margin"
+            android:textColor="@color/black"
+            android:textSize="16sp">
+
+            <EditText
+                android:id="@+id/et_plan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/btn_time"
+                android:layout_marginLeft="@dimen/main_margin"
+                android:layout_marginRight="@dimen/main_margin"
+                android:layout_alignTop="@+id/btn_send"
+                android:layout_toLeftOf="@+id/btn_add"
+                android:gravity="top"
+                android:hint="添加计划"
+                android:background="@drawable/bg_normal_white"
+                android:padding="@dimen/main_padding"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/btn_send"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="@dimen/main_margin"
+                android:layout_marginRight="@dimen/main_margin"
+                android:background="@drawable/bg_send"
+                android:gravity="center"
+                android:text="发布"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/btn_add"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/btn_send"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="@dimen/main_margin"
+                android:layout_marginRight="@dimen/main_margin"
+                android:background="@drawable/bg_main"
+                android:gravity="center"
+                android:text="添加"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/btn_time"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/btn_add"
+                android:layout_marginRight="@dimen/main_margin"
+                android:background="@drawable/bg_main"
+                android:gravity="center"
+                android:text="时间"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rlv_plan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_margin"
+            android:paddingTop="@dimen/main_padding"
+            android:layout_below="@+id/layout_et" />
+    </RelativeLayout>
+</layout>

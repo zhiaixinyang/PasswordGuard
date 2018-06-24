@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.mdove.passwordguard.singleplan.model.EtSinglePlanModelVM" />
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/main_margin"
+        android:layout_marginRight="@dimen/main_margin"
+        android:layout_marginBottom="@dimen/main_margin"
+        android:background="@drawable/bg_normal_white">
+
+        <TextView
+            android:id="@+id/tv_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_margin"
+            android:text="@{vm.mSinglePlanTips}"
+            android:textColor="@color/gray"
+            android:textSize="14sp"
+            tools:text="主计划" />
+
+        <TextView
+            android:id="@+id/tv_single_plan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_tips"
+            android:layout_marginBottom="@dimen/main_margin"
+            android:layout_marginLeft="@dimen/main_margin"
+            android:layout_marginRight="@dimen/main_margin"
+            android:text="@{vm.mSinglePlan}"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            tools:text="计划内容。" />
+    </RelativeLayout>
+</layout>

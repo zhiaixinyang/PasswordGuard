@@ -93,6 +93,8 @@
     <dimen name="margin_label_setting">5dp</dimen>
     <dimen name="padding_label_setting">5dp</dimen>
     <dimen name="main_et_h">36dp</dimen>
+    <dimen name="main_margin">5dp</dimen>
+    <dimen name="main_padding">5dp</dimen>
 
     <!-- 顶部按钮栏高度 -->
     <dimen name="pickerview_topbar_height">44dp</dimen>
@@ -104,4 +106,5 @@
     <!-- 选项文字大小 需要配合 bools.xml 的 pickerview_customTextSize 为 true 才有效果-->
     <dimen name="pickerview_textsize">20sp</dimen>
 
+    <dimen name="margin_item_single_plan">12dp</dimen>
 </resources>
