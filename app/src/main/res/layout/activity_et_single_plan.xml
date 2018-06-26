@@ -14,10 +14,26 @@
         android:background="@color/gray_light"
         android:layout_height="match_parent">
 
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            android:theme="@style/AppBarLayout">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        </android.support.design.widget.AppBarLayout>
+
         <RelativeLayout
             android:id="@+id/layout_label"
             android:layout_width="match_parent"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/app_bar"
             android:layout_height="wrap_content">
 
             <android.support.v7.widget.RecyclerView
@@ -125,34 +141,34 @@
 
             <TextView
                 android:id="@+id/btn_send"
-                android:layout_width="60dp"
+                android:layout_width="80dp"
                 android:layout_height="30dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginBottom="@dimen/main_margin"
                 android:layout_marginRight="@dimen/main_margin"
                 android:background="@drawable/bg_send"
                 android:gravity="center"
-                android:text="发布"
+                android:text="发布计划"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/btn_add"
-                android:layout_width="60dp"
+                android:layout_width="80dp"
                 android:layout_height="30dp"
                 android:layout_below="@+id/btn_send"
                 android:layout_alignParentRight="true"
                 android:layout_marginBottom="@dimen/main_margin"
                 android:layout_marginRight="@dimen/main_margin"
-                android:background="@drawable/bg_main"
+                android:background="@drawable/bg_gradient_enable"
                 android:gravity="center"
-                android:text="添加"
+                android:text="子计划"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/btn_time"
-                android:layout_width="60dp"
+                android:layout_width="80dp"
                 android:layout_height="30dp"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/btn_add"

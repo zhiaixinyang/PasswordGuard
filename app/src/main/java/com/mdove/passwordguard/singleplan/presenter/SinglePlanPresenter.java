@@ -78,6 +78,5 @@ public class SinglePlanPresenter implements SinglePlanContract.Presenter {
             }
             mView.deleteSinglePlan(position);
         }
-
     }
 }

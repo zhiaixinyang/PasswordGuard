@@ -28,11 +28,12 @@ public class DaoMaster extends AbstractDaoMaster {
         DeleteSelfTaskDao.createTable(db, ifNotExists);
         GroupInfoDao.createTable(db, ifNotExists);
         PasswordDao.createTable(db, ifNotExists);
+        SecondSinglePlanDao.createTable(db, ifNotExists);
         SelfTaskDao.createTable(db, ifNotExists);
         SelfTaskLabelDao.createTable(db, ifNotExists);
-        SucSelfTaskDao.createTable(db, ifNotExists);
         SelfTaskTimerDao.createTable(db, ifNotExists);
         SinglePlanDao.createTable(db, ifNotExists);
+        SucSelfTaskDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
@@ -44,11 +45,12 @@ public class DaoMaster extends AbstractDaoMaster {
         DeleteSelfTaskDao.dropTable(db, ifExists);
         GroupInfoDao.dropTable(db, ifExists);
         PasswordDao.dropTable(db, ifExists);
+        SecondSinglePlanDao.dropTable(db, ifExists);
         SelfTaskDao.dropTable(db, ifExists);
         SelfTaskLabelDao.dropTable(db, ifExists);
-        SucSelfTaskDao.dropTable(db, ifExists);
         SelfTaskTimerDao.dropTable(db, ifExists);
         SinglePlanDao.dropTable(db, ifExists);
+        SucSelfTaskDao.dropTable(db, ifExists);
     }
 
     /**
@@ -74,11 +76,12 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(DeleteSelfTaskDao.class);
         registerDaoClass(GroupInfoDao.class);
         registerDaoClass(PasswordDao.class);
+        registerDaoClass(SecondSinglePlanDao.class);
         registerDaoClass(SelfTaskDao.class);
         registerDaoClass(SelfTaskLabelDao.class);
-        registerDaoClass(SucSelfTaskDao.class);
         registerDaoClass(SelfTaskTimerDao.class);
         registerDaoClass(SinglePlanDao.class);
+        registerDaoClass(SucSelfTaskDao.class);
     }
 
     public DaoSession newSession() {

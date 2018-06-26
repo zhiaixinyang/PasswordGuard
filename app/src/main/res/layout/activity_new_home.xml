@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.mdove.passwordguard.home.model.HomeTimeModelVM" />
+
+        <variable
+            name="handler"
+            type="com.mdove.passwordguard.home.model.NewHomeHandler" />
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray_new_home">
+
+        <RelativeLayout
+            android:id="@+id/layout_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_12"
+            android:layout_marginLeft="@dimen/new_home_main_margin"
+            android:layout_marginTop="@dimen/new_home_main_margin">
+
+            <TextView
+                android:id="@+id/tv_time_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/dp_12"
+                android:text="@{vm.mYear}"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                tools:text="2018年" />
+
+            <TextView
+                android:id="@+id/tv_time_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:layout_toRightOf="@+id/tv_time_year"
+                android:background="@drawable/bg_normal_black"
+                android:paddingLeft="@dimen/main_padding"
+                android:paddingRight="@dimen/main_padding"
+                android:text="@{vm.mDay}"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                tools:text="26" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/tv_time_day"
+                android:layout_toLeftOf="@+id/tv_time_day"
+                android:text="@{vm.mMonth}"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                tools:text="四月" />
+        </RelativeLayout>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/layout_think"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_below="@+id/layout_time"
+            android:layout_margin="@dimen/new_home_main_margin"
+            app:cardCornerRadius="8dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_bg_think" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/trans_gray" />
+
+                <com.mdove.passwordguard.ui.TextViewPlus
+                    android:id="@+id/tv_think_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_12"
+                    android:text="今日复盘"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/new_home_title_size"
+                    app:customFont="@string/font_regular" />
+
+                <com.mdove.passwordguard.ui.TextViewPlus
+                    android:id="@+id/tv_think_tips"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_think_title"
+                    android:layout_marginLeft="@dimen/dp_12"
+                    android:text="静下心来复盘今天的得/失"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/new_home_tips_size"
+                    app:customFont="@string/font_regular" />
+
+                <ImageView
+                    android:layout_width="@dimen/dp_30"
+                    android:layout_height="@dimen/dp_30"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="@dimen/dp_12"
+                    android:layout_marginRight="@dimen/dp_12"
+                    android:src="@mipmap/ic_btn_in" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/layout_plan_today"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_below="@+id/layout_think"
+            android:layout_marginBottom="@dimen/new_home_main_margin"
+            android:layout_marginLeft="@dimen/new_home_main_margin"
+            android:layout_marginRight="@dimen/new_home_main_margin"
+            android:onClick="@{()->handler.onClickEtTodayPlan()}"
+            app:cardCornerRadius="8dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_bg_plan_today" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/trans_gray" />
+
+                <TextView
+                    android:id="@+id/tv_plan_today_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_12"
+                    android:text="今日计划"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/new_home_title_size" />
+
+                <TextView
+                    android:id="@+id/tv_plan_today_tips"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_plan_today_title"
+                    android:layout_marginLeft="@dimen/dp_12"
+                    android:text="查看自己的今日计划"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/new_home_tips_size" />
+
+                <ImageView
+                    android:layout_width="@dimen/dp_30"
+                    android:layout_height="@dimen/dp_30"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="@dimen/dp_12"
+                    android:layout_marginRight="@dimen/dp_12"
+                    android:src="@mipmap/ic_btn_in" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+    </RelativeLayout>
+</layout>

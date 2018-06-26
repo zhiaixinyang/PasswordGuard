@@ -13,6 +13,8 @@ import com.mdove.passwordguard.main.model.DailyPlanModel;
 import com.mdove.passwordguard.main.model.vm.DailyPlanModelVM;
 import com.mdove.passwordguard.main.newmain.everydayreplay.model.EverydayReplayRlvModelVM;
 import com.mdove.passwordguard.main.newmain.home.model.EverydayReplayModelVM;
+import com.mdove.passwordguard.singleplan.model.SinglePlanModelVM;
+import com.mdove.passwordguard.singleplan.model.SinglePlanRlvModelVM;
 import com.mdove.passwordguard.task.model.SelfTaskModelVM;
 
 /**
@@ -184,5 +186,14 @@ public class DataBindingAdapter {
     @BindingAdapter("srcDrawable")
     public static void srcDrawable(ImageView view, int src) {
         view.setBackgroundResource(src);
+    }
+
+    @BindingAdapter("srcBgSinglePlan")
+    public static void srcBgSinglePlan(ImageView view, SinglePlanRlvModelVM vm) {
+        if (vm.mIsMain.get()==SinglePlanRlvModelVM.BG_IS_MAIN_PLAN){
+            view.setImageResource(R.mipmap.ic_main_plan);
+        }else{
+            view.setImageResource(R.mipmap.ic_second_plan);
+        }
     }
 }

@@ -201,10 +201,16 @@ public class DateUtils {
         return calendar.get(Calendar.DAY_OF_WEEK);
     }
 
-    public static String getSimpleMonth(boolean abbrev) {
+    public static String getSimpleMonthE(boolean abbrev) {
         Calendar calendar = Calendar.getInstance();
         int month = calendar.get(Calendar.MONTH);
-        return parseMonth(month, abbrev);
+        return parseMonthE(month, abbrev);
+    }
+
+    public static String getSimpleMonthC(boolean abbrev) {
+        Calendar calendar = Calendar.getInstance();
+        int month = calendar.get(Calendar.MONTH);
+        return parseMonthC(month, abbrev);
     }
 
     public static String getDayOfWeek(long time) {
@@ -243,7 +249,7 @@ public class DateUtils {
         return format.format(new Date());
     }
 
-    private static String parseMonth(int month, boolean abbrev) {
+    private static String parseMonthE(int month, boolean abbrev) {
         switch (month) {
             case Calendar.JANUARY:
                 return abbrev ? "Ja." : "January";
@@ -269,6 +275,36 @@ public class DateUtils {
                 return abbrev ? "Nov." : "November";
             case Calendar.DECEMBER:
                 return abbrev ? "Dec." : "December";
+            default:
+                return "";
+        }
+    }
+    private static String parseMonthC(int month, boolean allChinese) {
+        switch (month) {
+            case Calendar.JANUARY:
+                return !allChinese ? "1月" : "一月";
+            case Calendar.FEBRUARY:
+                return !allChinese ? "2月" : "二月";
+            case Calendar.MARCH:
+                return !allChinese ? "3月" : "三月";
+            case Calendar.APRIL:
+                return !allChinese ? "4月" : "四月";
+            case Calendar.MAY:
+                return !allChinese ? "5月" : "五月";
+            case Calendar.JUNE:
+                return !allChinese ? "6月" : "六月";
+            case Calendar.JULY:
+                return !allChinese ? "7月" : "七月";
+            case Calendar.AUGUST:
+                return !allChinese ? "8月" : "八月";
+            case Calendar.SEPTEMBER:
+                return !allChinese ? "9月" : "九月";
+            case Calendar.OCTOBER:
+                return !allChinese ? "10月" : "十月";
+            case Calendar.NOVEMBER:
+                return !allChinese ? "11月" : "十一月";
+            case Calendar.DECEMBER:
+                return !allChinese ? "12月" : "十二月";
             default:
                 return "";
         }

@@ -115,4 +115,8 @@
     <string name="pickerview_minutes">分</string>
     <string name="pickerview_seconds">秒</string>
 
+    <string name="font_palatino">palatino.otf</string>
+    <string name="font_regular">GTWalsheim_Regular.otf</string>
+    <string name="font_medium">GTWalsheim_Medium.otf</string>
+    <string name="font_bold">GTWalsheim_Bold.otf</string>
 </resources>

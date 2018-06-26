@@ -7,6 +7,8 @@ import android.util.TypedValue;
 import android.view.Display;
 import android.view.View;
 
+import com.mdove.passwordguard.App;
+
 
 public class DensityUtil {
 
@@ -73,6 +75,26 @@ public class DensityUtil {
             mWidthPixels = displayMetrics.widthPixels;
         }
         return mWidthPixels;
+    }
+
+    /**
+     * 获得状态栏的高度
+     */
+    public static int getStatusHeight() {
+
+        int statusHeight = -1;
+        try
+        {
+            Class<?> clazz = Class.forName("com.android.internal.R$dimen");
+            Object object = clazz.newInstance();
+            int height = Integer.parseInt(clazz.getField("status_bar_height")
+                    .get(object).toString());
+            statusHeight = App.getAppContext().getResources().getDimensionPixelSize(height);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return statusHeight;
     }
 
     public static int getScreenHeight(Context context) {

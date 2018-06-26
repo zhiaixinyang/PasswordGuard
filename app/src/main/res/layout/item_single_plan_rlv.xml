@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.mdove.passwordguard.singleplan.model.SinglePlanRlvModelVM" />
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/main_margin"
+        android:layout_marginRight="@dimen/main_margin"
+        android:layout_marginBottom="@dimen/main_margin"
+        tools:background="@color/black">
+
+        <LinearLayout
+            android:id="@+id/layout_tips"
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/main_margin"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/iv_plan"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                app:srcBgSinglePlan="@{vm}"
+                android:src="@mipmap/ic_main_plan"/>
+
+            <TextView
+                android:id="@+id/tv_think_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/main_margin"
+                android:text="@{vm.mSinglePlanTips}"
+                android:textColor="@color/white"
+                android:layout_toRightOf="@+id/iv_plan"
+                android:textSize="14sp"
+                tools:text="主计划" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_single_plan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_tips"
+            android:layout_marginBottom="@dimen/main_margin"
+            android:layout_marginLeft="@dimen/main_margin"
+            android:layout_marginRight="@dimen/main_margin"
+            android:text="@{vm.mSinglePlan}"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            tools:text="计划内容。" />
+    </RelativeLayout>
+</layout>

@@ -94,7 +94,18 @@
     <dimen name="padding_label_setting">5dp</dimen>
     <dimen name="main_et_h">36dp</dimen>
     <dimen name="main_margin">5dp</dimen>
+    <dimen name="new_home_main_margin">8dp</dimen>
     <dimen name="main_padding">5dp</dimen>
+
+    <dimen name="dp_12">12dp</dimen>
+    <dimen name="dp_5">5dp</dimen>
+    <dimen name="dp_8">8dp</dimen>
+    <dimen name="dp_16">16dp</dimen>
+    <dimen name="dp_18">18dp</dimen>
+    <dimen name="dp_24">24dp</dimen>
+    <dimen name="dp_22">22dp</dimen>
+    <dimen name="dp_20">20dp</dimen>
+    <dimen name="dp_30">30dp</dimen>
 
     <!-- 顶部按钮栏高度 -->
     <dimen name="pickerview_topbar_height">44dp</dimen>
@@ -107,4 +118,8 @@
     <dimen name="pickerview_textsize">20sp</dimen>
 
     <dimen name="margin_item_single_plan">12dp</dimen>
+    <dimen name="new_home_title_size">24sp</dimen>
+    <dimen name="new_home_tips_size">14sp</dimen>
+    <dimen name="new_home_card_view_corner">8dp</dimen>
+    <dimen name="new_home_main_size">16sp</dimen>
 </resources>

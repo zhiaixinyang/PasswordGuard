@@ -29,11 +29,13 @@
     <color name="black_light">#1d1d1d</color>
 
     <color name="trans">#00ffffff</color>
+    <color name="trans_gray">#28dedede</color>
     <color name="blue">#303F9F</color>
     <color name="color_tv_main_option_btn">#000000</color>
     <color name="gray">#a4a4a4</color>
     <color name="gray_light">#e2e2e2</color>
     <color name="gray_50">#80cccacc</color>
+    <color name="gray_new_home">#EEF2F3</color>
 
     <color name="pickerview_timebtn_nor">#057dff</color>
     <color name="pickerview_timebtn_pre">#c2daf5</color>

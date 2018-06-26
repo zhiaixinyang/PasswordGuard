@@ -18,14 +18,13 @@
         android:layout_height="match_parent"
         android:background="@color/black">
 
-        <TextView
-            android:id="@+id/tv_single_plan"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rlv_single_plan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_margin="20dp"
-            android:text="@{vm.mSinglePlan}"
             android:textColor="@color/white"
             android:textSize="20sp"
             tools:text="计划内容。" />
