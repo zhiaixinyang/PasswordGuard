@@ -6,10 +6,6 @@
         <variable
             name="handler"
             type="com.mdove.passwordguard.singleplan.model.SinglePlanHandler" />
-
-        <variable
-            name="vm"
-            type="com.mdove.passwordguard.singleplan.model.SinglePlanModelVM" />
     </data>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -26,8 +22,7 @@
             android:layout_centerVertical="true"
             android:layout_margin="20dp"
             android:textColor="@color/white"
-            android:textSize="20sp"
-            tools:text="计划内容。" />
+            android:textSize="20sp" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -35,8 +30,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_marginBottom="8dp"
-            android:layout_marginRight="8dp"
-            android:onClick="@{()->handler.onClickDeleteSinglePlan(vm)}">
+            android:layout_marginRight="8dp">
 
             <ImageView
                 android:layout_width="32dp"

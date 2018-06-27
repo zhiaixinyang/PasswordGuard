@@ -18,7 +18,7 @@ public class SinglePlanHandler {
         mPresenter.onClickInEtSinglePlan();
     }
 
-    public void onClickDeleteSinglePlan(SinglePlanModelVM vm) {
-        mPresenter.onClickDeleteSinglePlan(vm.mSinglePlanId.get());
-    }
+//    public void onClickDeleteSinglePlan(SinglePlanModelVM vm) {
+//        mPresenter.onClickDeleteSinglePlan(vm.mSinglePlanId.get());
+//    }
 }

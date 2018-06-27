@@ -1,11 +1,14 @@
 package com.mdove.passwordguard.singleplan;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.WindowManager;
 
 import com.mdove.passwordguard.R;
@@ -31,6 +34,14 @@ public class SinglePlanActivity extends BaseActivity implements SinglePlanContra
     private SinglePlanAdapter mAdapter;
     private RecyclerView mRlv;
 
+    public static void start(Context context) {
+        Intent start = new Intent(context, SinglePlanActivity.class);
+        if (!(context instanceof Activity)) {
+            start.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+        context.startActivity(start);
+    }
+
     @Override
     protected boolean isNeedCustomLayout() {
         return true;
@@ -41,6 +52,7 @@ public class SinglePlanActivity extends BaseActivity implements SinglePlanContra
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().getDecorView().setSystemUiVisibility(View.INVISIBLE);
 
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_single_plan);
         StatusBarUtils.setTranslucent(this);
@@ -55,7 +67,7 @@ public class SinglePlanActivity extends BaseActivity implements SinglePlanContra
         mRlv.setLayoutManager(new ViewPagerLayoutManager(this, OrientationHelper.VERTICAL));
         mRlv.setAdapter(mAdapter);
 
-        mPresenter.initSinglePlan();
+        mPresenter.initData();
     }
 
     @Override
@@ -64,7 +76,7 @@ public class SinglePlanActivity extends BaseActivity implements SinglePlanContra
     }
 
     @Override
-    public void initSinglePlan(List<SinglePlanModel> data) {
+    public void initData(List<SinglePlanModel> data) {
         mAdapter.setData(data);
     }
 

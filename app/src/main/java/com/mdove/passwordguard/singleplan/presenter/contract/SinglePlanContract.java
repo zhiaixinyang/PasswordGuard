@@ -14,7 +14,7 @@ import java.util.List;
 
 public interface SinglePlanContract {
     interface Presenter extends BasePresenter<SinglePlanContract.MvpView> {
-        void initSinglePlan();
+        void initData();
 
         void onClickInEtSinglePlan();
 
@@ -22,7 +22,7 @@ public interface SinglePlanContract {
     }
 
     interface MvpView extends BaseView<Presenter> {
-        void initSinglePlan(List<SinglePlanModel> data);
+        void initData(List<SinglePlanModel> data);
 
         void deleteSinglePlan(int position);
     }

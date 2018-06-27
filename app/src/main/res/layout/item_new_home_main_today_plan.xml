@@ -5,7 +5,7 @@
 
         <variable
             name="vm"
-            type="com.mdove.passwordguard.singleplan.model.EtSinglePlanModelVM" />
+            type="com.mdove.passwordguard.home.ettodayplan.model.vm.MainTodayPlanModelVM" />
     </data>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -16,27 +16,36 @@
         android:layout_marginBottom="@dimen/main_margin"
         android:background="@drawable/bg_normal_white">
 
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="@dimen/dp_18"
+            android:src="@mipmap/ic_main_plan"
+            android:tint="@color/gray"
+            android:layout_margin="@dimen/main_margin"
+            android:layout_height="@dimen/dp_18" />
+
         <TextView
             android:id="@+id/tv_think_tips"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/main_margin"
-            android:text="@{vm.mSinglePlanTips}"
+            android:layout_toRightOf="@+id/iv"
+            android:layout_alignBottom="@+id/iv"
             android:textColor="@color/gray"
-            android:textSize="14sp"
-            tools:text="主计划" />
+            android:textSize="12sp"
+            android:text="主计划" />
 
         <TextView
             android:id="@+id/tv_single_plan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_think_tips"
+            android:layout_alignLeft="@+id/tv_think_tips"
             android:layout_marginBottom="@dimen/main_margin"
-            android:layout_marginLeft="@dimen/main_margin"
+            android:layout_marginTop="@dimen/main_margin"
             android:layout_marginRight="@dimen/main_margin"
-            android:text="@{vm.mSinglePlan}"
+            android:text="@{vm.mTodayPlan}"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="14sp"
             tools:text="计划内容。" />
     </RelativeLayout>
 </layout>

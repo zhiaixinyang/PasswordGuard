@@ -14,8 +14,10 @@ import com.mdove.passwordguard.greendao.entity.DeletedDailySelf;
 import com.mdove.passwordguard.greendao.entity.DeletedPassword;
 import com.mdove.passwordguard.greendao.entity.DeleteSelfTask;
 import com.mdove.passwordguard.greendao.entity.GroupInfo;
+import com.mdove.passwordguard.greendao.entity.MainTodayPlan;
 import com.mdove.passwordguard.greendao.entity.Password;
 import com.mdove.passwordguard.greendao.entity.SecondSinglePlan;
+import com.mdove.passwordguard.greendao.entity.SecondTodayPlan;
 import com.mdove.passwordguard.greendao.entity.SelfTask;
 import com.mdove.passwordguard.greendao.entity.SelfTaskLabel;
 import com.mdove.passwordguard.greendao.entity.SelfTaskTimer;
@@ -28,8 +30,10 @@ import com.mdove.passwordguard.greendao.DeletedDailySelfDao;
 import com.mdove.passwordguard.greendao.DeletedPasswordDao;
 import com.mdove.passwordguard.greendao.DeleteSelfTaskDao;
 import com.mdove.passwordguard.greendao.GroupInfoDao;
+import com.mdove.passwordguard.greendao.MainTodayPlanDao;
 import com.mdove.passwordguard.greendao.PasswordDao;
 import com.mdove.passwordguard.greendao.SecondSinglePlanDao;
+import com.mdove.passwordguard.greendao.SecondTodayPlanDao;
 import com.mdove.passwordguard.greendao.SelfTaskDao;
 import com.mdove.passwordguard.greendao.SelfTaskLabelDao;
 import com.mdove.passwordguard.greendao.SelfTaskTimerDao;
@@ -51,8 +55,10 @@ public class DaoSession extends AbstractDaoSession {
     private final DaoConfig deletedPasswordDaoConfig;
     private final DaoConfig deleteSelfTaskDaoConfig;
     private final DaoConfig groupInfoDaoConfig;
+    private final DaoConfig mainTodayPlanDaoConfig;
     private final DaoConfig passwordDaoConfig;
     private final DaoConfig secondSinglePlanDaoConfig;
+    private final DaoConfig secondTodayPlanDaoConfig;
     private final DaoConfig selfTaskDaoConfig;
     private final DaoConfig selfTaskLabelDaoConfig;
     private final DaoConfig selfTaskTimerDaoConfig;
@@ -65,8 +71,10 @@ public class DaoSession extends AbstractDaoSession {
     private final DeletedPasswordDao deletedPasswordDao;
     private final DeleteSelfTaskDao deleteSelfTaskDao;
     private final GroupInfoDao groupInfoDao;
+    private final MainTodayPlanDao mainTodayPlanDao;
     private final PasswordDao passwordDao;
     private final SecondSinglePlanDao secondSinglePlanDao;
+    private final SecondTodayPlanDao secondTodayPlanDao;
     private final SelfTaskDao selfTaskDao;
     private final SelfTaskLabelDao selfTaskLabelDao;
     private final SelfTaskTimerDao selfTaskTimerDao;
@@ -95,11 +103,17 @@ public class DaoSession extends AbstractDaoSession {
         groupInfoDaoConfig = daoConfigMap.get(GroupInfoDao.class).clone();
         groupInfoDaoConfig.initIdentityScope(type);
 
+        mainTodayPlanDaoConfig = daoConfigMap.get(MainTodayPlanDao.class).clone();
+        mainTodayPlanDaoConfig.initIdentityScope(type);
+
         passwordDaoConfig = daoConfigMap.get(PasswordDao.class).clone();
         passwordDaoConfig.initIdentityScope(type);
 
         secondSinglePlanDaoConfig = daoConfigMap.get(SecondSinglePlanDao.class).clone();
         secondSinglePlanDaoConfig.initIdentityScope(type);
+
+        secondTodayPlanDaoConfig = daoConfigMap.get(SecondTodayPlanDao.class).clone();
+        secondTodayPlanDaoConfig.initIdentityScope(type);
 
         selfTaskDaoConfig = daoConfigMap.get(SelfTaskDao.class).clone();
         selfTaskDaoConfig.initIdentityScope(type);
@@ -122,8 +136,10 @@ public class DaoSession extends AbstractDaoSession {
         deletedPasswordDao = new DeletedPasswordDao(deletedPasswordDaoConfig, this);
         deleteSelfTaskDao = new DeleteSelfTaskDao(deleteSelfTaskDaoConfig, this);
         groupInfoDao = new GroupInfoDao(groupInfoDaoConfig, this);
+        mainTodayPlanDao = new MainTodayPlanDao(mainTodayPlanDaoConfig, this);
         passwordDao = new PasswordDao(passwordDaoConfig, this);
         secondSinglePlanDao = new SecondSinglePlanDao(secondSinglePlanDaoConfig, this);
+        secondTodayPlanDao = new SecondTodayPlanDao(secondTodayPlanDaoConfig, this);
         selfTaskDao = new SelfTaskDao(selfTaskDaoConfig, this);
         selfTaskLabelDao = new SelfTaskLabelDao(selfTaskLabelDaoConfig, this);
         selfTaskTimerDao = new SelfTaskTimerDao(selfTaskTimerDaoConfig, this);
@@ -136,8 +152,10 @@ public class DaoSession extends AbstractDaoSession {
         registerDao(DeletedPassword.class, deletedPasswordDao);
         registerDao(DeleteSelfTask.class, deleteSelfTaskDao);
         registerDao(GroupInfo.class, groupInfoDao);
+        registerDao(MainTodayPlan.class, mainTodayPlanDao);
         registerDao(Password.class, passwordDao);
         registerDao(SecondSinglePlan.class, secondSinglePlanDao);
+        registerDao(SecondTodayPlan.class, secondTodayPlanDao);
         registerDao(SelfTask.class, selfTaskDao);
         registerDao(SelfTaskLabel.class, selfTaskLabelDao);
         registerDao(SelfTaskTimer.class, selfTaskTimerDao);
@@ -152,8 +170,10 @@ public class DaoSession extends AbstractDaoSession {
         deletedPasswordDaoConfig.clearIdentityScope();
         deleteSelfTaskDaoConfig.clearIdentityScope();
         groupInfoDaoConfig.clearIdentityScope();
+        mainTodayPlanDaoConfig.clearIdentityScope();
         passwordDaoConfig.clearIdentityScope();
         secondSinglePlanDaoConfig.clearIdentityScope();
+        secondTodayPlanDaoConfig.clearIdentityScope();
         selfTaskDaoConfig.clearIdentityScope();
         selfTaskLabelDaoConfig.clearIdentityScope();
         selfTaskTimerDaoConfig.clearIdentityScope();
@@ -185,12 +205,20 @@ public class DaoSession extends AbstractDaoSession {
         return groupInfoDao;
     }
 
+    public MainTodayPlanDao getMainTodayPlanDao() {
+        return mainTodayPlanDao;
+    }
+
     public PasswordDao getPasswordDao() {
         return passwordDao;
     }
 
     public SecondSinglePlanDao getSecondSinglePlanDao() {
         return secondSinglePlanDao;
+    }
+
+    public SecondTodayPlanDao getSecondTodayPlanDao() {
+        return secondTodayPlanDao;
     }
 
     public SelfTaskDao getSelfTaskDao() {

@@ -1,4 +1,4 @@
-package com.mdove.passwordguard.home.ettodayplan.model;
+package com.mdove.passwordguard.home.ettodayplan.model.handler;
 
 import com.mdove.passwordguard.home.ettodayplan.presenter.EtTodayPlanPresenter;
 import com.mdove.passwordguard.singleplan.model.EtSinglePlanHandler;

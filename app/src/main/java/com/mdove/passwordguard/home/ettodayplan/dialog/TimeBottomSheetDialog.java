@@ -4,16 +4,17 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.hwangjr.rxbus.RxBus;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.layoutmanager.PickerLayoutManager;
 import com.mdove.passwordguard.home.ettodayplan.adapter.EtTodayPlanTimeAdapter;
-import com.mdove.passwordguard.singleplan.adapter.EtSinglePlanAdapter;
+import com.mdove.passwordguard.home.ettodayplan.model.event.SetTimeEvent;
+import com.mdove.passwordguard.home.ettodayplan.model.SetTimeModel;
 import com.mdove.passwordguard.utils.SystemUtils;
 import com.mdove.passwordguard.utils.ToastHelper;
 
@@ -32,12 +33,12 @@ public class TimeBottomSheetDialog extends Dialog {
     private PickerLayoutManager mPickerLayoutManagerEndHour, mPickerLayoutManagerEndMin;
     private EtTodayPlanTimeAdapter mStartHourAdapter, mStartMinAdapter, mEndHourAdapter, mEndMinAdapter;
 
-    private List<String> mStartHours = new ArrayList<>();
-    private List<String> mEndHours = new ArrayList<>();
-    private List<String> mStartMinutes = new ArrayList<>();
-    private List<String> mEndMinutes = new ArrayList<>();
-    private int mSelectStartHour, mSelectStartMin;
-    private int mSelectEndHour, mSelectEndMin;
+    private List<Integer> mStartHours = new ArrayList<>();
+    private List<Integer> mEndHours = new ArrayList<>();
+    private List<Integer> mStartMinutes = new ArrayList<>();
+    private List<Integer> mEndMinutes = new ArrayList<>();
+    private int mSelectStartHour=1, mSelectStartMin;
+    private int mSelectEndHour=1, mSelectEndMin;
 
     public TimeBottomSheetDialog(@NonNull Context context) {
         super(context);
@@ -80,35 +81,19 @@ public class TimeBottomSheetDialog extends Dialog {
 
     private void initData() {
         for (int i = 1; i <= 24; i++) {
-            if (i <= 9) {
-                mStartHours.add("0" + i);
-            } else {
-                mStartHours.add(i + "");
-            }
+            mStartHours.add(i);
         }
 
         for (int i = 1; i <= 24; i++) {
-            if (i <= 9) {
-                mEndHours.add("0" + i);
-            } else {
-                mEndHours.add(i + "");
-            }
+            mEndHours.add(i);
         }
 
         for (int i = 0; i < 60; i++) {
-            if (i <= 9) {
-                mStartMinutes.add("0" + i);
-            } else {
-                mStartMinutes.add(i + "");
-            }
+            mStartMinutes.add(i);
         }
 
         for (int i = 0; i < 60; i++) {
-            if (i <= 9) {
-                mEndMinutes.add("0" + i);
-            } else {
-                mEndMinutes.add(i + "");
-            }
+            mEndMinutes.add(i);
         }
 
         mStartHourAdapter = new EtTodayPlanTimeAdapter(mStartHours);
@@ -137,27 +122,27 @@ public class TimeBottomSheetDialog extends Dialog {
         mPickerLayoutManagerStartHour.setOnSelectedViewListener(new PickerLayoutManager.OnSelectedViewListener() {
             @Override
             public void onSelectedView(View view, int position) {
-                mSelectStartHour = Integer.valueOf(mStartHours.get(position));
+                mSelectStartHour = mStartHours.get(position);
             }
         });
 
         mPickerLayoutManagerStartMin.setOnSelectedViewListener(new PickerLayoutManager.OnSelectedViewListener() {
             @Override
             public void onSelectedView(View view, int position) {
-                mSelectStartMin = Integer.valueOf(mStartMinutes.get(position));
+                mSelectStartMin = mStartMinutes.get(position);
             }
         });
         mPickerLayoutManagerEndHour.setOnSelectedViewListener(new PickerLayoutManager.OnSelectedViewListener() {
             @Override
             public void onSelectedView(View view, int position) {
-                mSelectEndHour = Integer.valueOf(mStartHours.get(position));
+                mSelectEndHour = mEndHours.get(position);
             }
         });
 
         mPickerLayoutManagerEndMin.setOnSelectedViewListener(new PickerLayoutManager.OnSelectedViewListener() {
             @Override
             public void onSelectedView(View view, int position) {
-                mSelectEndMin = Integer.valueOf(mStartMinutes.get(position));
+                mSelectEndMin = mEndMinutes.get(position);
             }
         });
 
@@ -171,10 +156,13 @@ public class TimeBottomSheetDialog extends Dialog {
         mBtnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mSelectStartHour < mSelectEndHour || (mSelectStartHour == mSelectEndMin && mSelectEndMin < mSelectStartMin)) {
+                if (mSelectStartHour > mSelectEndHour ||
+                        (mSelectStartHour == mSelectEndHour && mSelectStartMin >= mSelectEndMin)) {
                     ToastHelper.shortToast("设置时间有点不合理呀~");
                 } else {
-
+                    RxBus.get().post(new SetTimeEvent(new SetTimeModel(mSelectStartHour,
+                            mSelectStartMin, mSelectEndHour, mSelectEndMin)));
+                    dismiss();
                 }
             }
         });

@@ -4,42 +4,44 @@ import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 
+import java.io.Serializable;
+
 /**
- * Created by MDove on 2018/6/25.
+ * Created by MDove on 2018/6/27.
  */
 @Entity
-public class SecondSinglePlan {
+public class MainTodayPlan implements Serializable{
     @Id(autoincrement = true)
     public Long id;
-    public String mSinglePlan;
-    public long mTime;
+    public String mTodayPlan;
     public int mIsSuc;//0表示没有点击完成
     public int mIsSee;//0表示不在首页展示
+    public long mTime;
     public int mUrgent;
     public int mImportant;
-    static final long serialVersionUID = 1L;
 
     public long mLabelId;
-    public long mSinglePlanId;
     public String mLabel;
+    public String mTips;
+    static final long serialVersionUID = 1L;
 
-    @Generated(hash = 1761070587)
-    public SecondSinglePlan(Long id, String mSinglePlan, long mTime, int mIsSuc,
-            int mIsSee, int mUrgent, int mImportant, long mLabelId,
-            long mSinglePlanId, String mLabel) {
+    @Generated(hash = 641348831)
+    public MainTodayPlan(Long id, String mTodayPlan, int mIsSuc, int mIsSee,
+            long mTime, int mUrgent, int mImportant, long mLabelId, String mLabel,
+            String mTips) {
         this.id = id;
-        this.mSinglePlan = mSinglePlan;
-        this.mTime = mTime;
+        this.mTodayPlan = mTodayPlan;
         this.mIsSuc = mIsSuc;
         this.mIsSee = mIsSee;
+        this.mTime = mTime;
         this.mUrgent = mUrgent;
         this.mImportant = mImportant;
         this.mLabelId = mLabelId;
-        this.mSinglePlanId = mSinglePlanId;
         this.mLabel = mLabel;
+        this.mTips = mTips;
     }
-    @Generated(hash = 1582336188)
-    public SecondSinglePlan() {
+    @Generated(hash = 419990215)
+    public MainTodayPlan() {
     }
 
     public Long getId() {
@@ -48,17 +50,11 @@ public class SecondSinglePlan {
     public void setId(Long id) {
         this.id = id;
     }
-    public String getMSinglePlan() {
-        return this.mSinglePlan;
+    public String getMTodayPlan() {
+        return this.mTodayPlan;
     }
-    public void setMSinglePlan(String mSinglePlan) {
-        this.mSinglePlan = mSinglePlan;
-    }
-    public long getMTime() {
-        return this.mTime;
-    }
-    public void setMTime(long mTime) {
-        this.mTime = mTime;
+    public void setMTodayPlan(String mTodayPlan) {
+        this.mTodayPlan = mTodayPlan;
     }
     public int getMIsSuc() {
         return this.mIsSuc;
@@ -71,6 +67,12 @@ public class SecondSinglePlan {
     }
     public void setMIsSee(int mIsSee) {
         this.mIsSee = mIsSee;
+    }
+    public long getMTime() {
+        return this.mTime;
+    }
+    public void setMTime(long mTime) {
+        this.mTime = mTime;
     }
     public int getMUrgent() {
         return this.mUrgent;
@@ -96,11 +98,11 @@ public class SecondSinglePlan {
     public void setMLabel(String mLabel) {
         this.mLabel = mLabel;
     }
-    public long getMSinglePlanId() {
-        return this.mSinglePlanId;
+    public String getMTips() {
+        return this.mTips;
     }
-    public void setMSinglePlanId(long mSinglePlanId) {
-        this.mSinglePlanId = mSinglePlanId;
+    public void setMTips(String mTips) {
+        this.mTips = mTips;
     }
-    
+
 }

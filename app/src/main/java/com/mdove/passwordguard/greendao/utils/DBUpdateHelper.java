@@ -5,6 +5,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.mdove.passwordguard.greendao.DailyPlanDao;
 import com.mdove.passwordguard.greendao.DailySelfDao;
+import com.mdove.passwordguard.greendao.MainTodayPlanDao;
+import com.mdove.passwordguard.greendao.SecondTodayPlanDao;
 import com.mdove.passwordguard.greendao.SelfTaskLabelDao;
 import com.mdove.passwordguard.greendao.DaoMaster;
 import com.mdove.passwordguard.greendao.DeleteSelfTaskDao;
@@ -49,6 +51,7 @@ public class DBUpdateHelper extends DaoMaster.OpenHelper {
                     }
                 }, PasswordDao.class, DailySelfDao.class, GroupInfoDao.class, DeletedPasswordDao.class,
                 SelfTaskDao.class, SinglePlanDao.class, DeleteSelfTaskDao.class, DeletedDailySelfDao.class, DailyPlanDao.class,
-                SucSelfTaskDao.class, SelfTaskLabelDao.class, SelfTaskTimerDao.class);
+                SucSelfTaskDao.class, SelfTaskLabelDao.class, SelfTaskTimerDao.class, MainTodayPlanDao.class,
+                SecondTodayPlanDao.class);
     }
 }

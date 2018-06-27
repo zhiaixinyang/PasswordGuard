@@ -13,7 +13,6 @@ import com.mdove.passwordguard.main.model.DailyPlanModel;
 import com.mdove.passwordguard.main.model.vm.DailyPlanModelVM;
 import com.mdove.passwordguard.main.newmain.everydayreplay.model.EverydayReplayRlvModelVM;
 import com.mdove.passwordguard.main.newmain.home.model.EverydayReplayModelVM;
-import com.mdove.passwordguard.singleplan.model.SinglePlanModelVM;
 import com.mdove.passwordguard.singleplan.model.SinglePlanRlvModelVM;
 import com.mdove.passwordguard.task.model.SelfTaskModelVM;
 

@@ -86,7 +86,7 @@ android {
 }
 
 greendao {
-    schemaVersion 26
+    schemaVersion 27
     daoPackage 'com.mdove.passwordguard.greendao'
     targetGenDir 'src/main/java'
 }

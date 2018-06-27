@@ -16,9 +16,9 @@ import java.util.List;
  */
 
 public class EtTodayPlanTimeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<String> mData;
+    private List<Integer> mData;
 
-    public EtTodayPlanTimeAdapter(List<String> data) {
+    public EtTodayPlanTimeAdapter(List<Integer> data) {
         mData = data;
     }
 
@@ -45,7 +45,13 @@ public class EtTodayPlanTimeAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             mBinding = binding;
         }
 
-        public void bind(String content) {
+        public void bind(Integer num) {
+            String content = "";
+            if (num <= 9) {
+                content = "0" + num;
+            } else {
+                content = num + "";
+            }
             mBinding.tvText.setText(content);
         }
     }
