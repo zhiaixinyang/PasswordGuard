@@ -1,6 +1,7 @@
 package com.mdove.passwordguard.singleplan.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -8,12 +9,14 @@ import android.view.ViewGroup;
 
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.databinding.ItemSinglePlanBinding;
+import com.mdove.passwordguard.greendao.entity.MainTodayPlan;
 import com.mdove.passwordguard.greendao.entity.SecondTodayPlan;
 import com.mdove.passwordguard.home.ettodayplan.model.BaseTodayPlanModel;
 import com.mdove.passwordguard.home.ettodayplan.model.MainTodayPlanModel;
 import com.mdove.passwordguard.home.ettodayplan.model.SecondTodayPlanModel;
 import com.mdove.passwordguard.singleplan.model.SinglePlanModel;
 import com.mdove.passwordguard.singleplan.presenter.SinglePlanPresenter;
+import com.mdove.passwordguard.singleplan.utils.ItemSinglePlanBgHelper;
 import com.mdove.passwordguard.utils.InflateUtils;
 
 import java.util.ArrayList;
@@ -57,17 +60,24 @@ public class SinglePlanAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
 
         public void bind(SinglePlanModel model) {
+            MainTodayPlan mainTodayPlan = model.mMainTodayPlan;
             List<BaseTodayPlanModel> data = new ArrayList<>();
-            data.add(new MainTodayPlanModel(model.mMainTodayPlan));
+            data.add(model.mAddTodayPlanModel);
 
-            for (SecondTodayPlan secondTodayPlan : model.mSecondTodayPlans) {
-                data.add(new SecondTodayPlanModel(secondTodayPlan));
+            if (model.mMainTodayPlan != null) {
+                data.add(new MainTodayPlanModel(mainTodayPlan));
+
+                for (SecondTodayPlan secondTodayPlan : model.mSecondTodayPlans) {
+                    data.add(new SecondTodayPlanModel(secondTodayPlan));
+                }
+                mBinding.layoutMainCard.setCardBackgroundColor(Color.parseColor(
+                        ItemSinglePlanBgHelper.getBg(mainTodayPlan.mImportant, mainTodayPlan.mUrgent)));
             }
 
             mBinding.rlvSinglePlan.setLayoutManager(new LinearLayoutManager(mContext));
             mBinding.rlvSinglePlan.setAdapter(new RlvTodayPlanAdapter(mContext, data));
 
-            mBinding.layoutMain.setBackgroundColor(ContextCompat.getColor(mContext, R.color.black));
+
         }
     }
 

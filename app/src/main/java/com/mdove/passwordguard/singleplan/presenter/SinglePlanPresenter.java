@@ -8,6 +8,7 @@ import com.mdove.passwordguard.greendao.entity.MainTodayPlan;
 import com.mdove.passwordguard.greendao.entity.SecondTodayPlan;
 import com.mdove.passwordguard.greendao.entity.SinglePlan;
 import com.mdove.passwordguard.home.ettodayplan.EtTodayPlanActivity;
+import com.mdove.passwordguard.home.ettodayplan.model.AddTodayPlanModel;
 import com.mdove.passwordguard.singleplan.EtSinglePlanActivity;
 import com.mdove.passwordguard.singleplan.model.SinglePlanModel;
 import com.mdove.passwordguard.singleplan.presenter.contract.SinglePlanContract;
@@ -47,6 +48,11 @@ public class SinglePlanPresenter implements SinglePlanContract.Presenter {
         mData = new ArrayList<>();
 
         List<MainTodayPlan> mMainData = mMainTodayPlanDao.queryBuilder().list();
+
+        if (mMainData == null || mMainData.size() == 0) {
+            mData.add(new SinglePlanModel(null, null));
+        }
+
         for (MainTodayPlan mainTodayPlan : mMainData) {
             List<SecondTodayPlan> mSecondData = mSecondTodayPlanDao.queryBuilder().where(SecondTodayPlanDao.Properties.MMainTodayPlanId.
                     eq(mainTodayPlan.getId())).build().list();
@@ -58,6 +64,16 @@ public class SinglePlanPresenter implements SinglePlanContract.Presenter {
 
     @Override
     public void onClickInEtSinglePlan() {
+        EtTodayPlanActivity.start(mView.getContext());
+    }
+
+    @Override
+    public void onClickBack() {
+        mView.finish();
+    }
+
+    @Override
+    public void onClickEtPlan() {
         EtTodayPlanActivity.start(mView.getContext());
     }
 

@@ -11,8 +11,10 @@ import com.mdove.passwordguard.home.ettodayplan.model.MainTodayPlanModel;
 
 public class MainTodayPlanModelVM {
     public ObservableField<String> mTodayPlan = new ObservableField<>();
+    public ObservableField<String> mTime = new ObservableField<>();
 
     public MainTodayPlanModelVM(MainTodayPlanModel plan) {
         mTodayPlan.set(plan.mTodayPlan);
+        mTime.set(plan.mTime);
     }
 }

@@ -16,6 +16,7 @@ import com.hwangjr.rxbus.annotation.Subscribe;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.BaseActivity;
 import com.mdove.passwordguard.databinding.ActivityEtTodayPlanBinding;
+import com.mdove.passwordguard.home.constant.TimeConstant;
 import com.mdove.passwordguard.home.ettodayplan.adapter.EtTodayPlanAdapter;
 import com.mdove.passwordguard.home.ettodayplan.model.BaseTodayPlanModel;
 import com.mdove.passwordguard.home.ettodayplan.model.SecondTodayPlanModel;
@@ -25,6 +26,7 @@ import com.mdove.passwordguard.home.ettodayplan.model.event.SetTimeEvent;
 import com.mdove.passwordguard.home.ettodayplan.presenter.EtTodayPlanPresenter;
 import com.mdove.passwordguard.home.ettodayplan.presenter.contract.EtTodayPlanContract;
 import com.mdove.passwordguard.home.utils.TodayPlanUtils;
+import com.mdove.passwordguard.ui.renkstar.BubbleSeekBar;
 import com.mdove.passwordguard.utils.StatusBarUtils;
 import com.mdove.passwordguard.utils.ToastHelper;
 
@@ -40,6 +42,9 @@ public class EtTodayPlanActivity extends BaseActivity implements EtTodayPlanCont
     private ActivityEtTodayPlanBinding mBinding;
     private List<BaseTodayPlanModel> mData;
     private EtTodayPlanAdapter mAdapter;
+    private int mImportant = TimeConstant.DEFAUT_IMPORTANT, mUrgent = TimeConstant.DEFAUT_URGENT;
+    public int mSelectStartHour = TimeConstant.DEFAUT_START_HOUR, mSelectStartMin = TimeConstant.DEFAUT_START_MIN;
+    public int mSelectEndHour = TimeConstant.DEFAUT_END_HOUR, mSelectEndMin = TimeConstant.DEFAUT_END_MIN;
 
     public static void start(Context context) {
         Intent start = new Intent(context, EtTodayPlanActivity.class);
@@ -82,8 +87,9 @@ public class EtTodayPlanActivity extends BaseActivity implements EtTodayPlanCont
                 String tips = mBinding.etTips.getText().toString();
                 if (!TextUtils.isEmpty(content)) {
                     mBinding.etPlan.setText("");
-                    mPresenter.addMainTodayPlan(TodayPlanUtils.getMainTodatPlan(content, tips));
-                }else{
+                    mPresenter.addMainTodayPlan(TodayPlanUtils.getMainTodayPlan(content, tips,
+                            mImportant, mUrgent, mSelectStartHour, mSelectStartMin, mSelectEndHour, mSelectEndMin));
+                } else {
                     ToastHelper.shortToast("啥计划也没写呀？");
                 }
             }
@@ -95,10 +101,26 @@ public class EtTodayPlanActivity extends BaseActivity implements EtTodayPlanCont
                 String tips = mBinding.etTips.getText().toString();
                 if (!TextUtils.isEmpty(content)) {
                     mBinding.etPlan.setText("");
-                    mPresenter.addSecondTodayPlan(TodayPlanUtils.getSecondTodayPlan(content, tips));
-                }else{
+                    mPresenter.addSecondTodayPlan(TodayPlanUtils.getSecondTodayPlan(content, tips,
+                            mImportant, mUrgent, mSelectStartHour, mSelectStartMin, mSelectEndHour, mSelectEndMin));
+                } else {
                     ToastHelper.shortToast("啥计划也没写呀？");
                 }
+            }
+        });
+        mBinding.bbUrgent.setOnProgressChangedListener(new BubbleSeekBar.OnProgressChangedListenerAdapter() {
+            @Override
+            public void onProgressChanged(int progress, float progressFloat) {
+                super.onProgressChanged(progress, progressFloat);
+                mUrgent = progress;
+            }
+        });
+
+        mBinding.bbImportant.setOnProgressChangedListener(new BubbleSeekBar.OnProgressChangedListenerAdapter() {
+            @Override
+            public void onProgressChanged(int progress, float progressFloat) {
+                super.onProgressChanged(progress, progressFloat);
+                mImportant = progress;
             }
         });
     }
@@ -116,6 +138,11 @@ public class EtTodayPlanActivity extends BaseActivity implements EtTodayPlanCont
 
     @Subscribe
     public void setTimeCallBack(SetTimeEvent event) {
+        mSelectEndHour = event.mModel.mSelectEndHour;
+        mSelectEndMin = event.mModel.mSelectEndMin;
+        mSelectStartHour = event.mModel.mSelectStartHour;
+        mSelectStartMin = event.mModel.mSelectStartMin;
+
         mBinding.tvTime.setText(event.mModel.mTime);
     }
 

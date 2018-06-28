@@ -18,11 +18,16 @@ public interface SinglePlanContract {
 
         void onClickInEtSinglePlan();
 
+        void onClickBack();
+        void onClickEtPlan();
+
         void onClickDeleteSinglePlan(long id);
     }
 
     interface MvpView extends BaseView<Presenter> {
         void initData(List<SinglePlanModel> data);
+
+        void finish();
 
         void deleteSinglePlan(int position);
     }

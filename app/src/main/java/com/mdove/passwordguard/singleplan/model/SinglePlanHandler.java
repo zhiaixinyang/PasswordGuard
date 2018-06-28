@@ -18,6 +18,14 @@ public class SinglePlanHandler {
         mPresenter.onClickInEtSinglePlan();
     }
 
+    public void onClickBack() {
+        mPresenter.onClickBack();
+    }
+
+    public void onClickEtPlan() {
+        mPresenter.onClickEtPlan();
+    }
+
 //    public void onClickDeleteSinglePlan(SinglePlanModelVM vm) {
 //        mPresenter.onClickDeleteSinglePlan(vm.mSinglePlanId.get());
 //    }

@@ -6,6 +6,9 @@ import android.text.TextUtils;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -72,6 +75,18 @@ public class DateUtils {
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone(TimeZone.getDefault().getDisplayName()));
         calendar.setTimeInMillis(timestamp);
         return calendar.get(Calendar.HOUR);
+    }
+
+    public static long getRemainTime() {
+        Date currentDate = new Date();
+        Calendar midnight = Calendar.getInstance();
+        midnight.setTime(currentDate);
+        midnight.add(midnight.DAY_OF_MONTH, 1);
+        midnight.set(midnight.HOUR_OF_DAY, 0);
+        midnight.set(midnight.MINUTE, 0);
+        midnight.set(midnight.SECOND, 0);
+        midnight.set(midnight.MILLISECOND, 0);
+        return (midnight.getTime().getTime() - currentDate.getTime());
     }
 
     public static int getMonth(long time) {
@@ -225,6 +240,7 @@ public class DateUtils {
         SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
         return format.format(time);
     }
+
     public static String getDateChineseNoH(Long time) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
         return format.format(time);
@@ -239,6 +255,7 @@ public class DateUtils {
         SimpleDateFormat format = new SimpleDateFormat("HH:mm");
         return format.format(time);
     }
+
     public static String getHourMChinese(Long time) {
         SimpleDateFormat format = new SimpleDateFormat("HH小时mm分");
         return format.format(time);
@@ -279,6 +296,7 @@ public class DateUtils {
                 return "";
         }
     }
+
     private static String parseMonthC(int month, boolean allChinese) {
         switch (month) {
             case Calendar.JANUARY:

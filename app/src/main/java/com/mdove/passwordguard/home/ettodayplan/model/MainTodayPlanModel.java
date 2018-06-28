@@ -10,7 +10,7 @@ public class MainTodayPlanModel extends BaseTodayPlanModel {
     public String mTodayPlan;
     public int mIsSuc;//0表示没有点击完成
     public int mIsSee;//0表示不在首页展示
-    public long mTime;
+    public String mTime;
     public int mUrgent;
     public int mImportant;
 
@@ -19,7 +19,33 @@ public class MainTodayPlanModel extends BaseTodayPlanModel {
 
     public MainTodayPlanModel(MainTodayPlan mainTodayPlan) {
         mTodayPlan = mainTodayPlan.mTodayPlan;
-        mTime = mainTodayPlan.mTime;
+
+        String startHour = "";
+        if (mainTodayPlan.getStartHour() <= 9) {
+            startHour = "0" + mainTodayPlan.getStartHour();
+        } else {
+            startHour = mainTodayPlan.getStartHour() + "";
+        }
+        String startMin = "";
+        if (mainTodayPlan.getStartMin() <= 9) {
+            startMin = "0" + mainTodayPlan.getStartMin();
+        } else {
+            startMin = mainTodayPlan.getStartMin() + "";
+        }
+        String endHour = "";
+        if (mainTodayPlan.getEndHour() <= 9) {
+            endHour = "0" + mainTodayPlan.getEndHour();
+        } else {
+            endHour = mainTodayPlan.getEndHour() + "";
+        }
+        String endMin = "";
+        if (mainTodayPlan.getEndMin() <= 9) {
+            endMin = "0" + mainTodayPlan.getEndMin();
+        } else {
+            endMin = mainTodayPlan.getEndMin() + "";
+        }
+        mTime = startHour + ":" + startMin + "-" + endHour + ":" + endMin;
+
         mIsSuc = mainTodayPlan.mIsSuc;
         mIsSee = mainTodayPlan.mIsSee;
         mUrgent = mainTodayPlan.mUrgent;

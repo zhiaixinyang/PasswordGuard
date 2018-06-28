@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.OrientationHelper;
@@ -50,12 +51,10 @@ public class SinglePlanActivity extends BaseActivity implements SinglePlanContra
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getWindow().getDecorView().setSystemUiVisibility(View.INVISIBLE);
+//        fullScreen();
 
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_single_plan);
-        StatusBarUtils.setTranslucent(this);
+        StatusBarUtils.setColorNoTranslucent(this, Color.BLACK);
 
         mPresenter = new SinglePlanPresenter();
         mPresenter.subscribe(this);
@@ -63,11 +62,17 @@ public class SinglePlanActivity extends BaseActivity implements SinglePlanContra
         mBinding.setHandler(new SinglePlanHandler(mPresenter));
 
         mRlv = mBinding.rlv;
-        mAdapter = new SinglePlanAdapter(this,mPresenter);
+        mAdapter = new SinglePlanAdapter(this, mPresenter);
         mRlv.setLayoutManager(new ViewPagerLayoutManager(this, OrientationHelper.VERTICAL));
         mRlv.setAdapter(mAdapter);
 
         mPresenter.initData();
+    }
+
+    private void fullScreen() {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().getDecorView().setSystemUiVisibility(View.VISIBLE);
     }
 
     @Override

@@ -31,10 +31,14 @@ public class SecondTodayPlanDao extends AbstractDao<SecondTodayPlan, Long> {
         public final static Property MIsSee = new Property(4, int.class, "mIsSee", false, "M_IS_SEE");
         public final static Property MUrgent = new Property(5, int.class, "mUrgent", false, "M_URGENT");
         public final static Property MImportant = new Property(6, int.class, "mImportant", false, "M_IMPORTANT");
-        public final static Property MLabelId = new Property(7, long.class, "mLabelId", false, "M_LABEL_ID");
-        public final static Property MMainTodayPlanId = new Property(8, long.class, "mMainTodayPlanId", false, "M_MAIN_TODAY_PLAN_ID");
-        public final static Property MLabel = new Property(9, String.class, "mLabel", false, "M_LABEL");
-        public final static Property MTips = new Property(10, String.class, "mTips", false, "M_TIPS");
+        public final static Property StartHour = new Property(7, int.class, "startHour", false, "START_HOUR");
+        public final static Property StartMin = new Property(8, int.class, "startMin", false, "START_MIN");
+        public final static Property EndHour = new Property(9, int.class, "endHour", false, "END_HOUR");
+        public final static Property EndMin = new Property(10, int.class, "endMin", false, "END_MIN");
+        public final static Property MLabelId = new Property(11, long.class, "mLabelId", false, "M_LABEL_ID");
+        public final static Property MMainTodayPlanId = new Property(12, long.class, "mMainTodayPlanId", false, "M_MAIN_TODAY_PLAN_ID");
+        public final static Property MLabel = new Property(13, String.class, "mLabel", false, "M_LABEL");
+        public final static Property MTips = new Property(14, String.class, "mTips", false, "M_TIPS");
     }
 
 
@@ -57,10 +61,14 @@ public class SecondTodayPlanDao extends AbstractDao<SecondTodayPlan, Long> {
                 "\"M_IS_SEE\" INTEGER NOT NULL ," + // 4: mIsSee
                 "\"M_URGENT\" INTEGER NOT NULL ," + // 5: mUrgent
                 "\"M_IMPORTANT\" INTEGER NOT NULL ," + // 6: mImportant
-                "\"M_LABEL_ID\" INTEGER NOT NULL ," + // 7: mLabelId
-                "\"M_MAIN_TODAY_PLAN_ID\" INTEGER NOT NULL ," + // 8: mMainTodayPlanId
-                "\"M_LABEL\" TEXT," + // 9: mLabel
-                "\"M_TIPS\" TEXT);"); // 10: mTips
+                "\"START_HOUR\" INTEGER NOT NULL ," + // 7: startHour
+                "\"START_MIN\" INTEGER NOT NULL ," + // 8: startMin
+                "\"END_HOUR\" INTEGER NOT NULL ," + // 9: endHour
+                "\"END_MIN\" INTEGER NOT NULL ," + // 10: endMin
+                "\"M_LABEL_ID\" INTEGER NOT NULL ," + // 11: mLabelId
+                "\"M_MAIN_TODAY_PLAN_ID\" INTEGER NOT NULL ," + // 12: mMainTodayPlanId
+                "\"M_LABEL\" TEXT," + // 13: mLabel
+                "\"M_TIPS\" TEXT);"); // 14: mTips
     }
 
     /** Drops the underlying database table. */
@@ -87,17 +95,21 @@ public class SecondTodayPlanDao extends AbstractDao<SecondTodayPlan, Long> {
         stmt.bindLong(5, entity.getMIsSee());
         stmt.bindLong(6, entity.getMUrgent());
         stmt.bindLong(7, entity.getMImportant());
-        stmt.bindLong(8, entity.getMLabelId());
-        stmt.bindLong(9, entity.getMMainTodayPlanId());
+        stmt.bindLong(8, entity.getStartHour());
+        stmt.bindLong(9, entity.getStartMin());
+        stmt.bindLong(10, entity.getEndHour());
+        stmt.bindLong(11, entity.getEndMin());
+        stmt.bindLong(12, entity.getMLabelId());
+        stmt.bindLong(13, entity.getMMainTodayPlanId());
  
         String mLabel = entity.getMLabel();
         if (mLabel != null) {
-            stmt.bindString(10, mLabel);
+            stmt.bindString(14, mLabel);
         }
  
         String mTips = entity.getMTips();
         if (mTips != null) {
-            stmt.bindString(11, mTips);
+            stmt.bindString(15, mTips);
         }
     }
 
@@ -119,17 +131,21 @@ public class SecondTodayPlanDao extends AbstractDao<SecondTodayPlan, Long> {
         stmt.bindLong(5, entity.getMIsSee());
         stmt.bindLong(6, entity.getMUrgent());
         stmt.bindLong(7, entity.getMImportant());
-        stmt.bindLong(8, entity.getMLabelId());
-        stmt.bindLong(9, entity.getMMainTodayPlanId());
+        stmt.bindLong(8, entity.getStartHour());
+        stmt.bindLong(9, entity.getStartMin());
+        stmt.bindLong(10, entity.getEndHour());
+        stmt.bindLong(11, entity.getEndMin());
+        stmt.bindLong(12, entity.getMLabelId());
+        stmt.bindLong(13, entity.getMMainTodayPlanId());
  
         String mLabel = entity.getMLabel();
         if (mLabel != null) {
-            stmt.bindString(10, mLabel);
+            stmt.bindString(14, mLabel);
         }
  
         String mTips = entity.getMTips();
         if (mTips != null) {
-            stmt.bindString(11, mTips);
+            stmt.bindString(15, mTips);
         }
     }
 
@@ -148,10 +164,14 @@ public class SecondTodayPlanDao extends AbstractDao<SecondTodayPlan, Long> {
             cursor.getInt(offset + 4), // mIsSee
             cursor.getInt(offset + 5), // mUrgent
             cursor.getInt(offset + 6), // mImportant
-            cursor.getLong(offset + 7), // mLabelId
-            cursor.getLong(offset + 8), // mMainTodayPlanId
-            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // mLabel
-            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10) // mTips
+            cursor.getInt(offset + 7), // startHour
+            cursor.getInt(offset + 8), // startMin
+            cursor.getInt(offset + 9), // endHour
+            cursor.getInt(offset + 10), // endMin
+            cursor.getLong(offset + 11), // mLabelId
+            cursor.getLong(offset + 12), // mMainTodayPlanId
+            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // mLabel
+            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14) // mTips
         );
         return entity;
     }
@@ -165,10 +185,14 @@ public class SecondTodayPlanDao extends AbstractDao<SecondTodayPlan, Long> {
         entity.setMIsSee(cursor.getInt(offset + 4));
         entity.setMUrgent(cursor.getInt(offset + 5));
         entity.setMImportant(cursor.getInt(offset + 6));
-        entity.setMLabelId(cursor.getLong(offset + 7));
-        entity.setMMainTodayPlanId(cursor.getLong(offset + 8));
-        entity.setMLabel(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
-        entity.setMTips(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
+        entity.setStartHour(cursor.getInt(offset + 7));
+        entity.setStartMin(cursor.getInt(offset + 8));
+        entity.setEndHour(cursor.getInt(offset + 9));
+        entity.setEndMin(cursor.getInt(offset + 10));
+        entity.setMLabelId(cursor.getLong(offset + 11));
+        entity.setMMainTodayPlanId(cursor.getLong(offset + 12));
+        entity.setMLabel(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
+        entity.setMTips(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
      }
     
     @Override

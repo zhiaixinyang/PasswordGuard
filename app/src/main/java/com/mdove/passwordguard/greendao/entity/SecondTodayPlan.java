@@ -19,6 +19,8 @@ public class SecondTodayPlan implements Serializable {
     public int mIsSee;//0表示不在首页展示
     public int mUrgent;
     public int mImportant;
+    public int startHour,startMin;
+    public int endHour,endMin;
 
     public long mLabelId;
     public long mMainTodayPlanId;
@@ -26,10 +28,11 @@ public class SecondTodayPlan implements Serializable {
     public String mTips;
     static final long serialVersionUID = 1L;
 
-    @Generated(hash = 1492947738)
+    @Generated(hash = 90238663)
     public SecondTodayPlan(Long id, String mTodayPlan, long mTime, int mIsSuc,
-            int mIsSee, int mUrgent, int mImportant, long mLabelId,
-            long mMainTodayPlanId, String mLabel, String mTips) {
+            int mIsSee, int mUrgent, int mImportant, int startHour, int startMin,
+            int endHour, int endMin, long mLabelId, long mMainTodayPlanId,
+            String mLabel, String mTips) {
         this.id = id;
         this.mTodayPlan = mTodayPlan;
         this.mTime = mTime;
@@ -37,6 +40,10 @@ public class SecondTodayPlan implements Serializable {
         this.mIsSee = mIsSee;
         this.mUrgent = mUrgent;
         this.mImportant = mImportant;
+        this.startHour = startHour;
+        this.startMin = startMin;
+        this.endHour = endHour;
+        this.endMin = endMin;
         this.mLabelId = mLabelId;
         this.mMainTodayPlanId = mMainTodayPlanId;
         this.mLabel = mLabel;
@@ -133,5 +140,37 @@ public class SecondTodayPlan implements Serializable {
 
     public void setMTips(String mTips) {
         this.mTips = mTips;
+    }
+
+    public int getStartHour() {
+        return this.startHour;
+    }
+
+    public void setStartHour(int startHour) {
+        this.startHour = startHour;
+    }
+
+    public int getStartMin() {
+        return this.startMin;
+    }
+
+    public void setStartMin(int startMin) {
+        this.startMin = startMin;
+    }
+
+    public int getEndHour() {
+        return this.endHour;
+    }
+
+    public void setEndHour(int endHour) {
+        this.endHour = endHour;
+    }
+
+    public int getEndMin() {
+        return this.endMin;
+    }
+
+    public void setEndMin(int endMin) {
+        this.endMin = endMin;
     }
 }

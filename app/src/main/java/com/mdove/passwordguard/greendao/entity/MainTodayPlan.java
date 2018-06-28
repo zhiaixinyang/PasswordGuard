@@ -23,12 +23,15 @@ public class MainTodayPlan implements Serializable{
     public long mLabelId;
     public String mLabel;
     public String mTips;
+    public int startHour,startMin;
+    public int endHour,endMin;
+
     static final long serialVersionUID = 1L;
 
-    @Generated(hash = 641348831)
+    @Generated(hash = 1833831679)
     public MainTodayPlan(Long id, String mTodayPlan, int mIsSuc, int mIsSee,
             long mTime, int mUrgent, int mImportant, long mLabelId, String mLabel,
-            String mTips) {
+            String mTips, int startHour, int startMin, int endHour, int endMin) {
         this.id = id;
         this.mTodayPlan = mTodayPlan;
         this.mIsSuc = mIsSuc;
@@ -39,6 +42,10 @@ public class MainTodayPlan implements Serializable{
         this.mLabelId = mLabelId;
         this.mLabel = mLabel;
         this.mTips = mTips;
+        this.startHour = startHour;
+        this.startMin = startMin;
+        this.endHour = endHour;
+        this.endMin = endMin;
     }
     @Generated(hash = 419990215)
     public MainTodayPlan() {
@@ -103,6 +110,30 @@ public class MainTodayPlan implements Serializable{
     }
     public void setMTips(String mTips) {
         this.mTips = mTips;
+    }
+    public int getStartHour() {
+        return this.startHour;
+    }
+    public void setStartHour(int startHour) {
+        this.startHour = startHour;
+    }
+    public int getStartMin() {
+        return this.startMin;
+    }
+    public void setStartMin(int startMin) {
+        this.startMin = startMin;
+    }
+    public int getEndHour() {
+        return this.endHour;
+    }
+    public void setEndHour(int endHour) {
+        this.endHour = endHour;
+    }
+    public int getEndMin() {
+        return this.endMin;
+    }
+    public void setEndMin(int endMin) {
+        this.endMin = endMin;
     }
 
 }

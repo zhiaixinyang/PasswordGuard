@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -11,59 +11,65 @@
     </data>
 
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray_new_home">
+
         <RelativeLayout
+            android:id="@+id/layout_title"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/gray_new_home">
+            android:layout_height="wrap_content">
 
-            <RelativeLayout
-                android:id="@+id/layout_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="@dimen/dp_22"
+                android:layout_height="@dimen/dp_22"
+                android:layout_margin="@dimen/dp_12"
+                android:onClick="@{()->handler.onClickBack()}"
+                android:src="@mipmap/ic_btn_left"
+                android:tint="@color/black" />
 
-                <ImageView
-                    android:layout_width="@dimen/dp_22"
-                    android:layout_height="@dimen/dp_22"
-                    android:layout_margin="@dimen/dp_12"
-                    android:onClick="@{()->handler.onClickBack()}"
-                    android:src="@mipmap/ic_btn_left"
-                    android:tint="@color/black" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="@dimen/dp_12"
+                android:text="添加计划"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_margin="@dimen/dp_12"
-                    android:text="添加计划"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
+            <ImageView
+                android:id="@+id/btn_send"
+                android:layout_width="@dimen/dp_24"
+                android:layout_height="@dimen/dp_24"
+                android:layout_alignParentRight="true"
+                android:layout_margin="@dimen/dp_12"
+                android:visibility="gone"
+                android:src="@mipmap/ic_btn_send"
+                android:tint="@color/black" />
+        </RelativeLayout>
 
-                <ImageView
-                    android:id="@+id/btn_send"
-                    android:layout_width="@dimen/dp_24"
-                    android:layout_height="@dimen/dp_24"
-                    android:layout_alignParentRight="true"
-                    android:layout_margin="@dimen/dp_12"
-                    android:src="@mipmap/ic_btn_send"
-                    android:tint="@color/black" />
-            </RelativeLayout>
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_below="@+id/layout_title"
-                android:layout_height="wrap_content">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/dp_5"
+            android:layout_below="@+id/layout_title">
+
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/layout_title"
-                android:layout_marginTop="4dp"
                 android:layout_marginBottom="@dimen/dp_12"
                 android:layout_marginLeft="@dimen/dp_12"
                 android:layout_marginRight="@dimen/dp_12"
+                android:layout_marginTop="4dp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="@dimen/new_home_card_view_corner">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:layout_height="wrap_content">
 
                     <ImageView
@@ -78,7 +84,7 @@
                         android:id="@+id/layout_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/iv_icon"
+                        android:layout_below="@+id/et_tips"
                         android:layout_marginBottom="@dimen/dp_12"
                         android:layout_marginLeft="@dimen/dp_24"
                         android:layout_marginRight="@dimen/dp_24"
@@ -96,7 +102,7 @@
                             android:paddingBottom="@dimen/dp_8"
                             android:paddingLeft="@dimen/dp_12"
                             android:paddingRight="@dimen/dp_12"
-                            android:paddingTop="@dimen/dp_8"
+                            android:paddingTop="@dimen/dp_20"
                             android:textColor="@color/black"
                             android:textColorHint="@color/gray"
                             android:textSize="@dimen/new_home_main_size" />
@@ -104,6 +110,8 @@
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/rlv_plan"
                             android:layout_width="match_parent"
+                            android:scrollbars="none"
+                            android:overScrollMode="never"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/et_plan" />
 
@@ -137,8 +145,8 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:gravity="center"
                                 android:clickable="false"
+                                android:gravity="center"
                                 android:text="添加子计划"
                                 android:textColor="@color/gray"
                                 android:textSize="@dimen/new_home_main_size" />
@@ -146,19 +154,85 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/layout_urgent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/iv_icon"
+                        android:layout_marginBottom="@dimen/dp_12"
+                        android:layout_marginLeft="@dimen/dp_24"
+                        android:layout_marginRight="@dimen/dp_24">
+
+                        <TextView
+                            android:id="@+id/tv_urgent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="紧急度："
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/new_home_main_size" />
+
+                        <com.mdove.passwordguard.ui.renkstar.BubbleSeekBar
+                            android:id="@+id/bb_urgent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/main_margin"
+                            android:layout_toRightOf="@+id/tv_urgent"
+                            app:bsb_max="100"
+                            app:bsb_min="0"
+                            app:bsb_progress="25"
+                            app:bsb_second_track_color="@color/blue_700"
+                            app:bsb_second_track_size="4dp"
+                            app:bsb_track_color="@color/gray"
+                            app:bsb_track_size="3dp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/layout_important"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/layout_urgent"
+                        android:layout_marginLeft="@dimen/dp_24"
+                        android:layout_marginRight="@dimen/dp_24">
+
+                        <TextView
+                            android:id="@+id/tv_important"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="重要度："
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/new_home_main_size" />
+
+                        <com.mdove.passwordguard.ui.renkstar.BubbleSeekBar
+                            android:id="@+id/bb_important"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/main_margin"
+                            android:layout_toRightOf="@+id/tv_important"
+                            app:bsb_max="100"
+                            app:bsb_min="0"
+                            app:bsb_progress="25"
+                            app:bsb_track_color="@color/gray"
+                            app:bsb_second_track_color="@color/blue_700"
+                            app:bsb_second_track_size="4dp"
+                            app:bsb_track_size="3dp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
                         android:id="@+id/layout_time"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/layout_et"
-                        android:layout_marginBottom="@dimen/dp_12"
-                        android:layout_marginLeft="@dimen/dp_24"
+                        android:layout_below="@+id/layout_important"
                         android:layout_marginRight="@dimen/dp_24"
+                        android:layout_marginLeft="@dimen/dp_24"
+                        android:layout_marginBottom="@dimen/dp_12"
                         android:layout_marginTop="@dimen/dp_12"
                         android:onClick="@{()->handler.onClickTime()}">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
                             android:text="执行时间"
                             android:textColor="@color/black"
                             android:textSize="@dimen/new_home_main_size" />
@@ -169,10 +243,10 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_toLeftOf="@+id/btn_time"
-                            android:textColor="@color/gray_plus"
+                            android:text="9:00-11:00"
+                            android:textColor="@color/gray"
                             android:textSize="18sp"
-                            app:customFont="@string/font_regular"
-                            android:text="9:00-11:00" />
+                            app:customFont="@string/font_regular" />
 
                         <ImageView
                             android:id="@+id/btn_time"
@@ -180,7 +254,7 @@
                             android:layout_height="@dimen/dp_24"
                             android:layout_alignParentRight="true"
                             android:src="@mipmap/ic_btn_right"
-                            android:tint="@color/black" />
+                            android:tint="@color/gray" />
                     </RelativeLayout>
 
                     <TextView
@@ -211,8 +285,8 @@
                         android:textSize="@dimen/new_home_main_size" />
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
-            </ScrollView>
+        </ScrollView>
 
-        </RelativeLayout>
+    </RelativeLayout>
 
 </layout>

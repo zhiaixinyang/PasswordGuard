@@ -7,13 +7,19 @@ import android.graphics.Color;
  */
 
 public class ItemSinglePlanBgHelper {
-    public static int getBg(int important, int urgent) {
-        int a = 255;
-        int r = 0;
-        int b = 0;
-        int g = 0;
-        r = (int) (255 * ((float) urgent / 100f));
-        b = (int) (255 * ((float) important / 100f));
-        return Color.argb(a, r, b, g);
+    public static String getBg(int important, int urgent) {
+        if (important > urgent && important >= 60) {
+            return "#FF1744";
+        } else if (urgent > important && urgent >= 60) {
+            return "#1976d2";
+        } else if (important > urgent && important < 60 && important >= 30) {
+            return "#E91E63";
+        } else if (urgent > important && urgent < 60 && urgent >= 30) {
+            return "#2196f3";
+        } else if (important < 30 && urgent < 30) {
+            return "#e2e2e2";
+        }else{
+            return "#e2e2e2";
+        }
     }
 }
