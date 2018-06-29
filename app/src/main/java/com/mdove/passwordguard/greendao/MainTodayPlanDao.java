@@ -38,6 +38,10 @@ public class MainTodayPlanDao extends AbstractDao<MainTodayPlan, Long> {
         public final static Property StartMin = new Property(11, int.class, "startMin", false, "START_MIN");
         public final static Property EndHour = new Property(12, int.class, "endHour", false, "END_HOUR");
         public final static Property EndMin = new Property(13, int.class, "endMin", false, "END_MIN");
+        public final static Property SucStartHour = new Property(14, int.class, "sucStartHour", false, "SUC_START_HOUR");
+        public final static Property SucStartMin = new Property(15, int.class, "sucStartMin", false, "SUC_START_MIN");
+        public final static Property SucEndHour = new Property(16, int.class, "sucEndHour", false, "SUC_END_HOUR");
+        public final static Property SucEndMin = new Property(17, int.class, "sucEndMin", false, "SUC_END_MIN");
     }
 
 
@@ -66,7 +70,11 @@ public class MainTodayPlanDao extends AbstractDao<MainTodayPlan, Long> {
                 "\"START_HOUR\" INTEGER NOT NULL ," + // 10: startHour
                 "\"START_MIN\" INTEGER NOT NULL ," + // 11: startMin
                 "\"END_HOUR\" INTEGER NOT NULL ," + // 12: endHour
-                "\"END_MIN\" INTEGER NOT NULL );"); // 13: endMin
+                "\"END_MIN\" INTEGER NOT NULL ," + // 13: endMin
+                "\"SUC_START_HOUR\" INTEGER NOT NULL ," + // 14: sucStartHour
+                "\"SUC_START_MIN\" INTEGER NOT NULL ," + // 15: sucStartMin
+                "\"SUC_END_HOUR\" INTEGER NOT NULL ," + // 16: sucEndHour
+                "\"SUC_END_MIN\" INTEGER NOT NULL );"); // 17: sucEndMin
     }
 
     /** Drops the underlying database table. */
@@ -108,6 +116,10 @@ public class MainTodayPlanDao extends AbstractDao<MainTodayPlan, Long> {
         stmt.bindLong(12, entity.getStartMin());
         stmt.bindLong(13, entity.getEndHour());
         stmt.bindLong(14, entity.getEndMin());
+        stmt.bindLong(15, entity.getSucStartHour());
+        stmt.bindLong(16, entity.getSucStartMin());
+        stmt.bindLong(17, entity.getSucEndHour());
+        stmt.bindLong(18, entity.getSucEndMin());
     }
 
     @Override
@@ -143,6 +155,10 @@ public class MainTodayPlanDao extends AbstractDao<MainTodayPlan, Long> {
         stmt.bindLong(12, entity.getStartMin());
         stmt.bindLong(13, entity.getEndHour());
         stmt.bindLong(14, entity.getEndMin());
+        stmt.bindLong(15, entity.getSucStartHour());
+        stmt.bindLong(16, entity.getSucStartMin());
+        stmt.bindLong(17, entity.getSucEndHour());
+        stmt.bindLong(18, entity.getSucEndMin());
     }
 
     @Override
@@ -166,7 +182,11 @@ public class MainTodayPlanDao extends AbstractDao<MainTodayPlan, Long> {
             cursor.getInt(offset + 10), // startHour
             cursor.getInt(offset + 11), // startMin
             cursor.getInt(offset + 12), // endHour
-            cursor.getInt(offset + 13) // endMin
+            cursor.getInt(offset + 13), // endMin
+            cursor.getInt(offset + 14), // sucStartHour
+            cursor.getInt(offset + 15), // sucStartMin
+            cursor.getInt(offset + 16), // sucEndHour
+            cursor.getInt(offset + 17) // sucEndMin
         );
         return entity;
     }
@@ -187,6 +207,10 @@ public class MainTodayPlanDao extends AbstractDao<MainTodayPlan, Long> {
         entity.setStartMin(cursor.getInt(offset + 11));
         entity.setEndHour(cursor.getInt(offset + 12));
         entity.setEndMin(cursor.getInt(offset + 13));
+        entity.setSucStartHour(cursor.getInt(offset + 14));
+        entity.setSucStartMin(cursor.getInt(offset + 15));
+        entity.setSucEndHour(cursor.getInt(offset + 16));
+        entity.setSucEndMin(cursor.getInt(offset + 17));
      }
     
     @Override

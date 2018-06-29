@@ -35,10 +35,14 @@ public class SecondTodayPlanDao extends AbstractDao<SecondTodayPlan, Long> {
         public final static Property StartMin = new Property(8, int.class, "startMin", false, "START_MIN");
         public final static Property EndHour = new Property(9, int.class, "endHour", false, "END_HOUR");
         public final static Property EndMin = new Property(10, int.class, "endMin", false, "END_MIN");
-        public final static Property MLabelId = new Property(11, long.class, "mLabelId", false, "M_LABEL_ID");
-        public final static Property MMainTodayPlanId = new Property(12, long.class, "mMainTodayPlanId", false, "M_MAIN_TODAY_PLAN_ID");
-        public final static Property MLabel = new Property(13, String.class, "mLabel", false, "M_LABEL");
-        public final static Property MTips = new Property(14, String.class, "mTips", false, "M_TIPS");
+        public final static Property SucStartHour = new Property(11, int.class, "sucStartHour", false, "SUC_START_HOUR");
+        public final static Property SucStartMin = new Property(12, int.class, "sucStartMin", false, "SUC_START_MIN");
+        public final static Property SucEndHour = new Property(13, int.class, "sucEndHour", false, "SUC_END_HOUR");
+        public final static Property SucEndMin = new Property(14, int.class, "sucEndMin", false, "SUC_END_MIN");
+        public final static Property MLabelId = new Property(15, long.class, "mLabelId", false, "M_LABEL_ID");
+        public final static Property MMainTodayPlanId = new Property(16, long.class, "mMainTodayPlanId", false, "M_MAIN_TODAY_PLAN_ID");
+        public final static Property MLabel = new Property(17, String.class, "mLabel", false, "M_LABEL");
+        public final static Property MTips = new Property(18, String.class, "mTips", false, "M_TIPS");
     }
 
 
@@ -65,10 +69,14 @@ public class SecondTodayPlanDao extends AbstractDao<SecondTodayPlan, Long> {
                 "\"START_MIN\" INTEGER NOT NULL ," + // 8: startMin
                 "\"END_HOUR\" INTEGER NOT NULL ," + // 9: endHour
                 "\"END_MIN\" INTEGER NOT NULL ," + // 10: endMin
-                "\"M_LABEL_ID\" INTEGER NOT NULL ," + // 11: mLabelId
-                "\"M_MAIN_TODAY_PLAN_ID\" INTEGER NOT NULL ," + // 12: mMainTodayPlanId
-                "\"M_LABEL\" TEXT," + // 13: mLabel
-                "\"M_TIPS\" TEXT);"); // 14: mTips
+                "\"SUC_START_HOUR\" INTEGER NOT NULL ," + // 11: sucStartHour
+                "\"SUC_START_MIN\" INTEGER NOT NULL ," + // 12: sucStartMin
+                "\"SUC_END_HOUR\" INTEGER NOT NULL ," + // 13: sucEndHour
+                "\"SUC_END_MIN\" INTEGER NOT NULL ," + // 14: sucEndMin
+                "\"M_LABEL_ID\" INTEGER NOT NULL ," + // 15: mLabelId
+                "\"M_MAIN_TODAY_PLAN_ID\" INTEGER NOT NULL ," + // 16: mMainTodayPlanId
+                "\"M_LABEL\" TEXT," + // 17: mLabel
+                "\"M_TIPS\" TEXT);"); // 18: mTips
     }
 
     /** Drops the underlying database table. */
@@ -99,17 +107,21 @@ public class SecondTodayPlanDao extends AbstractDao<SecondTodayPlan, Long> {
         stmt.bindLong(9, entity.getStartMin());
         stmt.bindLong(10, entity.getEndHour());
         stmt.bindLong(11, entity.getEndMin());
-        stmt.bindLong(12, entity.getMLabelId());
-        stmt.bindLong(13, entity.getMMainTodayPlanId());
+        stmt.bindLong(12, entity.getSucStartHour());
+        stmt.bindLong(13, entity.getSucStartMin());
+        stmt.bindLong(14, entity.getSucEndHour());
+        stmt.bindLong(15, entity.getSucEndMin());
+        stmt.bindLong(16, entity.getMLabelId());
+        stmt.bindLong(17, entity.getMMainTodayPlanId());
  
         String mLabel = entity.getMLabel();
         if (mLabel != null) {
-            stmt.bindString(14, mLabel);
+            stmt.bindString(18, mLabel);
         }
  
         String mTips = entity.getMTips();
         if (mTips != null) {
-            stmt.bindString(15, mTips);
+            stmt.bindString(19, mTips);
         }
     }
 
@@ -135,17 +147,21 @@ public class SecondTodayPlanDao extends AbstractDao<SecondTodayPlan, Long> {
         stmt.bindLong(9, entity.getStartMin());
         stmt.bindLong(10, entity.getEndHour());
         stmt.bindLong(11, entity.getEndMin());
-        stmt.bindLong(12, entity.getMLabelId());
-        stmt.bindLong(13, entity.getMMainTodayPlanId());
+        stmt.bindLong(12, entity.getSucStartHour());
+        stmt.bindLong(13, entity.getSucStartMin());
+        stmt.bindLong(14, entity.getSucEndHour());
+        stmt.bindLong(15, entity.getSucEndMin());
+        stmt.bindLong(16, entity.getMLabelId());
+        stmt.bindLong(17, entity.getMMainTodayPlanId());
  
         String mLabel = entity.getMLabel();
         if (mLabel != null) {
-            stmt.bindString(14, mLabel);
+            stmt.bindString(18, mLabel);
         }
  
         String mTips = entity.getMTips();
         if (mTips != null) {
-            stmt.bindString(15, mTips);
+            stmt.bindString(19, mTips);
         }
     }
 
@@ -168,10 +184,14 @@ public class SecondTodayPlanDao extends AbstractDao<SecondTodayPlan, Long> {
             cursor.getInt(offset + 8), // startMin
             cursor.getInt(offset + 9), // endHour
             cursor.getInt(offset + 10), // endMin
-            cursor.getLong(offset + 11), // mLabelId
-            cursor.getLong(offset + 12), // mMainTodayPlanId
-            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // mLabel
-            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14) // mTips
+            cursor.getInt(offset + 11), // sucStartHour
+            cursor.getInt(offset + 12), // sucStartMin
+            cursor.getInt(offset + 13), // sucEndHour
+            cursor.getInt(offset + 14), // sucEndMin
+            cursor.getLong(offset + 15), // mLabelId
+            cursor.getLong(offset + 16), // mMainTodayPlanId
+            cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17), // mLabel
+            cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18) // mTips
         );
         return entity;
     }
@@ -189,10 +209,14 @@ public class SecondTodayPlanDao extends AbstractDao<SecondTodayPlan, Long> {
         entity.setStartMin(cursor.getInt(offset + 8));
         entity.setEndHour(cursor.getInt(offset + 9));
         entity.setEndMin(cursor.getInt(offset + 10));
-        entity.setMLabelId(cursor.getLong(offset + 11));
-        entity.setMMainTodayPlanId(cursor.getLong(offset + 12));
-        entity.setMLabel(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
-        entity.setMTips(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
+        entity.setSucStartHour(cursor.getInt(offset + 11));
+        entity.setSucStartMin(cursor.getInt(offset + 12));
+        entity.setSucEndHour(cursor.getInt(offset + 13));
+        entity.setSucEndMin(cursor.getInt(offset + 14));
+        entity.setMLabelId(cursor.getLong(offset + 15));
+        entity.setMMainTodayPlanId(cursor.getLong(offset + 16));
+        entity.setMLabel(cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17));
+        entity.setMTips(cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18));
      }
     
     @Override

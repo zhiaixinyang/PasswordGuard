@@ -59,6 +59,11 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name=".home.todayreview.TodayReViewActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name=".singleplan.SinglePlanActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />

@@ -9,6 +9,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mdove.passwordguard.R;
+import com.mdove.passwordguard.home.todayreview.model.BaseTodayReViewModel;
+import com.mdove.passwordguard.home.todayreview.model.vm.BaseTodayReViewVM;
+import com.mdove.passwordguard.main.model.BaseMainModel;
 import com.mdove.passwordguard.main.model.DailyPlanModel;
 import com.mdove.passwordguard.main.model.vm.DailyPlanModelVM;
 import com.mdove.passwordguard.main.newmain.everydayreplay.model.EverydayReplayRlvModelVM;
@@ -56,19 +59,19 @@ public class DataBindingAdapter {
         switch (modelVM.mStatus.get()) {
             case DailyPlanModel.STATUS_NORMAL: {
                 view.setBackgroundResource(R.drawable.bg_everyday_replay_normal);
-                TextViewBindingAdapter.setText(view,"淡");
+                TextViewBindingAdapter.setText(view, "淡");
                 view.setTextColor(ContextCompat.getColor(view.getContext(), R.color.black));
                 break;
             }
             case DailyPlanModel.STATUS_GET: {
                 view.setBackgroundResource(R.drawable.bg_everyday_replay_get);
-                TextViewBindingAdapter.setText(view,"得");
+                TextViewBindingAdapter.setText(view, "得");
                 view.setTextColor(ContextCompat.getColor(view.getContext(), R.color.green_300));
                 break;
             }
             case DailyPlanModel.STATUS_LOST: {
                 view.setBackgroundResource(R.drawable.bg_everyday_replay_lose);
-                TextViewBindingAdapter.setText(view,"失");
+                TextViewBindingAdapter.setText(view, "失");
                 view.setTextColor(ContextCompat.getColor(view.getContext(), R.color.red_300));
                 break;
             }
@@ -84,19 +87,19 @@ public class DataBindingAdapter {
         switch (modelVM.mStatus.get()) {
             case DailyPlanModel.STATUS_NORMAL: {
                 view.setBackgroundResource(R.drawable.bg_everyday_replay_normal);
-                TextViewBindingAdapter.setText(view,"淡");
+                TextViewBindingAdapter.setText(view, "淡");
                 view.setTextColor(ContextCompat.getColor(view.getContext(), R.color.black));
                 break;
             }
             case DailyPlanModel.STATUS_GET: {
                 view.setBackgroundResource(R.drawable.bg_everyday_replay_get);
-                TextViewBindingAdapter.setText(view,"得");
+                TextViewBindingAdapter.setText(view, "得");
                 view.setTextColor(ContextCompat.getColor(view.getContext(), R.color.green_300));
                 break;
             }
             case DailyPlanModel.STATUS_LOST: {
                 view.setBackgroundResource(R.drawable.bg_everyday_replay_lose);
-                TextViewBindingAdapter.setText(view,"失");
+                TextViewBindingAdapter.setText(view, "失");
                 view.setTextColor(ContextCompat.getColor(view.getContext(), R.color.red_300));
                 break;
             }
@@ -189,10 +192,37 @@ public class DataBindingAdapter {
 
     @BindingAdapter("srcBgSinglePlan")
     public static void srcBgSinglePlan(ImageView view, SinglePlanRlvModelVM vm) {
-        if (vm.mIsMain.get()==SinglePlanRlvModelVM.BG_IS_MAIN_PLAN){
+        if (vm.mIsMain.get() == SinglePlanRlvModelVM.BG_IS_MAIN_PLAN) {
             view.setImageResource(R.mipmap.ic_main_plan);
-        }else{
+        } else {
             view.setImageResource(R.mipmap.ic_second_plan);
+        }
+    }
+
+    @BindingAdapter("sucAtTimeBgTv")
+    public static void sucAtTimeBgTv(TextView view, BaseTodayReViewVM vm) {
+        switch (vm.mSucEnable.get()) {
+            case BaseTodayReViewModel.DEFAULT_NOT_SUC: {
+                break;
+            }
+            case BaseTodayReViewModel.DEFAULT_SUC_AT_TIME: {
+                view.setText("按时完成");
+                view.setBackgroundResource(R.drawable.bg_suc_at_time);
+                break;
+            }
+            case BaseTodayReViewModel.DEFAULT_SUC_NO_AT_TIME_PRE: {
+                view.setText("提前完成");
+                view.setBackgroundResource(R.drawable.bg_suc_not_at_time_pre);
+                break;
+            }
+            case BaseTodayReViewModel.DEFAULT_SUC_NO_AT_TIME_LAST: {
+                view.setText("超时完成");
+                view.setBackgroundResource(R.drawable.bg_suc_not_at_time_last);
+                break;
+            }
+            default: {
+                break;
+            }
         }
     }
 }

@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.mdove.passwordguard.R;
@@ -14,6 +15,7 @@ import com.mdove.passwordguard.greendao.entity.SecondTodayPlan;
 import com.mdove.passwordguard.home.ettodayplan.model.BaseTodayPlanModel;
 import com.mdove.passwordguard.home.ettodayplan.model.MainTodayPlanModel;
 import com.mdove.passwordguard.home.ettodayplan.model.SecondTodayPlanModel;
+import com.mdove.passwordguard.home.todayreview.TodayReViewActivity;
 import com.mdove.passwordguard.singleplan.model.SinglePlanModel;
 import com.mdove.passwordguard.singleplan.presenter.SinglePlanPresenter;
 import com.mdove.passwordguard.singleplan.utils.ItemSinglePlanBgHelper;
@@ -60,7 +62,15 @@ public class SinglePlanAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
 
         public void bind(SinglePlanModel model) {
-            MainTodayPlan mainTodayPlan = model.mMainTodayPlan;
+            final MainTodayPlan mainTodayPlan = model.mMainTodayPlan;
+
+            mBinding.layoutMainCard.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    TodayReViewActivity.start(mContext,mainTodayPlan.id);
+                }
+            });
+
             List<BaseTodayPlanModel> data = new ArrayList<>();
             data.add(model.mAddTodayPlanModel);
 
@@ -76,8 +86,6 @@ public class SinglePlanAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
             mBinding.rlvSinglePlan.setLayoutManager(new LinearLayoutManager(mContext));
             mBinding.rlvSinglePlan.setAdapter(new RlvTodayPlanAdapter(mContext, data));
-
-
         }
     }
 

@@ -14,7 +14,7 @@ public class MainTodayPlan implements Serializable{
     @Id(autoincrement = true)
     public Long id;
     public String mTodayPlan;
-    public int mIsSuc;//0表示没有点击完成
+    public int mIsSuc;//0表示没有点击完成,1表示按时，2表示未完成(提前)，3表示未完成(延迟)
     public int mIsSee;//0表示不在首页展示
     public long mTime;
     public int mUrgent;
@@ -23,15 +23,19 @@ public class MainTodayPlan implements Serializable{
     public long mLabelId;
     public String mLabel;
     public String mTips;
+
     public int startHour,startMin;
     public int endHour,endMin;
+    public int sucStartHour,sucStartMin;
+    public int sucEndHour,sucEndMin;
 
     static final long serialVersionUID = 1L;
 
-    @Generated(hash = 1833831679)
+    @Generated(hash = 1784481728)
     public MainTodayPlan(Long id, String mTodayPlan, int mIsSuc, int mIsSee,
             long mTime, int mUrgent, int mImportant, long mLabelId, String mLabel,
-            String mTips, int startHour, int startMin, int endHour, int endMin) {
+            String mTips, int startHour, int startMin, int endHour, int endMin,
+            int sucStartHour, int sucStartMin, int sucEndHour, int sucEndMin) {
         this.id = id;
         this.mTodayPlan = mTodayPlan;
         this.mIsSuc = mIsSuc;
@@ -46,6 +50,10 @@ public class MainTodayPlan implements Serializable{
         this.startMin = startMin;
         this.endHour = endHour;
         this.endMin = endMin;
+        this.sucStartHour = sucStartHour;
+        this.sucStartMin = sucStartMin;
+        this.sucEndHour = sucEndHour;
+        this.sucEndMin = sucEndMin;
     }
     @Generated(hash = 419990215)
     public MainTodayPlan() {
@@ -134,6 +142,30 @@ public class MainTodayPlan implements Serializable{
     }
     public void setEndMin(int endMin) {
         this.endMin = endMin;
+    }
+    public int getSucStartHour() {
+        return this.sucStartHour;
+    }
+    public void setSucStartHour(int sucStartHour) {
+        this.sucStartHour = sucStartHour;
+    }
+    public int getSucStartMin() {
+        return this.sucStartMin;
+    }
+    public void setSucStartMin(int sucStartMin) {
+        this.sucStartMin = sucStartMin;
+    }
+    public int getSucEndHour() {
+        return this.sucEndHour;
+    }
+    public void setSucEndHour(int sucEndHour) {
+        this.sucEndHour = sucEndHour;
+    }
+    public int getSucEndMin() {
+        return this.sucEndMin;
+    }
+    public void setSucEndMin(int sucEndMin) {
+        this.sucEndMin = sucEndMin;
     }
 
 }

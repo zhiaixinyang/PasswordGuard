@@ -76,6 +76,14 @@ public class SinglePlanActivity extends BaseActivity implements SinglePlanContra
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        if (mPresenter != null) {
+            mPresenter.initData();
+        }
+    }
+
+    @Override
     public Context getContext() {
         return this;
     }

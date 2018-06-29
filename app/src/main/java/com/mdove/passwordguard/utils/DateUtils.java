@@ -71,10 +71,15 @@ public class DateUtils {
         return simpleFormat(TimeZone.getDefault().getDisplayName(), timestamp, "HH:mm:ss");
     }
 
-    public static int getHour(long timestamp) {
+    public static int getHour(long time) {
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone(TimeZone.getDefault().getDisplayName()));
-        calendar.setTimeInMillis(timestamp);
-        return calendar.get(Calendar.HOUR);
+        calendar.setTimeInMillis(time);
+        return calendar.get(Calendar.HOUR_OF_DAY);
+    }
+
+    public static int getHour() {
+        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone(TimeZone.getDefault().getDisplayName()));
+        return calendar.get(Calendar.HOUR_OF_DAY);
     }
 
     public static long getRemainTime() {
@@ -195,8 +200,9 @@ public class DateUtils {
         return cal.getTimeInMillis();
     }
 
-    public static int getMinute() {
+    public static int getMinute(long timestamp) {
         Calendar c = Calendar.getInstance();
+        c.setTimeInMillis(timestamp);
         return c.get(Calendar.MINUTE);
     }
 

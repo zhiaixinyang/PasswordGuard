@@ -22,16 +22,20 @@ public class SecondTodayPlan implements Serializable {
     public int startHour,startMin;
     public int endHour,endMin;
 
+    public int sucStartHour,sucStartMin;
+    public int sucEndHour,sucEndMin;
+
     public long mLabelId;
     public long mMainTodayPlanId;
     public String mLabel;
     public String mTips;
     static final long serialVersionUID = 1L;
 
-    @Generated(hash = 90238663)
+    @Generated(hash = 1038563643)
     public SecondTodayPlan(Long id, String mTodayPlan, long mTime, int mIsSuc,
             int mIsSee, int mUrgent, int mImportant, int startHour, int startMin,
-            int endHour, int endMin, long mLabelId, long mMainTodayPlanId,
+            int endHour, int endMin, int sucStartHour, int sucStartMin,
+            int sucEndHour, int sucEndMin, long mLabelId, long mMainTodayPlanId,
             String mLabel, String mTips) {
         this.id = id;
         this.mTodayPlan = mTodayPlan;
@@ -44,6 +48,10 @@ public class SecondTodayPlan implements Serializable {
         this.startMin = startMin;
         this.endHour = endHour;
         this.endMin = endMin;
+        this.sucStartHour = sucStartHour;
+        this.sucStartMin = sucStartMin;
+        this.sucEndHour = sucEndHour;
+        this.sucEndMin = sucEndMin;
         this.mLabelId = mLabelId;
         this.mMainTodayPlanId = mMainTodayPlanId;
         this.mLabel = mLabel;
@@ -172,5 +180,37 @@ public class SecondTodayPlan implements Serializable {
 
     public void setEndMin(int endMin) {
         this.endMin = endMin;
+    }
+
+    public int getSucStartHour() {
+        return this.sucStartHour;
+    }
+
+    public void setSucStartHour(int sucStartHour) {
+        this.sucStartHour = sucStartHour;
+    }
+
+    public int getSucStartMin() {
+        return this.sucStartMin;
+    }
+
+    public void setSucStartMin(int sucStartMin) {
+        this.sucStartMin = sucStartMin;
+    }
+
+    public int getSucEndHour() {
+        return this.sucEndHour;
+    }
+
+    public void setSucEndHour(int sucEndHour) {
+        this.sucEndHour = sucEndHour;
+    }
+
+    public int getSucEndMin() {
+        return this.sucEndMin;
+    }
+
+    public void setSucEndMin(int sucEndMin) {
+        this.sucEndMin = sucEndMin;
     }
 }
