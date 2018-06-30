@@ -1,4 +1,4 @@
-package com.mdove.passwordguard.singleplan.adapter;
+package com.mdove.passwordguard.home.allplan.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -18,23 +18,23 @@ import com.mdove.passwordguard.home.ettodayplan.model.MainTodayPlanModel;
 import com.mdove.passwordguard.home.ettodayplan.model.SecondTodayPlanModel;
 import com.mdove.passwordguard.home.ettodayplan.model.vm.MainTodayPlanModelVM;
 import com.mdove.passwordguard.home.ettodayplan.model.vm.SecondTodayPlanModelVM;
+import com.mdove.passwordguard.singleplan.adapter.RlvTodayPlanAdapter;
 import com.mdove.passwordguard.utils.InflateUtils;
 
 import java.util.List;
 
 /**
- * Created by MDove on 2018/6/27.
+ * Created by MDove on 2018/6/30.
  */
 
-public class RlvTodayPlanAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class AllTodayPlanAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int TYPE_MAIN_TODAY_PLAN = 0;
     private static final int TYPE_SECOND_TODAY_PLAN = 1;
-    private static final int TYPE_ADD_PLAN = 2;
-    private static final int TYPE_EDIT_PLAN = 3;
+
     private List<BaseTodayPlanModel> mData;
     private Context mContext;
 
-    public RlvTodayPlanAdapter(Context context, List<BaseTodayPlanModel> data) {
+    public AllTodayPlanAdapter(Context context, List<BaseTodayPlanModel> data) {
         mContext = context;
         mData = data;
     }
@@ -46,10 +46,6 @@ public class RlvTodayPlanAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             return TYPE_MAIN_TODAY_PLAN;
         } else if (model instanceof SecondTodayPlanModel) {
             return TYPE_SECOND_TODAY_PLAN;
-        } else if (model instanceof AddTodayPlanModel) {
-            return TYPE_ADD_PLAN;
-        } else if (model instanceof EditTodayPlanModel) {
-            return TYPE_EDIT_PLAN;
         }
         return TYPE_SECOND_TODAY_PLAN;
     }
@@ -58,23 +54,15 @@ public class RlvTodayPlanAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
             case TYPE_MAIN_TODAY_PLAN: {
-                return new MainTodayPlanViewHolder((ItemNewHomeMainTodayPlanBinding)
+                return new AllTodayPlanAdapter.MainTodayPlanViewHolder((ItemNewHomeMainTodayPlanBinding)
                         InflateUtils.bindingInflate(parent, R.layout.item_new_home_main_today_plan));
             }
             case TYPE_SECOND_TODAY_PLAN: {
-                return new SecondTodayPlanViewHolder((ItemNewHomeSecondTodayPlanBinding)
+                return new AllTodayPlanAdapter.SecondTodayPlanViewHolder((ItemNewHomeSecondTodayPlanBinding)
                         InflateUtils.bindingInflate(parent, R.layout.item_new_home_second_today_plan));
             }
-            case TYPE_ADD_PLAN: {
-                return new AddTodayPlanViewHolder((ItemNewHomeAddPlanBinding)
-                        InflateUtils.bindingInflate(parent, R.layout.item_new_home_add_plan));
-            }
-            case TYPE_EDIT_PLAN:{
-                return new EditTodayPlanViewHolder((ItemNewHomeEditPlanBinding)
-                        InflateUtils.bindingInflate(parent, R.layout.item_new_home_edit_plan));
-            }
             default: {
-                return new MainTodayPlanViewHolder((ItemNewHomeMainTodayPlanBinding)
+                return new AllTodayPlanAdapter.MainTodayPlanViewHolder((ItemNewHomeMainTodayPlanBinding)
                         InflateUtils.bindingInflate(parent, R.layout.item_new_home_main_today_plan));
             }
         }
@@ -82,14 +70,10 @@ public class RlvTodayPlanAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof MainTodayPlanViewHolder) {
-            ((MainTodayPlanViewHolder) holder).bind(mData.get(position));
-        } else if (holder instanceof SecondTodayPlanViewHolder) {
-            ((SecondTodayPlanViewHolder) holder).bind(mData.get(position));
-        } else if (holder instanceof AddTodayPlanViewHolder) {
-            ((AddTodayPlanViewHolder) holder).bind();
-        }else if (holder instanceof EditTodayPlanViewHolder) {
-            ((EditTodayPlanViewHolder) holder).bind();
+        if (holder instanceof AllTodayPlanAdapter.MainTodayPlanViewHolder) {
+            ((AllTodayPlanAdapter.MainTodayPlanViewHolder) holder).bind(mData.get(position));
+        } else if (holder instanceof AllTodayPlanAdapter.SecondTodayPlanViewHolder) {
+            ((AllTodayPlanAdapter.SecondTodayPlanViewHolder) holder).bind(mData.get(position));
         }
     }
 
@@ -121,48 +105,6 @@ public class RlvTodayPlanAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         public void bind(BaseTodayPlanModel model) {
             mBinding.setVm(new SecondTodayPlanModelVM((SecondTodayPlanModel) model));
-        }
-    }
-
-    public class AddTodayPlanViewHolder extends RecyclerView.ViewHolder {
-        private ItemNewHomeAddPlanBinding mBinding;
-
-        public AddTodayPlanViewHolder(ItemNewHomeAddPlanBinding binding) {
-            super(binding.getRoot());
-            mBinding = binding;
-        }
-
-        public void bind() {
-            mBinding.btnAdd.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    EtTodayPlanActivity.start(mContext);
-                }
-            });
-        }
-    }
-
-    public class EditTodayPlanViewHolder extends RecyclerView.ViewHolder {
-        private ItemNewHomeEditPlanBinding mBinding;
-
-        public EditTodayPlanViewHolder(ItemNewHomeEditPlanBinding binding) {
-            super(binding.getRoot());
-            mBinding = binding;
-        }
-
-        public void bind() {
-            mBinding.btnEdit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    for (BaseTodayPlanModel model:mData) {
-                        if (model instanceof MainTodayPlanModel) {
-                            EtTodayPlanActivity.start(mContext,
-                                    EtTodayPlanActivity.INTENT_TYPE_EDIT_PLAN,
-                                    ((MainTodayPlanModel) model).mId);
-                        }
-                    }
-                }
-            });
         }
     }
 

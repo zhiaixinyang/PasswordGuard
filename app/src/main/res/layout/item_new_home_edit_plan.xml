@@ -4,7 +4,7 @@
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_add"
+        android:id="@+id/btn_edit"
         android:layout_marginBottom="@dimen/main_margin"
         android:layout_marginLeft="@dimen/main_margin"
         android:layout_marginRight="@dimen/main_margin"
@@ -20,10 +20,10 @@
                 android:layout_width="@dimen/dp_24"
                 android:layout_height="@dimen/dp_24"
                 android:layout_margin="@dimen/main_margin"
-                android:src="@mipmap/ic_bg_add" />
+                android:src="@mipmap/ic_bg_edit" />
             <TextView
                 android:layout_width="wrap_content"
-                android:text="添加计划"
+                android:text="修改计划"
                 android:textSize="14sp"
                 android:layout_toRightOf="@+id/iv"
                 android:layout_centerVertical="true"

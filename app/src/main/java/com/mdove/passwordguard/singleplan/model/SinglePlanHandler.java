@@ -1,5 +1,7 @@
 package com.mdove.passwordguard.singleplan.model;
 
+import com.mdove.passwordguard.greendao.entity.MainTodayPlan;
+import com.mdove.passwordguard.home.ettodayplan.model.MainTodayPlanModel;
 import com.mdove.passwordguard.singleplan.presenter.EtSinglePlanPresenter;
 import com.mdove.passwordguard.singleplan.presenter.SinglePlanPresenter;
 
@@ -24,6 +26,9 @@ public class SinglePlanHandler {
 
     public void onClickEtPlan() {
         mPresenter.onClickEtPlan();
+    }
+    public void onClickSeeAllPlan(MainTodayPlan model) {
+        mPresenter.onClickSeeAllPlan(model);
     }
 
 //    public void onClickDeleteSinglePlan(SinglePlanModelVM vm) {

@@ -4,9 +4,12 @@ import com.mdove.passwordguard.base.BasePresenter;
 import com.mdove.passwordguard.base.BaseView;
 import com.mdove.passwordguard.greendao.entity.MainTodayPlan;
 import com.mdove.passwordguard.greendao.entity.SecondTodayPlan;
+import com.mdove.passwordguard.home.ettodayplan.model.BaseTodayPlanModel;
 import com.mdove.passwordguard.home.ettodayplan.model.MainTodayPlanModel;
 import com.mdove.passwordguard.home.ettodayplan.model.SecondTodayPlanModel;
 import com.mdove.passwordguard.home.model.HomeTimeModelVM;
+
+import java.util.List;
 
 /**
  * Created by MDove on 2018/6/24.
@@ -21,12 +24,17 @@ public interface EtTodayPlanContract {
         void onClickBack();
 
         void onClickTime();
+
+        void initEditData(long id);
     }
 
     interface MvpView extends BaseView<Presenter> {
         void finish();
 
         void addMainTodayPlanReturn(MainTodayPlanModel model);
+
         void addMainTodayPlanReturn(SecondTodayPlanModel model);
+
+        void initEditData(List<BaseTodayPlanModel> data);
     }
 }

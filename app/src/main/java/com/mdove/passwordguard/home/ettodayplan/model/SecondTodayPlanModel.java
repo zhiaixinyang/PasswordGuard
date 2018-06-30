@@ -8,6 +8,7 @@ import com.mdove.passwordguard.greendao.entity.SecondTodayPlan;
  */
 
 public class SecondTodayPlanModel extends BaseTodayPlanModel {
+    public long mId;
     public String mTodayPlan;
     public int mIsSuc;//0表示没有点击完成
     public int mIsSee;//0表示不在首页展示
@@ -20,6 +21,7 @@ public class SecondTodayPlanModel extends BaseTodayPlanModel {
     public long mMainTodayPlanId;
 
     public SecondTodayPlanModel(SecondTodayPlan secondTodayPlan) {
+        mId = secondTodayPlan.id;
         mTodayPlan = secondTodayPlan.mTodayPlan;
 
         String startHour = "";

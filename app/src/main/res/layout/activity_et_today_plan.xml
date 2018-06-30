@@ -39,13 +39,12 @@
                 android:textSize="20sp" />
 
             <ImageView
-                android:id="@+id/btn_send"
-                android:layout_width="@dimen/dp_24"
-                android:layout_height="@dimen/dp_24"
+                android:id="@+id/btn_delete"
+                android:layout_width="@dimen/dp_26"
+                android:layout_height="@dimen/dp_26"
                 android:layout_alignParentRight="true"
                 android:layout_margin="@dimen/dp_12"
-                android:visibility="gone"
-                android:src="@mipmap/ic_btn_send"
+                android:src="@mipmap/ic_delete"
                 android:tint="@color/black" />
         </RelativeLayout>
 
@@ -58,7 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/layout_title"
-                android:layout_marginBottom="@dimen/dp_12"
+                android:layout_marginBottom="@dimen/dp_24"
                 android:layout_marginLeft="@dimen/dp_12"
                 android:layout_marginRight="@dimen/dp_12"
                 android:layout_marginTop="4dp"

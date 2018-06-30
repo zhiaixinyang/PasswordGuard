@@ -7,6 +7,7 @@ import com.mdove.passwordguard.greendao.SinglePlanDao;
 import com.mdove.passwordguard.greendao.entity.MainTodayPlan;
 import com.mdove.passwordguard.greendao.entity.SecondTodayPlan;
 import com.mdove.passwordguard.greendao.entity.SinglePlan;
+import com.mdove.passwordguard.home.allplan.AllTodayPlanActivity;
 import com.mdove.passwordguard.home.ettodayplan.EtTodayPlanActivity;
 import com.mdove.passwordguard.home.ettodayplan.model.AddTodayPlanModel;
 import com.mdove.passwordguard.singleplan.EtSinglePlanActivity;
@@ -75,6 +76,11 @@ public class SinglePlanPresenter implements SinglePlanContract.Presenter {
     @Override
     public void onClickEtPlan() {
         EtTodayPlanActivity.start(mView.getContext());
+    }
+
+    @Override
+    public void onClickSeeAllPlan(MainTodayPlan model) {
+        AllTodayPlanActivity.start(mView.getContext(), model.id);
     }
 
     @Override

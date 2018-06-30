@@ -38,6 +38,11 @@ import java.util.List;
  */
 
 public class EtTodayPlanActivity extends BaseActivity implements EtTodayPlanContract.MvpView {
+    public static final String EXTRA_INTENT_TYPE = "extra_intent_type";
+    public static final String EXTRA_INTENT_TYPE_TODAY_ID = "extra_intent_type_today_id";
+    public static final int INTENT_TYPE_ADD_PLAN = 0;
+    public static final int INTENT_TYPE_EDIT_PLAN = 1;
+
     private EtTodayPlanPresenter mPresenter;
     private ActivityEtTodayPlanBinding mBinding;
     private List<BaseTodayPlanModel> mData;
@@ -47,10 +52,16 @@ public class EtTodayPlanActivity extends BaseActivity implements EtTodayPlanCont
     public int mSelectEndHour = TimeConstant.DEFAUT_END_HOUR, mSelectEndMin = TimeConstant.DEFAUT_END_MIN;
 
     public static void start(Context context) {
+        start(context, INTENT_TYPE_ADD_PLAN, -1);
+    }
+
+    public static void start(Context context, int intentType, long todayId) {
         Intent start = new Intent(context, EtTodayPlanActivity.class);
         if (!(context instanceof Activity)) {
             start.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         }
+        start.putExtra(EXTRA_INTENT_TYPE, intentType);
+        start.putExtra(EXTRA_INTENT_TYPE_TODAY_ID, todayId);
         context.startActivity(start);
     }
 
@@ -77,6 +88,27 @@ public class EtTodayPlanActivity extends BaseActivity implements EtTodayPlanCont
         mBinding.rlvPlan.setAdapter(mAdapter);
 
         initListener();
+        initIntent(getIntent());
+    }
+
+    private void initIntent(Intent intent) {
+        if (intent == null) {
+            return;
+        }
+        int intentType = intent.getIntExtra(EXTRA_INTENT_TYPE, -1);
+        switch (intentType) {
+            case -1: {
+                break;
+            }
+            case INTENT_TYPE_ADD_PLAN: {
+                break;
+            }
+            case INTENT_TYPE_EDIT_PLAN: {
+                long id = intent.getLongExtra(EXTRA_INTENT_TYPE_TODAY_ID, -1);
+                mPresenter.initEditData(id);
+                break;
+            }
+        }
     }
 
     private void initListener() {
@@ -160,5 +192,10 @@ public class EtTodayPlanActivity extends BaseActivity implements EtTodayPlanCont
     @Override
     public void addMainTodayPlanReturn(SecondTodayPlanModel model) {
         mAdapter.insertData(model);
+    }
+
+    @Override
+    public void initEditData(List<BaseTodayPlanModel> data) {
+        mAdapter.setData(data);
     }
 }

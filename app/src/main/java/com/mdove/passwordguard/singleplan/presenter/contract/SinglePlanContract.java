@@ -2,6 +2,7 @@ package com.mdove.passwordguard.singleplan.presenter.contract;
 
 import com.mdove.passwordguard.base.BasePresenter;
 import com.mdove.passwordguard.base.BaseView;
+import com.mdove.passwordguard.greendao.entity.MainTodayPlan;
 import com.mdove.passwordguard.greendao.entity.SinglePlan;
 import com.mdove.passwordguard.main.newmain.dailytask.dialog.model.DailyTaskLabelModel;
 import com.mdove.passwordguard.singleplan.model.SinglePlanModel;
@@ -19,7 +20,10 @@ public interface SinglePlanContract {
         void onClickInEtSinglePlan();
 
         void onClickBack();
+
         void onClickEtPlan();
+
+        void onClickSeeAllPlan(MainTodayPlan model);
 
         void onClickDeleteSinglePlan(long id);
     }

@@ -48,6 +48,10 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".home.allplan.AllTodayPlanActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".home.ettodayplan.EtTodayPlanActivity"
             android:launchMode="singleTask"
