@@ -88,7 +88,7 @@ public class TodayReViewPresenter implements TodayReViewContract.Presenter {
     public void onClickTodayReViewSuc(BaseTodayReViewVM vm) {
         long id = vm.mId.get();
         long time = new Date().getTime();
-        int hour = DateUtils.getHour(time);
+        int hour = DateUtils.getHour();
         int min = DateUtils.getMinute(time);
 
         if (vm instanceof MainTodayReViewModelVM) {
@@ -97,10 +97,10 @@ public class TodayReViewPresenter implements TodayReViewContract.Presenter {
             int mIsSucStatus = -1;
 
             if (mainTodayPlan.mIsSuc == 0) {
-                if (hour > mainTodayPlan.startHour ||
+                if (hour < mainTodayPlan.startHour ||
                         (hour == mainTodayPlan.startHour && min < mainTodayPlan.startMin)) {
                     mIsSucStatus = BaseTodayReViewModel.DEFAULT_SUC_NO_AT_TIME_PRE;
-                } else if (hour < mainTodayPlan.endHour ||
+                } else if (hour > mainTodayPlan.endHour ||
                         (hour == mainTodayPlan.endHour && min > mainTodayPlan.startMin)) {
                     mIsSucStatus = BaseTodayReViewModel.DEFAULT_SUC_NO_AT_TIME_LAST;
                 } else {
@@ -122,10 +122,10 @@ public class TodayReViewPresenter implements TodayReViewContract.Presenter {
             int mIsSucStatus = -1;
 
             if (secondTodayPlan.mIsSuc == 0) {
-                if (hour > secondTodayPlan.startHour ||
+                if (hour < secondTodayPlan.startHour ||
                         (hour == secondTodayPlan.startHour && min < secondTodayPlan.startMin)) {
                     mIsSucStatus = BaseTodayReViewModel.DEFAULT_SUC_NO_AT_TIME_PRE;
-                } else if (hour < secondTodayPlan.endHour ||
+                } else if (hour > secondTodayPlan.endHour ||
                         (hour == secondTodayPlan.endHour && min > secondTodayPlan.startMin)) {
                     mIsSucStatus = BaseTodayReViewModel.DEFAULT_SUC_NO_AT_TIME_LAST;
                 } else {

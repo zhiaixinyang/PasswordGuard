@@ -2,22 +2,14 @@ package com.mdove.passwordguard.home.presenter;
 
 import com.mdove.passwordguard.App;
 import com.mdove.passwordguard.greendao.MainTodayPlanDao;
-import com.mdove.passwordguard.greendao.SelfTaskLabelDao;
-import com.mdove.passwordguard.greendao.SinglePlanDao;
 import com.mdove.passwordguard.greendao.entity.MainTodayPlan;
-import com.mdove.passwordguard.greendao.entity.SelfTaskLabel;
-import com.mdove.passwordguard.greendao.entity.SinglePlan;
-import com.mdove.passwordguard.home.ettodayplan.EtTodayPlanActivity;
 import com.mdove.passwordguard.home.model.HomeTimeModelVM;
 import com.mdove.passwordguard.home.presenter.contract.NewHomeContract;
 import com.mdove.passwordguard.home.todayreview.TodayReViewActivity;
-import com.mdove.passwordguard.main.newmain.dailytask.dialog.model.DailyTaskLabelModel;
 import com.mdove.passwordguard.singleplan.SinglePlanActivity;
-import com.mdove.passwordguard.task.LabelSettingActivity;
 import com.mdove.passwordguard.utils.DateUtils;
 import com.mdove.passwordguard.utils.ToastHelper;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;

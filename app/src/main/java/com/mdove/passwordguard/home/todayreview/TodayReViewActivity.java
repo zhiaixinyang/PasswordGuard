@@ -6,20 +6,15 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.LinearLayoutManager;
 
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.BaseActivity;
-import com.mdove.passwordguard.databinding.ActivityTodayReviewBinding;
-import com.mdove.passwordguard.home.todayreview.adapter.TodayReViewAdapter;
-import com.mdove.passwordguard.home.todayreview.model.BaseTodayReViewModel;
-import com.mdove.passwordguard.home.todayreview.model.MainTodayReViewModel;
-import com.mdove.passwordguard.home.todayreview.model.SecondTodayReViewModel;
-import com.mdove.passwordguard.home.todayreview.model.handler.TodayReViewHandler;
-import com.mdove.passwordguard.home.todayreview.presenter.TodayReViewPresenter;
-import com.mdove.passwordguard.home.todayreview.presenter.contract.TodayReViewContract;
-import com.mdove.passwordguard.main.presenter.contract.TodayPlanContract;
+import com.mdove.passwordguard.databinding.ActivityTodayReviewNewBinding;
+import com.mdove.passwordguard.home.todayreview.adapter.ReViewPagerAdapter;
+import com.mdove.passwordguard.home.todayreview.fragment.CustomReViewFragment;
+import com.mdove.passwordguard.home.todayreview.fragment.TodayReViewFragment;
 import com.mdove.passwordguard.utils.StatusBarUtils;
 
 import java.util.ArrayList;
@@ -29,13 +24,13 @@ import java.util.List;
  * Created by MDove on 2018/6/29.
  */
 
-public class TodayReViewActivity extends BaseActivity implements TodayReViewContract.MvpView {
+public class TodayReViewActivity extends BaseActivity {
     private static final String EXTRA_TODAY_PLAN_ID = "extra_today_plan_id";
-    private ActivityTodayReviewBinding mBinding;
-    private TodayReViewAdapter mAdapter;
-    private TodayReViewPresenter mPresenter;
-    private List<BaseTodayReViewModel> mData;
+    private ActivityTodayReviewNewBinding mBinding;
     private long mTodayPlanId;
+    private TodayReViewFragment mTodayReViewFragment;
+    private CustomReViewFragment mCustomReViewFragment;
+    private String[] mTitle = {"复盘计划", "独立复盘"};
 
     public static void start(Context context, long id) {
         Intent start = new Intent(context, TodayReViewActivity.class);
@@ -54,46 +49,18 @@ public class TodayReViewActivity extends BaseActivity implements TodayReViewCont
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_today_review);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_today_review_new);
         StatusBarUtils.setColorDiff(this, ContextCompat.getColor(this, R.color.gray_new_home));
 
         mTodayPlanId = getIntent().getLongExtra(EXTRA_TODAY_PLAN_ID, -1L);
 
-        mPresenter = new TodayReViewPresenter();
-        mPresenter.subscribe(this);
+        mTodayReViewFragment = TodayReViewFragment.newInstance(mTodayPlanId);
+        mCustomReViewFragment = CustomReViewFragment.newInstance();
+        List<Fragment> mFragments = new ArrayList<>();
+        mFragments.add(mTodayReViewFragment);
+        mFragments.add(mCustomReViewFragment);
 
-        mData = new ArrayList<>();
-        mAdapter = new TodayReViewAdapter(this, mData, mPresenter);
-
-        mBinding.rlvReview.setLayoutManager(new LinearLayoutManager(this));
-        mBinding.rlvReview.setAdapter(mAdapter);
-        mBinding.setHandler(new TodayReViewHandler(mPresenter));
-
-        mPresenter.initData(mTodayPlanId);
-    }
-
-    @Override
-    public Context getContext() {
-        return this;
-    }
-
-    @Override
-    public void initData(List<BaseTodayReViewModel> data) {
-        mAdapter.setData(data);
-    }
-
-    @Override
-    public void addMainTodayReViewReturn(MainTodayReViewModel model) {
-
-    }
-
-    @Override
-    public void addMainTodayReViewReturn(SecondTodayReViewModel model) {
-
-    }
-
-    @Override
-    public void onClickTodayReViewSuc(int position) {
-        mAdapter.notifyItemChanged(position);
+        mBinding.vp.setAdapter(new ReViewPagerAdapter(getSupportFragmentManager(), mFragments,mTitle));
+        mBinding.tb.setupWithViewPager(mBinding.vp);
     }
 }

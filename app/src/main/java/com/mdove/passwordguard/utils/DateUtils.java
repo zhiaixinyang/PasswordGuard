@@ -78,7 +78,7 @@ public class DateUtils {
     }
 
     public static int getHour() {
-        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone(TimeZone.getDefault().getDisplayName()));
+        Calendar calendar = Calendar.getInstance();
         return calendar.get(Calendar.HOUR_OF_DAY);
     }
 
