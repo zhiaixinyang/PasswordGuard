@@ -18,8 +18,19 @@ public class NewHomeHandler {
         mPresenter.onClickEtTodayPlan();
     }
 
+    public void onClickLongPlan() {
+        mPresenter.onClickLongPlan();
+    }
+
+    public void onClickEtLongPlan() {
+        mPresenter.onClickEtLongPlan();
+    }
+
     public void onClickTodayPlanReView() {
         mPresenter.onClickTodayPlanReView();
     }
 
+    public void onClickAllPlan() {
+        mPresenter.onClickAllPlan();
+    }
 }

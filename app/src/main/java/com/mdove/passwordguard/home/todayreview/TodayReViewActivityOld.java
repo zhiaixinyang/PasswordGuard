@@ -12,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.BaseActivity;
 import com.mdove.passwordguard.databinding.ActivityTodayReviewBinding;
+import com.mdove.passwordguard.databinding.ActivityTodayReviewOldBinding;
 import com.mdove.passwordguard.home.todayreview.adapter.TodayReViewAdapter;
 import com.mdove.passwordguard.home.todayreview.model.BaseTodayReViewModel;
 import com.mdove.passwordguard.home.todayreview.model.MainTodayReViewModel;
@@ -30,7 +31,7 @@ import java.util.List;
 
 public class TodayReViewActivityOld extends BaseActivity implements TodayReViewContract.MvpView {
     private static final String EXTRA_TODAY_PLAN_ID = "extra_today_plan_id";
-    private ActivityTodayReviewBinding mBinding;
+    private ActivityTodayReviewOldBinding mBinding;
     private TodayReViewAdapter mAdapter;
     private TodayReViewPresenter mPresenter;
     private List<BaseTodayReViewModel> mData;
@@ -53,7 +54,7 @@ public class TodayReViewActivityOld extends BaseActivity implements TodayReViewC
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_today_review);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_today_review_old);
         StatusBarUtils.setColorDiff(this, ContextCompat.getColor(this, R.color.gray_new_home));
 
         mTodayPlanId = getIntent().getLongExtra(EXTRA_TODAY_PLAN_ID, -1L);

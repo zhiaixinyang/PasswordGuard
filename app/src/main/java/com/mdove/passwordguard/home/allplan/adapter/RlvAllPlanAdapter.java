@@ -18,23 +18,21 @@ import com.mdove.passwordguard.home.ettodayplan.model.MainTodayPlanModel;
 import com.mdove.passwordguard.home.ettodayplan.model.SecondTodayPlanModel;
 import com.mdove.passwordguard.home.ettodayplan.model.vm.MainTodayPlanModelVM;
 import com.mdove.passwordguard.home.ettodayplan.model.vm.SecondTodayPlanModelVM;
-import com.mdove.passwordguard.singleplan.adapter.RlvTodayPlanAdapter;
 import com.mdove.passwordguard.utils.InflateUtils;
 
 import java.util.List;
 
 /**
- * Created by MDove on 2018/6/30.
+ * Created by MDove on 2018/6/27.
  */
 
-public class AllTodayPlanAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class RlvAllPlanAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int TYPE_MAIN_TODAY_PLAN = 0;
     private static final int TYPE_SECOND_TODAY_PLAN = 1;
-
     private List<BaseTodayPlanModel> mData;
     private Context mContext;
 
-    public AllTodayPlanAdapter(Context context, List<BaseTodayPlanModel> data) {
+    public RlvAllPlanAdapter(Context context, List<BaseTodayPlanModel> data) {
         mContext = context;
         mData = data;
     }
@@ -54,15 +52,15 @@ public class AllTodayPlanAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
             case TYPE_MAIN_TODAY_PLAN: {
-                return new AllTodayPlanAdapter.MainTodayPlanViewHolder((ItemNewHomeMainTodayPlanBinding)
+                return new MainTodayPlanViewHolder((ItemNewHomeMainTodayPlanBinding)
                         InflateUtils.bindingInflate(parent, R.layout.item_new_home_main_today_plan));
             }
             case TYPE_SECOND_TODAY_PLAN: {
-                return new AllTodayPlanAdapter.SecondTodayPlanViewHolder((ItemNewHomeSecondTodayPlanBinding)
+                return new SecondTodayPlanViewHolder((ItemNewHomeSecondTodayPlanBinding)
                         InflateUtils.bindingInflate(parent, R.layout.item_new_home_second_today_plan));
             }
             default: {
-                return new AllTodayPlanAdapter.MainTodayPlanViewHolder((ItemNewHomeMainTodayPlanBinding)
+                return new MainTodayPlanViewHolder((ItemNewHomeMainTodayPlanBinding)
                         InflateUtils.bindingInflate(parent, R.layout.item_new_home_main_today_plan));
             }
         }
@@ -70,10 +68,10 @@ public class AllTodayPlanAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof AllTodayPlanAdapter.MainTodayPlanViewHolder) {
-            ((AllTodayPlanAdapter.MainTodayPlanViewHolder) holder).bind(mData.get(position));
-        } else if (holder instanceof AllTodayPlanAdapter.SecondTodayPlanViewHolder) {
-            ((AllTodayPlanAdapter.SecondTodayPlanViewHolder) holder).bind(mData.get(position));
+        if (holder instanceof MainTodayPlanViewHolder) {
+            ((MainTodayPlanViewHolder) holder).bind(mData.get(position));
+        } else if (holder instanceof SecondTodayPlanViewHolder) {
+            ((SecondTodayPlanViewHolder) holder).bind(mData.get(position));
         }
     }
 

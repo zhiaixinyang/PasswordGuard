@@ -121,8 +121,11 @@
     <dimen name="pickerview_textsize">20sp</dimen>
 
     <dimen name="margin_item_single_plan">12dp</dimen>
-    <dimen name="new_home_title_size">24sp</dimen>
+    <dimen name="new_home_title_size">20sp</dimen>
     <dimen name="new_home_tips_size">14sp</dimen>
     <dimen name="new_home_card_view_corner">8dp</dimen>
     <dimen name="new_home_main_size">16sp</dimen>
+    <dimen name="new_home_item_h">80dp</dimen>
+    <dimen name="new_home_item_iv_w_h">55dp</dimen>
+    <dimen name="item_long_plan_normal_size">16sp</dimen>
 </resources>

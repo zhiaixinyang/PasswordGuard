@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="handler"
-            type="com.mdove.passwordguard.home.todayreview.model.handler.TodayReViewHandler" />
+            type="com.mdove.passwordguard.home.longplan.model.handler.LongPlanHandler" />
     </data>
 
-    <RelativeLayout
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/gray_new_home">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rlv"
+            android:layout_below="@+id/layout_title"
+            android:scrollbars="none"
+            android:overScrollMode="never"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
         <RelativeLayout
             android:id="@+id/layout_title"
@@ -33,27 +39,20 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_margin="@dimen/dp_12"
-                android:text="今日复盘"
+                android:text="长期计划"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
+            <ImageView
+                android:id="@+id/btn_et_plan"
+                android:layout_width="@dimen/dp_26"
+                android:layout_height="@dimen/dp_26"
+                android:layout_alignParentRight="true"
+                android:layout_margin="@dimen/dp_12"
+                android:src="@mipmap/ic_btn_password"
+                android:onClick="@{()->handler.onClickEtPlan()}"
+                android:tint="@color/black" />
         </RelativeLayout>
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tb"
-            android:layout_below="@+id/layout_title"
-            android:layout_width="match_parent"
-            app:tabTextColor="@color/gray"
-            app:tabIndicatorColor="@color/black"
-            app:tabMaxWidth="80dp"
-            app:tabIndicatorHeight="2dp"
-            app:tabSelectedTextColor="@color/black"
-            android:layout_height="wrap_content"/>
-        <android.support.v4.view.ViewPager
-            android:id="@+id/vp"
-            android:layout_below="@+id/tb"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
     </RelativeLayout>
-
 </layout>

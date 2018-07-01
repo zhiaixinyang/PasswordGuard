@@ -240,14 +240,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_toLeftOf="@+id/btn_time"
+                            android:layout_toLeftOf="@+id/iv_time"
                             android:text="9:00-11:00"
                             android:textColor="@color/gray"
                             android:textSize="18sp"
                             app:customFont="@string/font_regular" />
 
                         <ImageView
-                            android:id="@+id/btn_time"
+                            android:id="@+id/iv_time"
                             android:layout_width="@dimen/dp_24"
                             android:layout_height="@dimen/dp_24"
                             android:layout_alignParentRight="true"

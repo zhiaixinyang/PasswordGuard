@@ -93,6 +93,6 @@ public class TodayReViewFragment extends Fragment implements TodayReViewContract
 
     @Override
     public void onClickTodayReViewSuc(int position) {
-
+        mAdapter.notifyItemChanged(position);
     }
 }

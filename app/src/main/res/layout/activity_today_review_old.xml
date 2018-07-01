@@ -7,7 +7,7 @@
 
         <variable
             name="handler"
-            type="com.mdove.passwordguard.home.alltodayplan.model.AllTodayPlanHandler" />
+            type="com.mdove.passwordguard.home.todayreview.model.handler.TodayReViewHandler" />
     </data>
 
     <RelativeLayout
@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_margin="@dimen/dp_12"
-                android:text="计划详情"
+                android:text="今日复盘"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
@@ -53,7 +53,8 @@
             <RelativeLayout
                 android:id="@+id/layout_main"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                >
 
                 <ImageView
                     android:id="@+id/iv_icon"
@@ -61,19 +62,19 @@
                     android:layout_height="42dp"
                     android:layout_centerHorizontal="true"
                     android:layout_margin="@dimen/dp_18"
-                    android:src="@mipmap/ic_bg_all_plan" />
+                    android:src="@mipmap/ic_bg_review" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/iv_icon"
                     android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/iv_icon"
                     android:layout_marginLeft="@dimen/dp_12"
                     android:layout_marginRight="@dimen/dp_12"
                     android:background="@drawable/bg_new_home_today_plan">
 
                     <android.support.v7.widget.RecyclerView
-                        android:id="@+id/rlv_all_plan"
+                        android:id="@+id/rlv_review"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingTop="@dimen/dp_12"

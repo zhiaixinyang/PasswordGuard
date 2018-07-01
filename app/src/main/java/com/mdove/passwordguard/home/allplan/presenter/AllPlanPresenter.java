@@ -1,14 +1,15 @@
-package com.mdove.passwordguard.singleplan.presenter;
+package com.mdove.passwordguard.home.allplan.presenter;
 
 import com.mdove.passwordguard.App;
 import com.mdove.passwordguard.greendao.MainTodayPlanDao;
 import com.mdove.passwordguard.greendao.SecondTodayPlanDao;
 import com.mdove.passwordguard.greendao.entity.MainTodayPlan;
 import com.mdove.passwordguard.greendao.entity.SecondTodayPlan;
+import com.mdove.passwordguard.home.allplan.model.AllPlanModel;
+import com.mdove.passwordguard.home.allplan.presenter.contract.AllPlanContract;
 import com.mdove.passwordguard.home.alltodayplan.AllTodayPlanActivity;
 import com.mdove.passwordguard.home.ettodayplan.EtTodayPlanActivity;
 import com.mdove.passwordguard.singleplan.model.SinglePlanModel;
-import com.mdove.passwordguard.singleplan.presenter.contract.SinglePlanContract;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,20 +18,20 @@ import java.util.List;
  * Created by MDove on 2018/6/24.
  */
 
-public class SinglePlanPresenter implements SinglePlanContract.Presenter {
-    private SinglePlanContract.MvpView mView;
+public class AllPlanPresenter implements AllPlanContract.Presenter {
+    private AllPlanContract.MvpView mView;
     private MainTodayPlanDao mMainTodayPlanDao;
     private SecondTodayPlanDao mSecondTodayPlanDao;
 
-    private List<SinglePlanModel> mData;
+    private List<AllPlanModel> mData;
 
-    public SinglePlanPresenter() {
+    public AllPlanPresenter() {
         mMainTodayPlanDao = App.getDaoSession().getMainTodayPlanDao();
         mSecondTodayPlanDao = App.getDaoSession().getSecondTodayPlanDao();
     }
 
     @Override
-    public void subscribe(SinglePlanContract.MvpView view) {
+    public void subscribe(AllPlanContract.MvpView view) {
         mView = view;
     }
 
@@ -45,22 +46,13 @@ public class SinglePlanPresenter implements SinglePlanContract.Presenter {
 
         List<MainTodayPlan> mMainData = mMainTodayPlanDao.queryBuilder().list();
 
-        if (mMainData == null || mMainData.size() == 0) {
-            mData.add(new SinglePlanModel(null, null));
-        }
-
         for (MainTodayPlan mainTodayPlan : mMainData) {
             List<SecondTodayPlan> mSecondData = mSecondTodayPlanDao.queryBuilder().where(SecondTodayPlanDao.Properties.MMainTodayPlanId.
                     eq(mainTodayPlan.getId())).build().list();
-            mData.add(new SinglePlanModel(mainTodayPlan, mSecondData));
+            mData.add(new AllPlanModel(mainTodayPlan, mSecondData));
         }
 
         mView.initData(mData);
-    }
-
-    @Override
-    public void onClickInEtSinglePlan() {
-        EtTodayPlanActivity.start(mView.getContext());
     }
 
     @Override
@@ -71,14 +63,5 @@ public class SinglePlanPresenter implements SinglePlanContract.Presenter {
     @Override
     public void onClickEtPlan() {
         EtTodayPlanActivity.start(mView.getContext());
-    }
-
-    @Override
-    public void onClickSeeAllPlan(MainTodayPlan model) {
-        AllTodayPlanActivity.start(mView.getContext(), model.id);
-    }
-
-    @Override
-    public void onClickDeleteSinglePlan(long id) {
     }
 }

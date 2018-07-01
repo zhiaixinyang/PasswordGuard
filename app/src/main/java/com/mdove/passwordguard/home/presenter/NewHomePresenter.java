@@ -3,6 +3,9 @@ package com.mdove.passwordguard.home.presenter;
 import com.mdove.passwordguard.App;
 import com.mdove.passwordguard.greendao.MainTodayPlanDao;
 import com.mdove.passwordguard.greendao.entity.MainTodayPlan;
+import com.mdove.passwordguard.home.allplan.AllPlanActivity;
+import com.mdove.passwordguard.home.longplan.EtLongPlanActivity;
+import com.mdove.passwordguard.home.longplan.LongPlanActivity;
 import com.mdove.passwordguard.home.model.HomeTimeModelVM;
 import com.mdove.passwordguard.home.presenter.contract.NewHomeContract;
 import com.mdove.passwordguard.home.todayreview.TodayReViewActivity;
@@ -54,13 +57,14 @@ public class NewHomePresenter implements NewHomeContract.Presenter {
     public void onClickTodayPlanReView() {
         long time = new Date().getTime();
         int year = DateUtils.getYear(time);
-        int month = DateUtils.getMonth(time);
+        int month = DateUtils.getMonth(time) - 1;
         int days = DateUtils.getDay(time);
 
         Calendar calendar = Calendar.getInstance();
         calendar.clear();
         calendar.set(year, month, days);
         long curTime = calendar.getTimeInMillis();
+        //计算时候月份要按从0开始，才是正确的
         calendar.set(year, month, days + 1);
         long nextTime = calendar.getTimeInMillis();
 
@@ -71,5 +75,20 @@ public class NewHomePresenter implements NewHomeContract.Presenter {
         } else {
             ToastHelper.shortToast("今天还没有任何计划");
         }
+    }
+
+    @Override
+    public void onClickAllPlan() {
+        AllPlanActivity.start(mView.getContext());
+    }
+
+    @Override
+    public void onClickEtLongPlan() {
+        EtLongPlanActivity.start(mView.getContext());
+    }
+
+    @Override
+    public void onClickLongPlan() {
+        LongPlanActivity.start(mView.getContext());
     }
 }

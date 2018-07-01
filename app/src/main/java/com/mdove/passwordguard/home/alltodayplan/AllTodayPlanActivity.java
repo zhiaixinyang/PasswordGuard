@@ -1,4 +1,4 @@
-package com.mdove.passwordguard.home.allplan;
+package com.mdove.passwordguard.home.alltodayplan;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,11 +12,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.BaseActivity;
 import com.mdove.passwordguard.databinding.ActivityAllTodayPlanBinding;
-import com.mdove.passwordguard.home.allplan.adapter.AllTodayPlanAdapter;
-import com.mdove.passwordguard.home.allplan.model.AllTodayPlanHandler;
-import com.mdove.passwordguard.home.allplan.presenter.AllTodayPlanPresenter;
-import com.mdove.passwordguard.home.allplan.presenter.contract.AllTodayPlanContract;
-import com.mdove.passwordguard.home.ettodayplan.EtTodayPlanActivity;
+import com.mdove.passwordguard.home.alltodayplan.adapter.AllTodayPlanAdapter;
+import com.mdove.passwordguard.home.alltodayplan.model.AllTodayPlanHandler;
+import com.mdove.passwordguard.home.alltodayplan.presenter.AllTodayPlanPresenter;
+import com.mdove.passwordguard.home.alltodayplan.presenter.contract.AllTodayPlanContract;
 import com.mdove.passwordguard.home.ettodayplan.model.BaseTodayPlanModel;
 import com.mdove.passwordguard.utils.StatusBarUtils;
 

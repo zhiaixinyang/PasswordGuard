@@ -11,7 +11,7 @@ import android.support.v4.content.ContextCompat;
 
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.BaseActivity;
-import com.mdove.passwordguard.databinding.ActivityTodayReviewNewBinding;
+import com.mdove.passwordguard.databinding.ActivityTodayReviewBinding;
 import com.mdove.passwordguard.home.todayreview.adapter.ReViewPagerAdapter;
 import com.mdove.passwordguard.home.todayreview.fragment.CustomReViewFragment;
 import com.mdove.passwordguard.home.todayreview.fragment.TodayReViewFragment;
@@ -26,7 +26,7 @@ import java.util.List;
 
 public class TodayReViewActivity extends BaseActivity {
     private static final String EXTRA_TODAY_PLAN_ID = "extra_today_plan_id";
-    private ActivityTodayReviewNewBinding mBinding;
+    private ActivityTodayReviewBinding mBinding;
     private long mTodayPlanId;
     private TodayReViewFragment mTodayReViewFragment;
     private CustomReViewFragment mCustomReViewFragment;
@@ -49,7 +49,7 @@ public class TodayReViewActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_today_review_new);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_today_review);
         StatusBarUtils.setColorDiff(this, ContextCompat.getColor(this, R.color.gray_new_home));
 
         mTodayPlanId = getIntent().getLongExtra(EXTRA_TODAY_PLAN_ID, -1L);

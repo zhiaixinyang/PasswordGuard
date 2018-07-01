@@ -1,6 +1,6 @@
-package com.mdove.passwordguard.home.allplan.model;
+package com.mdove.passwordguard.home.alltodayplan.model;
 
-import com.mdove.passwordguard.home.allplan.presenter.AllTodayPlanPresenter;
+import com.mdove.passwordguard.home.alltodayplan.presenter.AllTodayPlanPresenter;
 
 /**
  * Created by MDove on 2018/6/30.

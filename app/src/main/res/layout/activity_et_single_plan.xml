@@ -127,7 +127,7 @@
                 android:id="@+id/et_plan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/btn_time"
+                android:layout_alignBottom="@+id/iv_time"
                 android:layout_marginLeft="@dimen/main_margin"
                 android:layout_marginRight="@dimen/main_margin"
                 android:layout_alignTop="@+id/btn_send"
@@ -167,7 +167,7 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/btn_time"
+                android:id="@+id/iv_time"
                 android:layout_width="80dp"
                 android:layout_height="30dp"
                 android:layout_alignParentRight="true"

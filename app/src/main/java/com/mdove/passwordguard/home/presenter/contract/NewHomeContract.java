@@ -18,6 +18,9 @@ public interface NewHomeContract {
 
         void onClickEtTodayPlan();
         void onClickTodayPlanReView();
+        void onClickAllPlan();
+        void onClickEtLongPlan();
+        void onClickLongPlan();
     }
 
     interface MvpView extends BaseView<Presenter> {

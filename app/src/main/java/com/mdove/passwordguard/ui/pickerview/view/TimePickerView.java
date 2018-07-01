@@ -513,7 +513,6 @@ public class TimePickerView extends BasePickerView implements View.OnClickListen
                 e.printStackTrace();
             }
         }
-        dismiss();
     }
 
     public interface OnTimeSelectListener {
