@@ -48,23 +48,38 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".home.allplan.AllPlanActivity"
+        <activity
+            android:name=".home.allplan.AllPlanActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".home.longplan.LongPlanActivity"
+        <activity
+            android:name=".home.longplan.LongPlanActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".home.longplan.EtLongPlanActivity"
+        <activity
+            android:name=".home.longplan.EtLongPlanActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".home.alltodayplan.AllTodayPlanActivity"
+        <activity
+            android:name=".home.schedule.EtScheduleActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".home.todayreview.TodayReViewActivity"
+        <activity
+            android:name=".home.schedule.ScheduleActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".home.alltodayplan.AllTodayPlanActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".home.todayreview.TodayReViewActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 

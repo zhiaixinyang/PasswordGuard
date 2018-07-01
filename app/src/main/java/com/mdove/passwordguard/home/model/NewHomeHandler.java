@@ -14,8 +14,8 @@ public class NewHomeHandler {
         mPresenter = presenter;
     }
 
-    public void onClickEtTodayPlan() {
-        mPresenter.onClickEtTodayPlan();
+    public void onClickSchedule() {
+        mPresenter.onClickSchedule();
     }
 
     public void onClickLongPlan() {

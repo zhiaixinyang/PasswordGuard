@@ -8,6 +8,7 @@ import com.mdove.passwordguard.home.longplan.EtLongPlanActivity;
 import com.mdove.passwordguard.home.longplan.LongPlanActivity;
 import com.mdove.passwordguard.home.model.HomeTimeModelVM;
 import com.mdove.passwordguard.home.presenter.contract.NewHomeContract;
+import com.mdove.passwordguard.home.schedule.ScheduleActivity;
 import com.mdove.passwordguard.home.todayreview.TodayReViewActivity;
 import com.mdove.passwordguard.singleplan.SinglePlanActivity;
 import com.mdove.passwordguard.utils.DateUtils;
@@ -49,8 +50,8 @@ public class NewHomePresenter implements NewHomeContract.Presenter {
     }
 
     @Override
-    public void onClickEtTodayPlan() {
-        SinglePlanActivity.start(mView.getContext());
+    public void onClickSchedule() {
+        ScheduleActivity.start(mView.getContext());
     }
 
     @Override

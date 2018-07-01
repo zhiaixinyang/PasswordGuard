@@ -16,7 +16,7 @@ public interface NewHomeContract {
     interface Presenter extends BasePresenter<NewHomeContract.MvpView> {
         void initTime();
 
-        void onClickEtTodayPlan();
+        void onClickSchedule();
         void onClickTodayPlanReView();
         void onClickAllPlan();
         void onClickEtLongPlan();

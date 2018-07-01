@@ -186,7 +186,7 @@
             android:layout_marginBottom="@dimen/new_home_main_margin"
             android:layout_marginLeft="@dimen/new_home_main_margin"
             android:layout_marginRight="@dimen/new_home_main_margin"
-            android:onClick="@{()->handler.onClickEtLongPlan()}"
+            android:onClick="@{()->handler.onClickSchedule()}"
             app:cardCornerRadius="8dp">
 
             <RelativeLayout

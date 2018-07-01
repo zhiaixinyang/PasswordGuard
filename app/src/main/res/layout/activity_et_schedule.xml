@@ -7,7 +7,7 @@
 
         <variable
             name="handler"
-            type="com.mdove.passwordguard.home.longplan.model.handler.EtLongPlanHandler" />
+            type="com.mdove.passwordguard.home.schedule.model.handler.EtScheduleHandler" />
     </data>
 
 
@@ -34,17 +34,18 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_margin="@dimen/dp_12"
-                android:text="添加长期计划"
+                android:text="添加日程安排"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
             <ImageView
-                android:id="@+id/btn_send"
+                android:id="@+id/btn_delete"
                 android:layout_width="@dimen/dp_26"
                 android:layout_height="@dimen/dp_26"
+                android:visibility="gone"
                 android:layout_alignParentRight="true"
                 android:layout_margin="@dimen/dp_12"
-                android:src="@mipmap/ic_btn_send"
+                android:src="@mipmap/ic_delete"
                 android:tint="@color/black" />
         </RelativeLayout>
 
@@ -67,11 +68,11 @@
 
                 <ImageView
                     android:id="@+id/iv_icon"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_centerHorizontal="true"
                     android:layout_margin="@dimen/dp_18"
-                    android:src="@mipmap/ic_today_plan" />
+                    android:src="@mipmap/ic_bg_schedule" />
 
                 <RelativeLayout
                     android:id="@+id/layout_urgent"
@@ -138,68 +139,43 @@
                         app:bsb_track_size="3dp" />
                 </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/tv_time_tips"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/layout_important"
-                    android:layout_centerVertical="true"
-                    android:layout_marginBottom="@dimen/dp_12"
-                    android:layout_marginLeft="@dimen/dp_24"
-                    android:layout_marginRight="@dimen/dp_24"
-                    android:layout_marginTop="@dimen/dp_12"
-                    android:text="计划周期"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/new_home_main_size" />
-                <ImageView
-                    android:id="@+id/iv_time"
-                    android:layout_width="@dimen/dp_18"
-                    android:layout_height="@dimen/dp_18"
-                    android:layout_alignParentRight="true"
-                    android:layout_below="@+id/tv_time_tips"
-                    android:src="@mipmap/ic_btn_right"
-                    android:layout_marginBottom="@dimen/dp_12"
-                    android:layout_marginRight="@dimen/dp_24"
-                    android:tint="@color/gray" />
                 <RelativeLayout
                     android:id="@+id/layout_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_time_tips"
-                    android:layout_toLeftOf="@+id/iv_time"
+                    android:layout_below="@+id/layout_important"
                     android:layout_marginBottom="@dimen/dp_12"
                     android:layout_marginLeft="@dimen/dp_24"
-                    android:layout_marginRight="@dimen/dp_8"
-                    android:gravity="center">
+                    android:layout_marginRight="@dimen/dp_24"
+                    android:layout_marginTop="@dimen/dp_12"
+                    android:onClick="@{()->handler.onClickTime()}">
 
-                    <com.mdove.passwordguard.ui.TextViewPlus
-                        android:id="@+id/tv_time_start"
+                    <TextView
                         android:layout_width="wrap_content"
-                        android:onClick="@{()->handler.onClickStartTimePicker()}"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:textColor="@color/gray"
-                        android:textSize="16sp"
-                        app:customFont="@string/font_regular"
-                        tools:text="2018年7月1日" />
-
-                    <View
-                        android:layout_width="10dp"
-                        android:layout_height="1.2dp"
-                        android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
-                        android:background="@color/gray" />
+                        android:text="执行时间"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/new_home_main_size" />
 
                     <com.mdove.passwordguard.ui.TextViewPlus
-                        android:id="@+id/tv_time_end"
+                        android:id="@+id/tv_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:onClick="@{()->handler.onClickEndTimePicker()}"
-                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/iv_time"
+                        android:text="9:00-11:00"
                         android:textColor="@color/gray"
-                        android:textSize="16sp"
-                        app:customFont="@string/font_regular"
-                        tools:text="2018年7月8日" />
+                        android:textSize="18sp"
+                        app:customFont="@string/font_regular" />
+
+                    <ImageView
+                        android:id="@+id/iv_time"
+                        android:layout_width="@dimen/dp_22"
+                        android:layout_height="@dimen/dp_22"
+                        android:layout_alignParentRight="true"
+                        android:src="@mipmap/ic_btn_right"
+                        android:tint="@color/gray" />
                 </RelativeLayout>
 
                 <TextView
@@ -237,7 +213,7 @@
                     android:layout_marginBottom="@dimen/dp_12"
                     android:layout_marginLeft="@dimen/dp_24"
                     android:layout_marginRight="@dimen/dp_24"
-                    android:text="填写计划"
+                    android:text="填写日程安排"
                     android:textColor="@color/black"
                     android:textSize="@dimen/new_home_main_size" />
 
@@ -245,14 +221,14 @@
                     android:id="@+id/et_plan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_plan_tips"
                     android:layout_above="@+id/btn_send_in"
+                    android:layout_below="@+id/tv_plan_tips"
                     android:layout_marginBottom="@dimen/dp_12"
                     android:layout_marginLeft="@dimen/dp_24"
                     android:layout_marginRight="@dimen/dp_24"
                     android:background="@drawable/bg_new_home_today_plan"
                     android:gravity="center"
-                    android:hint="在此处添加计划"
+                    android:hint="在此处添加日程安排"
                     android:paddingBottom="@dimen/dp_8"
                     android:paddingLeft="@dimen/dp_12"
                     android:paddingRight="@dimen/dp_12"
@@ -260,24 +236,26 @@
                     android:textColor="@color/black"
                     android:textColorHint="@color/gray"
                     android:textSize="@dimen/new_home_main_size" />
+
                 <android.support.v7.widget.CardView
                     android:id="@+id/btn_send_in"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/dp_12"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentBottom="true"
-                    app:cardBackgroundColor="@color/gray_light"
-                    android:layout_marginRight="@dimen/dp_24">
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="@dimen/dp_12"
+                    android:layout_marginRight="@dimen/dp_24"
+                    app:cardBackgroundColor="@color/gray_light">
+
                     <TextView
                         android:id="@+id/tv_send_in"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="添加计划"
                         android:paddingBottom="3dp"
-                        android:paddingTop="3dp"
-                        android:paddingRight="@dimen/dp_8"
                         android:paddingLeft="@dimen/dp_8"
+                        android:paddingRight="@dimen/dp_8"
+                        android:paddingTop="3dp"
+                        android:text="添加日程"
                         android:textColor="@color/white"
                         android:textSize="@dimen/new_home_main_size" />
                 </android.support.v7.widget.CardView>
