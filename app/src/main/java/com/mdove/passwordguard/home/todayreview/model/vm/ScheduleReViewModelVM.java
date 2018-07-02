@@ -10,16 +10,24 @@ import com.mdove.passwordguard.utils.DateUtils;
  * Created by MDove on 2018/7/2.
  */
 
-public class ScheduleReViewModelVM {
+public class ScheduleReViewModelVM extends BaseTodayReViewVM {
     public ObservableField<String> mTime = new ObservableField<>();
     public ObservableField<String> mSchedule = new ObservableField<>();
     public ObservableField<String> mSelectTime = new ObservableField<>();
     public ObservableField<String> mUrgent = new ObservableField<>();
     public ObservableField<String> mImportant = new ObservableField<>();
     public ObservableField<String> mTips = new ObservableField<>();
-    public ObservableField<Long> mId = new ObservableField<>();
 
     public ScheduleReViewModelVM(ScheduleReViewModel model) {
+        mSucEnable.set(model.mIsSuc);
+        if (model.mIsSuc>0) {
+            mIsSuc.set(true);
+        }else{
+            mIsSuc.set(false);
+        }
+
+        mId.set(model.mId);
+
         mTime.set("记录于：[" + DateUtils.getDateChinese(model.mTime) + "]");
         mSchedule.set(model.mSchedule);
         mSelectTime.set(model.mSelectTime);

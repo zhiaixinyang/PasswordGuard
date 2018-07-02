@@ -139,8 +139,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_alignBottom="@+id/layout_select_time"
-                    android:layout_marginTop="@dimen/dp_12"
+                    android:layout_alignBottom="@+id/tv_time_tip"
                     android:text="@{vm.mTime}"
                     android:textColor="@color/gray_plus"
                     android:textSize="12sp"
@@ -152,6 +151,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_time_tip"
                     android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
                     android:layout_marginTop="@dimen/dp_12"
                     android:gravity="center"
                     android:orientation="horizontal">

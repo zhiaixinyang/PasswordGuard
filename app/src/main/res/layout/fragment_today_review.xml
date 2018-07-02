@@ -20,8 +20,7 @@
             <RelativeLayout
                 android:id="@+id/layout_main"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
+                android:layout_height="match_parent">
 
                 <ImageView
                     android:id="@+id/iv_icon"
@@ -34,8 +33,8 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
                     android:layout_below="@+id/iv_icon"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginLeft="@dimen/dp_12"
                     android:layout_marginRight="@dimen/dp_12"
                     android:background="@drawable/bg_new_home_today_plan">
@@ -44,7 +43,9 @@
                         android:id="@+id/rlv_review"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingTop="@dimen/dp_12"
+                        android:paddingTop="@dimen/dp_8"
+                        android:scrollbars="none"
+                        android:overScrollMode="never"
                         android:textSize="20sp" />
                 </RelativeLayout>
             </RelativeLayout>

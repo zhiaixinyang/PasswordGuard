@@ -15,6 +15,10 @@ import com.mdove.passwordguard.databinding.ActivityTodayReviewBinding;
 import com.mdove.passwordguard.home.todayreview.adapter.ReViewPagerAdapter;
 import com.mdove.passwordguard.home.todayreview.fragment.CustomReViewFragment;
 import com.mdove.passwordguard.home.todayreview.fragment.ScheduleReViewFragment;
+import com.mdove.passwordguard.home.todayreview.model.handler.ActivityTodayReViewHandler;
+import com.mdove.passwordguard.home.todayreview.presenter.ActivityTodayReViewPresenter;
+import com.mdove.passwordguard.home.todayreview.presenter.contract.ActivityTodayReViewContract;
+import com.mdove.passwordguard.home.todayreview.presenter.contract.TodayReViewContract;
 import com.mdove.passwordguard.utils.StatusBarUtils;
 
 import java.util.ArrayList;
@@ -24,10 +28,11 @@ import java.util.List;
  * Created by MDove on 2018/6/29.
  */
 
-public class TodayReViewActivity extends BaseActivity {
+public class TodayReViewActivity extends BaseActivity implements ActivityTodayReViewContract.MvpView{
     private static final String EXTRA_TODAY_PLAN_ID = "extra_today_plan_id";
     private ActivityTodayReviewBinding mBinding;
     private long mTodayPlanId;
+    private ActivityTodayReViewPresenter mPresenter;
     private ScheduleReViewFragment mScheduleReViewFragment;
     private CustomReViewFragment mCustomReViewFragment;
     private String[] mTitle = {"复盘计划", "独立复盘"};
@@ -55,6 +60,9 @@ public class TodayReViewActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_today_review);
         StatusBarUtils.setColorDiff(this, ContextCompat.getColor(this, R.color.gray_new_home));
+        mPresenter=new ActivityTodayReViewPresenter();
+        mPresenter.subscribe(this);
+        mBinding.setHandler(new ActivityTodayReViewHandler(mPresenter));
 
         mTodayPlanId = getIntent().getLongExtra(EXTRA_TODAY_PLAN_ID, -1L);
 
@@ -66,5 +74,10 @@ public class TodayReViewActivity extends BaseActivity {
 
         mBinding.vp.setAdapter(new ReViewPagerAdapter(getSupportFragmentManager(), mFragments, mTitle));
         mBinding.tb.setupWithViewPager(mBinding.vp);
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
     }
 }

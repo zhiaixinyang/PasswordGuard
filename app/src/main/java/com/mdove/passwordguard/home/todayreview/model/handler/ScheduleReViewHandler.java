@@ -2,27 +2,21 @@ package com.mdove.passwordguard.home.todayreview.model.handler;
 
 import com.mdove.passwordguard.home.schedule.model.vm.ScheduleModelVM;
 import com.mdove.passwordguard.home.schedule.presenter.SchedulePresenter;
+import com.mdove.passwordguard.home.todayreview.model.vm.BaseTodayReViewVM;
+import com.mdove.passwordguard.home.todayreview.presenter.TodayReViewPresenter;
 
 /**
  * Created by MDove on 2018/7/2.
  */
 
 public class ScheduleReViewHandler {
-    private SchedulePresenter mPlanPresenter;
+    private TodayReViewPresenter mPresenter;
 
-    public ScheduleReViewHandler(SchedulePresenter planPresenter) {
-        mPlanPresenter = planPresenter;
+    public ScheduleReViewHandler(TodayReViewPresenter planPresenter) {
+        mPresenter = planPresenter;
     }
 
-    public void onClickBack() {
-        mPlanPresenter.onClickBack();
-    }
-
-    public void onClickEtSchedule() {
-        mPlanPresenter.onClickEtSchedule();
-    }
-
-    public void onClickEditSchedule(ScheduleModelVM vm) {
-        mPlanPresenter.onClickEditSchedule(vm.mId.get());
+    public void onClickTodayReViewSuc(BaseTodayReViewVM vm) {
+        mPresenter.onClickTodayReViewSuc(vm);
     }
 }

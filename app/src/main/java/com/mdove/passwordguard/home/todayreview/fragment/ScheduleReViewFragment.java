@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.databinding.FragmentTodayReviewBinding;
+import com.mdove.passwordguard.home.todayreview.adapter.ScheduleReViewAdapter;
 import com.mdove.passwordguard.home.todayreview.adapter.TodayReViewAdapter;
 import com.mdove.passwordguard.home.todayreview.model.BaseTodayReViewModel;
 import com.mdove.passwordguard.home.todayreview.model.MainTodayReViewModel;
@@ -29,7 +30,7 @@ public class ScheduleReViewFragment extends Fragment implements TodayReViewContr
     private static final String EXTRA_TODAY_PLAN_ID = "extra_today_plan_id";
 
     private FragmentTodayReviewBinding mBinding;
-    private TodayReViewAdapter mAdapter;
+    private ScheduleReViewAdapter mAdapter;
     private TodayReViewPresenter mPresenter;
     private List<BaseTodayReViewModel> mData;
     private long mTodayPlanId = -1;
@@ -59,14 +60,12 @@ public class ScheduleReViewFragment extends Fragment implements TodayReViewContr
         mPresenter.subscribe(this);
 
         mData = new ArrayList<>();
-        mAdapter = new TodayReViewAdapter(getContext(), mData, mPresenter);
+        mAdapter = new ScheduleReViewAdapter(getContext(), mData, mPresenter);
 
         mBinding.rlvReview.setLayoutManager(new LinearLayoutManager(getContext()));
         mBinding.rlvReview.setAdapter(mAdapter);
 
-        if (mTodayPlanId != -1) {
-            mPresenter.initData(mTodayPlanId);
-        }
+        mPresenter.initData(mTodayPlanId);
     }
 
     @Override

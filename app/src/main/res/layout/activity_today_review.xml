@@ -7,7 +7,7 @@
 
         <variable
             name="handler"
-            type="com.mdove.passwordguard.home.todayreview.model.handler.TodayReViewHandler" />
+            type="com.mdove.passwordguard.home.todayreview.model.handler.ActivityTodayReViewHandler" />
     </data>
 
     <RelativeLayout
