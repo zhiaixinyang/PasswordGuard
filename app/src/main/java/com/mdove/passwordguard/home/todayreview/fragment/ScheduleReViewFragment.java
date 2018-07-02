@@ -10,13 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mdove.passwordguard.R;
-import com.mdove.passwordguard.databinding.FragmentTodayPlanBinding;
 import com.mdove.passwordguard.databinding.FragmentTodayReviewBinding;
 import com.mdove.passwordguard.home.todayreview.adapter.TodayReViewAdapter;
 import com.mdove.passwordguard.home.todayreview.model.BaseTodayReViewModel;
 import com.mdove.passwordguard.home.todayreview.model.MainTodayReViewModel;
 import com.mdove.passwordguard.home.todayreview.model.SecondTodayReViewModel;
-import com.mdove.passwordguard.home.todayreview.model.handler.TodayReViewHandler;
 import com.mdove.passwordguard.home.todayreview.presenter.TodayReViewPresenter;
 import com.mdove.passwordguard.home.todayreview.presenter.contract.TodayReViewContract;
 
@@ -27,7 +25,7 @@ import java.util.List;
  * Created by MDove on 2018/6/30.
  */
 
-public class TodayReViewFragment extends Fragment implements TodayReViewContract.MvpView {
+public class ScheduleReViewFragment extends Fragment implements TodayReViewContract.MvpView {
     private static final String EXTRA_TODAY_PLAN_ID = "extra_today_plan_id";
 
     private FragmentTodayReviewBinding mBinding;
@@ -36,11 +34,11 @@ public class TodayReViewFragment extends Fragment implements TodayReViewContract
     private List<BaseTodayReViewModel> mData;
     private long mTodayPlanId = -1;
 
-    public static TodayReViewFragment newInstance(long id) {
+    public static ScheduleReViewFragment newInstance(long id) {
         Bundle args = new Bundle();
         args.putLong(EXTRA_TODAY_PLAN_ID, id);
 
-        TodayReViewFragment fragment = new TodayReViewFragment();
+        ScheduleReViewFragment fragment = new ScheduleReViewFragment();
         fragment.setArguments(args);
         return fragment;
     }

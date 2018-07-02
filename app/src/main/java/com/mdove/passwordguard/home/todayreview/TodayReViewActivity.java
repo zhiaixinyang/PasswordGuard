@@ -14,7 +14,7 @@ import com.mdove.passwordguard.base.BaseActivity;
 import com.mdove.passwordguard.databinding.ActivityTodayReviewBinding;
 import com.mdove.passwordguard.home.todayreview.adapter.ReViewPagerAdapter;
 import com.mdove.passwordguard.home.todayreview.fragment.CustomReViewFragment;
-import com.mdove.passwordguard.home.todayreview.fragment.TodayReViewFragment;
+import com.mdove.passwordguard.home.todayreview.fragment.ScheduleReViewFragment;
 import com.mdove.passwordguard.utils.StatusBarUtils;
 
 import java.util.ArrayList;
@@ -28,9 +28,13 @@ public class TodayReViewActivity extends BaseActivity {
     private static final String EXTRA_TODAY_PLAN_ID = "extra_today_plan_id";
     private ActivityTodayReviewBinding mBinding;
     private long mTodayPlanId;
-    private TodayReViewFragment mTodayReViewFragment;
+    private ScheduleReViewFragment mScheduleReViewFragment;
     private CustomReViewFragment mCustomReViewFragment;
     private String[] mTitle = {"复盘计划", "独立复盘"};
+
+    public static void start(Context context) {
+        start(context, -1L);
+    }
 
     public static void start(Context context, long id) {
         Intent start = new Intent(context, TodayReViewActivity.class);
@@ -54,13 +58,13 @@ public class TodayReViewActivity extends BaseActivity {
 
         mTodayPlanId = getIntent().getLongExtra(EXTRA_TODAY_PLAN_ID, -1L);
 
-        mTodayReViewFragment = TodayReViewFragment.newInstance(mTodayPlanId);
+        mScheduleReViewFragment = ScheduleReViewFragment.newInstance(mTodayPlanId);
         mCustomReViewFragment = CustomReViewFragment.newInstance();
         List<Fragment> mFragments = new ArrayList<>();
-        mFragments.add(mTodayReViewFragment);
+        mFragments.add(mScheduleReViewFragment);
         mFragments.add(mCustomReViewFragment);
 
-        mBinding.vp.setAdapter(new ReViewPagerAdapter(getSupportFragmentManager(), mFragments,mTitle));
+        mBinding.vp.setAdapter(new ReViewPagerAdapter(getSupportFragmentManager(), mFragments, mTitle));
         mBinding.tb.setupWithViewPager(mBinding.vp);
     }
 }

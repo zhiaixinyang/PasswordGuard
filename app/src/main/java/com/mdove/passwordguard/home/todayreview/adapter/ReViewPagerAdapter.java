@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.List;
 
 /**
- * Created by MBENBEN on 2018/6/30.
+ * Created by MDove on 2018/6/30.
  */
 
 public class ReViewPagerAdapter extends FragmentPagerAdapter {

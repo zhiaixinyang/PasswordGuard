@@ -56,26 +56,28 @@ public class NewHomePresenter implements NewHomeContract.Presenter {
 
     @Override
     public void onClickTodayPlanReView() {
-        long time = new Date().getTime();
-        int year = DateUtils.getYear(time);
-        int month = DateUtils.getMonth(time) - 1;
-        int days = DateUtils.getDay(time);
+        TodayReViewActivity.start(mView.getContext());
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.clear();
-        calendar.set(year, month, days);
-        long curTime = calendar.getTimeInMillis();
-        //计算时候月份要按从0开始，才是正确的
-        calendar.set(year, month, days + 1);
-        long nextTime = calendar.getTimeInMillis();
-
-        List<MainTodayPlan> planData = mMainTodayPlanDao.queryBuilder().where(MainTodayPlanDao.Properties.MTime.ge(curTime),
-                MainTodayPlanDao.Properties.MTime.lt(nextTime)).build().list();
-        if (planData != null && planData.size() > 0) {
-            TodayReViewActivity.start(mView.getContext(), planData.get(0).id);
-        } else {
-            ToastHelper.shortToast("今天还没有任何计划");
-        }
+//        long time = new Date().getTime();
+//        int year = DateUtils.getYear(time);
+//        int month = DateUtils.getMonth(time) - 1;
+//        int days = DateUtils.getDay(time);
+//
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.clear();
+//        calendar.set(year, month, days);
+//        long curTime = calendar.getTimeInMillis();
+//        //计算时候月份要按从0开始，才是正确的
+//        calendar.set(year, month, days + 1);
+//        long nextTime = calendar.getTimeInMillis();
+//
+//        List<MainTodayPlan> planData = mMainTodayPlanDao.queryBuilder().where(MainTodayPlanDao.Properties.MTime.ge(curTime),
+//                MainTodayPlanDao.Properties.MTime.lt(nextTime)).build().list();
+//        if (planData != null && planData.size() > 0) {
+//            TodayReViewActivity.start(mView.getContext(), planData.get(0).id);
+//        } else {
+//            ToastHelper.shortToast("今天还没有任何计划");
+//        }
     }
 
     @Override

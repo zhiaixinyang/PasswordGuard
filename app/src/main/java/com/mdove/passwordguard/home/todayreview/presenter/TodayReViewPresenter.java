@@ -55,18 +55,18 @@ public class TodayReViewPresenter implements TodayReViewContract.Presenter {
             return;
         }
 
-        MainTodayPlan mainTodayPlan = mMainTodayPlanDao.queryBuilder().where(MainTodayPlanDao.Properties.Id.eq(mainTodayPlanId))
-                .unique();
-        if (mainTodayPlan == null) {
-            return;
-        }
-
-        mData.add(new MainTodayReViewModel(mainTodayPlan));
-        List<SecondTodayPlan> mSecondData = mSecondTodayPlanDao.queryBuilder().where(SecondTodayPlanDao.Properties.MMainTodayPlanId.
-                eq(mainTodayPlan.getId())).build().list();
-        for (SecondTodayPlan secondTodayPlan : mSecondData) {
-            mData.add(new SecondTodayReViewModel(secondTodayPlan));
-        }
+//        MainTodayPlan mainTodayPlan = mMainTodayPlanDao.queryBuilder().where(MainTodayPlanDao.Properties.Id.eq(mainTodayPlanId))
+//                .unique();
+//        if (mainTodayPlan == null) {
+//            return;
+//        }
+//
+//        mData.add(new MainTodayReViewModel(mainTodayPlan));
+//        List<SecondTodayPlan> mSecondData = mSecondTodayPlanDao.queryBuilder().where(SecondTodayPlanDao.Properties.MMainTodayPlanId.
+//                eq(mainTodayPlan.getId())).build().list();
+//        for (SecondTodayPlan secondTodayPlan : mSecondData) {
+//            mData.add(new SecondTodayReViewModel(secondTodayPlan));
+//        }
 
         mView.initData(mData);
     }
