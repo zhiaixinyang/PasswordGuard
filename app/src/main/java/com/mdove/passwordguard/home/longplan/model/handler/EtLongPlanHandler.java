@@ -17,6 +17,10 @@ public class EtLongPlanHandler {
         mPresenter.onClickBack();
     }
 
+    public void onClickRichEditor(){
+        mPresenter.onClickRichEditor();
+    }
+
     public void onClickStartTimePicker() {
         mPresenter.onClickStartTimePicker();
     }

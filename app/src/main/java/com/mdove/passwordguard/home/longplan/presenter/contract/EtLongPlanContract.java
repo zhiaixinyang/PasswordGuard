@@ -22,6 +22,8 @@ public interface EtLongPlanContract {
 
         void initEditData(long id);
 
+        void onClickRichEditor();
+
         void editLongPlan(LongPlan longPlan);
     }
 
@@ -31,6 +33,8 @@ public interface EtLongPlanContract {
         void showStartTimePicker();
 
         void showEndTimePicker();
+
+        void onClickRichEditor();
 
         void initEditData(LongPlan longPlan);
     }

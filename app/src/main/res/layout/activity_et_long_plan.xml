@@ -151,33 +151,35 @@
                     android:text="计划周期"
                     android:textColor="@color/black"
                     android:textSize="@dimen/new_home_main_size" />
+
                 <ImageView
                     android:id="@+id/iv_time"
                     android:layout_width="@dimen/dp_18"
                     android:layout_height="@dimen/dp_18"
                     android:layout_alignParentRight="true"
                     android:layout_below="@+id/tv_time_tips"
-                    android:src="@mipmap/ic_btn_right"
                     android:layout_marginBottom="@dimen/dp_12"
                     android:layout_marginRight="@dimen/dp_24"
+                    android:src="@mipmap/ic_btn_right"
                     android:tint="@color/gray" />
+
                 <RelativeLayout
                     android:id="@+id/layout_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_time_tips"
-                    android:layout_toLeftOf="@+id/iv_time"
                     android:layout_marginBottom="@dimen/dp_12"
                     android:layout_marginLeft="@dimen/dp_24"
                     android:layout_marginRight="@dimen/dp_8"
+                    android:layout_toLeftOf="@+id/iv_time"
                     android:gravity="center">
 
                     <com.mdove.passwordguard.ui.TextViewPlus
                         android:id="@+id/tv_time_start"
                         android:layout_width="wrap_content"
-                        android:onClick="@{()->handler.onClickStartTimePicker()}"
                         android:layout_height="wrap_content"
                         android:gravity="center"
+                        android:onClick="@{()->handler.onClickStartTimePicker()}"
                         android:textColor="@color/gray"
                         android:textSize="16sp"
                         app:customFont="@string/font_regular"
@@ -194,8 +196,8 @@
                         android:id="@+id/tv_time_end"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:onClick="@{()->handler.onClickEndTimePicker()}"
                         android:layout_alignParentRight="true"
+                        android:onClick="@{()->handler.onClickEndTimePicker()}"
                         android:textColor="@color/gray"
                         android:textSize="16sp"
                         app:customFont="@string/font_regular"
@@ -241,12 +243,24 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/new_home_main_size" />
 
+                <TextView
+                    android:id="@+id/btn_rich_editor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/tv_plan_tips"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dp_24"
+                    android:onClick="@{()->handler.onClickRichEditor()}"
+                    android:text="使用文本Plus编辑"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
                 <EditText
                     android:id="@+id/et_plan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_plan_tips"
                     android:layout_above="@+id/btn_send_in"
+                    android:layout_below="@+id/tv_plan_tips"
                     android:layout_marginBottom="@dimen/dp_12"
                     android:layout_marginLeft="@dimen/dp_24"
                     android:layout_marginRight="@dimen/dp_24"
@@ -260,24 +274,26 @@
                     android:textColor="@color/black"
                     android:textColorHint="@color/gray"
                     android:textSize="@dimen/new_home_main_size" />
+
                 <android.support.v7.widget.CardView
                     android:id="@+id/btn_send_in"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/dp_12"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentBottom="true"
-                    app:cardBackgroundColor="@color/gray_light"
-                    android:layout_marginRight="@dimen/dp_24">
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="@dimen/dp_12"
+                    android:layout_marginRight="@dimen/dp_24"
+                    app:cardBackgroundColor="@color/gray_light">
+
                     <TextView
                         android:id="@+id/tv_send_in"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="添加计划"
                         android:paddingBottom="3dp"
-                        android:paddingTop="3dp"
-                        android:paddingRight="@dimen/dp_8"
                         android:paddingLeft="@dimen/dp_8"
+                        android:paddingRight="@dimen/dp_8"
+                        android:paddingTop="3dp"
+                        android:text="添加计划"
                         android:textColor="@color/white"
                         android:textSize="@dimen/new_home_main_size" />
                 </android.support.v7.widget.CardView>

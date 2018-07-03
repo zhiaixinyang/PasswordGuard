@@ -84,4 +84,14 @@ public class RichEditorPresenter implements RichEditorContract.Presenter {
             mView.onClickRichEditorBtn(modelType, position);
         }
     }
+
+    @Override
+    public void onClickBack() {
+        mView.finish();
+    }
+
+    @Override
+    public void onClickReturn() {
+        mView.onClickReturn();
+    }
 }

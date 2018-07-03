@@ -1,15 +1,65 @@
 <layout>
 
+    <data>
+
+        <variable
+            name="handler"
+            type="com.mdove.passwordguard.home.richeditor.model.handler.RichEditorHandler" />
+    </data>
+
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/gray_new_home"
         android:orientation="vertical">
 
+        <RelativeLayout
+            android:id="@+id/layout_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="@dimen/dp_22"
+                android:layout_height="@dimen/dp_22"
+                android:layout_margin="@dimen/dp_12"
+                android:onClick="@{()->handler.onClickBack()}"
+                android:src="@mipmap/ic_btn_left"
+                android:tint="@color/black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="@dimen/dp_12"
+                android:text="文本编辑器Plus"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/btn_return"
+                android:layout_width="@dimen/dp_26"
+                android:layout_height="@dimen/dp_26"
+                android:layout_marginTop="@dimen/dp_12"
+                android:layout_toLeftOf="@+id/btn_send"
+                android:onClick="@{()->handler.onClickReturn()}"
+                android:src="@mipmap/ic_btn_return"
+                android:tint="@color/black" />
+
+            <ImageView
+                android:id="@+id/btn_send"
+                android:layout_width="@dimen/dp_26"
+                android:layout_height="@dimen/dp_26"
+                android:layout_alignParentRight="true"
+                android:layout_margin="@dimen/dp_12"
+                android:src="@mipmap/ic_btn_send"
+                android:tint="@color/black" />
+        </RelativeLayout>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rlv_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_title"
             android:overScrollMode="never"
             android:paddingTop="@dimen/dp_8"
             android:scrollbars="none" />
@@ -27,24 +77,7 @@
         <com.mdove.passwordguard.ui.richeditor.RichEditor
             android:id="@+id/editor"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/btn_add"
+            android:layout_height="match_parent"
             android:layout_below="@+id/line" />
-
-        <TextView
-            android:id="@+id/content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/btn_add" />
-
-        <TextView
-            android:id="@+id/btn_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:text="添加"
-            android:textColor="@color/black"
-            android:textSize="@dimen/dp_20" />
-
     </RelativeLayout>
 </layout>

@@ -74,7 +74,7 @@ public class RichEditor extends WebView {
     void onAfterInitialLoad(boolean isReady);
   }
 
-  private static final String SETUP_HTML = "file:///android_asset/editor.html";
+  private static final String SETUP_HTML = "file:///android_asset/editor.contentHtml";
   private static final String CALLBACK_SCHEME = "re-callback://";
   private static final String STATE_SCHEME = "re-state://";
   private boolean isReady = false;

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -17,9 +18,11 @@ import com.mdove.passwordguard.base.BaseActivity;
 import com.mdove.passwordguard.databinding.ActivityEtLongPlanBinding;
 import com.mdove.passwordguard.greendao.entity.LongPlan;
 import com.mdove.passwordguard.home.constant.TimeConstant;
+import com.mdove.passwordguard.home.longplan.model.TempLongPlanModel;
 import com.mdove.passwordguard.home.longplan.model.handler.EtLongPlanHandler;
 import com.mdove.passwordguard.home.longplan.presenter.EtLongPlanPresenter;
 import com.mdove.passwordguard.home.longplan.presenter.contract.EtLongPlanContract;
+import com.mdove.passwordguard.home.richeditor.RichEditorActivity;
 import com.mdove.passwordguard.ui.pickerview.view.TimePickerView;
 import com.mdove.passwordguard.ui.renkstar.BubbleSeekBar;
 import com.mdove.passwordguard.utils.DateUtils;
@@ -70,6 +73,7 @@ public class EtLongPlanActivity extends BaseActivity implements EtLongPlanContra
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_et_long_plan);
         StatusBarUtils.setColorNoTranslucent(this, ContextCompat.getColor(this, R.color.gray_new_home));
+        mBinding.btnRichEditor.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
         mPresenter = new EtLongPlanPresenter();
         mPresenter.subscribe(this);
@@ -241,6 +245,18 @@ public class EtLongPlanActivity extends BaseActivity implements EtLongPlanContra
     @Override
     public void showEndTimePicker() {
         mEndPvTime.show();
+    }
+
+    @Override
+    public void onClickRichEditor() {
+        LongPlan longPlan = new LongPlan();
+        longPlan.setMStartTime(mSelectStartDate.getTime());
+        longPlan.setMEndTime(mSelectEndDate.getTime());
+        longPlan.setMImportant(mImportant);
+        longPlan.setMUrgent(mUrgent);
+        longPlan.setMTips(mBinding.etTips.getText().toString());
+        longPlan.setMLongPlan(mBinding.etPlan.getText().toString());
+        RichEditorActivity.start(this, new TempLongPlanModel(longPlan));
     }
 
     @Override

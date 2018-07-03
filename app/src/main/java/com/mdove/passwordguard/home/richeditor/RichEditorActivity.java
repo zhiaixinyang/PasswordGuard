@@ -9,34 +9,44 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
+import android.text.TextUtils;
 import android.view.View;
-import android.widget.TextView;
 
+import com.hwangjr.rxbus.RxBus;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.BaseActivity;
 import com.mdove.passwordguard.databinding.ActivityRichEditorBinding;
+import com.mdove.passwordguard.home.longplan.model.TempLongPlanModel;
 import com.mdove.passwordguard.home.richeditor.adapter.RichEditorBtnAdapter;
 import com.mdove.passwordguard.home.richeditor.model.RichEditorBtnModel;
+import com.mdove.passwordguard.home.richeditor.model.event.RichEditorBtnReturnEvent;
 import com.mdove.passwordguard.home.richeditor.presenter.RichEditorPresenter;
 import com.mdove.passwordguard.home.richeditor.presenter.contract.RichEditorContract;
 import com.mdove.passwordguard.ui.richeditor.RichEditor;
+import com.mdove.passwordguard.utils.DensityUtil;
 import com.mdove.passwordguard.utils.StatusBarUtils;
 
 import java.util.List;
 
 public class RichEditorActivity extends BaseActivity implements RichEditorContract.MvpView {
-    public static String html;
+    public static final String EXTRA_TEMP_LONG_PLAN = "extra_temp_long_plan";
+    public static String contentHtml;
     private ActivityRichEditorBinding mBinding;
     private RichEditor mEditor;
     private RichEditorBtnAdapter mAdapter;
     private RichEditorPresenter mPresenter;
-
+    private TempLongPlanModel mTempModel;
 
     public static void start(Context context) {
+        start(context, null);
+    }
+
+    public static void start(Context context, TempLongPlanModel model) {
         Intent start = new Intent(context, RichEditorActivity.class);
         if (!(context instanceof Activity)) {
             start.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         }
+        start.putExtra(EXTRA_TEMP_LONG_PLAN, model);
         context.startActivity(start);
     }
 
@@ -50,8 +60,10 @@ public class RichEditorActivity extends BaseActivity implements RichEditorContra
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_rich_editor);
         StatusBarUtils.setColorDiff(this, ContextCompat.getColor(this, R.color.gray_new_home));
+        mTempModel = (TempLongPlanModel) getIntent().getSerializableExtra(EXTRA_TEMP_LONG_PLAN);
 
         mEditor = mBinding.editor;
+        handleTempModel(mTempModel);
 
         mEditor.setEditorHeight(200);
         mEditor.setEditorFontSize(16);
@@ -59,7 +71,8 @@ public class RichEditorActivity extends BaseActivity implements RichEditorContra
         mEditor.setEditorBackgroundColor(ContextCompat.getColor(this, R.color.gray_new_home));
 //        mEditor.setBackgroundColor(Color.BLUE);
         //mEditor.setBackgroundResource(R.drawable.bg);
-        mEditor.setPadding(10, 10, 10, 10);
+        mEditor.setPadding(DensityUtil.dip2px(this, 12), DensityUtil.dip2px(this, 12),
+                DensityUtil.dip2px(this, 12), DensityUtil.dip2px(this, 12));
         //mEditor.setBackground("https://raw.githubusercontent.com/wasabeef/art/master/chip.jpg");
         mEditor.setPlaceholder("添加内容...");
         //mEditor.setInputEnabled(false);
@@ -74,19 +87,27 @@ public class RichEditorActivity extends BaseActivity implements RichEditorContra
         initListener();
     }
 
+    private void handleTempModel(TempLongPlanModel mTempModel) {
+        if (mTempModel == null) {
+            return;
+        }
+        if (!TextUtils.isEmpty(mTempModel.mLongPlan)) {
+            mEditor.setHtml(mTempModel.mLongPlan);
+        }
+    }
+
     private void initListener() {
         mEditor.setOnTextChangeListener(new RichEditor.OnTextChangeListener() {
             @Override
             public void onTextChange(String text) {
-                html = text;
-                mBinding.content.setText(html);
+                contentHtml = text;
             }
         });
 
-        mBinding.btnAdd.setOnClickListener(new View.OnClickListener() {
+        mBinding.btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mEditor.setHtml(html);
+                mEditor.setHtml(contentHtml);
             }
         });
     }
@@ -94,6 +115,13 @@ public class RichEditorActivity extends BaseActivity implements RichEditorContra
     @Override
     public void initRichEditorBtn(List<RichEditorBtnModel> data) {
         mAdapter.setData(data);
+    }
+
+    @Override
+    public void onClickReturn() {
+        contentHtml = "#RE#" + contentHtml;
+        RxBus.get().post(new RichEditorBtnReturnEvent(contentHtml));
+        finish();
     }
 
     @Override

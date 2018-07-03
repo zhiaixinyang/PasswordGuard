@@ -4,6 +4,7 @@ import com.mdove.passwordguard.App;
 import com.mdove.passwordguard.greendao.LongPlanDao;
 import com.mdove.passwordguard.greendao.entity.LongPlan;
 import com.mdove.passwordguard.home.longplan.presenter.contract.EtLongPlanContract;
+import com.mdove.passwordguard.home.richeditor.RichEditorActivity;
 
 import java.util.Date;
 
@@ -60,6 +61,11 @@ public class EtLongPlanPresenter implements EtLongPlanContract.Presenter {
         if (mNeedUpdateLongPlan != null) {
             mView.initEditData(mNeedUpdateLongPlan);
         }
+    }
+
+    @Override
+    public void onClickRichEditor() {
+        mView.onClickRichEditor();
     }
 
     @Override

@@ -16,10 +16,19 @@ public interface RichEditorContract {
         void initRichEditorBtn();
 
         void onClickRichEditorBtn(int modelType);
+
+        void onClickBack();
+
+        void onClickReturn();
     }
 
     interface MvpView extends BaseView<Presenter> {
+        void finish();
+
         void initRichEditorBtn(List<RichEditorBtnModel> data);
-        void onClickRichEditorBtn(int modelType,int updatePosition);
+
+        void onClickReturn();
+
+        void onClickRichEditorBtn(int modelType, int updatePosition);
     }
 }
