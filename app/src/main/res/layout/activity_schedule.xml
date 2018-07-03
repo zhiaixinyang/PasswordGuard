@@ -47,6 +47,16 @@
                 android:textSize="20sp" />
 
             <ImageView
+                android:id="@+id/btn_show_short"
+                android:layout_width="@dimen/dp_26"
+                android:layout_height="@dimen/dp_26"
+                android:layout_marginTop="@dimen/dp_12"
+                android:layout_toLeftOf="@+id/btn_et_plan"
+                android:src="@mipmap/ic_btn_password"
+                android:onClick="@{()->handler.onClickShowShort()}"
+                android:tint="@color/black" />
+
+            <ImageView
                 android:id="@+id/btn_et_plan"
                 android:layout_width="@dimen/dp_26"
                 android:layout_height="@dimen/dp_26"

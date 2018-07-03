@@ -17,6 +17,8 @@ public interface ScheduleContract {
 
         void onClickBack();
 
+        void onClickShowShort();
+
         void onClickEtSchedule();
 
         void onClickEditSchedule(long id);
@@ -28,5 +30,7 @@ public interface ScheduleContract {
         void finish();
 
         void deleteSchedule(int position);
+
+        void showShort();
     }
 }

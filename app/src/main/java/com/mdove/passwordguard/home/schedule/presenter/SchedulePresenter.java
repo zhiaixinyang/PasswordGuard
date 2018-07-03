@@ -62,6 +62,11 @@ public class SchedulePresenter implements ScheduleContract.Presenter {
     }
 
     @Override
+    public void onClickShowShort() {
+        mView.showShort();
+    }
+
+    @Override
     public void onClickEtSchedule() {
         EtScheduleActivity.start(mView.getContext());
     }

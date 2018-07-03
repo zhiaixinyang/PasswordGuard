@@ -24,6 +24,10 @@ public class ScheduleHandler {
         mPlanPresenter.onClickEtSchedule();
     }
 
+    public void onClickShowShort() {
+        mPlanPresenter.onClickShowShort();
+    }
+
     public void onClickEditSchedule(ScheduleModelVM vm) {
         mPlanPresenter.onClickEditSchedule(vm.mId.get());
     }

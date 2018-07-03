@@ -14,6 +14,7 @@ import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.BaseActivity;
 import com.mdove.passwordguard.databinding.ActivityScheduleBinding;
 import com.mdove.passwordguard.home.schedule.adapter.ScheduleAdapter;
+import com.mdove.passwordguard.home.schedule.adapter.ScheduleShortAdapter;
 import com.mdove.passwordguard.home.schedule.model.BaseScheduleModel;
 import com.mdove.passwordguard.home.schedule.model.handler.ScheduleHandler;
 import com.mdove.passwordguard.home.schedule.presenter.SchedulePresenter;
@@ -33,6 +34,7 @@ public class ScheduleActivity extends BaseActivity implements ScheduleContract.M
     private ActivityScheduleBinding mBinding;
     private SchedulePresenter mPresenter;
     private ScheduleAdapter mAdapter;
+    private List<BaseScheduleModel> mData;
 
     public static void start(Context context) {
         Intent start = new Intent(context, ScheduleActivity.class);
@@ -51,7 +53,7 @@ public class ScheduleActivity extends BaseActivity implements ScheduleContract.M
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_schedule);
-        StatusBarUtils.setColorNoTranslucent(this, ContextCompat.getColor(this,R.color.gray_new_home));
+        StatusBarUtils.setColorNoTranslucent(this, ContextCompat.getColor(this, R.color.gray_new_home));
 
         mPresenter = new SchedulePresenter();
         mPresenter.subscribe(this);
@@ -71,11 +73,19 @@ public class ScheduleActivity extends BaseActivity implements ScheduleContract.M
 
     @Override
     public void initData(List<BaseScheduleModel> data) {
+        mData = data;
         mAdapter.setData(data);
     }
 
     @Override
     public void deleteSchedule(int position) {
 
+    }
+
+    @Override
+    public void showShort() {
+        ScheduleShortAdapter adapter = new ScheduleShortAdapter(this, mPresenter);
+        mBinding.rlv.setAdapter(adapter);
+        adapter.setData(mData);
     }
 }
