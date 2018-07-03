@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.databinding.ItemAddScheduleBinding;
+import com.mdove.passwordguard.databinding.ItemAddScheduleShortBinding;
 import com.mdove.passwordguard.databinding.ItemScheduleBinding;
 import com.mdove.passwordguard.databinding.ItemScheduleShortBinding;
 import com.mdove.passwordguard.home.schedule.EtScheduleActivity;
@@ -52,7 +53,7 @@ public class ScheduleShortAdapter extends RecyclerView.Adapter<RecyclerView.View
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
             case ITEM_TYPE_ADD_SCHEDULE: {
-                return new AddViewHolder((ItemAddScheduleBinding) InflateUtils.bindingInflate(parent, R.layout.item_add_schedule));
+                return new AddViewHolder((ItemAddScheduleShortBinding) InflateUtils.bindingInflate(parent, R.layout.item_add_schedule_short));
             }
             case ITEM_TYPE_SCHEDULE: {
                 return new ViewHolder((ItemScheduleShortBinding) InflateUtils.bindingInflate(parent, R.layout.item_schedule_short));
@@ -97,9 +98,9 @@ public class ScheduleShortAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     public class AddViewHolder extends RecyclerView.ViewHolder {
-        private ItemAddScheduleBinding mBinding;
+        private ItemAddScheduleShortBinding mBinding;
 
-        public AddViewHolder(ItemAddScheduleBinding binding) {
+        public AddViewHolder(ItemAddScheduleShortBinding binding) {
             super(binding.getRoot());
             mBinding = binding;
         }

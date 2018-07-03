@@ -66,8 +66,8 @@ public class LongPlanPresenter implements LongPlanContract.Presenter {
     }
 
     @Override
-    public void onClickEtPlan() {
-        EtTodayPlanActivity.start(mView.getContext());
+    public void onClickAddLongPlan() {
+        EtLongPlanActivity.start(mView.getContext());
     }
 
     @Override

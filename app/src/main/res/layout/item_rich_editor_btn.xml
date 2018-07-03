@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="handler"
+            type="com.mdove.passwordguard.home.richeditor.model.handler.RichEditorBtnHandler" />
+
+        <variable
+            name="vm"
+            type="com.mdove.passwordguard.home.richeditor.model.vm.RichEditorBtnModelVM" />
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_8"
+        android:onClick="@{()->handler.onClickRichEditorBtn(vm)}">
+
+        <ImageView
+            android:id="@+id/ic"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            android:layout_centerHorizontal="true"
+            app:richEditorIc="@{vm}"
+            tools:src="@mipmap/undo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ic"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:richEditorTv="@{vm}"
+            tools:text="返回111" />
+    </RelativeLayout>
+</layout>

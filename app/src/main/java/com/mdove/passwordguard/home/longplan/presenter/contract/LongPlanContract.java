@@ -19,7 +19,7 @@ public interface LongPlanContract {
 
         void onClickBack();
 
-        void onClickEtPlan();
+        void onClickAddLongPlan();
 
         void onClickEditLongPlan(long id);
     }

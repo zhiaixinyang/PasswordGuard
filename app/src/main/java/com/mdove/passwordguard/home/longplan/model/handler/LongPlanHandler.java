@@ -18,8 +18,8 @@ public class LongPlanHandler {
         mPlanPresenter.onClickBack();
     }
 
-    public void onClickEtPlan() {
-        mPlanPresenter.onClickEtPlan();
+    public void onClickAddLongPlan() {
+        mPlanPresenter.onClickAddLongPlan();
     }
 
     public void onClickEditLongPlan(LongPlanModelVM vm) {

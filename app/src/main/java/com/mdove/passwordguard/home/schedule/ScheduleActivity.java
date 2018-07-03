@@ -15,6 +15,7 @@ import com.mdove.passwordguard.base.BaseActivity;
 import com.mdove.passwordguard.databinding.ActivityScheduleBinding;
 import com.mdove.passwordguard.home.schedule.adapter.ScheduleAdapter;
 import com.mdove.passwordguard.home.schedule.adapter.ScheduleShortAdapter;
+import com.mdove.passwordguard.home.schedule.model.AddScheduleModel;
 import com.mdove.passwordguard.home.schedule.model.BaseScheduleModel;
 import com.mdove.passwordguard.home.schedule.model.handler.ScheduleHandler;
 import com.mdove.passwordguard.home.schedule.presenter.SchedulePresenter;
@@ -86,10 +87,16 @@ public class ScheduleActivity extends BaseActivity implements ScheduleContract.M
     public void showShort(boolean isShort) {
         ScheduleShortAdapter adapterShort = new ScheduleShortAdapter(this, mPresenter);
         ScheduleAdapter adapter = new ScheduleAdapter(this, mPresenter);
-        if (isShort){
+        if (isShort) {
+            if (mData.size() != 1) {
+                mData.add(0, new AddScheduleModel());
+            }
             mBinding.rlv.setAdapter(adapterShort);
             adapterShort.setData(mData);
-        }else {
+        } else {
+            if (mData.size() > 1 && mData.get(0) instanceof AddScheduleModel) {
+                mData.remove(0);
+            }
             mBinding.rlv.setAdapter(adapter);
             adapter.setData(mData);
         }
