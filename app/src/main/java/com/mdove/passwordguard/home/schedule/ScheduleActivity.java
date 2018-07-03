@@ -83,9 +83,15 @@ public class ScheduleActivity extends BaseActivity implements ScheduleContract.M
     }
 
     @Override
-    public void showShort() {
-        ScheduleShortAdapter adapter = new ScheduleShortAdapter(this, mPresenter);
-        mBinding.rlv.setAdapter(adapter);
-        adapter.setData(mData);
+    public void showShort(boolean isShort) {
+        ScheduleShortAdapter adapterShort = new ScheduleShortAdapter(this, mPresenter);
+        ScheduleAdapter adapter = new ScheduleAdapter(this, mPresenter);
+        if (isShort){
+            mBinding.rlv.setAdapter(adapterShort);
+            adapterShort.setData(mData);
+        }else {
+            mBinding.rlv.setAdapter(adapter);
+            adapter.setData(mData);
+        }
     }
 }

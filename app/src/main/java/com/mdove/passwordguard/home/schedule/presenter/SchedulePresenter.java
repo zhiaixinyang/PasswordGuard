@@ -25,6 +25,7 @@ public class SchedulePresenter implements ScheduleContract.Presenter {
     private ScheduleContract.MvpView mView;
     private ScheduleDao mScheduleDao;
     private List<BaseScheduleModel> mData;
+    private boolean isShort = false;
 
     public SchedulePresenter() {
         mScheduleDao = App.getDaoSession().getScheduleDao();
@@ -63,7 +64,8 @@ public class SchedulePresenter implements ScheduleContract.Presenter {
 
     @Override
     public void onClickShowShort() {
-        mView.showShort();
+        isShort = !isShort;
+        mView.showShort(isShort);
     }
 
     @Override

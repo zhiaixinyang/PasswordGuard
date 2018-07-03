@@ -31,6 +31,6 @@ public interface ScheduleContract {
 
         void deleteSchedule(int position);
 
-        void showShort();
+        void showShort(boolean isShort);
     }
 }

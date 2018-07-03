@@ -227,7 +227,7 @@
                     android:layout_marginLeft="@dimen/dp_24"
                     android:layout_marginRight="@dimen/dp_24"
                     android:background="@drawable/bg_new_home_today_plan"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:hint="在此处添加日程安排"
                     android:paddingBottom="@dimen/dp_8"
                     android:paddingLeft="@dimen/dp_12"

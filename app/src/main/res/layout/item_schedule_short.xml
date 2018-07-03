@@ -21,11 +21,10 @@
 
         <ImageView
             android:id="@+id/iv"
-            android:layout_width="@dimen/dp_18"
-            android:layout_height="@dimen/dp_18"
+            android:layout_width="@dimen/dp_24"
+            android:layout_height="@dimen/dp_24"
             android:layout_margin="@dimen/dp_8"
-            android:src="@mipmap/ic_main_plan"
-            android:tint="@color/gray_plus" />
+            android:src="@mipmap/ic_bg_schedule" />
 
         <TextView
             android:id="@+id/tv_think_tips"

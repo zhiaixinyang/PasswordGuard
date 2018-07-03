@@ -150,7 +150,7 @@ public class EtLongPlanActivity extends BaseActivity implements EtLongPlanContra
                 String tips = mBinding.etTips.getText().toString();
                 LongPlan longPlan = new LongPlan();
                 longPlan.setMEndTime(mSelectEndDate.getTime());
-                longPlan.setMStartTime(mSelectEndDate.getTime());
+                longPlan.setMStartTime(mSelectStartDate.getTime());
                 longPlan.setMImportant(mImportant);
                 longPlan.setMUrgent(mUrgent);
                 longPlan.setMTips(tips);
