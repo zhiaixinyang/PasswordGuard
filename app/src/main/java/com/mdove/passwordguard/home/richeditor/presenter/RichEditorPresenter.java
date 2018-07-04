@@ -44,12 +44,12 @@ public class RichEditorPresenter implements RichEditorContract.Presenter {
         mData.add(new RichEditorBtnModel("下标", R.mipmap.subscript, false, R.color.blue_700, true, RichEditorBtnModel.MODEL_TYPE_SUBSCRIPT));
         mData.add(new RichEditorBtnModel("上标", R.mipmap.superscript, false, R.color.blue_700, true, RichEditorBtnModel.MODEL_TYPE_SUPERSCRIPT));
         mData.add(new RichEditorBtnModel("中划线", R.mipmap.strikethrough, false, R.color.blue_700, true, RichEditorBtnModel.MODEL_TYPE_STRIKETHROUGH));
-        mData.add(new RichEditorBtnModel("标题1", R.mipmap.h1, false, R.color.blue_700, true, RichEditorBtnModel.MODEL_TYPE_H1));
-        mData.add(new RichEditorBtnModel("标题2", R.mipmap.h2, false, R.color.blue_700, true, RichEditorBtnModel.MODEL_TYPE_H2));
-        mData.add(new RichEditorBtnModel("标题3", R.mipmap.h3, false, R.color.blue_700, true, RichEditorBtnModel.MODEL_TYPE_H3));
-        mData.add(new RichEditorBtnModel("标题4", R.mipmap.h4, false, R.color.blue_700, true, RichEditorBtnModel.MODEL_TYPE_H4));
-        mData.add(new RichEditorBtnModel("标题5", R.mipmap.h5, false, R.color.blue_700, true, RichEditorBtnModel.MODEL_TYPE_H5));
-        mData.add(new RichEditorBtnModel("标题6", R.mipmap.h6, false, R.color.blue_700, true, RichEditorBtnModel.MODEL_TYPE_H6));
+//        mData.add(new RichEditorBtnModel("标题1", R.mipmap.h1, false, R.color.blue_700, true, RichEditorBtnModel.MODEL_TYPE_H1));
+//        mData.add(new RichEditorBtnModel("标题2", R.mipmap.h2, false, R.color.blue_700, true, RichEditorBtnModel.MODEL_TYPE_H2));
+//        mData.add(new RichEditorBtnModel("标题3", R.mipmap.h3, false, R.color.blue_700, true, RichEditorBtnModel.MODEL_TYPE_H3));
+//        mData.add(new RichEditorBtnModel("标题4", R.mipmap.h4, false, R.color.blue_700, true, RichEditorBtnModel.MODEL_TYPE_H4));
+//        mData.add(new RichEditorBtnModel("标题5", R.mipmap.h5, false, R.color.blue_700, true, RichEditorBtnModel.MODEL_TYPE_H5));
+//        mData.add(new RichEditorBtnModel("标题6", R.mipmap.h6, false, R.color.blue_700, true, RichEditorBtnModel.MODEL_TYPE_H6));
 //        data.add(new RichEditorBtnModel("文本颜色", R.mipmap.txt_color, false, R.color.blue_700, true, RichEditorBtnModel.MODEL_TYPE_TXT_COLOR));
 //        data.add(new RichEditorBtnModel("填充背景", R.mipmap.bg_color, false, R.color.blue_700, true, RichEditorBtnModel.MODEL_TYPE_BG_COLOR));
         mData.add(new RichEditorBtnModel("左缩进", R.mipmap.indent, false, R.color.blue_700, true, RichEditorBtnModel.MODEL_TYPE_INDENT));
