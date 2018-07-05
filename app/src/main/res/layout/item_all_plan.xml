@@ -20,7 +20,7 @@
         android:layout_height="match_parent"
         android:layout_margin="@dimen/dp_5"
         app:cardBackgroundColor="@color/gray_light"
-        app:cardCornerRadius="@dimen/dp_12">
+        app:cardCornerRadius="@dimen/dp_8">
 
         <RelativeLayout
             android:id="@+id/layout_main"

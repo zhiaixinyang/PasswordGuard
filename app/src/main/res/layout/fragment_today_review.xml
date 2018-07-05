@@ -32,9 +32,10 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_below="@+id/iv_icon"
                     android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/dp_12"
                     android:layout_marginLeft="@dimen/dp_12"
                     android:layout_marginRight="@dimen/dp_12"
                     android:background="@drawable/bg_new_home_today_plan">
@@ -42,7 +43,7 @@
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/rlv_review"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:paddingTop="@dimen/dp_8"
                         android:scrollbars="none"
                         android:overScrollMode="never"

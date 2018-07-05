@@ -12,6 +12,7 @@ import com.mdove.passwordguard.home.ettodayplan.model.MainTodayPlanModel;
 import com.mdove.passwordguard.home.ettodayplan.model.SecondTodayPlanModel;
 import com.mdove.passwordguard.home.schedule.model.BaseScheduleModel;
 import com.mdove.passwordguard.home.todayreview.model.BaseTodayReViewModel;
+import com.mdove.passwordguard.home.todayreview.model.EmptyScheduleReViewModel;
 import com.mdove.passwordguard.home.todayreview.model.MainTodayReViewModel;
 import com.mdove.passwordguard.home.todayreview.model.ScheduleReViewModel;
 import com.mdove.passwordguard.home.todayreview.model.SecondTodayReViewModel;
@@ -59,6 +60,11 @@ public class TodayReViewPresenter implements TodayReViewContract.Presenter {
         mData = new ArrayList<>();
 
         List<Schedule> data = mScheduleDao.queryBuilder().list();
+
+        if (data == null || data.size() == 0) {
+            mData.add(new EmptyScheduleReViewModel());
+        }
+
         for (Schedule schedule : data) {
             mData.add(new ScheduleReViewModel(schedule));
         }

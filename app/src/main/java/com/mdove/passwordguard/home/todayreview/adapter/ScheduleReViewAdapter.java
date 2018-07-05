@@ -7,8 +7,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
 import com.mdove.passwordguard.R;
+import com.mdove.passwordguard.databinding.ItemEmptyScheduleReviewBinding;
 import com.mdove.passwordguard.databinding.ItemScheduleReviewBinding;
 import com.mdove.passwordguard.home.todayreview.model.BaseTodayReViewModel;
+import com.mdove.passwordguard.home.todayreview.model.EmptyScheduleReViewModel;
 import com.mdove.passwordguard.home.todayreview.model.ScheduleReViewModel;
 import com.mdove.passwordguard.home.todayreview.model.handler.ScheduleReViewHandler;
 import com.mdove.passwordguard.home.todayreview.model.vm.ScheduleReViewModelVM;
@@ -22,6 +24,8 @@ import java.util.List;
  */
 
 public class ScheduleReViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private static final int ITEM_TYPE_EMPTY = 0;
+    private static final int ITEM_TYPE_NORMAL = 1;
     private List<BaseTodayReViewModel> mData;
     private Context mContext;
     private TodayReViewPresenter mPresenter;
@@ -33,9 +37,32 @@ public class ScheduleReViewAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     }
 
     @Override
+    public int getItemViewType(int position) {
+        BaseTodayReViewModel model = mData.get(position);
+        if (model instanceof EmptyScheduleReViewModel) {
+            return ITEM_TYPE_EMPTY;
+        } else {
+            return ITEM_TYPE_NORMAL;
+        }
+    }
+
+    @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ScheduleReViewViewHolder((ItemScheduleReviewBinding)
-                InflateUtils.bindingInflate(parent, R.layout.item_schedule_review));
+        switch (viewType) {
+            case ITEM_TYPE_NORMAL: {
+                return new ScheduleReViewViewHolder((ItemScheduleReviewBinding)
+                        InflateUtils.bindingInflate(parent, R.layout.item_schedule_review));
+            }
+            case ITEM_TYPE_EMPTY: {
+                return new EmptyViewHolder((ItemEmptyScheduleReviewBinding)
+                        InflateUtils.bindingInflate(parent, R.layout.item_empty_schedule_review));
+            }
+            default: {
+                return new ScheduleReViewViewHolder((ItemScheduleReviewBinding)
+                        InflateUtils.bindingInflate(parent, R.layout.item_schedule_review));
+            }
+        }
+
     }
 
     @Override
@@ -78,6 +105,18 @@ public class ScheduleReViewAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             }
             mBinding.setVm(new ScheduleReViewModelVM((ScheduleReViewModel) model));
         }
+    }
+
+
+    public class EmptyViewHolder extends RecyclerView.ViewHolder {
+        private ItemEmptyScheduleReviewBinding mBinding;
+
+        public EmptyViewHolder(ItemEmptyScheduleReviewBinding binding) {
+            super(binding.getRoot());
+            mBinding = binding;
+        }
+
+        public void bind(){}
     }
 
     public void setData(List<BaseTodayReViewModel> data) {

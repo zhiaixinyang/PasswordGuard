@@ -1,4 +1,4 @@
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -74,10 +74,16 @@
             android:layout_marginRight="@dimen/dp_12"
             android:background="@color/gray" />
 
-        <com.mdove.passwordguard.ui.richeditor.RichEditor
-            android:id="@+id/editor"
+        <com.mdove.passwordguard.ui.richeditor.knife.KnifeText
+            android:id="@+id/knife"
+            android:gravity="left"
             android:layout_width="match_parent"
+            app:bulletColor="@color/black"
+            app:bulletRadius="3dp"
+            app:bulletGapWidth="@dimen/dp_5"
+            android:padding="@dimen/dp_12"
             android:layout_height="match_parent"
+            android:background="@drawable/bg_normal_gray_new_home"
             android:layout_below="@+id/line" />
     </RelativeLayout>
 </layout>

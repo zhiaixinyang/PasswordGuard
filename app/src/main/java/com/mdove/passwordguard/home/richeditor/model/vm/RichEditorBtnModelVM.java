@@ -31,28 +31,32 @@ public class RichEditorBtnModelVM {
     @BindingAdapter("richEditorIc")
     public static void richEditorIc(ImageView iv, RichEditorBtnModelVM vm) {
         iv.setImageResource(vm.mIcon.get());
-        if (!vm.isNeedSelect.get()) {
-            iv.setColorFilter(Color.BLACK);
-            return;
-        }
-        if (vm.isSelect.get()) {
-            iv.setColorFilter(ContextCompat.getColor(App.getAppContext(), R.color.blue_700));
-        } else {
-            iv.setColorFilter(Color.BLACK);
-        }
+        iv.setColorFilter(Color.BLACK);
+
+//        if (!vm.isNeedSelect.get()) {
+//            iv.setColorFilter(Color.BLACK);
+//            return;
+//        }
+//        if (vm.isSelect.get()) {
+//            iv.setColorFilter(ContextCompat.getColor(App.getAppContext(), R.color.blue_700));
+//        } else {
+//            iv.setColorFilter(Color.BLACK);
+//        }
     }
 
     @BindingAdapter("richEditorTv")
     public static void richEditorTv(TextView tv, RichEditorBtnModelVM vm) {
         tv.setText(vm.mTitle.get());
-        if (!vm.isNeedSelect.get()) {
-            tv.setTextColor(Color.BLACK);
-            return;
-        }
-        if (vm.isSelect.get()) {
-            tv.setTextColor(ContextCompat.getColor(App.getAppContext(), R.color.blue_700));
-        } else {
-            tv.setTextColor(Color.BLACK);
-        }
+        tv.setTextColor(Color.BLACK);
+
+//        if (!vm.isNeedSelect.get()) {
+//            tv.setTextColor(Color.BLACK);
+//            return;
+//        }
+//        if (vm.isSelect.get()) {
+//            tv.setTextColor(ContextCompat.getColor(App.getAppContext(), R.color.blue_700));
+//        } else {
+//            tv.setTextColor(Color.BLACK);
+//        }
     }
 }

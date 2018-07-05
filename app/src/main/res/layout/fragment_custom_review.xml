@@ -20,8 +20,7 @@
             <RelativeLayout
                 android:id="@+id/layout_main"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
+                android:layout_height="match_parent">
 
                 <ImageView
                     android:id="@+id/iv_icon"
@@ -33,18 +32,63 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
+                    android:layout_height="match_parent"
                     android:layout_below="@+id/iv_icon"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginLeft="@dimen/dp_12"
-                    android:layout_marginRight="@dimen/dp_12"
-                    android:background="@drawable/bg_new_home_today_plan">
+                    android:layout_marginRight="@dimen/dp_12">
+
+                    <RelativeLayout
+                        android:id="@+id/layout_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/et_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/dp_12"
+                            android:layout_toLeftOf="@+id/btn_send"
+                            android:background="@drawable/bg_normal_gray_new_home"
+                            android:maxLines="1"
+                            android:padding="@dimen/dp_8"
+                            android:textSize="16sp" />
+
+                        <ImageView
+                            android:id="@+id/btn_send"
+                            android:layout_width="@dimen/dp_26"
+                            android:layout_height="@dimen/dp_26"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/ic_btn_send"
+                            android:tint="@color/gray" />
+
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/btn_in_rich_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_below="@+id/layout_et"
+                        android:layout_marginTop="@dimen/dp_5"
+                        android:text="使用Plus编辑器编辑"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/rlv_review"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="@dimen/dp_12"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/btn_in_rich_edit"
+                        android:layout_marginTop="@dimen/dp_12"
+                        android:background="@drawable/bg_new_home_today_plan"
+                        android:scrollbars="none"
+                        android:overScrollMode="never"
+                        android:layout_alignParentBottom="true"
+                        android:paddingTop="@dimen/dp_8"
+                        android:layout_marginBottom="@dimen/dp_12"
                         android:textSize="20sp" />
                 </RelativeLayout>
             </RelativeLayout>

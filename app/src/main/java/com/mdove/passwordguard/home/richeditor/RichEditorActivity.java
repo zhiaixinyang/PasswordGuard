@@ -13,9 +13,11 @@ import android.text.TextUtils;
 import android.view.View;
 
 import com.hwangjr.rxbus.RxBus;
+import com.mdove.passwordguard.App;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.BaseActivity;
 import com.mdove.passwordguard.databinding.ActivityRichEditorBinding;
+import com.mdove.passwordguard.greendao.entity.CustomReView;
 import com.mdove.passwordguard.home.longplan.model.TempLongPlanModel;
 import com.mdove.passwordguard.home.richeditor.adapter.RichEditorBtnAdapter;
 import com.mdove.passwordguard.home.richeditor.model.RichEditorBtnModel;
@@ -23,16 +25,18 @@ import com.mdove.passwordguard.home.richeditor.model.event.RichEditorBtnReturnEv
 import com.mdove.passwordguard.home.richeditor.presenter.RichEditorPresenter;
 import com.mdove.passwordguard.home.richeditor.presenter.contract.RichEditorContract;
 import com.mdove.passwordguard.ui.richeditor.RichEditor;
+import com.mdove.passwordguard.ui.richeditor.knife.KnifeText;
 import com.mdove.passwordguard.utils.DensityUtil;
 import com.mdove.passwordguard.utils.StatusBarUtils;
+import com.mdove.passwordguard.utils.ToastHelper;
 
+import java.util.Date;
 import java.util.List;
 
 public class RichEditorActivity extends BaseActivity implements RichEditorContract.MvpView {
     public static final String EXTRA_TEMP_LONG_PLAN = "extra_temp_long_plan";
-    public static String contentHtml;
     private ActivityRichEditorBinding mBinding;
-    private RichEditor mEditor;
+    private KnifeText knife;
     private RichEditorBtnAdapter mAdapter;
     private RichEditorPresenter mPresenter;
     private TempLongPlanModel mTempModel;
@@ -62,20 +66,9 @@ public class RichEditorActivity extends BaseActivity implements RichEditorContra
         StatusBarUtils.setColorDiff(this, ContextCompat.getColor(this, R.color.gray_new_home));
         mTempModel = (TempLongPlanModel) getIntent().getSerializableExtra(EXTRA_TEMP_LONG_PLAN);
 
-        mEditor = mBinding.editor;
+        knife = mBinding.knife;
         handleTempModel(mTempModel);
 
-        mEditor.setEditorHeight(200);
-        mEditor.setEditorFontSize(16);
-        mEditor.setEditorFontColor(Color.RED);
-        mEditor.setEditorBackgroundColor(ContextCompat.getColor(this, R.color.gray_new_home));
-//        mEditor.setBackgroundColor(Color.BLUE);
-        //mEditor.setBackgroundResource(R.drawable.bg);
-        mEditor.setPadding(DensityUtil.dip2px(this, 12), DensityUtil.dip2px(this, 12),
-                DensityUtil.dip2px(this, 12), DensityUtil.dip2px(this, 12));
-        //mEditor.setBackground("https://raw.githubusercontent.com/wasabeef/art/master/chip.jpg");
-        mEditor.setPlaceholder("添加内容...");
-        //mEditor.setInputEnabled(false);
         mPresenter = new RichEditorPresenter();
         mPresenter.subscribe(this);
 
@@ -91,23 +84,17 @@ public class RichEditorActivity extends BaseActivity implements RichEditorContra
         if (mTempModel == null) {
             return;
         }
-        if (!TextUtils.isEmpty(mTempModel.mLongPlan)) {
-            mEditor.setHtml(mTempModel.mLongPlan);
-        }
     }
 
     private void initListener() {
-        mEditor.setOnTextChangeListener(new RichEditor.OnTextChangeListener() {
-            @Override
-            public void onTextChange(String text) {
-                contentHtml = text;
-            }
-        });
-
         mBinding.btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mEditor.setHtml(contentHtml);
+                CustomReView customReView = new CustomReView();
+                customReView.setMContent(knife.toHtml());
+                customReView.setMTime(new Date().getTime());
+                App.getDaoSession().getCustomReViewDao().insert(customReView);
+                finish();
             }
         });
     }
@@ -119,9 +106,9 @@ public class RichEditorActivity extends BaseActivity implements RichEditorContra
 
     @Override
     public void onClickReturn() {
-        contentHtml = "#RE#" + contentHtml;
-        RxBus.get().post(new RichEditorBtnReturnEvent(contentHtml));
-        finish();
+//        contentHtml = "#RE#" + contentHtml;
+//        RxBus.get().post(new RichEditorBtnReturnEvent(contentHtml));
+//        finish();
     }
 
     @Override
@@ -129,55 +116,47 @@ public class RichEditorActivity extends BaseActivity implements RichEditorContra
         mAdapter.notifyItemChanged(updatePosition);
         switch (modelType) {
             case RichEditorBtnModel.MODEL_TYPE_UNDO: {
-                mEditor.undo();
+                knife.undo();
                 break;
             }
             case RichEditorBtnModel.MODEL_TYPE_REDO: {
-                mEditor.redo();
+                knife.redo();
                 break;
             }
             case RichEditorBtnModel.MODEL_TYPE_BOLD: {
-                mEditor.setBold();
+                knife.bold(!knife.contains(KnifeText.FORMAT_BOLD));
                 break;
             }
             case RichEditorBtnModel.MODEL_TYPE_ITALIC: {
-                mEditor.setItalic();
+                knife.italic(!knife.contains(KnifeText.FORMAT_ITALIC));
                 break;
             }
             case RichEditorBtnModel.MODEL_TYPE_SUBSCRIPT: {
-                mEditor.setSubscript();
                 break;
             }
             case RichEditorBtnModel.MODEL_TYPE_SUPERSCRIPT: {
-                mEditor.setSuperscript();
                 break;
             }
             case RichEditorBtnModel.MODEL_TYPE_STRIKETHROUGH: {
-                mEditor.setStrikeThrough();
+                knife.strikethrough(!knife.contains(KnifeText.FORMAT_STRIKETHROUGH));
                 break;
             }
             case RichEditorBtnModel.MODEL_TYPE_H1: {
-                mEditor.setHeading(1);
                 break;
             }
             case RichEditorBtnModel.MODEL_TYPE_H2: {
-                mEditor.setHeading(2);
                 break;
             }
             case RichEditorBtnModel.MODEL_TYPE_H3: {
-                mEditor.setHeading(3);
                 break;
             }
             case RichEditorBtnModel.MODEL_TYPE_H4: {
-                mEditor.setHeading(4);
                 break;
             }
             case RichEditorBtnModel.MODEL_TYPE_H5: {
-                mEditor.setHeading(5);
                 break;
             }
             case RichEditorBtnModel.MODEL_TYPE_H6: {
-                mEditor.setHeading(6);
                 break;
             }
             case RichEditorBtnModel.MODEL_TYPE_TXT_COLOR: {
@@ -188,31 +167,25 @@ public class RichEditorActivity extends BaseActivity implements RichEditorContra
                 break;
             }
             case RichEditorBtnModel.MODEL_TYPE_INDENT: {
-                mEditor.setIndent();
                 break;
             }
             case RichEditorBtnModel.MODEL_TYPE_OUTDENT: {
-                mEditor.setOutdent();
                 break;
             }
             case RichEditorBtnModel.MODEL_TYPE_JUSTIFY_LEFT: {
-                mEditor.setAlignLeft();
                 break;
             }
             case RichEditorBtnModel.MODEL_TYPE_JUSTIFY_CENTER: {
-                mEditor.setAlignCenter();
                 break;
             }
             case RichEditorBtnModel.MODEL_TYPE_JUSTIFY_RIGHT: {
-                mEditor.setAlignRight();
                 break;
             }
             case RichEditorBtnModel.MODEL_TYPE_BULLETS: {
-                mEditor.setBullets();
+                knife.bullet(!knife.contains(KnifeText.FORMAT_BULLET));
                 break;
             }
             case RichEditorBtnModel.MODEL_TYPE_NUMBERST: {
-                mEditor.setNumbers();
                 break;
             }
             case RichEditorBtnModel.MODEL_TYPE_INSERT_IMAGE: {

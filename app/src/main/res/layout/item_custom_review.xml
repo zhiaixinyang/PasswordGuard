@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.mdove.passwordguard.home.todayreview.model.vm.CustomReViewModelVM" />
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/layout_main_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_8"
+        android:layout_marginLeft="@dimen/dp_8"
+        android:layout_marginRight="@dimen/dp_8"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/dp_8">
+
+        <RelativeLayout
+            android:id="@+id/layout_add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:layout_marginTop="@dimen/dp_12"
+                android:text="@{vm.mTime}"
+                android:textColor="@color/gray"
+                android:textSize="14sp"
+                tools:text="2018年7月5日 16:50" />
+
+            <com.mdove.passwordguard.ui.richeditor.knife.KnifeText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_time"
+                android:layout_margin="@dimen/dp_12"
+                android:background="@null"
+                android:clickable="false"
+                android:focusable="false"
+                app:bulletColor="@color/black"
+                app:bulletRadius="3dp"
+                app:bulletGapWidth="@dimen/dp_5"
+                app:showHtmlText="@{vm.mContent}"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                tools:text="复盘内容" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</layout>
