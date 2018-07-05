@@ -45,9 +45,7 @@
             android:layout_width="match_parent"
             app:tabTextColor="@color/gray"
             app:tabIndicatorColor="@color/black"
-            app:tabMaxWidth="80dp"
-            android:textSize="16sp"
-            app:tabTextAppearance="@style/TabLayoutTextStyle"
+            app:tabMaxWidth="120dp"
             app:tabIndicatorHeight="2dp"
             app:tabSelectedTextColor="@color/black"
             android:layout_height="40dp"/>
@@ -55,6 +53,8 @@
             android:id="@+id/vp"
             android:layout_below="@+id/tb"
             android:layout_width="match_parent"
+            android:overScrollMode="never"
+            android:scrollbars="none"
             android:layout_height="match_parent"/>
     </RelativeLayout>
 

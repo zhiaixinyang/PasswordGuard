@@ -113,8 +113,8 @@
         <item name="android:colorForeground">@color/blue_A200</item>
     </style>
 
-    <style name="TabLayoutTextStyle">
-        <item name="android:textSize">16sp</item>
+    <style name="TabLayoutTextStyle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse">
+        <item name="android:textSize">26sp</item>
     </style>
 
     <style name="MultiLineChooseLayoutTags.SingleChoose" parent="MultiLineChooseLayoutTags">
