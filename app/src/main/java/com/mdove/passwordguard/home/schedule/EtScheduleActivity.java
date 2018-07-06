@@ -11,6 +11,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 
+import com.hwangjr.rxbus.RxBus;
 import com.hwangjr.rxbus.annotation.Subscribe;
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.BaseActivity;
@@ -75,6 +76,8 @@ public class EtScheduleActivity extends BaseActivity implements EtScheduleContra
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_et_schedule);
         StatusBarUtils.setColorNoTranslucent(this, ContextCompat.getColor(this, R.color.gray_new_home));
+
+        RxBus.get().register(this);
 
         mPresenter = new EtSchedulePresenter();
         mPresenter.subscribe(this);
@@ -172,6 +175,12 @@ public class EtScheduleActivity extends BaseActivity implements EtScheduleContra
                 finish();
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RxBus.get().unregister(this);
     }
 
     @Override

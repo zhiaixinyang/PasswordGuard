@@ -37,8 +37,8 @@ public class TimeBottomSheetDialog extends Dialog {
     private List<Integer> mEndHours = new ArrayList<>();
     private List<Integer> mStartMinutes = new ArrayList<>();
     private List<Integer> mEndMinutes = new ArrayList<>();
-    private int mSelectStartHour=1, mSelectStartMin;
-    private int mSelectEndHour=1, mSelectEndMin;
+    private int mSelectStartHour = 1, mSelectStartMin;
+    private int mSelectEndHour = 1, mSelectEndMin;
 
     public TimeBottomSheetDialog(@NonNull Context context) {
         super(context);
@@ -96,10 +96,10 @@ public class TimeBottomSheetDialog extends Dialog {
             mEndMinutes.add(i);
         }
 
-        mStartHourAdapter = new EtTodayPlanTimeAdapter(mStartHours);
-        mStartMinAdapter = new EtTodayPlanTimeAdapter(mStartMinutes);
-        mEndHourAdapter = new EtTodayPlanTimeAdapter(mEndHours);
-        mEndMinAdapter = new EtTodayPlanTimeAdapter(mEndMinutes);
+        mStartHourAdapter = new EtTodayPlanTimeAdapter(mStartHours, true);
+        mStartMinAdapter = new EtTodayPlanTimeAdapter(mStartMinutes, false);
+        mEndHourAdapter = new EtTodayPlanTimeAdapter(mEndHours, true);
+        mEndMinAdapter = new EtTodayPlanTimeAdapter(mEndMinutes, false);
 
         mPickerLayoutManagerStartHour = new PickerLayoutManager(getContext(), mRlvStartHour, PickerLayoutManager.VERTICAL, false, 3, 0.4f, true);
         mRlvStartHour.setAdapter(mStartHourAdapter);

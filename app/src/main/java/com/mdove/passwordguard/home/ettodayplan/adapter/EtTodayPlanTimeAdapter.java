@@ -17,8 +17,10 @@ import java.util.List;
 
 public class EtTodayPlanTimeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Integer> mData;
+    private boolean isHour = false;
 
-    public EtTodayPlanTimeAdapter(List<Integer> data) {
+    public EtTodayPlanTimeAdapter(List<Integer> data, boolean isHour) {
+        this.isHour = isHour;
         mData = data;
     }
 
@@ -46,11 +48,12 @@ public class EtTodayPlanTimeAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         }
 
         public void bind(Integer num) {
+            String tips = isHour?"时":"分";
             String content = "";
             if (num <= 9) {
-                content = "0" + num;
+                content = "0" + num + tips;
             } else {
-                content = num + "";
+                content = num + tips;
             }
             mBinding.tvText.setText(content);
         }
