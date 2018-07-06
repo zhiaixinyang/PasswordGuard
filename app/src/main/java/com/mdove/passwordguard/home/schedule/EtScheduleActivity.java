@@ -164,10 +164,10 @@ public class EtScheduleActivity extends BaseActivity implements EtScheduleContra
 
                 if (isAddStatus) {
                     mPresenter.addSchedule(schedule);
-                    ToastHelper.shortToast("长期计划添加成功。");
+                    ToastHelper.shortToast("日程添加成功。");
                 } else {
                     mPresenter.editSchedule(schedule);
-                    ToastHelper.shortToast("修改计划成功。");
+                    ToastHelper.shortToast("修改日程成功。");
                 }
                 finish();
             }

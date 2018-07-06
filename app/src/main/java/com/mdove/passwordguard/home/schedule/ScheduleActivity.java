@@ -68,6 +68,14 @@ public class ScheduleActivity extends BaseActivity implements ScheduleContract.M
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        if (mPresenter != null) {
+            mPresenter.initData();
+        }
+    }
+
+    @Override
     public Context getContext() {
         return this;
     }

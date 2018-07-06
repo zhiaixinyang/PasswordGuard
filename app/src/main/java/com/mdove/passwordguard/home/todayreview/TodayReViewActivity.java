@@ -41,7 +41,7 @@ public class TodayReViewActivity extends BaseActivity implements ActivityTodayRe
     private ActivityTodayReViewPresenter mPresenter;
     private ScheduleReViewFragment mScheduleReViewFragment;
     private CustomReViewFragment mCustomReViewFragment;
-    private String[] mTitle = {"复盘计划", "独立复盘"};
+    private String[] mTitle = {"日程复盘", "独立复盘"};
 
     public static void start(Context context) {
         start(context, -1L);

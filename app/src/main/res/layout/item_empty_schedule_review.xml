@@ -35,7 +35,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/iv"
-                android:text="今日没有需要复盘的计划"
+                android:text="今日没有需要复盘的日程"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
         </RelativeLayout>
