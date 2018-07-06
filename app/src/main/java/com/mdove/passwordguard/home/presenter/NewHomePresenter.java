@@ -45,7 +45,7 @@ public class NewHomePresenter implements NewHomeContract.Presenter {
         Long time = new Date().getTime();
         String year = DateUtils.getYear(time) + "年";
         String month = DateUtils.getSimpleMonthC(true);
-        String day = DateUtils.getDay(time) + "";
+        String day = DateUtils.getDay(time) + "日";
 
         mView.initTime(new HomeTimeModelVM(year, month, day));
     }

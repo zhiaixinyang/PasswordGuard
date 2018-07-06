@@ -7,6 +7,7 @@ import com.mdove.passwordguard.home.todayreview.model.CustomReViewModel;
 import com.mdove.passwordguard.home.todayreview.presenter.contract.CustomReViewContract;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class CustomReViewPresenter implements CustomReViewContract.Presenter {
@@ -28,6 +29,17 @@ public class CustomReViewPresenter implements CustomReViewContract.Presenter {
         }
 
         mView.initData(mData);
+    }
+
+    @Override
+    public void addCustomSchedule(String content) {
+        CustomReView customReView = new CustomReView();
+        customReView.setMTime(new Date().getTime());
+        customReView.setMContent(content);
+        mCustomReViewDao.insert(customReView);
+
+        mData.add(new CustomReViewModel(customReView));
+        mView.addCustomSchedule(mData.size());
     }
 
     @Override

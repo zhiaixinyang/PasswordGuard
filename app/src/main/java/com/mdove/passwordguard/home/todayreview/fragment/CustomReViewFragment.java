@@ -4,8 +4,11 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.Editable;
 import android.text.Html;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,10 +60,43 @@ public class CustomReViewFragment extends Fragment implements CustomReViewContra
         mPresenter.initData();
 
         mBinding.btnInRichEdit.setText(Html.fromHtml("<u>使用Plus编辑器编辑</u>"));
+
+        mBinding.btnSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String content = mBinding.etContent.getText().toString();
+                mBinding.etContent.setText("");
+                mPresenter.addCustomSchedule(content);
+            }
+        });
+
+        mBinding.etContent.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length() <= 0) {
+                    mBinding.btnSend.setEnabled(false);
+                    mBinding.btnSend.setColorFilter(ContextCompat.getColor(getContext(), R.color.gray));
+                } else {
+                    mBinding.btnSend.setEnabled(true);
+                    mBinding.btnSend.setColorFilter(ContextCompat.getColor(getContext(), R.color.blue_700));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) { }
+        });
     }
 
     @Override
     public void initData(List<CustomReViewModel> data) {
         mAdapter.setData(data);
+    }
+
+    @Override
+    public void addCustomSchedule(int position) {
+        mAdapter.notifyItemChanged(position);
     }
 }

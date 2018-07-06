@@ -19,9 +19,13 @@ import java.util.List;
 public interface CustomReViewContract {
     interface Presenter extends BasePresenter<CustomReViewContract.MvpView> {
         void initData();
+
+        void addCustomSchedule(String content);
     }
 
     interface MvpView extends BaseView<Presenter> {
         void initData(List<CustomReViewModel> data);
+
+        void addCustomSchedule(int position);
     }
 }

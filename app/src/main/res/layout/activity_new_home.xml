@@ -239,12 +239,8 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/new_home_item_h"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/new_home_main_margin"
-            android:layout_marginLeft="@dimen/new_home_main_margin"
-            app:cardBackgroundColor="@color/black"
-            android:layout_marginRight="@dimen/new_home_main_margin"
-            android:onClick="@{()->handler.onClickAllPlan()}"
-            app:cardCornerRadius="8dp">
+            app:cardBackgroundColor="@color/white"
+            android:onClick="@{()->handler.onClickAllPlan()}">
 
             <RelativeLayout
                 android:layout_width="match_parent"
