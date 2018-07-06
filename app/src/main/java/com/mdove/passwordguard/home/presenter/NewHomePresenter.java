@@ -1,23 +1,17 @@
 package com.mdove.passwordguard.home.presenter;
 
 import com.mdove.passwordguard.App;
+import com.mdove.passwordguard.base.listlayout.TestActivity;
 import com.mdove.passwordguard.greendao.MainTodayPlanDao;
-import com.mdove.passwordguard.greendao.entity.MainTodayPlan;
-import com.mdove.passwordguard.home.allplan.AllPlanActivity;
 import com.mdove.passwordguard.home.longplan.EtLongPlanActivity;
 import com.mdove.passwordguard.home.longplan.LongPlanActivity;
 import com.mdove.passwordguard.home.model.HomeTimeModelVM;
 import com.mdove.passwordguard.home.presenter.contract.NewHomeContract;
-import com.mdove.passwordguard.home.richeditor.RichEditorActivity;
 import com.mdove.passwordguard.home.schedule.ScheduleActivity;
 import com.mdove.passwordguard.home.todayreview.TodayReViewActivity;
-import com.mdove.passwordguard.singleplan.SinglePlanActivity;
 import com.mdove.passwordguard.utils.DateUtils;
-import com.mdove.passwordguard.utils.ToastHelper;
 
-import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by MDove on 2018/6/24.
@@ -83,7 +77,8 @@ public class NewHomePresenter implements NewHomeContract.Presenter {
 
     @Override
     public void onClickAllPlan() {
-        RichEditorActivity.start(mView.getContext());
+//        RichEditorActivity.start(mView.getContext());
+        TestActivity.start(mView.getContext());
     }
 
     @Override
