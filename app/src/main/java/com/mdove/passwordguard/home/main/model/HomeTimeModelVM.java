@@ -1,4 +1,4 @@
-package com.mdove.passwordguard.home.model;
+package com.mdove.passwordguard.home.main.model;
 
 import android.databinding.ObservableField;
 

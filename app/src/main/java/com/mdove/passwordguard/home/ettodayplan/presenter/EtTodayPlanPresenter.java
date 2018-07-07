@@ -10,11 +10,8 @@ import com.mdove.passwordguard.home.ettodayplan.model.BaseTodayPlanModel;
 import com.mdove.passwordguard.home.ettodayplan.model.MainTodayPlanModel;
 import com.mdove.passwordguard.home.ettodayplan.model.SecondTodayPlanModel;
 import com.mdove.passwordguard.home.ettodayplan.presenter.contract.EtTodayPlanContract;
-import com.mdove.passwordguard.home.model.HomeTimeModelVM;
-import com.mdove.passwordguard.utils.DateUtils;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**

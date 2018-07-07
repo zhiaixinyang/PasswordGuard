@@ -1,20 +1,10 @@
 package com.mdove.passwordguard.home.richeditor.presenter;
 
-import com.mdove.passwordguard.App;
 import com.mdove.passwordguard.R;
-import com.mdove.passwordguard.greendao.MainTodayPlanDao;
-import com.mdove.passwordguard.home.longplan.EtLongPlanActivity;
-import com.mdove.passwordguard.home.longplan.LongPlanActivity;
-import com.mdove.passwordguard.home.model.HomeTimeModelVM;
-import com.mdove.passwordguard.home.richeditor.RichEditorActivity;
 import com.mdove.passwordguard.home.richeditor.model.RichEditorBtnModel;
 import com.mdove.passwordguard.home.richeditor.presenter.contract.RichEditorContract;
-import com.mdove.passwordguard.home.schedule.ScheduleActivity;
-import com.mdove.passwordguard.home.todayreview.TodayReViewActivity;
-import com.mdove.passwordguard.utils.DateUtils;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**

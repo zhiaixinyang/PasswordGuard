@@ -10,13 +10,16 @@ import android.support.v7.widget.RecyclerView;
 
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.listlayout.annotation.TitleLayout;
+import com.mdove.passwordguard.base.listlayout.model.BaseModelVM;
 import com.mdove.passwordguard.databinding.ActivityBaseListBinding;
 import com.mdove.passwordguard.utils.InflateUtils;
 import com.mdove.passwordguard.utils.StatusBarUtils;
 
+import java.util.List;
+
 public abstract class BaseListActivity extends AppCompatActivity {
     private ActivityBaseListBinding mBinding;
-    private RecyclerView.Adapter mAdapter;
+    private BaseListAdapter<BaseModelVM> mAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,15 +29,23 @@ public abstract class BaseListActivity extends AppCompatActivity {
         initTitleLayout();
         initRlv();
 
+        onCreateOver();
     }
+
+    protected abstract void onCreateOver();
 
     private void initRlv() {
         if (useCustomLayoutManager() != null) {
+            mBinding.rlvContent.setLayoutManager(useCustomLayoutManager());
+        } else {
             mBinding.rlvContent.setLayoutManager(new LinearLayoutManager(this));
         }
 
         mAdapter = useCustomAdapter();
         if (mAdapter != null) {
+            mBinding.rlvContent.setAdapter(mAdapter);
+        } else {
+            mAdapter = new BaseListAdapter<>(this);
             mBinding.rlvContent.setAdapter(mAdapter);
         }
     }
@@ -47,12 +58,18 @@ public abstract class BaseListActivity extends AppCompatActivity {
         }
     }
 
-    public RecyclerView.Adapter useCustomAdapter() {
+    public BaseListAdapter useCustomAdapter() {
         return null;
     }
 
     public RecyclerView.LayoutManager useCustomLayoutManager() {
         return null;
+    }
+
+    public void setData(List<BaseModelVM> data) {
+        if (mAdapter != null) {
+            mAdapter.setData(data);
+        }
     }
 
 }

@@ -6,11 +6,11 @@
 
         <variable
             name="vm"
-            type="com.mdove.passwordguard.home.model.HomeTimeModelVM" />
+            type="com.mdove.passwordguard.home.main.model.HomeTimeModelVM" />
 
         <variable
             name="handler"
-            type="com.mdove.passwordguard.home.model.NewHomeHandler" />
+            type="com.mdove.passwordguard.home.main.model.NewHomeHandler" />
     </data>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -59,264 +59,61 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 tools:text="四月" />
+
+            <LinearLayout
+                android:id="@+id/layout_today_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/tv_time_day"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="距今天结束还有"
+                    android:textColor="@color/gray_plus"
+                    android:textSize="12sp" />
+
+                <com.mdove.passwordguard.ui.TextViewPlus
+                    android:id="@+id/tv_remain_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:layout_marginRight="@dimen/dp_5"
+                    android:text="99999999"
+                    android:textColor="@color/red_700"
+                    android:textSize="26sp"
+                    app:customFont="@string/font_regular" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="秒"
+                    android:textColor="@color/gray_plus"
+                    android:textSize="12sp" />
+            </LinearLayout>
         </RelativeLayout>
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/layout_think"
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tb"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/new_home_item_h"
-            android:layout_below="@+id/layout_today_time"
-            android:layout_margin="@dimen/new_home_main_margin"
-            app:cardBackgroundColor="@color/white"
-            android:onClick="@{()->handler.onClickTodayPlanReView()}"
-            app:cardCornerRadius="8dp">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/iv_review"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/dp_12"
-                    android:layout_marginRight="@dimen/dp_12"
-                    android:padding="5dp"
-                    android:layout_width="@dimen/new_home_item_iv_w_h"
-                    android:layout_height="@dimen/new_home_item_iv_w_h"
-                    android:src="@mipmap/ic_bg_review" />
-
-
-                <com.mdove.passwordguard.ui.TextViewPlus
-                    android:id="@+id/tv_think_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/iv_review"
-                    android:layout_alignTop="@+id/iv_review"
-                    android:text="复盘"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/new_home_title_size"
-                    app:customFont="@string/font_regular" />
-
-                <com.mdove.passwordguard.ui.TextViewPlus
-                    android:id="@+id/tv_think_tips"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/iv_review"
-                    android:layout_alignBottom="@+id/iv_review"
-                    android:text="静下心来复盘今天的得/失"
-                    android:textColor="@color/gray"
-                    android:textSize="@dimen/new_home_tips_size"
-                    app:customFont="@string/font_regular" />
-
-                <ImageView
-                    android:layout_width="@dimen/dp_30"
-                    android:layout_height="@dimen/dp_30"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginBottom="@dimen/dp_12"
-                    android:layout_marginRight="@dimen/dp_12"
-                    android:src="@mipmap/ic_btn_in" />
-            </RelativeLayout>
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/layout_plan_today"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/new_home_item_h"
-            app:cardBackgroundColor="@color/white"
-            android:layout_below="@+id/layout_think"
-            android:layout_marginBottom="@dimen/new_home_main_margin"
-            android:layout_marginLeft="@dimen/new_home_main_margin"
-            android:layout_marginRight="@dimen/new_home_main_margin"
-            android:onClick="@{()->handler.onClickLongPlan()}"
-            app:cardCornerRadius="8dp">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/iv_plan"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/dp_12"
-                    android:padding="8dp"
-                    android:layout_marginRight="@dimen/dp_12"
-                    android:layout_width="@dimen/new_home_item_iv_w_h"
-                    android:layout_height="@dimen/new_home_item_iv_w_h"
-                    android:src="@mipmap/ic_today_plan" />
-
-
-                <TextView
-                    android:id="@+id/tv_plan_today_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/iv_plan"
-                    android:layout_toRightOf="@+id/iv_plan"
-                    android:textColor="@color/black"
-                    android:text="长期计划"
-                    android:textSize="@dimen/new_home_title_size" />
-
-                <TextView
-                    android:id="@+id/tv_plan_today_tips"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/iv_plan"
-                    android:layout_toRightOf="@+id/iv_plan"
-                    android:textColor="@color/gray_plus"
-                    android:text="查看/制定自己的长期计划"
-                    android:textSize="@dimen/new_home_tips_size" />
-
-                <ImageView
-                    android:layout_width="@dimen/dp_30"
-                    android:layout_height="@dimen/dp_30"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginBottom="@dimen/dp_12"
-                    android:layout_marginRight="@dimen/dp_12"
-                    android:src="@mipmap/ic_btn_in" />
-            </RelativeLayout>
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/layout_schedule"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/new_home_item_h"
-            app:cardBackgroundColor="@color/white"
-            android:layout_below="@+id/layout_plan_today"
-            android:layout_marginBottom="@dimen/new_home_main_margin"
-            android:layout_marginLeft="@dimen/new_home_main_margin"
-            android:layout_marginRight="@dimen/new_home_main_margin"
-            android:onClick="@{()->handler.onClickSchedule()}"
-            app:cardCornerRadius="8dp">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/iv_schedule"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/dp_12"
-                    android:layout_marginRight="@dimen/dp_12"
-                    android:layout_width="@dimen/new_home_item_iv_w_h"
-                    android:layout_height="@dimen/new_home_item_iv_w_h"
-                    android:src="@mipmap/ic_bg_schedule" />
-
-
-                <TextView
-                    android:id="@+id/tv_schedule_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/iv_schedule"
-                    android:layout_toRightOf="@+id/iv_schedule"
-                    android:textColor="@color/black"
-                    android:text="日程安排"
-                    android:textSize="@dimen/new_home_title_size" />
-
-                <TextView
-                    android:id="@+id/tv_schedule_tips"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/iv_schedule"
-                    android:layout_toRightOf="@+id/iv_schedule"
-                    android:textColor="@color/gray_plus"
-                    android:text="记录一下自己的日程"
-                    android:textSize="@dimen/new_home_tips_size" />
-
-                <ImageView
-                    android:layout_width="@dimen/dp_30"
-                    android:layout_height="@dimen/dp_30"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginBottom="@dimen/dp_12"
-                    android:layout_marginRight="@dimen/dp_12"
-                    android:src="@mipmap/ic_btn_in" />
-            </RelativeLayout>
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/layout_all_plan_today"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/new_home_item_h"
-            android:layout_alignParentBottom="true"
-            app:cardBackgroundColor="@color/white"
-            android:onClick="@{()->handler.onClickAllPlan()}">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:visibility="gone"
-                    android:src="@mipmap/ic_main_bg_all_plan" />
-
-
-                <TextView
-                    android:id="@+id/tv_all_plan_today_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dp_12"
-                    android:text="全部计划"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/new_home_title_size" />
-
-                <TextView
-                    android:id="@+id/tv_all_plan_today_tips"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_all_plan_today_title"
-                    android:layout_marginLeft="@dimen/dp_12"
-                    android:text="查看自己的历史的全部计划"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/new_home_tips_size" />
-
-                <ImageView
-                    android:layout_width="@dimen/dp_30"
-                    android:layout_height="@dimen/dp_30"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginBottom="@dimen/dp_12"
-                    android:layout_marginRight="@dimen/dp_12"
-                    android:src="@mipmap/ic_btn_in" />
-            </RelativeLayout>
-        </android.support.v7.widget.CardView>
-
-        <LinearLayout
-            android:id="@+id/layout_today_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_below="@+id/layout_time"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/dp_5"
-            android:orientation="horizontal">
+            app:tabIndicatorColor="@color/black"
+            app:tabIndicatorHeight="2dp"
+            app:tabMaxWidth="120dp"
+            app:tabSelectedTextColor="@color/black"
+            app:tabTextColor="@color/gray" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="距离今天结束还有"
-                android:textColor="@color/gray_plus"
-                android:textSize="16sp" />
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tb"
+            android:overScrollMode="never"
+            android:scrollbars="none" />
 
-            <com.mdove.passwordguard.ui.TextViewPlus
-                android:id="@+id/tv_remain_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_5"
-                android:layout_marginRight="@dimen/dp_5"
-                android:text="999999"
-                android:textColor="@color/red_700"
-                android:textSize="30sp"
-                app:customFont="@string/font_regular" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="秒"
-                android:textColor="@color/gray_plus"
-                android:textSize="16sp" />
-        </LinearLayout>
     </RelativeLayout>
 </layout>

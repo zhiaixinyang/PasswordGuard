@@ -2,7 +2,6 @@ package com.mdove.passwordguard.home.richeditor.presenter.contract;
 
 import com.mdove.passwordguard.base.BasePresenter;
 import com.mdove.passwordguard.base.BaseView;
-import com.mdove.passwordguard.home.model.HomeTimeModelVM;
 import com.mdove.passwordguard.home.richeditor.model.RichEditorBtnModel;
 
 import java.util.List;

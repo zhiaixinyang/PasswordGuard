@@ -1,7 +1,6 @@
-package com.mdove.passwordguard.home.model;
+package com.mdove.passwordguard.home.main.model;
 
-import com.mdove.passwordguard.home.ettodayplan.EtTodayPlanActivity;
-import com.mdove.passwordguard.home.presenter.NewHomePresenter;
+import com.mdove.passwordguard.home.main.presenter.NewHomePresenter;
 
 /**
  * Created by MDove on 2018/6/26.

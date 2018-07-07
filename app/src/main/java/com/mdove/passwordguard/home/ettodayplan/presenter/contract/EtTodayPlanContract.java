@@ -7,7 +7,6 @@ import com.mdove.passwordguard.greendao.entity.SecondTodayPlan;
 import com.mdove.passwordguard.home.ettodayplan.model.BaseTodayPlanModel;
 import com.mdove.passwordguard.home.ettodayplan.model.MainTodayPlanModel;
 import com.mdove.passwordguard.home.ettodayplan.model.SecondTodayPlanModel;
-import com.mdove.passwordguard.home.model.HomeTimeModelVM;
 
 import java.util.List;
 

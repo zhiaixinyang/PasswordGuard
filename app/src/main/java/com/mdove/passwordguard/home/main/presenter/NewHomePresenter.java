@@ -1,17 +1,24 @@
-package com.mdove.passwordguard.home.presenter;
+package com.mdove.passwordguard.home.main.presenter;
 
 import com.mdove.passwordguard.App;
 import com.mdove.passwordguard.base.listlayout.TestActivity;
 import com.mdove.passwordguard.greendao.MainTodayPlanDao;
+import com.mdove.passwordguard.greendao.ScheduleDao;
+import com.mdove.passwordguard.greendao.entity.Schedule;
 import com.mdove.passwordguard.home.longplan.EtLongPlanActivity;
 import com.mdove.passwordguard.home.longplan.LongPlanActivity;
-import com.mdove.passwordguard.home.model.HomeTimeModelVM;
-import com.mdove.passwordguard.home.presenter.contract.NewHomeContract;
+import com.mdove.passwordguard.home.main.model.HomeTimeModelVM;
+import com.mdove.passwordguard.home.main.presenter.contract.NewHomeContract;
 import com.mdove.passwordguard.home.schedule.ScheduleActivity;
+import com.mdove.passwordguard.home.schedule.model.AddScheduleModel;
+import com.mdove.passwordguard.home.schedule.model.BaseScheduleModel;
+import com.mdove.passwordguard.home.schedule.model.ScheduleModel;
 import com.mdove.passwordguard.home.todayreview.TodayReViewActivity;
 import com.mdove.passwordguard.utils.DateUtils;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by MDove on 2018/6/24.
@@ -20,9 +27,11 @@ import java.util.Date;
 public class NewHomePresenter implements NewHomeContract.Presenter {
     private NewHomeContract.MvpView mView;
     private MainTodayPlanDao mMainTodayPlanDao;
+    private ScheduleDao mScheduleDao;
 
     public NewHomePresenter() {
         mMainTodayPlanDao = App.getDaoSession().getMainTodayPlanDao();
+        mScheduleDao = App.getDaoSession().getScheduleDao();
     }
 
     @Override
@@ -42,6 +51,19 @@ public class NewHomePresenter implements NewHomeContract.Presenter {
         String day = DateUtils.getDay(time) + "日";
 
         mView.initTime(new HomeTimeModelVM(year, month, day));
+    }
+
+    @Override
+    public void initSchedule() {
+        List<BaseScheduleModel> modelData = new ArrayList<>();
+        List<Schedule> data = mScheduleDao.queryBuilder().list();
+        modelData.add(new AddScheduleModel());
+        if (data != null) {
+            for (Schedule schedule : data) {
+                modelData.add(new ScheduleModel(schedule));
+            }
+            mView.initSchedule(modelData);
+        }
     }
 
     @Override

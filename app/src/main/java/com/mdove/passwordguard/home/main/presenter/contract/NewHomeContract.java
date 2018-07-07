@@ -1,10 +1,9 @@
-package com.mdove.passwordguard.home.presenter.contract;
+package com.mdove.passwordguard.home.main.presenter.contract;
 
 import com.mdove.passwordguard.base.BasePresenter;
 import com.mdove.passwordguard.base.BaseView;
-import com.mdove.passwordguard.greendao.entity.SinglePlan;
-import com.mdove.passwordguard.home.model.HomeTimeModelVM;
-import com.mdove.passwordguard.main.newmain.dailytask.dialog.model.DailyTaskLabelModel;
+import com.mdove.passwordguard.home.main.model.HomeTimeModelVM;
+import com.mdove.passwordguard.home.schedule.model.BaseScheduleModel;
 
 import java.util.List;
 
@@ -16,14 +15,22 @@ public interface NewHomeContract {
     interface Presenter extends BasePresenter<NewHomeContract.MvpView> {
         void initTime();
 
+        void initSchedule();
+
         void onClickSchedule();
+
         void onClickTodayPlanReView();
+
         void onClickAllPlan();
+
         void onClickEtLongPlan();
+
         void onClickLongPlan();
     }
 
     interface MvpView extends BaseView<Presenter> {
         void initTime(HomeTimeModelVM timeVM);
+
+        void initSchedule(List<BaseScheduleModel> data);
     }
 }
