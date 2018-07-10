@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.mdove.passwordguard.home.main.model.vm.HomeLongPlanModelVM" />
+
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/layout_main_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_12"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/dp_12"
+        app:cardElevation="@dimen/dp_5">
+
+        <RelativeLayout
+            android:id="@+id/layout_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_icon"
+                android:layout_width="@dimen/dp_24"
+                android:layout_height="@dimen/dp_24"
+                android:layout_marginTop="@dimen/dp_8"
+                android:layout_marginLeft="@dimen/dp_8"
+                android:src="@mipmap/ic_today_plan" />
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/iv_icon"
+                android:layout_toRightOf="@+id/iv_icon"
+                android:layout_marginLeft="@dimen/dp_8"
+                android:text="@{vm.mTime}"
+                android:textColor="@color/gray"
+                android:textSize="12sp"
+                tools:text="记录于:[20018年7月1日 16:35]" />
+
+            <RelativeLayout
+                android:id="@+id/layout_urgent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iv_icon"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:layout_marginRight="@dimen/dp_12"
+                android:layout_marginTop="@dimen/dp_12">
+
+                <TextView
+                    android:id="@+id/tv_urgent_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="紧急度:"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/item_long_plan_normal_size" />
+
+                <com.mdove.passwordguard.ui.TextViewPlus
+                    android:id="@+id/tv_urgent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp_12"
+                    android:layout_toRightOf="@+id/tv_urgent_tip"
+                    android:text="@{vm.mUrgent}"
+                    android:textSize="@dimen/item_long_plan_normal_size"
+                    app:customFont="@string/font_regular"
+                    tools:text="99" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_important"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_urgent"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:layout_marginRight="@dimen/dp_12"
+                android:layout_marginTop="@dimen/dp_12">
+
+                <TextView
+                    android:id="@+id/tv_important_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="重要度:"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/item_long_plan_normal_size" />
+
+                <com.mdove.passwordguard.ui.TextViewPlus
+                    android:id="@+id/tv_important"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp_12"
+                    android:layout_toRightOf="@+id/tv_important_tip"
+                    android:text="@{vm.mImportant}"
+                    android:textSize="@dimen/item_long_plan_normal_size"
+                    app:customFont="@string/font_regular"
+                    tools:text="99" />
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="1.2dp"
+                android:layout_below="@+id/layout_important"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:layout_marginRight="@dimen/dp_12"
+                android:layout_marginTop="@dimen/dp_8"
+                android:background="@color/gray_new_home" />
+
+            <TextView
+                android:id="@+id/tv_time_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/line1"
+                android:layout_marginBottom="@dimen/dp_12"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:layout_marginRight="@dimen/dp_12"
+                android:layout_marginTop="@dimen/dp_8"
+                android:text="计划周期"
+                android:textColor="@color/black"
+                android:textSize="@dimen/new_home_main_size" />
+
+            <RelativeLayout
+                android:id="@+id/layout_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_time_tips"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:layout_marginRight="@dimen/dp_12"
+                android:layout_toLeftOf="@+id/iv_time"
+                android:gravity="center">
+
+                <com.mdove.passwordguard.ui.TextViewPlus
+                    android:id="@+id/tv_time_start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@{vm.mStartTime}"
+                    android:textColor="@color/gray"
+                    android:textSize="16sp"
+                    app:customFont="@string/font_regular"
+                    tools:text="2018年7月1日" />
+
+                <View
+                    android:layout_width="10dp"
+                    android:layout_height="1.2dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:background="@color/gray" />
+
+                <com.mdove.passwordguard.ui.TextViewPlus
+                    android:id="@+id/tv_time_end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="@{vm.mEndTime}"
+                    android:textColor="@color/gray"
+                    android:textSize="16sp"
+                    app:customFont="@string/font_regular"
+                    tools:text="2018年7月8日" />
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/line2"
+                android:layout_width="match_parent"
+                android:layout_height="1.2dp"
+                android:layout_below="@+id/layout_time"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:layout_marginRight="@dimen/dp_12"
+                android:layout_marginTop="@dimen/dp_8"
+                android:background="@color/gray_new_home" />
+
+            <TextView
+                android:id="@+id/tv_content_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/line2"
+                android:layout_marginBottom="@dimen/dp_12"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:layout_marginRight="@dimen/dp_12"
+                android:layout_marginTop="@dimen/dp_8"
+                android:text="计划内容"
+                android:textColor="@color/black"
+                android:textSize="@dimen/new_home_main_size" />
+
+            <TextView
+                android:id="@+id/tv_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/line2"
+                android:layout_marginBottom="@dimen/dp_12"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:layout_marginRight="@dimen/dp_12"
+                android:layout_marginTop="@dimen/dp_8"
+                android:text="@{vm.mTips}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/new_home_main_size"
+                tools:text="标签：[奋斗]" />
+
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_content_tips"
+                android:layout_marginBottom="@dimen/dp_12"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:layout_marginRight="@dimen/dp_12"
+                android:background="@drawable/bg_normal_gray_new_home"
+                android:paddingBottom="3dp"
+                android:paddingLeft="@dimen/dp_8"
+                android:paddingRight="@dimen/dp_8"
+                android:paddingTop="3dp"
+                android:text="@{vm.mLongPlan}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/new_home_main_size"
+                tools:text="正真的计划内容" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</layout>

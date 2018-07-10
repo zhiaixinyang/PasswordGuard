@@ -2,6 +2,7 @@ package com.mdove.passwordguard.home.main.presenter.contract;
 
 import com.mdove.passwordguard.base.BasePresenter;
 import com.mdove.passwordguard.base.BaseView;
+import com.mdove.passwordguard.home.main.model.BaseHomeMessModel;
 import com.mdove.passwordguard.home.main.model.HomeTimeModelVM;
 import com.mdove.passwordguard.home.schedule.model.BaseScheduleModel;
 
@@ -17,6 +18,6 @@ public interface HomeMessContract {
     }
 
     interface MvpView extends BaseView<Presenter> {
-        void initData();
+        void initData(List<BaseHomeMessModel> data);
     }
 }

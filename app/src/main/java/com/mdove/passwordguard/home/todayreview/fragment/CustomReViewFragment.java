@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.databinding.FragmentCustomReviewBinding;
+import com.mdove.passwordguard.home.richeditor.RichEditorActivity;
 import com.mdove.passwordguard.home.todayreview.adapter.CustomReViewAdapter;
 import com.mdove.passwordguard.home.todayreview.model.CustomReViewModel;
 import com.mdove.passwordguard.home.todayreview.presenter.CustomReViewPresenter;
@@ -60,6 +61,12 @@ public class CustomReViewFragment extends Fragment implements CustomReViewContra
         mPresenter.initData();
 
         mBinding.btnInRichEdit.setText(Html.fromHtml("<u>使用Plus编辑器编辑</u>"));
+        mBinding.btnInRichEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RichEditorActivity.start(getActivity());
+            }
+        });
 
         mBinding.btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,7 +79,8 @@ public class CustomReViewFragment extends Fragment implements CustomReViewContra
 
         mBinding.etContent.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -86,7 +94,8 @@ public class CustomReViewFragment extends Fragment implements CustomReViewContra
             }
 
             @Override
-            public void afterTextChanged(Editable s) { }
+            public void afterTextChanged(Editable s) {
+            }
         });
     }
 
