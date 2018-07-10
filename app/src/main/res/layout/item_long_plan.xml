@@ -197,8 +197,8 @@
                 android:textSize="@dimen/new_home_main_size"
                 tools:text="标签：[奋斗]" />
 
-            <TextView
-                android:id="@+id/tv_content"
+            <RelativeLayout
+                android:id="@+id/layout_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/tv_time"
@@ -211,11 +211,21 @@
                 android:paddingBottom="3dp"
                 android:paddingLeft="@dimen/dp_8"
                 android:paddingRight="@dimen/dp_8"
-                android:paddingTop="3dp"
-                android:text="@{vm.mLongPlan}"
-                android:textColor="@color/black"
-                android:textSize="@dimen/new_home_main_size"
-                tools:text="正真的计划内容" />
+                android:paddingTop="3dp">
+
+                <com.mdove.passwordguard.ui.richeditor.knife.KnifeText
+                    android:id="@+id/tv_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/new_home_main_size"
+                    app:showHtmlText="@{vm.mLongPlan}"
+                    tools:text="正真的计划内容" />
+            </RelativeLayout>
+
 
             <TextView
                 android:id="@+id/tv_time"
@@ -236,9 +246,9 @@
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:layout_margin="@dimen/dp_12"
-                android:onClick="@{()->handler.onClickEditLongPlan(vm)}"
                 android:background="@drawable/bg_normal_gray_new_home"
-                android:gravity="center">
+                android:gravity="center"
+                android:onClick="@{()->handler.onClickEditLongPlan(vm)}">
 
                 <ImageView
                     android:id="@+id/iv"

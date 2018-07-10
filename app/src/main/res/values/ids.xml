@@ -6,4 +6,6 @@
     <item name="calendarView_week_mode" type="id" />
     <item name="recyclerView" type="id" />
     <item name="weekview_top" type="id" />
+
+    <item name="recyclerview_swipe" type="id"/>
 </resources>

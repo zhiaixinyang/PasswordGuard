@@ -15,9 +15,13 @@ import java.util.List;
 public interface HomeMessContract {
     interface Presenter extends BasePresenter<HomeMessContract.MvpView> {
         void initData();
+
+        void loadMore();
     }
 
     interface MvpView extends BaseView<Presenter> {
         void initData(List<BaseHomeMessModel> data);
+
+        void onRefreshSuc(List<BaseHomeMessModel> data);
     }
 }

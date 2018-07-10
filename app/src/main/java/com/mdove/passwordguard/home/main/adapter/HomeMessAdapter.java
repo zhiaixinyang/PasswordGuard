@@ -11,8 +11,6 @@ import com.mdove.passwordguard.databinding.ItemAddScheduleShortBinding;
 import com.mdove.passwordguard.databinding.ItemHomeCustomReviewBinding;
 import com.mdove.passwordguard.databinding.ItemHomeLongPlanBinding;
 import com.mdove.passwordguard.databinding.ItemHomeScheduleBinding;
-import com.mdove.passwordguard.databinding.ItemScheduleShortBinding;
-import com.mdove.passwordguard.home.longplan.model.LongPlanModel;
 import com.mdove.passwordguard.home.main.model.BaseHomeMessModel;
 import com.mdove.passwordguard.home.main.model.HomeCustomReViewModel;
 import com.mdove.passwordguard.home.main.model.HomeLongPlanModel;
@@ -21,10 +19,7 @@ import com.mdove.passwordguard.home.main.model.vm.HomeCustomReViewModelVM;
 import com.mdove.passwordguard.home.main.model.vm.HomeLongPlanModelVM;
 import com.mdove.passwordguard.home.main.model.vm.HomeScheduleModelVM;
 import com.mdove.passwordguard.home.schedule.EtScheduleActivity;
-import com.mdove.passwordguard.home.schedule.model.AddScheduleModel;
-import com.mdove.passwordguard.home.schedule.model.BaseScheduleModel;
-import com.mdove.passwordguard.home.schedule.model.ScheduleModel;
-import com.mdove.passwordguard.home.schedule.model.vm.ScheduleModelVM;
+import com.mdove.passwordguard.utils.DensityUtil;
 import com.mdove.passwordguard.utils.InflateUtils;
 
 import java.util.List;
@@ -83,6 +78,13 @@ public class HomeMessAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (position == 0) {
+            ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) holder.itemView.getLayoutParams();
+            layoutParams.setMargins(DensityUtil.dip2px(mContext, 8),
+                    DensityUtil.dip2px(mContext, 1),
+                    DensityUtil.dip2px(mContext, 8),
+                    DensityUtil.dip2px(mContext, 8));
+        }
         if (holder instanceof LongPlanViewHolder) {
             ((LongPlanViewHolder) holder).bind((HomeLongPlanModel) mData.get(position));
         } else if (holder instanceof ScheduleViewHolder) {

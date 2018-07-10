@@ -258,6 +258,7 @@ public class EtLongPlanActivity extends BaseActivity implements EtLongPlanContra
         longPlan.setMTips(mBinding.etTips.getText().toString());
         longPlan.setMLongPlan(mBinding.etPlan.getText().toString());
         RichEditorActivity.start(this, new TempLongPlanModel(longPlan), RichEditorActivity.INTENT_TYPE_FROM_LONG_PLAN);
+        finish();
     }
 
     @Override
@@ -267,7 +268,7 @@ public class EtLongPlanActivity extends BaseActivity implements EtLongPlanContra
         mImportant = longPlan.mImportant;
         mUrgent = longPlan.mUrgent;
 
-        mBinding.etPlan.setText(longPlan.mLongPlan);
+        mBinding.etPlan.fromHtml(longPlan.mLongPlan);
         mBinding.tvTimeStart.setText(DateUtils.getDateChineseNoH(longPlan.mStartTime));
         mBinding.tvTimeEnd.setText(DateUtils.getDateChineseNoH(longPlan.mEndTime));
         mBinding.tvPlanTips.setText(longPlan.mTips);
