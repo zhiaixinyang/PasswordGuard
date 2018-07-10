@@ -20,6 +20,7 @@ import com.mdove.passwordguard.home.todayreview.adapter.CustomReViewAdapter;
 import com.mdove.passwordguard.home.todayreview.model.CustomReViewModel;
 import com.mdove.passwordguard.home.todayreview.presenter.CustomReViewPresenter;
 import com.mdove.passwordguard.home.todayreview.presenter.contract.CustomReViewContract;
+import com.mdove.passwordguard.utils.ToastHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,6 +75,7 @@ public class CustomReViewFragment extends Fragment implements CustomReViewContra
                 String content = mBinding.etContent.getText().toString();
                 mBinding.etContent.setText("");
                 mPresenter.addCustomSchedule(content);
+                ToastHelper.shortToast(getString(R.string.str_custom_review_insert_suc));
             }
         });
 

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
 import android.view.View;
 
@@ -73,7 +74,7 @@ public class EtLongPlanActivity extends BaseActivity implements EtLongPlanContra
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_et_long_plan);
         StatusBarUtils.setColorNoTranslucent(this, ContextCompat.getColor(this, R.color.gray_new_home));
-        mBinding.btnRichEditor.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
+        mBinding.btnRichEditor.setText(Html.fromHtml("<u>使用Plus编辑器编辑</u>"));
 
         mPresenter = new EtLongPlanPresenter();
         mPresenter.subscribe(this);
@@ -162,10 +163,10 @@ public class EtLongPlanActivity extends BaseActivity implements EtLongPlanContra
                 longPlan.setMTime(new Date().getTime());
                 if (isAddStatus) {
                     mPresenter.addLongPlan(longPlan);
-                    ToastHelper.shortToast("长期计划添加成功。");
+                    ToastHelper.shortToast(getString(R.string.str_long_plan_insert_suc));
                 } else {
                     mPresenter.editLongPlan(longPlan);
-                    ToastHelper.shortToast("修改计划成功。");
+                    ToastHelper.shortToast(getString(R.string.str_long_plan_edit_suc));
                 }
                 finish();
             }
@@ -256,7 +257,7 @@ public class EtLongPlanActivity extends BaseActivity implements EtLongPlanContra
         longPlan.setMUrgent(mUrgent);
         longPlan.setMTips(mBinding.etTips.getText().toString());
         longPlan.setMLongPlan(mBinding.etPlan.getText().toString());
-        RichEditorActivity.start(this, new TempLongPlanModel(longPlan));
+        RichEditorActivity.start(this, new TempLongPlanModel(longPlan), RichEditorActivity.INTENT_TYPE_FROM_LONG_PLAN);
     }
 
     @Override

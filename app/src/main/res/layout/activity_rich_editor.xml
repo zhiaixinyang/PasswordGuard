@@ -36,16 +36,6 @@
                 android:textSize="20sp" />
 
             <ImageView
-                android:id="@+id/btn_return"
-                android:layout_width="@dimen/dp_26"
-                android:layout_height="@dimen/dp_26"
-                android:layout_marginTop="@dimen/dp_12"
-                android:layout_toLeftOf="@+id/btn_send"
-                android:onClick="@{()->handler.onClickReturn()}"
-                android:src="@mipmap/ic_btn_return"
-                android:tint="@color/black" />
-
-            <ImageView
                 android:id="@+id/btn_send"
                 android:layout_width="@dimen/dp_26"
                 android:layout_height="@dimen/dp_26"

@@ -15,10 +15,11 @@
         android:id="@+id/layout_main_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dp_12"
+        android:layout_marginBottom="@dimen/dp_8"
+        android:layout_marginLeft="@dimen/dp_8"
+        android:layout_marginRight="@dimen/dp_8"
         app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="@dimen/dp_12"
-        app:cardElevation="@dimen/dp_5">
+        app:cardCornerRadius="@dimen/dp_8">
 
         <RelativeLayout
             android:id="@+id/layout_main"
@@ -29,8 +30,8 @@
                 android:id="@+id/iv_icon"
                 android:layout_width="@dimen/dp_24"
                 android:layout_height="@dimen/dp_24"
-                android:layout_marginTop="@dimen/dp_8"
                 android:layout_marginLeft="@dimen/dp_8"
+                android:layout_marginTop="@dimen/dp_8"
                 android:src="@mipmap/ic_today_plan" />
 
             <TextView
@@ -38,8 +39,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/iv_icon"
-                android:layout_toRightOf="@+id/iv_icon"
                 android:layout_marginLeft="@dimen/dp_8"
+                android:layout_toRightOf="@+id/iv_icon"
                 android:text="@{vm.mTime}"
                 android:textColor="@color/gray"
                 android:textSize="12sp"
@@ -47,7 +48,7 @@
 
             <RelativeLayout
                 android:id="@+id/layout_urgent"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/iv_icon"
                 android:layout_marginLeft="@dimen/dp_12"
@@ -59,8 +60,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="紧急度:"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/item_long_plan_normal_size" />
+                    android:textColor="@color/gray_plus"
+                    android:textSize="@dimen/sp_14" />
 
                 <com.mdove.passwordguard.ui.TextViewPlus
                     android:id="@+id/tv_urgent"
@@ -70,27 +71,28 @@
                     android:layout_marginLeft="@dimen/dp_12"
                     android:layout_toRightOf="@+id/tv_urgent_tip"
                     android:text="@{vm.mUrgent}"
-                    android:textSize="@dimen/item_long_plan_normal_size"
+                    android:textSize="@dimen/sp_14"
                     app:customFont="@string/font_regular"
                     tools:text="99" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/layout_important"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/layout_urgent"
+                android:layout_below="@+id/iv_icon"
                 android:layout_marginLeft="@dimen/dp_12"
                 android:layout_marginRight="@dimen/dp_12"
-                android:layout_marginTop="@dimen/dp_12">
+                android:layout_marginTop="@dimen/dp_12"
+                android:layout_toRightOf="@+id/layout_urgent">
 
                 <TextView
                     android:id="@+id/tv_important_tip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="重要度:"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/item_long_plan_normal_size" />
+                    android:textColor="@color/gray_plus"
+                    android:textSize="@dimen/sp_14" />
 
                 <com.mdove.passwordguard.ui.TextViewPlus
                     android:id="@+id/tv_important"
@@ -100,7 +102,7 @@
                     android:layout_marginLeft="@dimen/dp_12"
                     android:layout_toRightOf="@+id/tv_important_tip"
                     android:text="@{vm.mImportant}"
-                    android:textSize="@dimen/item_long_plan_normal_size"
+                    android:textSize="@dimen/sp_14"
                     app:customFont="@string/font_regular"
                     tools:text="99" />
             </RelativeLayout>
@@ -125,17 +127,17 @@
                 android:layout_marginRight="@dimen/dp_12"
                 android:layout_marginTop="@dimen/dp_8"
                 android:text="计划周期"
-                android:textColor="@color/black"
-                android:textSize="@dimen/new_home_main_size" />
+                android:textColor="@color/gray_plus"
+                android:textSize="@dimen/sp_14" />
 
             <RelativeLayout
                 android:id="@+id/layout_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_time_tips"
-                android:layout_marginLeft="@dimen/dp_12"
+                android:layout_alignBottom="@+id/tv_time_tips"
                 android:layout_marginRight="@dimen/dp_12"
                 android:layout_toLeftOf="@+id/iv_time"
+                android:layout_toRightOf="@+id/tv_time_tips"
                 android:gravity="center">
 
                 <com.mdove.passwordguard.ui.TextViewPlus
@@ -145,7 +147,7 @@
                     android:gravity="center"
                     android:text="@{vm.mStartTime}"
                     android:textColor="@color/gray"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/sp_14"
                     app:customFont="@string/font_regular"
                     tools:text="2018年7月1日" />
 
@@ -163,7 +165,7 @@
                     android:layout_alignParentRight="true"
                     android:text="@{vm.mEndTime}"
                     android:textColor="@color/gray"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/sp_14"
                     app:customFont="@string/font_regular"
                     tools:text="2018年7月8日" />
             </RelativeLayout>
@@ -189,7 +191,7 @@
                 android:layout_marginTop="@dimen/dp_8"
                 android:text="计划内容"
                 android:textColor="@color/black"
-                android:textSize="@dimen/new_home_main_size" />
+                android:textSize="@dimen/sp_14" />
 
             <TextView
                 android:id="@+id/tv_tips"
@@ -203,7 +205,7 @@
                 android:layout_marginTop="@dimen/dp_8"
                 android:text="@{vm.mTips}"
                 android:textColor="@color/black"
-                android:textSize="@dimen/new_home_main_size"
+                android:textSize="@dimen/sp_16"
                 tools:text="标签：[奋斗]" />
 
             <TextView
@@ -221,7 +223,7 @@
                 android:paddingTop="3dp"
                 android:text="@{vm.mLongPlan}"
                 android:textColor="@color/black"
-                android:textSize="@dimen/new_home_main_size"
+                android:textSize="@dimen/sp_14"
                 tools:text="正真的计划内容" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>

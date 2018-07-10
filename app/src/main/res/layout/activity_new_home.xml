@@ -36,25 +36,38 @@
                 android:textSize="16sp"
                 tools:text="2018年" />
 
-            <TextView
-                android:id="@+id/tv_time_day"
+            <LinearLayout
+                android:id="@+id/layout_time_day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_12"
-                android:layout_toRightOf="@+id/tv_time_year"
-                android:background="@drawable/bg_normal_black"
                 android:paddingLeft="@dimen/main_padding"
                 android:paddingRight="@dimen/main_padding"
-                android:text="@{vm.mDay}"
-                android:textColor="@color/white"
-                android:textSize="30sp"
-                tools:text="26" />
+                android:layout_marginLeft="@dimen/dp_12"
+                android:orientation="horizontal"
+                android:layout_toRightOf="@+id/tv_time_year"
+                android:background="@drawable/bg_normal_black">
+                <TextView
+                    android:id="@+id/tv_time_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{vm.mDay}"
+                    android:textColor="@color/white"
+                    android:textSize="30sp"
+                    tools:text="26" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="日"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"/>
+            </LinearLayout>
+
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/tv_time_day"
-                android:layout_toLeftOf="@+id/tv_time_day"
+                android:layout_alignBottom="@+id/layout_time_day"
+                android:layout_toLeftOf="@+id/layout_time_day"
                 android:text="@{vm.mMonth}"
                 android:textColor="@color/black"
                 android:textSize="16sp"
@@ -64,8 +77,9 @@
                 android:id="@+id/layout_today_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/tv_time_day"
+                android:layout_alignBottom="@+id/layout_time_day"
                 android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/dp_8"
                 android:orientation="horizontal">
 
                 <TextView

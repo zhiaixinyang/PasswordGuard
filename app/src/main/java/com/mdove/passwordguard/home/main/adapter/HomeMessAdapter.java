@@ -1,6 +1,7 @@
 package com.mdove.passwordguard.home.main.adapter;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -132,6 +133,13 @@ public class HomeMessAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         public void bind(HomeLongPlanModel model) {
             mBinding.setVm(new HomeLongPlanModelVM(model));
+            if (model.mImportant >= 60) {
+                mBinding.tvImportant.setTextColor(ContextCompat.getColor(mContext, R.color.red_600));
+            }
+
+            if (model.mUrgent >= 60) {
+                mBinding.tvUrgent.setTextColor(ContextCompat.getColor(mContext, R.color.red_600));
+            }
         }
     }
 

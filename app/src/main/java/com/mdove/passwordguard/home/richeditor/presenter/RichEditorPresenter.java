@@ -1,6 +1,11 @@
 package com.mdove.passwordguard.home.richeditor.presenter;
 
+import com.mdove.passwordguard.App;
 import com.mdove.passwordguard.R;
+import com.mdove.passwordguard.greendao.CustomReViewDao;
+import com.mdove.passwordguard.greendao.LongPlanDao;
+import com.mdove.passwordguard.greendao.entity.CustomReView;
+import com.mdove.passwordguard.greendao.entity.LongPlan;
 import com.mdove.passwordguard.home.richeditor.model.RichEditorBtnModel;
 import com.mdove.passwordguard.home.richeditor.presenter.contract.RichEditorContract;
 
@@ -14,6 +19,13 @@ import java.util.List;
 public class RichEditorPresenter implements RichEditorContract.Presenter {
     private RichEditorContract.MvpView mView;
     private List<RichEditorBtnModel> mData;
+    private CustomReViewDao mCustomReViewDao;
+    private LongPlanDao mLongPlanDao;
+
+    public RichEditorPresenter() {
+        mCustomReViewDao = App.getDaoSession().getCustomReViewDao();
+        mLongPlanDao = App.getDaoSession().getLongPlanDao();
+    }
 
     @Override
     public void subscribe(RichEditorContract.MvpView view) {
@@ -53,6 +65,16 @@ public class RichEditorPresenter implements RichEditorContract.Presenter {
 //        data.add(new RichEditorBtnModel("插入链接", R.mipmap.insert_link, false, R.color.blue_700, true, RichEditorBtnModel.MODEL_TYPE_INSERT_LINK));
 
         mView.initRichEditorBtn(mData);
+    }
+
+    @Override
+    public void insertCustomReView(CustomReView customReView) {
+        mCustomReViewDao.insert(customReView);
+    }
+
+    @Override
+    public void insertLongPlan(LongPlan longPlan) {
+        mLongPlanDao.insert(longPlan);
     }
 
     @Override

@@ -2,6 +2,8 @@ package com.mdove.passwordguard.home.richeditor.presenter.contract;
 
 import com.mdove.passwordguard.base.BasePresenter;
 import com.mdove.passwordguard.base.BaseView;
+import com.mdove.passwordguard.greendao.entity.CustomReView;
+import com.mdove.passwordguard.greendao.entity.LongPlan;
 import com.mdove.passwordguard.home.richeditor.model.RichEditorBtnModel;
 
 import java.util.List;
@@ -13,6 +15,10 @@ import java.util.List;
 public interface RichEditorContract {
     interface Presenter extends BasePresenter<RichEditorContract.MvpView> {
         void initRichEditorBtn();
+
+        void insertCustomReView(CustomReView customReView);
+
+        void insertLongPlan(LongPlan longPlan);
 
         void onClickRichEditorBtn(int modelType);
 
