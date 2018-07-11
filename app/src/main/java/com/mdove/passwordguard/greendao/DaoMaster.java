@@ -27,8 +27,10 @@ public class DaoMaster extends AbstractDaoMaster {
         DeletedPasswordDao.createTable(db, ifNotExists);
         DeleteSelfTaskDao.createTable(db, ifNotExists);
         GroupInfoDao.createTable(db, ifNotExists);
+        LongPlanDao.createTable(db, ifNotExists);
         MainTodayPlanDao.createTable(db, ifNotExists);
         PasswordDao.createTable(db, ifNotExists);
+        ScheduleDao.createTable(db, ifNotExists);
         SecondSinglePlanDao.createTable(db, ifNotExists);
         SecondTodayPlanDao.createTable(db, ifNotExists);
         SelfTaskDao.createTable(db, ifNotExists);
@@ -36,8 +38,6 @@ public class DaoMaster extends AbstractDaoMaster {
         SelfTaskTimerDao.createTable(db, ifNotExists);
         SinglePlanDao.createTable(db, ifNotExists);
         SucSelfTaskDao.createTable(db, ifNotExists);
-        LongPlanDao.createTable(db, ifNotExists);
-        ScheduleDao.createTable(db, ifNotExists);
         CustomReViewDao.createTable(db, ifNotExists);
     }
 
@@ -49,8 +49,10 @@ public class DaoMaster extends AbstractDaoMaster {
         DeletedPasswordDao.dropTable(db, ifExists);
         DeleteSelfTaskDao.dropTable(db, ifExists);
         GroupInfoDao.dropTable(db, ifExists);
+        LongPlanDao.dropTable(db, ifExists);
         MainTodayPlanDao.dropTable(db, ifExists);
         PasswordDao.dropTable(db, ifExists);
+        ScheduleDao.dropTable(db, ifExists);
         SecondSinglePlanDao.dropTable(db, ifExists);
         SecondTodayPlanDao.dropTable(db, ifExists);
         SelfTaskDao.dropTable(db, ifExists);
@@ -58,8 +60,6 @@ public class DaoMaster extends AbstractDaoMaster {
         SelfTaskTimerDao.dropTable(db, ifExists);
         SinglePlanDao.dropTable(db, ifExists);
         SucSelfTaskDao.dropTable(db, ifExists);
-        LongPlanDao.dropTable(db, ifExists);
-        ScheduleDao.dropTable(db, ifExists);
         CustomReViewDao.dropTable(db, ifExists);
     }
 
@@ -85,8 +85,10 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(DeletedPasswordDao.class);
         registerDaoClass(DeleteSelfTaskDao.class);
         registerDaoClass(GroupInfoDao.class);
+        registerDaoClass(LongPlanDao.class);
         registerDaoClass(MainTodayPlanDao.class);
         registerDaoClass(PasswordDao.class);
+        registerDaoClass(ScheduleDao.class);
         registerDaoClass(SecondSinglePlanDao.class);
         registerDaoClass(SecondTodayPlanDao.class);
         registerDaoClass(SelfTaskDao.class);
@@ -94,8 +96,6 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(SelfTaskTimerDao.class);
         registerDaoClass(SinglePlanDao.class);
         registerDaoClass(SucSelfTaskDao.class);
-        registerDaoClass(LongPlanDao.class);
-        registerDaoClass(ScheduleDao.class);
         registerDaoClass(CustomReViewDao.class);
     }
 
