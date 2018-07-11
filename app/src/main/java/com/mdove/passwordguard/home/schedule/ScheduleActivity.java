@@ -96,12 +96,14 @@ public class ScheduleActivity extends BaseActivity implements ScheduleContract.M
         ScheduleShortAdapter adapterShort = new ScheduleShortAdapter(this, mPresenter);
         ScheduleAdapter adapter = new ScheduleAdapter(this, mPresenter);
         if (isShort) {
+            mBinding.btnShowShort.setImageResource(R.mipmap.ic_schedule_short);
             if (mData.size() != 1) {
                 mData.add(0, new AddScheduleModel());
             }
             mBinding.rlv.setAdapter(adapterShort);
             adapterShort.setData(mData);
         } else {
+            mBinding.btnShowShort.setImageResource(R.mipmap.ic_schedule);
             if (mData.size() > 1 && mData.get(0) instanceof AddScheduleModel) {
                 mData.remove(0);
             }

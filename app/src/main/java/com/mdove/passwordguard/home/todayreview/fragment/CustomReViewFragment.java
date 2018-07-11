@@ -65,7 +65,7 @@ public class CustomReViewFragment extends Fragment implements CustomReViewContra
         mBinding.btnInRichEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RichEditorActivity.start(getActivity());
+                RichEditorActivity.start(getActivity(), RichEditorActivity.INTENT_TYPE_FROM_CUSTOM_REVIEW);
             }
         });
 
