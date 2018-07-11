@@ -20,8 +20,7 @@ public interface HomeMessContract {
     }
 
     interface MvpView extends BaseView<Presenter> {
-        void initData(List<BaseHomeMessModel> data);
-
         void onRefreshSuc(List<BaseHomeMessModel> data);
+        void onLoadMore(List<BaseHomeMessModel> data);
     }
 }

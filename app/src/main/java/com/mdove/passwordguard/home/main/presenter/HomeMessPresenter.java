@@ -44,6 +44,9 @@ public class HomeMessPresenter implements HomeMessContract.Presenter {
     @Override
     public void initData() {
         mData = new ArrayList<>();
+        mCurDBTypeScheduleIndex = 0;
+        mCurDBTypeCustomReviewIndex = 0;
+        mCurDBTypeLongPlanIndex = 0;
 
         List<Schedule> schedules = mScheduleDao.queryBuilder().limit(ONE_PAGER_COUNT_NUM).list();
         for (Schedule schedule : schedules) {
@@ -53,11 +56,12 @@ public class HomeMessPresenter implements HomeMessContract.Presenter {
             }
             mData.add(new HomeScheduleModel(schedule));
         }
-        mCurDBTypeScheduleIndex = mData.size() - 1;
+        mCurDBTypeScheduleIndex = mData.size();
 
-        if (mCurDBTypeScheduleIndex < 9) {
+        if (mData.size() < ONE_PAGER_COUNT_NUM) {
+            int curScheduleEndIndex = mData.size();
             List<LongPlan> longPlans = mLongPlanDao.queryBuilder().
-                    limit(ONE_PAGER_COUNT_NUM - mCurDBTypeScheduleIndex).list();
+                    limit(ONE_PAGER_COUNT_NUM).list();
             for (LongPlan longPlan : longPlans) {
                 mCurDBType = DB_ITEM_TYPE_LONG_PLAN;
                 if (mData.size() >= ONE_PAGER_COUNT_NUM) {
@@ -65,12 +69,13 @@ public class HomeMessPresenter implements HomeMessContract.Presenter {
                 }
                 mData.add(new HomeLongPlanModel(longPlan));
             }
-            mCurDBTypeLongPlanIndex = mData.size() - mCurDBTypeScheduleIndex - 1;
+            mCurDBTypeLongPlanIndex = mData.size() - curScheduleEndIndex;
         }
 
-        if (mCurDBTypeLongPlanIndex < 9) {
+        if (mData.size() < ONE_PAGER_COUNT_NUM) {
+            int curLongPlanEndIndex = mData.size();
             List<CustomReView> customReViews = mCustomReViewDao.queryBuilder().
-                    limit(ONE_PAGER_COUNT_NUM - mCurDBTypeLongPlanIndex).list();
+                    limit(ONE_PAGER_COUNT_NUM).list();
             for (CustomReView customReView : customReViews) {
                 mCurDBType = DB_ITEM_TYPE_CUSTOM_REVIEW;
                 if (mData.size() >= ONE_PAGER_COUNT_NUM) {
@@ -78,7 +83,7 @@ public class HomeMessPresenter implements HomeMessContract.Presenter {
                 }
                 mData.add(new HomeCustomReViewModel(customReView));
             }
-            mCurDBTypeCustomReviewIndex = mData.size() - mCurDBTypeLongPlanIndex - 1;
+            mCurDBTypeCustomReviewIndex = mData.size() - curLongPlanEndIndex;
         }
 
         if (mLaseData.size() == mData.size()) {
@@ -86,13 +91,82 @@ public class HomeMessPresenter implements HomeMessContract.Presenter {
             return;
         } else {
             mLaseData = mData;
-            mView.initData(mData);
+            mView.onRefreshSuc(mData);
         }
     }
 
     @Override
     public void loadMore() {
-        ToastHelper.shortToast("加载更多");
+        List<BaseHomeMessModel> data = new ArrayList<>();
+        switch (mCurDBType) {
+            case DB_ITEM_TYPE_SCHEDULE: {
+                loadMoreSchedule(data);
+                break;
+            }
+            case DB_ITEM_TYPE_CUSTOM_REVIEW: {
+                loadMoreCustomReView(data);
+                break;
+            }
+            case DB_ITEM_TYPE_LONG_PLAN: {
+                loadMoreLongPlan(data);
+                break;
+            }
+            default: {
+                break;
+            }
+        }
+        mView.onLoadMore(data);
+    }
+
+    private void loadMoreSchedule(List<BaseHomeMessModel> data) {
+        List<Schedule> schedules = mScheduleDao.queryBuilder()
+                .limit(ONE_PAGER_COUNT_NUM).offset(mCurDBTypeScheduleIndex).list();
+        for (Schedule schedule : schedules) {
+            mCurDBType = DB_ITEM_TYPE_SCHEDULE;
+            if (data.size() >= ONE_PAGER_COUNT_NUM) {
+                break;
+            }
+            data.add(new HomeScheduleModel(schedule));
+        }
+        mCurDBTypeScheduleIndex += data.size();
+
+        if (data.size() < ONE_PAGER_COUNT_NUM) {
+            loadMoreLongPlan(data);
+        }
+    }
+
+    private void loadMoreLongPlan(List<BaseHomeMessModel> data) {
+        int curIndex = data.size();
+
+        List<LongPlan> longPlans = mLongPlanDao.queryBuilder().
+                limit(ONE_PAGER_COUNT_NUM).offset(mCurDBTypeLongPlanIndex).list();
+        for (LongPlan longPlan : longPlans) {
+            mCurDBType = DB_ITEM_TYPE_LONG_PLAN;
+            if (data.size() >= ONE_PAGER_COUNT_NUM) {
+                break;
+            }
+            data.add(new HomeLongPlanModel(longPlan));
+        }
+        mCurDBTypeLongPlanIndex += data.size() - curIndex;
+
+        if (data.size() < ONE_PAGER_COUNT_NUM) {
+            loadMoreCustomReView(data);
+        }
+    }
+
+    private void loadMoreCustomReView(List<BaseHomeMessModel> data) {
+        int curIndex = data.size();
+
+        List<CustomReView> customReViews = mCustomReViewDao.queryBuilder()
+                .limit(ONE_PAGER_COUNT_NUM).offset(mCurDBTypeCustomReviewIndex).list();
+        for (CustomReView customReView : customReViews) {
+            mCurDBType = DB_ITEM_TYPE_CUSTOM_REVIEW;
+            if (data.size() >= ONE_PAGER_COUNT_NUM) {
+                break;
+            }
+            data.add(new HomeCustomReViewModel(customReView));
+        }
+        mCurDBTypeCustomReviewIndex += data.size() - curIndex;
     }
 
     @Override

@@ -239,35 +239,81 @@
                 android:textSize="12sp"
                 tools:text="记录于:[20018年7月1日 16:35]" />
 
-            <RelativeLayout
+            <android.support.v7.widget.CardView
                 android:id="@+id/layout_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_above="@+id/layout_add"
+                android:layout_marginBottom="@dimen/dp_8"
+                android:layout_marginTop="@dimen/dp_12"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:layout_marginRight="@dimen/dp_12"
+                app:cardBackgroundColor="@color/white"
+                app:cardElevation="@dimen/dp_5">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:onClick="@{()->handler.onClickEditLongPlan(vm)}">
+
+                    <ImageView
+                        android:id="@+id/iv_edit"
+                        android:layout_width="@dimen/dp_24"
+                        android:layout_height="@dimen/dp_24"
+                        android:layout_margin="@dimen/main_margin"
+                        android:src="@mipmap/ic_bg_edit" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/iv_edit"
+                        android:text="修改计划"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:id="@+id/layout_add"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_margin="@dimen/dp_12"
-                android:background="@drawable/bg_normal_gray_new_home"
-                android:gravity="center"
-                android:onClick="@{()->handler.onClickEditLongPlan(vm)}">
+                android:layout_marginBottom="@dimen/dp_12"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:layout_marginRight="@dimen/dp_12"
+                app:cardBackgroundColor="@color/white"
+                app:cardElevation="@dimen/dp_5">
 
-                <ImageView
-                    android:id="@+id/iv"
-                    android:layout_width="@dimen/dp_24"
-                    android:layout_height="@dimen/dp_24"
-                    android:layout_margin="@dimen/main_margin"
-                    android:src="@mipmap/ic_bg_edit" />
-
-                <TextView
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/iv"
-                    android:text="修改计划"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-            </RelativeLayout>
+                    android:gravity="center"
+                    android:onClick="@{()->handler.onClickAddLongPlan()}">
 
+                    <ImageView
+                        android:id="@+id/iv"
+                        android:layout_width="@dimen/dp_24"
+                        android:layout_height="@dimen/dp_24"
+                        android:layout_margin="@dimen/main_margin"
+                        android:src="@mipmap/ic_bg_add" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/iv"
+                        android:text="添加计划"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 </layout>

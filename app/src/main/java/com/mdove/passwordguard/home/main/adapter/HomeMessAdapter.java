@@ -173,4 +173,10 @@ public class HomeMessAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         mData.remove(position);
         notifyItemRemoved(position);
     }
+
+    public void notifyLoadMore(List<BaseHomeMessModel> data) {
+        int positionStart = mData.size() - 1;
+        mData.addAll(data);
+        notifyItemRangeChanged(positionStart, mData.size() - 1);
+    }
 }
