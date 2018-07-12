@@ -18,6 +18,7 @@ import com.mdove.passwordguard.R;
 import com.mdove.passwordguard.base.BaseActivity;
 import com.mdove.passwordguard.databinding.ActivityTodayReviewBinding;
 import com.mdove.passwordguard.home.todayreview.adapter.ReViewPagerAdapter;
+import com.mdove.passwordguard.home.todayreview.fragment.AscribeReViewFragment;
 import com.mdove.passwordguard.home.todayreview.fragment.CustomReViewFragment;
 import com.mdove.passwordguard.home.todayreview.fragment.ScheduleReViewFragment;
 import com.mdove.passwordguard.home.todayreview.model.handler.ActivityTodayReViewHandler;
@@ -40,8 +41,9 @@ public class TodayReViewActivity extends BaseActivity implements ActivityTodayRe
     private long mTodayPlanId;
     private ActivityTodayReViewPresenter mPresenter;
     private ScheduleReViewFragment mScheduleReViewFragment;
+    private AscribeReViewFragment mAscribeReViewFragment;
     private CustomReViewFragment mCustomReViewFragment;
-    private String[] mTitle = {"日程复盘", "独立复盘"};
+    private String[] mTitle = {"独立复盘", "归因复盘", "日程复盘"};
 
     public static void start(Context context) {
         start(context, -1L);
@@ -74,14 +76,16 @@ public class TodayReViewActivity extends BaseActivity implements ActivityTodayRe
 
         mScheduleReViewFragment = ScheduleReViewFragment.newInstance(mTodayPlanId);
         mCustomReViewFragment = CustomReViewFragment.newInstance();
+        mAscribeReViewFragment = AscribeReViewFragment.newInstance();
         List<Fragment> mFragments = new ArrayList<>();
-        mFragments.add(mScheduleReViewFragment);
         mFragments.add(mCustomReViewFragment);
+        mFragments.add(mAscribeReViewFragment);
+        mFragments.add(mScheduleReViewFragment);
 
         mBinding.vp.setAdapter(new ReViewPagerAdapter(getSupportFragmentManager(), mFragments, mTitle));
         mBinding.tb.setupWithViewPager(mBinding.vp);
 
-        initTabLayout();
+//        initTabLayout();
     }
 
     private void initTabLayout() {
@@ -93,10 +97,10 @@ public class TodayReViewActivity extends BaseActivity implements ActivityTodayRe
             ((TextView) tab.getCustomView().findViewById(R.id.tv_title)).setText(mTitle[i]);
             TextView title = (TextView) tab.getCustomView().findViewById(R.id.tv_title);
             if (i == 0) {
-                title.setTextSize(DensityUtil.dip2sp(getContext(), 6));
+                title.setTextSize(DensityUtil.dip2sp(getContext(), 5));
                 title.setTextColor(Color.BLACK);
             } else {
-                title.setTextSize(DensityUtil.dip2sp(getContext(), 5));
+                title.setTextSize(DensityUtil.dip2sp(getContext(), 4));
                 title.setTextColor(ContextCompat.getColor(getContext(), R.color.gray));
             }
         }

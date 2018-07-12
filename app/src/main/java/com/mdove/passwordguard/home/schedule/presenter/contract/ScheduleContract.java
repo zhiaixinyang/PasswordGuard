@@ -19,6 +19,7 @@ public interface ScheduleContract {
 
         void onClickShowShort();
 
+        void onClickReViewSchedule();
         void onClickEtSchedule();
 
         void onClickEditSchedule(long id);

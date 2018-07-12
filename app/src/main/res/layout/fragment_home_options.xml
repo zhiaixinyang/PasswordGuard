@@ -189,8 +189,10 @@
         <android.support.v7.widget.CardView
             android:id="@+id/layout_all_plan_today"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/new_home_item_h"
+            android:layout_height="50dp"
             android:layout_alignParentBottom="true"
+            app:cardCornerRadius="@dimen/dp_8"
+            android:layout_margin="@dimen/dp_12"
             android:onClick="@{()->handler.onClickAllPlan()}"
             app:cardBackgroundColor="@color/white">
 
@@ -198,41 +200,44 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@mipmap/ic_main_bg_all_plan"
-                    android:visibility="gone" />
-
-
                 <TextView
-                    android:id="@+id/tv_all_plan_today_title"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dp_12"
-                    android:text="全部计划"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/new_home_title_size" />
-
-                <TextView
-                    android:id="@+id/tv_all_plan_today_tips"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_all_plan_today_title"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/dp_12"
-                    android:text="查看自己的历史的全部计划"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/new_home_tips_size" />
+                    android:layout_height="wrap_content"
+                    android:text="快捷添加"/>
 
                 <ImageView
+                    android:id="@+id/iv_q_review"
                     android:layout_width="@dimen/dp_30"
                     android:layout_height="@dimen/dp_30"
-                    android:layout_alignParentBottom="true"
+                    android:layout_centerVertical="true"
+                    android:onClick="@{()->handler.onClickEtReView()}"
+                    android:layout_marginRight="@dimen/dp_18"
+                    android:padding="3dp"
+                    android:layout_toLeftOf="@+id/iv_q_plan"
+                    android:src="@mipmap/ic_bg_review" />
+
+                <ImageView
+                    android:id="@+id/iv_q_plan"
+                    android:layout_width="@dimen/dp_30"
+                    android:layout_height="@dimen/dp_30"
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/dp_5"
+                    android:onClick="@{()->handler.onClickEtLongPlan()}"
+                    android:layout_toLeftOf="@+id/iv_q_schedule"
+                    android:layout_marginRight="@dimen/dp_18"
+                    android:src="@mipmap/ic_today_plan" />
+
+                <ImageView
+                    android:id="@+id/iv_q_schedule"
+                    android:layout_width="@dimen/dp_30"
+                    android:layout_height="@dimen/dp_30"
+                    android:onClick="@{()->handler.onClickEtSchedule()}"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dp_18"
                     android:layout_alignParentRight="true"
-                    android:layout_marginBottom="@dimen/dp_12"
-                    android:layout_marginRight="@dimen/dp_12"
-                    android:src="@mipmap/ic_btn_in" />
+                    android:src="@mipmap/ic_bg_schedule" />
             </RelativeLayout>
         </android.support.v7.widget.CardView>
 

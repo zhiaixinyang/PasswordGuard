@@ -5,6 +5,7 @@ import com.mdove.passwordguard.home.longplan.EtLongPlanActivity;
 import com.mdove.passwordguard.home.longplan.LongPlanActivity;
 import com.mdove.passwordguard.home.main.presenter.contract.HomeOptionsContract;
 import com.mdove.passwordguard.home.richeditor.RichEditorActivity;
+import com.mdove.passwordguard.home.schedule.EtScheduleActivity;
 import com.mdove.passwordguard.home.schedule.ScheduleActivity;
 import com.mdove.passwordguard.home.todayreview.TodayReViewActivity;
 
@@ -33,6 +34,16 @@ public class HomeOptionsPresenter implements HomeOptionsContract.Presenter {
     @Override
     public void onClickEtLongPlan() {
         EtLongPlanActivity.start(mView.getContext());
+    }
+
+    @Override
+    public void onClickEtSchedule() {
+        EtScheduleActivity.start(mView.getContext());
+    }
+
+    @Override
+    public void onClickEtReView() {
+        TodayReViewActivity.start(mView.getContext());
     }
 
     @Override

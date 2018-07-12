@@ -123,4 +123,7 @@
     <string name="font_regular">GTWalsheim_Regular.otf</string>
     <string name="font_medium">GTWalsheim_Medium.otf</string>
     <string name="font_bold">GTWalsheim_Bold.otf</string>
+    <string name="string_content_is_empty">怎么能为空呢？</string>
+    <string name="string_inner_empty">内因咋能为空呢？</string>
+    <string name="string_outer_empty">外因咋能为空呢？</string>
 </resources>

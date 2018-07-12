@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 
@@ -102,7 +103,7 @@ public class EtScheduleActivity extends BaseActivity implements EtScheduleContra
             }
             case INTENT_TYPE_SCHEDULE: {
                 isAddStatus = false;
-                mBinding.tvSendIn.setText("修改日程");
+                mBinding.btnSendIn.setText("修改日程");
                 long id = intent.getLongExtra(EXTRA_INTENT_TYPE_TODAY_ID, -1);
                 mPresenter.initEditData(id);
                 break;
@@ -133,14 +134,14 @@ public class EtScheduleActivity extends BaseActivity implements EtScheduleContra
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length() > 0) {
-                    mBinding.btnSendIn.setClickable(true);
-                    mBinding.tvSendIn.setTextColor(ContextCompat.getColor(EtScheduleActivity.this, R.color.black));
-                    mBinding.btnSendIn.setCardBackgroundColor(ContextCompat.getColor(EtScheduleActivity.this, R.color.white));
-                } else {
+                if (s.length() == 0) {
                     mBinding.btnSendIn.setClickable(false);
-                    mBinding.tvSendIn.setTextColor(ContextCompat.getColor(EtScheduleActivity.this, R.color.white));
-                    mBinding.btnSendIn.setCardBackgroundColor(ContextCompat.getColor(EtScheduleActivity.this, R.color.gray_light));
+                    mBinding.btnSendIn.setTextColor(ContextCompat.getColor(EtScheduleActivity.this, R.color.black));
+                    mBinding.btnSendIn.setBackgroundResource(R.drawable.bg_normal_gray);
+                } else {
+                    mBinding.btnSendIn.setClickable(true);
+                    mBinding.btnSendIn.setTextColor(ContextCompat.getColor(EtScheduleActivity.this, R.color.white));
+                    mBinding.btnSendIn.setBackgroundResource(R.drawable.bg_normal_blue);
                 }
             }
 
@@ -153,6 +154,10 @@ public class EtScheduleActivity extends BaseActivity implements EtScheduleContra
             @Override
             public void onClick(View v) {
                 String content = mBinding.etPlan.getText().toString();
+                if (TextUtils.isEmpty(content)){
+                    ToastHelper.shortToast(getString(R.string.string_content_is_empty));
+                    return;
+                }
                 String tips = mBinding.etTips.getText().toString();
                 Schedule schedule = new Schedule();
                 schedule.setEndHour(mSelectEndHour);

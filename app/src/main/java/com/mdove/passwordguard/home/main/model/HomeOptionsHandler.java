@@ -24,6 +24,12 @@ public class HomeOptionsHandler {
     public void onClickEtLongPlan() {
         mPresenter.onClickEtLongPlan();
     }
+    public void onClickEtReView() {
+        mPresenter.onClickEtReView();
+    }
+    public void onClickEtSchedule() {
+        mPresenter.onClickEtSchedule();
+    }
 
     public void onClickTodayPlanReView() {
         mPresenter.onClickTodayPlanReView();

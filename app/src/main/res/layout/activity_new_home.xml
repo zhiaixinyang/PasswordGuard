@@ -127,7 +127,5 @@
             android:layout_below="@+id/tb"
             android:overScrollMode="never"
             android:scrollbars="none" />
-
-
     </RelativeLayout>
 </layout>

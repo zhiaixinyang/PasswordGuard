@@ -13,6 +13,7 @@ import com.mdove.passwordguard.home.schedule.model.AddScheduleModel;
 import com.mdove.passwordguard.home.schedule.model.BaseScheduleModel;
 import com.mdove.passwordguard.home.schedule.model.ScheduleModel;
 import com.mdove.passwordguard.home.schedule.presenter.contract.ScheduleContract;
+import com.mdove.passwordguard.home.todayreview.TodayReViewActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +67,11 @@ public class SchedulePresenter implements ScheduleContract.Presenter {
     public void onClickShowShort() {
         isShort = !isShort;
         mView.showShort(isShort);
+    }
+
+    @Override
+    public void onClickReViewSchedule() {
+        TodayReViewActivity.start(mView.getContext());
     }
 
     @Override

@@ -1,7 +1,5 @@
 package com.mdove.passwordguard.home.schedule.model.handler;
 
-import com.mdove.passwordguard.home.longplan.model.vm.LongPlanModelVM;
-import com.mdove.passwordguard.home.longplan.presenter.LongPlanPresenter;
 import com.mdove.passwordguard.home.schedule.model.vm.ScheduleModelVM;
 import com.mdove.passwordguard.home.schedule.presenter.SchedulePresenter;
 
@@ -20,6 +18,9 @@ public class ScheduleHandler {
         mPlanPresenter.onClickBack();
     }
 
+    public void onClickReViewSchedule() {
+        mPlanPresenter.onClickReViewSchedule();
+    }
     public void onClickEtSchedule() {
         mPlanPresenter.onClickEtSchedule();
     }

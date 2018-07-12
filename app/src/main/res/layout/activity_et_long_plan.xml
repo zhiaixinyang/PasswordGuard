@@ -264,11 +264,11 @@
                     android:layout_marginBottom="@dimen/dp_12"
                     android:layout_marginLeft="@dimen/dp_24"
                     android:layout_marginRight="@dimen/dp_24"
+                    android:background="@drawable/bg_new_home_today_plan"
                     android:paddingBottom="@dimen/dp_8"
                     android:paddingLeft="@dimen/dp_12"
                     android:paddingRight="@dimen/dp_12"
-                    android:paddingTop="@dimen/dp_8"
-                    android:background="@drawable/bg_new_home_today_plan">
+                    android:paddingTop="@dimen/dp_8">
 
                     <com.mdove.passwordguard.ui.richeditor.knife.KnifeText
                         android:id="@+id/et_plan"
@@ -284,7 +284,7 @@
                 </RelativeLayout>
 
 
-                <android.support.v7.widget.CardView
+                <TextView
                     android:id="@+id/btn_send_in"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -292,20 +292,15 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginBottom="@dimen/dp_12"
                     android:layout_marginRight="@dimen/dp_24"
-                    app:cardBackgroundColor="@color/gray_light">
-
-                    <TextView
-                        android:id="@+id/tv_send_in"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="3dp"
-                        android:paddingLeft="@dimen/dp_8"
-                        android:paddingRight="@dimen/dp_8"
-                        android:paddingTop="3dp"
-                        android:text="添加计划"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/new_home_main_size" />
-                </android.support.v7.widget.CardView>
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="@dimen/dp_8"
+                    android:paddingRight="@dimen/dp_8"
+                    android:background="@drawable/bg_normal_gray"
+                    android:paddingTop="3dp"
+                    android:clickable="false"
+                    android:text="添加计划"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/new_home_main_size" />
 
             </RelativeLayout>
         </android.support.v7.widget.CardView>

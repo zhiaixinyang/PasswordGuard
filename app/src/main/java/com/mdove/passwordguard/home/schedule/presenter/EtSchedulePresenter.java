@@ -48,7 +48,7 @@ public class EtSchedulePresenter implements EtScheduleContract.Presenter {
 
     @Override
     public void initEditData(long id) {
-        mNeedUpdateSchedule = mScheduleDao.queryBuilder().where(LongPlanDao.Properties.Id.eq(id)).unique();
+        mNeedUpdateSchedule = mScheduleDao.queryBuilder().where(ScheduleDao.Properties.Id.eq(id)).unique();
         if (mNeedUpdateSchedule != null) {
             mView.initEditData(mNeedUpdateSchedule);
         }

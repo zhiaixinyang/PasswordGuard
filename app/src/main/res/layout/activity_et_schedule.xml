@@ -237,28 +237,24 @@
                     android:textColorHint="@color/gray"
                     android:textSize="@dimen/new_home_main_size" />
 
-                <android.support.v7.widget.CardView
-                    android:id="@+id/btn_send_in"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginBottom="@dimen/dp_12"
-                    android:layout_marginRight="@dimen/dp_24"
-                    app:cardBackgroundColor="@color/gray_light">
 
                     <TextView
-                        android:id="@+id/tv_send_in"
+                        android:id="@+id/btn_send_in"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginBottom="@dimen/dp_12"
+                        android:layout_marginRight="@dimen/dp_24"
                         android:paddingBottom="@dimen/dp_5"
                         android:paddingLeft="@dimen/dp_12"
                         android:paddingRight="@dimen/dp_12"
                         android:paddingTop="@dimen/dp_5"
                         android:text="添加日程"
+                        android:clickable="false"
+                        android:background="@drawable/bg_normal_gray"
                         android:textColor="@color/white"
                         android:textSize="@dimen/new_home_main_size" />
-                </android.support.v7.widget.CardView>
 
             </RelativeLayout>
         </android.support.v7.widget.CardView>

@@ -3,9 +3,15 @@ package com.mdove.passwordguard.greendao.utils;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.mdove.passwordguard.greendao.AscribeTitleDao;
+import com.mdove.passwordguard.greendao.CustomReViewDao;
 import com.mdove.passwordguard.greendao.DailyPlanDao;
 import com.mdove.passwordguard.greendao.DailySelfDao;
+import com.mdove.passwordguard.greendao.InnerAscribeDao;
+import com.mdove.passwordguard.greendao.LongPlanDao;
 import com.mdove.passwordguard.greendao.MainTodayPlanDao;
+import com.mdove.passwordguard.greendao.OuterAscribeDao;
+import com.mdove.passwordguard.greendao.ScheduleDao;
 import com.mdove.passwordguard.greendao.SecondTodayPlanDao;
 import com.mdove.passwordguard.greendao.SelfTaskLabelDao;
 import com.mdove.passwordguard.greendao.DaoMaster;
@@ -52,6 +58,7 @@ public class DBUpdateHelper extends DaoMaster.OpenHelper {
                 }, PasswordDao.class, DailySelfDao.class, GroupInfoDao.class, DeletedPasswordDao.class,
                 SelfTaskDao.class, SinglePlanDao.class, DeleteSelfTaskDao.class, DeletedDailySelfDao.class, DailyPlanDao.class,
                 SucSelfTaskDao.class, SelfTaskLabelDao.class, SelfTaskTimerDao.class, MainTodayPlanDao.class,
-                SecondTodayPlanDao.class);
+                SecondTodayPlanDao.class, InnerAscribeDao.class, OuterAscribeDao.class,
+                AscribeTitleDao.class, ScheduleDao.class, CustomReViewDao.class, LongPlanDao.class);
     }
 }

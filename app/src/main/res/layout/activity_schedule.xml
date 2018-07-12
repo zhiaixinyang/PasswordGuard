@@ -52,7 +52,7 @@
                 android:layout_height="@dimen/dp_26"
                 android:layout_marginTop="@dimen/dp_12"
                 android:layout_toLeftOf="@+id/btn_et_plan"
-                android:src="@mipmap/ic_btn_password"
+                android:src="@mipmap/ic_schedule"
                 android:onClick="@{()->handler.onClickShowShort()}"
                 android:tint="@color/blue_700" />
 

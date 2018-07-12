@@ -20,6 +20,8 @@ public interface HomeOptionsContract {
         void onClickAllPlan();
 
         void onClickEtLongPlan();
+        void onClickEtSchedule();
+        void onClickEtReView();
 
         void onClickLongPlan();
     }
