@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.IntentFilter;
 
+import com.mdove.passwordguard.config.AppConfig;
 import com.mdove.passwordguard.greendao.DaoSession;
 import com.mdove.passwordguard.greendao.utils.DaoManager;
 import com.mdove.passwordguard.main.newmain.timer.TimerConstant;
@@ -40,6 +41,7 @@ public class App extends Application {
                 }
             }
         }
+
     }
 
     public static boolean isDebug() {

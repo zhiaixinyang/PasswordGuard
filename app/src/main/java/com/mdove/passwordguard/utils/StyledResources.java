@@ -43,7 +43,6 @@ public class StyledResources {
         TypedArray ta = getTypedArray(attrId);
         boolean bool = ta.getBoolean(0, false);
         ta.recycle();
-
         return bool;
     }
 

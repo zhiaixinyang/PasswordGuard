@@ -31,6 +31,7 @@ import com.mdove.passwordguard.utils.DensityUtil;
 import com.mdove.passwordguard.utils.StatusBarUtils;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -123,6 +124,7 @@ public class NewHomeActivity extends BaseActivity implements NewHomeContract.Mvp
             }
         });
     }
+
 
     private void setRemainTime() {
         if (mCountDownTimer != null) {

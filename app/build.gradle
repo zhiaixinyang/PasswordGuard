@@ -86,7 +86,7 @@ android {
 }
 
 greendao {
-    schemaVersion 33
+    schemaVersion 1
     daoPackage 'com.mdove.passwordguard.greendao'
     targetGenDir 'src/main/java'
 }
@@ -108,6 +108,12 @@ dependencies {
     implementation dependencies.retrofit
     implementation dependencies.retrofitConverterGson
     implementation dependencies.retrofitAdapterRxJava
+
+    implementation dependencies.kotlin.core
+    implementation dependencies.kotlin.coroutines
+    implementation dependencies.kotlin.coroutines_android
+
+    implementation "android.arch.lifecycle:extensions:1.1.1"
 
     implementation 'org.greenrobot:greendao:3.2.0'
     implementation 'com.tencent.bugly:crashreport:latest.release' //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.1.9
